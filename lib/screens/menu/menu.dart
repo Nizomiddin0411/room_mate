@@ -118,12 +118,7 @@ class _MenuPageState extends State<MenuPage> {
                           borderRadius: BorderRadius.circular(20)
                       ),
                     ),
-
-
-
-
                   ],
-
                   physics: const NeverScrollableScrollPhysics(),
                 ),
                 SizedBox(height: 200,),
