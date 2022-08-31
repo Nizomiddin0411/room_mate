@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:talaba_uy/screens/All_Ads_Page/all_ads_page.dart';
+import 'package:talaba_uy/screens/Create_ads.dart/create_ads_page.dart';
 
 void main() async {
   await Hive.initFlutter();
@@ -26,7 +27,7 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(
               primarySwatch: Colors.blue,
             ),
-            home: const MyHomePage(title: 'Flutter Demo Home Page'),
+            home: CreateAdsPage(),
           );
         });
   }
