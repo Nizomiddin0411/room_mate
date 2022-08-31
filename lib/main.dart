@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:talaba_uy/screens/All_Ads_Page/all_ads_page.dart';
+import 'package:talaba_uy/screens/Autorization/StartPage.dart';
 
 void main() async {
   await Hive.initFlutter();
@@ -47,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: AllAdsPage(),
+      body: StartPage(),
      // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
