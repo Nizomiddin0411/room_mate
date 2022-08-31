@@ -80,7 +80,7 @@ class _AllAdsPageState extends State<AllAdsPage> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Padding(
-                                  padding: const EdgeInsets.all(8.0),
+                                  padding: const EdgeInsets.all(6.0),
                                   child: Text(
                                     'Student bolalarga kvartira',
                                     style: TextStyle(fontSize: 18.sp),
