@@ -16,11 +16,11 @@ class _DrawerPageState extends State<DrawerPage> {
     return Drawer(
       child: Drawer(
         child: ListView(
+
           padding: EdgeInsets.zero,
           children:  [
             DrawerHeader(
-              decoration: BoxDecoration(
-                color: AppColors.kblue,
+              decoration: BoxDecoration( color: Colors.blue
               ),
               child: Image.asset('assets/images/Vector.png'),
             ),
@@ -29,16 +29,16 @@ class _DrawerPageState extends State<DrawerPage> {
               onTap: (){
 
               },
-              leading:  Image.asset('assets/images/Group.png'),
+              leading:  Image.asset('assets/images/Vector.png'),
             ),
             ListTile(
               title:  const Text("E’lonlarim"),onTap: (){
 
             },
-              leading:  Image.asset('assets/images/settings.png'),
+              leading:  Icon(Icons.checklist_rtl_sharp),
             ),
             ListTile(
-              leading: Image.asset('assets/nav_bar_logo/galeriya.png'),
+              leading: Icon(Icons.settings),
               title: const Text("Sozlamalar"),
               onTap: (){
               },
@@ -48,28 +48,31 @@ class _DrawerPageState extends State<DrawerPage> {
               title:  const Text("Bildirishnomalar"),onTap: (){
 
             },
-              leading: Image.asset('assets/images/notification_important.png'),
+              leading:Icon(Icons.notifications_none)
             ),
             ListTile(
               title:  const Text("Chat"),
               onTap: (){
 
               },
-              leading: Image.asset('assets/nav_bar_logo/play.png'),
+              leading: Icon(Icons.chat),
             ),
             ListTile(
               title:  const Text("Sevimlilar"),onTap: (){
             },
-              leading: Image.asset('assets/nav_bar_logo/save.png'),
+              leading: Icon(Icons.favorite_border)
+            ),Padding(
+              padding: const EdgeInsets.fromLTRB(80, 100, 0,0),
+              child: ListTile(
+                  title:  const Text("Version 1.1.0"),onTap: (){
+              },
+              ),
             ),
             GestureDetector(
               onTap: (){
                 showAlertDialog(context);
               },
-              child: ListTile(
-                title:   Text(""),
-                leading: Image.asset('assets/nav_bar_logo/exit.png'),
-              ),
+
             ),
           ],
         ),
