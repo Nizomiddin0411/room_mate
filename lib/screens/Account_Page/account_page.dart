@@ -11,6 +11,7 @@ class AccountPage extends StatefulWidget {
 }
 
 class _AccountPageState extends State<AccountPage> {
+  bool _switchValue=false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -94,6 +95,7 @@ class _AccountPageState extends State<AccountPage> {
             ),
           ),
           ListTile(
+
             leading: Container(
                 width: 40.w,
                 height: 40.h,
@@ -109,6 +111,7 @@ class _AccountPageState extends State<AccountPage> {
               "Sherik kerak",
               style: TextStyle(fontSize: 18.sp),
             ),
+
           ),
           InkWell(
             onTap: () {
