@@ -3,7 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:talaba_uy/screens/All_Ads_Page/all_ads_page.dart';
-import 'package:talaba_uy/screens/Create_ads.dart/create_ads_page.dart';
+import 'package:talaba_uy/screens/Create_ads/create_ads_page.dart';
+import 'package:talaba_uy/screens/Settings/setting.dart';
 
 void main() async {
   await Hive.initFlutter();

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
-import 'package:talaba_uy/screens/Create_ads.dart/owner.dart';
-import 'package:talaba_uy/screens/Create_ads.dart/student.dart';
+import 'package:talaba_uy/screens/Create_ads/owner.dart';
+import 'package:talaba_uy/screens/Create_ads/student.dart';
 
 class CreateAdsPage extends StatefulWidget {
   const CreateAdsPage({Key? key}) : super(key: key);
@@ -27,6 +27,15 @@ class _CreateAdsPageState extends State<CreateAdsPage>
       backgroundColor: AppColors.backgroundWhite,
       appBar: AppBar(
         backgroundColor: AppColors.backgroundWhite,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.arrow_back,
+            color: AppColors.textColor,
+          ),
+        ),
         elevation: 0,
         title: Text("E’lon yaratish",
             style: TextStyle(color: AppColors.mainColor)),
