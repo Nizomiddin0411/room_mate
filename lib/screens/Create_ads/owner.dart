@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
+import 'package:talaba_uy/screens/menu/menu.dart';
 
 class Owner extends StatefulWidget {
   const Owner({Key? key}) : super(key: key);
@@ -83,17 +84,24 @@ class _OwnerState extends State<Owner> {
             ),
             SizedBox(height: 4.h),
             Container(
+              width: double.infinity,
               decoration: BoxDecoration(
                   border: Border.all(color: Colors.grey.shade400),
                   borderRadius: BorderRadius.circular(4.r)),
-              child: ExpansionTile(
-                title: Text(
-                  "Kvartal , Uy , Xonadon ",
-                  style: TextStyle(color: Colors.grey, fontSize: 14.sp),
+              child: Container(
+                padding: EdgeInsets.only(left: 16.w),
+                child: TextFormField(
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    hintText: "Kvartal , Uy , Xonadon",
+                    hintStyle: TextStyle(fontSize: 14.sp, color: Colors.grey),
+                  ),
+                  cursorColor: Colors.grey.shade800,
+                  cursorWidth: 1.5.w,
                 ),
-                children: [],
               ),
             ),
+            
             SizedBox(height: 18.h),
             Text(
               "Xonadon ma’lumoti",
@@ -448,7 +456,9 @@ class _OwnerState extends State<Owner> {
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
                       primary: AppColors.buttonLinear
                     ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>MenuPage()), (route) => false);
+                },
                 child: Text(
                   "E’lon saqlash",
                   style:

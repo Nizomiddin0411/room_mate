@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sms_autofill/sms_autofill.dart';
+import 'package:talaba_uy/screens/menu/menu.dart';
 
 import '../../core/const/app_colors.dart';
 
@@ -88,7 +89,9 @@ class _SmsConfirmationPageState extends State<SmsConfirmationPage> {
             ),
             SizedBox(height: 30.h,),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>MenuPage()), (route) => false);
+              },
               style: ElevatedButton.styleFrom(
                 primary: AppColors.mainColor,
                 shape: RoundedRectangleBorder(

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
+import 'package:talaba_uy/screens/All_Ads_Page/detail_page.dart';
 
 class AllAdsPage extends StatefulWidget {
   const AllAdsPage({Key? key}) : super(key: key);
@@ -61,8 +62,8 @@ class _AllAdsPageState extends State<AllAdsPage> {
                 ),
               ),
               ListView.builder(
-                physics: NeverScrollableScrollPhysics(),
-                shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  shrinkWrap: true,
                   itemCount: 20,
                   itemBuilder: (BuildContext contex, int index) {
                     return Padding(
@@ -87,7 +88,7 @@ class _AllAdsPageState extends State<AllAdsPage> {
                                   ),
                                 ),
                                 const Padding(
-                                  padding: EdgeInsets.fromLTRB(1,0,8,0),
+                                  padding: EdgeInsets.fromLTRB(1, 0, 8, 0),
                                   child: Icon(
                                     Icons.favorite_border,
                                     color: AppColors.error,
@@ -100,22 +101,35 @@ class _AllAdsPageState extends State<AllAdsPage> {
                               child: Text(
                                 '300 y.e/oyiga',
                                 style: TextStyle(
-                                    color: AppColors.mainColor, fontSize: 24.sp),
+                                    color: AppColors.mainColor,
+                                    fontSize: 24.sp),
                               ),
                             ),
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Padding(
-                                  padding: const EdgeInsets.fromLTRB(8,0,8,0),
-                                  child: Text("Chilonzor tumani 2 kv 5/34 4 xonadon",style: TextStyle(
-                                    fontSize: 10.sp
-                                  ),),
+                                  padding:
+                                      const EdgeInsets.fromLTRB(8, 0, 8, 0),
+                                  child: Text(
+                                    "Chilonzor tumani 2 kv 5/34 4 xonadon",
+                                    style: TextStyle(fontSize: 10.sp),
+                                  ),
                                 ),
-                                const Padding(
-                                  padding: EdgeInsets.fromLTRB(8,0,8,0),
-                                  child: Text('Batafsil',style: TextStyle( decoration: TextDecoration.underline,color: AppColors.mainColor),),
-                                )
+                                 InkWell(
+                                  onTap: (){
+                                    Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailPage()));
+                                  },
+                                   child: Padding(
+                                    padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
+                                    child: Text(
+                                      'Batafsil',
+                                      style: TextStyle(
+                                          decoration: TextDecoration.underline,
+                                          color: AppColors.mainColor),
+                                    ),
+                                                                 ),
+                                 )
                               ],
                             ),
                             SizedBox(

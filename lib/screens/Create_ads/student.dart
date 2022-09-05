@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
+import 'package:talaba_uy/screens/menu/menu.dart';
 
 class Student extends StatefulWidget {
   const Student({Key? key}) : super(key: key);
@@ -472,7 +473,9 @@ class _StudentState extends State<Student> {
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10.r)),
                       primary: AppColors.buttonLinear
                     ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>MenuPage()), (route) => false);
+                },
                 child: Text(
                   "E’lon saqlash",
                   style:

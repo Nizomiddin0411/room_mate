@@ -6,9 +6,10 @@ import 'package:talaba_uy/screens/Account_Page/account_page.dart';
 import 'package:talaba_uy/screens/All_Ads_Page/all_ads_page.dart';
 import 'package:talaba_uy/screens/Create_ads/create_ads_page.dart';
 import 'package:talaba_uy/screens/Settings/setting.dart';
-import 'package:talaba_uy/screens/Create_ads.dart/create_ads_page.dart';
 import 'package:talaba_uy/screens/Autorization/StartPage.dart';
 import 'package:talaba_uy/screens/Search_University/search_page.dart';
+import 'package:talaba_uy/screens/drawer/drawer.dart';
+import 'package:talaba_uy/screens/menu/menu.dart';
 
 void main() async {
   await Hive.initFlutter();
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(
               primarySwatch: Colors.blue,
             ),
-            home:SearchPage(),
+            home:MyHomePage(title: '',),
           );
         });
   }

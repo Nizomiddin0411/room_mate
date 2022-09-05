@@ -65,14 +65,11 @@ class _LoginPageState extends State<LoginPage> {
               ),
             ),
             SizedBox(
-              height: 118.h,
+              // height: 118.h,
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => (SmsConfirmationPage())));
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>SmsConfirmationPage()));
               },
               style: ElevatedButton.styleFrom(
                 primary: AppColors.mainColor,

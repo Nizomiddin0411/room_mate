@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:hive/hive.dart';
+import 'package:talaba_uy/screens/Settings/setting.dart';
 
 import '../../core/const/app_colors.dart';
 
@@ -27,7 +28,6 @@ class _DrawerPageState extends State<DrawerPage> {
             ListTile(
               title:  const Text("Asosiy"),
               onTap: (){
-
               },
               leading:  Image.asset('assets/images/Vector.png'),
             ),
@@ -41,6 +41,7 @@ class _DrawerPageState extends State<DrawerPage> {
               leading: Icon(Icons.settings),
               title: const Text("Sozlamalar"),
               onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>Setting()));
               },
               // expandedCrossAxisAlignment: CrossAxisAlignment.start,
             ),

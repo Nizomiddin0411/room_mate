@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
+import 'package:talaba_uy/screens/Ijarachipage/filtr.dart';
 
-class Ijrachipage extends StatefulWidget {
-  const Ijrachipage({Key? key}) : super(key: key);
+class KunlikIjara extends StatefulWidget {
+  const KunlikIjara({Key? key}) : super(key: key);
 
   @override
-  State<Ijrachipage> createState() => _IjrachipageState();
+  State<KunlikIjara> createState() => _KunlikIjaraState();
 }
 
-class _IjrachipageState extends State<Ijrachipage> {
+class _KunlikIjaraState extends State<KunlikIjara> {
   @override
   Widget build(BuildContext context) {
 
@@ -21,14 +22,19 @@ class _IjrachipageState extends State<Ijrachipage> {
         appBar: PreferredSize(
           preferredSize: Size.fromHeight(155),
           child: AppBar(
-            leading: Icon(
-              Icons.arrow_back,
-              color: AppColors.iconColor,
+            leading: InkWell(
+              onTap: (){
+                Navigator.pop(context);
+              },
+              child: Icon(
+                Icons.arrow_back,
+                color: AppColors.iconColor,
+              ),
             ),
             backgroundColor: AppColors.backgroundWhite,
             title: Center(
               child: Text(
-                "Ijarachi kerak",
+                "Kunlik kvartira",
                 style: TextStyle(color: AppColors.mainColor),
               ),
             ),
@@ -54,11 +60,16 @@ class _IjrachipageState extends State<Ijrachipage> {
                         style: TextStyle(
                             color: AppColors.iconColor, fontSize: 16.sp),
                       ),
-                      const Padding(
-                        padding: EdgeInsets.all(11.0),
-                        child: Icon(
-                          Icons.tune,
-                          color: AppColors.mainColor,
+                      InkWell(
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>FiltrPage()));
+                        },
+                        child: const Padding(
+                          padding: EdgeInsets.all(11.0),
+                          child: Icon(
+                            Icons.tune,
+                            color: AppColors.mainColor,
+                          ),
                         ),
                       )
                     ],
