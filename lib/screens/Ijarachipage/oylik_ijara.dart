@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
+import 'package:talaba_uy/screens/All_Ads_Page/detail_page.dart';
 import 'package:talaba_uy/screens/Ijarachipage/filtr.dart';
 
 class OylikIjara extends StatefulWidget {
@@ -148,9 +149,14 @@ class _OylikIjaraState extends State<OylikIjara> {
                                           fontSize: 10.sp
                                       ),),
                                     ),
-                                    const Padding(
-                                      padding: EdgeInsets.fromLTRB(8,0,8,0),
-                                      child: Text('Batafsil',style: TextStyle( decoration: TextDecoration.underline,color: AppColors.mainColor),),
+                                    InkWell(
+                                      onTap: (){
+                                        Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailPage()));
+                                      },
+                                      child: const Padding(
+                                        padding: EdgeInsets.fromLTRB(8,0,8,0),
+                                        child: Text('Batafsil',style: TextStyle( decoration: TextDecoration.underline,color: AppColors.mainColor),),
+                                      ),
                                     )
                                   ],
                                 ),
@@ -217,9 +223,14 @@ class _OylikIjaraState extends State<OylikIjara> {
                                     fontSize: 10.sp
                                 ),),
                               ),
-                              const Padding(
-                                padding: EdgeInsets.fromLTRB(8,0,8,0),
-                                child: Text('Batafsil',style: TextStyle( decoration: TextDecoration.underline,color: AppColors.mainColor),),
+                              InkWell(
+                                onTap: (){
+                                        Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailPage()));
+                                      },
+                                child: const Padding(
+                                  padding: EdgeInsets.fromLTRB(8,0,8,0),
+                                  child: Text('Batafsil',style: TextStyle( decoration: TextDecoration.underline,color: AppColors.mainColor),),
+                                ),
                               )
                             ],
                           ),

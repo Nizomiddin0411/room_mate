@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
+import 'package:talaba_uy/screens/All_Ads_Page/detail_page.dart';
 import 'package:talaba_uy/screens/Ijarachipage/filtr.dart';
 
 class KunlikIjara extends StatefulWidget {
@@ -13,7 +14,6 @@ class KunlikIjara extends StatefulWidget {
 class _KunlikIjaraState extends State<KunlikIjara> {
   @override
   Widget build(BuildContext context) {
-
     TabController? _tabController;
     return DefaultTabController(
       length: 2,
@@ -23,7 +23,7 @@ class _KunlikIjaraState extends State<KunlikIjara> {
           preferredSize: Size.fromHeight(155),
           child: AppBar(
             leading: InkWell(
-              onTap: (){
+              onTap: () {
                 Navigator.pop(context);
               },
               child: Icon(
@@ -61,8 +61,11 @@ class _KunlikIjaraState extends State<KunlikIjara> {
                             color: AppColors.iconColor, fontSize: 16.sp),
                       ),
                       InkWell(
-                        onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>FiltrPage()));
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => FiltrPage()));
                         },
                         child: const Padding(
                           padding: EdgeInsets.all(11.0),
@@ -113,7 +116,8 @@ class _KunlikIjaraState extends State<KunlikIjara> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Padding(
                                       padding: const EdgeInsets.all(6.0),
@@ -123,7 +127,7 @@ class _KunlikIjaraState extends State<KunlikIjara> {
                                       ),
                                     ),
                                     const Padding(
-                                      padding: EdgeInsets.fromLTRB(1,0,8,0),
+                                      padding: EdgeInsets.fromLTRB(1, 0, 8, 0),
                                       child: Icon(
                                         Icons.favorite_border,
                                         color: AppColors.error,
@@ -132,25 +136,41 @@ class _KunlikIjaraState extends State<KunlikIjara> {
                                   ],
                                 ),
                                 Padding(
-                                  padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+                                  padding:
+                                      const EdgeInsets.fromLTRB(8, 0, 8, 0),
                                   child: Text(
                                     '300 y.e/oyiga',
                                     style: TextStyle(
-                                        color: AppColors.mainColor, fontSize: 24.sp),
+                                        color: AppColors.mainColor,
+                                        fontSize: 24.sp),
                                   ),
                                 ),
                                 Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsets.fromLTRB(8,0,8,0),
-                                      child: Text("Chilonzor tumani 2 kv 5/34 4 xonadon",style: TextStyle(
-                                          fontSize: 10.sp
-                                      ),),
+                                      padding:
+                                          const EdgeInsets.fromLTRB(8, 0, 8, 0),
+                                      child: Text(
+                                        "Chilonzor tumani 2 kv 5/34 4 xonadon",
+                                        style: TextStyle(fontSize: 10.sp),
+                                      ),
                                     ),
-                                    const Padding(
-                                      padding: EdgeInsets.fromLTRB(8,0,8,0),
-                                      child: Text('Batafsil',style: TextStyle( decoration: TextDecoration.underline,color: AppColors.mainColor),),
+                                    InkWell(
+                                      onTap: (){
+                                        Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailPage()));
+                                      },
+                                      child: const Padding(
+                                        padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
+                                        child: Text(
+                                          'Batafsil',
+                                          style: TextStyle(
+                                              decoration:
+                                                  TextDecoration.underline,
+                                              color: AppColors.mainColor),
+                                        ),
+                                      ),
                                     )
                                   ],
                                 ),
@@ -166,7 +186,6 @@ class _KunlikIjaraState extends State<KunlikIjara> {
                   );
                 }),
             ListView.builder(
-
                 shrinkWrap: true,
                 itemCount: 20,
                 itemBuilder: (BuildContext contex, int index) {
@@ -192,7 +211,7 @@ class _KunlikIjaraState extends State<KunlikIjara> {
                                 ),
                               ),
                               const Padding(
-                                padding: EdgeInsets.fromLTRB(1,0,8,0),
+                                padding: EdgeInsets.fromLTRB(1, 0, 8, 0),
                                 child: Icon(
                                   Icons.favorite_border,
                                   color: AppColors.error,
@@ -212,14 +231,25 @@ class _KunlikIjaraState extends State<KunlikIjara> {
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Padding(
-                                padding: const EdgeInsets.fromLTRB(8,0,8,0),
-                                child: Text("Chilonzor tumani 2 kv 5/34 4 xonadon",style: TextStyle(
-                                    fontSize: 10.sp
-                                ),),
+                                padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+                                child: Text(
+                                  "Chilonzor tumani 2 kv 5/34 4 xonadon",
+                                  style: TextStyle(fontSize: 10.sp),
+                                ),
                               ),
-                              const Padding(
-                                padding: EdgeInsets.fromLTRB(8,0,8,0),
-                                child: Text('Batafsil',style: TextStyle( decoration: TextDecoration.underline,color: AppColors.mainColor),),
+                              InkWell(
+                                onTap: (){
+                                        Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailPage()));
+                                      },
+                                child: const Padding(
+                                  padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
+                                  child: Text(
+                                    'Batafsil',
+                                    style: TextStyle(
+                                        decoration: TextDecoration.underline,
+                                        color: AppColors.mainColor),
+                                  ),
+                                ),
                               )
                             ],
                           ),
