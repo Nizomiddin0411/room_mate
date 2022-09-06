@@ -22,7 +22,7 @@ class _SettingState extends State<Setting> {
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back,
             color: AppColors.textColor,
           ),
@@ -42,11 +42,11 @@ class _SettingState extends State<Setting> {
         padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 56.h),
         child: Column(
           children: [
-            Container(
+            SizedBox(
               height: 56.h,
               child: InkWell(
                 onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>LanguageSettting()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>const LanguageSettting()));
                 },
                 child: ListTile(
                   contentPadding: EdgeInsets.only(right: 12.w),
@@ -56,7 +56,7 @@ class _SettingState extends State<Setting> {
                         color: AppColors.iconBack),
                     child: Padding(
                       padding: EdgeInsets.all(10.0.w),
-                      child: Icon(
+                      child: const Icon(
                         Icons.g_translate_outlined,
                         color: AppColors.mainColor,
                       ),
@@ -78,17 +78,17 @@ class _SettingState extends State<Setting> {
             SizedBox(
               height: 12.h,
             ),
-            Container(
+            SizedBox(
               height: 56.h,
               child: ListTile(
-                contentPadding: EdgeInsets.all(0),
+                contentPadding: const EdgeInsets.all(0),
                 leading: Container(
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8.r),
                       color: AppColors.iconBack),
                   child: Padding(
                     padding: EdgeInsets.all(10.0.w),
-                    child: Icon(Icons.notification_important_outlined,
+                    child: const Icon(Icons.notification_important_outlined,
                         color: AppColors.mainColor),
                   ),
                 ),

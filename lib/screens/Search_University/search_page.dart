@@ -54,33 +54,34 @@ class _SearchPageState extends State<SearchPage> {
               ),
             ),
           ),
-          ListView.builder(
-              itemCount: 15,
-              itemBuilder: (context, int index) {
-                return Container(
-                  width: 324.w,
-                  height: 163.h,
-                  child: Column(
-                    children: [
-                      Row(
-                        children: [
-                          Image.asset(
-                            'assets/;images/accountImage.png',
-                            width: 48.w,
-                            height: 48.h,
-                          ),
-                          SizedBox(
-                            width: MediaQuery.of(context).size.width -150,
-                            child: Text(
-                              'Muhammad al-Xorazmiy nomidagi Toshkent axborot texnologiyalari universiteti'
-                            ),
-                          )
-                        ],
-                      )
-                    ],
-                  ),
-                );
-              })
+          // ListView.builder(
+          //   shrinkWrap: true,
+          //     itemCount: 15,
+          //     itemBuilder: (context, int index) {
+          //       return Container(
+          //         width: 324.w,
+          //         height: 163.h,
+          //         child: Column(
+          //           children: [
+          //             Row(
+          //               children: [
+          //                 Image.asset(
+          //                   'assets/;images/accountImage.png',
+          //                   width: 48.w,
+          //                   height: 48.h,
+          //                 ),
+          //                 SizedBox(
+          //                   width: MediaQuery.of(context).size.width -150,
+          //                   child: Text(
+          //                     'Muhammad al-Xorazmiy nomidagi Toshkent axborot texnologiyalari universiteti'
+          //                   ),
+          //                 )
+          //               ],
+          //             )
+          //           ],
+          //         ),
+          //       );
+          //     })
         ],
       ),
     );
