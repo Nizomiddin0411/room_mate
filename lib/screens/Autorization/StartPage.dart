@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
+import 'package:talaba_uy/screens/Autorization/regirtratsiya_dart.dart';
 
 import 'LoginPage.dart';
 
@@ -17,7 +18,7 @@ class _StartPageState extends State<StartPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(25, 155, 25, 150),
+        padding: const EdgeInsets.fromLTRB(25, 115, 25, 120),
         child: Column(
           children: [
               Text("Assalomu alaykum , Xush kelibsiz 👋",style: TextStyle(fontSize: 18.sp),),
@@ -62,7 +63,9 @@ class _StartPageState extends State<StartPage> {
               child: Text('yoki'),
             ),
             ElevatedButton(
-              onPressed: () {  },
+              onPressed: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>Registratsiya()));
+              },
               style: ElevatedButton.styleFrom(
                 primary: AppColors.mainColor,
                 shape: RoundedRectangleBorder(
