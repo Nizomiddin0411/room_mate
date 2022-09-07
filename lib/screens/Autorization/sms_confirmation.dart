@@ -77,7 +77,7 @@ class _SmsConfirmationPageState extends State<SmsConfirmationPage> {
               ),
             ),
             SizedBox(
-              height: 85.h,
+              height: 50.h,
             ),
              Center(
               child: GestureDetector(

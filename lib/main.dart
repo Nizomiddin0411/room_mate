@@ -4,6 +4,7 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:talaba_uy/screens/Account_Page/account_page.dart';
 import 'package:talaba_uy/screens/All_Ads_Page/all_ads_page.dart';
+import 'package:talaba_uy/screens/Autorization/language_dart.dart';
 import 'package:talaba_uy/screens/Create_ads/create_ads_page.dart';
 import 'package:talaba_uy/screens/Settings/setting.dart';
 import 'package:talaba_uy/screens/Autorization/StartPage.dart';
@@ -54,7 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: StartPage(),
+      body: LanguagePage(),
      // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
