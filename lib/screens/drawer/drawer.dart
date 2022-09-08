@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
 import 'package:talaba_uy/screens/Settings/setting.dart';
 
+import '../Favorit_Ads_Page/favorit_ads_page.dart';
 import '../Favorit_Page/favorits_page.dart';
 
 
@@ -20,7 +21,7 @@ class _DrawerPageState extends State<DrawerPage> {
 
         child: Expanded(
           child: ListView(
-            physics: NeverScrollableScrollPhysics(),
+            physics: const NeverScrollableScrollPhysics(),
             padding: EdgeInsets.zero,
             children: [
               DrawerHeader(
@@ -38,7 +39,10 @@ class _DrawerPageState extends State<DrawerPage> {
               ),
               ListTile(
                 title: const Text("E’lonlarim"),
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => const FavoritAds()));
+                },
                 leading: const Icon(Icons.checklist_rtl_sharp),
               ),
               ListTile(

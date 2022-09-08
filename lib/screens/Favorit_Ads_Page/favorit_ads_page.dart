@@ -1,18 +1,18 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:talaba_uy/core/const/app_colors.dart';
 
+import '../../core/const/app_colors.dart';
 import '../All_Ads_Page/detail_page.dart';
 
-class FavoritPage extends StatefulWidget {
-  const FavoritPage({Key? key}) : super(key: key);
+class FavoritAds extends StatefulWidget {
+  const FavoritAds({Key? key}) : super(key: key);
 
   @override
-  State<FavoritPage> createState() => _FavoritPageState();
+  State<FavoritAds> createState() => _FavoritAdsState();
 }
 
-class _FavoritPageState extends State<FavoritPage> {
+class _FavoritAdsState extends State<FavoritAds> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,7 +68,7 @@ class _FavoritPageState extends State<FavoritPage> {
                                     padding:
                                     EdgeInsets.fromLTRB(1, 0, 8, 0),
                                     child: Icon(
-                                      Icons.favorite_border,
+                                      Icons.delete,
                                       color: AppColors.error,
                                     ),
                                   )
