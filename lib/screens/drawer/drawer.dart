@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
 import 'package:talaba_uy/screens/Settings/setting.dart';
 
+import '../Favorit_Page/favorits_page.dart';
+
 
 class DrawerPage extends StatefulWidget {
   const DrawerPage({Key? key}) : super(key: key);
@@ -59,7 +61,10 @@ class _DrawerPageState extends State<DrawerPage> {
               ),
               ListTile(
                   title: const Text("Sevimlilar"),
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => const FavoritPage()));
+                  },
                   leading: const Icon(Icons.favorite_border)),
               Padding(
                 padding: const EdgeInsets.fromLTRB(80, 100, 0, 0),
