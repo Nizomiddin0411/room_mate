@@ -460,14 +460,13 @@ class _RegistratsiyaState extends State<Registratsiya> {
                           },
                         ),
                         Text("Roziman "),
-                        Text("  Foydalanuvchi shartlariga",style: TextStyle(color: AppColors.mainColor,fontSize: 15),)
+                        InkWell(child: Text("  Foydalanuvchi shartlariga",style: TextStyle(color: AppColors.mainColor,fontSize: 15),))
                       ],
                     ),
                   ],
                 ),
               ),
             ),
-
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: SingleChildScrollView(

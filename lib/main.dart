@@ -11,11 +11,23 @@ import 'package:talaba_uy/screens/Autorization/StartPage.dart';
 import 'package:talaba_uy/screens/Search_University/search_page.dart';
 import 'package:talaba_uy/screens/drawer/drawer.dart';
 import 'package:talaba_uy/screens/menu/menu.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await EasyLocalization.ensureInitialized();
   await Hive.initFlutter();
   await Hive.openBox('token');
-  runApp(MyApp());
+  runApp(EasyLocalization(
+    path: 'assets/locale',
+    supportedLocales: [
+      Locale('ru', 'RU'),
+      Locale('uz', 'UZ'),
+    ],
+    fallbackLocale: Locale('uz', 'UZ'),
+    saveLocale: true,
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -34,7 +46,9 @@ class MyApp extends StatelessWidget {
             theme: ThemeData(
               primarySwatch: Colors.blue,
             ),
-            home:MyHomePage(title: '',),
+            home: MyHomePage(
+              title: '',
+            ),
           );
         });
   }
@@ -50,13 +64,11 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: LanguagePage(),
-     // This trailing comma makes auto-formatting nicer for build methods.
+      // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
