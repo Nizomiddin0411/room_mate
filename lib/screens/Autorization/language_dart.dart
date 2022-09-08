@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
@@ -10,11 +11,12 @@ class LanguagePage extends StatefulWidget {
 }
 
 class _LanguagePageState extends State<LanguagePage> {
+
+  bool value = false;
+  bool value1 = false;
+
   @override
   Widget build(BuildContext context) {
-
-    String? _groupValue;
-    String _language = 'uz';
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.fromLTRB(25, 80, 25, 100),
@@ -37,40 +39,33 @@ class _LanguagePageState extends State<LanguagePage> {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8.r),
                   border: Border.all(color: AppColors.iconBack)),
-              child: InkWell(
-                onTap: () {
-                  setState(() {
-                    _language = 'uz';
-                  });
+              child: ListTile(
+                onTap: ()async{
+                  context.locale=Locale('uz','UZ');
                 },
-                child: ListTile(
-                  horizontalTitleGap: 0,
-                  leading: Image.asset("assets/images/uzb.png"),
-                  title: SizedBox(
-                      child: Text(
-                        "O’zbek (Lotin)",
-                        style:
-                        TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
-                      )),
-                  trailing: _language == 'uz'
-                      ? CircleAvatar(
-                    radius: 12.r,
-                    child: Icon(
-                      Icons.check,
-                      size: 14.sp,
-                    ),
-                  )
-                      : Container(
-                    decoration: BoxDecoration(
-                        color: Color.fromRGBO(149, 149, 149, 1),
-                        shape: BoxShape.circle,
-                        border: Border.all(width: 1.w)),
-                    child: CircleAvatar(
-                      backgroundColor: AppColors.backgroundWhite,
-                      radius: 10.r,
-                    ),
+                horizontalTitleGap: 0,
+                leading: Image.asset("assets/images/uzb.png"),
+                title: SizedBox(
+                    child: Text(
+                      "O'zbek(lotin)",
+                      style:
+                      TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
+                    )),
+                trailing: Checkbox(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)
                   ),
+                  value: this.value1,
+                  onChanged: ( value)async {
+                    context.locale=Locale('uz','UZ');
+                    setState(() {
+                      value1 = value!;
+                    });
+                  },
                 ),
+                // ),
+
+
               ),
             ),
             SizedBox(height: 20.h,),
@@ -78,41 +73,28 @@ class _LanguagePageState extends State<LanguagePage> {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8.r),
                   border: Border.all(color: AppColors.iconBack)),
-              child: InkWell(
-                onTap: () {
-                  setState(() {
-                    _language = 'rus';
-                  });
-                },
-                child: ListTile(
-                  horizontalTitleGap: 0,
-                  leading: Image.asset("assets/images/rus.png"),
-                  title: SizedBox(
-                      child: Text(
-                        "Русский",
-                        style:
-                        TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
-                      )),
-                  trailing: _language == 'rus'
-                      ? CircleAvatar(
-                    radius: 12.r,
-                    child: Icon(
-                      Icons.check,
-                      size: 14.sp,
-                    ),
-                  )
-                      : Container(
-                    decoration: BoxDecoration(
-                        color: Color.fromRGBO(149, 149, 149, 1),
-                        shape: BoxShape.circle,
-                        border: Border.all(width: 1.w)),
-                    child: CircleAvatar(
-                      backgroundColor: AppColors.backgroundWhite,
-                      radius: 10.r,
-                    ),
+              child: ListTile(
+                horizontalTitleGap: 0,
+                leading: Image.asset("assets/images/rus.png"),
+                title: SizedBox(
+                    child: Text(
+                      "Русский",
+                      style:
+                      TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
+                    )),
+                trailing: Checkbox(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)
                   ),
+                  value: value,
+                  onChanged: ( value)async {
+                    context.locale=Locale('ru','RU');
+                    setState(() {
+                      this.value = value!;
+                    });
+                  },
                 ),
-
+                // ),
               ),
             ),
             SizedBox(height: 66.h,),
@@ -124,7 +106,6 @@ class _LanguagePageState extends State<LanguagePage> {
                 primary: AppColors.mainColor,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10.r),
-
                 ),
               ),
               child:  Container(
@@ -136,12 +117,11 @@ class _LanguagePageState extends State<LanguagePage> {
                 ),
                 child: Center(
                   child: Text(
-                    "Keyingi",
+                    "Keyingi".tr(),
                     style: TextStyle(color: AppColors.backgroundWhite,fontSize: 20.sp),
                   ),
                 ),
               ),
-
             ),
           ],
         ),
