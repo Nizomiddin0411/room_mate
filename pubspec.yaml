@@ -42,6 +42,7 @@ dependencies:
   dropdown_button2: ^1.4.0
   easy_localization: ^3.0.0
   switcher: ^1.0.0
+  draggable_scrollbar: ^0.1.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

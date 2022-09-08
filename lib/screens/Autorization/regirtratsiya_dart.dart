@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:switcher/core/switcher_size.dart';
 import 'package:switcher/switcher.dart';
 import 'package:talaba_uy/screens/Autorization/LoginPage.dart';
+import 'package:talaba_uy/screens/Autorization/offerto_dart.dart';
 
 import '../../core/const/app_colors.dart';
 
@@ -596,7 +597,11 @@ class _RegistratsiyaState extends State<Registratsiya> {
                           },
                         ),
                         Text("Roziman "),
-                        Text("  Foydalanuvchi shartlariga",style: TextStyle(color: AppColors.mainColor,fontSize: 15),)
+                        InkWell(
+                            onTap: ()=>{
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>OffertoPage())),
+                            },
+                            child: Text("  Foydalanuvchi shartlariga",style: TextStyle(color: AppColors.mainColor,fontSize: 15),))
                       ],
                     ),
                     SizedBox(height: 100.h),
