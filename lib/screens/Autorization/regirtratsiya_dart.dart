@@ -428,22 +428,163 @@ class _RegistratsiyaState extends State<Registratsiya> {
                     Column(
                       children: [
                         Row(
+                          children: [
+                            Text("Qaysi viloyatliksiz"),
+
+                          ],
+                        ),
+                        SizedBox(height: 5,),
+                        Column(
+                          children: [
+                            DropdownButtonFormField2(
+                              decoration: InputDecoration(
+                                //Add isDense true and zero Padding.
+                                //Add Horizontal padding using buttonPadding and Vertical padding by increasing buttonHeight instead of add Padding here so that The whole TextField Button become clickable, and also the dropdown menu open under The whole TextField Button.
+                                isDense: true,
+                                contentPadding: EdgeInsets.zero,
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                //Add more decoration as you want here
+                                //Add label If you want but add hint outside the decoration to be aligned in the button perfectly.
+                              ),
+                              isExpanded: true,
+                              hint: const Text(
+                                'Viloyatingizni tanlang',
+                                style: TextStyle(fontSize: 14),
+                              ),
+                              icon: const Icon(
+                                Icons.arrow_drop_down,
+                                color: Colors.black45,
+                              ),
+                              iconSize: 30,
+                              buttonHeight: 60,
+                              buttonPadding: const EdgeInsets.only(left: 20, right: 10),
+                              dropdownDecoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              items: kursingizItems
+                                  .map((item) =>
+                                  DropdownMenuItem<String>(
+                                    value: item,
+                                    child: Text(
+                                      item,
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ))
+                                  .toList(),
+                              validator: (value) {
+                                if (value == null) {
+                                  return 'Please select gender.';
+                                }
+                              },
+                              onChanged: (value) {
+                                //Do something when changing the item if you want.
+                              },
+                              onSaved: (value) {
+                                selectedValue = value.toString();
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 10,),
+                    Column(
+                      children: [
+                        Row(
+                          children: [
+                            Text(" Qaysi tumanidansiz"),
+
+                          ],
+                        ),
+                        SizedBox(height: 5,),
+                        Column(
+                          children: [
+                            DropdownButtonFormField2(
+                              decoration: InputDecoration(
+                                //Add isDense true and zero Padding.
+                                //Add Horizontal padding using buttonPadding and Vertical padding by increasing buttonHeight instead of add Padding here so that The whole TextField Button become clickable, and also the dropdown menu open under The whole TextField Button.
+                                isDense: true,
+                                contentPadding: EdgeInsets.zero,
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                //Add more decoration as you want here
+                                //Add label If you want but add hint outside the decoration to be aligned in the button perfectly.
+                              ),
+                              isExpanded: true,
+                              hint: const Text(
+                                'Tumaningizni tanlang',
+                                style: TextStyle(fontSize: 14),
+                              ),
+                              icon: const Icon(
+                                Icons.arrow_drop_down,
+                                color: Colors.black45,
+                              ),
+                              iconSize: 30,
+                              buttonHeight: 60,
+                              buttonPadding: const EdgeInsets.only(left: 20, right: 10),
+                              dropdownDecoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              items: kursingizItems
+                                  .map((item) =>
+                                  DropdownMenuItem<String>(
+                                    value: item,
+                                    child: Text(
+                                      item,
+                                      style: const TextStyle(
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                  ))
+                                  .toList(),
+                              validator: (value) {
+                                if (value == null) {
+                                  return 'Please select gender.';
+                                }
+                              },
+                              onChanged: (value) {
+                                //Do something when changing the item if you want.
+                              },
+                              onSaved: (value) {
+                                selectedValue = value.toString();
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    SizedBox(height: 10,),
+                    Column(
+                      children: [
+                        Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text("Sherik kerak",style: TextStyle(color: AppColors.textColor,fontWeight: FontWeight.bold,fontSize: 18),),
 
-                            Switcher(
-                              value: false,
-                              size: SwitcherSize.large,
-                              switcherButtonRadius: 50,
-                              enabledSwitcherButtonRotate: true,
-                              iconOff: Icons.lock,
-                              iconOn: Icons.check,
-                              colorOff: Colors.blue.withOpacity(0.3),
-                              colorOn: Colors.blue,
-                              onChanged: (bool state) {
-                                //
-                              },
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Container(
+                                height: 35.h,
+                                width: 80.w,
+                                child: Switcher(
+                                  value: false,
+                                  size: SwitcherSize.medium,
+                                  switcherButtonRadius: 30.r,
+                                  enabledSwitcherButtonRotate: true,
+                                  iconOff: Icons.lock,
+                                  iconOn: Icons.check,
+                                  colorOff: Colors.blue.withOpacity(0.3),
+                                  colorOn: Colors.blue,
+                                  onChanged: (bool state) {
+                                    //
+                                  },
+                                ),
+                              ),
                             ),
 
                           ],
