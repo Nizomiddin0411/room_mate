@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:talaba_uy/screens/Search_University/filtr_university.dart';
+import 'package:talaba_uy/screens/Search_University/result_search_universitety.dart';
 
 import '../../core/const/app_colors.dart';
 import 'count_student.dart';
@@ -12,6 +14,8 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
+
+  TextEditingController? _titleController;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,17 +40,24 @@ class _SearchPageState extends State<SearchPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            const Center(
+             Center(
               child: Padding(
                 padding: EdgeInsets.all(8.0),
                 child: TextField(
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     // label: Text("Search"),
-                    suffixIcon: Icon(
-                      Icons.tune,
-                      color: AppColors.textColor,
-                    ),
+                    suffixIcon:
+                       IconButton(
+                         onPressed: (){
+                           Navigator.push(context, MaterialPageRoute(builder: (context)=>UniverFiltrPage()));
+                         },
+                         icon: Icon(
+                          Icons.tune,
+                          color: AppColors.textColor,
+                      ),
+                       ),
+
                     prefixIcon: Icon(
                       Icons.search,
                       color: AppColors.textColor,
@@ -65,7 +76,7 @@ class _SearchPageState extends State<SearchPage> {
               children: [
                 InkWell(
                   onTap:(){
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=> (CountStudentPage())));
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=> (ResultUniversitetPage())));
                   },
                   child: Container(
                     width: 324.w,
@@ -101,7 +112,11 @@ class _SearchPageState extends State<SearchPage> {
                           ),
                           SizedBox(
                               width: MediaQuery.of(context).size.width - 130,
-                              child: Text("Toshkent shahri Yunusobod tumani 108 Amir Temir shox ko’chasi 100200",style: TextStyle(fontSize: 10.sp),)),
+                              child: InkWell(
+                                  onTap: (){
+                                    Navigator.push(context, MaterialPageRoute(builder: (context)=>ResultUniversitetPage()));
+                                  },
+                                  child: Text("Toshkent shahri Yunusobod tumani 108 Amir Temir shox ko’chasi 100200",style: TextStyle(fontSize: 10.sp),))),
                           SizedBox(
                               width: MediaQuery.of(context).size.width - 130,
                               child: Text("Sherik izlayotganlar : 456 ta",style: TextStyle(fontSize: 14.sp),)),
