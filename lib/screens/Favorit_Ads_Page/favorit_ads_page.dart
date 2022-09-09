@@ -5,6 +5,7 @@ import 'package:talaba_uy/services/get_my_ads_service.dart';
 
 import '../../core/const/app_colors.dart';
 import '../../models/get_my_ads_model.dart';
+import '../../services/post_my_ads_delete_Service.dart';
 import '../All_Ads_Page/detail_page.dart';
 
 class FavoritAds extends StatefulWidget {
@@ -80,9 +81,8 @@ class _FavoritAdsState extends State<FavoritAds> {
                                             // the method which is called
                                             // when button is pressed
                                             onPressed: () {
-                                              _showDialog(
 
-                                              );
+                                              _showDialog(snapshot.data![index].id);
                                             },
                                           ),
                                         ],
@@ -152,7 +152,7 @@ class _FavoritAdsState extends State<FavoritAds> {
       ),
     );
   }
-  void _showDialog() {
+  void _showDialog(int? adsId) {
     // flutter defined function
     showDialog(
         context: context,
@@ -192,7 +192,8 @@ class _FavoritAdsState extends State<FavoritAds> {
                         width: 130.w,
                         height: 48.h,
                         child: ElevatedButton(
-                          onPressed: () {
+                          onPressed: () async{
+                            await DeleteMyAds().DeleteAds(id: adsId);
                           },
                           style: ElevatedButton.styleFrom(
                             primary: Colors.red,
