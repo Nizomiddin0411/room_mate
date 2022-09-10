@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:talaba_uy/models/search_universitety_model.dart';
 import 'package:talaba_uy/screens/Search_University/filtr_university.dart';
 import 'package:talaba_uy/screens/Search_University/result_search_universitety.dart';
+import 'package:talaba_uy/services/get_search%20universitety.dart';
 
 import '../../core/const/app_colors.dart';
 import 'count_student.dart';
@@ -66,73 +68,85 @@ class _SearchPageState extends State<SearchPage> {
                 ),
               ),
             ),
-            ListView.builder(
-              physics: NeverScrollableScrollPhysics(),
-              shrinkWrap: true,
-                itemCount: 15,
-                itemBuilder: (context, int index) {
-                  return
-            Column(
-              children: [
-                InkWell(
-                  onTap:(){
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=> (ResultUniversitetPage())));
-                  },
-                  child: Container(
-                    width: 324.w,
-                    height: 163.h,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
-                      color: AppColors.secondBackgroud
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(12.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
+            FutureBuilder<List<SearchUniversitetyModel>?>(
+              future: GetSearchUniverService().fetchUniverSearch(),
+              builder:   (context, AsyncSnapshot<List<SearchUniversitetyModel>?> snapshot){
+                if(snapshot.hasData){
+                  return   ListView.builder(
+                      physics: NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (context, int index) {
+                        return
+                          Column(
                             children: [
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Image.asset(
-                                  'assets/images/accountImage.png',
-                                  width: 48.w,
-                                  height: 48.h,
+                              InkWell(
+                                onTap:(){
+                                  Navigator.push(context, MaterialPageRoute(builder: (context)=> (ResultUniversitetPage())));
+                                },
+                                child: Container(
+                                  width: 324.w,
+                                  height: 163.h,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10.r),
+                                      color: AppColors.secondBackgroud
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(11.0),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Padding(
+                                              padding: const EdgeInsets.all(8.0),
+                                              child: Image.asset(
+                                                'assets/images/talim.png',
+                                                width: 55.w,
+                                                height: 55.h,
+                                              ),
+                                            ),
+                                            SizedBox(width: 6.w,),
+                                            SizedBox(
+                                              width: MediaQuery.of(context).size.width - 150,
+                                              child:  Text(
+                                                  '${snapshot.data![index].name}',
+                                                  style:TextStyle(fontSize: 14.sp,color: AppColors.mainColor)),
+                                            ),
+                                          ],
+                                        ),
+                                        SizedBox(
+                                            width: MediaQuery.of(context).size.width - 130,
+                                            child: InkWell(
+                                                onTap: (){
+                                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>ResultUniversitetPage()));
+                                                },
+                                                child: Text("${snapshot.data![index].address}",style: TextStyle(fontSize: 12.sp),))),
+                                        SizedBox(
+                                            width: MediaQuery.of(context).size.width - 130,
+                                            child: Text("Sherik izlayotganlar : ${snapshot.data![index].searching}",style: TextStyle(fontSize: 14.sp),)),
+                                        SizedBox(
+                                            width: MediaQuery.of(context).size.width - 130,
+                                            child: Text("E’lon beruvchi : ${snapshot.data![index].advertising}",style: TextStyle(fontSize: 14.sp)))
+                                      ],
+                                    ),
+                                  ),
                                 ),
                               ),
-                              SizedBox(width: 6.w,),
-                              SizedBox(
-                                width: MediaQuery.of(context).size.width - 150,
-                                child:  Text(
-                                    'Muhammad al-Xorazmiy nomidagi Toshkent axborot texnologiyalari universiteti',
-                                style:TextStyle(fontSize: 14.sp,color: AppColors.mainColor)),
-                              ),
+                              SizedBox(height: 12.h,)
                             ],
-                          ),
-                          SizedBox(
-                              width: MediaQuery.of(context).size.width - 130,
-                              child: InkWell(
-                                  onTap: (){
-                                    Navigator.push(context, MaterialPageRoute(builder: (context)=>ResultUniversitetPage()));
-                                  },
-                                  child: Text("Toshkent shahri Yunusobod tumani 108 Amir Temir shox ko’chasi 100200",style: TextStyle(fontSize: 10.sp),))),
-                          SizedBox(
-                              width: MediaQuery.of(context).size.width - 130,
-                              child: Text("Sherik izlayotganlar : 456 ta",style: TextStyle(fontSize: 14.sp),)),
-                          SizedBox(
-                              width: MediaQuery.of(context).size.width - 130,
-                              child: Text("E’lon beruvchi : 238 ta",style: TextStyle(fontSize: 14.sp)))
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-                SizedBox(height: 12.h,)
-              ],
-            );
+                          );
 
-                })
+                      });
+                }
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              },
+
+
+            )
           ],
         ),
       ),

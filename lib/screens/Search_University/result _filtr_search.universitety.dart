@@ -20,7 +20,7 @@ class ResultFiltrPage extends StatefulWidget {
 class _ResultFiltrPageState extends State<ResultFiltrPage> {
 
   String? _dropownUsd;
-  String _titleUniver = "Fakultetingizni tanlang";
+
   String  _titleRegion = "Viloyatni tanlang";
   String _titleDistrict = "Tumanni tanlang";
   String _titleFaculty = "Yo’nalishingizni tanlang";
@@ -169,54 +169,6 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
               ),
               SizedBox(height: 10,),
               Text(
-                "Fakultet",
-                style: TextStyle(
-                  color: AppColors.textColor,
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              SizedBox(height: 4.h),
-              FutureBuilder<List<GetFacultyModel>?>(
-                  future: GetFacultyService().fetchFaculty(),
-                  builder:
-                      (context, AsyncSnapshot<List<GetFacultyModel>?> snapshot) {
-                    if (snapshot.hasData) {
-                      return Container(
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey.shade400),
-                            borderRadius: BorderRadius.circular(4.r)),
-                        child: ExpansionTile(
-                          key: GlobalKey(),
-                          title: Text(
-                            _titleUniver,
-                            style:
-                            TextStyle(color: Colors.grey, fontSize: 14.sp),
-                          ),
-                          children: [
-                            ListView.builder(
-                                shrinkWrap: true,
-                                itemCount: snapshot.data!.length,
-                                itemBuilder: (context, index) {
-                                  return InkWell(
-                                      onTap: (){
-                                        setState(() {
-                                          _titleUniver = snapshot.data![index].name!;
-                                        });
-                                      },
-                                      child: Text(
-                                          snapshot.data![index].name!));
-                                })
-                          ],
-                        ),
-                      );
-                    }
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }),
-              SizedBox(height: 12.h),
-              Text(
                 "Yo’nalish",
                 style: TextStyle(
                   color: AppColors.textColor,
@@ -263,9 +215,10 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                       child: CircularProgressIndicator(),
                     );
                   }),
-              SizedBox(height: 6.h),
+              SizedBox(height: 12.h),
+
               Padding(
-                padding: EdgeInsets.symmetric(vertical: 180.h, horizontal: 31.w),
+                padding: EdgeInsets.symmetric(vertical: 210.h, horizontal: 31.w),
                 child: Container(
                     width: double.infinity,
                     child: ElevatedButton(
