@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -21,7 +22,7 @@ class _StartPageState extends State<StartPage> {
         padding: const EdgeInsets.fromLTRB(25, 115, 25, 120),
         child: Column(
           children: [
-              Text("Assalomu alaykum , Xush kelibsiz 👋",style: TextStyle(fontSize: 18.sp),),
+              Text("Assalomu alaykum , Xush kelibsiz".tr(),style: TextStyle(fontSize: 18.sp),),
             SizedBox(
               height: 66.h,
             ),
@@ -60,7 +61,7 @@ class _StartPageState extends State<StartPage> {
             ),
             Padding(
               padding: const EdgeInsets.all(15.0),
-              child: Text('yoki'),
+              child: Text('yoki').tr(),
             ),
             ElevatedButton(
               onPressed: () {
@@ -82,7 +83,7 @@ class _StartPageState extends State<StartPage> {
                 ),
                 child: Center(
                   child: Text(
-                    "Ro’yxatda o’tish",
+                    "Ro’yxatda o’tish".tr(),
                     style: TextStyle(color: AppColors.backgroundWhite,fontSize: 20.sp),
                   ),
                 ),
