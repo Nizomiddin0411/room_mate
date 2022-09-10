@@ -24,16 +24,6 @@ class DeleteMyAds {
     request.fields['advertising_id']='$id';
     request.headers.addAll({HttpHeaders.authorizationHeader: 'Bearer VVuDO41zOoYY2KvUUHYPOJ9PzKsnnJeD'});
     http.StreamedResponse response = await request.send();
-    // print('$id');
-    // return  http.post(
-    //   Uri.parse('http://164.68.114.231:8081/roommate/backend/web/api/advertising/delete-my-advertising'),
-    //   headers: {
-    //     HttpHeaders.authorizationHeader: 'Bearer VVuDO41zOoYY2KvUUHYPOJ9PzKsnnJeD',
-    //   },
-    //   body: jsonEncode({
-    //     'advertising_id': id,
-    //   }),
-    // );
 
     if (response.statusCode >= 200 && response.statusCode <= 300) {
       var data = await response.stream.bytesToString();

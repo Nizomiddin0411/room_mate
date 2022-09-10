@@ -31,13 +31,13 @@ class _CreateAdsPageState extends State<CreateAdsPage>
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back,
             color: AppColors.textColor,
           ),
         ),
         elevation: 0,
-        title: Text("E’lon yaratish",
+        title: const Text("E’lon yaratish",
             style: TextStyle(color: AppColors.mainColor)),
         centerTitle: true,
         bottom: TabBar(
@@ -48,12 +48,12 @@ class _CreateAdsPageState extends State<CreateAdsPage>
           tabs: [
             Padding(
               padding: EdgeInsets.symmetric(vertical: 8.h),
-              child: Text(
+              child: const Text(
                 "Talabaman",
                 style: TextStyle(fontWeight: FontWeight.w500),
               ),
             ),
-            Text(
+            const Text(
               "Uy beruvchiman",
               style: TextStyle(fontWeight: FontWeight.w500),
             ),
@@ -62,7 +62,7 @@ class _CreateAdsPageState extends State<CreateAdsPage>
       ),
       body: TabBarView(
         controller: _tabController,
-        children: [Student(), Owner()],
+        children:  [Student(), Owner()],
       ),
     );
   }

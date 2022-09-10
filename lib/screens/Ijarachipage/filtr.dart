@@ -298,7 +298,10 @@ class _FiltrPageState extends State<FiltrPage> {
                               style: TextStyle(
                                   color: Colors.grey, fontSize: 14.sp),
                             ),
-                            children: [],
+                            children: const [
+                              Text("Kvartira"),
+                              Text("Xovli"),
+                            ],
                           ),
                         ),
                       ),
@@ -323,12 +326,19 @@ class _FiltrPageState extends State<FiltrPage> {
                         child: Container(
                           width: 152.w,
                           child: ExpansionTile(
+                            key: GlobalKey(),
                             title: Text(
                               "Xonalar soni",
                               style: TextStyle(
                                   color: Colors.grey, fontSize: 14.sp),
                             ),
-                            children: [],
+                            children: const [
+                              Text("1 xonali"),
+                              Text("2 xonali"),
+                              Text("3 xonali"),
+                              Text("4 xonali"),
+                              Text("4 va undan ko'p"),
+                            ],
                           ),
                         ),
                       ),
