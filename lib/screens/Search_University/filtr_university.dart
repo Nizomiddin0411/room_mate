@@ -10,6 +10,7 @@ import 'package:talaba_uy/services/get_univer_service.dart';
 import '../../services/get_district_service.dart';
 import '../../services/get_faculty_service.dart';
 import '../../services/get_region_service.dart';
+
 class UniverFiltrPage extends StatefulWidget {
   const UniverFiltrPage({Key? key}) : super(key: key);
 
@@ -18,13 +19,13 @@ class UniverFiltrPage extends StatefulWidget {
 }
 
 class _UniverFiltrPageState extends State<UniverFiltrPage> {
-
   final bool _checkMetro = false;
   String? _dropownUsd;
   String _titleUniver = "Oliy o’quv yurtingizni tanlang";
-  String  _titleRegion = "Viloyatni tanlang";
+  String _titleRegion = "Viloyatni tanlang";
   String _titleDistrict = "Tumanni tanlang";
   String _titleFaculty = "Kursingizni tanlang";
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -87,7 +88,7 @@ class _UniverFiltrPageState extends State<UniverFiltrPage> {
                           title: Text(
                             _titleRegion,
                             style:
-                            TextStyle(color: Colors.grey, fontSize: 14.sp),
+                                TextStyle(color: Colors.grey, fontSize: 14.sp),
                           ),
                           children: [
                             ListView.builder(
@@ -95,14 +96,14 @@ class _UniverFiltrPageState extends State<UniverFiltrPage> {
                                 itemCount: snapshot.data!.length,
                                 itemBuilder: (context, index) {
                                   return InkWell(
-                                      onTap: (){
+                                      onTap: () {
                                         setState(() {
-                                          _titleRegion = snapshot.data![index].name!;
+                                          _titleRegion =
+                                              snapshot.data![index].name!;
                                         });
                                       },
-                                      child: Text(
-                                          snapshot.data![index].name!));
-                                })
+                                      child: Text(snapshot.data![index].name!));
+                                }),
                           ],
                         ),
                       );
@@ -123,8 +124,8 @@ class _UniverFiltrPageState extends State<UniverFiltrPage> {
               SizedBox(height: 4.h),
               FutureBuilder<List<GetDistrictModel>?>(
                   future: GetDistrictService().fetchDistrict(),
-                  builder:
-                      (context, AsyncSnapshot<List<GetDistrictModel>?> snapshot) {
+                  builder: (context,
+                      AsyncSnapshot<List<GetDistrictModel>?> snapshot) {
                     if (snapshot.hasData) {
                       return Container(
                         decoration: BoxDecoration(
@@ -135,7 +136,7 @@ class _UniverFiltrPageState extends State<UniverFiltrPage> {
                           title: Text(
                             _titleDistrict,
                             style:
-                            TextStyle(color: Colors.grey, fontSize: 14.sp),
+                                TextStyle(color: Colors.grey, fontSize: 14.sp),
                           ),
                           children: [
                             ListView.builder(
@@ -143,13 +144,13 @@ class _UniverFiltrPageState extends State<UniverFiltrPage> {
                                 itemCount: snapshot.data!.length,
                                 itemBuilder: (context, index) {
                                   return InkWell(
-                                      onTap: (){
+                                      onTap: () {
                                         setState(() {
-                                          _titleDistrict = snapshot.data![index].name!;
+                                          _titleDistrict =
+                                              snapshot.data![index].name!;
                                         });
                                       },
-                                      child: Text(
-                                          snapshot.data![index].name!));
+                                      child: Text(snapshot.data![index].name!));
                                 })
                           ],
                         ),
@@ -160,7 +161,8 @@ class _UniverFiltrPageState extends State<UniverFiltrPage> {
                     );
                   }),
               Padding(
-                padding: EdgeInsets.symmetric(vertical: 385.h, horizontal: 31.w),
+                padding:
+                    EdgeInsets.symmetric(vertical: 385.h, horizontal: 31.w),
                 child: Container(
                     width: double.infinity,
                     child: ElevatedButton(
@@ -169,8 +171,7 @@ class _UniverFiltrPageState extends State<UniverFiltrPage> {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10.r)),
                           primary: AppColors.buttonLinear),
-                      onPressed: () {
-                      },
+                      onPressed: () {},
                       child: Text(
                         "Saqlash",
                         style: TextStyle(

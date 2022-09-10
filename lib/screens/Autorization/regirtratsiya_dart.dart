@@ -602,7 +602,11 @@ class _RegistratsiyaState extends State<Registratsiya> {
                           },
                         ),
                         Text("Roziman "),
-                        InkWell(child: Text("  Foydalanuvchi shartlariga",style: TextStyle(color: AppColors.mainColor,fontSize: 15),))
+                        InkWell(child: InkWell(
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context)=>OffertoPage()));
+                            },
+                            child: Text("  Foydalanuvchi shartlariga",style: TextStyle(color: AppColors.mainColor,fontSize: 15),)))
                       ],
                     ),
                   ],
