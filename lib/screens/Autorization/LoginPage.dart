@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:talaba_uy/screens/Autorization/sms_confirmation.dart';
+import 'package:talaba_uy/services/login_service.dart';
 
 import '../../core/const/app_colors.dart';
 
@@ -15,61 +16,98 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  TextEditingController _phoneController = TextEditingController();
+  String _message = '';
+  GlobalKey _key = GlobalKey();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      body: Padding(
-        padding: const EdgeInsets.fromLTRB(18, 155, 25, 150),
-        child: Column(
-          children: [
-            Center(
-                child: Image.asset(
-              'assets/images/logo.png',
-              width: 109.w,
-              height: 116.h,
+      appBar: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.transparent,
+        leading: InkWell(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Icon(
+              Icons.arrow_back,
+              color: Colors.black,
             )),
-            SizedBox(
-              height: 26.h,
-            ),
-            Text(
-              "Login",
-              style: TextStyle(color: AppColors.mainColor, fontSize: 32.sp),
-            ),
-            SizedBox(
-              height: 8.h,
-            ),
-            SizedBox(
-              width: MediaQuery.of(context).size.width - 150.w,
-              child: Text(
-                "Shaxsiy xisobga kirish uchun maydonlarni to’ldiring",
-                style: TextStyle(fontSize: 16.sp),
-              ),
-            ),
-            SizedBox(
-              height: 36.h,
-            ),
-            Padding(
-              padding: const EdgeInsets.fromLTRB(0, 0, 232, 6),
-              child: Text(
-                'Telefon raqamingiz',
-                style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.bold),
-              ),
-            ),
-            TextFormField(
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                hintText: '+ 998 ** *** ** **',
-                enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(color: AppColors.iconColor)),
-              ),
-            ),
-            SizedBox(
-              // height: 118.h,
+      ),
+      body: Padding(
+        padding: EdgeInsets.fromLTRB(18.w, 0.h, 25.w, 100.h),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Center(
+                    child: Image.asset(
+                  'assets/images/logo.png',
+                  width: 109.w,
+                  height: 116.h,
+                )),
+                SizedBox(
+                  height: 26.h,
+                ),
+                Center(
+                  child: Text(
+                    "Login",
+                    style: TextStyle(color: AppColors.mainColor, fontSize: 32.sp),
+                  ),
+                ),
+                SizedBox(
+                  height: 8.h,
+                ),
+                Center(
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width - 150.w,
+                    child: Text(
+                      "Shaxsiy xisobga kirish uchun maydonlarni to’ldiring",
+                      style: TextStyle(fontSize: 16.sp),textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 36.h,
+                ),
+                Text(
+                  'Telefon raqamingiz',
+                  style:
+                      TextStyle(fontSize: 12.sp, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  height: 6.h,
+                ),
+                TextFormField(
+                  key: _key,
+                  controller: _phoneController,
+                  keyboardType: TextInputType.number,
+                  decoration: InputDecoration(
+                    hintText: '998 ** *** ** **',
+                    border: OutlineInputBorder(
+                        borderSide: BorderSide(color: AppColors.iconColor)),
+                  ),
+                ),
+              ],
             ),
             ElevatedButton(
-              onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>SmsConfirmationPage()));
+              onPressed: () async {
+                var dataService = await LoginService()
+                    .loginService(phone: _phoneController.text);
+                if (dataService['status']) {
+                  _message = dataService['content'];
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SmsConfirmationPage(_phoneController.text, _message)));
+                          print(_message);
+                } else {
+                  _message = dataService['content'];
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(_message)));
+                }
               },
               style: ElevatedButton.styleFrom(
                 primary: AppColors.mainColor,

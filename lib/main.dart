@@ -32,6 +32,7 @@ void main() async {
     supportedLocales: [
       Locale('ru', 'RU'),
       Locale('uz', 'UZ'),
+      
     ],
     fallbackLocale: Locale('uz', 'UZ'),
     saveLocale: true,

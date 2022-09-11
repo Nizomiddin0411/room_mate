@@ -7,18 +7,43 @@ import 'package:talaba_uy/screens/menu/menu.dart';
 import '../../core/const/app_colors.dart';
 
 class SmsConfirmationPage extends StatefulWidget {
-  const SmsConfirmationPage({Key? key}) : super(key: key);
+  String? _phone;
+  String? _message;
+  SmsConfirmationPage(this._phone, this._message);
 
   @override
   State<SmsConfirmationPage> createState() => _SmsConfirmationPageState();
 }
 
 class _SmsConfirmationPageState extends State<SmsConfirmationPage> {
+
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
+      // do what you want here
+      final snackBar = SnackBar(
+        content: Text(widget._message!),
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    });
+
+  }
+  
   @override
   Widget build(BuildContext context) {
+    String func(){
+      List<String> _listPhone =  widget._phone!.split('');
+      String _partPhone = _listPhone[8] + _listPhone[9] +_listPhone[10] + _listPhone[11];
+      return _partPhone;
+    }
+
+    String _partPhone = func();
+
     return Scaffold(
       backgroundColor: AppColors.backgroundWhite,
-      // resizeToAvoidBottomInset: false,
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: AppColors.backgroundWhite,
@@ -51,8 +76,8 @@ class _SmsConfirmationPageState extends State<SmsConfirmationPage> {
             SizedBox(
               width: MediaQuery.of(context).size.width -150.w,
               child: Text(
-                "Biz *** 7886 raqamga SMS xabar jo’natdik,SMS xabardagi kod bilan tasdiqlang ! ",
-                style: TextStyle(fontSize: 16.sp),
+                "Biz *** $_partPhone raqamga SMS xabar jo’natdik, SMS xabardagi kod bilan tasdiqlang ! ",
+                style: TextStyle(fontSize: 16.sp), textAlign: TextAlign.center,
               ),
             ),
             SizedBox(
