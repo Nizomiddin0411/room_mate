@@ -1,3 +1,4 @@
+import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
@@ -5,6 +6,11 @@ import 'package:talaba_uy/models/days_apartment.dart';
 import 'package:talaba_uy/screens/All_Ads_Page/detail_page.dart';
 import 'package:talaba_uy/screens/Ijarachipage/filtr.dart';
 import 'package:talaba_uy/services/days_service.dart';
+
+import '../../models/get_all_ads.dart';
+import '../../services/get_all_ads_sevice.dart';
+import '../../services/get_all_ads_user.dart';
+import '../../services/post_change_favoritr_service.dart';
 
 class Elonlar extends StatefulWidget {
   const Elonlar({Key? key}) : super(key: key);
@@ -34,7 +40,7 @@ class _ElonlarState extends State<Elonlar> {
               ),
             ),
             backgroundColor: AppColors.backgroundWhite,
-            title: Center(
+            title: const Center(
               child: Text(
                 "E’lonlar",
                 style: TextStyle(color: AppColors.mainColor),
@@ -53,7 +59,7 @@ class _ElonlarState extends State<Elonlar> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Icon(
+                      const Icon(
                         Icons.location_on,
                         color: AppColors.mainColor,
                       ),
@@ -69,8 +75,7 @@ class _ElonlarState extends State<Elonlar> {
                               MaterialPageRoute(
                                   builder: (context) => FiltrPage()));
                         },
-                        child: const Padding(
-                          padding: EdgeInsets.all(11.0),
+                        child:  const Center(
                           child: Icon(
                             Icons.tune,
                             color: AppColors.mainColor,
@@ -82,7 +87,7 @@ class _ElonlarState extends State<Elonlar> {
                 ),
               ),
             ),
-            bottom: TabBar(
+            bottom: const TabBar(
               labelColor: AppColors.textColor,
               tabs: [
                 Tab(
@@ -98,158 +103,203 @@ class _ElonlarState extends State<Elonlar> {
         body: TabBarView(
           controller: _tabController,
           children: [
-            ListView.builder(
-                shrinkWrap: true,
-                itemCount: 20,
-                itemBuilder: (BuildContext contex, int index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(18.0),
-                    child: Container(
-                      width: 324.w,
-                      height: 100.h,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(6.r),
-                          color: AppColors.secondBackgroud),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(6.0),
-                                child: Text(
-                                  'Talabalarmiz , Kvartira kerak',
-                                  style: TextStyle(fontSize: 18.sp),
+            FutureBuilder<List<AllAdsModel>?>(
+              future: GetAllAdsService().fetchAllADS(),
+                builder: (context,AsyncSnapshot<List<AllAdsModel>?> snapshot){
+                if(snapshot.hasData) {
+                  return ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: snapshot.data!.length,
+                      itemBuilder: (BuildContext contex, int index) {
+                        return Padding(
+                          padding: const EdgeInsets.all(18.0),
+                          child: Container(
+                            width: 324.w,
+                            height: 100.h,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(6.r),
+                                color: AppColors.secondBackgroud),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(6.0),
+                                      child: Text(
+                                        '${snapshot.data![index].title.toString()}',
+                                        style: TextStyle(fontSize: 18.sp),
+                                      ),
+                                    ),
+                                     Padding(
+                                      padding: const EdgeInsets.fromLTRB(1, 0, 8, 0),
+                                      child:  FavoriteButton(
+                                        isFavorite: snapshot.data![index].favorite == '0'? false : true,
+                                        iconSize: 35.0,
+                                        valueChanged: (_isFavorite) {
+                                          print('Is Favorite $_isFavorite)');
+                                          setState(() {
+                                            FavoriteChange().Favoritefetch(id: snapshot.data![index].id.toString());
+
+                                          });
+                                          },
+                                      )
+                                      // InkWell(
+                                      //   onTap: (){},
+                                      //   child:  Icon(
+                                      //     snapshot.data![index].favorite == '0' ? Icons.favorite_border:Icons.favorite,
+                                      //     color: AppColors.error,
+                                      //   ),
+                                      // ),
+                                    )
+                                  ],
                                 ),
-                              ),
-                              const Padding(
-                                padding: EdgeInsets.fromLTRB(1, 0, 8, 0),
-                                child: Icon(
-                                  Icons.favorite_border,
-                                  color: AppColors.error,
-                                ),
-                              )
-                            ],
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-                            child: Text(
-                              '300 y.e/oyiga',
-                              style: TextStyle(
-                                  color: AppColors.mainColor, fontSize: 24.sp),
-                            ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-                                child: Text(
-                                  "Chilonzor tumani 2 kv 5/34 4 xonadon",
-                                  style: TextStyle(fontSize: 10.sp),
-                                ),
-                              ),
-                              InkWell(
-                                onTap: (){
-                                        Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailPage()));
-                                      },
-                                child: const Padding(
-                                  padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
+                                Padding(
+                                  padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
                                   child: Text(
-                                    'Batafsil',
+                                    '${snapshot.data![index].cost}',
                                     style: TextStyle(
-                                        decoration: TextDecoration.underline,
-                                        color: AppColors.mainColor),
+                                        color: AppColors.mainColor, fontSize: 24.sp),
                                   ),
                                 ),
-                              )
-                            ],
-                          ),
-                          SizedBox(
-                            height: 18.h,
-                          )
-                        ],
-                      ),
-                    ),
-                  );
-                })
-          ,ListView.builder(
-                shrinkWrap: true,
-                itemCount: 20,
-                itemBuilder: (BuildContext contex, int index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(18.0),
-                    child: Container(
-                      width: 324.w,
-                      height: 100.h,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(6.r),
-                          color: AppColors.secondBackgroud),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(6.0),
-                                child: Text(
-                                  'Talabalarmiz , Kvartira kerak',
-                                  style: TextStyle(fontSize: 18.sp),
-                                ),
-                              ),
-                              const Padding(
-                                padding: EdgeInsets.fromLTRB(1, 0, 8, 0),
-                                child: Icon(
-                                  Icons.favorite_border,
-                                  color: AppColors.error,
-                                ),
-                              )
-                            ],
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-                            child: Text(
-                              '300 y.e/oyiga',
-                              style: TextStyle(
-                                  color: AppColors.mainColor, fontSize: 24.sp),
-                            ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-                                child: Text(
-                                  "Chilonzor tumani 2 kv 5/34 4 xonadon",
-                                  style: TextStyle(fontSize: 10.sp),
-                                ),
-                              ),
-                              InkWell(
-                                onTap: (){
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+                                      child: Text(
+                                        "${snapshot.data![index].address.toString()}",
+                                        style: TextStyle(fontSize: 10.sp),
+                                      ),
+                                    ),
+                                    InkWell(
+                                      onTap: (){
                                         Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailPage()));
                                       },
-                                child: const Padding(
-                                  padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
-                                  child: Text(
-                                    'Batafsil',
-                                    style: TextStyle(
-                                        decoration: TextDecoration.underline,
-                                        color: AppColors.mainColor),
-                                  ),
+                                      child: const Padding(
+                                        padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
+                                        child: Text(
+                                          'Batafsil',
+                                          style: TextStyle(
+                                              decoration: TextDecoration.underline,
+                                              color: AppColors.mainColor),
+                                        ),
+                                      ),
+                                    )
+                                  ],
                                 ),
-                              )
-                            ],
+                                SizedBox(
+                                  height: 18.h,
+                                )
+                              ],
+                            ),
                           ),
-                          SizedBox(
-                            height: 18.h,
-                          )
-                        ],
-                      ),
-                    ),
-                  );
-                })
+                        );
+                      });
+                }
+                return Center(child: const CircularProgressIndicator(),);
+                }
+            ),
+
+            FutureBuilder<List<AllAdsModel>?>(
+                future: GetAllAdsUser().fetchAllADSUser(),
+                builder: (context,AsyncSnapshot<List<AllAdsModel>?> snapshot){
+                  if(snapshot.hasData) {
+                    return ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: snapshot.data!.length,
+                        itemBuilder: (BuildContext contex, int index) {
+                          return Padding(
+                            padding: const EdgeInsets.all(18.0),
+                            child: Container(
+                              width: 324.w,
+                              height: 100.h,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(6.r),
+                                  color: AppColors.secondBackgroud),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(6.0),
+                                        child: Text(
+                                          '${snapshot.data![index].title.toString()}',
+                                          style: TextStyle(fontSize: 18.sp),
+                                        ),
+                                      ),
+                                      Padding(
+                                          padding: const EdgeInsets.fromLTRB(1, 0, 8, 0),
+                                          child:  FavoriteButton(
+                                            isFavorite: snapshot.data![index].favorite == '0'? false : true,
+                                            iconSize: 35.0,
+                                            valueChanged: (_isFavorite) {
+                                              print('Is Favorite $_isFavorite)');
+                                              setState(() {
+                                                FavoriteChange().Favoritefetch(id: snapshot.data![index].id.toString());
+
+                                              });
+                                            },
+                                          )
+                                        // InkWell(
+                                        //   onTap: (){},
+                                        //   child:  Icon(
+                                        //     snapshot.data![index].favorite == '0' ? Icons.favorite_border:Icons.favorite,
+                                        //     color: AppColors.error,
+                                        //   ),
+                                        // ),
+                                      )
+                                    ],
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+                                    child: Text(
+                                      '${snapshot.data![index].cost}',
+                                      style: TextStyle(
+                                          color: AppColors.mainColor, fontSize: 24.sp),
+                                    ),
+                                  ),
+                                  Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+                                        child: Text(
+                                          "${snapshot.data![index].address.toString()}",
+                                          style: TextStyle(fontSize: 10.sp),
+                                        ),
+                                      ),
+                                      InkWell(
+                                        onTap: (){
+                                          Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailPage()));
+                                        },
+                                        child: const Padding(
+                                          padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
+                                          child: Text(
+                                            'Batafsil',
+                                            style: TextStyle(
+                                                decoration: TextDecoration.underline,
+                                                color: AppColors.mainColor),
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 18.h,
+                                  )
+                                ],
+                              ),
+                            ),
+                          );
+                        });
+                  }
+                  return Center(child: const CircularProgressIndicator(),);
+                }
+            ),
           ],
         ),
       ),
