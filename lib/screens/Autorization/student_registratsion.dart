@@ -1,4 +1,5 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:switcher/core/switcher_size.dart';
@@ -31,7 +32,23 @@ class _StudentUserState extends State<StudentUser> {
   String Course = '1';
   String Roommate = '';
   String District = '';
+  String Tuman = '';
   String? gender;
+
+  Color kursColor = Colors.black12;
+  Color fakultColor = Colors.black12;
+  Color univerColor = Colors.black12;
+  Color numberColor = Colors.black12;
+  Color nameColor = Colors.black12;
+  Color viloyatColor = Colors.black12;
+  Color tumanColor = Colors.black12;
+  Color jinsiColor = Colors.black12;
+  bool kurs = false;
+  bool univer = false;
+  bool viloyat = false;
+  bool ktuman = false;
+  bool fakultet = false;
+  bool jinsi= false;
 
   final List<String> genderItems = [
     'Ayol',
@@ -66,10 +83,20 @@ class _StudentUserState extends State<StudentUser> {
                 SizedBox(
                   height: 5,
                 ),
-                TextField(
+                TextFormField(
+                  autovalidateMode: AutovalidateMode.always,
+                  validator: (e){
+                    if(e!.length > 3){
+                      return null;
+                    }else{
+                      return 'Kamida 4ta soz bolishi kerak';
+                    }
+                  },
                   controller: myController,
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(),
+                    border: OutlineInputBorder(
+                      borderSide: BorderSide(color:myController.text == '' ? Colors.red : Colors.black12)
+                    ),
                     labelText: 'Ism familyangizni kiriting',
                   ),
                 ),
@@ -88,7 +115,16 @@ class _StudentUserState extends State<StudentUser> {
                 SizedBox(
                   height: 5,
                 ),
-                TextField(
+                TextFormField(
+                  autovalidateMode: AutovalidateMode.always,
+                  validator: (e){
+                    if(e!.length > 12){
+                      return null;
+                    }else{
+                      return '10 ta raqam kiriting ';
+                    }
+                  },
+                  keyboardType: TextInputType.phone,
                   controller: nameController,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
@@ -116,7 +152,8 @@ class _StudentUserState extends State<StudentUser> {
                       decoration: InputDecoration(
                         isDense: true,
                         contentPadding: EdgeInsets.zero,
-                        border: OutlineInputBorder(
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: jinsiColor),
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
@@ -151,16 +188,22 @@ class _StudentUserState extends State<StudentUser> {
                           .toList(),
                       validator: (value) {
                         if (value == null) {
-                          return 'Please select gender.';
+                          return 'Jinsingiz tanlang';
                         }
                       },
                       onChanged: (String? value) {
                         setState(() {
                           dropdownvalue = value;
+                          jinsi=true;
+                          jinsiColor = Colors.black12;
+                          print(dropdownvalue);
                         });
                       },
                       onSaved: (value) {
                         dropdownvalue = value.toString();
+                        setState(() {
+
+                        });
                       },
                     ),
                   ],
@@ -188,6 +231,7 @@ class _StudentUserState extends State<StudentUser> {
                         if (snapshot.hasData) {
                           return DropdownButtonFormField2<String>(
                             decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: univerColor)),
                               isDense: true,
                               contentPadding: EdgeInsets.zero,
                               border: OutlineInputBorder(
@@ -225,12 +269,17 @@ class _StudentUserState extends State<StudentUser> {
                                 .toList(),
                             validator: (value) {
                               if (value == null) {
-                                return '  ';
+                                return ' Oliy o’quv yurtingiz ';
                               }
+                              setState(() {
+
+                              });
                             },
                             onChanged: (value) {
                               setState(() {
                                 UniderId = (value as String?)!;
+                                univer=true;
+                                univerColor = Colors.black12;
                               });
                             },
                             onSaved: (value) {
@@ -268,6 +317,7 @@ class _StudentUserState extends State<StudentUser> {
                         if (snapshot.hasData) {
                           return DropdownButtonFormField2<String>(
                             decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: fakultColor)),
                               isDense: true,
                               contentPadding: EdgeInsets.zero,
                               border: OutlineInputBorder(
@@ -275,6 +325,7 @@ class _StudentUserState extends State<StudentUser> {
                               ),
                             ),
                             isExpanded: true,
+                            isDense: false,
                             hint: const Text(
                               'Fakultetingiz',
                               style: TextStyle(fontSize: 14),
@@ -290,7 +341,7 @@ class _StudentUserState extends State<StudentUser> {
                             dropdownDecoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15),
                             ),
-                            items: snapshot.data!
+                            items: univer ? snapshot.data!
                                 .map(
                                   (value) => DropdownMenuItem<String>(
                                 value: value.name,
@@ -302,21 +353,23 @@ class _StudentUserState extends State<StudentUser> {
                                 ),
                               ),
                             )
-                                .toList(),
-                            validator: (value) {
-                              if (value == null) {
-                                return 'Oliy o’quv yurtingiz';
-                              }
-                            },
+                                .toList() : [],
                             onChanged: (value) {
-                              setState(() {
-                                fakultetId = (value as String?)!;
-                              });
+                              fakultetId = (value)!;
+                              fakultet = true;
+                              fakultColor = Colors.black12;
+
+                            } ,
+                            validator: (value){
+                              if(value==null|| value.isEmpty){
+                                print("qwwwwwwwwwwwwwwwwwwwwww");
+                                return 'Fakultetni tanlang';
+                              }
+                              return null;
                             },
-                            onSaved: (value) {
-                              fakultetId = value.toString();
-                            },
+
                           );
+
                         }
                         return Center(
                           child: CircularProgressIndicator(),
@@ -344,13 +397,16 @@ class _StudentUserState extends State<StudentUser> {
                   children: [
                     DropdownButtonFormField2(
                       decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: kursColor)),
                         isDense: true,
                         contentPadding: EdgeInsets.zero,
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(10),
+
                         ),
                       ),
-                      isExpanded: true,
+                      isDense: false,
+                      buttonElevation: 2,
                       hint: const Text(
                         'Kursingizni kiriting',
                         style: TextStyle(fontSize: 14),
@@ -365,6 +421,7 @@ class _StudentUserState extends State<StudentUser> {
                       const EdgeInsets.only(left: 20, right: 10),
                       dropdownDecoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
+
                       ),
                       items: kursingizItems
                           .map((item) => DropdownMenuItem<String>(
@@ -377,13 +434,14 @@ class _StudentUserState extends State<StudentUser> {
                         ),
                       ))
                           .toList(),
-                      validator: (value) {
-                        if (value == null) {
-                          return 'Please select gender.';
-                        }
-                      },
+                      validator: (value)=>value==value?'Kursingizni kiriting':null,
                       onChanged: (String? value) {
                         selectedValue = value;
+                        kurs = true;
+                        kursColor = Colors.black12;
+                        setState(() {
+
+                        });
                       },
 
                     ),
@@ -412,6 +470,7 @@ class _StudentUserState extends State<StudentUser> {
                         if (snapshot.hasData) {
                           return DropdownButtonFormField2<String>(
                             decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: viloyatColor)),
                               isDense: true,
                               contentPadding: EdgeInsets.zero,
                               border: OutlineInputBorder(
@@ -449,12 +508,14 @@ class _StudentUserState extends State<StudentUser> {
                                 .toList(),
                             validator: (value) {
                               if (value == null) {
-                                return 'Oliy o’quv yurtingiz';
+                                return '';
                               }
                             },
                             onChanged: (value) {
                               setState(() {
-                                UniderId = (value as String?)!;
+                                District = (value as String?)!;
+                                viloyat=true;
+                                viloyatColor = Colors.black12;
                               });
                             },
                             onSaved: (value) {
@@ -490,6 +551,7 @@ class _StudentUserState extends State<StudentUser> {
                         if (snapshot.hasData) {
                           return DropdownButtonFormField2<String>(
                             decoration: InputDecoration(
+                              enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: tumanColor)),
                               isDense: true,
                               contentPadding: EdgeInsets.zero,
                               border: OutlineInputBorder(
@@ -526,17 +588,14 @@ class _StudentUserState extends State<StudentUser> {
                             )
                                 .toList(),
                             validator: (value) {
-                              if (value == null) {
-                                return 'Oliy o’quv yurtingiz';
-                              }
+
                             },
                             onChanged: (value) {
                               setState(() {
-                                District = (value as String?)!;
+                                Tuman = (value as String?)!;
+                                ktuman=true;
+                                tumanColor = Colors.black12;
                               });
-                            },
-                            onSaved: (value) {
-                              District = value.toString();
                             },
                           );
                         }
@@ -615,27 +674,48 @@ class _StudentUserState extends State<StudentUser> {
             ),
             ElevatedButton(
               onPressed: () async {
-                await RegistratsiyaStudent().CreateAdsStudent(
-                    FullName: myController.toString(),
-                    fakultetId: fakultetId,
-                    Course:selectedValue.toString(),
-                    Roommate: value.toString(),
-                    District: District,
-                    Phonenumber: nameController.text,
-                    gender: dropdownvalue.toString() == 'Erkak' ? '1' : '2',
-                    UniderId: UniderId.toString());
-                print('${myController} maulotiiiiiiiii+++++++++++');
-                print('${selectedValue} maulotiiiiiiiii+++++++++++');
+                if(kurs && viloyat && univer && fakultet&& ktuman && myController.text != ''&&jinsi){
+                  await RegistratsiyaStudent().CreateAdsStudent(
+                      FullName: myController.toString(),
+                      fakultetId: fakultetId,
+                      Course:selectedValue.toString(),
+                      Roommate: value.toString(),
+                      District: District.toString(),
+                      Phonenumber: nameController.text,
+                      gender: dropdownvalue.toString() == 'Erkak' ? '1' : '2',
+                      UniderId: UniderId.toString());
+                  print('${myController} maulotiiiiiiiii+++++++++++');
+                  print('${selectedValue} maulotiiiiiiiii+++++++++++');
 
-                print('${UniderId} malumotlar  +++++++++++');
-                print('${District} maulotiiiiiiiii+++++++++++');
-                print('${fakultetId} maulotiiiiiiiii+++++++++++');
-                print('${nameController.text} maulotiiiiiiiii+++++++++++');
-                print('${dropdownvalue} maulotiiiiiiiii+++++++++++');
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => LoginPage()));
+                  print('${UniderId} malumotlar  +++++++++++');
+                  print('${District} maulotiiiiiiiii+++++++++++');
+                  print('${fakultetId} maulotiiiiiiiii+++++++++++');
+                  print('${nameController.text} maulotiiiiiiiii+++++++++++');
+                  print('${dropdownvalue} maulotiiiiiiiii+++++++++++');
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => LoginPage()));
+                }
+                else{
+                  kursColor = Colors.red;
+                  univerColor = Colors.red;
+                  viloyatColor = Colors.red;
+                  tumanColor = Colors.red;
+                  fakultColor = Colors.red;
+                  jinsiColor = Colors.red;
+                  if(kurs) kursColor = Colors.black12;
+                  if(univer) univerColor = Colors.black12;
+                  if(viloyat) viloyatColor = Colors.black12;
+                  if(ktuman) tumanColor = Colors.black12;
+                  if(fakultet) fakultColor = Colors.black12;
+                  if(jinsi) jinsiColor = Colors.black12;
+
+
+                  setState(() {
+
+                  });
+                }
               },
               style: ElevatedButton.styleFrom(
                 primary: AppColors.mainColor,

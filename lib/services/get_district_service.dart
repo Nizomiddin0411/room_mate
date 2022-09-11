@@ -13,9 +13,7 @@ class GetDistrictService {
       var response = await http.get(Uri.parse(
         'http://164.68.114.231:8081/roommate/backend/web/api/region/get-district?region_id=1',
       ),
-          headers: {
-            HttpHeaders.authorizationHeader: 'Bearer VVuDO41zOoYY2KvUUHYPOJ9PzKsnnJeD'
-          }
+
       );
       if(response.statusCode == 200){
 
