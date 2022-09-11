@@ -216,7 +216,6 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                     );
                   }),
               SizedBox(height: 12.h),
-
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 210.h, horizontal: 31.w),
                 child: Container(
