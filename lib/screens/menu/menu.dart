@@ -5,6 +5,7 @@ import 'package:talaba_uy/core/const/app_colors.dart';
 import 'package:talaba_uy/screens/Account_Page/account_page.dart';
 import 'package:talaba_uy/screens/All_Ads_Page/all_ads_page.dart';
 import 'package:talaba_uy/screens/Create_ads/create_ads_page.dart';
+import 'package:talaba_uy/screens/Ijarachipage/elonlar.dart';
 import 'package:talaba_uy/screens/Ijarachipage/kunlik_ijara.dart';
 import 'package:talaba_uy/screens/Search_University/search_page.dart';
 import 'package:talaba_uy/screens/drawer/drawer.dart';
@@ -103,7 +104,7 @@ class _MenuPageState extends State<MenuPage> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const CreateAdsPage()));
+                            builder: (context) => const Elonlar()));
                   },
                   child: Container(
                     child: Column(
