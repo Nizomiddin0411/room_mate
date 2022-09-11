@@ -23,9 +23,6 @@ class RegistratsiyaUser {
       'full_name':FullName,
       'gender': gender,
     });
-    request.headers.addAll({
-      HttpHeaders.authorizationHeader: 'Bearer VVuDO41zOoYY2KvUUHYPOJ9PzKsnnJeD'
-    });
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode >= 200 && response.statusCode <= 300) {
