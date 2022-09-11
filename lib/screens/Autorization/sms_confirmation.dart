@@ -1,8 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sms_autofill/sms_autofill.dart';
 import 'package:talaba_uy/screens/menu/menu.dart';
+import 'package:talaba_uy/services/login_service.dart';
+import 'package:talaba_uy/services/sms_service.dart';
 
 import '../../core/const/app_colors.dart';
 
@@ -16,7 +20,14 @@ class SmsConfirmationPage extends StatefulWidget {
 }
 
 class _SmsConfirmationPageState extends State<SmsConfirmationPage> {
+  String? _message;
+  TextEditingController? _smsController;
+  String? _code;
 
+  Timer? _timer;
+  int _secoundCount = 59;
+  int _minutCount = 2;
+  bool _timeOf = false;
 
   @override
   void initState() {
@@ -29,17 +40,35 @@ class _SmsConfirmationPageState extends State<SmsConfirmationPage> {
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     });
 
+    _timer = Timer.periodic(
+      Duration(seconds: 1),
+      (timer) {
+        this._secoundCount -= 1;
+        setState(() {});
+      },
+    );
   }
-  
+
   @override
   Widget build(BuildContext context) {
-    String func(){
-      List<String> _listPhone =  widget._phone!.split('');
-      String _partPhone = _listPhone[8] + _listPhone[9] +_listPhone[10] + _listPhone[11];
+    String func() {
+      List<String> _listPhone = widget._phone!.split('');
+      String _partPhone =
+          _listPhone[8] + _listPhone[9] + _listPhone[10] + _listPhone[11];
       return _partPhone;
     }
 
     String _partPhone = func();
+    setState(() {
+      if (_secoundCount == 0 && _minutCount != 0) {
+        _secoundCount = 59;
+        _minutCount -= 1;
+      }
+      if (_minutCount == 0 && _secoundCount == 0) {
+        _timer!.cancel();
+        _timeOf = true;
+      }
+    });
 
     return Scaffold(
       backgroundColor: AppColors.backgroundWhite,
@@ -51,71 +80,125 @@ class _SmsConfirmationPageState extends State<SmsConfirmationPage> {
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: const Icon(Icons.arrow_back,color: AppColors.textColor,),
+          icon: const Icon(
+            Icons.arrow_back,
+            color: AppColors.textColor,
+          ),
         ),
       ),
       body: Padding(
-        padding:  EdgeInsets.symmetric(horizontal: 18.w),
+        padding: EdgeInsets.symmetric(horizontal: 18.w),
         child: Column(
           children: [
             Center(
                 child: Image.asset(
-                  'assets/images/logo.png',
-                  width: 109.w,
-                  height: 116.h,
-                )),
+              'assets/images/logo.png',
+              width: 109.w,
+              height: 116.h,
+            )),
             SizedBox(
               height: 26.h,
             ),
             Text(
               "SMS tasdiqlash",
-              style: TextStyle(color: AppColors.mainColor,fontSize: 32.sp),),
+              style: TextStyle(color: AppColors.mainColor, fontSize: 32.sp),
+            ),
             SizedBox(
               height: 8.h,
             ),
             SizedBox(
-              width: MediaQuery.of(context).size.width -150.w,
+              width: MediaQuery.of(context).size.width - 150.w,
               child: Text(
                 "Biz *** $_partPhone raqamga SMS xabar jo’natdik, SMS xabardagi kod bilan tasdiqlang ! ",
-                style: TextStyle(fontSize: 16.sp), textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 16.sp),
+                textAlign: TextAlign.center,
               ),
             ),
             SizedBox(
               height: 36.h,
             ),
-            const PinFieldAutoFill(
-                decoration: BoxLooseDecoration(
-                  textStyle: TextStyle(fontSize: 20, color: Colors.black),
-                     strokeColorBuilder: FixedColorBuilder(AppColors.mainColor),
-                ),// UnderlineDecoration, BoxLooseDecoration or BoxTightDecoration see https://github.com/TinoGuo/pin_input_text_field for more info,
-                currentCode: "",// prefill with a code
-                // onCodeSubmitted:, //code submitted callback
-                // onCodeChanged: //code changed callback
-                codeLength: 5,//code length, default 6
+            PinFieldAutoFill(
+              decoration: BoxLooseDecoration(
+                textStyle: TextStyle(fontSize: 20, color: Colors.black),
+                strokeColorBuilder: FixedColorBuilder(AppColors.mainColor),
+              ),
+              currentCode: '', // prefill with a code
+              codeLength: 5, //code length, default 6
+              onCodeChanged: (code) {
+                setState(() {
+                  _code = code;
+                });
+              },
             ),
             SizedBox(
               height: 32.h,
             ),
-            const Center(
+            Center(
               child: Text(
-                "02:59",style: TextStyle(color: AppColors.mainColor),
+                _secoundCount > 9
+                    ? "0" +
+                        _minutCount.toString() +
+                        ":" +
+                        _secoundCount.toString()
+                    : "0" +
+                        _minutCount.toString() +
+                        ":" +
+                        "0" +
+                        _secoundCount.toString(),
+                style: TextStyle(color: AppColors.mainColor),
               ),
             ),
             SizedBox(
               height: 50.h,
             ),
-             Center(
+            Center(
               child: GestureDetector(
-                onTap: (){},
-                child: const Text(
-                  "Qayta jo’natish",style: TextStyle(color: AppColors.mainColor),
+                onTap: () async {
+                  if (_timeOf) {
+                    _timeOf = false;
+                    _minutCount = 2;
+                    _secoundCount = 59;
+                    setState(() {});
+                    var dataService = await LoginService()
+                        .loginService(phone: widget._phone!);
+                    if (dataService['status']) {
+                      _message = dataService['content'];
+                      ScaffoldMessenger.of(context)
+                          .showSnackBar(SnackBar(content: Text(_message!)));
+                    } else {
+                      _message = dataService['content'];
+                      ScaffoldMessenger.of(context)
+                          .showSnackBar(SnackBar(content: Text(_message!)));
+                    }
+                  }
+                },
+                child: Text(
+                  "Qayta jo’natish",
+                  style: TextStyle(
+                      color: !_timeOf
+                          ? Colors.grey.shade400
+                          : AppColors.mainColor),
                 ),
               ),
             ),
-            SizedBox(height: 30.h,),
+            SizedBox(
+              height: 120.h,
+            ),
             ElevatedButton(
-              onPressed: () {
-                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>MenuPage()), (route) => false);
+              onPressed: () async {
+                var dataService = await SmsService()
+                    .smsService(phone: widget._phone!, sms: _code!);
+                if (dataService['status']) {
+                  _message = dataService['content'];
+                  Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(builder: (context) => MenuPage()),
+                      (route) => true);
+                } else {
+                  _message = dataService['content'];
+                  ScaffoldMessenger.of(context)
+                      .showSnackBar(SnackBar(content: Text(_message!)));
+                }
               },
               style: ElevatedButton.styleFrom(
                 primary: AppColors.mainColor,

@@ -9,7 +9,7 @@ class SmsService {
   }) async {
     var request = http.MultipartRequest(
       'post',
-      Uri.parse('https://ads.bolakayjon.uz/mobile/user/login'),
+      Uri.parse('http://164.68.114.231:8081/roommate/backend/web/api/user/check-sms'),
     );
     request.fields.addAll({
       'phone': phone, 
