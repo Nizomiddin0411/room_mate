@@ -1,3 +1,4 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
@@ -15,9 +16,17 @@ import 'package:easy_localization/easy_localization.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(
+      // options: FirebaseOptions(
+      // apiKey: "",
+      // appId: "",
+      // messagingSenderId: "",
+      // projectId: "",)
+      );
   await EasyLocalization.ensureInitialized();
   await Hive.initFlutter();
   await Hive.openBox('token');
+  
   runApp(EasyLocalization(
     path: 'assets/locale',
     supportedLocales: [

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "959870474293",
+    "project_id": "chat-app-621c9",
+    "storage_bucket": "chat-app-621c9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:959870474293:android:2e7bc03d5eeba8aeeb797c",
+        "android_client_info": {
+          "package_name": "com.example.roommate"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "959870474293-l6i8c3jla9j6cf7gqvd34lh8mpnq39os.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.roommate",
+            "certificate_hash": "5dadb2fc9d2872e07a3c01d9a6ca86077b737feb"
+          }
+        },
+        {
+          "client_id": "959870474293-aimq5aokhbicj4cuaf021o07cf3kvri1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACHHve28I-hAdH_mjmOj65Za11_7HBG9w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "959870474293-aimq5aokhbicj4cuaf021o07cf3kvri1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
