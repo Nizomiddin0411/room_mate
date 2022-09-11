@@ -43,6 +43,13 @@ dependencies:
   easy_localization: ^3.0.0
   switcher: ^1.0.0
   draggable_scrollbar: ^0.1.0
+  firebase_core:
+  firebase_auth: ^3.4.2
+  cloud_firestore: ^3.4.6
+  image_picker: ^0.8.5+3
+  firebase_storage: ^10.3.8
+  transparent_image: ^2.0.0
+  multi_image_picker: ^4.8.01
 dev_dependencies:
   flutter_test:
     sdk: flutter
