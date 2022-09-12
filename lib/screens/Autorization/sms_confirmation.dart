@@ -22,7 +22,7 @@ class SmsConfirmationPage extends StatefulWidget {
 class _SmsConfirmationPageState extends State<SmsConfirmationPage> {
   String? _message;
   TextEditingController? _smsController;
-  String? _code;
+  String _code="";
 
   Timer? _timer;
   int _secoundCount = 59;
@@ -122,11 +122,12 @@ class _SmsConfirmationPageState extends State<SmsConfirmationPage> {
                 textStyle: TextStyle(fontSize: 20, color: Colors.black),
                 strokeColorBuilder: FixedColorBuilder(AppColors.mainColor),
               ),
-              currentCode: '', // prefill with a code
+              currentCode: _code, // prefill with a code
               codeLength: 5, //code length, default 6
               onCodeChanged: (code) {
                 setState(() {
-                  _code = code;
+                  _code = code!;
+                  print(_code);
                 });
               },
             ),
