@@ -52,7 +52,7 @@ class _LanguagePageState extends State<LanguagePage> {
                     )),
                 trailing: Checkbox(
                   shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)
+                      borderRadius: BorderRadius.circular(8)
                   ),
                   value: this.value1,
 

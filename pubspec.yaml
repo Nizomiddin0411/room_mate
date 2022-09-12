@@ -48,6 +48,7 @@ dependencies:
   cloud_firestore: ^3.4.6
   favorite_button: ^0.0.4
   image_picker: ^0.8.4+2
+  easy_mask: ^2.0.1
   firebase_storage: ^10.3.8
   transparent_image: ^2.0.0
   multi_image_picker: ^4.8.01
