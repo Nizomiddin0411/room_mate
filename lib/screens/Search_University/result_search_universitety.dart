@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:talaba_uy/chat/chat_page.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
 import 'package:talaba_uy/screens/Ijarachipage/filtr.dart';
 import 'package:talaba_uy/screens/Search_University/filtr_university.dart';
@@ -178,6 +179,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                           Text("Kursi : 1"),
                                           InkWell(
                                             onTap: (){
+                                              Navigator.push(context, MaterialPageRoute(builder: (context)=>ChatPage(name: "Polat Alemdar")));
                                             },
                                             child: Padding(
                                               padding: const EdgeInsets.fromLTRB(0, 0, 7, 0),
@@ -278,6 +280,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                     Text("Kursi : 1"),
                                     InkWell(
                                         onTap: (){
+                                          Navigator.push(context, MaterialPageRoute(builder: (context)=>ChatPage(name: "Polat Alemdar")));
                                         },
                                         child: Padding(
                                           padding: const EdgeInsets.fromLTRB(0, 0, 7, 0),

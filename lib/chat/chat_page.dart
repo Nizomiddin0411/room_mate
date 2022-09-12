@@ -88,10 +88,10 @@ class _ChatPageState extends State<ChatPage> {
                     padding: const EdgeInsets.only(right: 6),
                     child: InkWell(
                       onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => AddImage()));
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (context) => AddImage()));
                       },
                       child: Icon(
                         Icons.folder,
