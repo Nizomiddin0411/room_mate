@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
 import 'package:talaba_uy/screens/Autorization/LoginPage.dart';
 import 'package:talaba_uy/screens/Autorization/offerto_dart.dart';
+import 'package:easy_mask/easy_mask.dart';
 
 import '../../services/post_user registratsion.dart';
 class UserRegistratsion extends StatefulWidget {
@@ -90,6 +91,13 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
                   height: 5,
                 ),
                 TextFormField(
+                  inputFormatters: [
+                    TextInputMask(
+                      mask: '\\+ 999 99 999 99 99',
+                      placeholder: '_ ',
+                      maxPlaceHolders: 13,
+                    )
+                  ],
                   autovalidateMode: AutovalidateMode.always,
                   validator: (e){
                     if(e!.length > 12){

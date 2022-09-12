@@ -1,4 +1,5 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -116,6 +117,13 @@ class _StudentUserState extends State<StudentUser> {
                   height: 5,
                 ),
                 TextFormField(
+                  inputFormatters: [
+                    TextInputMask(
+                      mask: '\\+ 999 99 999 99 99',
+                      placeholder: '_ ',
+                      maxPlaceHolders: 13,
+                    )
+                  ],
                   autovalidateMode: AutovalidateMode.always,
                   validator: (e){
                     if(e!.length > 12){
@@ -257,7 +265,7 @@ class _StudentUserState extends State<StudentUser> {
                             items: snapshot.data!
                                 .map(
                                   (value) => DropdownMenuItem<String>(
-                                value: value.name,
+                                value: value.nameRu,
                                 child: Text(
                                   value.name!,
                                   style: const TextStyle(
@@ -346,7 +354,7 @@ class _StudentUserState extends State<StudentUser> {
                                   (value) => DropdownMenuItem<String>(
                                 value: value.name,
                                 child: Text(
-                                  value.name!,
+                                  value.searching!,
                                   style: const TextStyle(
                                     fontSize: 14,
                                   ),
@@ -359,14 +367,8 @@ class _StudentUserState extends State<StudentUser> {
                               fakultet = true;
                               fakultColor = Colors.black12;
 
+
                             } ,
-                            validator: (value){
-                              if(value==null|| value.isEmpty){
-                                print("qwwwwwwwwwwwwwwwwwwwwww");
-                                return 'Fakultetni tanlang';
-                              }
-                              return null;
-                            },
 
                           );
 
