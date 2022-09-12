@@ -121,7 +121,7 @@ class _StudentUserState extends State<StudentUser> {
                     if(e!.length > 12){
                       return null;
                     }else{
-                      return '10 ta raqam kiriting ';
+                      return '12  ta raqam kiriting ';
                     }
                   },
                   keyboardType: TextInputType.phone,

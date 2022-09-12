@@ -22,6 +22,8 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
   String Roommate = '';
   String District = '';
   String? gender;
+  Color jinsiColor = Colors.black12;
+  bool jinsi= false;
 
   final List<String> genderItems = [
     'Ayol',
@@ -55,10 +57,20 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
                 SizedBox(
                   height: 5,
                 ),
-                TextField(
+                TextFormField(
+                  autovalidateMode: AutovalidateMode.always,
+                  validator: (e){
+                    if(e!.length > 3){
+                      return null;
+                    }else{
+                      return 'Kamida 4ta soz bolishi kerak';
+                    }
+                  },
                   controller: myController,
                   decoration: InputDecoration(
-                    border: OutlineInputBorder(),
+                    border: OutlineInputBorder(
+                        borderSide: BorderSide(color:myController.text == '' ? Colors.red : Colors.black12)
+                    ),
                     labelText: 'Ism familyangizni kiriting',
                   ),
                 ),
@@ -77,7 +89,15 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
                 SizedBox(
                   height: 5,
                 ),
-                TextField(
+                TextFormField(
+                  autovalidateMode: AutovalidateMode.always,
+                  validator: (e){
+                    if(e!.length > 12){
+                      return null;
+                    }else{
+                      return '12  ta raqam kiriting ';
+                    }
+                  },
                   keyboardType: TextInputType.phone,
                   controller: nameController,
                   decoration: InputDecoration(
@@ -106,7 +126,8 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
                       decoration: InputDecoration(
                         isDense: true,
                         contentPadding: EdgeInsets.zero,
-                        border: OutlineInputBorder(
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: BorderSide(color: jinsiColor),
                           borderRadius: BorderRadius.circular(10),
                         ),
                       ),
@@ -141,16 +162,22 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
                           .toList(),
                       validator: (value) {
                         if (value == null) {
-                          return 'Please select gender.';
+                          return 'Jinsingiz tanlang';
                         }
                       },
                       onChanged: (String? value) {
                         setState(() {
                           dropdownvalue = value;
+                          jinsi=true;
+                          jinsiColor = Colors.black12;
+                          print(dropdownvalue);
                         });
                       },
                       onSaved: (value) {
                         dropdownvalue = value.toString();
+                        setState(() {
+
+                        });
                       },
                     ),
                   ],
@@ -204,22 +231,22 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
             SizedBox(height: 100.h),
             ElevatedButton(
               onPressed: () async {
-                await RegistratsiyaUser().CreateAdsUser(
-                    FullName: myController.toString(),
-                    Phonenumber: nameController.text,
-                    gender: dropdownvalue.toString() == 'Erkak' ? '1' : '2',);
-                print('${myController} maulotiiiiiiiii+++++++++++');
-                print('${selectedValue} maulotiiiiiiiii+++++++++++');
-
-                print('${UniderId} malumotlar  +++++++++++');
-                print('${District} maulotiiiiiiiii+++++++++++');
-                print('${fakultetId} maulotiiiiiiiii+++++++++++');
-                print('${nameController.text} maulotiiiiiiiii+++++++++++');
-                print('${dropdownvalue} maulotiiiiiiiii+++++++++++');
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => LoginPage()));
+               if(myController.text != ''&&jinsi){
+                 await RegistratsiyaUser().CreateAdsUser(
+                   FullName: myController.toString(),
+                   Phonenumber: nameController.text,
+                   gender: dropdownvalue.toString() == 'Erkak' ? '1' : '2',);
+                 Navigator.push(
+                     context,
+                     MaterialPageRoute(
+                         builder: (context) => LoginPage()));
+               }
+               else{
+                 jinsiColor = Colors.red;
+                 if(jinsi) jinsiColor = Colors.black12;
+                 setState(() {
+                 });
+               }
               },
               style: ElevatedButton.styleFrom(
                 primary: AppColors.mainColor,
