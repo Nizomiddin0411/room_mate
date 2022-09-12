@@ -1,53 +1,44 @@
-// To parse this JSON data, do
-//
-//     final searchUniversitetyModel = searchUniversitetyModelFromJson(jsonString);
-
-import 'dart:convert';
-
-List<SearchUniversitetyModel> searchUniversitetyModelFromJson(String str) => List<SearchUniversitetyModel>.from(json.decode(str).map((x) => SearchUniversitetyModel.fromJson(x)));
-
-String searchUniversitetyModelToJson(List<SearchUniversitetyModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
-
 class SearchUniversitetyModel {
-  SearchUniversitetyModel({
-    required this.id,
-    required this.name,
-    required this.nameRu,
-    required this.short,
-    required this.districtId,
-    required this.address,
-    required this.advertising,
-    required this.searching,
-  });
+  int? id;
+  String? name;
+  String? nameRu;
+  String? short;
+  Null? districtId;
+  Null? address;
+  String? advertising;
+  String? searching;
 
-  int id;
-  String name;
-  String nameRu;
-  String short;
-  int districtId;
-  String address;
-  String advertising;
-  String searching;
+  SearchUniversitetyModel(
+      {this.id,
+      this.name,
+      this.nameRu,
+      this.short,
+      this.districtId,
+      this.address,
+      this.advertising,
+      this.searching});
 
-  factory SearchUniversitetyModel.fromJson(Map<String, dynamic> json) => SearchUniversitetyModel(
-    id: json["id"],
-    name: json["name"],
-    nameRu: json["name_ru"],
-    short: json["short"],
-    districtId: json["district_id"],
-    address: json["address"],
-    advertising: json["advertising"],
-    searching: json["searching"],
-  );
+  SearchUniversitetyModel.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    nameRu = json['name_ru'];
+    short = json['short'];
+    districtId = json['district_id'];
+    address = json['address'];
+    advertising = json['advertising'];
+    searching = json['searching'];
+  }
 
-  Map<String, dynamic> toJson() => {
-    "id": id,
-    "name": name,
-    "name_ru": nameRu,
-    "short": short,
-    "district_id": districtId,
-    "address": address,
-    "advertising": advertising,
-    "searching": searching,
-  };
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['name'] = this.name;
+    data['name_ru'] = this.nameRu;
+    data['short'] = this.short;
+    data['district_id'] = this.districtId;
+    data['address'] = this.address;
+    data['advertising'] = this.advertising;
+    data['searching'] = this.searching;
+    return data;
+  }
 }

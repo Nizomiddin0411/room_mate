@@ -26,6 +26,7 @@ void main() async {
   await EasyLocalization.ensureInitialized();
   await Hive.initFlutter();
   await Hive.openBox('token');
+  await Hive.openBox('id');
   
   runApp(EasyLocalization(
     path: 'assets/locale',

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:sms_autofill/sms_autofill.dart';
 import 'package:talaba_uy/screens/menu/menu.dart';
 import 'package:talaba_uy/services/login_service.dart';
@@ -22,7 +23,7 @@ class SmsConfirmationPage extends StatefulWidget {
 class _SmsConfirmationPageState extends State<SmsConfirmationPage> {
   String? _message;
   TextEditingController? _smsController;
-  String _code="";
+  String _code = "";
 
   Timer? _timer;
   int _secoundCount = 59;
@@ -47,6 +48,12 @@ class _SmsConfirmationPageState extends State<SmsConfirmationPage> {
         setState(() {});
       },
     );
+  }
+
+  @override
+  void dispose() {
+    _timer!.cancel();
+    super.dispose();
   }
 
   @override
@@ -159,7 +166,13 @@ class _SmsConfirmationPageState extends State<SmsConfirmationPage> {
                     _timeOf = false;
                     _minutCount = 2;
                     _secoundCount = 59;
-                    setState(() {});
+                    _timer = Timer.periodic(
+                      Duration(seconds: 1),
+                      (timer) {
+                        this._secoundCount -= 1;
+                        setState(() {});
+                      },
+                    );
                     var dataService = await LoginService()
                         .loginService(phone: widget._phone!);
                     if (dataService['status']) {
@@ -187,14 +200,16 @@ class _SmsConfirmationPageState extends State<SmsConfirmationPage> {
             ),
             ElevatedButton(
               onPressed: () async {
+
+
                 var dataService = await SmsService()
-                    .smsService(phone: widget._phone!, sms: _code!);
+                    .smsService(phone: widget._phone!, sms: _code);
                 if (dataService['status']) {
                   _message = dataService['content'];
                   Navigator.pushAndRemoveUntil(
                       context,
                       MaterialPageRoute(builder: (context) => MenuPage()),
-                      (route) => true);
+                      (route) => false);
                 } else {
                   _message = dataService['content'];
                   ScaffoldMessenger.of(context)

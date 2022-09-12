@@ -99,7 +99,7 @@ class _KunlikIjaraState extends State<KunlikIjara> {
           controller: _tabController,
           children: [
             FutureBuilder<List<DaysKvModel>?>(
-              future: DaysAdsService().fetchDays(),
+              future: DaysAdsService().fetchDays(), 
               builder: (context, AsyncSnapshot<List<DaysKvModel>?> snapshot){
                 if(snapshot.hasData){
                   return   ListView.builder(

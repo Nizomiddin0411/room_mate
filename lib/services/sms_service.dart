@@ -23,6 +23,10 @@ class SmsService {
         'token', 
         jsonDecode(data)["access_token"]
       );
+       await Hive.box('id').put(
+        'id', 
+        jsonDecode(data)["user_id"]
+      );
       return jsonDecode(data);
     }
   }

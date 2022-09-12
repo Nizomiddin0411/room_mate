@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:talaba_uy/screens/Autorization/sms_confirmation.dart';
 import 'package:talaba_uy/services/login_service.dart';
+import 'package:easy_mask/easy_mask.dart';
 
 import '../../core/const/app_colors.dart';
 
@@ -16,7 +17,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  TextEditingController _phoneController = TextEditingController();
+  TextEditingController _phoneController = TextEditingController(text: '+998');
   String _message = '';
   GlobalKey _key = GlobalKey();
   @override
@@ -55,7 +56,8 @@ class _LoginPageState extends State<LoginPage> {
                 Center(
                   child: Text(
                     "Login",
-                    style: TextStyle(color: AppColors.mainColor, fontSize: 32.sp),
+                    style:
+                        TextStyle(color: AppColors.mainColor, fontSize: 32.sp),
                   ),
                 ),
                 SizedBox(
@@ -66,7 +68,8 @@ class _LoginPageState extends State<LoginPage> {
                     width: MediaQuery.of(context).size.width - 150.w,
                     child: Text(
                       "Shaxsiy xisobga kirish uchun maydonlarni to’ldiring",
-                      style: TextStyle(fontSize: 16.sp),textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 16.sp),
+                      textAlign: TextAlign.center,
                     ),
                   ),
                 ),
@@ -82,11 +85,21 @@ class _LoginPageState extends State<LoginPage> {
                   height: 6.h,
                 ),
                 TextFormField(
+                  inputFormatters: [
+                    TextInputMask(
+                      mask: '\\+ 999 99 999 99 99',
+                      placeholder: '_ ',
+                      maxPlaceHolders: 13,
+                    )
+                  ],
                   key: _key,
                   controller: _phoneController,
+                  onChanged: (e){
+                    print(_phoneController.text);
+                  },
                   keyboardType: TextInputType.number,
                   decoration: InputDecoration(
-                    hintText: '998 ** *** ** **',
+                    hintText: '998  _ _  _ _ _  _ _  _ _ ',
                     border: OutlineInputBorder(
                         borderSide: BorderSide(color: AppColors.iconColor)),
                   ),
@@ -102,11 +115,13 @@ class _LoginPageState extends State<LoginPage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => SmsConfirmationPage(_phoneController.text, _message)));
-                          print(_message);
+                          builder: (context) => SmsConfirmationPage(
+                              _phoneController.text, _message)));
+                  print(_message);
                 } else {
                   _message = dataService['content'];
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(_message)));
+                  ScaffoldMessenger.of(context)
+                      .showSnackBar(SnackBar(content: Text(_message)));
                 }
               },
               style: ElevatedButton.styleFrom(
