@@ -12,7 +12,7 @@ class LanguagePage extends StatefulWidget {
 
 class _LanguagePageState extends State<LanguagePage> {
 
-  bool value = false;
+  bool value2 = false;
   bool value1 = false;
 
   @override
@@ -41,7 +41,6 @@ class _LanguagePageState extends State<LanguagePage> {
                   border: Border.all(color: AppColors.iconBack)),
               child: ListTile(
                 onTap: ()async{
-                  context.locale=Locale('uz','UZ');
                 },
                 horizontalTitleGap: 0,
                 leading: Image.asset("assets/images/uzb.png"),
@@ -56,10 +55,12 @@ class _LanguagePageState extends State<LanguagePage> {
                       borderRadius: BorderRadius.circular(10)
                   ),
                   value: this.value1,
+
                   onChanged: ( value)async {
                     context.locale=Locale('uz','UZ');
                     setState(() {
-                      value1 = value!;
+                      value1 = true;
+                      value2 = false;
                     });
                   },
                 ),
@@ -86,11 +87,12 @@ class _LanguagePageState extends State<LanguagePage> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10)
                   ),
-                  value: value,
+                  value: this.value2,
                   onChanged: ( value)async {
                     context.locale=Locale('ru','RU');
                     setState(() {
-                      this.value = value!;
+                      value2 = true;
+                      value1 = false;
                     });
                   },
                 ),
