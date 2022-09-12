@@ -40,6 +40,13 @@ android {
         abortOnError false
     }
 
+    lintOptions {
+            disable 'InvalidPackage'
+            disable "Instantiatable"
+            checkReleaseBuilds false
+            abortOnError false
+        }
+
     kotlinOptions {
         jvmTarget = '1.8'
     }
