@@ -11,7 +11,7 @@ class GetDistrictService {
   Future<List<GetDistrictModel>?> fetchDistrict() async {
     try {
       var response = await http.get(Uri.parse(
-        'http://164.68.114.231:8081/roommate/backend/web/api/region/get-district?region_id=1',
+        'http://164.68.114.231:8081/roommate/backend/web/api/region/get-district?region_id=8',
       ),
 
       );
