@@ -1,8 +1,10 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
 import 'package:talaba_uy/chat/chat_page.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
+import 'package:talaba_uy/core/data/mockdata.dart';
 import 'package:talaba_uy/models/searching_students_model.dart';
 import 'package:talaba_uy/screens/All_Ads_Page/detail_page.dart';
 import 'package:talaba_uy/screens/Ijarachipage/filtr.dart';
@@ -14,13 +16,19 @@ import '../../models/searching_ads_model.dart';
 import 'result _filtr_search.universitety.dart';
 
 class ResultUniversitetPage extends StatefulWidget {
-  const ResultUniversitetPage({Key? key}) : super(key: key);
+
+
+ final  String name;
+ final  String id;
+  const ResultUniversitetPage({Key? key,required this.name, required this.id}) : super(key: key);
 
   @override
   State<ResultUniversitetPage> createState() => _ResultUniversitetPageState();
 }
 
 class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
+
+
   @override
   Widget build(BuildContext context) {
     TabController? _tabController;
@@ -53,18 +61,26 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                 children: [
                   Container(
                     height: 87.h,
-                    width: 324.w,
+                    width: 350.w,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(6.r),
                         color: AppColors.secondBackgroud),
                     child: Padding(
                       padding:  EdgeInsets.all(10.0.w),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+
                         children: [
                           Image.asset('assets/images/image 7.png'),
-                          Text(
-                              'Muhammad al-Xorazmiy nomidagi\n Toshkent axborot\n texnologiyalari universiteti\n Samarqand filiali\n')
+                          SizedBox(width: 20,),
+                          Container(
+                            height: 25,
+                            width: 200,
+                            child: AutoSizeText(
+                              widget.name,
+                              style: TextStyle(fontSize: 10),
+                              maxLines: 4,
+                            ),
+                          )
                         ],
                       ),
                     ),
@@ -88,7 +104,8 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                             style: TextStyle(color: Colors.black),
                           ),
                           InkWell(
-                            onTap: () {
+                            onTap: (
+                                ) {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(

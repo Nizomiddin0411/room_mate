@@ -1,6 +1,8 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
+import 'package:talaba_uy/core/data/mockdata.dart';
 import 'package:talaba_uy/models/get_district_model.dart';
 import 'package:talaba_uy/models/get_faculty_model.dart';
 import 'package:talaba_uy/models/get_univer_model.dart';
@@ -19,10 +21,6 @@ class ResultFiltrPage extends StatefulWidget {
 
 class _ResultFiltrPageState extends State<ResultFiltrPage> {
 
-  String? _dropownUsd;
-
-  String  _titleRegion = "Viloyatni tanlang";
-  String _titleDistrict = "Tumanni tanlang";
   String _titleFaculty = "Yo’nalishingizni tanlang";
   @override
   Widget build(BuildContext context) {
@@ -72,44 +70,78 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                 ),
               ),
               SizedBox(height: 4.h),
-              FutureBuilder<List<GetRegionModel>?>(
-                  future: GetRegionService().fetchRegion(),
-                  builder:
-                      (context, AsyncSnapshot<List<GetRegionModel>?> snapshot) {
-                    if (snapshot.hasData) {
-                      return Container(
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey.shade400),
-                            borderRadius: BorderRadius.circular(4.r)),
-                        child: ExpansionTile(
-                          key: GlobalKey(),
-                          title: Text(
-                            _titleRegion,
-                            style:
-                            TextStyle(color: Colors.grey, fontSize: 14.sp),
-                          ),
-                          children: [
-                            ListView.builder(
-                                shrinkWrap: true,
-                                itemCount: snapshot.data!.length,
-                                itemBuilder: (context, index) {
-                                  return InkWell(
-                                      onTap: (){
-                                        setState(() {
-                                          _titleRegion = snapshot.data![index].name!;
-                                        });
-                                      },
-                                      child: Text(
-                                          snapshot.data![index].name!));
-                                })
-                          ],
-                        ),
-                      );
-                    }
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }),
+              Column(
+                children: [
+                  Column(
+                    children: [
+                      FutureBuilder<List<GetRegionModel>?>(
+                        future: GetRegionService().fetchRegion(),
+                        builder: (BuildContext context, snapshot) {
+                          if (snapshot.hasData) {
+                            return DropdownButtonFormField2<String>(
+                              decoration: InputDecoration(
+                                enabledBorder: OutlineInputBorder(borderSide: BorderSide()),
+                                isDense: true,
+                                contentPadding: EdgeInsets.zero,
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                              isExpanded: true,
+                              hint: const Text(
+                                'Viloyatni tanlang',
+                                style: TextStyle(fontSize: 14),
+                              ),
+                              icon: const Icon(
+                                Icons.arrow_drop_down,
+                                color: Colors.black45,
+                              ),
+                              iconSize: 30,
+                              buttonHeight: 60,
+                              buttonPadding: const EdgeInsets.only(
+                                  left: 20, right: 10),
+                              dropdownDecoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              items: snapshot.data!
+                                  .map(
+                                    (value) => DropdownMenuItem<String>(
+                                  onTap: () async{
+                                    MockData.viloyatid = value.id;
+                                  },
+                                  value: value.name,
+                                  child: Text(
+                                    value.name!,
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ),
+                              )
+                                  .toList(),
+                              validator: (value) {
+                                if (value == null) {
+                                  return '';
+                                }
+                              },
+                              onChanged: (value) {
+                                setState(() {
+
+
+                                });
+                              },
+                              onSaved: (value) {
+
+                              },
+                            );
+                          }
+                          return CircularProgressIndicator();
+                        },
+                      ),
+                    ],
+                  ),
+                ],
+              ),
               SizedBox(height: 12.h),
               Text(
                 "Tuman",
@@ -120,44 +152,76 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                 ),
               ),
               SizedBox(height: 4.h),
-              FutureBuilder<List<GetDistrictModel>?>(
-                  future: GetDistrictService().fetchDistrict(),
-                  builder:
-                      (context, AsyncSnapshot<List<GetDistrictModel>?> snapshot) {
-                    if (snapshot.hasData) {
-                      return Container(
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey.shade400),
-                            borderRadius: BorderRadius.circular(4.r)),
-                        child: ExpansionTile(
-                          key: GlobalKey(),
-                          title: Text(
-                            _titleDistrict,
-                            style:
-                            TextStyle(color: Colors.grey, fontSize: 14.sp),
-                          ),
-                          children: [
-                            ListView.builder(
-                                shrinkWrap: true,
-                                itemCount: snapshot.data!.length,
-                                itemBuilder: (context, index) {
-                                  return InkWell(
-                                      onTap: (){
-                                        setState(() {
-                                          _titleDistrict = snapshot.data![index].name!;
-                                        });
-                                      },
-                                      child: Text(
-                                          snapshot.data![index].name!));
-                                })
-                          ],
-                        ),
-                      );
-                    }
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }),
+              Column(
+                children: [
+                  Row(
+                    children: [
+                      Text(" Qaysi tumanidansiz"),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 5,
+                  ),
+                  Column(
+                    children: [
+                      FutureBuilder<List<GetDistrictModel>?>(
+                        future: GetDistrictService().fetchDistrict(),
+                        builder: (BuildContext context, snapshot) {
+                          if (snapshot.hasData) {
+                            return DropdownButtonFormField2<String>(
+                              decoration: InputDecoration(
+                                enabledBorder: OutlineInputBorder(borderSide: BorderSide()),
+                                isDense: true,
+                                contentPadding: EdgeInsets.zero,
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                              isExpanded: true,
+                              hint: const Text(
+                                ' Qaysi tumanidansiz',
+                                style: TextStyle(fontSize: 14),
+                              ),
+                              icon: const Icon(
+                                Icons.arrow_drop_down,
+                                color: Colors.black45,
+                              ),
+                              iconSize: 30,
+                              buttonHeight: 60,
+                              buttonPadding: const EdgeInsets.only(
+                                  left: 20, right: 10),
+                              dropdownDecoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              items: snapshot.data!
+                                  .map(
+                                    (value) => DropdownMenuItem<String>(
+                                  value: value.name,
+                                  child: Text(
+                                    value.name!,
+                                    style: const TextStyle(
+                                      fontSize: 14,
+                                    ),
+                                  ),
+                                ),
+                              )
+                                  .toList(),
+                              validator: (value) {
+
+                              },
+                              onChanged: (value) {
+                                setState(() {
+                                });
+                              },
+                            );
+                          }
+                          return CircularProgressIndicator();
+                        },
+                      ),
+                    ],
+                  ),
+                ],
+              ),
               SizedBox(height: 12.h),
               Text(
                 "Talaba",
@@ -177,44 +241,66 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                 ),
               ),
               SizedBox(height: 4.h),
-              FutureBuilder<List<GetFacultyModel>?>(
-                  future: GetFacultyService().fetchFaculty(),
-                  builder:
-                      (context, AsyncSnapshot<List<GetFacultyModel>?> snapshot) {
-                    if (snapshot.hasData) {
-                      return Container(
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey.shade400),
-                            borderRadius: BorderRadius.circular(4.r)),
-                        child: ExpansionTile(
-                          key: GlobalKey(),
-                          title: Text(
-                            _titleFaculty,
-                            style:
-                            TextStyle(color: Colors.grey, fontSize: 14.sp),
+              Column(
+                children: [
+                  FutureBuilder<List<GetFacultyModel>?>(
+                    future: GetFacultyService().fetchFaculty(),
+                    builder: (BuildContext context, snapshot) {
+                      if (snapshot.hasData) {
+                        return DropdownButtonFormField2<String>(
+                          decoration: InputDecoration(
+                            enabledBorder: OutlineInputBorder(),
+                            isDense: true,
+                            contentPadding: EdgeInsets.zero,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
                           ),
-                          children: [
-                            ListView.builder(
-                                shrinkWrap: true,
-                                itemCount: snapshot.data!.length,
-                                itemBuilder: (context, index) {
-                                  return InkWell(
-                                      onTap: (){
-                                        setState(() {
-                                          _titleFaculty = snapshot.data![index].name!;
-                                        });
-                                      },
-                                      child: Text(
-                                          snapshot.data![index].name!));
-                                })
-                          ],
-                        ),
+                          isExpanded: true,
+                          isDense: false,
+                          hint: const Text(
+                            'Fakultetingiz',
+                            style: TextStyle(fontSize: 14),
+                          ),
+                          icon: const Icon(
+                            Icons.arrow_drop_down,
+                            color: Colors.black45,
+                          ),
+                          iconSize: 30,
+                          buttonHeight: 60,
+                          buttonPadding: const EdgeInsets.only(
+                              left: 20, right: 10),
+                          dropdownDecoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          items:  snapshot.data!
+                              .map(
+                                (value) => DropdownMenuItem<String>(
+                              value: value.name,
+                              child: Text(
+                                value.name!,
+                                style: const TextStyle(
+                                  fontSize: 14,
+                                ),
+                              ),
+                            ),
+                          )
+                              .toList(),
+                          onChanged: (value) {
+
+
+                          } ,
+
+                        );
+
+                      }
+                      return Center(
+                        child: CircularProgressIndicator(),
                       );
-                    }
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }),
+                    },
+                  ),
+                ],
+              ),
               SizedBox(height: 12.h),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 210.h, horizontal: 31.w),

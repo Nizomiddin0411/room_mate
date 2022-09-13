@@ -12,6 +12,8 @@ class OffertoPage extends StatefulWidget {
 class _OffertoPageState extends State<OffertoPage> {
   @override
   Widget build(BuildContext context) {
+
+    bool checkBox=true;
     return Scaffold(
       body: RawScrollbar(
           thumbColor: Colors.blue,
@@ -79,6 +81,10 @@ class _OffertoPageState extends State<OffertoPage> {
                         height: 48.h,
                         child: ElevatedButton(
                           onPressed: () {
+                            Navigator.pop(context);
+                            setState(() {
+                              checkBox;
+                            });
                           },
                           style: ElevatedButton.styleFrom(
                             primary: Colors.white,
