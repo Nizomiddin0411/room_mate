@@ -1,17 +1,22 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hive/hive.dart';
 
 class Messages extends StatefulWidget {
   String name;
-  Messages({required this.name});
+  int id;
+  Messages({required this.name, required this.id});
   @override
-  _MessagesState createState() => _MessagesState(name: name);
+  _MessagesState createState() => _MessagesState(name: name, id: id);
 }
 
 class _MessagesState extends State<Messages> {
   String name;
-  _MessagesState({required this.name});
+  int id;
+    int myId = Hive.box('id').get('id');
+  _MessagesState({required this.name, required this.id});
 
   Stream<QuerySnapshot> _messageStream = FirebaseFirestore.instance
       .collection('Messages')
@@ -27,12 +32,12 @@ class _MessagesState extends State<Messages> {
         }
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(
-            child: CircularProgressIndicator(),
+            child: Center(child: CircularProgressIndicator()),
           );
         }
 
         return Padding(
-          padding: const EdgeInsets.symmetric(vertical: 6),
+          padding:  EdgeInsets.symmetric(vertical: 6.h),
           child: ListView.builder(
             itemCount: snapshot.data!.docs.length,
             physics: ScrollPhysics(),
@@ -43,44 +48,45 @@ class _MessagesState extends State<Messages> {
               Timestamp t = qs['time'];
               DateTime d = t.toDate();
               return Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                padding:  EdgeInsets.symmetric(horizontal: 8.w, vertical: 3.h),
                 child: Column(
                   crossAxisAlignment: name == qs['name']
                       ? CrossAxisAlignment.end
                       : CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    id == qs['id'] && myId == qs['myId'] ?
                     Container(
-                      width: 280,
+                      width: id == qs['id'] && myId == qs['myId'] ? 280.w : 0,
                       decoration: BoxDecoration(
-                        color: name != qs['name']
-                            ? Colors.white
-                            : Color.fromRGBO(225, 254, 198, 1),
-                        borderRadius: BorderRadius.circular(8),
-                        boxShadow: [
-                          BoxShadow(
-                            offset: Offset(2,3),
-                            color: name != qs['name']  ? Color.fromARGB(255, 171, 166, 166)
-                            : Color.fromARGB(255, 146, 154, 142),
-                            blurRadius: 4,
-                          )
-                        ]
-                      ),
+                          color: name != qs['name']
+                              ? Colors.white
+                              : Color.fromRGBO(225, 254, 198, 1),
+                          borderRadius: BorderRadius.circular(8.r),
+                          boxShadow: [
+                            BoxShadow(
+                              offset: Offset(2, 3),
+                              color: name != qs['name']
+                                  ? Color.fromARGB(255, 171, 166, 166)
+                                  : Color.fromARGB(255, 146, 154, 142),
+                              blurRadius: 4,
+                            )
+                          ]),
                       child: Padding(
-                        padding: const EdgeInsets.fromLTRB(8, 8, 8, 4),
+                        padding:  EdgeInsets.fromLTRB(8.w, 8.h, 8.w, 4.h),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           crossAxisAlignment: CrossAxisAlignment.end,
                           children: [
                             Container(
-                              width: 236,
+                              width: 236.w,
                               child: Padding(
-                                padding: const EdgeInsets.only(bottom: 12),
+                                padding:  EdgeInsets.only(bottom: 12.h),
                                 child: Text(
                                   qs['message'],
                                   softWrap: true,
                                   style: TextStyle(
-                                    fontSize: 15,
+                                    fontSize: 15.sp,
                                   ),
                                 ),
                               ),
@@ -97,12 +103,12 @@ class _MessagesState extends State<Messages> {
                                   color: name == qs['name']
                                       ? Color.fromRGBO(45, 164, 48, 1)
                                       : Color.fromRGBO(142, 142, 147, 1),
-                                  fontSize: 11),
+                                  fontSize: 11.sp),
                             ),
                           ],
                         ),
                       ),
-                    ),
+                    ) : Container(height: 0,)
                   ],
                 ),
               );

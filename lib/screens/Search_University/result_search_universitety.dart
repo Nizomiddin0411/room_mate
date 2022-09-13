@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hive/hive.dart';
 import 'package:talaba_uy/chat/chat_page.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
 import 'package:talaba_uy/models/searching_students_model.dart';
@@ -28,7 +29,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
       child: Scaffold(
         backgroundColor: AppColors.backgroundWhite,
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(260),
+          preferredSize: Size.fromHeight(260.h),
           child: AppBar(
             leading: InkWell(
               onTap: () {
@@ -47,17 +48,17 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
               ),
             ),
             flexibleSpace: Padding(
-              padding: const EdgeInsets.fromLTRB(18, 100, 18, 18),
+              padding:  EdgeInsets.fromLTRB(18.w, 100.h, 18.w, 18.h),
               child: Column(
                 children: [
                   Container(
-                    height: 87,
-                    width: 324,
+                    height: 87.h,
+                    width: 324.w,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(6.r),
                         color: AppColors.secondBackgroud),
                     child: Padding(
-                      padding: const EdgeInsets.all(10.0),
+                      padding:  EdgeInsets.all(10.0.w),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -69,16 +70,16 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                     ),
                   ),
                   SizedBox(
-                    height: 6,
+                    height: 6.h,
                   ),
                   Container(
-                    height: 50,
-                    width: 324,
+                    height: 50.h,
+                    width: 324.w,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(6.r),
                         color: AppColors.secondBackgroud),
                     child: Padding(
-                      padding: const EdgeInsets.all(10.0),
+                      padding:  EdgeInsets.all(10.0.w),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -93,8 +94,8 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                   MaterialPageRoute(
                                       builder: (context) => ResultFiltrPage()));
                             },
-                            child: const Padding(
-                              padding: EdgeInsets.all(11.0),
+                            child:  Padding(
+                              padding: EdgeInsets.all(11.0.w),
                               child: Icon(
                                 Icons.tune,
                                 color: AppColors.mainColor,
@@ -160,15 +161,16 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                           children: [
                                             Padding(
                                               padding:
-                                                  const EdgeInsets.all(6.0),
-                                              child: Text(snapshot.data![index].fullName!,
+                                                   EdgeInsets.all(6.0.w),
+                                              child: Text(
+                                                snapshot.data![index].fullName!,
                                                 style:
                                                     TextStyle(fontSize: 18.sp),
                                               ),
                                             ),
-                                            const Padding(
+                                             Padding(
                                               padding: EdgeInsets.fromLTRB(
-                                                  1, 0, 8, 0),
+                                                  1.w, 0, 8.w, 0),
                                               child: Icon(
                                                 Icons.favorite_border,
                                                 color: AppColors.error,
@@ -177,8 +179,8 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                           ],
                                         ),
                                         Padding(
-                                          padding: const EdgeInsets.fromLTRB(
-                                              8, 0, 8, 0),
+                                          padding:  EdgeInsets.fromLTRB(
+                                              8.w, 0, 8.w, 0),
                                           child: Text(
                                             '',
                                             style: TextStyle(
@@ -192,35 +194,43 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                           children: [
                                             Padding(
                                               padding:
-                                                  const EdgeInsets.fromLTRB(
-                                                      8, 0, 8, 0),
-                                              child: Text(snapshot.data![index].gender == 1 ? "jinsi : Erkak" : "jinsi : Ayol"
-                                                ,
+                                                   EdgeInsets.fromLTRB(
+                                                      8.w, 0, 8.w, 0),
+                                              child: Text(
+                                                snapshot.data![index].gender ==
+                                                        1
+                                                    ? "jinsi : Erkak"
+                                                    : "jinsi : Ayol",
                                                 style:
                                                     TextStyle(fontSize: 15.sp),
                                               ),
                                             ),
-                                            Text("Kursi : ${snapshot.data![index].course}"),
+                                            Text(
+                                                "Kursi : ${snapshot.data![index].course}"),
                                             InkWell(
                                                 onTap: () {
+                                                  
                                                   Navigator.push(
-                                                      context,
-                                                      MaterialPageRoute(
-                                                          builder: (context) =>
-                                                              ChatPage(
-                                                                  name:
-                                                                      "Polat Alemdar")));
+                                                    context,
+                                                    MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          ChatPage(
+                                                              name: snapshot
+                                                                  .data![index]
+                                                                  .fullName!, id: snapshot.data![index].id!),
+                                                    ),
+                                                  );
                                                 },
                                                 child: Padding(
                                                   padding:
-                                                      const EdgeInsets.fromLTRB(
-                                                          0, 0, 7, 0),
+                                                       EdgeInsets.fromLTRB(
+                                                          0, 0, 7.w, 0),
                                                   child: Container(
-                                                    height: 35,
-                                                    width: 90,
+                                                    height: 35.h,
+                                                    width: 90.w,
                                                     child: Padding(
-                                                      padding: const EdgeInsets
-                                                          .fromLTRB(5, 0, 5, 0),
+                                                      padding:  EdgeInsets
+                                                          .fromLTRB(5.w, 0, 5.w, 0),
                                                       child: Row(
                                                         mainAxisAlignment:
                                                             MainAxisAlignment
@@ -231,7 +241,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                                             color: Colors.blue,
                                                           ),
                                                           SizedBox(
-                                                            width: 10,
+                                                            width: 10.w,
                                                           ),
                                                           Text(
                                                             "Aloqa",
@@ -249,7 +259,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                                             color: Colors.blue),
                                                         borderRadius:
                                                             BorderRadius
-                                                                .circular(10)),
+                                                                .circular(10.r)),
                                                   ),
                                                 )),
                                           ],
@@ -274,83 +284,110 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                     return Text("ERROR");
                   } else {
                     return ListView.builder(
-                shrinkWrap: true,
-                itemCount: snapshot.data!.length,
-                itemBuilder: (BuildContext contex, int index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(18.0),
-                    child: Container(
-                      width: 324.w,
-                      height: 100.h,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(6.r),
-                          color: AppColors.secondBackgroud),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(6.0),
-                                child: Text(snapshot.data![index].type == 1 ?
-                                  'Talaba' : "Elon beruvchi",
-                                  style: TextStyle(fontSize: 18.sp),
-                                ),
-                              ),
-                              const Padding(
-                                padding: EdgeInsets.fromLTRB(1, 0, 8, 0),
-                                child: Icon(
-                                  Icons.favorite_border,
-                                  color: AppColors.error,
-                                ),
-                              )
-                            ],
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-                            child: Text(snapshot.data![index].rentType == 1 ? snapshot.data![index].cost.toString() + (snapshot.data![index].costType == 1 ? " so'm" : " \$") + '/kunlik' : snapshot.data![index].cost.toString() + snapshot.data![index].costType.toString() + '/oylik',
-                              style: TextStyle(
-                                  color: AppColors.mainColor, fontSize: 24.sp),
-                            ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-                                child: Text(
-                                  snapshot.data![index].address ?? "",
-                                  style: TextStyle(fontSize: 10.sp),
-                                ),
-                              ),
-                              InkWell(
-                                onTap: (){
-                                        Navigator.push(context, MaterialPageRoute(builder: (context)=>DetailPage()));
-                                      },
-                                child: const Padding(
-                                  padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
-                                  child: Text(
-                                    'Batafsil',
-                                    style: TextStyle(
-                                        decoration: TextDecoration.underline,
-                                        color: AppColors.mainColor),
+                        shrinkWrap: true,
+                        itemCount: snapshot.data!.length,
+                        itemBuilder: (BuildContext contex, int index) {
+                          return Padding(
+                            padding:  EdgeInsets.all(18.0.w),
+                            child: Container(
+                              width: 324.w,
+                              height: 100.h,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(6.r),
+                                  color: AppColors.secondBackgroud),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Padding(
+                                        padding:  EdgeInsets.all(6.0.w),
+                                        child: Text(
+                                          snapshot.data![index].type == 1
+                                              ? 'Talaba'
+                                              : "Elon beruvchi",
+                                          style: TextStyle(fontSize: 18.sp),
+                                        ),
+                                      ),
+                                       Padding(
+                                        padding:
+                                            EdgeInsets.fromLTRB(1.w, 0, 8.w, 0),
+                                        child: Icon(
+                                          Icons.favorite_border,
+                                          color: AppColors.error,
+                                        ),
+                                      )
+                                    ],
                                   ),
-                                ),
-                              )
-                            ],
-                          ),
-                          SizedBox(
-                            height: 18.h,
-                          )
-                        ],
-                      ),
-                    ),
-                  );
-                });
-          }
+                                  Padding(
+                                    padding:
+                                         EdgeInsets.fromLTRB(8.w, 0, 8.w, 0),
+                                    child: Text(
+                                      snapshot.data![index].rentType == 1
+                                          ? snapshot.data![index].cost
+                                                  .toString() +
+                                              (snapshot.data![index].costType ==
+                                                      1
+                                                  ? " so'm"
+                                                  : " \$") +
+                                              '/kunlik'
+                                          : snapshot.data![index].cost
+                                                  .toString() +
+                                              snapshot.data![index].costType
+                                                  .toString() +
+                                              '/oylik',
+                                      style: TextStyle(
+                                          color: AppColors.mainColor,
+                                          fontSize: 24.sp),
+                                    ),
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Padding(
+                                        padding:  EdgeInsets.fromLTRB(
+                                            8.w, 0, 8.w, 0),
+                                        child: Text(
+                                          snapshot.data![index].address ?? "",
+                                          style: TextStyle(fontSize: 10.sp),
+                                        ),
+                                      ),
+                                      InkWell(
+                                        onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      DetailPage()));
+                                        },
+                                        child:  Padding(
+                                          padding:
+                                              EdgeInsets.fromLTRB(8.w, 0, 8.w, 0),
+                                          child: Text(
+                                            'Batafsil',
+                                            style: TextStyle(
+                                                decoration:
+                                                    TextDecoration.underline,
+                                                color: AppColors.mainColor),
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 18.h,
+                                  )
+                                ],
+                              ),
+                            ),
+                          );
+                        });
+                  }
                 }),
-            ],
+          ],
         ),
       ),
     );

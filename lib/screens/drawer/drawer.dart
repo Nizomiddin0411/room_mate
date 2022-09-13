@@ -62,7 +62,7 @@ class _DrawerPageState extends State<DrawerPage> {
               ListTile(
                 title: const Text("Chat"),
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>ChatPage(name: "Polat Alemdar")));
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>ChatPage(name: "Polat Alemdar", id: 0)));
                 },
                 leading: const Icon(Icons.chat),
               ),

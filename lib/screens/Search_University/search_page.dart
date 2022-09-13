@@ -122,7 +122,7 @@ class _SearchPageState extends State<SearchPage> {
                                                 onTap: (){
                                                   Navigator.push(context, MaterialPageRoute(builder: (context)=>ResultUniversitetPage()));
                                                 },
-                                                child: Text("${snapshot.data![index].address}",style: TextStyle(fontSize: 12.sp),))),
+                                                child: Text(snapshot.data![index].address ?? "",style: TextStyle(fontSize: 12.sp),))),
                                         SizedBox(
                                             width: MediaQuery.of(context).size.width - 130,
                                             child: Text("Sherik izlayotganlar : ${snapshot.data![index].searching}",style: TextStyle(fontSize: 14.sp),)),
