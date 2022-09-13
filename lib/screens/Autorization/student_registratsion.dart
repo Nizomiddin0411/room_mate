@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/cupertino.dart';
@@ -6,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:switcher/core/switcher_size.dart';
 import 'package:switcher/switcher.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
+import 'package:talaba_uy/core/data/mockdata.dart';
 import 'package:talaba_uy/models/get_district_model.dart';
 import 'package:talaba_uy/models/get_faculty_model.dart';
 import 'package:talaba_uy/models/get_region_model.dart';
@@ -35,7 +38,6 @@ class _StudentUserState extends State<StudentUser> {
   String District = '';
   String Tuman = '';
   String? gender;
-
   Color kursColor = Colors.black12;
   Color fakultColor = Colors.black12;
   Color univerColor = Colors.black12;
@@ -265,7 +267,10 @@ class _StudentUserState extends State<StudentUser> {
                             items: snapshot.data!
                                 .map(
                                   (value) => DropdownMenuItem<String>(
-                                value: value.nameRu,
+                                    onTap: () async{
+                                      MockData.id = value.id;
+                                    },
+                                value: value.name,
                                 child: Text(
                                   value.name!,
                                   style: const TextStyle(
@@ -273,22 +278,23 @@ class _StudentUserState extends State<StudentUser> {
                                   ),
                                 ),
                               ),
-                            )
-                                .toList(),
-                            validator: (value) {
-                              if (value == null) {
-                                return ' Oliy o’quv yurtingiz ';
-                              }
-                              setState(() {
-
-                              });
-                            },
+                            ).toList(),
                             onChanged: (value) {
                               setState(() {
+
+
                                 UniderId = (value as String?)!;
                                 univer=true;
                                 univerColor = Colors.black12;
+
                               });
+                              snapshot.data!.map((e) {
+                                // MockData.id = e.id.toString(),
+                               return print(
+                                    '${e.id}++++++++++++++++++++++++++++++++++')
+                                ;
+                              });
+
                             },
                             onSaved: (value) {
                               UniderId = value.toString();
@@ -354,7 +360,7 @@ class _StudentUserState extends State<StudentUser> {
                                   (value) => DropdownMenuItem<String>(
                                 value: value.name,
                                 child: Text(
-                                  value.searching!,
+                                  value.name!,
                                   style: const TextStyle(
                                     fontSize: 14,
                                   ),
@@ -498,6 +504,9 @@ class _StudentUserState extends State<StudentUser> {
                             items: snapshot.data!
                                 .map(
                                   (value) => DropdownMenuItem<String>(
+                                    onTap: () async{
+                                      MockData.viloyatid = value.id;
+                                    },
                                 value: value.name,
                                 child: Text(
                                   value.name!,
@@ -633,7 +642,6 @@ class _StudentUserState extends State<StudentUser> {
                           size: SwitcherSize.medium,
                           switcherButtonRadius: 30.r,
                           enabledSwitcherButtonRotate: true,
-                          iconOff: Icons.lock,
                           iconOn: Icons.check,
                           colorOff: Colors.blue.withOpacity(0.3),
                           colorOn: Colors.blue,
