@@ -20,7 +20,7 @@ class GetUniverService {
         List json = jsonDecode(response.body);
         List <GetUniverModel> data = json.map((e) => GetUniverModel.fromJson(e)).toList();
         // var data = TotalAdsModel.fromJson(jsonDecode(response.body));
-        print('${data}+++++++++++');
+        // print('${data}+++++++++++');
         return data;
 
       }

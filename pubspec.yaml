@@ -52,6 +52,7 @@ dependencies:
   firebase_storage: ^10.3.8
   transparent_image: ^2.0.0
   multi_image_picker: ^4.8.01
+  auto_size_text: ^3.0.0
 dev_dependencies:
   flutter_test:
     sdk: flutter

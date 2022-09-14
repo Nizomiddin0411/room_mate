@@ -82,7 +82,10 @@ class _SearchPageState extends State<SearchPage> {
                             children: [
                               InkWell(
                                 onTap:(){
-                                  Navigator.push(context, MaterialPageRoute(builder: (context)=> (ResultUniversitetPage())));
+                                  Navigator.push(context, MaterialPageRoute(builder: (context)=> (ResultUniversitetPage(
+                                    name: '${snapshot.data![index].name}',
+                                    id: '${snapshot.data![index].id}',
+                                  ))));
                                 },
                                 child: Container(
                                   width: 324.w,
@@ -120,7 +123,7 @@ class _SearchPageState extends State<SearchPage> {
                                             width: MediaQuery.of(context).size.width - 130,
                                             child: InkWell(
                                                 onTap: (){
-                                                  Navigator.push(context, MaterialPageRoute(builder: (context)=>ResultUniversitetPage()));
+                                                  // Navigator.push(context, MaterialPageRoute(builder: (context)=>ResultUniversitetPage()));
                                                 },
                                                 child: Text(snapshot.data![index].address ?? "",style: TextStyle(fontSize: 12.sp),))),
                                         SizedBox(

@@ -25,6 +25,7 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
   String? gender;
   Color jinsiColor = Colors.black12;
   bool jinsi= false;
+  bool checkBox = false;
 
   final List<String> genderItems = [
     'Ayol',
@@ -36,7 +37,7 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
     '3 ',
     '4 ',
   ];
-  bool value = false;
+
   final myController = TextEditingController();
   final nameController = TextEditingController();
   String? selectedValue;
@@ -214,10 +215,10 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
             Row(
               children: [
                 Checkbox(
-                  value: this.value,
+                  value: this.checkBox,
                   onChanged: (bool? value) {
                     setState(() {
-                      this.value = value!;
+                      this.checkBox = value!;
                     });
                   },
                 ),
@@ -239,7 +240,7 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
             SizedBox(height: 100.h),
             ElevatedButton(
               onPressed: () async {
-               if(myController.text != ''&&jinsi){
+               if(myController.text != ''&&jinsi&&checkBox){
                  await RegistratsiyaUser().CreateAdsUser(
                    FullName: myController.toString(),
                    Phonenumber: nameController.text,

@@ -1,7 +1,7 @@
 class GetRegionModel {
   int? id;
   String? name;
-  String? nameRu;
+  dynamic nameRu;
 
   GetRegionModel({this.id, this.name, this.nameRu});
 
