@@ -32,7 +32,7 @@ class _MessagesState extends State<Messages> {
         }
         if (snapshot.connectionState == ConnectionState.waiting) {
           return Center(
-            child: Center(child: CircularProgressIndicator()),
+            child: CircularProgressIndicator(),
           );
         }
 

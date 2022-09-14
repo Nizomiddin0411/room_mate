@@ -19,7 +19,6 @@ class _DrawerPageState extends State<DrawerPage> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-
         child: Expanded(
           child: ListView(
             physics: const NeverScrollableScrollPhysics(),
@@ -62,7 +61,7 @@ class _DrawerPageState extends State<DrawerPage> {
               ListTile(
                 title: const Text("Chat"),
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>ChatPage(name: "Polat Alemdar", id: 0)));
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>ChatPage(name: "Polat Alemdar", id: 3982)));
                 },
                 leading: const Icon(Icons.chat),
               ),
