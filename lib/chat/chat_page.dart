@@ -73,7 +73,7 @@ class _ChatPageState extends State<ChatPage> {
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
             Container(
-              height: MediaQuery.of(context).size.height * 0.79.h,
+              height: MediaQuery.of(context).size.height * 0.85.h,
               child: Container(
                 decoration: BoxDecoration(
                     image: DecorationImage(
@@ -86,92 +86,94 @@ class _ChatPageState extends State<ChatPage> {
                 ),
               ),
             ),
-            Padding(
-              padding:  EdgeInsets.all(8.0.w),
-              child: Row(
-                children: [
-                  Padding(
-                    padding:  EdgeInsets.only(right: 6.w),
-                    child: InkWell(
-                      onTap: () {
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (context) => AddImage()));
-                      },
-                      child: Icon(
-                        Icons.folder,
-                        color: Color.fromRGBO(151, 151, 151, 1),
-                        size: 28.sp,
-                      ),
-                    ),
-                  ),
-                  Expanded(
-                    child: TextFormField(
-                      controller: message,
-                      cursorColor: Colors.black87,
-                      decoration: InputDecoration(
-                        filled: true,
-                        fillColor: Colors.white,
-                        hintText: 'message',
-                        helperStyle:
-                            TextStyle(color: Color.fromRGBO(174, 174, 178, 1)),
-                        enabled: true,
-                        contentPadding:  EdgeInsets.only(
-                            left: 12.0.w, bottom: 8.0.h, top: 8.0.h),
-                        focusedBorder: OutlineInputBorder(
-                          borderSide: new BorderSide(
-                              color: Color.fromRGBO(209, 209, 214, 1)),
-                          borderRadius: new BorderRadius.circular(18.r),
-                        ),
-                        border: OutlineInputBorder(
-                          borderSide: new BorderSide(
-                              color: Color.fromRGBO(209, 209, 214, 1)),
-                          borderRadius: new BorderRadius.circular(18.r),
+            Container(
+              child: Padding(
+                padding:  EdgeInsets.only(left: 6.w, top: 6.h, right: 8.w, bottom: 8.h),
+                child: Row(
+                  children: [
+                    Padding(
+                      padding:  EdgeInsets.only(right: 6.w),
+                      child: InkWell(
+                        onTap: () {
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (context) => AddImage()));
+                        },
+                        child: Icon(
+                          Icons.folder,
+                          color: Color.fromRGBO(151, 151, 151, 1),
+                          size: 28.sp,
                         ),
                       ),
-                      validator: (value) {},
-                      onChanged: (e) {
-                        setState(() {
-                          if (e.length != 0) {
-                            _isEmpty = false;
-                          } else {
-                            _isEmpty = true;
-                          }
-                        });
-                      },
-                      onSaved: (value) {
-                        message.text = value!;
-                      },
                     ),
-                  ),
-                  Padding(
-                    padding:  EdgeInsets.only(left: 14.w),
-                    child: InkWell(
-                      child: Icon(
-                        Icons.send_sharp,
-                        color: !_isEmpty
-                            ? Colors.green.shade700
-                            : Color.fromRGBO(151, 151, 151, 1),
-                      ),
-                      onTap: () {
-                        if (message.text.isNotEmpty) {
-                          fs.collection('Messages').doc().set({
-                            'message': message.text.trim(),
-                            'time': DateTime.now(),
-                            'name': name,
-                            'myId': myId,
-                            'id': id
+                    Expanded(
+                      child: TextFormField(
+                        controller: message,
+                        cursorColor: Colors.black87,
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.white,
+                          hintText: 'message',
+                          helperStyle:
+                              TextStyle(color: Color.fromRGBO(174, 174, 178, 1)),
+                          enabled: true,
+                          contentPadding:  EdgeInsets.only(
+                              left: 12.0.w, bottom: 8.0.h, top: 8.0.h),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: new BorderSide(
+                                color: Color.fromRGBO(209, 209, 214, 1)),
+                            borderRadius: new BorderRadius.circular(18.r),
+                          ),
+                          border: OutlineInputBorder(
+                            borderSide: new BorderSide(
+                                color: Color.fromRGBO(209, 209, 214, 1)),
+                            borderRadius: new BorderRadius.circular(18.r),
+                          ),
+                        ),
+                        validator: (value) {},
+                        onChanged: (e) {
+                          setState(() {
+                            if (e.length != 0) {
+                              _isEmpty = false;
+                            } else {
+                              _isEmpty = true;
+                            }
                           });
-                          _isEmpty = true;
-                          setState(() {});
-
-                          message.clear();
-                        }
-                      },
+                        },
+                        onSaved: (value) {
+                          message.text = value!;
+                        },
+                      ),
                     ),
-                  ),
-                ],
+                    Padding(
+                      padding: EdgeInsets.only(left: 6.w),
+                      child: InkWell(
+                        child: Icon(
+                          Icons.send_sharp,
+                          color: !_isEmpty
+                              ? Colors.green.shade700
+                              : Color.fromRGBO(151, 151, 151, 1),
+                        ),
+                        onTap: () {
+                          if (message.text.isNotEmpty) {
+                            fs.collection('Messages').doc().set({
+                              'message': message.text.trim(),
+                              'time': DateTime.now(),
+                              'name': name,
+                              'myId': myId,
+                              'id': id
+                            });
+                            _isEmpty = true;
+                            setState(() {});
+
+                            message.clear();
+                          }
+                        },
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],

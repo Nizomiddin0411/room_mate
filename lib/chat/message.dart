@@ -48,7 +48,7 @@ class _MessagesState extends State<Messages> {
               Timestamp t = qs['time'];
               DateTime d = t.toDate();
               return Padding(
-                padding:  EdgeInsets.symmetric(horizontal: 8.w, vertical: 3.h),
+                padding:  EdgeInsets.symmetric(horizontal: 8.w, vertical: id == qs['id'] && myId == qs['myId'] ? 3.h : 0),
                 child: Column(
                   crossAxisAlignment: name == qs['name']
                       ? CrossAxisAlignment.end
