@@ -1,23 +1,29 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 
 class CreateAdsStudent {
   Future CreateAds({
     required String districtId,
     required String UniderId,
+    required String fakultetId,
     required String Course,
+    //live
     required String roomOwner,
     required String TypeHouse,
-    required String CountRoom,
     required String TypeOfRent,
     required String? cost,
     required String typePayment,
     required String subway,
     required String gender,
-    required String fakultetId,
-    required String countRoom,
+    required String CountRoom,
+
+
+
+
+
     required String? title,
     required String? description
   }) async {
@@ -40,13 +46,13 @@ class CreateAdsStudent {
       'cost_type': typePayment,
       'subway': subway,
       'roommate_gender': gender,
-      'roommate_count': countRoom,
+      'roommate_count': CountRoom,
       'title': '${title}',
       'description': '${description}'
     });
     // request.fields['district_id']='1';
     request.headers.addAll({
-      HttpHeaders.authorizationHeader: 'Bearer VVuDO41zOoYY2KvUUHYPOJ9PzKsnnJeD'
+      HttpHeaders.authorizationHeader: 'Bearer ${Hive.box('token').get('token')}'
     });
     http.StreamedResponse response = await request.send();
 
