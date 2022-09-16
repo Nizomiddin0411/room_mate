@@ -152,6 +152,7 @@ class _OwnerState extends State<Owner> {
                             return DropdownMenuItem<String>(
                               onTap: () {
                                 print("${e.id}");
+                                data.districtOwnerId = e.id.toString();
                               },
                               value: data.isDistrict
                                   ? e.name.toString()
@@ -643,7 +644,7 @@ class _OwnerState extends State<Owner> {
                           // print(inputcontroller?.text);//
                           // print(addressController?.text);//
                           CreateAdsUserServeice().CreateAds(
-                              districtId: '56',
+                              districtId: data.districtOwnerId,
                               roomOwner: RoomOwner,
                               TypeHouse: TypeHouse=='Kvartira'? '1':'2',
                               CountRoom: CountRoom,
