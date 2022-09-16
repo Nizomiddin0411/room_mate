@@ -1,22 +1,17 @@
-import 'package:dropdown_button2/custom_dropdown_button2.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
+
 import 'package:provider/provider.dart';
-import 'package:talaba_uy/bloc/bloc_region/region_bloc.dart';
-import 'package:talaba_uy/bloc/bloc_region/region_statate.dart';
+
 import 'package:talaba_uy/core/const/app_colors.dart';
-import 'package:talaba_uy/core/data/mockdata.dart';
+
 import 'package:talaba_uy/provider/region_provider.dart';
 import 'package:talaba_uy/screens/menu/menu.dart';
 
-import '../../bloc/bloc_region/region_event.dart';
 import '../../models/get_district_model.dart';
-import '../../models/get_region_model.dart';
-import '../../services/get_district_for_create.dart';
-
-import '../../services/get_region_service.dart';
+import '../../services/post_create_ads_service.dart';
 
 class Owner extends StatefulWidget {
   const Owner({Key? key}) : super(key: key);
@@ -26,13 +21,22 @@ class Owner extends StatefulWidget {
 }
 
 class _OwnerState extends State<Owner> {
-  bool isDistrict = false;
+  // bool isDistrict = false;
   bool _checkHome = false;
   bool _checkMetro = false;
+  String RoomOwner = '';
+  String RentOf = '';
+  String Subway = '';
   String? _dropownUsd;
   String dropDown = "";
-
-  // GetRegionModel? valuee;
+  String TypeHouse = '';
+  String CountRoom = '';
+  String genderString = '';
+  String countRoom = '';
+  TextEditingController? addressController;
+  TextEditingController? costController;
+  TextEditingController? adsTitleController;
+  TextEditingController? inputcontroller;
   GetDistrictModel? dropDown1;
   var kvartira = [
     'Kvartira',
@@ -60,6 +64,14 @@ class _OwnerState extends State<Owner> {
     '4',
     '5-6',
   ];
+  @override
+  void initState() {
+    addressController = TextEditingController();
+    costController = TextEditingController();
+    adsTitleController = TextEditingController();
+    inputcontroller = TextEditingController();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -123,43 +135,8 @@ class _OwnerState extends State<Owner> {
                   ),
                 ),
                 SizedBox(height: 4.h),
-
                 data.isDistrict
                     ? Container(
-                      width: 324.w,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10.r)),
-                      child: DropdownButtonFormField(
-                        isExpanded: true,
-                        hint: Text("Tumanni tanlang"),
-                        decoration: const InputDecoration(
-                            isDense: true,
-                            border: OutlineInputBorder(),
-                            focusColor: Colors.grey),
-                        icon: Icon(Icons.arrow_drop_down_outlined),
-                        items: data.districts.map((e) {
-                          return DropdownMenuItem<String>(
-                            onTap: () {
-                              print("${e.id}");
-                            },
-                            value: data.isDistrict
-                                ? e.name.toString()
-                                : data.defaultvalue,
-                            child: Text(data.isDistrict
-                                ? e.name.toString()
-                                : data.defaultvalue),
-                          );
-                        }).toList(),
-                        onChanged: (newValue) {
-                          print("Selected ----------- $newValue");
-                          setState(() {
-                            // dropDown1 = newValue as GetDistrictModel?;
-                            dropDown = newValue.toString();
-                          });
-                        },
-                      ),
-                    )
-                    : Container(
                         width: 324.w,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(10.r)),
@@ -171,11 +148,44 @@ class _OwnerState extends State<Owner> {
                               border: OutlineInputBorder(),
                               focusColor: Colors.grey),
                           icon: Icon(Icons.arrow_drop_down_outlined),
-                          items: [],
-                          onChanged:  null
+                          items: data.districts.map((e) {
+                            return DropdownMenuItem<String>(
+                              onTap: () {
+                                print("${e.id}");
+                                data.districtOwnerId = e.id.toString();
+                              },
+                              value: data.isDistrict
+                                  ? e.name.toString()
+                                  : data.defaultvalue,
+                              child: Text(data.isDistrict
+                                  ? e.name.toString()
+                                  : data.defaultvalue),
+                            );
+                          }).toList(),
+                          onChanged: (newValue) {
+                            print("Selected ----------- $newValue");
+                            setState(() {
+                              // dropDown1 = newValue as GetDistrictModel?;
+                              dropDown = newValue.toString();
+                            });
+                          },
                         ),
+                      )
+                    : Container(
+                        width: 324.w,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10.r)),
+                        child: DropdownButtonFormField(
+                            isExpanded: true,
+                            hint: Text("Tumanni tanlang"),
+                            decoration: const InputDecoration(
+                                isDense: true,
+                                border: OutlineInputBorder(),
+                                focusColor: Colors.grey),
+                            icon: Icon(Icons.arrow_drop_down_outlined),
+                            items: [],
+                            onChanged: null),
                       ),
-
                 SizedBox(height: 12.h),
                 Text(
                   "Manzil",
@@ -194,6 +204,7 @@ class _OwnerState extends State<Owner> {
                   child: Container(
                     padding: EdgeInsets.only(left: 16.w),
                     child: TextFormField(
+                      controller: addressController,
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         hintText: "Kvartal , Uy , Xonadon",
@@ -205,7 +216,6 @@ class _OwnerState extends State<Owner> {
                     ),
                   ),
                 ),
-
                 SizedBox(height: 18.h),
                 Text(
                   "Xonadon ma’lumoti",
@@ -227,6 +237,11 @@ class _OwnerState extends State<Owner> {
                         onChanged: (e) {
                           setState(() {
                             _checkHome = e!;
+                            if (_checkHome == true) {
+                              RoomOwner = '1';
+                            } else {
+                              RoomOwner = '2';
+                            }
                           });
                         },
                       ),
@@ -272,7 +287,7 @@ class _OwnerState extends State<Owner> {
                             }).toList(),
                             onChanged: (newValue) {
                               setState(() {
-                                dropDown = newValue.toString();
+                                TypeHouse = newValue.toString();
                               });
                             },
                           ),
@@ -310,7 +325,7 @@ class _OwnerState extends State<Owner> {
                             }).toList(),
                             onChanged: (newValue) {
                               setState(() {
-                                dropDown = newValue.toString();
+                                CountRoom = newValue.toString();
                               });
                             },
                           ),
@@ -347,7 +362,7 @@ class _OwnerState extends State<Owner> {
                     }).toList(),
                     onChanged: (newValue) {
                       setState(() {
-                        dropDown = newValue.toString();
+                        RentOf = newValue.toString();
                       });
                     },
                   ),
@@ -370,6 +385,7 @@ class _OwnerState extends State<Owner> {
                   child: Container(
                     padding: EdgeInsets.only(left: 16.w),
                     child: TextFormField(
+                      controller: costController,
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         hintText: "Xonadonni narxini kiriting / oyiga",
@@ -437,6 +453,11 @@ class _OwnerState extends State<Owner> {
                         onChanged: (e) {
                           setState(() {
                             _checkMetro = e!;
+                            if (_checkMetro == true) {
+                              Subway = '1';
+                            } else {
+                              Subway = '2';
+                            }
                           });
                         },
                       ),
@@ -490,7 +511,7 @@ class _OwnerState extends State<Owner> {
                             }).toList(),
                             onChanged: (newValue) {
                               setState(() {
-                                dropDown = newValue.toString();
+                                genderString = newValue.toString();
                               });
                             },
                           ),
@@ -528,7 +549,7 @@ class _OwnerState extends State<Owner> {
                             }).toList(),
                             onChanged: (newValue) {
                               setState(() {
-                                dropDown = newValue.toString();
+                                countRoom = newValue.toString();
                               });
                             },
                           ),
@@ -555,6 +576,7 @@ class _OwnerState extends State<Owner> {
                   child: Container(
                     padding: EdgeInsets.only(left: 16.w),
                     child: TextFormField(
+                      controller: adsTitleController,
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         hintText: "E’lonni nomlang",
@@ -584,6 +606,7 @@ class _OwnerState extends State<Owner> {
                   child: Container(
                     padding: EdgeInsets.only(left: 16.w),
                     child: TextFormField(
+                      controller:inputcontroller ,
                       maxLines: 6,
                       decoration: InputDecoration(
                         hintText: 'Massage...',
@@ -608,6 +631,34 @@ class _OwnerState extends State<Owner> {
                                 borderRadius: BorderRadius.circular(10.r)),
                             primary: AppColors.buttonLinear),
                         onPressed: () {
+                          print(Hive.box('token').get('token'));
+                          // print(RoomOwner);
+                          // print(TypeHouse=='Kvartira'? '1':'2');
+                          // print(CountRoom);
+                          // print(RentOf == 'kunlik'? '1':'2');
+                          // print(costController?.text);//
+                          // print(_dropownUsd == "SO'M"? '1':'2');
+                          // print(Subway);
+                          // print(genderString == 'Erkak'? '1':'2');
+                          // print(adsTitleController?.text);//
+                          // print(inputcontroller?.text);//
+                          // print(addressController?.text);//
+                          CreateAdsUserServeice().CreateAds(
+                              districtId: data.districtOwnerId,
+                              roomOwner: RoomOwner,
+                              TypeHouse: TypeHouse=='Kvartira'? '1':'2',
+                              CountRoom: CountRoom,
+                              TypeOfRent: RentOf == 'kunlik'? '1':'2',
+                              cost: costController?.text,
+                              typePayment: _dropownUsd == "SO'M"? '1':'2',
+                              subway: Subway,
+                              gender: genderString == 'Erkak'? '1':'2',
+                              countRoom: countRoom,
+                              title: adsTitleController?.text,
+                              description: inputcontroller?.text,
+                              address: addressController?.text
+                          );
+
                           Navigator.pushAndRemoveUntil(
                               context,
                               MaterialPageRoute(
