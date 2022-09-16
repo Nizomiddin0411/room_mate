@@ -322,7 +322,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                       Padding(
                                         padding:  EdgeInsets.all(6.0.w),
                                         child: Text(
-                                          snapshot.data![index].type == 1
+                                          snapshot.data![index].type == 2
                                               ? 'Talaba'
                                               : "Elon beruvchi",
                                           style: TextStyle(fontSize: 18.sp),
