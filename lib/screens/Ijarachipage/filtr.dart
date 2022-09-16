@@ -124,7 +124,7 @@ class _FiltrPageState extends State<FiltrPage> {
               ),
               SizedBox(height: 4.h),
               FutureBuilder<List<GetDistrictModel>?>(
-                  future: GetDistrictService().fetchDistrict(),
+                  future: GetDistrictService().fetchDistrict(0),
                   builder:
                       (context, AsyncSnapshot<List<GetDistrictModel>?> snapshot) {
                     if (snapshot.hasData) {
@@ -220,7 +220,7 @@ class _FiltrPageState extends State<FiltrPage> {
               ),
               SizedBox(height: 4.h),
               FutureBuilder<List<GetFacultyModel>?>(
-                  future: GetFacultyService().fetchFaculty(),
+                  future: GetFacultyService().fetchFaculty(0),
                   builder:
                       (context, AsyncSnapshot<List<GetFacultyModel>?> snapshot) {
                     if (snapshot.hasData) {
@@ -243,11 +243,11 @@ class _FiltrPageState extends State<FiltrPage> {
                                   return InkWell(
                                       onTap: (){
                                         setState(() {
-                                          _titleFaculty = snapshot.data![index].name!;
+                                          _titleFaculty = snapshot.data![index].name;
                                         });
                                       },
                                       child: Text(
-                                          snapshot.data![index].name!));
+                                          snapshot.data![index].name));
                                 })
                           ],
                         ),

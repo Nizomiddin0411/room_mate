@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
 import 'package:talaba_uy/screens/menu/menu.dart';
+
 import '../../models/get_district_model.dart';
 import '../../models/get_faculty_model.dart';
 import '../../models/get_region_model.dart';
@@ -165,7 +166,7 @@ class _StudentState extends State<Student> {
             ),
             SizedBox(height: 4.h),
             FutureBuilder<List<GetDistrictModel>?>(
-              future: GetDistrictService().fetchDistrict(),
+              future: GetDistrictService().fetchDistrict(0),
               builder: (BuildContext context,
                   AsyncSnapshot<List<GetDistrictModel>?> snapshot) {
                 if (snapshot.hasData) {
@@ -266,7 +267,7 @@ class _StudentState extends State<Student> {
             ),
             SizedBox(height: 4.h),
             FutureBuilder<List<GetFacultyModel>?>(
-                future: GetFacultyService().fetchFaculty(),
+                future: GetFacultyService().fetchFaculty(0),
                 builder:
                     (context, AsyncSnapshot<List<GetFacultyModel>?> snapshot) {
                   if (snapshot.hasData) {
