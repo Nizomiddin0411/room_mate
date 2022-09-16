@@ -1,12 +1,14 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:switcher/core/switcher_size.dart';
 import 'package:switcher/switcher.dart';
 import 'package:talaba_uy/models/get_district_model.dart';
 import 'package:talaba_uy/models/get_faculty_model.dart';
 import 'package:talaba_uy/models/get_region_model.dart';
 import 'package:talaba_uy/models/get_univer_model.dart';
+import 'package:talaba_uy/provider/universitet_provider.dart';
 import 'package:talaba_uy/screens/Autorization/LoginPage.dart';
 import 'package:talaba_uy/screens/Autorization/offerto_dart.dart';
 import 'package:talaba_uy/screens/Autorization/student_registratsion.dart';
@@ -30,11 +32,14 @@ class _RegistratsiyaState extends State<Registratsiya> {
 
   final _formKey = GlobalKey<FormState>();
   TabController? _tabController;
-
   @override
-  void initstate() {
+  void initState() {
+
     super.initState();
+    Provider.of<UniversitetProvider>(context, listen: false).getUniver();
+    Provider.of<UniversitetProvider>(context, listen: false).getViloyat();
   }
+
 
   @override
   Widget build(BuildContext context) {

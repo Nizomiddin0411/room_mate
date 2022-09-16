@@ -1,36 +1,45 @@
+// To parse this JSON data, do
+//
+//     final getFacultyModel = getFacultyModelFromJson(jsonString);
+
+import 'dart:convert';
+
+List<GetFacultyModel> getFacultyModelFromJson(String str) => List<GetFacultyModel>.from(json.decode(str).map((x) => GetFacultyModel.fromJson(x)));
+
+String getFacultyModelToJson(List<GetFacultyModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
+
 class GetFacultyModel {
-  int? id;
-  int? universityId;
-  String? name;
-  String? nameRu;
-  String? advertising;
-  String? searching;
+  GetFacultyModel({
+    required this.id,
+    required this.universityId,
+    required this.name,
+    required this.nameRu,
+    required this.advertising,
+    required this.searching,
+  });
 
-  GetFacultyModel(
-      {this.id,
-        this.universityId,
-        this.name,
-        this.nameRu,
-        this.advertising,
-        this.searching});
+  int id;
+  int universityId;
+  String name;
+  String nameRu;
+  String advertising;
+  String searching;
 
-  GetFacultyModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    universityId = json['university_id'];
-    name = json['name'];
-    nameRu = json['name_ru'];
-    advertising = json['advertising'];
-    searching = json['searching'];
-  }
+  factory GetFacultyModel.fromJson(Map<String, dynamic> json) => GetFacultyModel(
+    id: json["id"],
+    universityId: json["university_id"],
+    name: json["name"],
+    nameRu: json["name_ru"],
+    advertising: json["advertising"],
+    searching: json["searching"],
+  );
 
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['university_id'] = this.universityId;
-    data['name'] = this.name;
-    data['name_ru'] = this.nameRu;
-    data['advertising'] = this.advertising;
-    data['searching'] = this.searching;
-    return data;
-  }
+  Map<String, dynamic> toJson() => {
+    "id": id,
+    "university_id": universityId,
+    "name": name,
+    "name_ru": nameRu,
+    "advertising": advertising,
+    "searching": searching,
+  };
 }

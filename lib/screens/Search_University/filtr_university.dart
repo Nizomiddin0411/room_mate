@@ -155,7 +155,7 @@ class _UniverFiltrPageState extends State<UniverFiltrPage> {
               Column(
                 children: [
                   FutureBuilder<List<GetDistrictModel>?>(
-                    future: GetDistrictService().fetchDistrict(),
+                    future: GetDistrictService().fetchDistrict(0),
                     builder: (BuildContext context, snapshot) {
                       if (snapshot.hasData) {
                         return DropdownButtonFormField2<String>(

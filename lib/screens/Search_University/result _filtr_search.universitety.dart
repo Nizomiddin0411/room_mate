@@ -165,7 +165,7 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                   Column(
                     children: [
                       FutureBuilder<List<GetDistrictModel>?>(
-                        future: GetDistrictService().fetchDistrict(),
+                        future: GetDistrictService().fetchDistrict(0),
                         builder: (BuildContext context, snapshot) {
                           if (snapshot.hasData) {
                             return DropdownButtonFormField2<String>(
@@ -244,7 +244,7 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
               Column(
                 children: [
                   FutureBuilder<List<GetFacultyModel>?>(
-                    future: GetFacultyService().fetchFaculty(),
+                    future: GetFacultyService().fetchFaculty(0),
                     builder: (BuildContext context, snapshot) {
                       if (snapshot.hasData) {
                         return DropdownButtonFormField2<String>(
