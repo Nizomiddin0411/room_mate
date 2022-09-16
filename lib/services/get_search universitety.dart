@@ -9,7 +9,7 @@ import 'package:talaba_uy/models/search_universitety_model.dart';
 import '../models/get_univer_model.dart';
 
 class GetSearchUniverService {
-  Future<List<SearchUniversitetyModel>?> fetchUniverSearch() async {
+  Future<List<SearchUniversitetyModel>> fetchUniverSearch() async {
     try {
       var _response = await http.get(
         Uri.parse(
@@ -25,6 +25,7 @@ class GetSearchUniverService {
       }
     } catch (e) {
       print('${e}');
+      return [];
     }
   }
 }

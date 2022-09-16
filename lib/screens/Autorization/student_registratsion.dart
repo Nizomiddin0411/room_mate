@@ -468,9 +468,7 @@ class _StudentUserState extends State<StudentUser> {
                           Course = value.toString();
                           kurs = true;
                           kursColor = Colors.black12;
-                          setState(() {
-                            selectedValue=value.toString();
-                          });
+                          setState(() {});
                         },
                       ),
                     ],
@@ -598,9 +596,6 @@ class _StudentUserState extends State<StudentUser> {
                               items:data.tumanlar
                                   .map(
                                     (e) => DropdownMenuItem<String>(
-                                      onTap: (){
-                                        data.district_id=e.id.toString();
-                                      },
                                       value: data.istuman
                                       ?e.name.toString()
                                       :data.defaultvalue1,
@@ -690,9 +685,7 @@ class _StudentUserState extends State<StudentUser> {
                             colorOff: Colors.blue.withOpacity(0.3),
                             colorOn: Colors.blue,
                             onChanged: (bool state) {
-                              setState(() {
-                                Roommate=value3.toString();
-                              });
+
                             },
                           ),
                         ),
@@ -744,7 +737,7 @@ class _StudentUserState extends State<StudentUser> {
                         fakultetId: data.fakultetid,
                         Course: selectedValue.toString(),
                         Roommate: Roommate.toString()=='ha' ? '1':'2',
-                        District: data.district_id,
+                        District: District.toString(),
                         Phonenumber: nameController.text,
                         gender: dropdownvalue.toString() == 'Erkak' ? '1' : '2',
                         UniderId: data.universiterid
