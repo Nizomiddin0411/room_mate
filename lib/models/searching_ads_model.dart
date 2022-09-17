@@ -3,10 +3,10 @@ class SearchingAdsModel {
   int? type;
   int? userId;
   int? districtId;
-  int? universityId;
-  int? facultyId;
-  Null? address;
-  Null? roomCount;
+  dynamic universityId;
+  dynamic facultyId;
+  String? address;
+  int? roomCount;
   int? liveWithOwner;
   int? houseType;
   int? rentType;
@@ -23,26 +23,26 @@ class SearchingAdsModel {
 
   SearchingAdsModel(
       {this.id,
-      this.type,
-      this.userId,
-      this.districtId,
-      this.universityId,
-      this.facultyId,
-      this.address,
-      this.roomCount,
-      this.liveWithOwner,
-      this.houseType,
-      this.rentType,
-      this.cost,
-      this.costType,
-      this.subway,
-      this.roommateGender,
-      this.roommateCount,
-      this.title,
-      this.description,
-      this.createdAt,
-      this.updatedAt,
-      this.favorite});
+        this.type,
+        this.userId,
+        this.districtId,
+        this.universityId,
+        this.facultyId,
+        this.address,
+        this.roomCount,
+        this.liveWithOwner,
+        this.houseType,
+        this.rentType,
+        this.cost,
+        this.costType,
+        this.subway,
+        this.roommateGender,
+        this.roommateCount,
+        this.title,
+        this.description,
+        this.createdAt,
+        this.updatedAt,
+        this.favorite});
 
   SearchingAdsModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
