@@ -148,7 +148,7 @@ class _FiltrPageState extends State<FiltrPage> {
                       icon: Icon(Icons.arrow_drop_down_outlined),
                       items: data.regions.map((e) {
                         return DropdownMenuItem<String>(
-                          onTap: (){
+                          onTap: () {
                             data.RegionId = e.id.toString();
                           },
                           value: e.name ?? "",
@@ -157,6 +157,8 @@ class _FiltrPageState extends State<FiltrPage> {
                       }).toList(),
                       onChanged: (newValue) async {
                         print("Selected ----------- $newValue");
+                        data.isRegion = true;
+                        print(data.isRegion);
                         final selected = data.regions
                             .where((element) => element.name == newValue);
                         data.getDistrict(selected.last.id!);
@@ -205,6 +207,7 @@ class _FiltrPageState extends State<FiltrPage> {
                             }).toList(),
                             onChanged: (newValue) {
                               print("Selected ----------- $newValue");
+                              data.isDistrict = true;
                               setState(() {
                                 // dropDown1 = newValue as GetDistrictModel?;
                                 dropDown = newValue.toString();
@@ -262,7 +265,8 @@ class _FiltrPageState extends State<FiltrPage> {
                         );
                       }).toList(),
                       onChanged: (newValue) async {
-                        print("Selected ----------- $newValue");
+                        // print("Selected ----------- $newValue");
+                        data.isUniver = true;
                         final selected = data.univer
                             .where((element) => element.name == newValue);
                         data.getFaculty(selected.last.id!);
@@ -272,66 +276,6 @@ class _FiltrPageState extends State<FiltrPage> {
                       },
                     ),
                   ),
-                  // SizedBox(height: 12.h),
-                  // Text(
-                  //   "Fakultetni tanlang",
-                  //   style: TextStyle(
-                  //     color: AppColors.textColor,
-                  //     fontSize: 14.sp,
-                  //     fontWeight: FontWeight.w500,
-                  //   ),
-                  // ),
-                  // SizedBox(height: 4.h),
-                  // data.isFaculty ? Container(
-                  //   width: 324.w,
-                  //   decoration:
-                  //   BoxDecoration(borderRadius: BorderRadius.circular(10.r)),
-                  //   child: DropdownButtonFormField(
-                  //     isExpanded: true,
-                  //     hint: Text("Faqultetni tanlang"),
-                  //     decoration: const InputDecoration(
-                  //         border: OutlineInputBorder(), focusColor: Colors.grey),
-                  //     // value: ,
-                  //     icon: Icon(Icons.arrow_drop_down_outlined),
-                  //     items: data.faculty.map((e) {
-                  //       return DropdownMenuItem<String>(
-                  //         onTap: (){
-                  //           data.FacutyId = e.id.toString();
-                  //         },
-                  //         value: data.isFaculty? e.name.toString(): data.defaultFaculty,
-                  //         child: SizedBox(
-                  //           width: MediaQuery.of(context).size.width -150.w,
-                  //           child:
-                  //           Text(data.isFaculty ? e.name.toString(): data.defaultFaculty),
-                  //
-                  //         ),
-                  //       );
-                  //     }).toList(),
-                  //     onChanged: (newValue) async {
-                  //       print("Selected ----------- $newValue");
-                  //       // final selected = data.regions
-                  //       //     .where((element) => element.name == newValue);
-                  //       // data.getDistrict(selected.last.id!);
-                  //       setState(() {
-                  //         dropDown2 = newValue.toString();
-                  //       });
-                  //     },
-                  //   ),
-                  // ):Container(
-                  //   width: 324.w,
-                  //   decoration:
-                  //   BoxDecoration(borderRadius: BorderRadius.circular(10.r)),
-                  //   child: DropdownButtonFormField(
-                  //       isExpanded: true,
-                  //       hint: Text("Faqultetni tanlang"),
-                  //       decoration: const InputDecoration(
-                  //           border: OutlineInputBorder(), focusColor: Colors.grey),
-                  //       // value: ,
-                  //       icon: Icon(Icons.arrow_drop_down_outlined),
-                  //       items: [],
-                  //       onChanged: null
-                  //   ),
-                  // ),
                   SizedBox(
                     height: 18.h,
                   ),
@@ -372,6 +316,7 @@ class _FiltrPageState extends State<FiltrPage> {
                           );
                         }).toList(),
                         onChanged: (newValue) {
+                          data.isCourse = true;
                           setState(() {
                             _titleCourse = newValue.toString();
                           });
@@ -389,34 +334,6 @@ class _FiltrPageState extends State<FiltrPage> {
                         fontSize: 20.sp,
                         fontWeight: FontWeight.w500),
                   ),
-                  // SizedBox(
-                  //   height: 14.h,
-                  // ),
-                  // Row(
-                  //   children: [
-                  //     SizedBox(
-                  //       width: 20,
-                  //       height: 20,
-                  //       child: Checkbox(
-                  //         value: _checkHome,
-                  //         onChanged: (e) {
-                  //           setState(() {
-                  //             _checkHome = e!;
-                  //             if (_checkHome == true) {
-                  //               RoomOwner = '1';
-                  //             } else {
-                  //               RoomOwner = '2';
-                  //             }
-                  //           });
-                  //         },
-                  //       ),
-                  //     ),
-                  //     SizedBox(
-                  //       width: 12.w,
-                  //     ),
-                  //     Text("Uy egasi bilan birga yashashga roziman !!!")
-                  //   ],
-                  // ),
                   SizedBox(height: 19.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -451,6 +368,7 @@ class _FiltrPageState extends State<FiltrPage> {
                                 );
                               }).toList(),
                               onChanged: (newValue) {
+                                data.isTypeHouse = true;
                                 setState(() {
                                   dropDown = newValue.toString();
                                 });
@@ -489,6 +407,7 @@ class _FiltrPageState extends State<FiltrPage> {
                                 );
                               }).toList(),
                               onChanged: (newValue) {
+                                data.isCount = true;
                                 setState(() {
                                   roomCount = newValue.toString();
                                 });
@@ -531,6 +450,7 @@ class _FiltrPageState extends State<FiltrPage> {
                           );
                         }).toList(),
                         onChanged: (newValue) {
+                          data.isRent = true;
                           setState(() {
                             TypeOfRent = newValue.toString();
                           });
@@ -539,16 +459,6 @@ class _FiltrPageState extends State<FiltrPage> {
                     ),
                   ),
                   SizedBox(height: 12.h),
-                  // Text(
-                  //   "Narxi",
-                  //   style: TextStyle(
-                  //     color: AppColors.textColor,
-                  //     fontSize: 14.sp,
-                  //     fontWeight: FontWeight.w500,
-                  //   ),
-                  // ),
-                  // SizedBox(height: 4.h),
-
                   SizedBox(
                     height: 16.h,
                   ),
@@ -560,6 +470,7 @@ class _FiltrPageState extends State<FiltrPage> {
                         child: Checkbox(
                           value: _checkMetro,
                           onChanged: (e) {
+                            data.isSubway = true;
                             setState(() {
                               _checkMetro = e!;
                             });
@@ -572,100 +483,6 @@ class _FiltrPageState extends State<FiltrPage> {
                       Text("Metroga yaqin")
                     ],
                   ),
-                  // SizedBox(height: 22.h),
-                  // Text(
-                  //   "Qo’shimcha",
-                  //   style: TextStyle(
-                  //       color: AppColors.mainColor,
-                  //       fontSize: 20.sp,
-                  //       fontWeight: FontWeight.w500),
-                  // ),
-                  // SizedBox(height: 12.h),
-                  // Row(
-                  //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  //   children: [
-                  //     Column(
-                  //       crossAxisAlignment: CrossAxisAlignment.start,
-                  //       children: [
-                  //         Text(
-                  //           "Sheriklarni tanlang",
-                  //           style: TextStyle(
-                  //             color: AppColors.textColor,
-                  //             fontSize: 14.sp,
-                  //             fontWeight: FontWeight.w500,
-                  //           ),
-                  //         ),
-                  //         SizedBox(height: 4.h),
-                  //         Container(
-                  //           width: 152.w,
-                  //           decoration: BoxDecoration(
-                  //               borderRadius: BorderRadius.circular(10.r)),
-                  //           child: DropdownButtonFormField(
-                  //             hint: Text("Qiz,O'g'il"),
-                  //             decoration: const InputDecoration(
-                  //                 border: OutlineInputBorder(),
-                  //                 focusColor: Colors.grey),
-                  //             icon: Icon(Icons.arrow_drop_down_outlined),
-                  //             items: genderone.map((e) {
-                  //               return DropdownMenuItem<String>(
-                  //                 onTap: () {
-                  //
-                  //                 },
-                  //                 value: e,
-                  //                 child: Text(e),
-                  //               );
-                  //             }).toList(),
-                  //             onChanged: (newValue) {
-                  //               setState(() {
-                  //                 _titleGendor = newValue.toString();
-                  //               });
-                  //             },
-                  //           ),
-                  //         ),
-                  //       ],
-                  //     ),
-                  //     Column(
-                  //       crossAxisAlignment: CrossAxisAlignment.start,
-                  //       children: [
-                  //         Text(
-                  //           "Soni",
-                  //           style: TextStyle(
-                  //             color: AppColors.textColor,
-                  //             fontSize: 14.sp,
-                  //             fontWeight: FontWeight.w500,
-                  //           ),
-                  //         ),
-                  //         SizedBox(height: 4.h),
-                  //         Container(
-                  //           width: 152.w,
-                  //           decoration: BoxDecoration(
-                  //               borderRadius: BorderRadius.circular(10.r)),
-                  //           child: DropdownButtonFormField(
-                  //             hint: Text("Ijarachilar soni"),
-                  //             decoration: const InputDecoration(
-                  //                 border: OutlineInputBorder(),
-                  //                 focusColor: Colors.grey),
-                  //             icon: Icon(Icons.arrow_drop_down_outlined),
-                  //             items: ijarachi.map((e) {
-                  //               return DropdownMenuItem<String>(
-                  //                 onTap: () {
-                  //
-                  //                 },
-                  //                 value: e,
-                  //                 child: Text(e),
-                  //               );
-                  //             }).toList(),
-                  //             onChanged: (newValue) {
-                  //               setState(() {
-                  //                 dropDown = newValue.toString();
-                  //               });
-                  //             },
-                  //           ),
-                  //         ),
-                  //       ],
-                  //     ),
-                  //   ],
-                  // ),
                   SizedBox(height: 22.h),
                   Text(
                     "Narxi",
@@ -689,6 +506,9 @@ class _FiltrPageState extends State<FiltrPage> {
                           child: Container(
                             padding: EdgeInsets.only(left: 16.w),
                             child: TextFormField(
+                              onTap: (){
+                                data.isFromCost = true;
+                              },
                               controller: fromCost,
                               decoration: InputDecoration(
                                 border: InputBorder.none,
@@ -716,6 +536,9 @@ class _FiltrPageState extends State<FiltrPage> {
                           child: Container(
                             padding: EdgeInsets.only(left: 16.w),
                             child: TextFormField(
+                              onTap: (){
+                                data.isToCost = true;
+                              },
                               controller: toCost,
                               decoration: InputDecoration(
                                 border: InputBorder.none,
@@ -800,35 +623,36 @@ class _FiltrPageState extends State<FiltrPage> {
                             print(toCost.text);
                             print('-----------------');
 
-
-
                             // Navigator.pushAndRemoveUntil(
                             //     context,
                             //     MaterialPageRoute(builder: (context) => MenuPage()),
                             //         (route) => false);
 
                             data.getFiltrApi(
-                                // data.RegionId,
-                                // data.districtId,
-                                // data.UniverId,
-                                // Course,
-                                // TypeHouse,
-                                // roomCount,
-                                // _titleTime,
-                                // subwayof,
-                                // fromCost.text,
-                                // toCost.text,
-                              data.RegionId,
-                              '0',
-                              '0',
-                              '0',
-                              '0',
-                              '0',
-                              '0',
-                              '0',
-                              '0',
-                              '0',
+                              data.isRegion ? data.RegionId : '0',
+                              data.isDistrict ? data.districtId : '0',
+                              data.isUniver ? data.UniverId : '0',
+                              data.isCourse ? Course : '0',
+                              data.isTypeHouse ? TypeHouse : '0',
+                              data.isCount ? roomCount : '0',
+                              data.isRent ? _titleTime: '0',
+                              data.isSubway ? subwayof : '0',
+                              data.isFromCost ? fromCost.text : '0',
+                              data.isToCost ? toCost.text: '0',
+                              // data.isRegion ? data.RegionId: '0',
+                              // '11',
+                              // '0',
+                              // '0',
+                              // '0',
+                              // '0',
+                              // '0',
+                              // '0',
+                              // '0',
+                              // '0',
+                              // '0',
                             );
+                            Navigator.pop(context);
+                            print(data.isRegion);
                           },
                           child: Text(
                             "Saqlash",
