@@ -22,13 +22,7 @@ class _StudentState extends State<Student> {
    String dropDown2 = "";
   bool _checkHome = false;
   bool _checkMetro = false;
-  String _titleUniver = "Oliy o’quv yurtingizni tanlang";
-  String _titleRegion = "Viloyatni tanlang";
-  String _titleDistrict = "Tumanni tanlang";
-  String _titleFaculty = "Fakultetni tanlang";
   String? _dropownUsd;
-  String _titilekv = "Kvartira , Xovli";
-  String _titleRoom = "Xonalar soni";
   String _titleTime = "Ijara muddati";
   String _titleGendor = "";
   String _titleCount = "Ijarachilar soni";
