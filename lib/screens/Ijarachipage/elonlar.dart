@@ -1,13 +1,15 @@
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
-import 'package:talaba_uy/models/days_apartment.dart';
+
 import 'package:talaba_uy/screens/All_Ads_Page/detail_page.dart';
 import 'package:talaba_uy/screens/Ijarachipage/filtr.dart';
-import 'package:talaba_uy/services/days_service.dart';
+
 
 import '../../models/get_all_ads.dart';
+import '../../provider/region_provider.dart';
 import '../../services/get_all_ads_sevice.dart';
 import '../../services/get_all_ads_user.dart';
 import '../../services/post_change_favoritr_service.dart';
@@ -20,6 +22,14 @@ class Elonlar extends StatefulWidget {
 }
 
 class _ElonlarState extends State<Elonlar> {
+
+  @override
+  void initState() {
+    super.initState();
+    Provider.of<RegionProvider>(context,listen: false).getUnivers();
+    Provider.of<RegionProvider>(context, listen: false).getRegion().asStream();
+  }
+
   @override
   Widget build(BuildContext context) {
     TabController? _tabController;
@@ -28,13 +38,13 @@ class _ElonlarState extends State<Elonlar> {
       child: Scaffold(
         backgroundColor: AppColors.backgroundWhite,
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(155),
+          preferredSize: const Size.fromHeight(155),
           child: AppBar(
             leading: InkWell(
               onTap: () {
                 Navigator.pop(context);
               },
-              child: Icon(
+              child: const Icon(
                 Icons.arrow_back,
                 color: AppColors.iconColor,
               ),
@@ -103,13 +113,9 @@ class _ElonlarState extends State<Elonlar> {
         body: TabBarView(
           controller: _tabController,
           children: [
-            FutureBuilder<List<AllAdsModel>?>(
-              future: GetAllAdsService().fetchAllADS(),
-                builder: (context,AsyncSnapshot<List<AllAdsModel>?> snapshot){
-                if(snapshot.hasData) {
-                  return ListView.builder(
+                   ListView.builder(
                       shrinkWrap: true,
-                      itemCount: snapshot.data!.length,
+                      itemCount: 3,
                       itemBuilder: (BuildContext contex, int index) {
                         return Padding(
                           padding: const EdgeInsets.all(18.0),
@@ -128,19 +134,20 @@ class _ElonlarState extends State<Elonlar> {
                                     Padding(
                                       padding: const EdgeInsets.all(6.0),
                                       child: Text(
-                                        '${snapshot.data![index].title.toString()}',
+                                        'Studentlar uchun',
                                         style: TextStyle(fontSize: 18.sp),
                                       ),
                                     ),
                                      Padding(
                                       padding: const EdgeInsets.fromLTRB(1, 0, 8, 0),
                                       child:  FavoriteButton(
-                                        isFavorite: snapshot.data![index].favorite == '0'? false : true,
+                                        // isFavorite: snapshot.data![index].favorite == '0'? false : true,
+
                                         iconSize: 35.0,
                                         valueChanged: (_isFavorite) {
                                           print('Is Favorite $_isFavorite)');
                                           setState(() {
-                                            FavoriteChange().Favoritefetch(id: snapshot.data![index].id.toString());
+                                            // FavoriteChange().Favoritefetch(id: snapshot.data![index].id.toString());
 
                                           });
                                           },
@@ -158,7 +165,7 @@ class _ElonlarState extends State<Elonlar> {
                                 Padding(
                                   padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
                                   child: Text(
-                                    '${snapshot.data![index].cost}',
+                                    '300/sum',
                                     style: TextStyle(
                                         color: AppColors.mainColor, fontSize: 24.sp),
                                   ),
@@ -169,7 +176,7 @@ class _ElonlarState extends State<Elonlar> {
                                     Padding(
                                       padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
                                       child: Text(
-                                        "${snapshot.data![index].address.toString()}",
+                                        "Uch tepa tumani 26 13 14",
                                         style: TextStyle(fontSize: 10.sp),
                                       ),
                                     ),
@@ -196,11 +203,7 @@ class _ElonlarState extends State<Elonlar> {
                             ),
                           ),
                         );
-                      });
-                }
-                return Center(child: const CircularProgressIndicator(),);
-                }
-            ),
+                      }),
 
             FutureBuilder<List<AllAdsModel>?>(
                 future: GetAllAdsUser().fetchAllADSUser(),

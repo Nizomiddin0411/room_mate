@@ -73,11 +73,8 @@ class MyApp extends StatelessWidget {
               theme: ThemeData(
                 primarySwatch: Colors.blue,
               ),
-              home: BlocProvider<RegionBloc>(
-                create: (context) => RegionBloc(repository),
-                child: MyHomePage(
-                  title: '',
-                ),
+              home: MyHomePage(
+                title: '',
               ),
             ),
           );
@@ -98,7 +95,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: LanguagePage(),
+      body: Hive.box('token').isEmpty ? LanguagePage(): MenuPage(),
       // This trailing comma makes auto-formatting nicer for build methods.
     );
   }

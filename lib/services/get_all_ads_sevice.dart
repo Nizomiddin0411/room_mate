@@ -5,7 +5,22 @@ import '../models/get_all_ads.dart';
 
 
 class GetAllAdsService {
-  Future<List<AllAdsModel>?> fetchAllADS() async {
+  Future<List<AllAdsModel>> fetchAllADS(
+      String regionId,
+      String districtId,
+      String univerId,
+      String faqultyId,
+      String course,
+      String live_with_owner,
+      String houseType,
+      String roomCount,
+      String rentType,
+      String subway,
+      String costFrom,
+      String costTo,
+      String Type,
+      String roomateGender,
+      ) async {
     try {
       var response = await http.get(
           Uri.parse(
@@ -27,6 +42,7 @@ class GetAllAdsService {
       }
     } catch (e) {
       print(e);
+      return [];
     }
   }
 }

@@ -1,17 +1,10 @@
-
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
-import 'package:talaba_uy/models/get_faculty_model.dart';
-import 'package:talaba_uy/models/get_region_model.dart';
-import 'package:talaba_uy/models/get_univer_model.dart';
 import 'package:talaba_uy/screens/All_Ads_Page/all_ads_page.dart';
-import 'package:talaba_uy/services/get_faculty_service.dart';
-import 'package:talaba_uy/services/get_univer_service.dart';
-
-import '../../models/get_district_model.dart';
-import '../../services/get_district_service.dart';
-import '../../services/get_region_service.dart';
+import '../../provider/region_provider.dart';
 
 class FiltrPage extends StatefulWidget {
   const FiltrPage({Key? key}) : super(key: key);
@@ -21,12 +14,80 @@ class FiltrPage extends StatefulWidget {
 }
 
 class _FiltrPageState extends State<FiltrPage> {
-  final bool _checkMetro = false;
+   bool _checkMetro = false;
+
+
+  TextEditingController? costcontroller;
+  TextEditingController? titlecontroller;
+  TextEditingController? othercontroller;
+  String dropDown = "";
+  String dropDown2 = "";
+  bool _checkHome = false;
+
   String? _dropownUsd;
-  String _titleUniver = "Oliy o’quv yurtingizni tanlang";
-  String  _titleRegion = "Viloyatni tanlang";
-  String _titleDistrict = "Tumanni tanlang";
-  String _titleFaculty = "Kursingizni tanlang";
+  String _titleTime = "Ijara muddati";
+  String _titleGendor = "";
+  String _titleCount = "Ijarachilar soni";
+  String _titleCourse = "";
+  String DistrictId = '';
+  String UniverId = '';
+  String Course = '';
+  String FakultetId = '';
+  String RoomOwner = '';
+  String TypeHouse = '';
+  String TypeOfRent = '';
+  String typeOfPayment = '';
+  String subwayof = '';
+  String gender = '';
+  String CourseCount = '';
+  String roomCount = '';
+  var kurs = [
+    '1-kurs',
+    '2-kurs',
+    '3-kurs',
+    '4-kurs',
+    '5-kurs',
+    '6-kurs',
+
+  ];
+  var kvartira = [
+    'Kvartira',
+    'Xovli',
+  ];
+  var genderone = [
+    'Erkak',
+    'Ayol',
+  ];
+  var kindOfMoment = [
+    'kunlik',
+    'oylik',
+  ];
+  var rooms = [
+    '1',
+    '2',
+    '3',
+    '4',
+    '5-6',
+  ];
+  var ijarachi = [
+    '1',
+    '2',
+    '3',
+    '4',
+    '5-6',
+  ];
+  TextEditingController? fromCost;
+  TextEditingController? toCost;
+  @override
+  void initState() {
+    super.initState();
+    fromCost =TextEditingController();
+    toCost =TextEditingController();
+    Provider.of<RegionProvider>(context, listen: false).getUnivers();
+    // Provider.of<RegionProvider>(context,listen: false).getFiltrApi();
+    Provider.of<RegionProvider>(context, listen: false).getRegion().asStream();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,431 +116,731 @@ class _FiltrPageState extends State<FiltrPage> {
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 12.h),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                "Joylashuv",
-                style: TextStyle(
-                    color: AppColors.mainColor,
-                    fontSize: 20.sp,
-                    fontWeight: FontWeight.w500),
-              ),
-              SizedBox(height: 12.h),
-              Text(
-                "Viloyat",
-                style: TextStyle(
-                  color: AppColors.textColor,
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              SizedBox(height: 4.h),
-              FutureBuilder<List<GetRegionModel>?>(
-                  future: GetRegionService().fetchRegion(),
-                  builder:
-                      (context, AsyncSnapshot<List<GetRegionModel>?> snapshot) {
-                    if (snapshot.hasData) {
-                      return Container(
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey.shade400),
-                            borderRadius: BorderRadius.circular(4.r)),
-                        child: ExpansionTile(
-                          key: GlobalKey(),
-                          title: Text(
-                            _titleRegion,
-                            style:
-                            TextStyle(color: Colors.grey, fontSize: 14.sp),
-                          ),
-                          children: [
-                            ListView.builder(
-                                shrinkWrap: true,
-                                itemCount: snapshot.data!.length,
-                                itemBuilder: (context, index) {
-                                  return InkWell(
-                                      onTap: (){
-                                        setState(() {
-                                          _titleRegion = snapshot.data![index].name!;
-                                        });
-                                      },
-                                      child: Text(
-                                          snapshot.data![index].name!));
-                                })
-                          ],
-                        ),
-                      );
-                    }
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }),
-              SizedBox(height: 12.h),
-              Text(
-                "Tuman",
-                style: TextStyle(
-                  color: AppColors.textColor,
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              SizedBox(height: 4.h),
-              FutureBuilder<List<GetDistrictModel>?>(
-                  future: GetDistrictService().fetchDistrict(0),
-                  builder:
-                      (context, AsyncSnapshot<List<GetDistrictModel>?> snapshot) {
-                    if (snapshot.hasData) {
-                      return Container(
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey.shade400),
-                            borderRadius: BorderRadius.circular(4.r)),
-                        child: ExpansionTile(
-                          key: GlobalKey(),
-                          title: Text(
-                            _titleDistrict,
-                            style:
-                            TextStyle(color: Colors.grey, fontSize: 14.sp),
-                          ),
-                          children: [
-                            ListView.builder(
-                                shrinkWrap: true,
-                                itemCount: snapshot.data!.length,
-                                itemBuilder: (context, index) {
-                                  return InkWell(
-                                      onTap: (){
-                                        setState(() {
-                                          _titleDistrict = snapshot.data![index].name!;
-                                        });
-                                      },
-                                      child: Text(
-                                          snapshot.data![index].name!));
-                                })
-                          ],
-                        ),
-                      );
-                    }
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }),
-              SizedBox(height: 12.h),
-              Text(
-                "Oliy o’quv yurti",
-                style: TextStyle(
-                  color: AppColors.textColor,
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              SizedBox(height: 4.h),
-              FutureBuilder<List<GetUniverModel>?>(
-                  future: GetUniverService().fetchUniver(),
-                  builder:
-                      (context, AsyncSnapshot<List<GetUniverModel>?> snapshot) {
-                    if (snapshot.hasData) {
-                      return Container(
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey.shade400),
-                            borderRadius: BorderRadius.circular(4.r)),
-                        child: ExpansionTile(
-                          key: GlobalKey(),
-                          title: Text(
-                            _titleUniver,
-                            style:
-                                TextStyle(color: Colors.grey, fontSize: 14.sp),
-                          ),
-                          children: [
-                            ListView.builder(
-                                shrinkWrap: true,
-                                itemCount: snapshot.data!.length,
-                                itemBuilder: (context, index) {
-                                  return InkWell(
-                                    onTap: (){
-                                      setState(() {
-                                        _titleUniver = snapshot.data![index].name!;
-                                      });
-                                    },
-                                      child: Text(
-                                          snapshot.data![index].name!));
-                                })
-                          ],
-                        ),
-                      );
-                    }
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }),
-              SizedBox(height: 12.h),
-              Text(
-                "Kursingiz",
-                style: TextStyle(
-                  color: AppColors.textColor,
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              SizedBox(height: 4.h),
-              FutureBuilder<List<GetFacultyModel>?>(
-                  future: GetFacultyService().fetchFaculty(0),
-                  builder:
-                      (context, AsyncSnapshot<List<GetFacultyModel>?> snapshot) {
-                    if (snapshot.hasData) {
-                      return Container(
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey.shade400),
-                            borderRadius: BorderRadius.circular(4.r)),
-                        child: ExpansionTile(
-                          key: GlobalKey(),
-                          title: Text(
-                            _titleFaculty,
-                            style:
-                            TextStyle(color: Colors.grey, fontSize: 14.sp),
-                          ),
-                          children: [
-                            ListView.builder(
-                                shrinkWrap: true,
-                                itemCount: snapshot.data!.length,
-                                itemBuilder: (context, index) {
-                                  return InkWell(
-                                      onTap: (){
-                                        setState(() {
-                                          _titleFaculty = snapshot.data![index].name;
-                                        });
-                                      },
-                                      child: Text(
-                                          snapshot.data![index].name));
-                                })
-                          ],
-                        ),
-                      );
-                    }
-                    return const Center(
-                      child: CircularProgressIndicator(),
-                    );
-                  }),
-              SizedBox(
+          child: Consumer<RegionProvider>(
 
-                height: 18.h,
-              ),
-              Text(
-                "Xonadon ma’lumoti",
-                style: TextStyle(
-                    color: AppColors.mainColor,
-                    fontSize: 20.sp,
-                    fontWeight: FontWeight.w500),
-              ),
-              SizedBox(
-                height: 14.h,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            builder: (_, data,__) {
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Uy turi",
-                        style: TextStyle(
-                          color: AppColors.textColor,
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      SizedBox(height: 4.h),
-                      Container(
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey.shade400),
-                            borderRadius: BorderRadius.circular(4.r)),
-                        child: Container(
-                          width: 152.w,
-                          child: ExpansionTile(
-                            title: Text(
-                              "Kvartira , Xovli",
-                              style: TextStyle(
-                                  color: Colors.grey, fontSize: 14.sp),
-                            ),
-                            children: const [
-                              Text("Kvartira"),
-                              Text("Xovli"),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
+                  Text(
+                    "Joylashuv",
+                    style: TextStyle(
+                        color: AppColors.mainColor,
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.w500),
                   ),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Necha xona",
-                        style: TextStyle(
-                          color: AppColors.textColor,
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      SizedBox(height: 4.h),
-                      Container(
-                        decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey.shade400),
-                            borderRadius: BorderRadius.circular(4.r)),
-                        child: Container(
-                          width: 152.w,
-                          child: ExpansionTile(
-                            key: GlobalKey(),
-                            title: Text(
-                              "Xonalar soni",
-                              style: TextStyle(
-                                  color: Colors.grey, fontSize: 14.sp),
-                            ),
-                            children: const [
-                              Text("1 xonali"),
-                              Text("2 xonali"),
-                              Text("3 xonali"),
-                              Text("4 xonali"),
-                              Text("4 va undan ko'p"),
-                            ],
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-              SizedBox(height: 12.h),
-              Text(
-                "Ijara muddatini kiriting",
-                style: TextStyle(
-                  color: AppColors.textColor,
-                  fontSize: 14.sp,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              SizedBox(height: 4.h),
-              Container(
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey.shade400),
-                    borderRadius: BorderRadius.circular(4.r)),
-                child: Container(
-                  width: 152.w,
-                  child: ExpansionTile(
-                    title: Text(
-                      "Ijara muddati",
-                      style: TextStyle(color: Colors.grey, fontSize: 14.sp),
+                  SizedBox(height: 12.h),
+                  Text(
+                    "Viloyat",
+                    style: TextStyle(
+                      color: AppColors.textColor,
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w500,
                     ),
-                    children: [],
                   ),
-                ),
-              ),
-              SizedBox(height: 12.h),
-              Row(
-                children: [
+                  SizedBox(height: 4.h),
                   Container(
-                    width: 20,
-                    height: 20,
-                    child: Checkbox(
-                      value: _checkMetro,
-                      onChanged: (e) {
+                    width: 324.w,
+                    decoration:
+                    BoxDecoration(borderRadius: BorderRadius.circular(10.r)),
+                    child: DropdownButtonFormField(
+                      hint: Text("Viloyatni tanlang"),
+                      decoration: const InputDecoration(
+                          border: OutlineInputBorder(), focusColor: Colors.grey),
+                      // value: ,
+                      icon: Icon(Icons.arrow_drop_down_outlined),
+                      items: data.regions.map((e) {
+                        return DropdownMenuItem<String>(
+                          value: e.name ?? "",
+                          child: Text(e.name.toString()),
+                        );
+                      }).toList(),
+                      onChanged: (newValue) async {
+                        print("Selected ----------- $newValue");
+                        final selected = data.regions
+                            .where((element) => element.name == newValue);
+                        data.getDistrict(selected.last.id!);
                         setState(() {
-                          // _checkMetro = e!;
+                          dropDown = newValue.toString();
                         });
                       },
                     ),
                   ),
-                  SizedBox(
-                    width: 12.w,
-                  ),
-                  Text("Metroga yaqin")
-                ],
-              ),
-              SizedBox(height: 22.h),
-              Text(
-                "Narxi",
-                style: TextStyle(
-                    color: AppColors.mainColor,
-                    fontSize: 20.sp,
-                    fontWeight: FontWeight.w500),
-              ),
-              SizedBox(height: 12.h),
-              Text("Dan"),
-              SizedBox(height: 6.h),
-              Row(
-                children: [
-                  Expanded(
-                    flex: 10,
-                    child: Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.grey.shade400),
-                          borderRadius: BorderRadius.circular(4.r)),
-                      child: Container(
-                        padding: EdgeInsets.only(left: 16.w),
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: "dan",
-                            hintStyle:
-                                TextStyle(fontSize: 14.sp, color: Colors.grey),
-                          ),
-                          cursorColor: Colors.grey.shade800,
-                          cursorWidth: 1.5.w,
-                        ),
-                      ),
+                  SizedBox(height: 12.h),
+                  Text(
+                    "Tuman",
+                    style: TextStyle(
+                      color: AppColors.textColor,
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
-                  Expanded(
-                    flex: 1,
-                    child: Container(),
-                  ),
-                  Expanded(
-                    flex: 10,
-                    child: Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.grey.shade400),
-                          borderRadius: BorderRadius.circular(4.r)),
-                      child: Container(
-                        padding: EdgeInsets.only(left: 16.w),
-                        child: TextFormField(
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                            hintText: "gacha",
-                            hintStyle:
-                                TextStyle(fontSize: 14.sp, color: Colors.grey),
-                          ),
-                          cursorColor: Colors.grey.shade800,
-                          cursorWidth: 1.5.w,
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 18.h, horizontal: 31.w),
-                child: Container(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.symmetric(vertical: 14.h),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.r)),
-                          primary: AppColors.buttonLinear),
-                      onPressed: () {
-                        Navigator.pushAndRemoveUntil(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => AllAdsPage()),
-                            (route) => false);
+                  SizedBox(height: 4.h),
+                  data.isDistrict
+                      ? Container(
+                    width: 324.w,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.r)),
+                    child: DropdownButtonFormField(
+                      isExpanded: true,
+                      hint: Text("Tumanni tanlang"),
+                      decoration: const InputDecoration(
+                          isDense: true,
+                          border: OutlineInputBorder(),
+                          focusColor: Colors.grey),
+                      icon: Icon(Icons.arrow_drop_down_outlined),
+                      items: data.districts.map((e) {
+                        return DropdownMenuItem<String>(
+                          onTap: () {
+                            print("${e.name}${e.id}");
+                            data.districtId = e.id.toString();
+                          },
+                          value: data.isDistrict
+                              ? e.name.toString()
+                              : data.defaultvalue,
+                          child: Text(data.isDistrict
+                              ? e.name.toString()
+                              : data.defaultvalue),
+
+                        );
+                      }).toList(),
+                      onChanged: (newValue) {
+                        print("Selected ----------- $newValue");
+                        setState(() {
+                          // dropDown1 = newValue as GetDistrictModel?;
+                          dropDown = newValue.toString();
+                        });
                       },
-                      child: Text(
-                        "Saqlash",
-                        style: TextStyle(
-                            fontSize: 20.sp, fontWeight: FontWeight.w500),
+                    ),
+                  )
+                      : Container(
+                    width: 324.w,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.r)),
+                    child: DropdownButtonFormField(
+                        isExpanded: true,
+                        hint: Text("Tumanni tanlang"),
+                        decoration: const InputDecoration(
+                            isDense: true,
+                            border: OutlineInputBorder(),
+                            focusColor: Colors.grey),
+                        icon: Icon(Icons.arrow_drop_down_outlined),
+                        items: [],
+                        onChanged: null),
+                  ),
+                  SizedBox(height: 12.h),
+                  Text(
+                    "Oliy o’quv yurti",
+                    style: TextStyle(
+                      color: AppColors.textColor,
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  SizedBox(height: 4.h),
+                  Container(
+                    width: 324.w,
+                    decoration:
+                    BoxDecoration(borderRadius: BorderRadius.circular(10.r)),
+                    child: DropdownButtonFormField(
+                      isExpanded: true,
+                      hint: Text("OTM ni tanlang"),
+                      decoration: const InputDecoration(
+                          border: OutlineInputBorder(), focusColor: Colors.grey),
+                      // value: ,
+                      icon: Icon(Icons.arrow_drop_down_outlined),
+                      items: data.univer.map((e) {
+                        return DropdownMenuItem<String>(
+                          onTap: (){
+                            data.UniverId = e.id.toString();
+                          },
+                          value: e.name ?? "",
+                          child: SizedBox(
+                            width: MediaQuery.of(context).size.width -150.w,
+                            child:
+                            Text(e.name.toString()),
+
+                          ),
+                        );
+                      }).toList(),
+                      onChanged: (newValue) async {
+                        print("Selected ----------- $newValue");
+                        final selected = data.univer
+                            .where((element) => element.name == newValue);
+                        data.getFaculty(selected.last.id!);
+                        setState(() {
+                          dropDown2 = newValue.toString();
+                        });
+                      },
+                    ),
+                  ),
+                  SizedBox(height: 12.h),
+                  Text(
+                    "Fakultetni tanlang",
+                    style: TextStyle(
+                      color: AppColors.textColor,
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  SizedBox(height: 4.h),
+                  data.isFaculty ? Container(
+                    width: 324.w,
+                    decoration:
+                    BoxDecoration(borderRadius: BorderRadius.circular(10.r)),
+                    child: DropdownButtonFormField(
+                      isExpanded: true,
+                      hint: Text("Faqultetni tanlang"),
+                      decoration: const InputDecoration(
+                          border: OutlineInputBorder(), focusColor: Colors.grey),
+                      // value: ,
+                      icon: Icon(Icons.arrow_drop_down_outlined),
+                      items: data.faculty.map((e) {
+                        return DropdownMenuItem<String>(
+                          onTap: (){
+                            data.FacutyId = e.id.toString();
+                          },
+                          value: data.isFaculty? e.name.toString(): data.defaultFaculty,
+                          child: SizedBox(
+                            width: MediaQuery.of(context).size.width -150.w,
+                            child:
+                            Text(data.isFaculty ? e.name.toString(): data.defaultFaculty),
+
+                          ),
+                        );
+                      }).toList(),
+                      onChanged: (newValue) async {
+                        print("Selected ----------- $newValue");
+                        // final selected = data.regions
+                        //     .where((element) => element.name == newValue);
+                        // data.getDistrict(selected.last.id!);
+                        setState(() {
+                          dropDown2 = newValue.toString();
+                        });
+                      },
+                    ),
+                  ):Container(
+                    width: 324.w,
+                    decoration:
+                    BoxDecoration(borderRadius: BorderRadius.circular(10.r)),
+                    child: DropdownButtonFormField(
+                        isExpanded: true,
+                        hint: Text("Faqultetni tanlang"),
+                        decoration: const InputDecoration(
+                            border: OutlineInputBorder(), focusColor: Colors.grey),
+                        // value: ,
+                        icon: Icon(Icons.arrow_drop_down_outlined),
+                        items: [],
+                        onChanged: null
+                    ),
+                  ),
+                  SizedBox(
+                    height: 18.h,
+                  ),
+                  Text(
+                    "Kurs",
+                    style: TextStyle(
+                      color: AppColors.textColor,
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  SizedBox(height: 4.h),
+                  Container(
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey.shade400),
+                        borderRadius: BorderRadius.circular(4.r)),
+                    child:  Container(
+                      width: 324.w,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10.r)),
+                      child: DropdownButtonFormField2(
+                        isExpanded: true,
+                        hint: Text("Kursingizni tanlang"),
+                        decoration: const InputDecoration(
+                            isDense: true,
+                            border: OutlineInputBorder(),
+                            focusColor: Colors.grey),
+
+                        icon: Icon(Icons.arrow_drop_down_outlined),
+                        // value: snapshot.data!.length,
+                        items: kurs.map((e) {
+                          return DropdownMenuItem<String>(
+                            onTap: () {
+                              // print("${e.id}");
+                            },
+                            value: e.toString(),
+                            child: Text(e.toString()),
+                          );
+                        }).toList(),
+                        onChanged: (newValue) {
+                          setState(() {
+                            _titleCourse = newValue.toString();
+                          });
+                        },
                       ),
-                    )),
-              )
-            ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 18.h,
+                  ),
+                  Text(
+                    "Xonadon ma’lumoti",
+                    style: TextStyle(
+                        color: AppColors.mainColor,
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.w500),
+                  ),
+                  SizedBox(
+                    height: 14.h,
+                  ),
+                  Row(
+                    children: [
+                      SizedBox(
+                        width: 20,
+                        height: 20,
+                        child: Checkbox(
+                          value: _checkHome,
+                          onChanged: (e) {
+                            setState(() {
+                              _checkHome = e!;
+                              if (_checkHome == true) {
+                                RoomOwner = '1';
+                              } else {
+                                RoomOwner = '2';
+                              }
+                            });
+                          },
+                        ),
+                      ),
+                      SizedBox(
+                        width: 12.w,
+                      ),
+                      Text("Uy egasi bilan birga yashashga roziman !!!")
+                    ],
+                  ),
+                  SizedBox(height: 19.h),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Uy turi",
+                            style: TextStyle(
+                              color: AppColors.textColor,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          SizedBox(height: 4.h),
+                          Container(
+                            width: 152.w,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.r)),
+                            child: DropdownButtonFormField(
+                              hint: Text("Kv yoki xovli"),
+                              decoration: const InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  focusColor: Colors.grey),
+                              icon: Icon(Icons.arrow_drop_down_outlined),
+                              items: kvartira.map((e) {
+                                return DropdownMenuItem<String>(
+                                  onTap: () {
+
+                                  },
+                                  value: e,
+                                  child: Text(e),
+                                );
+                              }).toList(),
+                              onChanged: (newValue) {
+                                setState(() {
+                                  dropDown = newValue.toString();
+                                });
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Necha xona",
+                            style: TextStyle(
+                              color: AppColors.textColor,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          SizedBox(height: 4.h),
+                          Container(
+                            width: 152.w,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.r)),
+                            child: DropdownButtonFormField(
+                              hint: Text("Xonalar soni"),
+                              decoration: const InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  focusColor: Colors.grey),
+                              icon: Icon(Icons.arrow_drop_down_outlined),
+                              items: rooms.map((e) {
+                                return DropdownMenuItem<String>(
+                                  onTap: () {
+
+                                  },
+                                  value: e,
+                                  child: Text(e),
+                                );
+                              }).toList(),
+                              onChanged: (newValue) {
+                                setState(() {
+                                  roomCount = newValue.toString();
+                                });
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 12.h),
+                  Text(
+                    "Ijara muddatini kiriting",
+                    style: TextStyle(
+                      color: AppColors.textColor,
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  SizedBox(height: 4.h),
+                  Container(
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey.shade400),
+                        borderRadius: BorderRadius.circular(4.r)),
+                    child: Container(
+                      width: 152.w,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10.r)),
+                      child: DropdownButtonFormField(
+                        hint: Text("Ijara muddati"),
+                        decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            focusColor: Colors.grey),
+                        icon: Icon(Icons.arrow_drop_down_outlined),
+                        items: kindOfMoment.map((e) {
+                          return DropdownMenuItem<String>(
+                            onTap: () {
+
+                            },
+                            value: e,
+                            child: Text(e),
+                          );
+                        }).toList(),
+                        onChanged: (newValue) {
+                          setState(() {
+                            TypeOfRent = newValue.toString();
+                          });
+                        },
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 12.h),
+                  Text(
+                    "Narxi",
+                    style: TextStyle(
+                      color: AppColors.textColor,
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                  SizedBox(height: 4.h),
+
+                  SizedBox(
+                    height: 16.h,
+                  ),
+                  Row(
+                    children: [
+                      Container(
+                        width: 20,
+                        height: 20,
+                        child: Checkbox(
+                          value: _checkMetro,
+                          onChanged: (e) {
+                            setState(() {
+                              _checkMetro = e!;
+                            });
+                          },
+                        ),
+                      ),
+                      SizedBox(
+                        width: 12.w,
+                      ),
+                      Text("Metroga yaqin")
+                    ],
+                  ),
+                  SizedBox(height: 22.h),
+                  Text(
+                    "Qo’shimcha",
+                    style: TextStyle(
+                        color: AppColors.mainColor,
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.w500),
+                  ),
+                  SizedBox(height: 12.h),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Sheriklarni tanlang",
+                            style: TextStyle(
+                              color: AppColors.textColor,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          SizedBox(height: 4.h),
+                          Container(
+                            width: 152.w,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.r)),
+                            child: DropdownButtonFormField(
+                              hint: Text("Qiz,O'g'il"),
+                              decoration: const InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  focusColor: Colors.grey),
+                              icon: Icon(Icons.arrow_drop_down_outlined),
+                              items: genderone.map((e) {
+                                return DropdownMenuItem<String>(
+                                  onTap: () {
+
+                                  },
+                                  value: e,
+                                  child: Text(e),
+                                );
+                              }).toList(),
+                              onChanged: (newValue) {
+                                setState(() {
+                                  _titleGendor = newValue.toString();
+                                });
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Soni",
+                            style: TextStyle(
+                              color: AppColors.textColor,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          SizedBox(height: 4.h),
+                          Container(
+                            width: 152.w,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.r)),
+                            child: DropdownButtonFormField(
+                              hint: Text("Ijarachilar soni"),
+                              decoration: const InputDecoration(
+                                  border: OutlineInputBorder(),
+                                  focusColor: Colors.grey),
+                              icon: Icon(Icons.arrow_drop_down_outlined),
+                              items: ijarachi.map((e) {
+                                return DropdownMenuItem<String>(
+                                  onTap: () {
+
+                                  },
+                                  value: e,
+                                  child: Text(e),
+                                );
+                              }).toList(),
+                              onChanged: (newValue) {
+                                setState(() {
+                                  dropDown = newValue.toString();
+                                });
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 22.h),
+                  Text(
+                    "Narxi",
+                    style: TextStyle(
+                        color: AppColors.mainColor,
+                        fontSize: 20.sp,
+                        fontWeight: FontWeight.w500),
+                  ),
+                  SizedBox(height: 12.h),
+                  Text("Dan"),
+                  SizedBox(height: 6.h),
+                  Row(
+                    children: [
+                      Expanded(
+                        flex: 10,
+                        child: Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey.shade400),
+                              borderRadius: BorderRadius.circular(4.r)),
+                          child: Container(
+                            padding: EdgeInsets.only(left: 16.w),
+                            child: TextFormField(
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: "dan",
+                                hintStyle:
+                                TextStyle(fontSize: 14.sp, color: Colors.grey),
+                              ),
+                              cursorColor: Colors.grey.shade800,
+                              cursorWidth: 1.5.w,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: Container(),
+                      ),
+                      Expanded(
+                        flex: 10,
+                        child: Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.grey.shade400),
+                              borderRadius: BorderRadius.circular(4.r)),
+                          child: Container(
+                            padding: EdgeInsets.only(left: 16.w),
+                            child: TextFormField(
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: "gacha",
+                                hintStyle:
+                                TextStyle(fontSize: 14.sp, color: Colors.grey),
+                              ),
+                              cursorColor: Colors.grey.shade800,
+                              cursorWidth: 1.5.w,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Padding(
+                    padding: EdgeInsets.symmetric(vertical: 18.h, horizontal: 31.w),
+                    child: Container(
+                        width: double.infinity,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              padding: EdgeInsets.symmetric(vertical: 14.h),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.r)),
+                              primary: AppColors.buttonLinear),
+                          onPressed: () async {
+                            // DistrictId
+                            setState(() {
+                              if (_titleCourse == '1-kurs') {
+                                Course = '1';
+                              } else if (_titleCourse == '2-kurs') {
+                                Course = '2';
+                              } else if (_titleCourse == '3-kurs') {
+                                Course = '3';
+                              } else if (_titleCourse == '4-kurs') {
+                                Course = '4';
+                              }else if (_titleCourse == '5-kurs') {
+                                Course = '5';
+                              }else if (_titleCourse == '6-kurs') {
+                                Course = '6';
+                              }
+                            });
+                            setState(() {
+                              if (kvartira == 'Xovli') {
+                                TypeHouse = '2';
+                              } else {
+                                TypeHouse = '1';
+                              }
+                            });
+                            setState(() {
+                              if (TypeOfRent == 'kunlik') {
+                                _titleTime = '1';
+                              } else {
+                                _titleTime = '2';
+                              }
+                            });
+                            setState(() {
+                              if (_checkMetro = true) {
+                                subwayof = '1';
+                              } else {
+                                subwayof = '2';
+                              }
+                            });
+                            setState(() {
+                              if (_titleGendor == 'Ayol') {
+                                gender = '2';
+                              } else {
+                                gender = '1';
+                              }
+                            });
+                            print('-----------------');
+                            print(Course);
+                            print(RoomOwner);
+                            print(TypeHouse);
+                            // print(roomCount);
+                            print(_titleTime);
+                            print(costcontroller?.text);
+                            print(typeOfPayment);
+                            print(subwayof);
+                            print(gender);
+                            print(_titleCount);
+                            print(titlecontroller?.text);
+                            print(othercontroller?.text);
+                            print('-----------------');
+                            print(data.districtId);
+                            print(data.UniverId);
+                               // await data.getFiltrApi();
+                            // await CreateAdsStudent().CreateAds(
+                            //   districtId: data.districtId,
+                            //   UniderId: data.UniverId,
+                            //   fakultetId: data.FacutyId,
+                            //   Course: Course,
+                            //   roomOwner: RoomOwner,
+                            //   TypeHouse: TypeHouse,
+                            //   CountRoom: roomCount,
+                            //   TypeOfRent: _titleTime,
+                            //   cost: costcontroller?.text,
+                            //   typePayment: typeOfPayment,
+                            //   subway: subwayof,
+                            //   gender: gender,
+                            //   title: titlecontroller?.text,
+                            //   description: othercontroller?.text,
+                            // );
+
+                            // Navigator.pushAndRemoveUntil(
+                            //     context,
+                            //     MaterialPageRoute(builder: (context) => MenuPage()),
+                            //         (route) => false);
+                          },
+                          child: Text(
+                            "Saqlash",
+                            style: TextStyle(
+                                fontSize: 20.sp, fontWeight: FontWeight.w500),
+                          ),
+                        )),
+                  )
+                ],
+              );
+            },
           ),
         ),
       ),
