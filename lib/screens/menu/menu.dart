@@ -27,11 +27,13 @@ class _MenuPageState extends State<MenuPage> {
   @override
   void initState() {
 
+
     super.initState();
-    Provider.of<SearchUniversitet>(context, listen: false).getSearchUniver();
+    Provider.of<SearchUniversitet>(context, listen: false).getSearchUniver(toStringShort());
   }
 
   Widget build(BuildContext context) {
+
     return Scaffold(
       key: _scaffoldKey,
       drawer: const DrawerPage(),

@@ -1,12 +1,10 @@
 // To parse this JSON data, do
 //
+// To parse this JSON data, do
+//
 //     final getFacultyModel = getFacultyModelFromJson(jsonString);
 
 import 'dart:convert';
-
-List<GetFacultyModel> getFacultyModelFromJson(String str) => List<GetFacultyModel>.from(json.decode(str).map((x) => GetFacultyModel.fromJson(x)));
-
-String getFacultyModelToJson(List<GetFacultyModel> data) => json.encode(List<dynamic>.from(data.map((x) => x.toJson())));
 
 class GetFacultyModel {
   GetFacultyModel({
@@ -24,6 +22,10 @@ class GetFacultyModel {
   String nameRu;
   String advertising;
   String searching;
+
+  factory GetFacultyModel.fromRawJson(String str) => GetFacultyModel.fromJson(json.decode(str));
+
+  String toRawJson() => json.encode(toJson());
 
   factory GetFacultyModel.fromJson(Map<String, dynamic> json) => GetFacultyModel(
     id: json["id"],

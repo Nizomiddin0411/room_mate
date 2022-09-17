@@ -5,8 +5,16 @@ import 'package:talaba_uy/services/get_search%20universitety.dart';
 
 class SearchUniversitet  extends ChangeNotifier{
   List<SearchUniversitetyModel> searchuniversitet =[];
+bool ischanging=false;
 
-  Future<void> getSearchUniver() async{
-    searchuniversitet = (await GetSearchUniverService().fetchUniverSearch());
+void setChange(bool value){
+  ischanging = value;
+  notifyListeners();
+}
+  Future<void>
+  getSearchUniver(String query) async{
+  setChange(false);
+    searchuniversitet = (await GetSearchUniverService().fetchUniverSearch(query));
+    setChange(true);
   }
 }
