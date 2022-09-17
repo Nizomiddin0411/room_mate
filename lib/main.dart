@@ -7,6 +7,7 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
 import 'package:talaba_uy/bloc/bloc_region/region_bloc.dart';
 import 'package:talaba_uy/provider/region_provider.dart';
+import 'package:talaba_uy/provider/search_universitet_provider.dart';
 import 'package:talaba_uy/provider/universitet_provider.dart';
 import 'package:talaba_uy/repository/region_repository.dart';
 import 'package:talaba_uy/screens/Account_Page/account_page.dart';
@@ -63,7 +64,8 @@ class MyApp extends StatelessWidget {
           return MultiProvider(
             providers: [
               ChangeNotifierProvider(create: (context1)=>UniversitetProvider()),
-              ChangeNotifierProvider(create: (contxet)=>RegionProvider())
+              ChangeNotifierProvider(create: (contxet)=>RegionProvider()),
+              ChangeNotifierProvider(create: (context)=>SearchUniversitet())
             ],
             child: MaterialApp(
               localizationsDelegates: context.localizationDelegates,

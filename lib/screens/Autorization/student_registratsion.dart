@@ -37,7 +37,7 @@ class _StudentUserState extends State<StudentUser> {
   String UniderId = '';
   String fakultetId = '';
   String Course = '';
-  String Roommate = '';
+  String? Roommate;
   String District = '';
   String Tuman = '';
   String? gender;
@@ -70,6 +70,7 @@ class _StudentUserState extends State<StudentUser> {
     '4 ',
   ];
   bool value = false;
+  String? value3;
   final myController = TextEditingController();
   final nameController = TextEditingController();
   String? selectedValue;
@@ -271,6 +272,9 @@ class _StudentUserState extends State<StudentUser> {
                         ),
                         items: data.universitet.map((e) {
                           return DropdownMenuItem<String>(
+                            onTap:(){
+                            data.universiterid=e.id.toString();
+                          },
                             value: e.name ?? "",
                             child: Text(
                               e.name.toString(),
@@ -344,7 +348,7 @@ class _StudentUserState extends State<StudentUser> {
                             .map(
                               (e) => DropdownMenuItem<String>(
                                 onTap: () {
-                                  print("${e.id}");
+                                  data.fakultetid=e.id.toString();
                                 },
                                 value: data.isFakultet
                                     ? e.name.toString()
@@ -680,7 +684,9 @@ class _StudentUserState extends State<StudentUser> {
                             iconOn: Icons.check,
                             colorOff: Colors.blue.withOpacity(0.3),
                             colorOn: Colors.blue,
-                            onChanged: (bool state) {},
+                            onChanged: (bool state) {
+
+                            },
                           ),
                         ),
                       ),
@@ -727,17 +733,17 @@ class _StudentUserState extends State<StudentUser> {
                       myController.text != '' &&
                       jinsi) {
                     await RegistratsiyaStudent().CreateAdsStudent(
-                        FullName: myController.toString(),
-                        fakultetId: fakultetId,
+                        FullName: myController.text,
+                        fakultetId: data.fakultetid,
                         Course: selectedValue.toString(),
-                        Roommate: value.toString(),
+                        Roommate: Roommate.toString()=='ha' ? '1':'2',
                         District: District.toString(),
                         Phonenumber: nameController.text,
                         gender: dropdownvalue.toString() == 'Erkak' ? '1' : '2',
-                        UniderId: UniderId.toString());
+                        UniderId: data.universiterid
+                    );
                     print('${myController} maulotiiiiiiiii+++++++++++');
-                    print('${selectedValue} maulotiiiiiiiii+++++++++++');
-
+                    print('${Roommate} sherik kerak mi +++++++++++');
                     print('${UniderId} malumotlar  +++++++++++');
                     print('${District} maulotiiiiiiiii+++++++++++');
                     print('${fakultetId} maulotiiiiiiiii+++++++++++');

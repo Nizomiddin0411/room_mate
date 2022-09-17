@@ -18,6 +18,9 @@ class UniversitetProvider extends ChangeNotifier{
   String defaultvalue = 'Fakultetni tanlang';
   String defaultvalue1 = 'Tumanni tanlang';
   bool istuman=false;
+  String universiterid='';
+  String fakultetid='';
+  String district_id='';
 
 
   void _setFakultet(bool value){
