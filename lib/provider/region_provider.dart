@@ -18,7 +18,7 @@ class RegionProvider extends ChangeNotifier{
   List<GetUniverModel> univer = [];
   List<GetFacultyModel> faculty = [];
   List<AllAdsModel> Ads = [];
-
+  String RegionId = '';
   String districtId = '';
   String UniverId = '';
   String FacutyId = '';
@@ -27,6 +27,12 @@ class RegionProvider extends ChangeNotifier{
   String defaultvalue = 'Tumanni tanlang';
   bool isFaculty = false;
   String defaultFaculty = 'Faqutetni tanlang';
+  bool isChanded = false;
+
+  void _setFiltr(bool value){
+    isChanded = value;
+    notifyListeners();
+  }
 
   void _setDistrict(bool value){
     isDistrict = value;
@@ -64,34 +70,34 @@ class RegionProvider extends ChangeNotifier{
       String regionId,
       String districtId,
       String univerId,
-      String faqultyId,
       String course,
-      String live_with_owner,
       String houseType,
       String roomCount,
       String rentType,
       String subway,
       String costFrom,
       String costTo,
-      String Type,
-      String roomateGender,
+      // String Type,
+
       ) async{
+    _setFiltr(false);
     Ads = await GetAllAdsService().fetchAllADS(
         regionId,
         districtId,
         univerId,
-        faqultyId,
+
         course,
-        live_with_owner,
+
         houseType,
         roomCount,
         rentType,
         subway,
         costFrom,
         costTo,
-        Type,
-        roomateGender
+        // Type,
+
     );
+    _setFiltr(true);
   }
 
 

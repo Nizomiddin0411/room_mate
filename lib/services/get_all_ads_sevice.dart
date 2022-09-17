@@ -9,22 +9,19 @@ class GetAllAdsService {
       String regionId,
       String districtId,
       String univerId,
-      String faqultyId,
       String course,
-      String live_with_owner,
       String houseType,
       String roomCount,
       String rentType,
       String subway,
       String costFrom,
       String costTo,
-      String Type,
-      String roomateGender,
+
       ) async {
     try {
       var response = await http.get(
           Uri.parse(
-            'http://164.68.114.231:8081/roommate/backend/web/api/advertising/get-advertising?region_id=1&district_id=1&university_id=1&faculty_id=1&course=1&live_with_owner=1&house_type=1&room_count=0&rent_type=1&subway=1&cost_from=100&cost_to=160000&type=0&roommate_gender=0',
+            'http://164.68.114.231:8081/roommate/backend/web/api/advertising/get-advertising?region_id=$regionId&district_id=$districtId&university_id=$univerId&faculty_id=0&course=$course&live_with_owner=0&house_type=$houseType&room_count=$roomCount&rent_type=$rentType&subway=$subway&cost_from=$costFrom&cost_to=$costTo&type=0&roommate_gender=0',
           ),
           headers: {
             HttpHeaders.authorizationHeader:
