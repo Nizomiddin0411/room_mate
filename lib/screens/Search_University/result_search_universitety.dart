@@ -16,11 +16,11 @@ import '../../models/searching_ads_model.dart';
 import 'result _filtr_search.universitety.dart';
 
 class ResultUniversitetPage extends StatefulWidget {
+  final String name;
+  final String id;
 
-
- final  String name;
- final  String id;
-  const ResultUniversitetPage({Key? key,required this.name, required this.id}) : super(key: key);
+  const ResultUniversitetPage({Key? key, required this.name, required this.id})
+      : super(key: key);
 
   @override
   State<ResultUniversitetPage> createState() => _ResultUniversitetPageState();
@@ -56,7 +56,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
               ),
             ),
             flexibleSpace: Padding(
-              padding:  EdgeInsets.fromLTRB(18.w, 100.h, 18.w, 18.h),
+              padding: EdgeInsets.fromLTRB(18.w, 100.h, 18.w, 18.h),
               child: Column(
                 children: [
                   Container(
@@ -66,12 +66,13 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                         borderRadius: BorderRadius.circular(6.r),
                         color: AppColors.secondBackgroud),
                     child: Padding(
-                      padding:  EdgeInsets.all(10.0.w),
+                      padding: EdgeInsets.all(10.0.w),
                       child: Row(
-
                         children: [
                           Image.asset('assets/images/image 7.png'),
-                          SizedBox(width: 20,),
+                          SizedBox(
+                            width: 20,
+                          ),
                           Container(
                             height: 25,
                             width: 200,
@@ -95,7 +96,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                         borderRadius: BorderRadius.circular(6.r),
                         color: AppColors.secondBackgroud),
                     child: Padding(
-                      padding:  EdgeInsets.all(10.0.w),
+                      padding: EdgeInsets.all(10.0.w),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -104,14 +105,13 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                             style: TextStyle(color: Colors.black),
                           ),
                           InkWell(
-                            onTap: (
-                                ) {
+                            onTap: () {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => ResultFiltrPage()));
                             },
-                            child:  Padding(
+                            child: Padding(
                               padding: EdgeInsets.all(11.0.w),
                               child: Icon(
                                 Icons.tune,
@@ -177,15 +177,14 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             Padding(
-                                              padding:
-                                                   EdgeInsets.all(6.0.w),
+                                              padding: EdgeInsets.all(6.0.w),
                                               child: Text(
                                                 snapshot.data![index].fullName!,
                                                 style:
                                                     TextStyle(fontSize: 18.sp),
                                               ),
                                             ),
-                                             Padding(
+                                            Padding(
                                               padding: EdgeInsets.fromLTRB(
                                                   1.w, 0, 8.w, 0),
                                               child: Icon(
@@ -196,7 +195,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                           ],
                                         ),
                                         Padding(
-                                          padding:  EdgeInsets.fromLTRB(
+                                          padding: EdgeInsets.fromLTRB(
                                               8.w, 0, 8.w, 0),
                                           child: Text(
                                             '',
@@ -239,15 +238,15 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                                   );
                                                 },
                                                 child: Padding(
-                                                  padding:
-                                                       EdgeInsets.fromLTRB(
-                                                          0, 0, 7.w, 0),
+                                                  padding: EdgeInsets.fromLTRB(
+                                                      0, 0, 7.w, 0),
                                                   child: Container(
                                                     height: 35.h,
                                                     width: 90.w,
                                                     child: Padding(
-                                                      padding:  EdgeInsets
-                                                          .fromLTRB(5.w, 0, 5.w, 0),
+                                                      padding:
+                                                          EdgeInsets.fromLTRB(
+                                                              5.w, 0, 5.w, 0),
                                                       child: Row(
                                                         mainAxisAlignment:
                                                             MainAxisAlignment
@@ -276,7 +275,8 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                                             color: Colors.blue),
                                                         borderRadius:
                                                             BorderRadius
-                                                                .circular(10.r)),
+                                                                .circular(
+                                                                    10.r)),
                                                   ),
                                                 )),
                                           ],
@@ -305,7 +305,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                         itemCount: snapshot.data!.length,
                         itemBuilder: (BuildContext contex, int index) {
                           return Padding(
-                            padding:  EdgeInsets.all(18.0.w),
+                            padding: EdgeInsets.all(18.0.w),
                             child: Container(
                               width: 324.w,
                               height: 100.h,
@@ -320,15 +320,15 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Padding(
-                                        padding:  EdgeInsets.all(6.0.w),
+                                        padding: EdgeInsets.all(6.0.w),
                                         child: Text(
-                                          snapshot.data![index].type == 1
+                                          snapshot.data![index].type == 2
                                               ? 'Talaba'
                                               : "Elon beruvchi",
                                           style: TextStyle(fontSize: 18.sp),
                                         ),
                                       ),
-                                       Padding(
+                                      Padding(
                                         padding:
                                             EdgeInsets.fromLTRB(1.w, 0, 8.w, 0),
                                         child: Icon(
@@ -340,7 +340,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                   ),
                                   Padding(
                                     padding:
-                                         EdgeInsets.fromLTRB(8.w, 0, 8.w, 0),
+                                        EdgeInsets.fromLTRB(8.w, 0, 8.w, 0),
                                     child: Text(
                                       snapshot.data![index].rentType == 1
                                           ? snapshot.data![index].cost
@@ -365,8 +365,8 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Padding(
-                                        padding:  EdgeInsets.fromLTRB(
-                                            8.w, 0, 8.w, 0),
+                                        padding:
+                                            EdgeInsets.fromLTRB(8.w, 0, 8.w, 0),
                                         child: Text(
                                           snapshot.data![index].address ?? "",
                                           style: TextStyle(fontSize: 10.sp),
@@ -380,9 +380,9 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                                   builder: (context) =>
                                                       DetailPage()));
                                         },
-                                        child:  Padding(
-                                          padding:
-                                              EdgeInsets.fromLTRB(8.w, 0, 8.w, 0),
+                                        child: Padding(
+                                          padding: EdgeInsets.fromLTRB(
+                                              8.w, 0, 8.w, 0),
                                           child: Text(
                                             'Batafsil',
                                             style: TextStyle(

@@ -9,10 +9,10 @@ import '../models/get_district_model.dart';
 
 
 class GetDistrictService {
-  Future<List<GetDistrictModel>?> fetchDistrict() async {
+  Future<List<GetDistrictModel>> fetchDistrict( int id) async {
     try {
       var response = await http.get(Uri.parse(
-        'http://164.68.114.231:8081/roommate/backend/web/api/region/get-district?region_id=${MockData.viloyatid}',
+        'http://164.68.114.231:8081/roommate/backend/web/api/region/get-district?region_id=$id',
       ),
 
       );
@@ -30,6 +30,7 @@ class GetDistrictService {
       }
     } catch (e) {
       print(e);
+      return [];
     }
   }
 }

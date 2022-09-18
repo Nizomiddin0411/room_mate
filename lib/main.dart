@@ -1,8 +1,15 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
+import 'package:provider/provider.dart';
+import 'package:talaba_uy/bloc/bloc_region/region_bloc.dart';
+import 'package:talaba_uy/provider/region_provider.dart';
+import 'package:talaba_uy/provider/search_universitet_provider.dart';
+import 'package:talaba_uy/provider/universitet_provider.dart';
+import 'package:talaba_uy/repository/region_repository.dart';
 import 'package:talaba_uy/screens/Account_Page/account_page.dart';
 import 'package:talaba_uy/screens/All_Ads_Page/all_ads_page.dart';
 import 'package:talaba_uy/screens/Autorization/language_dart.dart';
@@ -27,6 +34,8 @@ void main() async {
   await EasyLocalization.ensureInitialized();
   await Hive.initFlutter();
   await Hive.openBox('token');
+  await Hive.openBox('regionId');
+  await Hive.openBox('id');
   await Hive.openBox('id'); // myId
   await Hive.openBox('Id'); // friendId
   await Hive.openBox('haveMessage');
@@ -44,7 +53,8 @@ void main() async {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  MyApp({Key? key}) : super(key: key);
+  final repository = RegionRepository();
 
   // This widget is the root of your application.
   @override
@@ -54,16 +64,23 @@ class MyApp extends StatelessWidget {
         minTextAdapt: true,
         splitScreenMode: true,
         builder: (context, child) {
-          return MaterialApp(
-            localizationsDelegates: context.localizationDelegates,
-            supportedLocales: context.supportedLocales,
-            locale: context.locale,
-            debugShowCheckedModeBanner: false,
-            theme: ThemeData(
-              primarySwatch: Colors.blue,
-            ),
-            home: MyHomePage(
-              title: '',
+          return MultiProvider(
+            providers: [
+              ChangeNotifierProvider(create: (context1)=>UniversitetProvider()),
+              ChangeNotifierProvider(create: (contxet)=>RegionProvider()),
+              ChangeNotifierProvider(create: (context)=>SearchUniversitet())
+            ],
+            child: MaterialApp(
+              localizationsDelegates: context.localizationDelegates,
+              supportedLocales: context.supportedLocales,
+              locale: context.locale,
+              debugShowCheckedModeBanner: false,
+              theme: ThemeData(
+                primarySwatch: Colors.blue,
+              ),
+              home: MyHomePage(
+                title: '',
+              ),
             ),
           );
         });
@@ -83,7 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: LanguagePage(),
+      body: Hive.box('token').isEmpty ? LanguagePage(): MenuPage(),
       // This trailing comma makes auto-formatting nicer for build methods.
     );
   }

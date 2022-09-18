@@ -1,7 +1,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
+import 'package:talaba_uy/provider/search_universitet_provider.dart';
 import 'package:talaba_uy/screens/Account_Page/account_page.dart';
 import 'package:talaba_uy/screens/All_Ads_Page/all_ads_page.dart';
 import 'package:talaba_uy/screens/Create_ads/create_ads_page.dart';
@@ -16,13 +18,22 @@ class MenuPage extends StatefulWidget {
   const MenuPage({Key? key}) : super(key: key);
 
   @override
+
   State<MenuPage> createState() => _MenuPageState();
 }
 
 class _MenuPageState extends State<MenuPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
   @override
+  void initState() {
+
+
+    super.initState();
+    Provider.of<SearchUniversitet>(context, listen: false).getSearchUniver(toStringShort());
+  }
+
   Widget build(BuildContext context) {
+
     return Scaffold(
       key: _scaffoldKey,
       drawer: const DrawerPage(),

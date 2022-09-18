@@ -1,12 +1,11 @@
 import 'dart:io';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'package:talaba_uy/models/get_region_model.dart';
 
 
 import '../models/get_univer_model.dart';
 
-class GetUniverService {
+class GetUniverCrateAds {
   Future<List<GetUniverModel>> fetchUniver() async {
     try {
       var response = await http.get(Uri.parse(
@@ -21,7 +20,7 @@ class GetUniverService {
         List json = jsonDecode(response.body);
         List <GetUniverModel> data = json.map((e) => GetUniverModel.fromJson(e)).toList();
         // var data = TotalAdsModel.fromJson(jsonDecode(response.body));
-        print('${data}+++++++++++');
+        // print('${data}+++++++++++');
         return data;
 
       }

@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hive/hive.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
+import 'package:talaba_uy/screens/Autorization/language_dart.dart';
 
 class AccountPage extends StatefulWidget {
   const AccountPage({Key? key}) : super(key: key);
@@ -24,7 +26,7 @@ class _AccountPageState extends State<AccountPage> {
           ),
         ),
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back,
             color: AppColors.textColor,
           ),
@@ -42,7 +44,7 @@ class _AccountPageState extends State<AccountPage> {
               height: 120.h,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(24.r),
-                  image: DecorationImage(
+                  image: const DecorationImage(
                     image: AssetImage(
                       'assets/images/accountImage.png',
                     ),
@@ -150,17 +152,18 @@ class _AccountPageState extends State<AccountPage> {
 showAlertDialog(BuildContext context) {
   // Create button
   Widget okButton = ElevatedButton(
+
     style: ElevatedButton.styleFrom(
         primary: AppColors.error
     ),
     child: Text("Chiqish"),
     onPressed: () async{
-      // Hive.box('token').clear();
-      // Navigator.pushAndRemoveUntil(
-      //     context,
-      //     MaterialPageRoute(
-      //         builder: (_) => const LoginPage()),
-      //         (route) => false);
+      Hive.box('token').clear();
+      Navigator.pushAndRemoveUntil(
+          context,
+          MaterialPageRoute(
+              builder: (_) => const LanguagePage()),
+              (route) => false);
     },
   );
   Widget notButton = ElevatedButton(

@@ -41,6 +41,11 @@ class RegistratsiyaStudent {
       var data = await response.stream.bytesToString();
       print('---------------------');
       print("$gender ##########");
+      print("$Roommate sherik kerakkkk ");
+      print("$fakultetId sherik kerakkkkcbdshcbbhdcbd ");
+      print("$Course sheri kursi ");
+      print("$District tugilgan joyyyy ");
+      print("$FullName Ismiiiiiii ");
 
       // await Hive.box('token').put('token', jsonDecode(data)["access_token"]);
 

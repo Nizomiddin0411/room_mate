@@ -1,16 +1,10 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
 import 'package:talaba_uy/screens/menu/menu.dart';
-
-import '../../models/get_district_model.dart';
-import '../../models/get_faculty_model.dart';
-import '../../models/get_region_model.dart';
-import '../../models/get_univer_model.dart';
-import '../../services/get_district_service.dart';
-import '../../services/get_faculty_service.dart';
-import '../../services/get_region_service.dart';
-import '../../services/get_univer_service.dart';
+import '../../provider/region_provider.dart';
 import '../../services/post_create_ads_student.dart';
 
 class Student extends StatefulWidget {
@@ -24,19 +18,15 @@ class _StudentState extends State<Student> {
    TextEditingController? costcontroller;
    TextEditingController? titlecontroller;
    TextEditingController? othercontroller;
+   String dropDown = "";
+   String dropDown2 = "";
   bool _checkHome = false;
   bool _checkMetro = false;
-  String _titleUniver = "Oliy o’quv yurtingizni tanlang";
-  String _titleRegion = "Viloyatni tanlang";
-  String _titleDistrict = "Tumanni tanlang";
-  String _titleFaculty = "Fakultetni tanlang";
   String? _dropownUsd;
-  String _titilekv = "Kvartira , Xovli";
-  String _titleRoom = "Xonalar soni";
   String _titleTime = "Ijara muddati";
-  String _titleGendor = "Qiz , O’g'il";
+  String _titleGendor = "";
   String _titleCount = "Ijarachilar soni";
-  String _titleCourse = "Kursingizni tanlang";
+  String _titleCourse = "";
   String DistrictId = '';
   String UniverId = '';
   String Course = '';
@@ -47,6 +37,43 @@ class _StudentState extends State<Student> {
   String typeOfPayment = '';
   String subwayof = '';
   String gender = '';
+  String CourseCount = '';
+   String roomCount = '';
+   var kurs = [
+     '1-kurs',
+     '2-kurs',
+     '3-kurs',
+     '4-kurs',
+     '5-kurs',
+     '6-kurs',
+
+   ];
+   var kvartira = [
+     'Kvartira',
+     'Xovli',
+   ];
+   var genderone = [
+     'Erkak',
+     'Ayol',
+   ];
+   var kindOfMoment = [
+     'kunlik',
+     'oylik',
+   ];
+   var rooms = [
+     '1',
+     '2',
+     '3',
+     '4',
+     '5-6',
+   ];
+   var ijarachi = [
+     '1',
+     '2',
+     '3',
+     '4',
+     '5-6',
+   ];
   @override
   void initState() {
     super.initState();
@@ -60,7 +87,9 @@ class _StudentState extends State<Student> {
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 12.h),
-        child: Column(
+        child: Consumer<RegionProvider>(
+        builder: (_, data, __) {
+        return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
@@ -80,43 +109,33 @@ class _StudentState extends State<Student> {
               ),
             ),
             SizedBox(height: 4.h),
-            FutureBuilder<List<GetRegionModel>?>(
-                future: GetRegionService().fetchRegion(),
-                builder:
-                    (context, AsyncSnapshot<List<GetRegionModel>?> snapshot) {
-                  if (snapshot.hasData) {
-                    return Container(
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.grey.shade400),
-                          borderRadius: BorderRadius.circular(4.r)),
-                      child: ExpansionTile(
-                        key: GlobalKey(),
-                        title: Text(
-                          _titleRegion,
-                          style: TextStyle(color: Colors.grey, fontSize: 14.sp),
-                        ),
-                        children: [
-                          ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: snapshot.data!.length,
-                              itemBuilder: (context, index) {
-                                return InkWell(
-                                    onTap: () {
-                                      setState(() {
-                                        _titleRegion =
-                                            snapshot.data![index].name!;
-                                      });
-                                    },
-                                    child: Text(snapshot.data![index].name!));
-                              })
-                        ],
-                      ),
-                    );
-                  }
-                  return const Center(
-                    child: CircularProgressIndicator(),
+            Container(
+              width: 324.w,
+              decoration:
+              BoxDecoration(borderRadius: BorderRadius.circular(10.r)),
+              child: DropdownButtonFormField(
+                hint: Text("Viloyatni tanlang"),
+                decoration: const InputDecoration(
+                    border: OutlineInputBorder(), focusColor: Colors.grey),
+                // value: ,
+                icon: Icon(Icons.arrow_drop_down_outlined),
+                items: data.regions.map((e) {
+                  return DropdownMenuItem<String>(
+                    value: e.name ?? "",
+                    child: Text(e.name.toString()),
                   );
-                }),
+                }).toList(),
+                onChanged: (newValue) async {
+                  print("Selected ----------- $newValue");
+                  final selected = data.regions
+                      .where((element) => element.name == newValue);
+                  data.getDistrict(selected.last.id!);
+                  setState(() {
+                    dropDown = newValue.toString();
+                  });
+                },
+              ),
+            ),
             SizedBox(height: 12.h),
             Text(
               "Tuman",
@@ -127,45 +146,58 @@ class _StudentState extends State<Student> {
               ),
             ),
             SizedBox(height: 4.h),
-            FutureBuilder<List<GetDistrictModel>?>(
-                future: GetDistrictService().fetchDistrict(),
-                builder:
-                    (context, AsyncSnapshot<List<GetDistrictModel>?> snapshot) {
-                  if (snapshot.hasData) {
-                    return Container(
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.grey.shade400),
-                          borderRadius: BorderRadius.circular(4.r)),
-                      child: ExpansionTile(
-                        key: GlobalKey(),
-                        title: Text(
-                          _titleDistrict,
-                          style: TextStyle(color: Colors.grey, fontSize: 14.sp),
-                        ),
-                        children: [
-                          ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: snapshot.data!.length,
-                              itemBuilder: (context, index) {
-                                return InkWell(
-                                    onTap: () {
-                                      setState(() {
-                                        _titleDistrict =
-                                            snapshot.data![index].name!;
-                                        DistrictId =
-                                            snapshot.data![index].id.toString();
-                                      });
-                                    },
-                                    child: Text(snapshot.data![index].name!));
-                              })
-                        ],
-                      ),
-                    );
-                  }
-                  return const Center(
-                    child: CircularProgressIndicator(),
+            data.isDistrict
+                ? Container(
+              width: 324.w,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.r)),
+              child: DropdownButtonFormField(
+                isExpanded: true,
+                hint: Text("Tumanni tanlang"),
+                decoration: const InputDecoration(
+                    isDense: true,
+                    border: OutlineInputBorder(),
+                    focusColor: Colors.grey),
+                icon: Icon(Icons.arrow_drop_down_outlined),
+                items: data.districts.map((e) {
+                  return DropdownMenuItem<String>(
+                    onTap: () {
+                      print("${e.name}${e.id}");
+                      data.districtId = e.id.toString();
+                    },
+                    value: data.isDistrict
+                        ? e.name.toString()
+                        : data.defaultvalue,
+                    child: Text(data.isDistrict
+                        ? e.name.toString()
+                        : data.defaultvalue),
+
                   );
-                }),
+                }).toList(),
+                onChanged: (newValue) {
+                  print("Selected ----------- $newValue");
+                  setState(() {
+                    // dropDown1 = newValue as GetDistrictModel?;
+                    dropDown = newValue.toString();
+                  });
+                },
+              ),
+            )
+                : Container(
+              width: 324.w,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10.r)),
+              child: DropdownButtonFormField(
+                  isExpanded: true,
+                  hint: Text("Tumanni tanlang"),
+                  decoration: const InputDecoration(
+                      isDense: true,
+                      border: OutlineInputBorder(),
+                      focusColor: Colors.grey),
+                  icon: Icon(Icons.arrow_drop_down_outlined),
+                  items: [],
+                  onChanged: null),
+            ),
             SizedBox(height: 12.h),
             Text(
               "Oliy o’quv yurti",
@@ -176,45 +208,42 @@ class _StudentState extends State<Student> {
               ),
             ),
             SizedBox(height: 4.h),
-            FutureBuilder<List<GetUniverModel>?>(
-                future: GetUniverService().fetchUniver(),
-                builder:
-                    (context, AsyncSnapshot<List<GetUniverModel>?> snapshot) {
-                  if (snapshot.hasData) {
-                    return Container(
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.grey.shade400),
-                          borderRadius: BorderRadius.circular(4.r)),
-                      child: ExpansionTile(
-                        key: GlobalKey(),
-                        title: Text(
-                          _titleUniver,
-                          style: TextStyle(color: Colors.grey, fontSize: 14.sp),
+            Container(
+              width: 324.w,
+              decoration:
+              BoxDecoration(borderRadius: BorderRadius.circular(10.r)),
+              child: DropdownButtonFormField(
+                isExpanded: true,
+                hint: Text("OTM ni tanlang"),
+                decoration: const InputDecoration(
+                    border: OutlineInputBorder(), focusColor: Colors.grey),
+                // value: ,
+                icon: Icon(Icons.arrow_drop_down_outlined),
+                items: data.univer.map((e) {
+                  return DropdownMenuItem<String>(
+                    onTap: (){
+                      data.UniverId = e.id.toString();
+                    },
+                    value: e.name ?? "",
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width -150.w,
+                        child:
+                            Text(e.name.toString()),
+
                         ),
-                        children: [
-                          ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: snapshot.data!.length,
-                              itemBuilder: (context, index) {
-                                return InkWell(
-                                    onTap: () {
-                                      setState(() {
-                                        _titleUniver =
-                                            snapshot.data![index].name!;
-                                        UniverId =
-                                            snapshot.data![index].id.toString();
-                                      });
-                                    },
-                                    child: Text(snapshot.data![index].name!));
-                              })
-                        ],
-                      ),
-                    );
-                  }
-                  return const Center(
-                    child: CircularProgressIndicator(),
                   );
-                }),
+                }).toList(),
+                onChanged: (newValue) async {
+                  print("Selected ----------- $newValue");
+                  final selected = data.univer
+                      .where((element) => element.name == newValue);
+                  data.getFaculty(selected.last.id!);
+                  setState(() {
+                    dropDown2 = newValue.toString();
+                  });
+                },
+              ),
+            ),
             SizedBox(height: 12.h),
             Text(
               "Fakultetni tanlang",
@@ -225,45 +254,56 @@ class _StudentState extends State<Student> {
               ),
             ),
             SizedBox(height: 4.h),
-            FutureBuilder<List<GetFacultyModel>?>(
-                future: GetFacultyService().fetchFaculty(),
-                builder:
-                    (context, AsyncSnapshot<List<GetFacultyModel>?> snapshot) {
-                  if (snapshot.hasData) {
-                    return Container(
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.grey.shade400),
-                          borderRadius: BorderRadius.circular(4.r)),
-                      child: ExpansionTile(
-                        key: GlobalKey(),
-                        title: Text(
-                          _titleFaculty,
-                          style: TextStyle(color: Colors.grey, fontSize: 14.sp),
-                        ),
-                        children: [
-                          ListView.builder(
-                              shrinkWrap: true,
-                              itemCount: snapshot.data!.length,
-                              itemBuilder: (context, index) {
-                                return InkWell(
-                                    onTap: () {
-                                      setState(() {
-                                        _titleFaculty =
-                                            snapshot.data![index].name!;
-                                        FakultetId =
-                                            snapshot.data![index].id.toString();
-                                      });
-                                    },
-                                    child: Text(snapshot.data![index].name!));
-                              })
-                        ],
-                      ),
-                    );
-                  }
-                  return const Center(
-                    child: CircularProgressIndicator(),
+            data.isFaculty ? Container(
+              width: 324.w,
+              decoration:
+              BoxDecoration(borderRadius: BorderRadius.circular(10.r)),
+              child: DropdownButtonFormField(
+                isExpanded: true,
+                hint: Text("Faqultetni tanlang"),
+                decoration: const InputDecoration(
+                    border: OutlineInputBorder(), focusColor: Colors.grey),
+                // value: ,
+                icon: Icon(Icons.arrow_drop_down_outlined),
+                items: data.faculty.map((e) {
+                  return DropdownMenuItem<String>(
+                    onTap: (){
+                      data.FacutyId = e.id.toString();
+                    },
+                    value: data.isFaculty? e.name.toString(): data.defaultFaculty,
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width -150.w,
+                      child:
+                      Text(data.isFaculty ? e.name.toString(): data.defaultFaculty),
+
+                    ),
                   );
-                }),
+                }).toList(),
+                onChanged: (newValue) async {
+                  print("Selected ----------- $newValue");
+                  // final selected = data.regions
+                  //     .where((element) => element.name == newValue);
+                  // data.getDistrict(selected.last.id!);
+                  setState(() {
+                    dropDown2 = newValue.toString();
+                  });
+                },
+              ),
+            ):Container(
+              width: 324.w,
+              decoration:
+              BoxDecoration(borderRadius: BorderRadius.circular(10.r)),
+              child: DropdownButtonFormField(
+                isExpanded: true,
+                hint: Text("Faqultetni tanlang"),
+                decoration: const InputDecoration(
+                    border: OutlineInputBorder(), focusColor: Colors.grey),
+                // value: ,
+                icon: Icon(Icons.arrow_drop_down_outlined),
+                items: [],
+                onChanged: null
+              ),
+            ),
             SizedBox(
               height: 18.h,
             ),
@@ -280,45 +320,35 @@ class _StudentState extends State<Student> {
               decoration: BoxDecoration(
                   border: Border.all(color: Colors.grey.shade400),
                   borderRadius: BorderRadius.circular(4.r)),
-              child: ExpansionTile(
-                key: GlobalKey(),
-                title: Text(
-                  _titleCourse,
-                  style: TextStyle(color: Colors.grey, fontSize: 14.sp),
+              child:  Container(
+                width: 324.w,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10.r)),
+                child: DropdownButtonFormField2(
+                  isExpanded: true,
+                  hint: Text("Kursingizni tanlang"),
+                  decoration: const InputDecoration(
+                      isDense: true,
+                      border: OutlineInputBorder(),
+                      focusColor: Colors.grey),
+
+                  icon: Icon(Icons.arrow_drop_down_outlined),
+                  // value: snapshot.data!.length,
+                  items: kurs.map((e) {
+                    return DropdownMenuItem<String>(
+                      onTap: () {
+                        // print("${e.id}");
+                      },
+                      value: e.toString(),
+                      child: Text(e.toString()),
+                    );
+                  }).toList(),
+                  onChanged: (newValue) {
+                    setState(() {
+                      _titleCourse = newValue.toString();
+                    });
+                  },
                 ),
-                children: [
-                  InkWell(
-                      onTap: () {
-                        setState(() {
-                          _titleCourse = '1-kurs';
-                        });
-                      },
-                      child: Text(
-                        "1-kurs",
-                        style: TextStyle(fontSize: 15.sp),
-                      )),
-                  InkWell(
-                      onTap: () {
-                        setState(() {
-                          _titleCourse = '2-kurs';
-                        });
-                      },
-                      child: Text("2-kurs")),
-                  InkWell(
-                      onTap: () {
-                        setState(() {
-                          _titleCourse = '3-kurs';
-                        });
-                      },
-                      child: Text("3-kurs")),
-                  InkWell(
-                      onTap: () {
-                        setState(() {
-                          _titleCourse = '4-kurs';
-                        });
-                      },
-                      child: Text("4-kurs")),
-                ],
               ),
             ),
             SizedBox(
@@ -376,35 +406,29 @@ class _StudentState extends State<Student> {
                     ),
                     SizedBox(height: 4.h),
                     Container(
+                      width: 152.w,
                       decoration: BoxDecoration(
-                          border: Border.all(color: Colors.grey.shade400),
-                          borderRadius: BorderRadius.circular(4.r)),
-                      child: SizedBox(
-                        width: 152.w,
-                        child: ExpansionTile(
-                          key: GlobalKey(),
-                          title: Text(
-                            _titilekv,
-                            style:
-                                TextStyle(color: Colors.grey, fontSize: 14.sp),
-                          ),
-                          children: [
-                            InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    _titilekv = 'Xonadon';
-                                  });
-                                },
-                                child: Text("Xonadon")),
-                            InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    _titilekv = 'Kvartira';
-                                  });
-                                },
-                                child: Text("Kvartira")),
-                          ],
-                        ),
+                          borderRadius: BorderRadius.circular(10.r)),
+                      child: DropdownButtonFormField(
+                        hint: Text("Kv yoki xovli"),
+                        decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            focusColor: Colors.grey),
+                        icon: Icon(Icons.arrow_drop_down_outlined),
+                        items: kvartira.map((e) {
+                          return DropdownMenuItem<String>(
+                            onTap: () {
+
+                            },
+                            value: e,
+                            child: Text(e),
+                          );
+                        }).toList(),
+                        onChanged: (newValue) {
+                          setState(() {
+                            dropDown = newValue.toString();
+                          });
+                        },
                       ),
                     ),
                   ],
@@ -422,59 +446,29 @@ class _StudentState extends State<Student> {
                     ),
                     SizedBox(height: 4.h),
                     Container(
+                      width: 152.w,
                       decoration: BoxDecoration(
-                          border: Border.all(color: Colors.grey.shade400),
-                          borderRadius: BorderRadius.circular(4.r)),
-                      child: Container(
-                        width: 152.w,
-                        child: ExpansionTile(
-                          key: GlobalKey(),
-                          title: Text(
-                            _titleRoom,
-                            style:
-                                TextStyle(color: Colors.grey, fontSize: 14.sp),
-                          ),
-                          children: [
-                            InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    _titleRoom = '1-xonali';
-                                  });
-                                },
-                                child: Text(
-                                  "1-xonali",
-                                  style: TextStyle(fontSize: 15.sp),
-                                )),
-                            InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    _titleRoom = '2-xonali';
-                                  });
-                                },
-                                child: Text("2-xonali")),
-                            InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    _titleRoom = '3-xonali';
-                                  });
-                                },
-                                child: Text("3-xonali")),
-                            InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    _titleRoom = '4-xonali';
-                                  });
-                                },
-                                child: Text("4-xonali")),
-                            InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    _titleRoom = '4-5 xonali';
-                                  });
-                                },
-                                child: Text("4-5 xonali")),
-                          ],
-                        ),
+                          borderRadius: BorderRadius.circular(10.r)),
+                      child: DropdownButtonFormField(
+                        hint: Text("Xonalar soni"),
+                        decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            focusColor: Colors.grey),
+                        icon: Icon(Icons.arrow_drop_down_outlined),
+                        items: rooms.map((e) {
+                          return DropdownMenuItem<String>(
+                            onTap: () {
+
+                            },
+                            value: e,
+                            child: Text(e),
+                          );
+                        }).toList(),
+                        onChanged: (newValue) {
+                          setState(() {
+                            roomCount = newValue.toString();
+                          });
+                        },
                       ),
                     ),
                   ],
@@ -497,28 +491,28 @@ class _StudentState extends State<Student> {
                   borderRadius: BorderRadius.circular(4.r)),
               child: Container(
                 width: 152.w,
-                child: ExpansionTile(
-                  key: GlobalKey(),
-                  title: Text(
-                    _titleTime,
-                    style: TextStyle(color: Colors.grey, fontSize: 14.sp),
-                  ),
-                  children: [
-                    InkWell(
-                        onTap: () {
-                          setState(() {
-                            _titleTime = 'kunlik';
-                          });
-                        },
-                        child: Text("kunlik")),
-                    InkWell(
-                        onTap: () {
-                          setState(() {
-                            _titleTime = 'oylik';
-                          });
-                        },
-                        child: Text("oylik")),
-                  ],
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10.r)),
+                child: DropdownButtonFormField(
+                  hint: Text("Ijara muddati"),
+                  decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      focusColor: Colors.grey),
+                  icon: Icon(Icons.arrow_drop_down_outlined),
+                  items: kindOfMoment.map((e) {
+                    return DropdownMenuItem<String>(
+                      onTap: () {
+
+                      },
+                      value: e,
+                      child: Text(e),
+                    );
+                  }).toList(),
+                  onChanged: (newValue) {
+                    setState(() {
+                      TypeOfRent = newValue.toString();
+                    });
+                  },
                 ),
               ),
             ),
@@ -550,7 +544,7 @@ class _StudentState extends State<Student> {
                           border: Border(
                               left: BorderSide(color: Colors.grey.shade300))),
                       padding: EdgeInsets.only(left: 8.w, top: 0),
-                      width: 70,
+                      width: 70.w,
                       height: 0,
                       child: DropdownButton(
                         underline: Container(),
@@ -644,35 +638,29 @@ class _StudentState extends State<Student> {
                     ),
                     SizedBox(height: 4.h),
                     Container(
+                      width: 152.w,
                       decoration: BoxDecoration(
-                          border: Border.all(color: Colors.grey.shade400),
-                          borderRadius: BorderRadius.circular(4.r)),
-                      child: Container(
-                        width: 152.w,
-                        child: ExpansionTile(
-                          key: GlobalKey(),
-                          title: Text(
-                            _titleGendor,
-                            style:
-                                TextStyle(color: Colors.grey, fontSize: 14.sp),
-                          ),
-                          children: [
-                            InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    _titleGendor = "Qiz";
-                                  });
-                                },
-                                child: Text("Qiz")),
-                            InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    _titleGendor = "O'g'il";
-                                  });
-                                },
-                                child: Text("O'g'il"))
-                          ],
-                        ),
+                          borderRadius: BorderRadius.circular(10.r)),
+                      child: DropdownButtonFormField(
+                        hint: Text("Qiz,O'g'il"),
+                        decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            focusColor: Colors.grey),
+                        icon: Icon(Icons.arrow_drop_down_outlined),
+                        items: genderone.map((e) {
+                          return DropdownMenuItem<String>(
+                            onTap: () {
+
+                            },
+                            value: e,
+                            child: Text(e),
+                          );
+                        }).toList(),
+                        onChanged: (newValue) {
+                          setState(() {
+                            _titleGendor = newValue.toString();
+                          });
+                        },
                       ),
                     ),
                   ],
@@ -690,56 +678,29 @@ class _StudentState extends State<Student> {
                     ),
                     SizedBox(height: 4.h),
                     Container(
+                      width: 152.w,
                       decoration: BoxDecoration(
-                          border: Border.all(color: Colors.grey.shade400),
-                          borderRadius: BorderRadius.circular(4.r)),
-                      child: SizedBox(
-                        width: 152.w,
-                        child: ExpansionTile(
-                          key: GlobalKey(),
-                          title: Text(
-                            _titleCount,
-                            style:
-                                TextStyle(color: Colors.grey, fontSize: 14.sp),
-                          ),
-                          children: [
-                            InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    _titleCount = '1';
-                                  });
-                                },
-                                child: Text("1")),
-                            InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    _titleCount = '2';
-                                  });
-                                },
-                                child: Text("2")),
-                            InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    _titleCount = '3';
-                                  });
-                                },
-                                child: Text("3")),
-                            InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    _titleCount = '4';
-                                  });
-                                },
-                                child: Text("4")),
-                            InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    _titleCount = '5';
-                                  });
-                                },
-                                child: Text("5")),
-                          ],
-                        ),
+                          borderRadius: BorderRadius.circular(10.r)),
+                      child: DropdownButtonFormField(
+                        hint: Text("Ijarachilar soni"),
+                        decoration: const InputDecoration(
+                            border: OutlineInputBorder(),
+                            focusColor: Colors.grey),
+                        icon: Icon(Icons.arrow_drop_down_outlined),
+                        items: ijarachi.map((e) {
+                          return DropdownMenuItem<String>(
+                            onTap: () {
+
+                            },
+                            value: e,
+                            child: Text(e),
+                          );
+                        }).toList(),
+                        onChanged: (newValue) {
+                          setState(() {
+                            dropDown = newValue.toString();
+                          });
+                        },
                       ),
                     ),
                   ],
@@ -826,20 +787,24 @@ class _StudentState extends State<Student> {
                           Course = '3';
                         } else if (_titleCourse == '4-kurs') {
                           Course = '4';
+                        }else if (_titleCourse == '5-kurs') {
+                          Course = '5';
+                        }else if (_titleCourse == '6-kurs') {
+                          Course = '6';
                         }
                       });
                       setState(() {
-                        if (_titilekv == 'Xonadon') {
+                        if (kvartira == 'Xovli') {
                           TypeHouse = '2';
                         } else {
                           TypeHouse = '1';
                         }
                       });
                       setState(() {
-                        if (_titleTime == 'kunlik') {
-                          TypeOfRent = '1';
+                        if (TypeOfRent == 'kunlik') {
+                          _titleTime = '1';
                         } else {
-                          TypeOfRent = '2';
+                          _titleTime = '2';
                         }
                       });
                       setState(() {
@@ -850,28 +815,45 @@ class _StudentState extends State<Student> {
                         }
                       });
                       setState(() {
-                        if (_titleGendor == 'Qiz') {
+                        if (_titleGendor == 'Ayol') {
                           gender = '2';
                         } else {
                           gender = '1';
                         }
                       });
+                      print('-----------------');
+                      print(Course);
+                      print(RoomOwner);
+                      print(TypeHouse);
+                      // print(roomCount);
+                      print(_titleTime);
+                      print(costcontroller?.text);
                       print(typeOfPayment);
+                      print(subwayof);
+                      print(gender);
+                      print(_titleCount);
+                      print(titlecontroller?.text);
+                      print(othercontroller?.text);
+                      print('-----------------');
+                      print(data.districtId);
+                      print(data.UniverId);
+
                       await CreateAdsStudent().CreateAds(
-                          districtId: DistrictId,
-                          UniderId: UniverId,
+                          districtId: data.districtId,
+                          UniderId: data.UniverId,
+                          fakultetId: data.FacutyId,
                           Course: Course,
                           roomOwner: RoomOwner,
                           TypeHouse: TypeHouse,
-                          CountRoom: _titleRoom,
-                          TypeOfRent: TypeOfRent,
+                          CountRoom: roomCount,
+                          TypeOfRent: _titleTime,
                           cost: costcontroller?.text,
                           typePayment: typeOfPayment,
                           subway: subwayof,
                           gender: gender,
-                          countRoom: _titleCount,
                           title: titlecontroller?.text,
-                          description: othercontroller?.text, fakultetId: FakultetId);
+                          description: othercontroller?.text,
+                      );
 
                       Navigator.pushAndRemoveUntil(
                           context,
@@ -886,7 +868,9 @@ class _StudentState extends State<Student> {
                   )),
             )
           ],
-        ),
+        );
+  },
+),
       ),
     );
   }

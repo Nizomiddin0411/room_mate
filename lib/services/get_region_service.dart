@@ -7,7 +7,7 @@ import 'package:talaba_uy/models/get_region_model.dart';
 import '../models/get_univer_model.dart';
 
 class GetRegionService {
-  Future<List<GetRegionModel>?> fetchRegion() async {
+  Future<List<GetRegionModel>> fetchRegion() async {
     try {
       var response = await http.get(Uri.parse(
         'http://164.68.114.231:8081/roommate/backend/web/api/region',
@@ -30,6 +30,7 @@ class GetRegionService {
       }
     } catch (e) {
       print(e);
+      return [];
     }
   }
 }
