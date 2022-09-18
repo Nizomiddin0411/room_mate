@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
+import 'package:talaba_uy/chat/all_chats.dart';
 import 'package:talaba_uy/chat/chat_page.dart';
 import 'package:talaba_uy/screens/Settings/setting.dart';
 
@@ -61,7 +62,7 @@ class _DrawerPageState extends State<DrawerPage> {
               ListTile(
                 title: const Text("Chat"),
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>ChatPage(name: "Polat Alemdar", id: 3992)));
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>AllChats()));
                 },
                 leading: const Icon(Icons.chat),
               ),

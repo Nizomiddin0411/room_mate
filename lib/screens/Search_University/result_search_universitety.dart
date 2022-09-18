@@ -143,7 +143,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
           controller: _tabController,
           children: [
             FutureBuilder<List<SearchingStudents>?>(
-                future: SearchingStudentsService().fetchSearchingStudents(),
+                future: SearchingStudentsService().fetchSearchingStudents(widget.id),
                 builder: (BuildContext context,
                     AsyncSnapshot<List<SearchingStudents>?> snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
@@ -232,9 +232,9 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                                     MaterialPageRoute(
                                                       builder: (context) =>
                                                           ChatPage(
-                                                              name: snapshot
+                                                             snapshot
                                                                   .data![index]
-                                                                  .fullName!, id: snapshot.data![index].id!),
+                                                                  .fullName!, snapshot.data![index].id!),
                                                     ),
                                                   );
                                                 },
