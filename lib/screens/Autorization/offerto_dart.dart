@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
+import 'package:talaba_uy/screens/Autorization/StartPage.dart';
 
 class OffertoPage extends StatefulWidget {
   const OffertoPage({Key? key}) : super(key: key);
@@ -59,6 +60,7 @@ class _OffertoPageState extends State<OffertoPage> {
                         height: 48.h,
                         child: ElevatedButton(
                           onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (contxet)=>StartPage()));
                           },
                           style: ElevatedButton.styleFrom(
                             primary: Colors.white,

@@ -63,7 +63,7 @@ class _MenuPageState extends State<MenuPage> {
         ],
         title: const Center(
             child: Text(
-          "Madad",
+          "Rommate",
           style: TextStyle(color: AppColors.buttonLinear, fontSize: 24),
         )),
         // flexibleSpace:
