@@ -1,33 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:talaba_uy/models/search_universitety_model.dart';
 import 'package:talaba_uy/provider/search_universitet_provider.dart';
+import 'package:talaba_uy/provider/universitet_provider.dart';
 import 'package:talaba_uy/screens/Search_University/filtr_university.dart';
 import 'package:talaba_uy/screens/Search_University/result_search_universitety.dart';
-import 'package:talaba_uy/services/get_search%20universitety.dart';
-
 import '../../core/const/app_colors.dart';
-import 'count_student.dart';
-
 class SearchPage extends StatefulWidget {
   const SearchPage({Key? key}) : super(key: key);
-
   @override
   State<SearchPage> createState() => _SearchPageState();
 }
-
 class _SearchPageState extends State<SearchPage> {
-  TextEditingController? _titleController;
-
   @override
   Widget build(BuildContext context) {
     final _controller = TextEditingController();
-    String _searchText;
-
     @override
     void initState() {
       context.read<SearchUniversitet>().getSearchUniver("");
+      Provider.of<UniversitetProvider>(context, listen: false).getViloyat();
       super.initState();
     }
 
