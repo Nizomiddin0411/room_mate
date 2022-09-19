@@ -14,7 +14,7 @@ class _OffertoPageState extends State<OffertoPage> {
   @override
   Widget build(BuildContext context) {
 
-    bool checkBox=true;
+    bool checkBox=false;
     return Scaffold(
       body: RawScrollbar(
           thumbColor: Colors.blue,
