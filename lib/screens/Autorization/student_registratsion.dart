@@ -58,6 +58,7 @@ class _StudentUserState extends State<StudentUser> {
   bool fakultet = false;
   bool jinsi = false;
   String drowdown1='';
+  String drowdown2='';
 
   final List<String> genderItems = [
     'Ayol',
@@ -75,6 +76,7 @@ class _StudentUserState extends State<StudentUser> {
   final nameController = TextEditingController();
   String? selectedValue;
   String? dropdownvalue;
+  bool isSwitched = false;
 
   @override
   Widget build(BuildContext context) {
@@ -491,6 +493,7 @@ class _StudentUserState extends State<StudentUser> {
                   Column(
                     children: [
                       DropdownButtonFormField2<String>(
+
                               decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
                                     borderSide:
@@ -520,6 +523,10 @@ class _StudentUserState extends State<StudentUser> {
                               items: data.Viloyat
                                   .map(
                                     (e) => DropdownMenuItem<String>(
+                                      onTap:(){
+                                        data.districtid=e.id.toString();
+                                        print('${data.districtid}hhcshcbscuvsycvtuc');
+                                      },
                                       value: e.name ??"",
                                       child: Text(
                                         e.name.toString(),
@@ -538,7 +545,8 @@ class _StudentUserState extends State<StudentUser> {
                         setState(() {
                           viloyat = true;
                           viloyatColor = Colors.black12;
-                          drowdown1 = newValue.toString();
+                          drowdown2 = newValue.toString();
+                          drowdown2= District.toString();
                         });
                       },
                               onSaved: (value) {
@@ -674,18 +682,14 @@ class _StudentUserState extends State<StudentUser> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
-                          height: 35.h,
-                          width: 80.w,
-                          child: Switcher(
-                            value: false,
-                            size: SwitcherSize.medium,
-                            switcherButtonRadius: 30.r,
-                            enabledSwitcherButtonRotate: true,
-                            iconOn: Icons.check,
-                            colorOff: Colors.blue.withOpacity(0.3),
-                            colorOn: Colors.blue,
-                            onChanged: (bool state) {
-
+                          height: 40.h,
+                          width: 70.w,
+                          child: Switch(
+                            value: isSwitched,
+                            onChanged: (value) {
+                              setState(() {
+                                isSwitched = value;
+                              });
                             },
                           ),
                         ),
@@ -725,22 +729,30 @@ class _StudentUserState extends State<StudentUser> {
               ),
               ElevatedButton(
                 onPressed: () async {
+                  showDialog(context: context, builder: ( context){
+                    return AlertDialog(
+                      title: Text("Ro'yxatdan muaffaqiyatli o'tdingi  "),
+                      content: Text("Tabriklaymiz !!!"),
+                    );
+                  });
+
                   if (kurs &&
                       viloyat &&
                       univer &&
                       fakultet &&
                       ktuman &&
                       myController.text != '' &&
-                      jinsi) {
+                      jinsi
+                   &&value) {
                     await RegistratsiyaStudent().CreateAdsStudent(
                         FullName: myController.text,
-                        fakultetId: data.fakultetid,
-                        Course: selectedValue.toString(),
-                        Roommate: Roommate.toString()=='ha' ? '1':'2',
-                        District: District.toString(),
+                        fakultetId: data.fakultetid.toString(),
+                        Course: Course.toString(),
+                        Roommate: isSwitched.toString()=='ha' ? '1':'2',
+                        District: data.districtid.toString(),
                         Phonenumber: nameController.text,
                         gender: dropdownvalue.toString() == 'Erkak' ? '1' : '2',
-                        UniderId: data.universiterid
+                        UniderId: data.universiterid.toString()
                     );
                     print('${myController} maulotiiiiiiiii+++++++++++');
                     print('${Roommate} sherik kerak mi +++++++++++');
@@ -764,7 +776,6 @@ class _StudentUserState extends State<StudentUser> {
                     if (ktuman) tumanColor = Colors.black12;
                     if (fakultet) fakultColor = Colors.black12;
                     if (jinsi) jinsiColor = Colors.black12;
-
                     setState(() {});
                   }
                 },

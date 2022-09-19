@@ -2,17 +2,21 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
+import 'package:provider/provider.dart';
 import 'package:talaba_uy/chat/chat_page.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
 import 'package:talaba_uy/core/data/mockdata.dart';
+import 'package:talaba_uy/models/search_univer%20all.dart';
 import 'package:talaba_uy/models/searching_students_model.dart';
 import 'package:talaba_uy/screens/All_Ads_Page/detail_page.dart';
 import 'package:talaba_uy/screens/Ijarachipage/filtr.dart';
+import 'package:talaba_uy/screens/Search_University/details_page.dart';
 import 'package:talaba_uy/screens/Search_University/filtr_university.dart';
 import 'package:talaba_uy/services/searching_ads_service.dart';
 import 'package:talaba_uy/services/searching_students_service.dart';
 
 import '../../models/searching_ads_model.dart';
+import '../../provider/universitet_provider.dart';
 import 'result _filtr_search.universitety.dart';
 
 class ResultUniversitetPage extends StatefulWidget {
@@ -27,7 +31,10 @@ class ResultUniversitetPage extends StatefulWidget {
 }
 
 class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
-
+  void initState() {
+    super.initState();
+    Provider.of<UniversitetProvider>(context, listen: false).getViloyat();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -109,10 +116,12 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => ResultFiltrPage()));
+                                      builder: (context) => ResultFiltrPage(
+                                            id: widget.id,
+                                          )));
                             },
                             child: Padding(
-                              padding: EdgeInsets.all(11.0.w),
+                              padding: EdgeInsets.all(2.0.w),
                               child: Icon(
                                 Icons.tune,
                                 color: AppColors.mainColor,
@@ -143,14 +152,10 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
           controller: _tabController,
           children: [
             FutureBuilder<List<SearchingStudents>?>(
-                future: SearchingStudentsService().fetchSearchingStudents(widget.id),
+                future: SearchingStudentsService().fetchSearchingStudents(),
                 builder: (BuildContext context,
                     AsyncSnapshot<List<SearchingStudents>?> snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(child: CircularProgressIndicator());
-                  } else if (snapshot.hasError) {
-                    return Text("ERROR");
-                  } else {
+                  if (snapshot.hasData) {
                     return ListView.builder(
                         shrinkWrap: true,
                         itemCount: snapshot.data!.length,
@@ -209,9 +214,8 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             Padding(
-                                              padding:
-                                                   EdgeInsets.fromLTRB(
-                                                      8.w, 0, 8.w, 0),
+                                              padding: EdgeInsets.fromLTRB(
+                                                  8.w, 0, 8.w, 0),
                                               child: Text(
                                                 snapshot.data![index].gender ==
                                                         1
@@ -225,15 +229,17 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                                 "Kursi : ${snapshot.data![index].course}"),
                                             InkWell(
                                                 onTap: () {
-                                                  
                                                   Navigator.push(
                                                     context,
                                                     MaterialPageRoute(
                                                       builder: (context) =>
                                                           ChatPage(
-                                                             snapshot
+                                                              snapshot
                                                                   .data![index]
-                                                                  .fullName!, snapshot.data![index].id!),
+                                                                  .fullName!,
+                                                              snapshot
+                                                                  .data![index]
+                                                                  .id!),
                                                     ),
                                                   );
                                                 },
@@ -290,16 +296,14 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                           );
                         });
                   }
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
                 }),
-            FutureBuilder<List<SearchingAdsModel>?>(
+            FutureBuilder<List<SearchingStudentAll>?>(
                 future: SearchingAdsService().fetchSearchingAds(),
-                builder: (BuildContext context,
-                    AsyncSnapshot<List<SearchingAdsModel>?> snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return Center(child: CircularProgressIndicator());
-                  } else if (snapshot.hasError) {
-                    return Text("ERROR");
-                  } else {
+                builder: (BuildContext context, snapshot) {
+                  if (snapshot.hasData) {
                     return ListView.builder(
                         shrinkWrap: true,
                         itemCount: snapshot.data!.length,
@@ -342,19 +346,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                     padding:
                                         EdgeInsets.fromLTRB(8.w, 0, 8.w, 0),
                                     child: Text(
-                                      snapshot.data![index].rentType == 1
-                                          ? snapshot.data![index].cost
-                                                  .toString() +
-                                              (snapshot.data![index].costType ==
-                                                      1
-                                                  ? " so'm"
-                                                  : " \$") +
-                                              '/kunlik'
-                                          : snapshot.data![index].cost
-                                                  .toString() +
-                                              snapshot.data![index].costType
-                                                  .toString() +
-                                              '/oylik',
+                                      '${snapshot.data![index].cost}',
                                       style: TextStyle(
                                           color: AppColors.mainColor,
                                           fontSize: 24.sp),
@@ -375,10 +367,40 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                       InkWell(
                                         onTap: () {
                                           Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      DetailPage()));
+                                            context,
+                                            MaterialPageRoute(
+                                              builder: (context) =>
+                                                  UniverDetails(
+                                                cost:
+                                                    '${snapshot.data![index]}',
+                                                roommate_count:
+                                                    '${snapshot.data![index].roommateCount}',
+                                                roommate_gender:
+                                                    '${snapshot.data![index].roommateGender}',
+                                                faculty:
+                                                    '${snapshot.data![index].faculty}',
+                                                subway:
+                                                    '${snapshot.data![index].subway}',
+                                                district_id:
+                                                    '${snapshot.data![index].districtId}',
+                                                university:
+                                                    '${snapshot.data![index].university}',
+                                                live_with_owner:
+                                                    '${snapshot.data![index].liveWithOwner}',
+                                                addres:
+                                                    '${snapshot.data![index].address}',
+                                                description:
+                                                    '${snapshot.data![index].description}',
+                                                cost_type:
+                                                    '${snapshot.data![index].costType}',
+                                                room_count:
+                                                    '${snapshot.data![index].roomCount}',
+                                                title: '',
+                                                region:
+                                                    '${snapshot.data![index].title}',
+                                              ),
+                                            ),
+                                          );
                                         },
                                         child: Padding(
                                           padding: EdgeInsets.fromLTRB(
@@ -403,6 +425,9 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                           );
                         });
                   }
+                  return Center(
+                    child: CircularProgressIndicator(),
+                  );
                 }),
           ],
         ),

@@ -6,6 +6,8 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
 import 'package:talaba_uy/bloc/bloc_region/region_bloc.dart';
+import 'package:talaba_uy/provider/day_provider.dart';
+import 'package:talaba_uy/provider/month_provider.dart';
 import 'package:talaba_uy/provider/region_provider.dart';
 import 'package:talaba_uy/provider/search_universitet_provider.dart';
 import 'package:talaba_uy/provider/universitet_provider.dart';
@@ -23,16 +25,15 @@ import 'package:easy_localization/easy_localization.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await EasyLocalization.ensureInitialized();
   await Firebase.initializeApp(
-      // options: FirebaseOptions(
-      //   apiKey: "a",
-      //   appId: "a",
-      //   messagingSenderId: "",
-      //   projectId: "1",
-      // ),
-      );
-
+    // options: FirebaseOptions(
+    //   apiKey: "a",
+    //   appId: "a",
+    //   messagingSenderId: "",
+    //   projectId: "1",
+    // ),
+  );
+  await EasyLocalization.ensureInitialized();
   await Hive.initFlutter();
   await Hive.openBox('token');
   await Hive.openBox('regionId');
@@ -65,10 +66,11 @@ class MyApp extends StatelessWidget {
         builder: (context, child) {
           return MultiProvider(
             providers: [
-              ChangeNotifierProvider(
-                  create: (context1) => UniversitetProvider()),
-              ChangeNotifierProvider(create: (contxet) => RegionProvider()),
-              ChangeNotifierProvider(create: (context) => SearchUniversitet())
+              ChangeNotifierProvider(create: (context1)=>UniversitetProvider()),
+              ChangeNotifierProvider(create: (context)=>RegionProvider()),
+              ChangeNotifierProvider(create: (context)=>DayProvider()),
+              ChangeNotifierProvider(create: (context)=>MonthProvider()),
+              ChangeNotifierProvider(create: (context)=>SearchUniversitet())
             ],
             child: MaterialApp(
               localizationsDelegates: context.localizationDelegates,
@@ -100,7 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Hive.box('token').isEmpty ? LanguagePage() : MenuPage(),
+      body: Hive.box('token').isEmpty ? LanguagePage(): MenuPage(),
       // This trailing comma makes auto-formatting nicer for build methods.
     );
   }

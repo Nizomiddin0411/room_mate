@@ -4,10 +4,10 @@ import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 import 'package:talaba_uy/models/searching_students_model.dart';
 class SearchingStudentsService{
-  Future<List<SearchingStudents>?> fetchSearchingStudents(String id) async{
+  Future<List<SearchingStudents>?> fetchSearchingStudents( ) async{
     try{
       // String token = Hive.box('token').get('token');
-      var _response = await http.get(Uri.parse('http://164.68.114.231:8081/roommate/backend/web/api/university/get-searching-students?faculty_id=$id&birth_region_id=1&birth_district_id=2'),
+      var _response = await http.get(Uri.parse('http://164.68.114.231:8081/roommate/backend/web/api/university/get-searching-students?faculty_id=1&birth_region_id=1&birth_district_id=2'),
         // headers: {
         //   HttpHeaders.authorizationHeader: 'Bearer $token',
         // },

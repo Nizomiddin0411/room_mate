@@ -3,17 +3,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
-import 'package:talaba_uy/screens/All_Ads_Page/all_ads_page.dart';
-import '../../provider/region_provider.dart';
+import '../../provider/day_provider.dart';
+import '../../provider/month_provider.dart';
 
-class FiltrPage extends StatefulWidget {
-  const FiltrPage({Key? key}) : super(key: key);
+
+class FiltrForMonth extends StatefulWidget {
+  const FiltrForMonth({Key? key}) : super(key: key);
 
   @override
-  State<FiltrPage> createState() => _FiltrPageState();
+  State<FiltrForMonth> createState() => _FiltrForMonthState();
 }
 
-class _FiltrPageState extends State<FiltrPage> {
+class _FiltrForMonthState extends State<FiltrForMonth> {
   bool _checkMetro = false;
 
   TextEditingController? costcontroller;
@@ -80,9 +81,9 @@ class _FiltrPageState extends State<FiltrPage> {
     super.initState();
     fromCost = TextEditingController();
     toCost = TextEditingController();
-    Provider.of<RegionProvider>(context, listen: false).getUnivers();
+    Provider.of<MonthProvider>(context, listen: false).getUnivers();
     // Provider.of<RegionProvider>(context,listen: false).getFiltrApi();
-    Provider.of<RegionProvider>(context, listen: false).getRegion().asStream();
+    Provider.of<MonthProvider>(context, listen: false).getRegion().asStream();
   }
 
   @override
@@ -113,7 +114,7 @@ class _FiltrPageState extends State<FiltrPage> {
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 12.h),
-          child: Consumer<RegionProvider>(
+          child: Consumer<MonthProvider>(
             builder: (_, data, __) {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -180,56 +181,56 @@ class _FiltrPageState extends State<FiltrPage> {
                   SizedBox(height: 4.h),
                   data.isDistrict
                       ? Container(
-                          width: 324.w,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10.r)),
-                          child: DropdownButtonFormField(
-                            isExpanded: true,
-                            hint: Text("Tumanni tanlang"),
-                            decoration: const InputDecoration(
-                                isDense: true,
-                                border: OutlineInputBorder(),
-                                focusColor: Colors.grey),
-                            icon: Icon(Icons.arrow_drop_down_outlined),
-                            items: data.districts.map((e) {
-                              return DropdownMenuItem<String>(
-                                onTap: () {
-                                  print("${e.name}${e.id}");
-                                  data.districtId = e.id.toString();
-                                },
-                                value: data.isDistrict
-                                    ? e.name.toString()
-                                    : data.defaultvalue,
-                                child: Text(data.isDistrict
-                                    ? e.name.toString()
-                                    : data.defaultvalue),
-                              );
-                            }).toList(),
-                            onChanged: (newValue) {
-                              print("Selected ----------- $newValue");
-                              data.isDistrict = true;
-                              setState(() {
-                                // dropDown1 = newValue as GetDistrictModel?;
-                                dropDown = newValue.toString();
-                              });
-                            },
-                          ),
-                        )
+                    width: 324.w,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.r)),
+                    child: DropdownButtonFormField(
+                      isExpanded: true,
+                      hint: Text("Tumanni tanlang"),
+                      decoration: const InputDecoration(
+                          isDense: true,
+                          border: OutlineInputBorder(),
+                          focusColor: Colors.grey),
+                      icon: Icon(Icons.arrow_drop_down_outlined),
+                      items: data.districts.map((e) {
+                        return DropdownMenuItem<String>(
+                          onTap: () {
+                            print("${e.name}${e.id}");
+                            data.districtId = e.id.toString();
+                          },
+                          value: data.isDistrict
+                              ? e.name.toString()
+                              : data.defaultvalue,
+                          child: Text(data.isDistrict
+                              ? e.name.toString()
+                              : data.defaultvalue),
+                        );
+                      }).toList(),
+                      onChanged: (newValue) {
+                        print("Selected ----------- $newValue");
+                        data.isDistrict = true;
+                        setState(() {
+                          // dropDown1 = newValue as GetDistrictModel?;
+                          dropDown = newValue.toString();
+                        });
+                      },
+                    ),
+                  )
                       : Container(
-                          width: 324.w,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10.r)),
-                          child: DropdownButtonFormField(
-                              isExpanded: true,
-                              hint: Text("Tumanni tanlang"),
-                              decoration: const InputDecoration(
-                                  isDense: true,
-                                  border: OutlineInputBorder(),
-                                  focusColor: Colors.grey),
-                              icon: Icon(Icons.arrow_drop_down_outlined),
-                              items: [],
-                              onChanged: null),
-                        ),
+                    width: 324.w,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.r)),
+                    child: DropdownButtonFormField(
+                        isExpanded: true,
+                        hint: Text("Tumanni tanlang"),
+                        decoration: const InputDecoration(
+                            isDense: true,
+                            border: OutlineInputBorder(),
+                            focusColor: Colors.grey),
+                        icon: Icon(Icons.arrow_drop_down_outlined),
+                        items: [],
+                        onChanged: null),
+                  ),
                   SizedBox(height: 12.h),
                   Text(
                     "Oliy o’quv yurti",
@@ -556,7 +557,7 @@ class _FiltrPageState extends State<FiltrPage> {
                   ),
                   Padding(
                     padding:
-                        EdgeInsets.symmetric(vertical: 18.h, horizontal: 31.w),
+                    EdgeInsets.symmetric(vertical: 18.h, horizontal: 31.w),
                     child: Container(
                         width: double.infinity,
                         child: ElevatedButton(
@@ -635,7 +636,7 @@ class _FiltrPageState extends State<FiltrPage> {
                               data.isCourse ? Course : '0',
                               data.isTypeHouse ? TypeHouse : '0',
                               data.isCount ? roomCount : '0',
-                              data.isRent ? _titleTime: '0',
+                              // data.isRent ? _titleTime: '0',
                               data.isSubway ? subwayof : '0',
                               data.isFromCost ? fromCost.text : '0',
                               data.isToCost ? toCost.text: '0',
@@ -659,7 +660,7 @@ class _FiltrPageState extends State<FiltrPage> {
                               data.isCourse ? Course : '0',
                               data.isTypeHouse ? TypeHouse : '0',
                               data.isCount ? roomCount : '0',
-                              data.isRent ? _titleTime: '0',
+                              // data.isRent ? _titleTime: '0',
                               data.isSubway ? subwayof : '0',
                               data.isFromCost ? fromCost.text : '0',
                               data.isToCost ? toCost.text: '0',
@@ -678,7 +679,7 @@ class _FiltrPageState extends State<FiltrPage> {
 
 
                             Navigator.pop(context);
-                            print(data.isRegion);
+                            // print(data.isRegion);
                           },
                           child: Text(
                             "Saqlash",

@@ -18,11 +18,9 @@ class UniversitetProvider extends ChangeNotifier{
   String defaultvalue = 'Fakultetni tanlang';
   String defaultvalue1 = 'Tumanni tanlang';
   bool istuman=false;
-  String universiterid='';
-  String fakultetid='';
-  String district_id='';
-
-
+  String? universiterid;
+  String? fakultetid;
+  String? districtid;
   void _setFakultet(bool value){
     isFakultet = value;
     notifyListeners();
@@ -33,20 +31,15 @@ void _settuman(bool value){
 }
 Future<void> getViloyat() async{
   Viloyat=await GetRegionService().fetchRegion();
-
 }
 Future<void>  getTuman(int id)async{
   _settuman(false);
   tumanlar=await GetDistrictService().fetchDistrict(id);
   _settuman(true);
-
 }
-
   Future<void> getUniver() async{
     universitet = await GetUniverService().fetchUniver();
   }
-
-
   Future<void> getFakultet(int id) async{
     _setFakultet(false);
     fakultet = await GetFacultyService().fetchFaculty(id);

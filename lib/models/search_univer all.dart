@@ -1,12 +1,12 @@
-class AllAdsModel {
+class SearchingStudentAll {
   int? id;
   int? type;
   int? userId;
   int? districtId;
   int? universityId;
   int? facultyId;
-  dynamic address;
-  dynamic roomCount;
+  Null? address;
+  Null? roomCount;
   int? liveWithOwner;
   int? houseType;
   int? rentType;
@@ -25,7 +25,7 @@ class AllAdsModel {
   University? university;
   Faculty? faculty;
 
-  AllAdsModel(
+  SearchingStudentAll(
       {this.id,
         this.type,
         this.userId,
@@ -52,7 +52,7 @@ class AllAdsModel {
         this.university,
         this.faculty});
 
-  AllAdsModel.fromJson(Map<String, dynamic> json) {
+  SearchingStudentAll.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     type = json['type'];
     userId = json['user_id'];
@@ -128,7 +128,7 @@ class AllAdsModel {
 class Region {
   int? id;
   String? name;
-  dynamic nameRu;
+  Null? nameRu;
 
   Region({this.id, this.name, this.nameRu});
 
@@ -151,7 +151,7 @@ class District {
   int? id;
   int? regionId;
   String? name;
-  dynamic nameRu;
+  Null? nameRu;
 
   District({this.id, this.regionId, this.name, this.nameRu});
 
@@ -176,9 +176,9 @@ class University {
   int? id;
   String? name;
   String? nameRu;
-  dynamic short;
-  dynamic districtId;
-  dynamic address;
+  String? short;
+  Null? districtId;
+  Null? address;
   String? advertising;
   String? searching;
 

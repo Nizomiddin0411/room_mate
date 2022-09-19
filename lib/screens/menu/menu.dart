@@ -26,9 +26,8 @@ class _MenuPageState extends State<MenuPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
   @override
   void initState() {
-
-
     super.initState();
+    Provider.of<SearchUniversitet>(context, listen: false).getSearchUniver('0');
     Provider.of<SearchUniversitet>(context, listen: false).getSearchUniver(toStringShort());
   }
 
@@ -36,7 +35,7 @@ class _MenuPageState extends State<MenuPage> {
 
     return Scaffold(
       key: _scaffoldKey,
-      drawer: const DrawerPage(),
+      drawer:  DrawerPage(),
       appBar: AppBar(
         backgroundColor: AppColors.backgroundWhite,
         leading: InkWell(
@@ -63,7 +62,7 @@ class _MenuPageState extends State<MenuPage> {
         ],
         title: const Center(
             child: Text(
-          "Madad",
+          "Rommate",
           style: TextStyle(color: AppColors.buttonLinear, fontSize: 24),
         )),
         // flexibleSpace:
