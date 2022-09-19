@@ -75,6 +75,7 @@ class _StudentUserState extends State<StudentUser> {
   final nameController = TextEditingController();
   String? selectedValue;
   String? dropdownvalue;
+  bool isSwitched = false;
 
   @override
   Widget build(BuildContext context) {
@@ -674,18 +675,14 @@ class _StudentUserState extends State<StudentUser> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Container(
-                          height: 35.h,
-                          width: 80.w,
-                          child: Switcher(
-                            value: false,
-                            size: SwitcherSize.medium,
-                            switcherButtonRadius: 30.r,
-                            enabledSwitcherButtonRotate: true,
-                            iconOn: Icons.check,
-                            colorOff: Colors.blue.withOpacity(0.3),
-                            colorOn: Colors.blue,
-                            onChanged: (bool state) {
-
+                          height: 40.h,
+                          width: 70.w,
+                          child: Switch(
+                            value: isSwitched,
+                            onChanged: (value) {
+                              setState(() {
+                                isSwitched = value;
+                              });
                             },
                           ),
                         ),

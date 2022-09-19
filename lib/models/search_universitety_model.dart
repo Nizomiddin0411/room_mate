@@ -3,8 +3,8 @@ class SearchUniversitetyModel {
   String? name;
   String? nameRu;
   String? short;
-  Null? districtId;
-  Null? address;
+  dynamic districtId;
+  dynamic address;
   String? advertising;
   String? searching;
 

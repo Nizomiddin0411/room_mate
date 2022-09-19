@@ -19,17 +19,14 @@ import 'package:path/path.dart' as Path;
 class ChatPage extends StatefulWidget {
   String name;
   int id;
-  ChatPage({required this.name, required this.id});
+  ChatPage(this.name, this.id);
+
   @override
-  _ChatPageState createState() => _ChatPageState(name: name, id: id);
+  _ChatPageState createState() => _ChatPageState();
 }
 
 class _ChatPageState extends State<ChatPage> {
-  String name;
-  int id;
   int myId = Hive.box('id').get('id');
-
-  _ChatPageState({required this.name, required this.id});
 
   final fs = FirebaseFirestore.instance;
   final TextEditingController message = new TextEditingController();
@@ -41,6 +38,21 @@ class _ChatPageState extends State<ChatPage> {
 
   List<File> _image = [];
   final picker = ImagePicker();
+  int? _lichId;
+  bool haveMessageStart = false;
+  bool? haveMessageEnd;
+
+
+  @override
+  void initState() {
+    _lichId = myId * widget.id;
+    super.initState();
+  }
+  @override
+  void dispose() {
+    haveMessageEnd = haveMessageEnd;
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,14 +63,14 @@ class _ChatPageState extends State<ChatPage> {
         title: Row(
           children: [
             Padding(
-              padding:  EdgeInsets.only(right: 10.w, left: 0),
+              padding: EdgeInsets.only(right: 10.w, left: 0),
               child: CircleAvatar(
                 backgroundImage: NetworkImage(
                     "https://ahvalnews.com/sites/default/files/styles/is_home_content_second_440x440_2/public/2020-01/Polat-Alemdar.jpg?h=885b497d&itok=LkqYqDwp"),
               ),
             ),
             Text(
-              name,
+              widget.name,
               style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.w500,
@@ -80,19 +92,18 @@ class _ChatPageState extends State<ChatPage> {
                         image: AssetImage("assets/images/bgimg.png"),
                         fit: BoxFit.fill)),
                 child: SingleChildScrollView(
-                  child: SingleChildScrollView(
-                    child: Messages(name: name, id: id),
-                  ),
+                  child: Messages(name: widget.name, id: widget.id),
                 ),
               ),
             ),
             Container(
               child: Padding(
-                padding:  EdgeInsets.only(left: 6.w, top: 6.h, right: 8.w, bottom: 8.h),
+                padding: EdgeInsets.only(
+                    left: 6.w, top: 6.h, right: 8.w, bottom: 8.h),
                 child: Row(
                   children: [
                     Padding(
-                      padding:  EdgeInsets.only(right: 6.w),
+                      padding: EdgeInsets.only(right: 6.w),
                       child: InkWell(
                         onTap: () {
                           // Navigator.push(
@@ -115,10 +126,10 @@ class _ChatPageState extends State<ChatPage> {
                           filled: true,
                           fillColor: Colors.white,
                           hintText: 'message',
-                          helperStyle:
-                              TextStyle(color: Color.fromRGBO(174, 174, 178, 1)),
+                          helperStyle: TextStyle(
+                              color: Color.fromRGBO(174, 174, 178, 1)),
                           enabled: true,
-                          contentPadding:  EdgeInsets.only(
+                          contentPadding: EdgeInsets.only(
                               left: 12.0.w, bottom: 8.0.h, top: 8.0.h),
                           focusedBorder: OutlineInputBorder(
                             borderSide: new BorderSide(
@@ -131,18 +142,9 @@ class _ChatPageState extends State<ChatPage> {
                             borderRadius: new BorderRadius.circular(18.r),
                           ),
                         ),
-                        validator: (value) {},
-                        onChanged: (e) {
-                          setState(() {
-                            if (e.length != 0) {
-                              _isEmpty = false;
-                            } else {
-                              _isEmpty = true;
-                            }
-                          });
-                        },
                         onSaved: (value) {
                           message.text = value!;
+                          setState(() {});
                         },
                       ),
                     ),
@@ -157,16 +159,24 @@ class _ChatPageState extends State<ChatPage> {
                         ),
                         onTap: () {
                           if (message.text.isNotEmpty) {
-                            fs.collection('Messages').doc().set({
-                              'message': message.text.trim(),
-                              'time': DateTime.now(),
-                              'name': name,
-                              'myId': myId,
-                              'id': id
-                            });
-                            _isEmpty = true;
-                            setState(() {});
-
+                            // Messages page qismi uchun (all_chats.dart)
+                              fs.doc('Messages/$_lichId').set({
+                                'message': FieldValue.arrayUnion(
+                                    [message.text.trim()]),
+                                'time': FieldValue.arrayUnion([DateTime.now()]),
+                                'name': widget.name,
+                                'myId': myId,
+                                'id': widget.id
+                              });
+                            // Lichkaga kirib yozish uchun  (message.dart)
+                            fs.doc('Messages/$_lichId').collection('msg').doc().set({
+                                'message': message.text.trim(),
+                                'time': DateTime.now(),
+                                'name': widget.name,
+                                'myId': myId,
+                                'id': widget.id
+                              });
+                            Hive.box('Id').put('Id', widget.id);
                             message.clear();
                           }
                         },
@@ -221,11 +231,5 @@ class _ChatPageState extends State<ChatPage> {
         });
       });
     }
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    imgRef = FirebaseFirestore.instance.collection('imageURLs');
   }
 }

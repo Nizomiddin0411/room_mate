@@ -12,15 +12,15 @@ class SearchingStudents {
 
   SearchingStudents(
       {this.id,
-      this.fullName,
-      this.phone,
-      this.gender,
-      this.universityId,
-      this.facultyId,
-      this.course,
-      this.roommate,
-      this.birthRegionId,
-      this.birthDistrictId});
+        this.fullName,
+        this.phone,
+        this.gender,
+        this.universityId,
+        this.facultyId,
+        this.course,
+        this.roommate,
+        this.birthRegionId,
+        this.birthDistrictId});
 
   SearchingStudents.fromJson(Map<String, dynamic> json) {
     id = json['id'];
