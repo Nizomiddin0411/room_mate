@@ -20,70 +20,78 @@ class _DrawerPageState extends State<DrawerPage> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-        child: Expanded(
-          child: ListView(
-            physics: const NeverScrollableScrollPhysics(),
-            padding: EdgeInsets.zero,
+        child: Drawer(
+          child: Column(
             children: [
-              DrawerHeader(
-                decoration: BoxDecoration(
-                    color: Colors.blue,
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(10.r),
-                        bottomRight: Radius.circular(10.r))),
-                child: Image.asset('assets/images/logo.png'),
-              ),
-              ListTile(
-                title: const Text("Asosiy"),
-                onTap: () {},
-                leading: Image.asset('assets/images/Vector.png'),
-              ),
-              ListTile(
-                title: const Text("E’lonlarim"),
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const FavoritAds()));
-                },
-                leading: const Icon(Icons.checklist_rtl_sharp),
-              ),
-              ListTile(
-                leading: const Icon(Icons.settings),
-                title: const Text("Sozlamalar"),
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => const Setting()));
-                },
-                // expandedCrossAxisAlignment: CrossAxisAlignment.start,
-              ),
-              ListTile(
-                  title: const Text("Bildirishnomalar"),
-                  onTap: () {},
-                  leading: const Icon(Icons.notifications_none)),
-              ListTile(
-                title: const Text("Chat"),
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>AllChats()));
-                },
-                leading: const Icon(Icons.chat),
-              ),
-              ListTile(
-                  title: const Text("Sevimlilar"),
-                  onTap: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => const FavoritPage()));
-                  },
-                  leading: const Icon(Icons.favorite_border)),
-              Padding(
-                padding: const EdgeInsets.fromLTRB(80, 100, 0, 0),
-                child: ListTile(
-                  title: const Text("Version 1.1.0"),
-                  onTap: () {},
+              Expanded(
+                child: ListView(
+                  scrollDirection: Axis.vertical,
+                 physics: const NeverScrollableScrollPhysics(),
+                  padding: EdgeInsets.zero,
+                  shrinkWrap: true,
+                  children: [
+                    DrawerHeader(
+                      decoration: BoxDecoration(
+                          color: Colors.blue,
+                          borderRadius: BorderRadius.only(
+                              bottomLeft: Radius.circular(10.r),
+                              bottomRight: Radius.circular(10.r))),
+                      child: Image.asset('assets/images/logo.png'),
+                    ),
+                    ListTile(
+                      title: const Text("Asosiy"),
+                      onTap: () {},
+                      leading: Image.asset('assets/images/Vector.png'),
+                    ),
+                    ListTile(
+                      title: const Text("E’lonlarim"),
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => const FavoritAds()));
+                      },
+                      leading: const Icon(Icons.checklist_rtl_sharp),
+                    ),
+                    ListTile(
+                      leading: const Icon(Icons.settings),
+                      title: const Text("Sozlamalar"),
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => const Setting()));
+                      },
+                      // expandedCrossAxisAlignment: CrossAxisAlignment.start,
+                    ),
+                    ListTile(
+                        title: const Text("Bildirishnomalar"),
+                        onTap: () {},
+                        leading: const Icon(Icons.notifications_none)),
+                    ListTile(
+                      title: const Text("Chat"),
+                      onTap: () {
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>AllChats()));
+                      },
+                      leading: const Icon(Icons.chat),
+                    ),
+                    ListTile(
+                        title: const Text("Sevimlilar"),
+                        onTap: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => const FavoritPage()));
+                        },
+                        leading: const Icon(Icons.favorite_border)),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(80, 100, 0, 0),
+                      child: ListTile(
+                        title: const Text("Version 1.1.0"),
+                        onTap: () {},
+                      ),
+                    ),
+                    InkWell(
+                      onTap: () {
+                        showAlertDialog(context);
+                      },
+                    ),
+                  ],
                 ),
-              ),
-              InkWell(
-                onTap: () {
-                  showAlertDialog(context);
-                },
               ),
             ],
           ),

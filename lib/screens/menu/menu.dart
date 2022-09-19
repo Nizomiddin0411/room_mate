@@ -35,7 +35,7 @@ class _MenuPageState extends State<MenuPage> {
 
     return Scaffold(
       key: _scaffoldKey,
-      drawer: const DrawerPage(),
+      drawer:  DrawerPage(),
       appBar: AppBar(
         backgroundColor: AppColors.backgroundWhite,
         leading: InkWell(
