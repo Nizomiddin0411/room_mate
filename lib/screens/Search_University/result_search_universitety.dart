@@ -1,15 +1,17 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:provider/provider.dart';
+import 'package:hive/hive.dart';
 import 'package:talaba_uy/chat/chat_page.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
-import 'package:talaba_uy/models/search_univer%20all.dart';
+import 'package:talaba_uy/core/data/mockdata.dart';
 import 'package:talaba_uy/models/searching_students_model.dart';
-import 'package:talaba_uy/provider/universitet_provider.dart';
-import 'package:talaba_uy/screens/Search_University/details_page.dart';
+import 'package:talaba_uy/screens/All_Ads_Page/detail_page.dart';
+import 'package:talaba_uy/screens/Ijarachipage/filtr.dart';
+import 'package:talaba_uy/screens/Search_University/filtr_university.dart';
 import 'package:talaba_uy/services/searching_ads_service.dart';
 import 'package:talaba_uy/services/searching_students_service.dart';
+
 import '../../models/searching_ads_model.dart';
 import 'result _filtr_search.universitety.dart';
 

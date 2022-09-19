@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:talaba_uy/models/get_district_model.dart';
-import 'package:talaba_uy/services/get_district_service.dart';
-
 import '../models/get_all_ads.dart';
 import '../models/get_faculty_model.dart';
 import '../models/get_region_model.dart';
@@ -28,6 +26,18 @@ class RegionProvider extends ChangeNotifier{
   bool isFaculty = false;
   String defaultFaculty = 'Faqutetni tanlang';
   bool isChanded = false;
+
+  bool isRegion = false;
+  bool isDistricts = false;
+  bool isUniver = false;
+  bool isCourse = false;
+  bool isTypeHouse = false;
+  bool isCount = false;
+  bool isRent = false;
+  bool isSubway = false;
+  bool isFromCost = false;
+  bool isToCost = false;
+
 
   void _setFiltr(bool value){
     isChanded = value;

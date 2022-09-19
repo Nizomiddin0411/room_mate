@@ -14,7 +14,7 @@ import '../../services/get_all_ads_sevice.dart';
 import '../../services/get_all_ads_user.dart';
 import '../../services/post_change_favoritr_service.dart';
 
-class Elonlar extends StatefulWidget  {
+class Elonlar extends StatefulWidget {
   const Elonlar({Key? key}) : super(key: key);
 
   @override
@@ -82,9 +82,20 @@ class _ElonlarState extends State<Elonlar> {
                           InkWell(
                             onTap: () {
                               Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => FiltrPage())).then((value) => data.isChanded);
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => FiltrPage()))
+                                  .then((value) => data.isChanded);
+                              data.isRegion = false;
+                              data.isDistricts = false;
+                              data.isUniver = false;
+                              data.isCourse = false;
+                              data.isTypeHouse = false;
+                              data.isCount = false;
+                              data.isRent = false;
+                              data.isSubway = false;
+                              data.isFromCost = false;
+                              data.isToCost = false;
                             },
                             child: const Center(
                               child: Icon(
@@ -117,103 +128,111 @@ class _ElonlarState extends State<Elonlar> {
           controller: _tabController,
           children: [
             Consumer<RegionProvider>(
-            builder: (_, data, __) {
-          return ListView.builder(
-                shrinkWrap: true,
-                itemCount: data.isChanded ? data.Ads.length: 3,
-                itemBuilder: (BuildContext contex, int index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(18.0),
-                    child: Container(
-                      width: 324.w,
-                      height: 100.h,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(6.r),
-                          color: AppColors.secondBackgroud),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              builder: (_, data, __) {
+                return ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: data.Ads.length,
+                    itemBuilder: (BuildContext contex, int index) {
+                      return Padding(
+                        padding: const EdgeInsets.all(18.0),
+                        child: Container(
+                          width: 324.w,
+                          height: 100.h,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(6.r),
+                              color: AppColors.secondBackgroud),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Padding(
-                                padding: const EdgeInsets.all(6.0),
-                                child: Text(
-                                  data.isChanded ? data.Ads[index].title.toString() :'Studentlar uchun',
-                                  style: TextStyle(fontSize: 18.sp),
-                                ),
-                              ),
-                              Padding(
-                                  padding:
-                                      const EdgeInsets.fromLTRB(1, 0, 8, 0),
-                                  child: FavoriteButton(
-                                    // isFavorite: snapshot.data![index].favorite == '0'? false : true,
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.all(6.0),
+                                    child: Text(
+                                      data.isChanded
+                                          ? data.Ads[index].title.toString()
+                                          : 'Studentlar uchun',
+                                      style: TextStyle(fontSize: 18.sp),
+                                    ),
+                                  ),
+                                  Padding(
+                                      padding:
+                                          const EdgeInsets.fromLTRB(1, 0, 8, 0),
+                                      child: FavoriteButton(
+                                        // isFavorite: snapshot.data![index].favorite == '0'? false : true,
 
-                                    iconSize: 35.0,
-                                    valueChanged: (_isFavorite) {
-                                      print('Is Favorite $_isFavorite)');
-                                      setState(() {
-                                        // FavoriteChange().Favoritefetch(id: snapshot.data![index].id.toString());
-                                      });
-                                    },
-                                  )
-                                  // InkWell(
-                                  //   onTap: (){},
-                                  //   child:  Icon(
-                                  //     snapshot.data![index].favorite == '0' ? Icons.favorite_border:Icons.favorite,
-                                  //     color: AppColors.error,
-                                  //   ),
-                                  // ),
-                                  )
-                            ],
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-                            child: Text(
-                              '300/sum',
-                              style: TextStyle(
-                                  color: AppColors.mainColor, fontSize: 24.sp),
-                            ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
+                                        iconSize: 35.0,
+                                        valueChanged: (_isFavorite) {
+                                          // print('Is Favorite $_isFavorite)');
+                                          setState(() {
+                                            // FavoriteChange().Favoritefetch(id: snapshot.data![index].id.toString());
+                                          });
+                                        },
+                                      )
+                                      // InkWell(
+                                      //   onTap: (){},
+                                      //   child:  Icon(
+                                      //     snapshot.data![index].favorite == '0' ? Icons.favorite_border:Icons.favorite,
+                                      //     color: AppColors.error,
+                                      //   ),
+                                      // ),
+                                      )
+                                ],
+                              ),
                               Padding(
                                 padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
                                 child: Text(
-                                  "Uch tepa tumani 26 13 14",
-                                  style: TextStyle(fontSize: 10.sp),
+                                  '${data.Ads[index].cost.toString()}${data.Ads[index].costType.toString()}',
+                                  style: TextStyle(
+                                      color: AppColors.mainColor,
+                                      fontSize: 24.sp),
                                 ),
                               ),
-                              InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => DetailPage()));
-                                },
-                                child: const Padding(
-                                  padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
-                                  child: Text(
-                                    'Batafsil',
-                                    style: TextStyle(
-                                        decoration: TextDecoration.underline,
-                                        color: AppColors.mainColor),
+                              Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Padding(
+                                    padding:
+                                        const EdgeInsets.fromLTRB(8, 0, 8, 0),
+                                    child: Text(
+                                      "${data.Ads[index].address.toString()}",
+                                      style: TextStyle(fontSize: 10.sp),
+                                    ),
                                   ),
-                                ),
+                                  InkWell(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  DetailPage()));
+                                    },
+                                    child: const Padding(
+                                      padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
+                                      child: Text(
+                                        'Batafsil',
+                                        style: TextStyle(
+                                            decoration:
+                                                TextDecoration.underline,
+                                            color: AppColors.mainColor),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                              SizedBox(
+                                height: 18.h,
                               )
                             ],
                           ),
-                          SizedBox(
-                            height: 18.h,
-                          )
-                        ],
-                      ),
-                    ),
-                  );
-                });
-  },
-),
+                        ),
+                      );
+                    });
+              },
+            ),
             FutureBuilder<List<AllAdsModel>?>(
                 future: GetAllAdsUser().fetchAllADSUser(),
                 builder: (context, AsyncSnapshot<List<AllAdsModel>?> snapshot) {
