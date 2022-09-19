@@ -15,7 +15,8 @@ class AllChats extends StatefulWidget {
 class _AllChatsState extends State<AllChats> {
   GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
   int myId = Hive.box('id').get('id');
-  int id = Hive.box('Id').get('Id');
+  int leng = 0;
+  List _iList = [];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,17 +49,28 @@ class _AllChatsState extends State<AllChats> {
                 child: CircularProgressIndicator(),
               );
             }
-            print(snapshot.data!.docs.length);
+            int lengFunc(leng) {
+              for (int i = 0; i < snapshot.data!.docs.length; i++) {
+                if (int.parse(snapshot.data!.docs[i].id) % myId == 0) {
+                  print(i);
+                    leng += 1;
+                    _iList.add(i);
+                }
+              }
+              return leng;
+            }
+
             return ListView.builder(
-              itemCount: snapshot.data!.docs.length,
+              itemCount: lengFunc(leng),
               physics: ScrollPhysics(),
               shrinkWrap: true,
               primary: true,
               itemBuilder: ((context, index) {
-                QueryDocumentSnapshot qs = snapshot.data!.docs[index];
+                QueryDocumentSnapshot qs = snapshot.data!.docs[_iList[index]];
                 return InkWell(
                   onTap: () {
-                    print(qs);
+                    
+                    print(qs['id']);
                     Navigator.push(
                         context,
                         MaterialPageRoute(

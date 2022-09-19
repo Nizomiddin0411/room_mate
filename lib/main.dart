@@ -23,22 +23,21 @@ import 'package:easy_localization/easy_localization.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(
-    // options: FirebaseOptions(
-    //   apiKey: "a",
-    //   appId: "a",
-    //   messagingSenderId: "",
-    //   projectId: "1",
-    // ),
-  );
   await EasyLocalization.ensureInitialized();
+  await Firebase.initializeApp(
+      // options: FirebaseOptions(
+      //   apiKey: "a",
+      //   appId: "a",
+      //   messagingSenderId: "",
+      //   projectId: "1",
+      // ),
+      );
+
   await Hive.initFlutter();
   await Hive.openBox('token');
   await Hive.openBox('regionId');
-  await Hive.openBox('id');
   await Hive.openBox('id'); // myId
   await Hive.openBox('Id'); // friendId
-  await Hive.openBox('haveMessage');
 
   runApp(EasyLocalization(
     path: 'assets/locale',
@@ -66,9 +65,10 @@ class MyApp extends StatelessWidget {
         builder: (context, child) {
           return MultiProvider(
             providers: [
-              ChangeNotifierProvider(create: (context1)=>UniversitetProvider()),
-              ChangeNotifierProvider(create: (contxet)=>RegionProvider()),
-              ChangeNotifierProvider(create: (context)=>SearchUniversitet())
+              ChangeNotifierProvider(
+                  create: (context1) => UniversitetProvider()),
+              ChangeNotifierProvider(create: (contxet) => RegionProvider()),
+              ChangeNotifierProvider(create: (context) => SearchUniversitet())
             ],
             child: MaterialApp(
               localizationsDelegates: context.localizationDelegates,
@@ -100,7 +100,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Hive.box('token').isEmpty ? LanguagePage(): MenuPage(),
+      body: Hive.box('token').isEmpty ? LanguagePage() : MenuPage(),
       // This trailing comma makes auto-formatting nicer for build methods.
     );
   }

@@ -1,10 +1,6 @@
-
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:talaba_uy/bloc/bloc_region/region_event.dart';
 import 'package:talaba_uy/bloc/bloc_region/region_statate.dart';
-import 'package:talaba_uy/chat/model.dart';
 import 'package:talaba_uy/repository/region_repository.dart';
 
 import '../../models/get_region_model.dart';
