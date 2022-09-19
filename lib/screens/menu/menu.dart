@@ -26,9 +26,8 @@ class _MenuPageState extends State<MenuPage> {
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
   @override
   void initState() {
-
-
     super.initState();
+    Provider.of<SearchUniversitet>(context, listen: false).getSearchUniver('0');
     Provider.of<SearchUniversitet>(context, listen: false).getSearchUniver(toStringShort());
   }
 
