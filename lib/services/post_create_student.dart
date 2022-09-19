@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 
+import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 import 'package:talaba_uy/services/post_create_ads_student.dart';
 
@@ -32,23 +33,18 @@ class RegistratsiyaStudent {
       'roommate': Roommate,
       'birth_district_id': District
     });
-    request.headers.addAll({
-      HttpHeaders.authorizationHeader: 'Bearer VVuDO41zOoYY2KvUUHYPOJ9PzKsnnJeD'
-    });
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode >= 200 && response.statusCode <= 300) {
       var data = await response.stream.bytesToString();
-      print('---------------------');
-      print("$gender ##########");
-      print("$Roommate sherik kerakkkk ");
-      print("$fakultetId sherik kerakkkkcbdshcbbhdcbd ");
+      print('$Phonenumber jjfhhfhdsdvtsdfstd');
+      print("$gender    jinsi ");
+      print("$Roommate sherik rommate  ");
+      print("$fakultetId fakulted id si  ");
       print("$Course sheri kursi ");
-      print("$District tugilgan joyyyy ");
-      print("$FullName Ismiiiiiii ");
-
-      // await Hive.box('token').put('token', jsonDecode(data)["access_token"]);
-
+      print("$District  viloyattt idisi  ");
+      print("$UniderId  univer idsi   ");
+      print("$Roommate  rommate sherik   ");
       return jsonDecode(data);
     }
   }
