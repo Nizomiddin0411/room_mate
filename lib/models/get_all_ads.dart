@@ -20,6 +20,10 @@ class AllAdsModel {
   String? createdAt;
   String? updatedAt;
   String? favorite;
+  Region? region;
+  District? district;
+  University? university;
+  Faculty? faculty;
 
   AllAdsModel(
       {this.id,
@@ -42,7 +46,11 @@ class AllAdsModel {
         this.description,
         this.createdAt,
         this.updatedAt,
-        this.favorite});
+        this.favorite,
+        this.region,
+        this.district,
+        this.university,
+        this.faculty});
 
   AllAdsModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -66,6 +74,16 @@ class AllAdsModel {
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     favorite = json['favorite'];
+    region =
+    json['region'] != null ? new Region.fromJson(json['region']) : null;
+    district = json['district'] != null
+        ? new District.fromJson(json['district'])
+        : null;
+    university = json['university'] != null
+        ? new University.fromJson(json['university'])
+        : null;
+    faculty =
+    json['faculty'] != null ? new Faculty.fromJson(json['faculty']) : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -91,6 +109,147 @@ class AllAdsModel {
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
     data['favorite'] = this.favorite;
+    if (this.region != null) {
+      data['region'] = this.region!.toJson();
+    }
+    if (this.district != null) {
+      data['district'] = this.district!.toJson();
+    }
+    if (this.university != null) {
+      data['university'] = this.university!.toJson();
+    }
+    if (this.faculty != null) {
+      data['faculty'] = this.faculty!.toJson();
+    }
+    return data;
+  }
+}
+
+class Region {
+  int? id;
+  String? name;
+  dynamic nameRu;
+
+  Region({this.id, this.name, this.nameRu});
+
+  Region.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    nameRu = json['name_ru'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['name'] = this.name;
+    data['name_ru'] = this.nameRu;
+    return data;
+  }
+}
+
+class District {
+  int? id;
+  int? regionId;
+  String? name;
+  dynamic nameRu;
+
+  District({this.id, this.regionId, this.name, this.nameRu});
+
+  District.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    regionId = json['region_id'];
+    name = json['name'];
+    nameRu = json['name_ru'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['region_id'] = this.regionId;
+    data['name'] = this.name;
+    data['name_ru'] = this.nameRu;
+    return data;
+  }
+}
+
+class University {
+  int? id;
+  String? name;
+  String? nameRu;
+  dynamic short;
+  dynamic districtId;
+  dynamic address;
+  String? advertising;
+  String? searching;
+
+  University(
+      {this.id,
+        this.name,
+        this.nameRu,
+        this.short,
+        this.districtId,
+        this.address,
+        this.advertising,
+        this.searching});
+
+  University.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    nameRu = json['name_ru'];
+    short = json['short'];
+    districtId = json['district_id'];
+    address = json['address'];
+    advertising = json['advertising'];
+    searching = json['searching'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['name'] = this.name;
+    data['name_ru'] = this.nameRu;
+    data['short'] = this.short;
+    data['district_id'] = this.districtId;
+    data['address'] = this.address;
+    data['advertising'] = this.advertising;
+    data['searching'] = this.searching;
+    return data;
+  }
+}
+
+class Faculty {
+  int? id;
+  int? universityId;
+  String? name;
+  String? nameRu;
+  String? advertising;
+  String? searching;
+
+  Faculty(
+      {this.id,
+        this.universityId,
+        this.name,
+        this.nameRu,
+        this.advertising,
+        this.searching});
+
+  Faculty.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    universityId = json['university_id'];
+    name = json['name'];
+    nameRu = json['name_ru'];
+    advertising = json['advertising'];
+    searching = json['searching'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['university_id'] = this.universityId;
+    data['name'] = this.name;
+    data['name_ru'] = this.nameRu;
+    data['advertising'] = this.advertising;
+    data['searching'] = this.searching;
     return data;
   }
 }

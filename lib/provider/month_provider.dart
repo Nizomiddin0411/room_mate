@@ -4,14 +4,16 @@ import '../models/get_all_ads.dart';
 import '../models/get_faculty_model.dart';
 import '../models/get_region_model.dart';
 import '../models/get_univer_model.dart';
-import '../services/get_all_ads_for_student.dart';
-import '../services/get_all_ads_sevice.dart';
+import '../services/get_ads_day_student.dart';
+import '../services/get_ads_day_user.dart';
 import '../services/get_district_for_create.dart';
 import '../services/get_faculty_create_ads.dart';
+import '../services/get_month_ads_for_student.dart';
+import '../services/get_month_ads_for_user.dart';
 import '../services/get_region_service.dart';
 import '../services/get_univer_create_ads.dart';
 
-class RegionProvider extends ChangeNotifier {
+class MonthProvider extends ChangeNotifier {
   List<GetRegionModel> regions = [];
   List<GetDistrictModel> districts = [];
   List<GetUniverModel> univer = [];
@@ -81,92 +83,87 @@ class RegionProvider extends ChangeNotifier {
   }
 
 
-  Future<void> getFiltrApi(String regionId,
-      String districtId,
-      String univerId,
-      String course,
-      String houseType,
-      String roomCount,
-      String rentType,
-      String subway,
-      String costFrom,
-      String costTo,
-      // String Type,
-
-      ) async {
-    _setFiltr(false);
-    Ads = await GetAllAdsService().fetchAllADS(
-      regionId,
-      districtId,
-      univerId,
-      course,
-      houseType,
-      roomCount,
-      rentType,
-      subway,
-      costFrom,
-      costTo,
-      // Type,
-
-    );
-    _setFiltr(true);
-  }
-
-  Future<void> getFiltrForStudent(String regionId,
-      String districtId,
-      String univerId,
-      String course,
-      String houseType,
-      String roomCount,
-      String rentType,
-      String subway,
-      String costFrom,
-      String costTo,
-      // String Type,
-      ) async {
-    _setFiltr(false);
-    AdsForStudent = await GetAdsForStudent().fetchADS(
-      regionId,
-      districtId,
-      univerId,
-      course,
-      houseType,
-      roomCount,
-      rentType,
-      subway,
-      costFrom,
-      costTo,
-      // Type,
-
-    );
-    _setFiltr(true);
-  }
-
-
-  Future<void> ForStudentZero(
+  Future<void> getFiltrApi(
       String regionId,
       String districtId,
       String univerId,
       String course,
       String houseType,
       String roomCount,
-      String rentType,
       String subway,
       String costFrom,
       String costTo,
-      // String Type,
+
       ) async {
-    AdsForZero = await GetAdsForStudent().fetchADS(
+    _setFiltr(false);
+    Ads = await GetMonthAdsUser().fetchAdsMonthUser(
       regionId,
       districtId,
       univerId,
       course,
       houseType,
       roomCount,
-      rentType,
+      subway,
+      costFrom,
+      costTo,
+
+    );
+    _setFiltr(true);
+  }
+
+  Future<void> getFiltrForStudent(
+      String regionId,
+      String districtId,
+      String univerId,
+      String course,
+      String houseType,
+      String roomCount,
+      String subway,
+      String costFrom,
+      String costTo,
+      ) async {
+    _setFiltr(false);
+    AdsForStudent = await GetMonthAdsStudent().fetchAdsMonth(
+      regionId,
+      districtId,
+      univerId,
+      course,
+      houseType,
+      roomCount,
       subway,
       costFrom,
       costTo,
     );
+    _setFiltr(true);
   }
+
+
+// Future<void> ForStudentZero(
+//     String regionId,
+//     String districtId,
+//     String univerId,
+//     String course,
+//     String houseType,
+//     String roomCount,
+//     String rentType,
+//     String subway,
+//     String costFrom,
+//     String costTo,
+//     // String Type,
+//     ) async {
+//   AdsForZero = await GetAdsForStudent().fetchADS(
+//     regionId,
+//     districtId,
+//     univerId,
+//     course,
+//     houseType,
+//     roomCount,
+//     rentType,
+//     subway,
+//     costFrom,
+//     costTo,
+//     // Type,
+//
+//   );
+// }
 }
