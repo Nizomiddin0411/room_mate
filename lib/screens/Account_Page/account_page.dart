@@ -2,8 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
+import 'package:switcher/core/switcher_size.dart';
+import 'package:switcher/switcher.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
 import 'package:talaba_uy/screens/Autorization/language_dart.dart';
+
+import '../../services/post_change_profile.dart';
 
 class AccountPage extends StatefulWidget {
   const AccountPage({Key? key}) : super(key: key);
@@ -13,7 +17,7 @@ class AccountPage extends StatefulWidget {
 }
 
 class _AccountPageState extends State<AccountPage> {
-  bool _switchValue=false;
+  bool _switchValue = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +25,7 @@ class _AccountPageState extends State<AccountPage> {
         backgroundColor: AppColors.backgroundWhite,
         title: const Center(
           child: Text(
-            "Shaxsiy kobinet",
+            "Shaxsiy kabinet",
             style: TextStyle(color: AppColors.mainColor),
           ),
         ),
@@ -62,42 +66,47 @@ class _AccountPageState extends State<AccountPage> {
           SizedBox(
             height: 20.h,
           ),
+    //       InkWell(
+    //       onTap: () {},
+    // child: ListTile(
+    //         leading: Container(
+    //             width: 40.w,
+    //             height: 40.h,
+    //             decoration: BoxDecoration(
+    //               color: AppColors.iconBack,
+    //               borderRadius: BorderRadius.circular(8.r),
+    //             ),
+    //             child: const Icon(
+    //               Icons.payment,
+    //               color: AppColors.mainColor,
+    //             )),
+    //         title: Text(
+    //           "To'lovlar",
+    //           style: TextStyle(fontSize: 18.sp),
+    //         ),
+    //       ),
+    //       ),
+    // InkWell(
+    // onTap: () {},
+    // child: ListTile(
+    //         leading: Container(
+    //             width: 40.w,
+    //             height: 40.h,
+    //             decoration: BoxDecoration(
+    //               color: AppColors.iconBack,
+    //               borderRadius: BorderRadius.circular(8.r),
+    //             ),
+    //             child: const Icon(
+    //               Icons.chat,
+    //               color: AppColors.mainColor,
+    //             )),
+    //         title: Text(
+    //           "Fikr qoldirish",
+    //           style: TextStyle(fontSize: 18.sp),
+    //         ),
+    //       ),
+    // ),
           ListTile(
-            leading: Container(
-                width: 40.w,
-                height: 40.h,
-                decoration: BoxDecoration(
-                  color: AppColors.iconBack,
-                  borderRadius: BorderRadius.circular(8.r),
-                ),
-                child: const Icon(
-                  Icons.payment,
-                  color: AppColors.mainColor,
-                )),
-            title: Text(
-              "To'lovlar",
-              style: TextStyle(fontSize: 18.sp),
-            ),
-          ),
-          ListTile(
-            leading: Container(
-                width: 40.w,
-                height: 40.h,
-                decoration: BoxDecoration(
-                  color: AppColors.iconBack,
-                  borderRadius: BorderRadius.circular(8.r),
-                ),
-                child: const Icon(
-                  Icons.chat,
-                  color: AppColors.mainColor,
-                )),
-            title: Text(
-              "Fikr qoldirish",
-              style: TextStyle(fontSize: 18.sp),
-            ),
-          ),
-          ListTile(
-
             leading: Container(
                 width: 40.w,
                 height: 40.h,
@@ -113,7 +122,28 @@ class _AccountPageState extends State<AccountPage> {
               "Sherik kerak",
               style: TextStyle(fontSize: 18.sp),
             ),
-
+            trailing: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Container(
+                height: 35.h,
+                width: 80.w,
+                child: Switcher(
+                  value: _switchValue,
+                  size: SwitcherSize.medium,
+                  switcherButtonRadius: 30.r,
+                  enabledSwitcherButtonRotate: true,
+                  iconOn: Icons.check,
+                  colorOff: Colors.blue.withOpacity(0.3),
+                  colorOn: Colors.blue,
+                  onChanged: (bool state) {
+                  },
+                  onTap: () async{
+                    // print(_switchValue);
+                    await ChangeProfile().ChangeProf(id: _switchValue ? '1': '2');
+                  },
+                ),
+              ),
+            ),
           ),
           InkWell(
             onTap: () {
@@ -138,7 +168,7 @@ class _AccountPageState extends State<AccountPage> {
             ),
           ),
           SizedBox(
-            height: 85.h,
+            height: 230.h,
           ),
           Center(
             child: Text("Version 1.1.0"),
