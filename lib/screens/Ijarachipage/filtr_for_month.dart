@@ -1,9 +1,9 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
-import '../../provider/day_provider.dart';
 import '../../provider/month_provider.dart';
 
 
@@ -99,7 +99,7 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
               color: AppColors.mainColor,
               fontSize: 18.sp,
               fontWeight: FontWeight.w500),
-        ),
+        ).tr(),
         centerTitle: true,
         leading: InkWell(
           child: const Icon(
@@ -125,7 +125,7 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                         color: AppColors.mainColor,
                         fontSize: 20.sp,
                         fontWeight: FontWeight.w500),
-                  ),
+                  ).tr(),
                   SizedBox(height: 12.h),
                   Text(
                     "Viloyat",
@@ -134,14 +134,14 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w500,
                     ),
-                  ),
+                  ).tr(),
                   SizedBox(height: 4.h),
                   Container(
                     width: 324.w,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.r)),
                     child: DropdownButtonFormField(
-                      hint: Text("Viloyatni tanlang"),
+                      hint: Text("Viloyatni tanlang").tr(),
                       decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           focusColor: Colors.grey),
@@ -157,7 +157,7 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                         );
                       }).toList(),
                       onChanged: (newValue) async {
-                        print("Selected ----------- $newValue");
+                        // print("Selected ----------- $newValue");
                         data.isRegion = true;
                         print(data.isRegion);
                         final selected = data.regions
@@ -177,7 +177,7 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w500,
                     ),
-                  ),
+                  ).tr(),
                   SizedBox(height: 4.h),
                   data.isDistrict
                       ? Container(
@@ -186,7 +186,7 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                         borderRadius: BorderRadius.circular(10.r)),
                     child: DropdownButtonFormField(
                       isExpanded: true,
-                      hint: Text("Tumanni tanlang"),
+                      hint: Text("Tumanni tanlang").tr(),
                       decoration: const InputDecoration(
                           isDense: true,
                           border: OutlineInputBorder(),
@@ -195,7 +195,7 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                       items: data.districts.map((e) {
                         return DropdownMenuItem<String>(
                           onTap: () {
-                            print("${e.name}${e.id}");
+                            // print("${e.name}${e.id}");
                             data.districtId = e.id.toString();
                           },
                           value: data.isDistrict
@@ -207,7 +207,7 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                         );
                       }).toList(),
                       onChanged: (newValue) {
-                        print("Selected ----------- $newValue");
+                        // print("Selected ----------- $newValue");
                         data.isDistrict = true;
                         setState(() {
                           // dropDown1 = newValue as GetDistrictModel?;
@@ -222,7 +222,7 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                         borderRadius: BorderRadius.circular(10.r)),
                     child: DropdownButtonFormField(
                         isExpanded: true,
-                        hint: Text("Tumanni tanlang"),
+                        hint: Text("Tumanni tanlang").tr(),
                         decoration: const InputDecoration(
                             isDense: true,
                             border: OutlineInputBorder(),
@@ -239,7 +239,7 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w500,
                     ),
-                  ),
+                  ).tr(),
                   SizedBox(height: 4.h),
                   Container(
                     width: 324.w,
@@ -247,7 +247,7 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                         borderRadius: BorderRadius.circular(10.r)),
                     child: DropdownButtonFormField(
                       isExpanded: true,
-                      hint: Text("OTM ni tanlang"),
+                      hint: Text("OTM ni tanlang").tr(),
                       decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           focusColor: Colors.grey),
@@ -281,13 +281,13 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                     height: 18.h,
                   ),
                   Text(
-                    "Kurs",
+                    "Kursi",
                     style: TextStyle(
                       color: AppColors.textColor,
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w500,
                     ),
-                  ),
+                  ).tr(),
                   SizedBox(height: 4.h),
                   Container(
                     decoration: BoxDecoration(
@@ -334,7 +334,7 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                         color: AppColors.mainColor,
                         fontSize: 20.sp,
                         fontWeight: FontWeight.w500),
-                  ),
+                  ).tr(),
                   SizedBox(height: 19.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -349,14 +349,14 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                               fontSize: 14.sp,
                               fontWeight: FontWeight.w500,
                             ),
-                          ),
+                          ).tr(),
                           SizedBox(height: 4.h),
                           Container(
                             width: 152.w,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10.r)),
                             child: DropdownButtonFormField(
-                              hint: Text("Kv yoki xovli"),
+                              hint: Text("Kvartira,Xovli",style: TextStyle(fontSize: 14.sp),).tr(),
                               decoration: const InputDecoration(
                                   border: OutlineInputBorder(),
                                   focusColor: Colors.grey),
@@ -388,14 +388,14 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                               fontSize: 14.sp,
                               fontWeight: FontWeight.w500,
                             ),
-                          ),
+                          ).tr(),
                           SizedBox(height: 4.h),
                           Container(
                             width: 152.w,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10.r)),
                             child: DropdownButtonFormField(
-                              hint: Text("Xonalar soni"),
+                              hint: Text("Xonalar soni",style: TextStyle(fontSize: 11.sp)).tr(),
                               decoration: const InputDecoration(
                                   border: OutlineInputBorder(),
                                   focusColor: Colors.grey),
@@ -427,7 +427,7 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w500,
                     ),
-                  ),
+                  ).tr(),
                   SizedBox(height: 4.h),
                   Container(
                     decoration: BoxDecoration(
@@ -438,7 +438,7 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10.r)),
                       child: DropdownButtonFormField(
-                        hint: Text("Ijara muddati"),
+                        hint: Text("Ijara muddati").tr(),
                         decoration: const InputDecoration(
                             border: OutlineInputBorder(),
                             focusColor: Colors.grey),
@@ -481,7 +481,7 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                       SizedBox(
                         width: 12.w,
                       ),
-                      Text("Metroga yaqin")
+                      Text("Metroga yaqin").tr()
                     ],
                   ),
                   SizedBox(height: 22.h),
@@ -491,9 +491,9 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                         color: AppColors.mainColor,
                         fontSize: 20.sp,
                         fontWeight: FontWeight.w500),
-                  ),
+                  ).tr(),
                   SizedBox(height: 12.h),
-                  Text("Dan"),
+                  Text("Dan").tr(),
                   SizedBox(height: 6.h),
                   Row(
                     children: [
@@ -513,7 +513,7 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                               controller: fromCost,
                               decoration: InputDecoration(
                                 border: InputBorder.none,
-                                hintText: "dan",
+                                hintText: tr("dan"),
                                 hintStyle: TextStyle(
                                     fontSize: 14.sp, color: Colors.grey),
                               ),
@@ -543,7 +543,7 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                               controller: toCost,
                               decoration: InputDecoration(
                                 border: InputBorder.none,
-                                hintText: "gacha",
+                                hintText: tr("gacha"),
                                 hintStyle: TextStyle(
                                     fontSize: 14.sp, color: Colors.grey),
                               ),
@@ -685,7 +685,7 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                             "Saqlash",
                             style: TextStyle(
                                 fontSize: 20.sp, fontWeight: FontWeight.w500),
-                          ),
+                          ).tr(),
                         )),
                   )
                 ],

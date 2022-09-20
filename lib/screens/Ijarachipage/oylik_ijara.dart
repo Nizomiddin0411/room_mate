@@ -1,22 +1,12 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
-
-import 'package:talaba_uy/screens/All_Ads_Page/detail_page.dart';
-import 'package:talaba_uy/screens/Ijarachipage/filtr.dart';
-
-import '../../models/get_all_ads.dart';
-import '../../provider/day_provider.dart';
 import '../../provider/month_provider.dart';
-import '../../provider/region_provider.dart';
-import '../../services/get_all_ads_sevice.dart';
-import '../../services/get_all_ads_user.dart';
 import '../../services/post_change_favoritr_service.dart';
 import '../Ads_Detail/ads_detail.dart';
-import 'filtr_for_day.dart';
 import 'filtr_for_month.dart';
 
 class OylikIjara extends StatefulWidget {
@@ -77,19 +67,20 @@ class _OylikIjaraState extends State<OylikIjara> {
               ),
             ),
             backgroundColor: AppColors.backgroundWhite,
-            title: const Center(
+            title:  Padding(
+              padding: EdgeInsets.symmetric(horizontal: 35.w),
               child: Text(
                 "Oylik kvartira",
                 style: TextStyle(color: AppColors.mainColor),
-              ),
+              ).tr(),
             ),
             flexibleSpace: Consumer<MonthProvider>(
               builder: (_, data, __) {
                 return Padding(
-                  padding: const EdgeInsets.fromLTRB(18, 85, 18, 18),
+                  padding:  EdgeInsets.fromLTRB(18.w, 85.h, 18.w, 18.h),
                   child: Container(
-                    height: 50,
-                    width: 324,
+                    height: 50.h,
+                    width: 324.w,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(6.r),
                         color: AppColors.secondBackgroud),
@@ -106,7 +97,7 @@ class _OylikIjaraState extends State<OylikIjara> {
                             "Joylashuvni sozlash",
                             style: TextStyle(
                                 color: AppColors.iconColor, fontSize: 16.sp),
-                          ),
+                          ).tr(),
                           InkWell(
                             onTap: () {
                               Navigator.push(
@@ -139,14 +130,14 @@ class _OylikIjaraState extends State<OylikIjara> {
                 );
               },
             ),
-            bottom: const TabBar(
+            bottom:  TabBar(
               labelColor: AppColors.textColor,
               tabs: [
                 Tab(
-                  text: "Ijarachi kerak",
+                  text: tr("Ijarachi kerak"),
                 ),
                 Tab(
-                  text: "Kvartira kerak",
+                  text: tr("Kvartira kerak"),
                 )
               ],
             ),

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -78,16 +79,17 @@ class _KunlikIjaraState extends State<KunlikIjara> {
               ),
             ),
             backgroundColor: AppColors.backgroundWhite,
-            title: const Center(
+            title:  Padding(
+              padding: EdgeInsets.symmetric(horizontal: 40.w),
               child: Text(
                 "Kunlik kvartira",
                 style: TextStyle(color: AppColors.mainColor),
-              ),
+              ).tr(),
             ),
             flexibleSpace: Consumer<DayProvider>(
               builder: (_, data, __) {
                 return Padding(
-                  padding: const EdgeInsets.fromLTRB(18, 85, 18, 18),
+                  padding:  EdgeInsets.fromLTRB(18.w, 85.h, 18.w, 18.h),
                   child: Container(
                     height: 50.h,
                     width: 324.w,
@@ -107,7 +109,7 @@ class _KunlikIjaraState extends State<KunlikIjara> {
                             "Joylashuvni sozlash",
                             style: TextStyle(
                                 color: AppColors.iconColor, fontSize: 16.sp),
-                          ),
+                          ).tr(),
                           InkWell(
                             onTap: () {
                               Navigator.push(
@@ -140,14 +142,14 @@ class _KunlikIjaraState extends State<KunlikIjara> {
                 );
               },
             ),
-            bottom: const TabBar(
+            bottom:  TabBar(
               labelColor: AppColors.textColor,
               tabs: [
                 Tab(
-                  text: "Ijarachi kerak",
+                  text: tr("Ijarachi kerak"),
                 ),
                 Tab(
-                  text: "Kvartira kerak",
+                  text: tr("Kvartira kerak"),
                 )
               ],
             ),
@@ -188,7 +190,7 @@ class _KunlikIjaraState extends State<KunlikIjara> {
                                   ),
                                   Padding(
                                       padding:
-                                          const EdgeInsets.fromLTRB(1, 0, 8, 0),
+                                           EdgeInsets.fromLTRB(1.w, 0, 8.w, 0),
                                       child: FavoriteButton(
                                         isFavorite:
                                             data.Ads[index].favorite == '0'
@@ -207,7 +209,7 @@ class _KunlikIjaraState extends State<KunlikIjara> {
                                 ],
                               ),
                               Padding(
-                                padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+                                padding:  EdgeInsets.fromLTRB(8.w, 0, 8.w, 0),
                                 child: Text(
                                   '${data.Ads[index].cost.toString()} ${data.Ads[index].costType.toString() == "1" ? "so'm" : "y.e"}',
                                   style: TextStyle(
@@ -283,13 +285,13 @@ class _KunlikIjaraState extends State<KunlikIjara> {
                                     child: Padding(
                                       padding:
                                           EdgeInsets.fromLTRB(8.w, 0, 8.w, 0),
-                                      child: const Text(
+                                      child:  Text(
                                         'Batafsil',
                                         style: TextStyle(
                                             decoration:
                                                 TextDecoration.underline,
                                             color: AppColors.mainColor),
-                                      ),
+                                      ).tr(),
                                     ),
                                   )
                                 ],
@@ -453,15 +455,15 @@ class _KunlikIjaraState extends State<KunlikIjara> {
                                                         .toString(),
                                                   )));
                                     },
-                                    child: const Padding(
-                                      padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
+                                    child:  Padding(
+                                      padding: EdgeInsets.fromLTRB(8.w, 0, 8.w, 0),
                                       child: Text(
                                         'Batafsil',
                                         style: TextStyle(
                                             decoration:
                                                 TextDecoration.underline,
                                             color: AppColors.mainColor),
-                                      ),
+                                      ).tr(),
                                     ),
                                   )
                                 ],

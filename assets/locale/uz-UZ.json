@@ -88,6 +88,7 @@
   "E’lon beruvchi:": "E’lon beruvchi:",
   "Jinsi:":"Jinsi:",
   "Kursi:": "Kursi:",
+  "Kursi": "Kursi",
   "Aloqa": "Aloqa",
   "Oliy o’quv yurti": "Oliy o’quv yurti",
   "Erkak": "Erkak",
@@ -103,6 +104,11 @@
   "Ha": "Ha",
   "Yo'q":  "Yo'q",
   "Rozi": "Rozi",
-  "Roziemas": "Не согласен"
+  "Roziemas": "Не согласен",
+  "Viloyatni tanlang": "Viloyatni tanlang",
+  "Tumanni tanlang": "Tumanni tanlang",
+  "OTM ni tanlang":"OTM ni tanlang"
+
+
 
 }

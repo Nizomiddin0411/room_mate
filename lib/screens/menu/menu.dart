@@ -6,7 +6,6 @@ import 'package:provider/provider.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
 import 'package:talaba_uy/provider/search_universitet_provider.dart';
 import 'package:talaba_uy/screens/Account_Page/account_page.dart';
-import 'package:talaba_uy/screens/All_Ads_Page/all_ads_page.dart';
 import 'package:talaba_uy/screens/Create_ads/create_ads_page.dart';
 import 'package:talaba_uy/screens/Ijarachipage/elonlar.dart';
 import 'package:talaba_uy/screens/Ijarachipage/kunlik_ijara.dart';

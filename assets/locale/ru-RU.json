@@ -88,6 +88,7 @@
   "E’lon beruvchi:": "Рекламодатель:",
   "Jinsi:":"Пол:",
   "Kursi:": "Курс:",
+  "Kursi": "Курс",
   "Aloqa": "СМС",
   "Oliy o’quv yurti": "Высшее учебное заведение",
   "Erkak": "Мужчина",
@@ -103,5 +104,8 @@
   "Ha": "Да",
   "Yo'q":  "Нет",
   "Rozi": "Согласен",
-  "Roziemas": "Roziemas"
+  "Roziemas": "Roziemas",
+  "Viloyatni tanlang": "Выбрать регион",
+  "Tumanni tanlang": "Выбрать район",
+  "OTM ni tanlang":"Выбрать ВУЗ"
 }
