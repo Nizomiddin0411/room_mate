@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
@@ -58,7 +59,7 @@ class _LoginPageState extends State<LoginPage> {
                     "Login",
                     style:
                         TextStyle(color: AppColors.mainColor, fontSize: 32.sp),
-                  ),
+                  ).tr(),
                 ),
                 SizedBox(
                   height: 8.h,
@@ -70,14 +71,14 @@ class _LoginPageState extends State<LoginPage> {
                       "Shaxsiy xisobga kirish uchun maydonlarni to’ldiring",
                       style: TextStyle(fontSize: 16.sp),
                       textAlign: TextAlign.center,
-                    ),
+                    ).tr(),
                   ),
                 ),
                 SizedBox(
                   height: 36.h,
                 ),
                 Text(
-                  'Telefon raqamingiz',
+                  'Telefon raqamingiz'.tr(),
                   style:
                       TextStyle(fontSize: 12.sp, fontWeight: FontWeight.bold),
                 ),
@@ -139,7 +140,7 @@ class _LoginPageState extends State<LoginPage> {
                 ),
                 child: Center(
                   child: Text(
-                    "Keyingi",
+                    "Keyingi".tr(),
                     style: TextStyle(
                         color: AppColors.backgroundWhite, fontSize: 20.sp),
                   ),

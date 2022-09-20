@@ -23,7 +23,7 @@ class _StartPageState extends State<StartPage> {
         padding: const EdgeInsets.fromLTRB(25, 115, 25, 120),
         child: Column(
           children: [
-              Text("Assalomu alaykum , Xush kelibsiz".tr(),style: TextStyle(fontSize: 18.sp),),
+              Text("Assalomu alaykum , Xush kelibsiz ".tr(),style: TextStyle(fontSize: 18.sp),),
             SizedBox(
               height: 66.h,
             ),
@@ -55,7 +55,8 @@ class _StartPageState extends State<StartPage> {
               ),
               child: Center(
                 child: Text(
-                  "Login",
+                  "Login".tr(
+                  ),
                   style: TextStyle(color: Colors.blue,fontSize: 20.sp),
                 ),
               ),
@@ -64,7 +65,7 @@ class _StartPageState extends State<StartPage> {
             ),
             Padding(
               padding: const EdgeInsets.all(15.0),
-              child: Text('yoki').tr(),
+              child: Text('yoki'.tr()),
             ),
             ElevatedButton(
               onPressed: () {
@@ -86,7 +87,7 @@ class _StartPageState extends State<StartPage> {
                 ),
                 child: Center(
                   child: Text(
-                    "Ro’yxatda o’tish".tr(),
+                    "Ro’yxatdan o’tish".tr(),
                     style: TextStyle(color: AppColors.backgroundWhite,fontSize: 20.sp),
                   ),
                 ),
