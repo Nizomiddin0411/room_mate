@@ -82,11 +82,11 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                             width: 20,
                           ),
                           Container(
-                            height: 25,
-                            width: 200,
+                            height: 25.h,
+                            width: 200.w,
                             child: AutoSizeText(
                               widget.name,
-                              style: TextStyle(fontSize: 10),
+                              style: TextStyle(fontSize: 10.sp),
                               maxLines: 4,
                             ),
                           )
@@ -140,10 +140,10 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
               labelColor: AppColors.textColor,
               tabs: [
                 Tab(
-                  text: "Sherik kerak ",
+                  text: tr("Sherik kerak"),
                 ),
                 Tab(
-                  text: "E’lonlar",
+                  text: tr("E’lonlar"),
                 )
               ],
             ),
@@ -220,14 +220,14 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                               child: Text(
                                                 snapshot.data![index].gender ==
                                                         1
-                                                    ? "jinsi : Erkak"
-                                                    : "jinsi : Ayol",
+                                                    ? tr("jinsi") +":" +tr("Erkak")
+                                                    : tr("jinsi") +":" +tr("Ayol"),
                                                 style:
                                                     TextStyle(fontSize: 15.sp),
                                               ),
                                             ),
                                             Text(
-                                                "Kursi : ${snapshot.data![index].course}"),
+                                                tr("Kursi:")+"${snapshot.data![index].course}"),
                                             InkWell(
                                                 onTap: () {
                                                   Navigator.push(
@@ -267,7 +267,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                                             width: 10.w,
                                                           ),
                                                           Text(
-                                                            "Aloqa",
+                                                            tr("Aloqa"),
                                                             style: TextStyle(
                                                                 color: Colors
                                                                     .black),
@@ -328,8 +328,8 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                         padding: EdgeInsets.all(6.0.w),
                                         child: Text(
                                           snapshot.data![index].type == 2
-                                              ? 'Talaba'
-                                              : "Elon beruvchi",
+                                              ? tr('Talaba')
+                                              : tr("E’lon beruvchi:"),
                                           style: TextStyle(fontSize: 18.sp),
                                         ),
                                       ),
@@ -407,7 +407,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                           padding: EdgeInsets.fromLTRB(
                                               8.w, 0, 8.w, 0),
                                           child: Text(
-                                            'Batafsil',
+                                            tr('Batafsil'),
                                             style: TextStyle(
                                                 decoration:
                                                     TextDecoration.underline,

@@ -16,7 +16,7 @@
   "Viloyatingizni tanlang": "Выберите свой регион",
   "Qaysi tumanidansiz": "Вы из какого района",
   "Tumaningizni tanlang": "Выберите свой район",
-  "Sherik kerak": "Сосед по комнате",
+  "Sherik kerak": "Нужен сосед по комнате",
   "Roziman":"Я согласен",
   "Foydalanuvchi shartlariga": "К пользовательским условиям",
   "Foydalanuvchi shartlari": "Пользовательские условия",
@@ -88,5 +88,14 @@
   "E’lon beruvchi:": "Рекламодатель:",
   "Jinsi:":"Пол:",
   "Kursi:": "Курс:",
-  "Aloqa": "Общение"
+  "Aloqa": "СМС",
+  "Oliy o’quv yurti": "Высшее учебное заведение",
+  "Erkak": "Мужчина",
+  "Ayol": "Женщина",
+  "jinsi": "Пол",
+  "kishi": "человек",
+  "Ma’lumot": "Информация",
+  "Uy egasi bilan birga yashshga:": "Жить с хозяином:",
+  "Metroga yaqin bo'lsin": "Рядом с метро",
+  "Kvartira": "Квартира"
 }

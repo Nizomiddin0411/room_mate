@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
@@ -45,7 +46,19 @@ class _UniverDetailsState extends State<UniverDetails> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.backgroundWhite,
-        title: Center(child: Text('Batafsil',style: TextStyle(color: AppColors.mainColor),)),
+        title: Padding(
+          padding:  EdgeInsets.symmetric(horizontal: 65.w),
+          child: Text('Batafsil',style: TextStyle(color: AppColors.mainColor),).tr(),
+        ),
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back,
+            color: AppColors.textColor,
+          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -70,7 +83,7 @@ class _UniverDetailsState extends State<UniverDetails> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.fromLTRB(12,12,12,0),
+                          padding:  EdgeInsets.fromLTRB(12.w,12.h,12.w,0),
                           child: Text('${widget.cost_type} y.e/oy',style: TextStyle(fontSize: 24.sp,color: AppColors.mainColor),),
                         ),
                         const Padding(
@@ -90,9 +103,9 @@ class _UniverDetailsState extends State<UniverDetails> {
                         children: [
                           Container(
                             child: Row(
-                              children: const [
+                              children:  [
                                 Icon(Icons.apartment,color: AppColors.mainColor,),
-                                Text('Kvartira'),
+                                Text('Kvartira').tr(),
                               ],
                             ),
                           ),
@@ -108,7 +121,7 @@ class _UniverDetailsState extends State<UniverDetails> {
                             child: Row(
                               children:  [
                                 Icon(Icons.directions_walk,color: AppColors.mainColor,),
-                                Text('${widget.roommate_count} kishi'),
+                                Text('${widget.roommate_count}'+tr('kishi')),
                               ],
                             ),
                           ),
@@ -126,14 +139,14 @@ class _UniverDetailsState extends State<UniverDetails> {
                         ),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: const [
+                          children:  [
                             Padding(
                               padding: EdgeInsets.all(11.0),
                               child: Icon(Icons.mail,color: AppColors.succesColor,),
                             ),
                             Padding(
                               padding: EdgeInsets.all(10.0),
-                              child: Text('Aloqa'),
+                              child: Text('Aloqa').tr(),
                             )
                           ],
                         ),
@@ -153,7 +166,7 @@ class _UniverDetailsState extends State<UniverDetails> {
                 padding: const EdgeInsets.all(10.0),
                 child: Column(
                   children: [
-                    Text('Joylashuv',style: TextStyle(fontSize: 18.sp,fontWeight: FontWeight.bold),),
+                    Text('Joylashuv',style: TextStyle(fontSize: 18.sp,fontWeight: FontWeight.bold),).tr(),
                     Row(
                       children: [
                         Container(
@@ -233,7 +246,7 @@ class _UniverDetailsState extends State<UniverDetails> {
                         )
                       ],
                     ),
-                    Text("Ma’lumot",style: TextStyle(fontSize: 18.sp,fontWeight: FontWeight.bold),),
+                    Text("Ma’lumot",style: TextStyle(fontSize: 18.sp,fontWeight: FontWeight.bold),).tr(),
                     Row(
                       children: [
                         Container(
@@ -247,7 +260,9 @@ class _UniverDetailsState extends State<UniverDetails> {
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Text("Uy egasi bilan birga yashshga rozi emas",style: TextStyle(fontSize: 14.sp),),
+                          child: Text("Uy egasi bilan birga yashshga rozi emas",
+                          style: TextStyle(fontSize: 14.sp),)
+
                         )
                       ],
                     ),
