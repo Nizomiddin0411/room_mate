@@ -39,36 +39,30 @@ class _StudentState extends State<Student> {
   String gender = '';
   String CourseCount = '';
   String roomCount = '';
-  Color colorRegion = Colors.grey;
-  bool RegionOnClick = false;
-  Color colorDistric = Colors.grey;
-  bool DiscritOnClick = false;
-  Color colorUniver = Colors.grey;
-  bool UniverOnClick = false;
-  Color colorFaculty = Colors.grey;
-  bool FacultyOnClick = false;
-  Color colorCourse = Colors.grey;
-  bool CourseOnClick = false;
-  Color colorTypeHouse = Colors.grey;
-  bool TypeHouseOnClick = false;
-  Color colorRoomCount = Colors.grey;
-  bool RoomCountOnClick = false;
-  Color colorRentType = Colors.grey;
-  bool RentTypeOnClick = false;
-  Color colorTypeCost = Colors.grey;
-  bool TypeCostOnClick = false;
-  Color colorGender = Colors.grey;
-  bool GenderOnClick = false;
-  Color colorCountPupil = Colors.grey;
-  bool CountPupilOnClick = false;
-  Color colorForm = Colors.grey;
-  bool FormOnClick = false;
-  Color colorFormDescription = Colors.grey;
-  bool FormDescriptionOnClick = false;
-  Color colorCheckOwen = Colors.grey;
-  bool CheckOwenOnClick = false;
-  Color colorSubway = Colors.grey;
-  bool SubwayOnClick = false;
+  Color _colorRegion = Colors.grey;
+  bool _RegionOnClick = false;
+  Color _colorDistric = Colors.grey;
+  bool _DiscritOnClick = false;
+  Color _colorUniver = Colors.grey;
+  bool _UniverOnClick = false;
+  Color _colorFaculty = Colors.grey;
+  bool _FacultyOnClick = false;
+  Color _colorCourse = Colors.grey;
+  bool _CourseOnClick = false;
+  Color _colorTypeHouse = Colors.grey;
+  bool _TypeHouseOnClick = false;
+  Color _colorRoomCount = Colors.grey;
+  bool _RoomCountOnClick = false;
+  Color _colorRentType = Colors.grey;
+  bool _RentTypeOnClick = false;
+  Color _colorTypeCost = Colors.grey;
+  bool _TypeCostOnClick = false;
+  Color _colorGender = Colors.grey;
+  bool _GenderOnClick = false;
+  Color _colorCountPupil = Colors.grey;
+  bool _CountPupilOnClick = false;
+  Color _colorForm = Colors.grey;
+  bool _FormOnClick = false;
   var kurs = [
     '1-kurs',
     '2-kurs',
@@ -143,24 +137,28 @@ class _StudentState extends State<Student> {
                   width: 324.w,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.r),
-                      border: Border.all(color: colorRegion)),
+                      border: Border.all(color: _colorRegion)),
                   child: DropdownButtonFormField(
-                    hint: Text("Viloyatni tanlang"),
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.grey)),
+                    hint: Padding(
+                      padding: EdgeInsets.only(left: 8.w),
+                      child: Text("Viloyatni tanlang"),
                     ),
+                    decoration: InputDecoration(border: InputBorder.none),
                     // value: ,
                     icon: Icon(Icons.arrow_drop_down_outlined),
                     items: data.regions.map((e) {
                       return DropdownMenuItem<String>(
                         value: e.name ?? "",
-                        child: Text(e.name.toString()),
+                        child: Padding(
+                          padding: EdgeInsets.only(left: 8.w),
+                          child: Text(e.name.toString()),
+                        ),
                       );
                     }).toList(),
                     onChanged: (newValue) async {
                       setState(() {
-                        RegionOnClick = true;
+                        _RegionOnClick = true;
+                        _colorRegion = Colors.grey;
                       });
 
                       final selected = data.regions
@@ -187,16 +185,17 @@ class _StudentState extends State<Student> {
                         width: 324.w,
                         decoration: BoxDecoration(
                             border: Border.all(
-                              color: colorDistric,
+                              color: _colorDistric,
                             ),
                             borderRadius: BorderRadius.circular(10.r)),
                         child: DropdownButtonFormField(
-                          isExpanded: true,
-                          hint: Text("Tumanni tanlang"),
-                          decoration: const InputDecoration(
-                              isDense: true,
-                              border: OutlineInputBorder(),
-                              focusColor: Colors.grey),
+                          hint: Padding(
+                            padding: EdgeInsets.only(left: 8.w),
+                            child: Text("Tumanni tanlang"),
+                          ),
+                          decoration: InputDecoration(
+                            border: InputBorder.none,
+                          ),
                           icon: Icon(Icons.arrow_drop_down_outlined),
                           items: data.districts.map((e) {
                             return DropdownMenuItem<String>(
@@ -207,14 +206,18 @@ class _StudentState extends State<Student> {
                               value: data.isDistrict
                                   ? e.name.toString()
                                   : data.defaultvalue,
-                              child: Text(data.isDistrict
-                                  ? e.name.toString()
-                                  : data.defaultvalue),
+                              child: Padding(
+                                padding: EdgeInsets.only(left: 8.w),
+                                child: Text(data.isDistrict
+                                    ? e.name.toString()
+                                    : data.defaultvalue),
+                              ),
                             );
                           }).toList(),
                           onChanged: (newValue) {
                             setState(() {
-                              DiscritOnClick = true;
+                              _DiscritOnClick = true;
+                              _colorDistric = Colors.grey;
                               dropDown = newValue.toString();
                             });
                           },
@@ -249,12 +252,14 @@ class _StudentState extends State<Student> {
                   width: 324.w,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10.r),
-                      border: Border.all(color: colorUniver)),
+                      border: Border.all(color: _colorUniver)),
                   child: DropdownButtonFormField(
                     isExpanded: true,
-                    hint: Text("OTM ni tanlang"),
-                    decoration: const InputDecoration(
-                        border: OutlineInputBorder(), focusColor: Colors.grey),
+                    hint: Padding(
+                      padding: EdgeInsets.only(left: 8.w),
+                      child: Text("OTM ni tanlang"),
+                    ),
+                    decoration: InputDecoration(border: InputBorder.none),
                     // value: ,
                     icon: Icon(Icons.arrow_drop_down_outlined),
                     items: data.univer.map((e) {
@@ -265,14 +270,18 @@ class _StudentState extends State<Student> {
                         value: e.name ?? "",
                         child: SizedBox(
                           width: MediaQuery.of(context).size.width - 150.w,
-                          child: Text(e.name.toString()),
+                          child: Padding(
+                            padding: EdgeInsets.only(left: 8.w),
+                            child: Text(e.name.toString()),
+                          ),
                         ),
                       );
                     }).toList(),
                     onChanged: (newValue) async {
                       print("Selected ----------- $newValue");
                       setState(() {
-                        UniverOnClick = true;
+                        _UniverOnClick = true;
+                        _colorUniver = Colors.grey;
                       });
                       final selected = data.univer
                           .where((element) => element.name == newValue);
@@ -297,14 +306,17 @@ class _StudentState extends State<Student> {
                     ? Container(
                         width: 324.w,
                         decoration: BoxDecoration(
-                            border: Border.all(color: colorFaculty),
+                            border: Border.all(color: _colorFaculty),
                             borderRadius: BorderRadius.circular(10.r)),
                         child: DropdownButtonFormField(
                           isExpanded: true,
-                          hint: Text("Faqultetni tanlang"),
+                          hint: Padding(
+                            padding: EdgeInsets.only(left: 8.w),
+                            child: Text("Faqultetni tanlang"),
+                          ),
                           decoration: const InputDecoration(
-                              border: OutlineInputBorder(),
-                              focusColor: Colors.grey),
+                            border: InputBorder.none,
+                          ),
                           // value: ,
                           icon: Icon(Icons.arrow_drop_down_outlined),
                           items: data.faculty.map((e) {
@@ -318,17 +330,18 @@ class _StudentState extends State<Student> {
                               child: SizedBox(
                                 width:
                                     MediaQuery.of(context).size.width - 150.w,
-                                child: Text(data.isFaculty
-                                    ? e.name.toString()
-                                    : data.defaultFaculty),
+                                child: Padding(
+                                  padding:  EdgeInsets.only(left: 8.w),
+                                  child: Text(data.isFaculty
+                                      ? e.name.toString()
+                                      : data.defaultFaculty),
+                                ),
                               ),
                             );
                           }).toList(),
                           onChanged: (newValue) async {
-                            FacultyOnClick = true;
-                            // final selected = data.regions
-                            //     .where((element) => element.name == newValue);
-                            // data.getDistrict(selected.last.id!);
+                            _FacultyOnClick = true;
+                            _colorFaculty = Colors.grey;
                             setState(() {
                               dropDown2 = newValue.toString();
                             });
@@ -338,14 +351,17 @@ class _StudentState extends State<Student> {
                     : Container(
                         width: 324.w,
                         decoration: BoxDecoration(
-                          border: Border.all(color: colorFaculty),
+                            border: Border.all(color: _colorFaculty),
                             borderRadius: BorderRadius.circular(10.r)),
                         child: DropdownButtonFormField(
                             isExpanded: true,
-                            hint: Text("Faqultetni tanlang"),
-                            decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
-                                focusColor: Colors.grey),
+                            hint: Padding(
+                              padding: EdgeInsets.only(left: 8.w),
+                              child: Text("Faqultetni tanlang"),
+                            ),
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                            ),
                             // value: ,
                             icon: Icon(Icons.arrow_drop_down_outlined),
                             items: [],
@@ -365,7 +381,7 @@ class _StudentState extends State<Student> {
                 SizedBox(height: 4.h),
                 Container(
                   decoration: BoxDecoration(
-                      border: Border.all(color: colorCourse),
+                      border: Border.all(color: _colorCourse),
                       borderRadius: BorderRadius.circular(4.r)),
                   child: Container(
                     width: 324.w,
@@ -373,11 +389,12 @@ class _StudentState extends State<Student> {
                         borderRadius: BorderRadius.circular(10.r)),
                     child: DropdownButtonFormField2(
                       isExpanded: true,
-                      hint: Text("Kursingizni tanlang"),
+                      hint: Padding(
+                        padding:  EdgeInsets.only(left: 8.w),
+                        child: Text("Kursingizni tanlang"),
+                      ),
                       decoration: const InputDecoration(
-                          isDense: true,
-                          border: OutlineInputBorder(),
-                          focusColor: Colors.grey),
+                          border: InputBorder.none,),
 
                       icon: Icon(Icons.arrow_drop_down_outlined),
                       // value: snapshot.data!.length,
@@ -387,12 +404,16 @@ class _StudentState extends State<Student> {
                             // print("${e.id}");
                           },
                           value: e.toString(),
-                          child: Text(e.toString()),
+                          child: Padding(
+                            padding: EdgeInsets.only(left: 8.w),
+                            child: Text(e.toString()),
+                          ),
                         );
                       }).toList(),
                       onChanged: (newValue) {
                         setState(() {
-                          CourseOnClick = true;
+                          _CourseOnClick = true;
+                          _colorCourse = Colors.grey;
                           _titleCourse = newValue.toString();
                         });
                       },
@@ -415,18 +436,12 @@ class _StudentState extends State<Student> {
                 Row(
                   children: [
                     Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: colorCheckOwen
-                        )
-                      ),
                       width: 20.w,
                       height: 20.h,
                       child: Checkbox(
                         value: _checkHome,
                         onChanged: (e) {
                           setState(() {
-                            CheckOwenOnClick = true;
                             _checkHome = e!;
                             if (_checkHome == true) {
                               RoomOwner = '1';
@@ -463,23 +478,29 @@ class _StudentState extends State<Student> {
                           width: 152.w,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.r),
-                              border: Border.all(color: colorTypeHouse)),
+                              border: Border.all(color: _colorTypeHouse)),
                           child: DropdownButtonFormField(
-                            hint: Text("Kv yoki xovli"),
-                            decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
-                                focusColor: Colors.grey),
+                            hint: Padding(
+                              padding:  EdgeInsets.only(left: 8.w),
+                              child: Text("Kv yoki xovli"),
+                            ),
+                            decoration:  InputDecoration(
+                                border: InputBorder.none),
                             icon: Icon(Icons.arrow_drop_down_outlined),
                             items: kvartira.map((e) {
                               return DropdownMenuItem<String>(
                                 onTap: () {},
                                 value: e,
-                                child: Text(e),
+                                child: Padding(
+                                  padding: EdgeInsets.only(left: 8.w),
+                                  child: Text(e),
+                                ),
                               );
                             }).toList(),
                             onChanged: (newValue) {
                               setState(() {
-                                TypeHouseOnClick = true;
+                                _TypeHouseOnClick = true;
+                                _colorTypeHouse = Colors.grey;
                                 dropDown = newValue.toString();
                               });
                             },
@@ -502,24 +523,30 @@ class _StudentState extends State<Student> {
                         Container(
                           width: 152.w,
                           decoration: BoxDecoration(
-                              border: Border.all(color: colorRoomCount),
+                              border: Border.all(color: _colorRoomCount),
                               borderRadius: BorderRadius.circular(10.r)),
                           child: DropdownButtonFormField(
-                            hint: Text("Xonalar soni"),
+                            hint: Padding(
+                              padding:  EdgeInsets.only(left: 8.w),
+                              child: Text("Xonalar soni"),
+                            ),
                             decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
-                                focusColor: Colors.grey),
+                                border: InputBorder.none),
                             icon: Icon(Icons.arrow_drop_down_outlined),
                             items: rooms.map((e) {
                               return DropdownMenuItem<String>(
                                 onTap: () {},
                                 value: e,
-                                child: Text(e),
+                                child: Padding(
+                                  padding: EdgeInsets.only(left: 8.w),
+                                  child: Text(e),
+                                ),
                               );
                             }).toList(),
                             onChanged: (newValue) {
                               setState(() {
-                                RoomCountOnClick = true;
+                                _RoomCountOnClick = true;
+                                _colorRoomCount = Colors.grey;
                                 roomCount = newValue.toString();
                               });
                             },
@@ -541,28 +568,34 @@ class _StudentState extends State<Student> {
                 SizedBox(height: 4.h),
                 Container(
                   decoration: BoxDecoration(
-                      border: Border.all(color: colorRentType),
-                      borderRadius: BorderRadius.circular(4.r)),
+                      border: Border.all(color: _colorRentType),
+                      borderRadius: BorderRadius.circular(8.r)),
                   child: Container(
                     width: 152.w,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.r)),
                     child: DropdownButtonFormField(
-                      hint: Text("Ijara muddati"),
+                      hint: Padding(
+                        padding: EdgeInsets.only(left: 8.w),
+                        child: Text("Ijara muddati"),
+                      ),
                       decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          focusColor: Colors.grey),
+                          border: InputBorder.none),
                       icon: Icon(Icons.arrow_drop_down_outlined),
                       items: kindOfMoment.map((e) {
                         return DropdownMenuItem<String>(
                           onTap: () {},
                           value: e,
-                          child: Text(e),
+                          child: Padding(
+                            padding:  EdgeInsets.only(left: 8.w),
+                            child: Text(e),
+                          ),
                         );
                       }).toList(),
                       onChanged: (newValue) {
                         setState(() {
-                          RentTypeOnClick = true;
+                          _RentTypeOnClick = true;
+                          _colorRentType = Colors.grey;
                           TypeOfRent = newValue.toString();
                         });
                       },
@@ -582,11 +615,22 @@ class _StudentState extends State<Student> {
                 Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
-                      border: Border.all(color: colorTypeCost),
+                      border: Border.all(color: _colorTypeCost),
                       borderRadius: BorderRadius.circular(4.r)),
                   child: Container(
                     padding: EdgeInsets.only(left: 16.w),
                     child: TextFormField(
+                      onChanged: (e) {
+                        setState(() {
+                          if (e.length > 0) {
+                            _TypeCostOnClick = true;
+                            _colorTypeCost = Colors.grey;
+                          } else {
+                            _TypeCostOnClick = false;
+                            _colorTypeCost = Colors.red;
+                          }
+                        });
+                      },
                       controller: costcontroller,
                       decoration: InputDecoration(
                         border: InputBorder.none,
@@ -602,12 +646,8 @@ class _StudentState extends State<Student> {
                           width: 70.w,
                           height: 0,
                           child: DropdownButton(
-                            focusColor: colorTypeCost,
                             underline: Container(),
                             value: _dropownUsd,
-                            onTap: () {
-                              TypeCostOnClick = true;
-                            },
                             onChanged: (String? e) {
                               setState(() {
                                 _dropownUsd = e;
@@ -659,14 +699,11 @@ class _StudentState extends State<Student> {
                     Container(
                       width: 20.w,
                       height: 20.h,
-                      decoration:  BoxDecoration(
-                        border: Border.all(color: colorSubway)
-                      ),
+                      decoration: BoxDecoration(),
                       child: Checkbox(
                         value: _checkMetro,
                         onChanged: (e) {
                           setState(() {
-                            CheckOwenOnClick = true;
                             _checkMetro = e!;
                           });
                         },
@@ -706,23 +743,29 @@ class _StudentState extends State<Student> {
                           width: 152.w,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.r),
-                              border: Border.all(color: colorGender)),
+                              border: Border.all(color: _colorGender)),
                           child: DropdownButtonFormField(
-                            hint: Text("Qiz,O'g'il"),
+                            hint: Padding(
+                              padding: EdgeInsets.only(left: 8.w),
+                              child: Text("Qiz,O'g'il"),
+                            ),
                             decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
-                                focusColor: Colors.grey),
+                                border: InputBorder.none),
                             icon: Icon(Icons.arrow_drop_down_outlined),
                             items: genderone.map((e) {
                               return DropdownMenuItem<String>(
                                 onTap: () {},
                                 value: e,
-                                child: Text(e),
+                                child: Padding(
+                                  padding: EdgeInsets.only(left: 8.w),
+                                  child: Text(e),
+                                ),
                               );
                             }).toList(),
                             onChanged: (newValue) {
                               setState(() {
-                                GenderOnClick = true;
+                                _GenderOnClick = true;
+                                _colorGender = Colors.grey;
                                 _titleGendor = newValue.toString();
                               });
                             },
@@ -743,26 +786,32 @@ class _StudentState extends State<Student> {
                         ),
                         SizedBox(height: 4.h),
                         Container(
-                          width: 152.w,
+                          width: 154.w,
                           decoration: BoxDecoration(
-                              border: Border.all(color: colorCountPupil),
+                              border: Border.all(color: _colorCountPupil),
                               borderRadius: BorderRadius.circular(10.r)),
                           child: DropdownButtonFormField(
-                            hint: Text("Ijarachilar soni"),
+                            hint: Padding(
+                              padding: EdgeInsets.only(left: 8.w),
+                              child: Text("Ijarachilar soni"),
+                            ),
                             decoration: const InputDecoration(
-                                border: OutlineInputBorder(),
-                                focusColor: Colors.grey),
+                                border: InputBorder.none,),
                             icon: Icon(Icons.arrow_drop_down_outlined),
                             items: ijarachi.map((e) {
                               return DropdownMenuItem<String>(
                                 onTap: () {},
                                 value: e,
-                                child: Text(e),
+                                child: Padding(
+                                  padding: EdgeInsets.only(left: 8.w),
+                                  child: Text(e),
+                                ),
                               );
                             }).toList(),
                             onChanged: (newValue) {
                               setState(() {
-                                CountPupilOnClick = true;
+                                _CountPupilOnClick = true;
+                                _colorCountPupil = Colors.grey;
                                 dropDown = newValue.toString();
                               });
                             },
@@ -785,13 +834,21 @@ class _StudentState extends State<Student> {
                 Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
-                      border: Border.all(color: colorForm),
+                      border: Border.all(color: _colorForm),
                       borderRadius: BorderRadius.circular(4.r)),
                   child: Container(
                     padding: EdgeInsets.only(left: 16.w),
                     child: TextFormField(
-                      onTap: (){
-                        FormOnClick = true;
+                      onChanged: (e) {
+                        setState(() {
+                          if (e.length > 0) {
+                            _FormOnClick = true;
+                            _colorForm = Colors.grey;
+                          } else {
+                            _FormOnClick = false;
+                            _colorForm = Colors.red;
+                          }
+                        });
                       },
                       controller: titlecontroller,
                       decoration: InputDecoration(
@@ -818,14 +875,11 @@ class _StudentState extends State<Student> {
                 Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
-                      border: Border.all(color: colorFormDescription),
+                      border: Border.all(color: Colors.grey),
                       borderRadius: BorderRadius.circular(4.r)),
                   child: Container(
                     padding: EdgeInsets.only(left: 16.w),
                     child: TextFormField(
-                      onTap: (){
-                        FormDescriptionOnClick = true;
-                      },
                       controller: othercontroller,
                       maxLines: 6,
                       decoration: InputDecoration(
@@ -928,22 +982,18 @@ class _StudentState extends State<Student> {
                             description: othercontroller?.text,
                           );
 
-                          if (RegionOnClick &&
-                              DiscritOnClick &&
-                              UniverOnClick &&
-                              FacultyOnClick &&
-                              CourseOnClick &&
-                              TypeHouseOnClick &&
-                              RoomCountOnClick &&
-                              RentTypeOnClick &&
-                              TypeCostOnClick &&
-                              GenderOnClick &&
-                              CountPupilOnClick &&
-                               FormOnClick   &&
-                              FormDescriptionOnClick &&
-                              CheckOwenOnClick &&
-                              SubwayOnClick
-                          ) {
+                          if (_RegionOnClick &&
+                              _DiscritOnClick &&
+                              _UniverOnClick &&
+                              _FacultyOnClick &&
+                              _CourseOnClick &&
+                              _TypeHouseOnClick &&
+                              _RoomCountOnClick &&
+                              _RentTypeOnClick &&
+                              _TypeCostOnClick &&
+                              _GenderOnClick &&
+                              _CountPupilOnClick &&
+                              _FormOnClick) {
                             Navigator.pushAndRemoveUntil(
                                 context,
                                 MaterialPageRoute(
@@ -951,21 +1001,42 @@ class _StudentState extends State<Student> {
                                 (route) => false);
                           } else {
                             setState(() {
-                              colorRegion = Colors.red;
-                              colorDistric = Colors.red;
-                              colorUniver = Colors.red;
-                              colorFaculty = Colors.red;
-                              colorCourse = Colors.red;
-                              colorTypeHouse = Colors.red;
-                              colorRoomCount = Colors.red;
-                              colorRentType = Colors.red;
-                              colorTypeCost = Colors.red;
-                              colorGender = Colors.red;
-                              colorCountPupil = Colors.red;
-                              colorForm = Colors.red;
-                              colorFormDescription = Colors.red;
-                              colorCheckOwen = Colors.red;
-                              colorSubway = Colors.red;
+                              if (!_RegionOnClick) {
+                                _colorRegion = Colors.red;
+                              }
+                              if (!_DiscritOnClick) {
+                                _colorDistric = Colors.red;
+                              }
+                              if (!_UniverOnClick) {
+                                _colorUniver = Colors.red;
+                              }
+                              if (!_FacultyOnClick) {
+                                _colorFaculty = Colors.red;
+                              }
+                              if (!_CourseOnClick) {
+                                _colorCourse = Colors.red;
+                              }
+                              if (!_TypeHouseOnClick) {
+                                _colorTypeHouse = Colors.red;
+                              }
+                              if (!_RoomCountOnClick) {
+                                _colorRoomCount = Colors.red;
+                              }
+                              if (!_RentTypeOnClick) {
+                                _colorRentType = Colors.red;
+                              }
+                              if (!_TypeCostOnClick) {
+                                _colorTypeCost = Colors.red;
+                              }
+                              if (!_GenderOnClick) {
+                                _colorGender = Colors.red;
+                              }
+                              if (!_CountPupilOnClick) {
+                                _colorCountPupil = Colors.red;
+                              }
+                              if (!_FormOnClick) {
+                                _colorForm = Colors.red;
+                              }
                             });
                           }
                         },
