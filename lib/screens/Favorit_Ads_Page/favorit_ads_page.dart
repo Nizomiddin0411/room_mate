@@ -21,7 +21,8 @@ class _FavoritAdsState extends State<FavoritAds> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.backgroundWhite,
-        title: const Center(
+        title: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 69.w),
           child: Text(
             "E’lonlarim",
             style: TextStyle(color: AppColors.mainColor),

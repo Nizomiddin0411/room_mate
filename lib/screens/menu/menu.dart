@@ -1,4 +1,5 @@
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -60,10 +61,10 @@ class _MenuPageState extends State<MenuPage> {
             ),
           )
         ],
-        title: const Center(
+        title:  Center(
             child: Text(
           "Rommate",
-          style: TextStyle(color: AppColors.buttonLinear, fontSize: 24),
+          style: TextStyle(color: AppColors.buttonLinear, fontSize: 24.sp),
         )),
         // flexibleSpace:
       ),
@@ -90,18 +91,18 @@ class _MenuPageState extends State<MenuPage> {
                   child: Container(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
-                      children: const [
-                        Image(
+                      children:  [
+                        const Image(
                           image: AssetImage(
                               "assets/images/building-mid-2 (1).png"),
                         ),
-                        SizedBox(
-                          height: 15,
+                         SizedBox(
+                          height: 15.h
                         ),
-                        Text(
-                          "Universitet bo'yicha",
+                        const Text(
+                          "Oliy o’quv yurtlari",
                           style: TextStyle(color: AppColors.textColor),
-                        )
+                        ).tr()
                       ],
                     ),
                     decoration: BoxDecoration(
@@ -127,10 +128,10 @@ class _MenuPageState extends State<MenuPage> {
                         SizedBox(
                           height: 15.h,
                         ),
-                        const Text(
+                         Text(
                           "E’lonlar",
                           style: TextStyle(color: AppColors.textColor),
-                        )
+                        ).tr()
                       ],
                     ),
                     decoration: BoxDecoration(
@@ -152,15 +153,15 @@ class _MenuPageState extends State<MenuPage> {
                         SizedBox(
                           height: 15.h,
                         ),
-                        const Text(
+                         Text(
                           "Kunlik kvartira",
                           style: TextStyle(color: AppColors.textColor),
-                        )
+                        ).tr()
                       ],
                     ),
                     decoration: BoxDecoration(
                         color: AppColors.secondBackgroud,
-                        borderRadius: BorderRadius.circular(20)),
+                        borderRadius: BorderRadius.circular(20.r)),
                   ),
                 ),
                 InkWell(
@@ -177,10 +178,10 @@ class _MenuPageState extends State<MenuPage> {
                         SizedBox(
                           height: 15.h,
                         ),
-                        const Text(
+                         Text(
                           "Oylik kvartira",
                           style: TextStyle(color: AppColors.textColor),
-                        )
+                        ).tr()
                       ],
                     ),
                     decoration: BoxDecoration(
@@ -198,7 +199,7 @@ class _MenuPageState extends State<MenuPage> {
               height: 48.h,
               width: 250.w,
               child: ElevatedButton(
-                child: const Text('E’lon berish'),
+                child:  Text('E’lon berish').tr(),
                 onPressed: () {
                   Navigator.push(
                       context,

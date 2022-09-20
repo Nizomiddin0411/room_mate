@@ -20,7 +20,8 @@ class _FavoritPageState extends State<FavoritPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.backgroundWhite,
-        title: const Center(
+        title: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 68.w),
           child: Text(
             "Sevimlilar",
             style: TextStyle(color: AppColors.mainColor),
