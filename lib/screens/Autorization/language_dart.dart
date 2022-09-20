@@ -12,8 +12,8 @@ class LanguagePage extends StatefulWidget {
 
 class _LanguagePageState extends State<LanguagePage> {
 
-  bool value2 = false;
   bool value1 = false;
+  bool lang = false;
   String _language = 'uz';
 
   @override
@@ -44,7 +44,9 @@ class _LanguagePageState extends State<LanguagePage> {
                 onTap: () {
                   context.locale=Locale('uz','UZ');
                   setState(() {
+                    lang =true;
                     _language = 'uz';
+                    value1=true;
                   });
                 },
                 child: ListTile(
@@ -56,7 +58,7 @@ class _LanguagePageState extends State<LanguagePage> {
                         style:
                         TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
                       )),
-                  trailing: _language == 'uz'
+                  trailing: _language == 'uz' && lang
                       ? CircleAvatar(
                     radius: 12.r,
                     child: Icon(
@@ -86,8 +88,9 @@ class _LanguagePageState extends State<LanguagePage> {
                 onTap: () {
                   context.locale=Locale('ru','RU');
                   setState(() {
+                    lang = true;
                     _language = 'rus';
-                    value1=false;
+                    value1=true;
                   });
                 },
                 child: ListTile(
@@ -99,7 +102,7 @@ class _LanguagePageState extends State<LanguagePage> {
                         style:
                         TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
                       )),
-                  trailing: _language == 'rus'
+                  trailing: _language == 'rus' && lang
                       ? CircleAvatar(
                     radius: 12.r,
                     child: Icon(
@@ -122,8 +125,16 @@ class _LanguagePageState extends State<LanguagePage> {
             ),
             SizedBox(height: 66.h,),
             ElevatedButton(
-              onPressed: () {
+              onPressed: () { if(lang){
                 Navigator.push(context, MaterialPageRoute(builder: (context)=>StartPage()));
+              }
+              else{
+                showDialog(context: context, builder: ( context){
+                  return AlertDialog(
+                    title: Text("Tilni tanglang !!!  "),
+                  );
+                });
+              }
               },
               style: ElevatedButton.styleFrom(
                 primary: AppColors.mainColor,
