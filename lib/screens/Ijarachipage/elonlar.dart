@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -67,19 +68,20 @@ class _ElonlarState extends State<Elonlar> {
               ),
             ),
             backgroundColor: AppColors.backgroundWhite,
-            title: const Center(
+            title:  Padding(
+              padding: EdgeInsets.symmetric(horizontal: 60.w),
               child: Text(
                 "E’lonlar",
                 style: TextStyle(color: AppColors.mainColor),
-              ),
+              ).tr(),
             ),
             flexibleSpace: Consumer<RegionProvider>(
               builder: (_, data, __) {
                 return Padding(
-                  padding: const EdgeInsets.fromLTRB(18, 85, 18, 18),
+                  padding:  EdgeInsets.fromLTRB(18.w, 85.h, 18.w, 18.h),
                   child: Container(
-                    height: 50,
-                    width: 324,
+                    height: 50.h,
+                    width: 324.w,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(6.r),
                         color: AppColors.secondBackgroud),
@@ -88,7 +90,7 @@ class _ElonlarState extends State<Elonlar> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Icon(
+                           Icon(
                             Icons.location_on,
                             color: AppColors.mainColor,
                           ),
@@ -96,7 +98,7 @@ class _ElonlarState extends State<Elonlar> {
                             "Joylashuvni sozlash",
                             style: TextStyle(
                                 color: AppColors.iconColor, fontSize: 16.sp),
-                          ),
+                          ).tr(),
                           InkWell(
                             onTap: () {
                               Navigator.push(
@@ -132,14 +134,14 @@ class _ElonlarState extends State<Elonlar> {
             bottom: TabBar(
               labelColor: AppColors.textColor,
               onTap: (String) {
-                print("bosildi");
+
               },
-              tabs: const [
+              tabs:  [
                 Tab(
-                  text: "Ijarachi kerak",
+                  text: tr("Ijarachi kerak"),
                 ),
                 Tab(
-                  text: "Kvartira kerak",
+                  text: tr("Kvartira kerak"),
                 )
               ],
             ),
@@ -297,15 +299,15 @@ class _ElonlarState extends State<Elonlar> {
                                                         .toString(),
                                                   )));
                                     },
-                                    child: const Padding(
-                                      padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
+                                    child:  Padding(
+                                      padding: EdgeInsets.fromLTRB(8.w, 0, 8.w, 0),
                                       child: Text(
                                         'Batafsil',
                                         style: TextStyle(
                                             decoration:
                                                 TextDecoration.underline,
                                             color: AppColors.mainColor),
-                                      ),
+                                      ).tr(),
                                     ),
                                   )
                                 ],
@@ -353,7 +355,7 @@ class _ElonlarState extends State<Elonlar> {
                                   ),
                                   Padding(
                                       padding:
-                                          const EdgeInsets.fromLTRB(1, 0, 8, 0),
+                                           EdgeInsets.fromLTRB(1.w, 0, 8.w, 0),
                                       child: FavoriteButton(
                                         isFavorite: data.AdsForStudent[index]
                                                     .favorite ==
@@ -375,7 +377,7 @@ class _ElonlarState extends State<Elonlar> {
                                 ],
                               ),
                               Padding(
-                                padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+                                padding:  EdgeInsets.fromLTRB(8.w, 0, 8.w, 0),
                                 child: Text(
                                   '${data.AdsForStudent[index].cost.toString()}${data.AdsForStudent[index].costType.toString()}',
                                   style: TextStyle(
@@ -471,15 +473,15 @@ class _ElonlarState extends State<Elonlar> {
                                                         .toString(),
                                                   )));
                                     },
-                                    child: const Padding(
-                                      padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
+                                    child:  Padding(
+                                      padding: EdgeInsets.fromLTRB(8.w, 0, 8.w, 0),
                                       child: Text(
                                         'Batafsil',
                                         style: TextStyle(
                                             decoration:
                                                 TextDecoration.underline,
                                             color: AppColors.mainColor),
-                                      ),
+                                      ).tr(),
                                     ),
                                   )
                                 ],

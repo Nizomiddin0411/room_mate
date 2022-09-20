@@ -54,7 +54,8 @@ class _AdsDetailState extends State<AdsDetail> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.backgroundWhite,
-        title: Center(
+        title: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 65.w),
             child: Text(
           'Batafsil',
           style: TextStyle(color: AppColors.mainColor),
@@ -73,7 +74,7 @@ class _AdsDetailState extends State<AdsDetail> {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(18, 12, 18, 18),
+              padding:  EdgeInsets.fromLTRB(18.w, 12.h, 18.w, 18.h),
               child: Container(
                 width: 324.w,
                 height: 232.h,
@@ -91,7 +92,7 @@ class _AdsDetailState extends State<AdsDetail> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.fromLTRB(12, 12, 12, 0),
+                          padding:  EdgeInsets.fromLTRB(12.w, 12.h, 12.w, 0),
                           child: Text(
                             '${widget.cost} ${widget.costTayp == '1' ? "so'm" : 'y.e'}',
                             style: TextStyle(
@@ -99,7 +100,7 @@ class _AdsDetailState extends State<AdsDetail> {
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.fromLTRB(12, 12, 12, 0),
+                          padding: EdgeInsets.fromLTRB(12.w, 12.h, 12.w, 0),
                           child: FavoriteButton(
                             isFavorite: widget.favorite == '0' ? false : true,
                             iconSize: 35.0,
@@ -136,8 +137,8 @@ class _AdsDetailState extends State<AdsDetail> {
                                   color: AppColors.mainColor,
                                 ),
                                 Text(widget.houseType == '1'
-                                    ? 'Kvartira'
-                                    : 'Xonadon'),
+                                    ? tr('Kvartira')
+                                    : tr('Xonadon')),
                               ],
                             ),
                           ),
@@ -148,7 +149,7 @@ class _AdsDetailState extends State<AdsDetail> {
                                   Icons.apartment,
                                   color: AppColors.mainColor,
                                 ),
-                                Text('${widget.countRoom} xona'),
+                                Text('${widget.countRoom} '+tr('xona')),
                               ],
                             ),
                           ),
@@ -159,7 +160,7 @@ class _AdsDetailState extends State<AdsDetail> {
                                   Icons.directions_walk,
                                   color: AppColors.mainColor,
                                 ),
-                                Text('${widget.countPeople} kishi'),
+                                Text('${widget.countPeople} ' +tr('kishi')),
                               ],
                             ),
                           ),
@@ -167,7 +168,7 @@ class _AdsDetailState extends State<AdsDetail> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.fromLTRB(12, 0, 12, 12),
+                      padding:  EdgeInsets.fromLTRB(12.w, 0, 12.w, 12.h),
                       child: Container(
                         width: 95.w,
                         height: 42.h,
@@ -176,7 +177,7 @@ class _AdsDetailState extends State<AdsDetail> {
                             color: AppColors.colorBack3),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: const [
+                          children:  [
                             Padding(
                               padding: EdgeInsets.all(11.0),
                               child: Icon(
@@ -186,7 +187,7 @@ class _AdsDetailState extends State<AdsDetail> {
                             ),
                             Padding(
                               padding: EdgeInsets.all(10.0),
-                              child: Text('Aloqa'),
+                              child: Text('Aloqa').tr(),
                             )
                           ],
                         ),
@@ -209,7 +210,7 @@ class _AdsDetailState extends State<AdsDetail> {
                       'Joylashuv',
                       style: TextStyle(
                           fontSize: 18.sp, fontWeight: FontWeight.bold),
-                    ),
+                    ).tr(),
                     Row(
                       children: [
                         Container(
@@ -321,7 +322,7 @@ class _AdsDetailState extends State<AdsDetail> {
                       ],
                     ) : const SizedBox(),
                     Text(
-                      "Ma’lumot",
+                      tr("Ma’lumot"),
                       style: TextStyle(
                           fontSize: 18.sp, fontWeight: FontWeight.bold),
                     ),
@@ -343,7 +344,7 @@ class _AdsDetailState extends State<AdsDetail> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
-                            "Uy egasi bilan birga yashshga: ${widget.liveWithOwner == '1' ? 'Rozi' : 'Roziemas'}",
+                            tr("Uy egasi bilan birga yashshga:") + "${widget.liveWithOwner == '1' ? 'Rozi' : 'Roziemas'}",
                             style: TextStyle(fontSize: 14.sp),
                           ),
                         )
@@ -370,7 +371,7 @@ class _AdsDetailState extends State<AdsDetail> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
-                            "Metroga yaqinmi? ${widget.subway == '1' ? 'Ha' : "Yo'q"}",
+                            tr("Metroga yaqinmi") +"${widget.subway == '1' ? tr('Ha') : tr("Yo'q")}",
                             style: TextStyle(fontSize: 14.sp),
                           ),
                         )
