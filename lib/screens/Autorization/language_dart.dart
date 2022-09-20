@@ -14,6 +14,7 @@ class _LanguagePageState extends State<LanguagePage> {
 
   bool value2 = false;
   bool value1 = false;
+  String _language = 'uz';
 
   @override
   Widget build(BuildContext context) {
@@ -39,64 +40,84 @@ class _LanguagePageState extends State<LanguagePage> {
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8.r),
                   border: Border.all(color: AppColors.iconBack)),
-              child: ListTile(
-                onTap: ()async{
+              child: InkWell(
+                onTap: () {
+                  context.locale=Locale('uz','UZ');
+                  setState(() {
+                    _language = 'uz';
+                  });
                 },
-                horizontalTitleGap: 0,
-                leading: Image.asset("assets/images/uzb.png"),
-                title: SizedBox(
-                    child: Text(
-                      "O'zbek(lotin)",
-                      style:
-                      TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
-                    )),
-                trailing: Checkbox(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(8)
+                child: ListTile(
+                  horizontalTitleGap: 0,
+                  leading: Image.asset("assets/images/uzb.png"),
+                  title: SizedBox(
+                      child: Text(
+                        "O’zbek (Lotin)",
+                        style:
+                        TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
+                      )),
+                  trailing: _language == 'uz'
+                      ? CircleAvatar(
+                    radius: 12.r,
+                    child: Icon(
+                      Icons.check,
+                      size: 14.sp,
+                    ),
+                  )
+                      : Container(
+                    decoration: BoxDecoration(
+                        color: Color.fromRGBO(149, 149, 149, 1),
+                        shape: BoxShape.circle,
+                        border: Border.all(width: 1.w)),
+                    child: CircleAvatar(
+                      backgroundColor: AppColors.backgroundWhite,
+                      radius: 10.r,
+                    ),
                   ),
-                  value: this.value1,
-
-                  onChanged: ( value)async {
-                    context.locale=Locale('uz','UZ');
-                    setState(() {
-                      value1 = true;
-                      value2 = false;
-                    });
-                  },
                 ),
-                // ),
-
-
               ),
             ),
-            SizedBox(height: 20.h,),
+            SizedBox(height: 12.h),
             Container(
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8.r),
                   border: Border.all(color: AppColors.iconBack)),
-              child: ListTile(
-                horizontalTitleGap: 0,
-                leading: Image.asset("assets/images/rus.png"),
-                title: SizedBox(
-                    child: Text(
-                      "Русский",
-                      style:
-                      TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
-                    )),
-                trailing: Checkbox(
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)
+              child: InkWell(
+                onTap: () {
+                  context.locale=Locale('ru','RU');
+                  setState(() {
+                    _language = 'rus';
+                    value1=false;
+                  });
+                },
+                child: ListTile(
+                  horizontalTitleGap: 0,
+                  leading: Image.asset("assets/images/rus.png"),
+                  title: SizedBox(
+                      child: Text(
+                        "Русский",
+                        style:
+                        TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
+                      )),
+                  trailing: _language == 'rus'
+                      ? CircleAvatar(
+                    radius: 12.r,
+                    child: Icon(
+                      Icons.check,
+                      size: 14.sp,
+                    ),
+                  )
+                      : Container(
+                    decoration: BoxDecoration(
+                        color: Color.fromRGBO(149, 149, 149, 1),
+                        shape: BoxShape.circle,
+                        border: Border.all(width: 1.w)),
+                    child: CircleAvatar(
+                      backgroundColor: AppColors.backgroundWhite,
+                      radius: 10.r,
+                    ),
                   ),
-                  value: this.value2,
-                  onChanged: ( value)async {
-                    context.locale=Locale('ru','RU');
-                    setState(() {
-                      value2 = true;
-                      value1 = false;
-                    });
-                  },
                 ),
-                // ),
               ),
             ),
             SizedBox(height: 66.h,),
