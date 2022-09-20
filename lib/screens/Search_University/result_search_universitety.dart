@@ -1,4 +1,5 @@
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
@@ -60,7 +61,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
               child: Text(
                 "Oliy o’quv yurti",
                 style: TextStyle(color: AppColors.mainColor),
-              ),
+              ).tr(),
             ),
             flexibleSpace: Padding(
               padding: EdgeInsets.fromLTRB(18.w, 100.h, 18.w, 18.h),
@@ -110,7 +111,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                           Text(
                             "Filtr",
                             style: TextStyle(color: Colors.black),
-                          ),
+                          ).tr(),
                           InkWell(
                             onTap: () {
                               Navigator.push(

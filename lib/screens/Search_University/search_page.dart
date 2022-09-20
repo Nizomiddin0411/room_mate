@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -31,11 +32,11 @@ class _SearchPageState extends State<SearchPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.backgroundWhite,
-        title: const Center(
+        title:  Center(
           child: Text(
             "Oliy o’quv yurtlari",
             style: TextStyle(color: AppColors.mainColor),
-          ),
+          ).tr(),
         ),
         leading: IconButton(
           icon: const Icon(
@@ -138,12 +139,12 @@ class _SearchPageState extends State<SearchPage> {
                                               width: MediaQuery.of(context)
                                                   .size
                                                   .width -
-                                                  150,
+                                                  150.w,
                                               child: Text(
                                                   data.searchuniversitet[index].name.toString()
                                                   ,
                                                   style: TextStyle(
-                                                      fontSize: 14.sp,
+                                                      fontSize: 12.sp,
                                                       color: AppColors.mainColor)),
                                             ),
                                           ],
@@ -151,7 +152,7 @@ class _SearchPageState extends State<SearchPage> {
                                         SizedBox(
                                             width:
                                             MediaQuery.of(context).size.width -
-                                                130,
+                                                130.w,
                                             child: InkWell(
                                                 onTap: () {
                                                   // Navigator.push(context, MaterialPageRoute(builder: (context)=>ResultUniversitetPage()));
@@ -162,17 +163,17 @@ class _SearchPageState extends State<SearchPage> {
                                         SizedBox(
                                             width:
                                             MediaQuery.of(context).size.width -
-                                                130,
+                                                130.w,
                                             child: Text(
-                                              "Sherik izlayotganlar : ${data.searchuniversitet[index].searching}",
+                                              tr("Sherik izlayotganlar:")+"${data.searchuniversitet[index].searching}",
                                               style: TextStyle(fontSize: 14.sp),
                                             )),
                                         SizedBox(
                                             width:
                                             MediaQuery.of(context).size.width -
-                                                130,
+                                                130.w,
                                             child: Text(
-                                                "E’lon beruvchi : ${data.searchuniversitet[index].advertising}",
+                                                tr("E’lon beruvchi:")+"${data.searchuniversitet[index].advertising}",
                                                 style: TextStyle(fontSize: 14.sp)))
                                       ],
                                     ),
