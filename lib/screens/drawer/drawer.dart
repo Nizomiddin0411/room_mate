@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
@@ -39,12 +40,12 @@ class _DrawerPageState extends State<DrawerPage> {
                       child: Image.asset('assets/images/logo.png'),
                     ),
                     ListTile(
-                      title: const Text("Asosiy"),
+                      title:  Text("Asosiy").tr(),
                       onTap: () {},
                       leading: Image.asset('assets/images/Vector.png'),
                     ),
                     ListTile(
-                      title: const Text("E’lonlarim"),
+                      title:  Text("E’lonlarim").tr(),
                       onTap: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) => const FavoritAds()));
@@ -53,7 +54,7 @@ class _DrawerPageState extends State<DrawerPage> {
                     ),
                     ListTile(
                       leading: const Icon(Icons.settings),
-                      title: const Text("Sozlamalar"),
+                      title:  Text("Sozlamalar").tr(),
                       onTap: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) => const Setting()));
@@ -61,18 +62,18 @@ class _DrawerPageState extends State<DrawerPage> {
                       // expandedCrossAxisAlignment: CrossAxisAlignment.start,
                     ),
                     ListTile(
-                        title: const Text("Bildirishnomalar"),
+                        title:  Text("Bildirishnomalar").tr(),
                         onTap: () {},
                         leading: const Icon(Icons.notifications_none)),
                     ListTile(
-                      title: const Text("Chat"),
+                      title:  Text("Chat").tr(),
                       onTap: () {
                         Navigator.push(context, MaterialPageRoute(builder: (context)=>AllChats()));
                       },
                       leading: const Icon(Icons.chat),
                     ),
                     ListTile(
-                        title: const Text("Sevimlilar"),
+                        title:  Text("Sevimlilar").tr(),
                         onTap: () {
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) => const FavoritPage()));
