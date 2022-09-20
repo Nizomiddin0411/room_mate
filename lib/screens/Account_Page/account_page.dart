@@ -18,6 +18,9 @@ class AccountPage extends StatefulWidget {
 
 class _AccountPageState extends State<AccountPage> {
   bool _switchValue = false;
+  bool isSwitched = false;
+  String name = Hive.box('name').get('name');
+  String number = Hive.box('number').get('number');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,10 +62,10 @@ class _AccountPageState extends State<AccountPage> {
             height: 20.h,
           ),
           Text(
-            "Abdullayev Axmatjon",
+            name,
             style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
           ),
-          Text("+998991234567"),
+          Text(number),
           SizedBox(
             height: 20.h,
           ),
@@ -122,26 +125,18 @@ class _AccountPageState extends State<AccountPage> {
               "Sherik kerak",
               style: TextStyle(fontSize: 18.sp),
             ),
-            trailing: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Container(
-                height: 35.h,
-                width: 80.w,
-                child: Switcher(
-                  value: _switchValue,
-                  size: SwitcherSize.medium,
-                  switcherButtonRadius: 30.r,
-                  enabledSwitcherButtonRotate: true,
-                  iconOn: Icons.check,
-                  colorOff: Colors.blue.withOpacity(0.3),
-                  colorOn: Colors.blue,
-                  onChanged: (bool state) {
-                  },
-                  onTap: () async{
-                    // print(_switchValue);
-                    await ChangeProfile().ChangeProf(id: _switchValue ? '1': '2');
-                  },
-                ),
+            trailing: Container(
+              height: 60.h,
+              width: 80.w,
+              child:
+              Switch(
+                value: isSwitched,
+                onChanged: (value) {
+                   ChangeProfile().ChangeProf(id: _switchValue ? '2': '1');
+                  setState(() {
+                    isSwitched = value;
+                  });
+                },
               ),
             ),
           ),

@@ -38,6 +38,30 @@ class _OwnerState extends State<Owner> {
   TextEditingController? adsTitleController;
   TextEditingController? inputcontroller;
   GetDistrictModel? dropDown1;
+  Color colorRegion = Colors.grey;
+  bool RegionOnClick = false;
+  Color colorDistric = Colors.grey;
+  bool DiscritOnClick = false;
+  Color colorUniver = Colors.grey;
+  bool UniverOnClick = false;
+  Color colorTypeHouse = Colors.grey;
+  bool TypeHouseOnClick = false;
+  Color colorRoomCount = Colors.grey;
+  bool RoomCountOnClick = false;
+  Color colorRentType = Colors.grey;
+  bool RentTypeOnClick = false;
+  Color colorTypeCost = Colors.grey;
+  bool TypeCostOnClick = false;
+  Color colorGender = Colors.grey;
+  bool GenderOnClick = false;
+  Color colorCountPupil = Colors.grey;
+  bool CountPupilOnClick = false;
+  Color colorForm = Colors.grey;
+  bool FormOnClick = false;
+  Color colorFormDescription = Colors.grey;
+  bool FormDescriptionOnClick = false;
+
+
   var kvartira = [
     'Kvartira',
     'Xovli',
@@ -100,10 +124,11 @@ class _OwnerState extends State<Owner> {
                 Container(
                   width: 324.w,
                   decoration:
-                      BoxDecoration(borderRadius: BorderRadius.circular(10.r)),
+                      BoxDecoration(borderRadius: BorderRadius.circular(10.r),border: Border.all(color: colorRegion),),
                   child: DropdownButtonFormField(
                     hint: Text("Viloyatni tanlang"),
                     decoration: const InputDecoration(
+                      
                         border: OutlineInputBorder(), focusColor: Colors.grey),
                     // value: ,
                     icon: Icon(Icons.arrow_drop_down_outlined),
@@ -119,6 +144,7 @@ class _OwnerState extends State<Owner> {
                           .where((element) => element.name == newValue);
                       data.getDistrict(selected.last.id!);
                       setState(() {
+                        RegionOnClick = true;
                         dropDown = newValue.toString();
                       });
                     },
@@ -139,6 +165,7 @@ class _OwnerState extends State<Owner> {
                     ? Container(
                         width: 324.w,
                         decoration: BoxDecoration(
+                          border: Border.all(color: colorDistric),
                             borderRadius: BorderRadius.circular(10.r)),
                         child: DropdownButtonFormField(
                           isExpanded: true,
@@ -163,6 +190,7 @@ class _OwnerState extends State<Owner> {
                             );
                           }).toList(),
                           onChanged: (newValue) {
+                            DiscritOnClick = true;
                             print("Selected ----------- $newValue");
                             setState(() {
                               // dropDown1 = newValue as GetDistrictModel?;
@@ -199,11 +227,20 @@ class _OwnerState extends State<Owner> {
                 Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey.shade400),
+                      border: Border.all(color: colorUniver),
                       borderRadius: BorderRadius.circular(4.r)),
                   child: Container(
                     padding: EdgeInsets.only(left: 16.w),
                     child: TextFormField(
+                      onSaved: (e){
+                        setState(() {
+                          if(e!.length > 0){
+                            setState(() {
+                              UniverOnClick = true;
+                            });
+                          }
+                        });
+                      },
                       controller: addressController,
                       decoration: InputDecoration(
                         border: InputBorder.none,
@@ -236,6 +273,7 @@ class _OwnerState extends State<Owner> {
                         value: _checkHome,
                         onChanged: (e) {
                           setState(() {
+                            
                             _checkHome = e!;
                             if (_checkHome == true) {
                               RoomOwner = '1';
@@ -271,7 +309,7 @@ class _OwnerState extends State<Owner> {
                         Container(
                           width: 152.w,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10.r)),
+                              borderRadius: BorderRadius.circular(10.r),border: Border.all(color: colorTypeHouse),),
                           child: DropdownButtonFormField(
                             hint: Text("uy turi"),
                             decoration: const InputDecoration(
@@ -287,6 +325,7 @@ class _OwnerState extends State<Owner> {
                             }).toList(),
                             onChanged: (newValue) {
                               setState(() {
+                              TypeHouseOnClick = true;
                                 TypeHouse = newValue.toString();
                               });
                             },
@@ -309,7 +348,7 @@ class _OwnerState extends State<Owner> {
                         Container(
                           width: 152.w,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10.r)),
+                              borderRadius: BorderRadius.circular(10.r),border: Border.all(color: colorRoomCount),),
                           child: DropdownButtonFormField(
                             hint: Text("Xonalar soni"),
                             decoration: const InputDecoration(
@@ -325,6 +364,7 @@ class _OwnerState extends State<Owner> {
                             }).toList(),
                             onChanged: (newValue) {
                               setState(() {
+                                RoomCountOnClick =true;
                                 CountRoom = newValue.toString();
                               });
                             },
@@ -347,7 +387,7 @@ class _OwnerState extends State<Owner> {
                 Container(
                   width: 152.w,
                   decoration:
-                      BoxDecoration(borderRadius: BorderRadius.circular(10.r)),
+                      BoxDecoration(borderRadius: BorderRadius.circular(10.r),border: Border.all(color: colorRentType),),
                   child: DropdownButtonFormField(
                     hint: Text("Ijara muddati"),
                     decoration: const InputDecoration(
@@ -362,6 +402,7 @@ class _OwnerState extends State<Owner> {
                     }).toList(),
                     onChanged: (newValue) {
                       setState(() {
+                        RentTypeOnClick =true;
                         RentOf = newValue.toString();
                       });
                     },
@@ -380,11 +421,18 @@ class _OwnerState extends State<Owner> {
                 Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey.shade400),
+                      border: Border.all(color: colorTypeCost),
                       borderRadius: BorderRadius.circular(4.r)),
                   child: Container(
                     padding: EdgeInsets.only(left: 16.w),
                     child: TextFormField(
+                      onSaved: (e){
+                        setState(() {
+                          if(e!.length > 0){
+                            TypeCostOnClick = true;
+                          }
+                        });
+                      },
                       controller: costController,
                       decoration: InputDecoration(
                         border: InputBorder.none,
@@ -404,6 +452,7 @@ class _OwnerState extends State<Owner> {
                             value: _dropownUsd,
                             onChanged: (String? e) {
                               setState(() {
+                                
                                 _dropownUsd = e;
                               });
                             },
@@ -495,7 +544,7 @@ class _OwnerState extends State<Owner> {
                         Container(
                           width: 152.w,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10.r)),
+                              borderRadius: BorderRadius.circular(10.r),border: Border.all(color: colorGender),),
                           child: DropdownButtonFormField(
                             hint: Text("Qiz,O'g'il"),
                             decoration: const InputDecoration(
@@ -511,6 +560,7 @@ class _OwnerState extends State<Owner> {
                             }).toList(),
                             onChanged: (newValue) {
                               setState(() {
+                                GenderOnClick =true;
                                 genderString = newValue.toString();
                               });
                             },
@@ -533,7 +583,7 @@ class _OwnerState extends State<Owner> {
                         Container(
                           width: 152.w,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10.r)),
+                              borderRadius: BorderRadius.circular(10.r),border: Border.all(color: colorCountPupil),),
                           child: DropdownButtonFormField(
                             hint: Text("Ijarachilar soni"),
                             decoration: const InputDecoration(
@@ -549,6 +599,7 @@ class _OwnerState extends State<Owner> {
                             }).toList(),
                             onChanged: (newValue) {
                               setState(() {
+                                CountPupilOnClick = true;
                                 countRoom = newValue.toString();
                               });
                             },
@@ -571,11 +622,18 @@ class _OwnerState extends State<Owner> {
                 Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey.shade400),
+                      border: Border.all(color: colorForm),
                       borderRadius: BorderRadius.circular(4.r)),
                   child: Container(
                     padding: EdgeInsets.only(left: 16.w),
                     child: TextFormField(
+                      onSaved: (e){
+                        if(e!.length>0){
+                          setState(() {
+                            FormOnClick = true;
+                          });
+                        }
+                      },
                       controller: adsTitleController,
                       decoration: InputDecoration(
                         border: InputBorder.none,
@@ -601,11 +659,18 @@ class _OwnerState extends State<Owner> {
                 Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey.shade400),
+                      border: Border.all(color: colorFormDescription),
                       borderRadius: BorderRadius.circular(4.r)),
                   child: Container(
                     padding: EdgeInsets.only(left: 16.w),
                     child: TextFormField(
+                      onSaved: (e){
+                        if(e!.length>0){
+                          setState(() {
+                            FormDescriptionOnClick = true;
+                          });
+                        }
+                      },
                       controller:inputcontroller ,
                       maxLines: 6,
                       decoration: InputDecoration(
@@ -659,11 +724,39 @@ class _OwnerState extends State<Owner> {
                               address: addressController?.text
                           );
 
-                          Navigator.pushAndRemoveUntil(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => MenuPage()),
-                              (route) => false);
+                          if (RegionOnClick &&
+                              DiscritOnClick &&
+                              UniverOnClick &&
+                              TypeHouseOnClick &&
+                              RoomCountOnClick &&
+                              RentTypeOnClick &&
+                              TypeCostOnClick &&
+                              GenderOnClick &&
+                              CountPupilOnClick &&
+                               FormOnClick   &&
+                              FormDescriptionOnClick
+
+                          ) {
+                            Navigator.pushAndRemoveUntil(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => MenuPage()),
+                                (route) => false);
+                          } else {
+                            setState(() {
+                              colorRegion = Colors.red;
+                              colorDistric = Colors.red;
+                              colorUniver = Colors.red;
+                              colorTypeHouse = Colors.red;
+                              colorRoomCount = Colors.red;
+                              colorRentType = Colors.red;
+                              colorTypeCost = Colors.red;
+                              colorGender = Colors.red;
+                              colorCountPupil = Colors.red;
+                              colorForm = Colors.red;
+                              colorFormDescription = Colors.red;
+                            });
+                          }
                         },
                         child: Text(
                           "E’lon saqlash",

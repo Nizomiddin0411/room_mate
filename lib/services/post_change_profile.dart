@@ -21,6 +21,7 @@ class ChangeProfile {
     if (response.statusCode >= 200 && response.statusCode <= 300) {
       var data = await response.stream.bytesToString();
       // await Hive.box('token').put('token', jsonDecode(data)["access_token"]);
+      print("$id   prifilee idisi  ");
 
       return jsonDecode(data);
     }

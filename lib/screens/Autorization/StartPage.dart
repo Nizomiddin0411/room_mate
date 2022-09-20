@@ -38,9 +38,11 @@ class _StartPageState extends State<StartPage> {
                 Navigator.push(context, MaterialPageRoute(builder: (context)=>(LoginPage())));
               },
               style: ElevatedButton.styleFrom(
-                  primary: AppColors.mainColor,
+                  primary: Colors.white,
                 shape: RoundedRectangleBorder(
+
                   borderRadius: BorderRadius.circular(10.r),
+                  side: BorderSide(color: Colors.blue)
 
                 ),
               ),
@@ -54,7 +56,7 @@ class _StartPageState extends State<StartPage> {
               child: Center(
                 child: Text(
                   "Login",
-                  style: TextStyle(color: AppColors.backgroundWhite,fontSize: 20.sp),
+                  style: TextStyle(color: Colors.blue,fontSize: 20.sp),
                 ),
               ),
             ),
