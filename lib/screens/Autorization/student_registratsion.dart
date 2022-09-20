@@ -5,6 +5,7 @@ import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 import 'package:switcher/core/switcher_size.dart';
 import 'package:switcher/switcher.dart';
@@ -754,6 +755,8 @@ class _StudentUserState extends State<StudentUser> {
                         gender: dropdownvalue.toString() == 'Erkak' ? '1' : '2',
                         UniderId: data.universiterid.toString()
                     );
+                    Hive.box('name').put( 'name', myController.text );
+                    Hive.box('number').put( 'number', nameController.text );
                     print('${myController} maulotiiiiiiiii+++++++++++');
                     print('${Roommate} sherik kerak mi +++++++++++');
                     print('${UniderId} malumotlar  +++++++++++');

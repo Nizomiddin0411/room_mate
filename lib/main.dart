@@ -36,6 +36,8 @@ void main() async {
   await EasyLocalization.ensureInitialized();
   await Hive.initFlutter();
   await Hive.openBox('token');
+  await Hive.openBox('name');
+  await Hive.openBox('number');
   await Hive.openBox('regionId');
   await Hive.openBox('id'); // myId
   await Hive.openBox('Id'); // friendId
