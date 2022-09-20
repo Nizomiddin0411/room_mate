@@ -38,28 +38,28 @@ class _OwnerState extends State<Owner> {
   TextEditingController? adsTitleController;
   TextEditingController? inputcontroller;
   GetDistrictModel? dropDown1;
-  Color colorRegion = Colors.grey;
-  bool RegionOnClick = false;
-  Color colorDistric = Colors.grey;
-  bool DiscritOnClick = false;
-  Color colorUniver = Colors.grey;
-  bool UniverOnClick = false;
-  Color colorTypeHouse = Colors.grey;
-  bool TypeHouseOnClick = false;
-  Color colorRoomCount = Colors.grey;
-  bool RoomCountOnClick = false;
-  Color colorRentType = Colors.grey;
-  bool RentTypeOnClick = false;
-  Color colorTypeCost = Colors.grey;
-  bool TypeCostOnClick = false;
-  Color colorGender = Colors.grey;
-  bool GenderOnClick = false;
-  Color colorCountPupil = Colors.grey;
-  bool CountPupilOnClick = false;
-  Color colorForm = Colors.grey;
-  bool FormOnClick = false;
-  Color colorFormDescription = Colors.grey;
-  bool FormDescriptionOnClick = false;
+  Color _colorRegion = Colors.grey;
+  bool _RegionOnClick = false;
+  Color _colorDistric = Colors.grey;
+  bool _DiscritOnClick = false;
+  Color _colorUniver = Colors.grey;
+  bool _UniverOnClick = false;
+  Color _colorTypeHouse = Colors.grey;
+  bool _TypeHouseOnClick = false;
+  Color _colorRoomCount = Colors.grey;
+  bool _RoomCountOnClick = false;
+  Color _colorRentType = Colors.grey;
+  bool _RentTypeOnClick = false;
+  Color _colorTypeCost = Colors.grey;
+  bool _TypeCostOnClick = false;
+  Color _colorGender = Colors.grey;
+  bool _GenderOnClick = false;
+  Color _colorCountPupil = Colors.grey;
+  bool _CountPupilOnClick = false;
+  Color _colorForm = Colors.grey;
+  bool _FormOnClick = false;
+  Color _colorFormDescription = Colors.grey;
+  bool _FormDescriptionOnClick = false;
 
 
   var kvartira = [
@@ -124,7 +124,7 @@ class _OwnerState extends State<Owner> {
                 Container(
                   width: 324.w,
                   decoration:
-                      BoxDecoration(borderRadius: BorderRadius.circular(10.r),border: Border.all(color: colorRegion),),
+                      BoxDecoration(borderRadius: BorderRadius.circular(10.r),border: Border.all(color: _colorRegion),),
                   child: DropdownButtonFormField(
                     hint: Text("Viloyatni tanlang"),
                     decoration: const InputDecoration(
@@ -144,7 +144,7 @@ class _OwnerState extends State<Owner> {
                           .where((element) => element.name == newValue);
                       data.getDistrict(selected.last.id!);
                       setState(() {
-                        RegionOnClick = true;
+                        _RegionOnClick = true;
                         dropDown = newValue.toString();
                       });
                     },
@@ -165,7 +165,7 @@ class _OwnerState extends State<Owner> {
                     ? Container(
                         width: 324.w,
                         decoration: BoxDecoration(
-                          border: Border.all(color: colorDistric),
+                          border: Border.all(color: _colorDistric),
                             borderRadius: BorderRadius.circular(10.r)),
                         child: DropdownButtonFormField(
                           isExpanded: true,
@@ -190,7 +190,7 @@ class _OwnerState extends State<Owner> {
                             );
                           }).toList(),
                           onChanged: (newValue) {
-                            DiscritOnClick = true;
+                            _DiscritOnClick = true;
                             print("Selected ----------- $newValue");
                             setState(() {
                               // dropDown1 = newValue as GetDistrictModel?;
@@ -227,16 +227,16 @@ class _OwnerState extends State<Owner> {
                 Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
-                      border: Border.all(color: colorUniver),
+                      border: Border.all(color: _colorUniver),
                       borderRadius: BorderRadius.circular(4.r)),
                   child: Container(
                     padding: EdgeInsets.only(left: 16.w),
                     child: TextFormField(
-                      onSaved: (e){
+                      onChanged: (e){
                         setState(() {
-                          if(e!.length > 0){
+                          if(e.length > 0){
                             setState(() {
-                              UniverOnClick = true;
+                              _UniverOnClick = true;
                             });
                           }
                         });
@@ -309,7 +309,7 @@ class _OwnerState extends State<Owner> {
                         Container(
                           width: 152.w,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10.r),border: Border.all(color: colorTypeHouse),),
+                              borderRadius: BorderRadius.circular(10.r),border: Border.all(color: _colorTypeHouse),),
                           child: DropdownButtonFormField(
                             hint: Text("uy turi"),
                             decoration: const InputDecoration(
@@ -325,7 +325,7 @@ class _OwnerState extends State<Owner> {
                             }).toList(),
                             onChanged: (newValue) {
                               setState(() {
-                              TypeHouseOnClick = true;
+                              _TypeHouseOnClick = true;
                                 TypeHouse = newValue.toString();
                               });
                             },
@@ -348,7 +348,7 @@ class _OwnerState extends State<Owner> {
                         Container(
                           width: 152.w,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10.r),border: Border.all(color: colorRoomCount),),
+                              borderRadius: BorderRadius.circular(10.r),border: Border.all(color: _colorRoomCount),),
                           child: DropdownButtonFormField(
                             hint: Text("Xonalar soni"),
                             decoration: const InputDecoration(
@@ -364,7 +364,7 @@ class _OwnerState extends State<Owner> {
                             }).toList(),
                             onChanged: (newValue) {
                               setState(() {
-                                RoomCountOnClick =true;
+                                _RoomCountOnClick =true;
                                 CountRoom = newValue.toString();
                               });
                             },
@@ -387,7 +387,7 @@ class _OwnerState extends State<Owner> {
                 Container(
                   width: 152.w,
                   decoration:
-                      BoxDecoration(borderRadius: BorderRadius.circular(10.r),border: Border.all(color: colorRentType),),
+                      BoxDecoration(borderRadius: BorderRadius.circular(10.r),border: Border.all(color: _colorRentType),),
                   child: DropdownButtonFormField(
                     hint: Text("Ijara muddati"),
                     decoration: const InputDecoration(
@@ -402,7 +402,7 @@ class _OwnerState extends State<Owner> {
                     }).toList(),
                     onChanged: (newValue) {
                       setState(() {
-                        RentTypeOnClick =true;
+                        _RentTypeOnClick =true;
                         RentOf = newValue.toString();
                       });
                     },
@@ -421,7 +421,7 @@ class _OwnerState extends State<Owner> {
                 Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
-                      border: Border.all(color: colorTypeCost),
+                      border: Border.all(color: _colorTypeCost),
                       borderRadius: BorderRadius.circular(4.r)),
                   child: Container(
                     padding: EdgeInsets.only(left: 16.w),
@@ -429,7 +429,7 @@ class _OwnerState extends State<Owner> {
                       onSaved: (e){
                         setState(() {
                           if(e!.length > 0){
-                            TypeCostOnClick = true;
+                            _TypeCostOnClick = true;
                           }
                         });
                       },
@@ -544,7 +544,7 @@ class _OwnerState extends State<Owner> {
                         Container(
                           width: 152.w,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10.r),border: Border.all(color: colorGender),),
+                              borderRadius: BorderRadius.circular(10.r),border: Border.all(color: _colorGender),),
                           child: DropdownButtonFormField(
                             hint: Text("Qiz,O'g'il"),
                             decoration: const InputDecoration(
@@ -560,7 +560,7 @@ class _OwnerState extends State<Owner> {
                             }).toList(),
                             onChanged: (newValue) {
                               setState(() {
-                                GenderOnClick =true;
+                                _GenderOnClick =true;
                                 genderString = newValue.toString();
                               });
                             },
@@ -583,7 +583,7 @@ class _OwnerState extends State<Owner> {
                         Container(
                           width: 152.w,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10.r),border: Border.all(color: colorCountPupil),),
+                              borderRadius: BorderRadius.circular(10.r),border: Border.all(color: _colorCountPupil),),
                           child: DropdownButtonFormField(
                             hint: Text("Ijarachilar soni"),
                             decoration: const InputDecoration(
@@ -599,7 +599,7 @@ class _OwnerState extends State<Owner> {
                             }).toList(),
                             onChanged: (newValue) {
                               setState(() {
-                                CountPupilOnClick = true;
+                                _CountPupilOnClick = true;
                                 countRoom = newValue.toString();
                               });
                             },
@@ -622,15 +622,15 @@ class _OwnerState extends State<Owner> {
                 Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
-                      border: Border.all(color: colorForm),
+                      border: Border.all(color: _colorForm),
                       borderRadius: BorderRadius.circular(4.r)),
                   child: Container(
                     padding: EdgeInsets.only(left: 16.w),
                     child: TextFormField(
-                      onSaved: (e){
-                        if(e!.length>0){
+                      onChanged: (e){
+                        if(e.length>0){
                           setState(() {
-                            FormOnClick = true;
+                            _FormOnClick = true;
                           });
                         }
                       },
@@ -659,15 +659,15 @@ class _OwnerState extends State<Owner> {
                 Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
-                      border: Border.all(color: colorFormDescription),
+                      border: Border.all(color: _colorFormDescription),
                       borderRadius: BorderRadius.circular(4.r)),
                   child: Container(
                     padding: EdgeInsets.only(left: 16.w),
                     child: TextFormField(
-                      onSaved: (e){
-                        if(e!.length>0){
+                      onChanged: (e){
+                        if(e.length>0){
                           setState(() {
-                            FormDescriptionOnClick = true;
+                            _FormDescriptionOnClick = true;
                           });
                         }
                       },
@@ -723,38 +723,47 @@ class _OwnerState extends State<Owner> {
                               description: inputcontroller?.text,
                               address: addressController?.text
                           );
-
-                          if (RegionOnClick &&
-                              DiscritOnClick &&
-                              UniverOnClick &&
-                              TypeHouseOnClick &&
-                              RoomCountOnClick &&
-                              RentTypeOnClick &&
-                              TypeCostOnClick &&
-                              GenderOnClick &&
-                              CountPupilOnClick &&
-                               FormOnClick   &&
-                              FormDescriptionOnClick
-
-                          ) {
-                            Navigator.pushAndRemoveUntil(
+                          print(_RegionOnClick);
+                          print(_DiscritOnClick);
+                          print(_UniverOnClick);
+                          print(_TypeHouseOnClick);
+                          print(_RoomCountOnClick);
+                          print(_RentTypeOnClick);
+                          print(_TypeCostOnClick);
+                          print(_GenderOnClick);
+                          print(_CountPupilOnClick);
+                          print(_FormOnClick);
+                          Navigator.pushAndRemoveUntil(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => MenuPage()),
                                 (route) => false);
+
+                          if (_RegionOnClick &&
+                              _DiscritOnClick &&
+                              _UniverOnClick &&
+                              _TypeHouseOnClick &&
+                              _RoomCountOnClick &&
+                              _RentTypeOnClick &&
+                              _TypeCostOnClick &&
+                              _GenderOnClick &&
+                              _CountPupilOnClick &&
+                               _FormOnClick 
+                          ) {
+                            
                           } else {
                             setState(() {
-                              colorRegion = Colors.red;
-                              colorDistric = Colors.red;
-                              colorUniver = Colors.red;
-                              colorTypeHouse = Colors.red;
-                              colorRoomCount = Colors.red;
-                              colorRentType = Colors.red;
-                              colorTypeCost = Colors.red;
-                              colorGender = Colors.red;
-                              colorCountPupil = Colors.red;
-                              colorForm = Colors.red;
-                              colorFormDescription = Colors.red;
+                              // colorRegion = Colors.red;
+                              // colorDistric = Colors.red;
+                              // colorUniver = Colors.red;
+                              // colorTypeHouse = Colors.red;
+                              // colorRoomCount = Colors.red;
+                              // colorRentType = Colors.red;
+                              // colorTypeCost = Colors.red;
+                              // colorGender = Colors.red;
+                              // colorCountPupil = Colors.red;
+                              // colorForm = Colors.red;
+                              // colorFormDescription = Colors.red;
                             });
                           }
                         },
