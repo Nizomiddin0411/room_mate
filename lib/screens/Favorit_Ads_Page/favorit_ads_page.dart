@@ -1,4 +1,5 @@
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:talaba_uy/services/get_my_ads_service.dart';
@@ -26,7 +27,7 @@ class _FavoritAdsState extends State<FavoritAds> {
           child: Text(
             "E’lonlarim",
             style: TextStyle(color: AppColors.mainColor),
-          ),
+          ).tr(),
         ),
         leading: IconButton(
           onPressed: () {
@@ -89,8 +90,8 @@ class _FavoritAdsState extends State<FavoritAds> {
                                         ],
                                       ),
                                       Padding(
-                                        padding: const EdgeInsets.fromLTRB(
-                                            8, 0, 8, 0),
+                                        padding:  EdgeInsets.fromLTRB(
+                                            8.w, 0, 8.w, 0),
                                         child: Text(
                                           snapshot.data![index].cost.toString(),
                                           style: TextStyle(
@@ -103,8 +104,8 @@ class _FavoritAdsState extends State<FavoritAds> {
                                         MainAxisAlignment.spaceBetween,
                                         children: [
                                           Padding(
-                                            padding: const EdgeInsets.fromLTRB(
-                                                8, 0, 8, 0),
+                                            padding:  EdgeInsets.fromLTRB(
+                                                8.w, 0, 8.w, 0),
                                             child: Text(
                                               snapshot.data![index].address.toString(),
                                               style: TextStyle(fontSize: 10.sp),
@@ -118,9 +119,9 @@ class _FavoritAdsState extends State<FavoritAds> {
                                                       builder: (context) =>
                                                       const DetailPage()));
                                             },
-                                            child: const Padding(
+                                            child:  Padding(
                                               padding: EdgeInsets.fromLTRB(
-                                                  8, 0, 8, 0),
+                                                  8.w, 0, 8.w, 0),
                                               child: Text(
                                                 'Batafsil',
                                                 style: TextStyle(
@@ -183,7 +184,7 @@ class _FavoritAdsState extends State<FavoritAds> {
                           child: Text(
                             "Bekor qilish",
                             style: TextStyle(color:AppColors.backgroundWhite,fontSize: 18.sp),
-                          ),
+                          ).tr(),
 
 
                         ),
