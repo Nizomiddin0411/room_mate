@@ -163,7 +163,7 @@ class _ElonlarState extends State<Elonlar> {
                         padding: const EdgeInsets.all(18.0),
                         child: Container(
                           width: 324.w,
-                          height: 100.h,
+                          height: 105.h,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(6.r),
                               color: AppColors.secondBackgroud),

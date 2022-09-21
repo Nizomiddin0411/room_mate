@@ -1,9 +1,16 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
 import 'package:talaba_uy/screens/All_Ads_Page/all_ads_page.dart';
+import '../../cubit/aut_cubit.dart';
+import '../../models/lan_classs.dart';
+import '../../models/lan_classs.dart';
+import '../../models/lan_classs.dart';
+import '../../models/lan_classs.dart';
+import '../../models/lang_model.dart';
 import '../../provider/region_provider.dart';
 
 class FiltrPage extends StatefulWidget {
@@ -80,13 +87,16 @@ class _FiltrPageState extends State<FiltrPage> {
     super.initState();
     fromCost = TextEditingController();
     toCost = TextEditingController();
+    // context.read<AutCubit>().selectSettingLan(LangData.languageList.singleWhere((e) => e.locale == context.locale), context);
     Provider.of<RegionProvider>(context, listen: false).getUnivers();
     // Provider.of<RegionProvider>(context,listen: false).getFiltrApi();
     Provider.of<RegionProvider>(context, listen: false).getRegion().asStream();
+
   }
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       backgroundColor: AppColors.backgroundWhite,
       appBar: AppBar(
@@ -257,10 +267,14 @@ class _FiltrPageState extends State<FiltrPage> {
                           onTap: () {
                             data.UniverId = e.id.toString();
                           },
-                          value: e.name ?? "",
+                          value:  e.name  ?? '',
                           child: SizedBox(
                             width: MediaQuery.of(context).size.width - 150.w,
-                            child: Text(e.name.toString()),
+                            child: Text(
+                                // context.read<AutCubit>().selectedLang.index == 1 ?
+                                e.name.toString()
+                                    // : e.nameRu.toString()
+                            ),
                           ),
                         );
                       }).toList(),
