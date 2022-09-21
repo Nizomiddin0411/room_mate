@@ -9,6 +9,7 @@ import 'package:talaba_uy/services/get_favorite_service.dart';
 
 import '../../provider/favorite_provider.dart';
 import '../../services/post_change_favoritr_service.dart';
+import '../Ads_Detail/ads_detail.dart';
 import '../All_Ads_Page/detail_page.dart';
 
 class FavoritPage extends StatefulWidget {
@@ -128,12 +129,58 @@ class _FavoritPageState extends State<FavoritPage> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    DetailPage()));
+                                                    AdsDetail(
+                                                      title: data.Like[index].title
+                                                          .toString(),
+                                                      description: data
+                                                          .Like[index].description
+                                                          .toString(),
+                                                      houseType: data
+                                                          .Like[index].houseType
+                                                          .toString(),
+                                                      cost: data.Like[index].cost
+                                                          .toString(),
+                                                      costTayp: data
+                                                          .Like[index].costType
+                                                          .toString(),
+                                                      countRoom: data
+                                                          .Like[index].roomCount
+                                                          .toString(),
+                                                      countPeople: data.Like[index]
+                                                          .roommateCount
+                                                          .toString(),
+                                                      region: data
+                                                          .Like[index].region?.name
+                                                          .toString(),
+                                                      district: data.Like[index]
+                                                          .district?.name
+                                                          .toString(),
+                                                      univer: data.Like[index]
+                                                          .university?.name
+                                                          .toString(),
+                                                      facultet: data.Like[index]
+                                                          .faculty?.name
+                                                          .toString(),
+                                                      liveWithOwner: data
+                                                          .Like[index]
+                                                          .liveWithOwner
+                                                          .toString(),
+                                                      subway: data
+                                                          .Like[index].subway
+                                                          .toString(),
+                                                      favorite: data
+                                                          .Like[index].favorite
+                                                          .toString(),
+                                                      id: data.Like[index].id
+                                                          .toString(),
+                                                      type: data.Like[index].type
+                                                          .toString(),
+                                                    )));
                                       },
                                       child: Padding(
                                         padding:
                                             EdgeInsets.fromLTRB(8.w, 0, 8.w, 0),
-                                        child: Text(
+                                        child: const Text(
                                           'Batafsil',
                                           style: TextStyle(
                                               decoration:

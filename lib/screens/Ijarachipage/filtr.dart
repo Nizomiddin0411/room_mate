@@ -1,16 +1,22 @@
+import 'dart:convert';
+
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:http/http.dart'as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
 import 'package:talaba_uy/screens/All_Ads_Page/all_ads_page.dart';
 import '../../cubit/aut_cubit.dart';
+import '../../models/get_univer_model.dart';
 import '../../models/lan_classs.dart';
 import '../../models/lan_classs.dart';
 import '../../models/lan_classs.dart';
 import '../../models/lan_classs.dart';
 import '../../models/lang_model.dart';
+import '../../models/search_universitety_model.dart';
 import '../../provider/region_provider.dart';
 
 class FiltrPage extends StatefulWidget {
