@@ -78,7 +78,7 @@ class _LoginPageState extends State<LoginPage> {
                   height: 36.h,
                 ),
                 Text(
-                  'Telefon raqamingiz'.tr(),
+                  'Akkauntga kirish uchun telefon raqamingizni kiriting'.tr(),
                   style:
                       TextStyle(fontSize: 12.sp, fontWeight: FontWeight.bold),
                 ),

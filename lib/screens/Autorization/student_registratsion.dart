@@ -93,7 +93,7 @@ class _StudentUserState extends State<StudentUser> {
                 children: [
                   Row(
                     children: [
-                      Text("To’liq ism , familyangiz").tr(),
+                      Text("Ism va familiya ").tr(),
                     ],
                   ),
                   SizedBox(
@@ -115,7 +115,7 @@ class _StudentUserState extends State<StudentUser> {
                               color: myController.text == ''
                                   ? Colors.red
                                   : Colors.black12)),
-                      labelText: 'Ism familyangizni kiriting'.tr(),
+                      labelText: 'Ism va familiyangizni kiriting'.tr(),
                     ),
                   ),
                 ],
@@ -127,7 +127,7 @@ class _StudentUserState extends State<StudentUser> {
                 children: [
                   Row(
                     children: [
-                      Text("Telefon raqamingiz").tr(),
+                      Text("Telefon raqami").tr(),
                     ],
                   ),
                   SizedBox(
@@ -153,7 +153,7 @@ class _StudentUserState extends State<StudentUser> {
                     controller: nameController,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
-                      labelText: '+ 998 ** *** ** **',
+                      labelText: 'Telefon raqamini kiriting',
                     ),
                   ),
                 ],
@@ -165,7 +165,7 @@ class _StudentUserState extends State<StudentUser> {
                 children: [
                   Row(
                     children: [
-                      Text("Jinsingizni tanlang").tr(),
+                      Text("Jins ").tr(),
                     ],
                   ),
                   SizedBox(
@@ -184,7 +184,7 @@ class _StudentUserState extends State<StudentUser> {
                         ),
                         isExpanded: true,
                         hint: const Text(
-                          'Jinsingiz',
+                          'Jinsni tanlang',
                           style: TextStyle(fontSize: 14),
                         ),
                         icon: const Icon(
@@ -240,7 +240,7 @@ class _StudentUserState extends State<StudentUser> {
                 children: [
                   Row(
                     children: [
-                      Text("Oliy o’quv yurtingiz").tr(),
+                      Text("Oliy o’quv yurti").tr(),
                     ],
                   ),
                   SizedBox(
@@ -260,7 +260,7 @@ class _StudentUserState extends State<StudentUser> {
                         ),
                         isExpanded: true,
                         hint: const Text(
-                          'Oliy o’quv yurtingiz',
+                          'Oliy o’quv yurtini tanlang',
                           style: TextStyle(fontSize: 14),
                         ).tr(),
                         icon: const Icon(
@@ -312,7 +312,7 @@ class _StudentUserState extends State<StudentUser> {
                 children: [
                   Row(
                     children: [
-                      Text("Fakultetingiz").tr(),
+                      Text("Fakultet ").tr(),
                     ],
                   ),
                   SizedBox(
@@ -334,7 +334,7 @@ class _StudentUserState extends State<StudentUser> {
                         isExpanded: true,
                         isDense: true,
                         hint: const Text(
-                          'Fakultetingiz',
+                          'Fakultetni kiriting',
                           style: TextStyle(fontSize: 14),
                         ).tr(),
                         icon: const Icon(
@@ -390,7 +390,7 @@ class _StudentUserState extends State<StudentUser> {
                         isExpanded: true,
                         isDense: true,
                         hint: const Text(
-                          'Fakultetingiz',
+                          'Fakultetni kiriting',
                           style: TextStyle(fontSize: 14),
                         ),
                         icon: const Icon(
@@ -420,7 +420,7 @@ class _StudentUserState extends State<StudentUser> {
                 children: [
                   Row(
                     children: [
-                      Text("Kursingiz").tr(),
+                      Text("Kurs ").tr(),
                     ],
                   ),
                   SizedBox(
@@ -441,7 +441,7 @@ class _StudentUserState extends State<StudentUser> {
                         isDense: true,
                         buttonElevation: 2,
                         hint: const Text(
-                          'Kursingizni kiriting',
+                          "Kursni tanlang",
                           style: TextStyle(fontSize: 14),
                         ).tr(),
                         icon: const Icon(
@@ -467,7 +467,7 @@ class _StudentUserState extends State<StudentUser> {
                                 ))
                             .toList(),
                         validator: (value) =>
-                            value == value ? 'Kursingizni kiriting' : null,
+                            value == value ? 'Kursni tanlang' : null,
                         onChanged: (String? value) {
                           Course = value.toString();
                           kurs = true;
@@ -486,7 +486,7 @@ class _StudentUserState extends State<StudentUser> {
                 children: [
                   Row(
                     children: [
-                      Text("Qaysi viloyatliksiz").tr(),
+                      Text("Viloyat ").tr(),
                     ],
                   ),
                   SizedBox(
@@ -508,7 +508,7 @@ class _StudentUserState extends State<StudentUser> {
                               ),
                               isExpanded: true,
                               hint: const Text(
-                                'Qaysi viloyatliksiz',
+                                "Viloyatni tanlang",
                                 style: TextStyle(fontSize: 14),
                               ).tr(),
                               icon: const Icon(
@@ -567,7 +567,7 @@ class _StudentUserState extends State<StudentUser> {
                 children: [
                   Row(
                     children: [
-                      Text("Tumaningizni tanlang").tr(),
+                      Text("Tuman").tr(),
                     ],
                   ),
                   SizedBox(
@@ -589,7 +589,7 @@ class _StudentUserState extends State<StudentUser> {
                               ),
                               isExpanded: true,
                               hint: const Text(
-                                "Tumaningizni tanlang",
+                                "Tumanni tanlang",
                                 style: TextStyle(fontSize: 14),
                               ).tr(),
                               icon: const Icon(
@@ -643,7 +643,7 @@ class _StudentUserState extends State<StudentUser> {
                         isExpanded: true,
                         isDense: true,
                         hint: const Text(
-                          'Tumaningiz',
+                          'Tumanni tanlang',
                           style: TextStyle(fontSize: 14),
                         ).tr(),
                         icon: const Icon(
@@ -720,7 +720,7 @@ class _StudentUserState extends State<StudentUser> {
                                     builder: (context) => OffertoPage()));
                           },
                           child: Text(
-                            "  Foydalanuvchi shartlariga".tr(),
+                            "Foydalanuvchi shartlariga roziman".tr(),
                             style: TextStyle(
                                 color: AppColors.mainColor, fontSize: 15),
                           )))

@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:dropdown_search/dropdown_search.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:http/http.dart'as http;
 import 'package:flutter/material.dart';
