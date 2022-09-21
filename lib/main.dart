@@ -43,6 +43,7 @@ void main() async {
   await Hive.openBox('regionId');
   await Hive.openBox('id'); // myId
   await Hive.openBox('Id'); // friendId
+  await Hive.openBox('fullname'); 
 
   runApp(EasyLocalization(
     path: 'assets/locale',
