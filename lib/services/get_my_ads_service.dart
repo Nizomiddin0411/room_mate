@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'dart:convert';
+import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 
 
@@ -13,10 +14,12 @@ class GetMyAdsService {
     try {
       var response = await http.get(Uri.parse(
         'http://164.68.114.231:8081/roommate/backend/web/api/advertising/get-my-advertising',
+
       ),
-          // headers: {
-          //   HttpHeaders.authorizationHeader: 'Bearer VVuDO41zOoYY2KvUUHYPOJ9PzKsnnJeD'
-          // }
+          headers: {
+            HttpHeaders.authorizationHeader: 'Bearer ${Hive.box('token').get('token')}'
+      }
+
       );
       if(response.statusCode == 200){
 

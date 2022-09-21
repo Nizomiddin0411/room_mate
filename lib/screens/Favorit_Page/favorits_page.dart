@@ -1,10 +1,13 @@
 
+import 'package:easy_localization/easy_localization.dart';
+import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
 import 'package:talaba_uy/models/get_favorite_model.dart';
 import 'package:talaba_uy/services/get_favorite_service.dart';
 
+import '../../services/post_change_favoritr_service.dart';
 import '../All_Ads_Page/detail_page.dart';
 
 class FavoritPage extends StatefulWidget {
@@ -15,6 +18,13 @@ class FavoritPage extends StatefulWidget {
 }
 
 class _FavoritPageState extends State<FavoritPage> {
+    Future<List<FavoritemModel>> fetchFavorite = FavoriteService().fetchFavorite();
+
+    @override
+  void initState() {
+      fetchFavorite = FavoriteService().fetchFavorite();
+    super.initState();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +35,7 @@ class _FavoritPageState extends State<FavoritPage> {
           child: Text(
             "Sevimlilar",
             style: TextStyle(color: AppColors.mainColor),
-          ),
+          ).tr(),
         ),
         leading: IconButton(
           onPressed: () {
@@ -37,13 +47,13 @@ class _FavoritPageState extends State<FavoritPage> {
       body: Column(
         children: [
           FutureBuilder<List<FavoritemModel>?>(
-            future: FavoriteService().fetchFavorite(),
+            future: fetchFavorite,
             builder: (context, AsyncSnapshot<List<FavoritemModel>?> snapshot){
               if(snapshot.hasData){
                 return   ListView.builder(
                     shrinkWrap: true,
                     itemCount: snapshot.data!.length,
-                    itemBuilder: (BuildContext contex, int index) {
+                    itemBuilder: (BuildContext context, int index) {
                       return Padding(
                         padding: const EdgeInsets.all(18.0),
                         child: SingleChildScrollView(
@@ -70,18 +80,29 @@ class _FavoritPageState extends State<FavoritPage> {
                                             style: TextStyle(fontSize: 18.sp),
                                           ),
                                         ),
-                                        const Padding(
-                                          padding: EdgeInsets.fromLTRB(1, 0, 8, 0),
-                                          child: Icon(
-                                            Icons.favorite_border,
-                                            color: AppColors.error,
-                                          ),
+                                         Padding(
+                                          padding: EdgeInsets.fromLTRB(1.w, 0, 8.w, 0),
+                                          child:FavoriteButton(
+                                            isFavorite:
+                                            snapshot.data![index].favorite.toString() == '0'
+                                                ? false
+                                                : true,
+                                            iconSize: 35.0,
+                                            valueChanged: (_isFavorite) {
+                                              // print('Is Favorite $_isFavorite)');
+                                              setState(() {
+                                                FavoriteChange().Favoritefetch(
+                                                    id: snapshot.data![index].id
+                                                        .toString());
+                                              });
+                                            },
+                                          )
                                         )
                                       ],
                                     ),
                                     Padding(
                                       padding:
-                                      const EdgeInsets.fromLTRB(8, 0, 8, 0),
+                                       EdgeInsets.fromLTRB(8.w, 0, 8.w, 0),
                                       child: Text(
                                         '${snapshot.data![index].cost}',
                                         style: TextStyle(
@@ -95,7 +116,7 @@ class _FavoritPageState extends State<FavoritPage> {
                                       children: [
                                         Padding(
                                           padding:
-                                          const EdgeInsets.fromLTRB(8, 0, 8, 0),
+                                           EdgeInsets.fromLTRB(8.w, 0, 8.w, 0),
                                           child: Text(
                                             "${snapshot.data![index].address}",
                                             style: TextStyle(fontSize: 10.sp),
@@ -107,15 +128,15 @@ class _FavoritPageState extends State<FavoritPage> {
 
                                             )));
                                           },
-                                          child: const Padding(
-                                            padding: EdgeInsets.fromLTRB(8, 0, 8, 0),
+                                          child:  Padding(
+                                            padding: EdgeInsets.fromLTRB(8.w, 0, 8.w, 0),
                                             child: Text(
                                               'Batafsil',
                                               style: TextStyle(
                                                   decoration:
                                                   TextDecoration.underline,
                                                   color: AppColors.mainColor),
-                                            ),
+                                            ).tr(),
                                           ),
                                         )
                                       ],
