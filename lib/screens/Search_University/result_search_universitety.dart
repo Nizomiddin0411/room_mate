@@ -9,6 +9,7 @@ import 'package:talaba_uy/core/const/app_colors.dart';
 import 'package:talaba_uy/core/data/mockdata.dart';
 import 'package:talaba_uy/models/search_univer%20all.dart';
 import 'package:talaba_uy/models/searching_students_model.dart';
+import 'package:talaba_uy/provider/search_universitet_provider.dart';
 import 'package:talaba_uy/screens/All_Ads_Page/detail_page.dart';
 import 'package:talaba_uy/screens/Ijarachipage/filtr.dart';
 import 'package:talaba_uy/screens/Search_University/details_page.dart';
@@ -36,76 +37,73 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
     super.initState();
     Provider.of<UniversitetProvider>(context, listen: false).getViloyat();
   }
-
   @override
   Widget build(BuildContext context) {
-    TabController? _tabController;
-    return DefaultTabController(
-      length: 2,
-      child: Scaffold(
-        backgroundColor: AppColors.backgroundWhite,
-        appBar: PreferredSize(
-          preferredSize: Size.fromHeight(260.h),
-          child: AppBar(
-            leading: InkWell(
-              onTap: () {
-                Navigator.pop(context);
-              },
-              child: Icon(
-                Icons.arrow_back,
-                color: AppColors.iconColor,
-              ),
+    return Scaffold(
+      backgroundColor: AppColors.backgroundWhite,
+      appBar: PreferredSize(
+        preferredSize: Size.fromHeight(260.h),
+        child: AppBar(
+          elevation: 0,
+          leading: InkWell(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: Icon(
+              Icons.arrow_back,
+              color: AppColors.iconColor,
             ),
-            backgroundColor: AppColors.backgroundWhite,
-            title: Center(
-              child: Text(
-                "Oliy o’quv yurti",
-                style: TextStyle(color: AppColors.mainColor),
-              ).tr(),
-            ),
-            flexibleSpace: Padding(
-              padding: EdgeInsets.fromLTRB(18.w, 100.h, 18.w, 18.h),
-              child: Column(
-                children: [
-                  Container(
-                    height: 87.h,
-                    width: 350.w,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(6.r),
-                        color: AppColors.secondBackgroud),
-                    child: Padding(
-                      padding: EdgeInsets.all(10.0.w),
-                      child: Row(
-                        children: [
-                          Image.asset('assets/images/image 7.png'),
-                          SizedBox(
-                            width: 20,
+          ),
+          backgroundColor: AppColors.backgroundWhite,
+          title: Center(
+            child: Text(
+              "Oliy o’quv yurti",
+              style: TextStyle(color: AppColors.mainColor),
+            ).tr(),
+          ),
+          flexibleSpace: Padding(
+            padding: EdgeInsets.fromLTRB(18.w, 100.h, 18.w, 18.h),
+            child: Column(
+              children: [
+                Container(
+                  height: 87.h,
+                  width: 360.w,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(6.r),
+                      color: AppColors.secondBackgroud),
+                  child: Padding(
+                    padding: EdgeInsets.all(10.0.w),
+                    child: Row(
+                      children: [
+                        Image.asset('assets/images/image 7.png'),
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Container(
+                          height: 35.h,
+                          width: 200.w,
+                          child: AutoSizeText(
+                            widget.name,
+                            style: TextStyle(fontSize: 10.sp),
+                            maxLines: 1,
                           ),
-                          Container(
-                            height: 25.h,
-                            width: 200.w,
-                            child: AutoSizeText(
-                              widget.name,
-                              style: TextStyle(fontSize: 10.sp),
-                              maxLines: 4,
-                            ),
-                          )
-                        ],
-                      ),
+                        )
+                      ],
                     ),
                   ),
-                  SizedBox(
-                    height: 6.h,
-                  ),
-                  Container(
-                    height: 50.h,
-                    width: 324.w,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(6.r),
-                        color: AppColors.secondBackgroud),
-                    child: Padding(
-                      padding: EdgeInsets.all(10.0.w),
-                      child: Row(
+                ),
+                SizedBox(
+                  height: 6.h,
+                ),
+                Container(
+                  height: 50.h,
+                  width: 324.w,
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(6.r),
+                      color: AppColors.secondBackgroud),
+                  child: Column(
+                    children: [
+                      Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
@@ -122,314 +120,180 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                           )));
                             },
                             child: Padding(
-                              padding: EdgeInsets.all(2.0.w),
-                              child: Icon(
-                                Icons.tune,
-                                color: AppColors.mainColor,
+                              padding: EdgeInsets.all(2.0),
+                              child: Center(
+                                child: Icon(
+                                  Icons.tune,
+                                  color: AppColors.mainColor,
+                                ),
                               ),
                             ),
                           )
                         ],
                       ),
-                    ),
+                    ],
                   ),
-                ],
-              ),
-            ),
-            bottom: TabBar(
-              labelColor: AppColors.textColor,
-              tabs: [
-                Tab(
-                  text: tr("Sherik kerak"),
                 ),
-                Tab(
-                  text: tr("E’lonlar"),
+                SizedBox(
+                  height: 7.h,
+                ),
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Sherik",
+                      style: TextStyle(color: Colors.blue, fontSize: 14),
+                    )
+                  ],
                 )
               ],
             ),
           ),
         ),
-        body: TabBarView(
-          controller: _tabController,
+      ),
+      body: SingleChildScrollView(
+        child: Column(
           children: [
-            FutureBuilder<List<SearchingStudents>?>(
-                future: SearchingStudentsService().fetchSearchingStudents(),
-                builder: (BuildContext context,
-                    AsyncSnapshot<List<SearchingStudents>?> snapshot) {
-                  if (snapshot.hasData) {
-                    return ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: snapshot.data!.length,
-                        itemBuilder: (BuildContext contex, int index) {
-                          return Padding(
-                            padding: const EdgeInsets.all(12.0),
-                            child: SingleChildScrollView(
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  Container(
-                                    width: 324.w,
-                                    height: 110.h,
-                                    decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(6.r),
-                                        color: AppColors.secondBackgroud),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
+            Consumer<UniversitetProvider>(
+              builder: (_, data, __) {
+                return ListView.builder(
+                    shrinkWrap: true,
+                    physics: NeverScrollableScrollPhysics(),
+                    itemCount: data.ads.length,
+                    itemBuilder: (BuildContext contex, int index) {
+                      return Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: SingleChildScrollView(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Container(
+                                width: 324.w,
+                                height: 110.h,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(6.r),
+                                    color: AppColors.secondBackgroud),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
                                       children: [
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Padding(
-                                              padding: EdgeInsets.all(6.0.w),
-                                              child: Text(
-                                                snapshot.data![index].fullName!,
-                                                style:
-                                                    TextStyle(fontSize: 18.sp),
-                                              ),
-                                            ),
-                                            Padding(
-                                              padding: EdgeInsets.fromLTRB(
-                                                  1.w, 0, 8.w, 0),
-                                              child: Icon(
-                                                Icons.favorite_border,
-                                                color: AppColors.error,
-                                              ),
-                                            )
-                                          ],
+                                        Padding(
+                                          padding: EdgeInsets.all(6.0.w),
+                                          child: Text(
+                                            '${data.ads[index].fullName}',
+                                            style: TextStyle(fontSize: 18.sp),
+                                          ),
                                         ),
+                                        Padding(
+                                          padding: EdgeInsets.fromLTRB(
+                                              1.w, 0, 8.w, 0),
+                                          child: Icon(
+                                            Icons.favorite_border,
+                                            color: AppColors.error,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                    Padding(
+                                      padding:
+                                          EdgeInsets.fromLTRB(8.w, 0, 8.w, 0),
+                                      child: Text(
+                                        '',
+                                        style: TextStyle(
+                                            color: AppColors.mainColor,
+                                            fontSize: 24.sp),
+                                      ),
+                                    ),
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
                                         Padding(
                                           padding: EdgeInsets.fromLTRB(
                                               8.w, 0, 8.w, 0),
                                           child: Text(
-                                            '',
-                                            style: TextStyle(
-                                                color: AppColors.mainColor,
-                                                fontSize: 24.sp),
+                                            data.ads[index].gender.toString() ==
+                                                    '1'
+                                                ? tr("jinsi") +
+                                                    ":" +
+                                                    tr("Erkak")
+                                                : tr("jinsi") +
+                                                    ":" +
+                                                    tr("Ayol"),
+                                            // "jinsi",
+                                            style: TextStyle(fontSize: 15.sp),
                                           ),
                                         ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Padding(
+                                        Text(tr("Kursi:") +
+                                            "${data.ads[index].course.toString()}"),
+                                        InkWell(
+                                            onTap: () {
+                                              Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      ChatPage(
+                                                          data.ads[index]
+                                                              .fullName!,
+                                                          data.ads[index].id!),
+                                                ),
+                                              );
+                                            },
+                                            child: Padding(
                                               padding: EdgeInsets.fromLTRB(
-                                                  8.w, 0, 8.w, 0),
-                                              child: Text(
-                                                snapshot.data![index].gender ==
-                                                        1
-                                                    ? tr("jinsi") +":" +tr("Erkak")
-                                                    : tr("jinsi") +":" +tr("Ayol"),
-                                                style:
-                                                    TextStyle(fontSize: 15.sp),
-                                              ),
-                                            ),
-                                            Text(
-                                                tr("Kursi:")+"${snapshot.data![index].course}"),
-                                            InkWell(
-                                                onTap: () {
-                                                  Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                      builder: (context) =>
-                                                          ChatPage(
-                                                              snapshot
-                                                                  .data![index]
-                                                                  .fullName!,
-                                                              snapshot
-                                                                  .data![index]
-                                                                  .id!),
-                                                    ),
-                                                  );
-                                                },
+                                                  0, 0, 7.w, 0),
+                                              child: Container(
+                                                height: 35.h,
+                                                width: 90.w,
                                                 child: Padding(
                                                   padding: EdgeInsets.fromLTRB(
-                                                      0, 0, 7.w, 0),
-                                                  child: Container(
-                                                    height: 35.h,
-                                                    width: 90.w,
-                                                    child: Padding(
-                                                      padding:
-                                                          EdgeInsets.fromLTRB(
-                                                              5.w, 0, 5.w, 0),
-                                                      child: Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceBetween,
-                                                        children: [
-                                                          Icon(
-                                                            Icons.email,
-                                                            color: Colors.blue,
-                                                          ),
-                                                          SizedBox(
-                                                            width: 10.w,
-                                                          ),
-                                                          Text(
-                                                            tr("Aloqa"),
-                                                            style: TextStyle(
-                                                                color: Colors
-                                                                    .black),
-                                                          )
-                                                        ],
+                                                      5.w, 0, 5.w, 0),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .spaceBetween,
+                                                    children: [
+                                                      Icon(
+                                                        Icons.email,
+                                                        color: Colors.blue,
                                                       ),
-                                                    ),
-                                                    decoration: BoxDecoration(
-                                                        color: AppColors
-                                                            .backgroundWhite,
-                                                        border: Border.all(
-                                                            color: Colors.blue),
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(
-                                                                    10.r)),
+                                                      SizedBox(
+                                                        width: 10.w,
+                                                      ),
+                                                      Text(
+                                                        tr("Aloqa"),
+                                                        style: TextStyle(
+                                                            color:
+                                                                Colors.black),
+                                                      )
+                                                    ],
                                                   ),
-                                                )),
-                                          ],
-                                        ),
+                                                ),
+                                                decoration: BoxDecoration(
+                                                    color: AppColors
+                                                        .backgroundWhite,
+                                                    border: Border.all(
+                                                        color: Colors.blue),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            10.r)),
+                                              ),
+                                            )),
                                       ],
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
-                            ),
-                          );
-                        });
-                  }
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }),
-            FutureBuilder<List<SearchingStudentAll>?>(
-                future: SearchingAdsService().fetchSearchingAds(),
-                builder: (BuildContext context, snapshot) {
-                  if (snapshot.hasData) {
-                    return ListView.builder(
-                        shrinkWrap: true,
-                        itemCount: snapshot.data!.length,
-                        itemBuilder: (BuildContext contex, int index) {
-                          return Padding(
-                            padding: EdgeInsets.all(18.0.w),
-                            child: Container(
-                              width: 324.w,
-                              height: 100.h,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(6.r),
-                                  color: AppColors.secondBackgroud),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Padding(
-                                        padding: EdgeInsets.all(6.0.w),
-                                        child: Text(
-                                          snapshot.data![index].type == 2
-                                              ? tr('Talaba')
-                                              : tr("E’lon beruvchi:"),
-                                          style: TextStyle(fontSize: 18.sp),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding:
-                                            EdgeInsets.fromLTRB(1.w, 0, 8.w, 0),
-                                        child: Icon(
-                                          Icons.favorite_border,
-                                          color: AppColors.error,
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  Padding(
-                                    padding:
-                                        EdgeInsets.fromLTRB(8.w, 0, 8.w, 0),
-                                    child: Text(
-                                      '${snapshot.data![index].cost}',
-                                      style: TextStyle(
-                                          color: AppColors.mainColor,
-                                          fontSize: 24.sp),
-                                    ),
-                                  ),
-                                  Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
-                                    children: [
-                                      Padding(
-                                        padding:
-                                            EdgeInsets.fromLTRB(8.w, 0, 8.w, 0),
-                                        child: Text(
-                                          snapshot.data![index].address ?? "",
-                                          style: TextStyle(fontSize: 10.sp),
-                                        ),
-                                      ),
-                                      InkWell(
-                                        onTap: () {
-                                          Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (context) =>
-                                                  UniverDetails(
-                                                cost:
-                                                    '${snapshot.data![index]}',
-                                                roommate_count:
-                                                    '${snapshot.data![index].roommateCount}',
-                                                roommate_gender:
-                                                    '${snapshot.data![index].roommateGender}',
-                                                faculty:
-                                                    '${snapshot.data![index].faculty}',
-                                                subway:
-                                                    '${snapshot.data![index].subway}',
-                                                district_id:
-                                                    '${snapshot.data![index].districtId}',
-                                                university:
-                                                    '${snapshot.data![index].university}',
-                                                live_with_owner:
-                                                    '${snapshot.data![index].liveWithOwner}',
-                                                addres:
-                                                    '${snapshot.data![index].address}',
-                                                description:
-                                                    '${snapshot.data![index].description}',
-                                                cost_type:
-                                                    '${snapshot.data![index].costType}',
-                                                room_count:
-                                                    '${snapshot.data![index].roomCount}',
-                                                title: '',
-                                                region:
-                                                    '${snapshot.data![index].title}',
-                                              ),
-                                            ),
-                                          );
-                                        },
-                                        child: Padding(
-                                          padding: EdgeInsets.fromLTRB(
-                                              8.w, 0, 8.w, 0),
-                                          child: Text(
-                                            tr('Batafsil'),
-                                            style: TextStyle(
-                                                decoration:
-                                                    TextDecoration.underline,
-                                                color: AppColors.mainColor),
-                                          ),
-                                        ),
-                                      )
-                                    ],
-                                  ),
-                                  SizedBox(
-                                    height: 18.h,
-                                  )
-                                ],
-                              ),
-                            ),
-                          );
-                        });
-                  }
-                  return Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }),
+                            ],
+                          ),
+                        ),
+                      );
+                    });
+              },
+            ),
           ],
         ),
       ),

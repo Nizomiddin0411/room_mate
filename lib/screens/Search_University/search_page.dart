@@ -13,24 +13,30 @@ class SearchPage extends StatefulWidget {
   State<SearchPage> createState() => _SearchPageState();
 }
 class _SearchPageState extends State<SearchPage> {
+  final _controller = TextEditingController();
+
+
+
   @override
-  Widget build(BuildContext context) {
-    final _controller = TextEditingController();
-    @override
-    void initState() {
+  void initState() {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
       context.read<SearchUniversitet>().getSearchUniver("");
       Provider.of<UniversitetProvider>(context, listen: false).getViloyat();
-      super.initState();
-    }
+      Provider.of<UniversitetProvider>(context, listen: false).getAds("0","0","0");
+    });
+    super.initState();
+  }
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
 
-    @override
-    void dispose() {
-      _controller.dispose();
-      super.dispose();
-    }
+  Widget build(BuildContext context) {
 
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
         backgroundColor: AppColors.backgroundWhite,
         title:  Center(
           child: Text(

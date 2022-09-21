@@ -4,18 +4,35 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
 import 'package:talaba_uy/models/get_faculty_model.dart';
+import 'package:talaba_uy/screens/Search_University/result_search_universitety.dart';
 import 'package:talaba_uy/services/get_faculty_service.dart';
+import '../../provider/search_universitet_provider.dart';
 import '../../provider/universitet_provider.dart';
+import '../../services/searching_students_service.dart';
+
 class ResultFiltrPage extends StatefulWidget {
   final String id;
-  const ResultFiltrPage({Key? key,
-  required this.id}) : super(key: key);
+
+  const ResultFiltrPage({Key? key, required this.id}) : super(key: key);
+
+
   @override
   State<ResultFiltrPage> createState() => _ResultFiltrPageState();
 }
+
 class _ResultFiltrPageState extends State<ResultFiltrPage> {
+  void initState() {
+    super.initState();
+    Provider.of<UniversitetProvider>(context, listen: false).getViloyat();
+    Provider.of<SearchUniversitet>(context, listen: false).getViloyat();
+
+    Provider.of<UniversitetProvider>(context, listen: false).getViloyat();
+  }
   @override
   Widget build(BuildContext context) {
+    String? Region;
+    String? District;
+    String? Fakultet;
     return Scaffold(
       backgroundColor: AppColors.backgroundWhite,
       appBar: AppBar(
@@ -42,8 +59,8 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 15.w, vertical: 12.h),
         child: Consumer<UniversitetProvider>(
-          builder: (_, provider,__){
-            return  Column(
+          builder: (_, provider, __) {
+            return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
@@ -66,9 +83,8 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                   children: [
                     DropdownButtonFormField2<String>(
                       decoration: InputDecoration(
-                        enabledBorder: OutlineInputBorder(
-                            borderSide:
-                            BorderSide()),
+                        enabledBorder:
+                        OutlineInputBorder(borderSide: BorderSide()),
                         isDense: true,
                         contentPadding: EdgeInsets.zero,
                         border: OutlineInputBorder(
@@ -86,15 +102,18 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                       ),
                       iconSize: 30,
                       buttonHeight: 60,
-                      buttonPadding:
-                      const EdgeInsets.only(left: 20, right: 10),
+                      buttonPadding: const EdgeInsets.only(left: 20, right: 10),
                       dropdownDecoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
                       ),
-                      items: provider.Viloyat
-                          .map(
+                      items: provider.Viloyat.map(
                             (e) => DropdownMenuItem<String>(
-                          value: e.name ??"",
+                          onTap: () {
+                            setState(() {
+                              Region = e.id.toString();
+                            });
+                          },
+                          value: e.name ?? "",
                           child: Text(
                             e.name.toString(),
                             style: const TextStyle(
@@ -102,22 +121,23 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                             ),
                           ),
                         ),
-                      )
-                          .toList(),
+                      ).toList(),
                       onChanged: (newValue) async {
                         print("Selected ----------- $newValue");
-                        final selected = provider.Viloyat
-                            .where((element) => element.name == newValue);
+                        final selected = provider.Viloyat.where(
+                                (element) => element.name == newValue);
                         provider.getTuman(selected.last.id!);
-                        setState(() {
-                        });
+                        provider.RegionId = newValue.toString();
+                        print(provider.RegionId);
+                        setState(() {});
                       },
-                      onSaved: (value) {
-                      },
+                      onSaved: (value) {},
                     ),
                   ],
                 ),
-                SizedBox(height: 15,),
+                SizedBox(
+                  height: 15,
+                ),
                 Column(
                   children: [
                     Row(
@@ -129,8 +149,7 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                       height: 5,
                     ),
                     provider.istuman
-                        ?
-                    Column(
+                        ? Column(
                       children: [
                         DropdownButtonFormField2<String>(
                           decoration: InputDecoration(
@@ -158,12 +177,17 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                           dropdownDecoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(15),
                           ),
-                          items:provider.tumanlar
+                          items: provider.tumanlar
                               .map(
                                 (e) => DropdownMenuItem<String>(
+                              onTap: () {
+                                setState(() {
+                                  District = e.id.toString();
+                                });
+                              },
                               value: provider.istuman
-                                  ?e.name.toString()
-                                  :provider.defaultvalue1,
+                                  ? e.name.toString()
+                                  : provider.defaultvalue1,
                               child: Text(
                                 e.name.toString(),
                                 style: const TextStyle(
@@ -174,13 +198,14 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                           )
                               .toList(),
                           onChanged: (value) {
-                            setState(() {
-                            });
+                            provider.DistrickId = value.toString();
+                            print(provider.DistrickId);
+                            setState(() {});
                           },
                         ),
                       ],
-                    ):
-                    Column(
+                    )
+                        : Column(
                       children: [
                         DropdownButtonFormField2(
                           decoration: InputDecoration(
@@ -237,14 +262,16 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                 ),
                 SizedBox(height: 4.h),
                 FutureBuilder<List<GetFacultyModel>?>(
-                  future: GetFacultyService().fetchFaculty(int. parse(widget.id)),
+                  future:
+                  GetFacultyService().fetchFaculty(int.parse(widget.id)),
                   builder: (BuildContext context, snapshot) {
                     if (snapshot.hasData) {
                       return Column(
                         children: [
                           DropdownButtonFormField2<String?>(
                             decoration: InputDecoration(
-                              enabledBorder: OutlineInputBorder(borderSide: BorderSide()),
+                              enabledBorder:
+                              OutlineInputBorder(borderSide: BorderSide()),
                               isDense: true,
                               contentPadding: EdgeInsets.zero,
                               border: OutlineInputBorder(
@@ -263,12 +290,12 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                             ),
                             iconSize: 30,
                             buttonHeight: 60,
-                            buttonPadding: const EdgeInsets.only(
-                                left: 20, right: 10),
+                            buttonPadding:
+                            const EdgeInsets.only(left: 20, right: 10),
                             dropdownDecoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(15),
                             ),
-                            items:   snapshot.data!
+                            items: snapshot.data!
                                 .map(
                                   (value) => DropdownMenuItem<String?>(
                                 value: value.name,
@@ -280,13 +307,13 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                                 ),
                               ),
                             )
-                                .toList() ,
-                            onChanged: ( value) {
+                                .toList(),
+                            onChanged: (value) {
                               setState(() {
+                                Fakultet = value.toString();
                               });
                             },
-                            onSaved: (value) {
-                            },
+                            onSaved: (value) {},
                           ),
                         ],
                       );
@@ -305,13 +332,13 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10.r)),
                         primary: AppColors.buttonLinear),
-                    onPressed: () {
-                      Navigator.pop(context);
+                    onPressed: () { provider.getAds(Fakultet.toString(), provider.RegionId, provider.DistrickId);
+                    Navigator.pop(context);
                     },
                     child: Text(
                       "Saqlash",
-                      style:
-                      TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w500),
+                      style: TextStyle(
+                          fontSize: 20.sp, fontWeight: FontWeight.w500),
                     ),
                   ),
                 ),
