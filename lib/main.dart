@@ -6,7 +6,9 @@ import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
 import 'package:talaba_uy/bloc/bloc_region/region_bloc.dart';
+import 'package:talaba_uy/cubit/aut_cubit.dart';
 import 'package:talaba_uy/provider/day_provider.dart';
+import 'package:talaba_uy/provider/favorite_provider.dart';
 import 'package:talaba_uy/provider/month_provider.dart';
 import 'package:talaba_uy/provider/region_provider.dart';
 import 'package:talaba_uy/provider/search_universitet_provider.dart';
@@ -69,22 +71,27 @@ class MyApp extends StatelessWidget {
         builder: (context, child) {
           return MultiProvider(
             providers: [
-              ChangeNotifierProvider(create: (context1)=>UniversitetProvider()),
-              ChangeNotifierProvider(create: (context)=>RegionProvider()),
-              ChangeNotifierProvider(create: (context)=>DayProvider()),
-              ChangeNotifierProvider(create: (context)=>MonthProvider()),
-              ChangeNotifierProvider(create: (context)=>SearchUniversitet())
+              ChangeNotifierProvider(
+                  create: (context1) => UniversitetProvider()),
+              ChangeNotifierProvider(create: (context) => RegionProvider()),
+              ChangeNotifierProvider(create: (context) => DayProvider()),
+              ChangeNotifierProvider(create: (context) => MonthProvider()),
+              ChangeNotifierProvider(create: (context) => FavoriteProvider()),
+              ChangeNotifierProvider(create: (context) => SearchUniversitet())
             ],
-            child: MaterialApp(
-              localizationsDelegates: context.localizationDelegates,
-              supportedLocales: context.supportedLocales,
-              locale: context.locale,
-              debugShowCheckedModeBanner: false,
-              theme: ThemeData(
-                primarySwatch: Colors.blue,
-              ),
-              home: MyHomePage(
-                title: '',
+            child: BlocProvider(
+              create: (context) => AutCubit(),
+              child: MaterialApp(
+                localizationsDelegates: context.localizationDelegates,
+                supportedLocales: context.supportedLocales,
+                locale: context.locale,
+                debugShowCheckedModeBanner: false,
+                theme: ThemeData(
+                  primarySwatch: Colors.blue,
+                ),
+                home: MyHomePage(
+                  title: '',
+                ),
               ),
             ),
           );
@@ -105,7 +112,9 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Hive.box('token').isEmpty ? LanguagePage(): MenuPage(),
+      body: Hive
+          .box('token')
+          .isEmpty ? LanguagePage() : MenuPage(),
       // This trailing comma makes auto-formatting nicer for build methods.
     );
   }

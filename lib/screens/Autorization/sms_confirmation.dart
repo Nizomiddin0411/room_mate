@@ -138,6 +138,8 @@ class _SmsConfirmationPageState extends State<SmsConfirmationPage> {
                 });
               },
             ),
+            SizedBox(height: 10.h,),
+            Text("SMS habardagi kodni kiriting"),
             SizedBox(
               height: 32.h,
             ),

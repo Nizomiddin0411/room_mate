@@ -53,7 +53,7 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
               children: [
                 Row(
                   children: [
-                    Text("To’liq ism , familyangiz"),
+                    Text("Ism va familiya "),
                   ],
                 ),
                 SizedBox(
@@ -73,7 +73,7 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
                     border: OutlineInputBorder(
                         borderSide: BorderSide(color:myController.text == '' ? Colors.red : Colors.black12)
                     ),
-                    labelText: 'Ism familyangizni kiriting',
+                    labelText: "Ism va familiyangizni kiriting",
                   ),
                 ),
               ],
@@ -85,7 +85,7 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
               children: [
                 Row(
                   children: [
-                    Text("Telefon raqamingiz"),
+                    Text("Telefon raqami "),
                   ],
                 ),
                 SizedBox(
@@ -111,7 +111,7 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
                   controller: nameController,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: '+ 998 ** *** ** **',
+                    labelText: 'Telefon raqamini kiriting',
                   ),
                 ),
               ],
@@ -123,7 +123,7 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
               children: [
                 Row(
                   children: [
-                    Text("Jinsingiz tanlang"),
+                    Text("Jins "),
                   ],
                 ),
                 SizedBox(
@@ -142,7 +142,7 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
                       ),
                       isExpanded: true,
                       hint: const Text(
-                        'Jinsingiz',
+                        'Jinsni tanlang',
                         style: TextStyle(fontSize: 14),
                       ),
                       icon: const Icon(
@@ -231,7 +231,7 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
                               builder: (context) => OffertoPage())),
                     },
                     child: Text(
-                      "  Foydalanuvchi shartlariga",
+                      "Foydalanuvchi shartlariga roziman",
                       style: TextStyle(
                           color: AppColors.mainColor, fontSize: 15),
                     ))
