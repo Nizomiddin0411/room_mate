@@ -63,10 +63,7 @@ class _StartPageState extends State<StartPage> {
             ),
 
             ),
-            Padding(
-              padding: const EdgeInsets.all(15.0),
-              child: Text('yoki'.tr()),
-            ),
+           SizedBox(height: 18.h,),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context)=>Registratsiya()));

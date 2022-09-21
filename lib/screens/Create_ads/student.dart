@@ -1,4 +1,5 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -117,7 +118,7 @@ class _StudentState extends State<Student> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Joylashuv",
+                  "Joylashuv".tr(),
                   style: TextStyle(
                       color: AppColors.mainColor,
                       fontSize: 20.sp,
@@ -125,7 +126,7 @@ class _StudentState extends State<Student> {
                 ),
                 SizedBox(height: 12.h),
                 Text(
-                  "Viloyat",
+                  "Viloyat".tr(),
                   style: TextStyle(
                     color: AppColors.textColor,
                     fontSize: 14.sp,
@@ -141,7 +142,7 @@ class _StudentState extends State<Student> {
                   child: DropdownButtonFormField(
                     hint: Padding(
                       padding: EdgeInsets.only(left: 8.w),
-                      child: Text("Viloyatni tanlang"),
+                      child: Text("Viloyatni tanlang".tr()),
                     ),
                     decoration: InputDecoration(border: InputBorder.none),
                     // value: ,
@@ -172,7 +173,7 @@ class _StudentState extends State<Student> {
                 ),
                 SizedBox(height: 12.h),
                 Text(
-                  "Tuman",
+                  "Tuman".tr(),
                   style: TextStyle(
                     color: AppColors.textColor,
                     fontSize: 14.sp,
@@ -191,7 +192,7 @@ class _StudentState extends State<Student> {
                         child: DropdownButtonFormField(
                           hint: Padding(
                             padding: EdgeInsets.only(left: 8.w),
-                            child: Text("Tumanni tanlang"),
+                            child: Text("Tumanni tanlang".tr()),
                           ),
                           decoration: InputDecoration(
                             border: InputBorder.none,
@@ -229,7 +230,7 @@ class _StudentState extends State<Student> {
                             borderRadius: BorderRadius.circular(10.r)),
                         child: DropdownButtonFormField(
                             isExpanded: true,
-                            hint: Text("Tumanni tanlang"),
+                            hint: Text("Tumanni tanlang".tr()),
                             decoration: const InputDecoration(
                                 isDense: true,
                                 border: OutlineInputBorder(),
@@ -240,7 +241,7 @@ class _StudentState extends State<Student> {
                       ),
                 SizedBox(height: 12.h),
                 Text(
-                  "Oliy o’quv yurti",
+                  "Oliy o’quv yurti".tr(),
                   style: TextStyle(
                     color: AppColors.textColor,
                     fontSize: 14.sp,
@@ -257,7 +258,7 @@ class _StudentState extends State<Student> {
                     isExpanded: true,
                     hint: Padding(
                       padding: EdgeInsets.only(left: 8.w),
-                      child: Text("OTM ni tanlang"),
+                      child: Text("OTM ni tanlang".tr()),
                     ),
                     decoration: InputDecoration(border: InputBorder.none),
                     // value: ,
@@ -294,7 +295,7 @@ class _StudentState extends State<Student> {
                 ),
                 SizedBox(height: 12.h),
                 Text(
-                  "Fakultetni tanlang",
+                  "Fakultetni tanlang".tr(),
                   style: TextStyle(
                     color: AppColors.textColor,
                     fontSize: 14.sp,
@@ -312,7 +313,7 @@ class _StudentState extends State<Student> {
                           isExpanded: true,
                           hint: Padding(
                             padding: EdgeInsets.only(left: 8.w),
-                            child: Text("Faqultetni tanlang"),
+                            child: Text("Fakultetni tanlang".tr()),
                           ),
                           decoration: const InputDecoration(
                             border: InputBorder.none,
@@ -357,7 +358,7 @@ class _StudentState extends State<Student> {
                             isExpanded: true,
                             hint: Padding(
                               padding: EdgeInsets.only(left: 8.w),
-                              child: Text("Faqultetni tanlang"),
+                              child: Text("Fakultetni tanlang".tr()),
                             ),
                             decoration: InputDecoration(
                               border: InputBorder.none,
@@ -371,7 +372,7 @@ class _StudentState extends State<Student> {
                   height: 18.h,
                 ),
                 Text(
-                  "Kurs",
+                  "Kurs".tr(),
                   style: TextStyle(
                     color: AppColors.textColor,
                     fontSize: 14.sp,
@@ -382,7 +383,7 @@ class _StudentState extends State<Student> {
                 Container(
                   decoration: BoxDecoration(
                       border: Border.all(color: _colorCourse),
-                      borderRadius: BorderRadius.circular(4.r)),
+                      borderRadius: BorderRadius.circular(8.r)),
                   child: Container(
                     width: 324.w,
                     decoration: BoxDecoration(
@@ -391,7 +392,7 @@ class _StudentState extends State<Student> {
                       isExpanded: true,
                       hint: Padding(
                         padding:  EdgeInsets.only(left: 8.w),
-                        child: Text("Kursingizni tanlang"),
+                        child: Text("Kursingizni tanlang".tr()),
                       ),
                       decoration: const InputDecoration(
                           border: InputBorder.none,),
@@ -406,7 +407,7 @@ class _StudentState extends State<Student> {
                           value: e.toString(),
                           child: Padding(
                             padding: EdgeInsets.only(left: 8.w),
-                            child: Text(e.toString()),
+                            child: Text(e.toString().tr()),
                           ),
                         );
                       }).toList(),
@@ -424,7 +425,7 @@ class _StudentState extends State<Student> {
                   height: 18.h,
                 ),
                 Text(
-                  "Xonadon ma’lumoti",
+                  "Xonadon ma’lumoti".tr(),
                   style: TextStyle(
                       color: AppColors.mainColor,
                       fontSize: 20.sp,
@@ -455,7 +456,7 @@ class _StudentState extends State<Student> {
                     SizedBox(
                       width: 12.w,
                     ),
-                    Text("Uy egasi bilan birga yashashga roziman !!!")
+                    Text("Uy egasi bilan birga yashashga roziman !!!".tr())
                   ],
                 ),
                 SizedBox(height: 19.h),
@@ -466,7 +467,7 @@ class _StudentState extends State<Student> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Uy turi",
+                          "Uy turi".tr(),
                           style: TextStyle(
                             color: AppColors.textColor,
                             fontSize: 14.sp,
@@ -482,7 +483,7 @@ class _StudentState extends State<Student> {
                           child: DropdownButtonFormField(
                             hint: Padding(
                               padding:  EdgeInsets.only(left: 8.w),
-                              child: Text("Kv yoki xovli"),
+                              child: Text("Kv yoki xovli".tr()),
                             ),
                             decoration:  InputDecoration(
                                 border: InputBorder.none),
@@ -493,7 +494,7 @@ class _StudentState extends State<Student> {
                                 value: e,
                                 child: Padding(
                                   padding: EdgeInsets.only(left: 8.w),
-                                  child: Text(e),
+                                  child: Text(e.tr()),
                                 ),
                               );
                             }).toList(),
@@ -512,7 +513,7 @@ class _StudentState extends State<Student> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Necha xona",
+                          "Necha xona".tr(),
                           style: TextStyle(
                             color: AppColors.textColor,
                             fontSize: 14.sp,
@@ -528,7 +529,7 @@ class _StudentState extends State<Student> {
                           child: DropdownButtonFormField(
                             hint: Padding(
                               padding:  EdgeInsets.only(left: 8.w),
-                              child: Text("Xonalar soni"),
+                              child: Container(width: 118.w,child: Text("Xonalar soni".tr())),
                             ),
                             decoration: const InputDecoration(
                                 border: InputBorder.none),
@@ -558,7 +559,7 @@ class _StudentState extends State<Student> {
                 ),
                 SizedBox(height: 12.h),
                 Text(
-                  "Ijara muddatini kiriting",
+                  "Ijara muddatini kiriting".tr(),
                   style: TextStyle(
                     color: AppColors.textColor,
                     fontSize: 14.sp,
@@ -577,7 +578,7 @@ class _StudentState extends State<Student> {
                     child: DropdownButtonFormField(
                       hint: Padding(
                         padding: EdgeInsets.only(left: 8.w),
-                        child: Text("Ijara muddati"),
+                        child: Text("Ijara muddati".tr()),
                       ),
                       decoration: const InputDecoration(
                           border: InputBorder.none),
@@ -588,7 +589,7 @@ class _StudentState extends State<Student> {
                           value: e,
                           child: Padding(
                             padding:  EdgeInsets.only(left: 8.w),
-                            child: Text(e),
+                            child: Text(e.tr()),
                           ),
                         );
                       }).toList(),
@@ -604,7 +605,7 @@ class _StudentState extends State<Student> {
                 ),
                 SizedBox(height: 12.h),
                 Text(
-                  "Narxi",
+                  "Narxi".tr(),
                   style: TextStyle(
                     color: AppColors.textColor,
                     fontSize: 14.sp,
@@ -634,7 +635,7 @@ class _StudentState extends State<Student> {
                       controller: costcontroller,
                       decoration: InputDecoration(
                         border: InputBorder.none,
-                        hintText: "Xonadonni narxini kiriting / oyiga",
+                        hintText: "Xonadonni narxini kiriting / oyiga".tr(),
                         hintStyle:
                             TextStyle(fontSize: 14.sp, color: Colors.grey),
                         suffixIcon: Container(
@@ -659,14 +660,14 @@ class _StudentState extends State<Student> {
                               });
                             },
                             hint: Text(
-                              "SO'M",
+                              "SO'M".tr(),
                               style: TextStyle(
                                   fontSize: 14.sp, color: AppColors.textColor),
                             ),
                             items: [
                               DropdownMenuItem(
                                 child: Text(
-                                  "SO'M",
+                                  "SO'M".tr(),
                                   style: TextStyle(
                                       fontSize: 14.sp,
                                       color: AppColors.textColor),
@@ -712,12 +713,12 @@ class _StudentState extends State<Student> {
                     SizedBox(
                       width: 12.w,
                     ),
-                    Text("Metroga yaqin")
+                    Text("Metroga yaqin".tr())
                   ],
                 ),
                 SizedBox(height: 22.h),
                 Text(
-                  "Qo’shimcha",
+                  "Qo’shimcha".tr(),
                   style: TextStyle(
                       color: AppColors.mainColor,
                       fontSize: 20.sp,
@@ -731,7 +732,7 @@ class _StudentState extends State<Student> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Sheriklarni tanlang",
+                          "Sheriklarni tanlang".tr(),
                           style: TextStyle(
                             color: AppColors.textColor,
                             fontSize: 14.sp,
@@ -747,7 +748,7 @@ class _StudentState extends State<Student> {
                           child: DropdownButtonFormField(
                             hint: Padding(
                               padding: EdgeInsets.only(left: 8.w),
-                              child: Text("Qiz,O'g'il"),
+                              child: Text("Qiz,O'g'il".tr(), style: TextStyle(fontSize: 14.sp),),
                             ),
                             decoration: const InputDecoration(
                                 border: InputBorder.none),
@@ -758,7 +759,7 @@ class _StudentState extends State<Student> {
                                 value: e,
                                 child: Padding(
                                   padding: EdgeInsets.only(left: 8.w),
-                                  child: Text(e),
+                                  child: Text(e.tr()),
                                 ),
                               );
                             }).toList(),
@@ -777,7 +778,7 @@ class _StudentState extends State<Student> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Soni",
+                          "Ijarachilar soni".tr(),
                           style: TextStyle(
                             color: AppColors.textColor,
                             fontSize: 14.sp,
@@ -793,7 +794,7 @@ class _StudentState extends State<Student> {
                           child: DropdownButtonFormField(
                             hint: Padding(
                               padding: EdgeInsets.only(left: 8.w),
-                              child: Text("Ijarachilar soni"),
+                              child: Container(width: 115,child: Text("Soni".tr(), style: TextStyle(fontSize: 14.sp),)),
                             ),
                             decoration: const InputDecoration(
                                 border: InputBorder.none,),
@@ -823,7 +824,7 @@ class _StudentState extends State<Student> {
                 ),
                 SizedBox(height: 12.h),
                 Text(
-                  "E’lonni nomlash",
+                  "E’lonni nomlash".tr(),
                   style: TextStyle(
                     color: AppColors.textColor,
                     fontSize: 14.sp,
@@ -853,7 +854,7 @@ class _StudentState extends State<Student> {
                       controller: titlecontroller,
                       decoration: InputDecoration(
                         border: InputBorder.none,
-                        hintText: "E’lonni nomlang",
+                        hintText: "E’lonni nomlang".tr(),
                         hintStyle:
                             TextStyle(fontSize: 14.sp, color: Colors.grey),
                       ),
@@ -864,7 +865,7 @@ class _StudentState extends State<Student> {
                 ),
                 SizedBox(height: 12.h),
                 Text(
-                  "Qo’shimcha ma’lumot ",
+                  "Qo’shimcha ma’lumot".tr(),
                   style: TextStyle(
                     color: AppColors.textColor,
                     fontSize: 14.sp,
@@ -883,7 +884,7 @@ class _StudentState extends State<Student> {
                       controller: othercontroller,
                       maxLines: 6,
                       decoration: InputDecoration(
-                        hintText: 'Massage...',
+                        hintText: 'Message...'.tr(),
                         border: InputBorder.none,
                         hintStyle:
                             TextStyle(fontSize: 14.sp, color: Colors.grey),
@@ -906,29 +907,29 @@ class _StudentState extends State<Student> {
                             primary: AppColors.buttonLinear),
                         onPressed: () async {
                           setState(() {
-                            if (_titleCourse == '1-kurs') {
+                            if (_titleCourse == '1-kurs' || _titleCourse == '1-курс') {
                               Course = '1';
-                            } else if (_titleCourse == '2-kurs') {
+                            } else if (_titleCourse == '2-kurs' || _titleCourse == '2-курс') {
                               Course = '2';
-                            } else if (_titleCourse == '3-kurs') {
+                            } else if (_titleCourse == '3-kurs' || _titleCourse == '3-курс') {
                               Course = '3';
-                            } else if (_titleCourse == '4-kurs') {
+                            } else if (_titleCourse == '4-kurs' || _titleCourse == '4-курс') {
                               Course = '4';
-                            } else if (_titleCourse == '5-kurs') {
+                            } else if (_titleCourse == '5-kurs' || _titleCourse == '5-курс') {
                               Course = '5';
-                            } else if (_titleCourse == '6-kurs') {
+                            } else if (_titleCourse == '6-kurs' || _titleCourse == '6-курс') {
                               Course = '6';
                             }
                           });
                           setState(() {
-                            if (kvartira == 'Xovli') {
+                            if (kvartira == 'Xovli' || kvartira == 'Участка') {
                               TypeHouse = '2';
                             } else {
                               TypeHouse = '1';
                             }
                           });
                           setState(() {
-                            if (TypeOfRent == 'kunlik') {
+                            if (TypeOfRent == 'kunlik' || TypeOfRent == 'день') {
                               _titleTime = '1';
                             } else {
                               _titleTime = '2';
@@ -942,7 +943,7 @@ class _StudentState extends State<Student> {
                             }
                           });
                           setState(() {
-                            if (_titleGendor == 'Ayol') {
+                            if (_titleGendor == 'Ayol' || _titleGendor == 'Женщина') {
                               gender = '2';
                             } else {
                               gender = '1';
@@ -1041,7 +1042,7 @@ class _StudentState extends State<Student> {
                           }
                         },
                         child: Text(
-                          "E’lon saqlash",
+                          "E’lon saqlash".tr(),
                           style: TextStyle(
                               fontSize: 20.sp, fontWeight: FontWeight.w500),
                         ),
