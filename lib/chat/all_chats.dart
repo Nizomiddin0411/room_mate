@@ -20,13 +20,14 @@ class _AllChatsState extends State<AllChats> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
-      drawer: DrawerPage(),
+      // key: _scaffoldKey,
+      // drawer: DrawerPage(),
       appBar: AppBar(
         backgroundColor: Color.fromRGBO(60, 104, 255, 1),
         leading: InkWell(
-          onTap: () => _scaffoldKey.currentState!.openDrawer(),
-          child: Icon(Icons.menu),
+          // onTap: () => _scaffoldKey.currentState!.openDrawer(),
+          onTap: ()=>Navigator.pop(context),
+          child: Icon(Icons.arrow_back),
         ),
         title: Text(
           "Messages",
