@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -43,7 +44,7 @@ class _CreateAdsPageState extends State<CreateAdsPage>
           ),
         ),
         elevation: 0,
-        title: const Text("E’lon yaratish",
+        title: Text("E’lon yaratish".tr(),
             style: TextStyle(color: AppColors.mainColor)),
         centerTitle: true,
         bottom: TabBar(
@@ -54,13 +55,13 @@ class _CreateAdsPageState extends State<CreateAdsPage>
           tabs: [
             Padding(
               padding: EdgeInsets.symmetric(vertical: 8.h),
-              child: const Text(
-                "Talabaman",
+              child: Text(
+                "Talabaman".tr(),
                 style: TextStyle(fontWeight: FontWeight.w500),
               ),
             ),
-            const Text(
-              "Uy beruvchiman",
+           Text(
+              "Uy beruvchiman".tr(),
               style: TextStyle(fontWeight: FontWeight.w500),
             ),
           ],

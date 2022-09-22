@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -105,14 +106,14 @@ class _OwnerState extends State<Owner> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Joylashuv",
+                  "Joylashuv".tr(),
                   style: TextStyle(
                       color: AppColors.mainColor,
                       fontSize: 20.sp,
                       fontWeight: FontWeight.w500),
                 ),
                 SizedBox(height: 12.h),
-                Text("Viloyat",
+                Text("Viloyat".tr(),
                     style: TextStyle(
                       color: AppColors.textColor,
                       fontSize: 14.sp,
@@ -127,7 +128,7 @@ class _OwnerState extends State<Owner> {
                   child: DropdownButtonFormField(
                     hint: Padding(
                       padding: EdgeInsets.only(left: 8.w),
-                      child: Text("Viloyatni tanlang"),
+                      child: Text("Viloyatni tanlang".tr()),
                     ),
                     decoration: const InputDecoration(
                       border: InputBorder.none,
@@ -159,7 +160,7 @@ class _OwnerState extends State<Owner> {
                 SizedBox(height: 4.h),
                 SizedBox(height: 12.h),
                 Text(
-                  "Tuman",
+                  "Tuman".tr(),
                   style: TextStyle(
                     color: AppColors.textColor,
                     fontSize: 14.sp,
@@ -172,12 +173,12 @@ class _OwnerState extends State<Owner> {
                         width: 324.w,
                         decoration: BoxDecoration(
                             border: Border.all(color: _colorDistric),
-                            borderRadius: BorderRadius.circular(10.r)),
+                            borderRadius: BorderRadius.circular(8.r)),
                         child: DropdownButtonFormField(
                           isExpanded: true,
                           hint: Padding(
                             padding: EdgeInsets.only(left: 8.w),
-                            child: Text("Tumanni tanlang"),
+                            child: Text("Tumanni tanlang".tr()),
                           ),
                           decoration: const InputDecoration(
                                border: InputBorder.none,),
@@ -213,10 +214,14 @@ class _OwnerState extends State<Owner> {
                     : Container(
                         width: 324.w,
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10.r)),
+                          border: Border.all(color: _colorDistric),
+                            borderRadius: BorderRadius.circular(8.r)),
                         child: DropdownButtonFormField(
                             isExpanded: true,
-                            hint: Text("Tumanni tanlang"),
+                            hint: Padding(
+                              padding: EdgeInsets.only(left: 8.w),
+                              child: Text("Tumanni tanlang".tr()),
+                            ),
                             decoration: const InputDecoration(
                                  border: InputBorder.none,),
                             icon: Icon(Icons.arrow_drop_down_outlined),
@@ -225,7 +230,7 @@ class _OwnerState extends State<Owner> {
                       ),
                 SizedBox(height: 12.h),
                 Text(
-                  "Manzil",
+                  "Manzil".tr(),
                   style: TextStyle(
                     color: AppColors.textColor,
                     fontSize: 14.sp,
@@ -237,7 +242,7 @@ class _OwnerState extends State<Owner> {
                   width: double.infinity,
                   decoration: BoxDecoration(
                       border: Border.all(color: _colorUniver),
-                      borderRadius: BorderRadius.circular(4.r)),
+                      borderRadius: BorderRadius.circular(8.r)),
                   child: Container(
                     padding: EdgeInsets.only(left: 16.w),
                     child: TextFormField(
@@ -259,7 +264,7 @@ class _OwnerState extends State<Owner> {
                       controller: addressController,
                       decoration: InputDecoration(
                         border: InputBorder.none,
-                        hintText: "Kvartal , Uy , Xonadon",
+                        hintText: "Kvartal , Uy , Xonadon".tr(),
                         hintStyle:
                             TextStyle(fontSize: 14.sp, color: Colors.grey),
                       ),
@@ -270,7 +275,7 @@ class _OwnerState extends State<Owner> {
                 ),
                 SizedBox(height: 18.h),
                 Text(
-                  "Xonadon ma’lumoti",
+                  "Xonadon ma’lumoti".tr(),
                   style: TextStyle(
                       color: AppColors.mainColor,
                       fontSize: 20.sp,
@@ -301,7 +306,7 @@ class _OwnerState extends State<Owner> {
                     SizedBox(
                       width: 12.w,
                     ),
-                    Text("Uy egasi bilan birga yashashga roziman !!!")
+                    Text("Uy egasi bilan birga yashashga roziman !!!".tr())
                   ],
                 ),
                 SizedBox(height: 19.h),
@@ -312,7 +317,7 @@ class _OwnerState extends State<Owner> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Uy turi",
+                          "Uy turi".tr(),
                           style: TextStyle(
                             color: AppColors.textColor,
                             fontSize: 14.sp,
@@ -329,7 +334,7 @@ class _OwnerState extends State<Owner> {
                           child: DropdownButtonFormField(
                             hint: Padding(
                               padding: EdgeInsets.only(left: 8.w),
-                              child: Text("uy turi"),
+                              child: Text("Uy turi".tr()),
                             ),
                             decoration: const InputDecoration(
                                  border: InputBorder.none,),
@@ -340,7 +345,7 @@ class _OwnerState extends State<Owner> {
                                 value: e,
                                 child: Padding(
                                   padding: EdgeInsets.only(left: 8.w),
-                                  child: Text(e),
+                                  child: Text(e.tr()),
                                 ),
                               );
                             }).toList(),
@@ -359,7 +364,7 @@ class _OwnerState extends State<Owner> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Necha xona",
+                          "Necha xona".tr(),
                           style: TextStyle(
                             color: AppColors.textColor,
                             fontSize: 14.sp,
@@ -376,7 +381,7 @@ class _OwnerState extends State<Owner> {
                           child: DropdownButtonFormField(
                             hint: Padding(
                               padding: EdgeInsets.only(left: 8.w),
-                              child: Text("Xonalar soni"),
+                              child: Container(width: 115.w,child: Text("Xonalar soni".tr())),
                             ),
                             decoration: const InputDecoration(
                                  border: InputBorder.none,),
@@ -406,7 +411,7 @@ class _OwnerState extends State<Owner> {
                 ),
                 SizedBox(height: 12.h),
                 Text(
-                  "Ijara muddatini kiriting",
+                  "Ijara muddatini kiriting".tr(),
                   style: TextStyle(
                     color: AppColors.textColor,
                     fontSize: 14.sp,
@@ -423,7 +428,7 @@ class _OwnerState extends State<Owner> {
                   child: DropdownButtonFormField(
                     hint: Padding(
                       padding: EdgeInsets.only(left: 8.w),
-                      child: Text("Ijara muddati"),
+                      child: Text("Ijara muddati".tr()),
                     ),
                     decoration: const InputDecoration(
                          border: InputBorder.none,),
@@ -434,7 +439,7 @@ class _OwnerState extends State<Owner> {
                         value: e,
                         child: Padding(
                           padding: EdgeInsets.only(left: 8.w),
-                          child: Text(e),
+                          child: Text(e.tr()),
                         ),
                       );
                     }).toList(),
@@ -449,7 +454,7 @@ class _OwnerState extends State<Owner> {
                 ),
                 SizedBox(height: 12.h),
                 Text(
-                  "Narxi",
+                  "Narxi".tr(),
                   style: TextStyle(
                     color: AppColors.textColor,
                     fontSize: 14.sp,
@@ -461,7 +466,7 @@ class _OwnerState extends State<Owner> {
                   width: double.infinity,
                   decoration: BoxDecoration(
                       border: Border.all(color: _colorTypeCost),
-                      borderRadius: BorderRadius.circular(4.r)),
+                      borderRadius: BorderRadius.circular(8.r)),
                   child: Container(
                     padding: EdgeInsets.only(left: 16.w),
                     child: TextFormField(
@@ -479,7 +484,7 @@ class _OwnerState extends State<Owner> {
                       controller: costController,
                       decoration: InputDecoration(
                         border: InputBorder.none,
-                        hintText: "Xonadonni narxini kiriting / oyiga",
+                        hintText: "Xonadonni narxini kiriting / oyiga".tr(),
                         hintStyle:
                             TextStyle(fontSize: 14.sp, color: Colors.grey),
                         suffixIcon: Container(
@@ -499,14 +504,14 @@ class _OwnerState extends State<Owner> {
                               });
                             },
                             hint: Text(
-                              "SO'M",
+                              "SO'M".tr(),
                               style: TextStyle(
                                   fontSize: 14.sp, color: AppColors.textColor),
                             ),
                             items: [
                               DropdownMenuItem(
                                 child: Text(
-                                  "SO'M",
+                                  "SO'M".tr(),
                                   style: TextStyle(
                                       fontSize: 14.sp,
                                       color: AppColors.textColor),
@@ -556,12 +561,12 @@ class _OwnerState extends State<Owner> {
                     SizedBox(
                       width: 12.w,
                     ),
-                    Text("Metroga yaqin")
+                    Text("Metroga yaqin".tr())
                   ],
                 ),
                 SizedBox(height: 22.h),
                 Text(
-                  "Qo’shimcha",
+                  "Qo’shimcha".tr(),
                   style: TextStyle(
                       color: AppColors.mainColor,
                       fontSize: 20.sp,
@@ -575,7 +580,7 @@ class _OwnerState extends State<Owner> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Sheriklarni tanlang",
+                          "Sheriklarni tanlang".tr(),
                           style: TextStyle(
                             color: AppColors.textColor,
                             fontSize: 14.sp,
@@ -592,7 +597,7 @@ class _OwnerState extends State<Owner> {
                           child: DropdownButtonFormField(
                             hint: Padding(
                               padding: EdgeInsets.only(left: 8.w),
-                              child: Text("Qiz,O'g'il"),
+                              child: Text("Qiz,O'g'il".tr(), style: TextStyle(fontSize: 14.sp),),
                             ),
                             decoration: const InputDecoration(
                                  border: InputBorder.none,),
@@ -603,7 +608,7 @@ class _OwnerState extends State<Owner> {
                                 value: e,
                                 child: Padding(
                                   padding: EdgeInsets.only(left: 8.w),
-                                  child: Text(e),
+                                  child: Text(e.tr()),
                                 ),
                               );
                             }).toList(),
@@ -622,7 +627,7 @@ class _OwnerState extends State<Owner> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Soni",
+                          "Ijarachilar soni".tr(),
                           style: TextStyle(
                             color: AppColors.textColor,
                             fontSize: 14.sp,
@@ -639,7 +644,7 @@ class _OwnerState extends State<Owner> {
                           child: DropdownButtonFormField(
                             hint: Padding(
                               padding: EdgeInsets.only(left: 8.w),
-                              child: Text("Ijarachilar soni"),
+                              child: Container(width: 115.w,child: Text("Soni".tr(), style: TextStyle(fontSize: 14.sp),)),
                             ),
                             decoration: const InputDecoration(
                                  border: InputBorder.none,),
@@ -669,7 +674,7 @@ class _OwnerState extends State<Owner> {
                 ),
                 SizedBox(height: 12.h),
                 Text(
-                  "E’lonni nomlash",
+                  "E’lonni nomlash".tr(),
                   style: TextStyle(
                     color: AppColors.textColor,
                     fontSize: 14.sp,
@@ -701,7 +706,7 @@ class _OwnerState extends State<Owner> {
                       controller: adsTitleController,
                       decoration: InputDecoration(
                         border: InputBorder.none,
-                        hintText: "E’lonni nomlang",
+                        hintText: "E’lonni nomlang".tr(),
                         hintStyle:
                             TextStyle(fontSize: 14.sp, color: Colors.grey),
                       ),
@@ -712,7 +717,7 @@ class _OwnerState extends State<Owner> {
                 ),
                 SizedBox(height: 12.h),
                 Text(
-                  "Qo’shimcha ma’lumot ",
+                  "Qo’shimcha ma’lumot".tr(),
                   style: TextStyle(
                     color: AppColors.textColor,
                     fontSize: 14.sp,
@@ -731,7 +736,7 @@ class _OwnerState extends State<Owner> {
                       controller: inputcontroller,
                       maxLines: 6,
                       decoration: InputDecoration(
-                        hintText: 'Massage...',
+                        hintText: 'Message...'.tr(),
                         border: InputBorder.none,
                         hintStyle:
                             TextStyle(fontSize: 14.sp, color: Colors.grey),
@@ -768,13 +773,13 @@ class _OwnerState extends State<Owner> {
                           CreateAdsUserServeice().CreateAds(
                               districtId: data.districtOwnerId,
                               roomOwner: RoomOwner,
-                              TypeHouse: TypeHouse == 'Kvartira' ? '1' : '2',
+                              TypeHouse: TypeHouse == 'Kvartira' || TypeHouse == 'Квартира' ? '1' : '2',
                               CountRoom: CountRoom,
-                              TypeOfRent: RentOf == 'kunlik' ? '1' : '2',
+                              TypeOfRent: RentOf == 'kunlik' || RentOf == 'день' ? '1' : '2',
                               cost: costController?.text,
-                              typePayment: _dropownUsd == "SO'M" ? '1' : '2',
+                              typePayment: _dropownUsd == "SO'M" || _dropownUsd == "СУМ" ? '1' : '2',
                               subway: Subway,
-                              gender: genderString == 'Erkak' ? '1' : '2',
+                              gender: genderString == 'Erkak' || genderString == 'Мужчина' ? '1' : '2',
                               countRoom: countRoom,
                               title: adsTitleController?.text,
                               description: inputcontroller?.text,
@@ -831,7 +836,7 @@ class _OwnerState extends State<Owner> {
                           }
                         },
                         child: Text(
-                          "E’lon saqlash",
+                          "E’lon saqlash".tr(),
                           style: TextStyle(
                               fontSize: 20.sp, fontWeight: FontWeight.w500),
                         ),
