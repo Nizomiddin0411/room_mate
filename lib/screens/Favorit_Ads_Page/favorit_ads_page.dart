@@ -2,13 +2,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:talaba_uy/services/get_my_ads_service.dart';
-
 import '../../core/const/app_colors.dart';
-import '../../models/get_my_ads_model.dart';
 import '../../provider/favorite_provider.dart';
 import '../../services/post_my_ads_delete_Service.dart';
-import '../All_Ads_Page/detail_page.dart';
+import '../Ads_Detail/ads_detail.dart';
 
 class FavoritAds extends StatefulWidget {
   const FavoritAds({Key? key}) : super(key: key);
@@ -30,7 +27,7 @@ class _FavoritAdsState extends State<FavoritAds> {
       appBar: AppBar(
         backgroundColor: AppColors.backgroundWhite,
         title: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 69.w),
+          padding: EdgeInsets.symmetric(horizontal: 45.w),
           child: const Text(
             "E’lonlarim",
             style: TextStyle(color: AppColors.mainColor),
@@ -93,7 +90,8 @@ class _FavoritAdsState extends State<FavoritAds> {
                                           // when button is pressed
                                           onPressed: () {
                                             _showDialog(
-                                                data.MyAds[index].id);
+                                                data.MyAds[index].id,);
+
                                           },
                                         ),
                                       ],
@@ -127,7 +125,53 @@ class _FavoritAdsState extends State<FavoritAds> {
                                                 context,
                                                 MaterialPageRoute(
                                                     builder: (context) =>
-                                                        const DetailPage()));
+                                                        AdsDetail(
+                                                          title: data.MyAds[index].title
+                                                              .toString(),
+                                                          description: data
+                                                              .MyAds[index].description
+                                                              .toString(),
+                                                          houseType: data
+                                                              .MyAds[index].houseType
+                                                              .toString(),
+                                                          cost: data.MyAds[index].cost
+                                                              .toString(),
+                                                          costTayp: data
+                                                              .MyAds[index].costType
+                                                              .toString(),
+                                                          countRoom: data
+                                                              .MyAds[index].roomCount
+                                                              .toString(),
+                                                          countPeople: data.MyAds[index]
+                                                              .roommateCount
+                                                              .toString(),
+                                                          region: data
+                                                              .MyAds[index].region?.name
+                                                              .toString(),
+                                                          district: data.MyAds[index]
+                                                              .district?.name
+                                                              .toString(),
+                                                          univer: data.MyAds[index]
+                                                              .university?.name
+                                                              .toString(),
+                                                          facultet: data.MyAds[index]
+                                                              .faculty?.name
+                                                              .toString(),
+                                                          liveWithOwner: data
+                                                              .MyAds[index]
+                                                              .liveWithOwner
+                                                              .toString(),
+                                                          subway: data
+                                                              .MyAds[index].subway
+                                                              .toString(),
+                                                          favorite: data
+                                                              .MyAds[index].favorite
+                                                              .toString(),
+                                                          id: data.MyAds[index].id
+                                                              .toString(),
+                                                          type: data.MyAds[index].type
+                                                              .toString(),
+                                                        )));
                                           },
                                           child: Padding(
                                             padding: EdgeInsets.fromLTRB(
@@ -172,7 +216,10 @@ class _FavoritAdsState extends State<FavoritAds> {
             actions: [
               Column(
                 children: [
-                  Text("Ushbu e’lonni o’chirishga\n ishonchingiz komilmi ? \n"),
+                  Padding(
+                    padding:  EdgeInsets.symmetric(horizontal: 10.h,vertical: 15.w),
+                    child: Text("Ushbu e’lonni o’chirishga ishonchingiz komilmi ? "),
+                  ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -180,7 +227,9 @@ class _FavoritAdsState extends State<FavoritAds> {
                         width: 130.w,
                         height: 48.h,
                         child: ElevatedButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
                           style: ElevatedButton.styleFrom(
                             primary: Colors.blue,
                             shape: RoundedRectangleBorder(
@@ -196,7 +245,7 @@ class _FavoritAdsState extends State<FavoritAds> {
                         ),
                       ),
                       SizedBox(
-                        width: 13,
+                        width: 10.w,
                       ),
                       Container(
                         width: 130.w,
@@ -204,6 +253,8 @@ class _FavoritAdsState extends State<FavoritAds> {
                         child: ElevatedButton(
                           onPressed: () async {
                             await DeleteMyAds().DeleteAds(id: adsId);
+                            // await Data();
+                            Navigator.pop(context);
                           },
                           style: ElevatedButton.styleFrom(
                             primary: Colors.red,
