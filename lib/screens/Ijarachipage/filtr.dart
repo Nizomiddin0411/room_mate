@@ -1,8 +1,9 @@
 import 'dart:convert';
 
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:http/http.dart'as http;
+import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -96,12 +97,10 @@ class _FiltrPageState extends State<FiltrPage> {
     Provider.of<RegionProvider>(context, listen: false).getUnivers();
     // Provider.of<RegionProvider>(context,listen: false).getFiltrApi();
     Provider.of<RegionProvider>(context, listen: false).getRegion().asStream();
-
   }
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: AppColors.backgroundWhite,
       appBar: AppBar(
@@ -255,45 +254,67 @@ class _FiltrPageState extends State<FiltrPage> {
                     ),
                   ),
                   SizedBox(height: 4.h),
-                  Container(
-                    width: 324.w,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10.r)),
-                    child: DropdownButtonFormField(
-                      isExpanded: true,
-                      hint: Text("OTM ni tanlang"),
-                      decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          focusColor: Colors.grey),
-                      // value: ,
-                      icon: Icon(Icons.arrow_drop_down_outlined),
-                      items: data.univer.map((e) {
-                        return DropdownMenuItem<String>(
-                          onTap: () {
-                            data.UniverId = e.id.toString();
-                          },
-                          value:  e.name  ?? '',
-                          child: SizedBox(
-                            width: MediaQuery.of(context).size.width - 150.w,
-                            child: Text(
-                                // context.read<AutCubit>().selectedLang.index == 1 ?
-                                e.name.toString()
-                                    // : e.nameRu.toString()
-                            ),
-                          ),
-                        );
-                      }).toList(),
-                      onChanged: (newValue) async {
-                        // print("Selected ----------- $newValue");
-                        data.isUniver = true;
-                        final selected = data.univer
-                            .where((element) => element.name == newValue);
-                        data.getFaculty(selected.last.id!);
-                        setState(() {
-                          dropDown2 = newValue.toString();
-                        });
-                      },
-                    ),
+                  // Container(
+                  //   width: 324.w,
+                  //   decoration: BoxDecoration(
+                  //       borderRadius: BorderRadius.circular(10.r)),
+                  //   child: DropdownButtonFormField(
+                  //     isExpanded: true,
+                  //     hint: Text("OTM ni tanlang"),
+                  //     decoration: const InputDecoration(
+                  //         border: OutlineInputBorder(),
+                  //         focusColor: Colors.grey),
+                  //     // value: ,
+                  //     icon: Icon(Icons.arrow_drop_down_outlined),
+                  //     items: data.univer.map((e) {
+                  //       return DropdownMenuItem<String>(
+                  //         onTap: () {
+                  //           data.UniverId = e.id.toString();
+                  //         },
+                  //         value:  e.name  ?? '',
+                  //         child: SizedBox(
+                  //           width: MediaQuery.of(context).size.width - 150.w,
+                  //           child: Text(
+                  //               // context.read<AutCubit>().selectedLang.index == 1 ?
+                  //               e.name.toString()
+                  //                   // : e.nameRu.toString()
+                  //           ),
+                  //         ),
+                  //       );
+                  //     }).toList(),
+                  //     onChanged: (newValue) async {
+                  //       // print("Selected ----------- $newValue");
+                  //       data.isUniver = true;
+                  //       final selected = data.univer
+                  //           .where((element) => element.name == newValue);
+                  //       data.getFaculty(selected.last.id!);
+                  //       setState(() {
+                  //         dropDown2 = newValue.toString();
+                  //       });
+                  //     },
+                  //   ),
+                  // ),
+                  DropdownSearch<String>(
+                    mode: Mode.MENU,
+                    items: data.univer.map((e) {
+                      if(dropDown2 == e.name){
+                        data.UniverId = e.id.toString();
+                      }
+                      return e.name.toString();
+                    }).toList(),
+                    showSearchBox: true,
+                    // label: "Menu mode",
+                    // hint: "country in menu mode",
+                    onChanged: (value) {
+                      data.isUniver = true;
+                      final selected =
+                      data.univer.where((element) => element.name == value);
+                      data.getFaculty(selected.last.id!);
+                      setState(() {
+                        dropDown2 = value.toString();
+                      });
+                    },
+                    selectedItem: "OTM ni tanlang",
                   ),
                   SizedBox(
                     height: 18.h,
@@ -525,7 +546,7 @@ class _FiltrPageState extends State<FiltrPage> {
                           child: Container(
                             padding: EdgeInsets.only(left: 16.w),
                             child: TextFormField(
-                              onTap: (){
+                              onTap: () {
                                 data.isFromCost = true;
                               },
                               controller: fromCost,
@@ -555,7 +576,7 @@ class _FiltrPageState extends State<FiltrPage> {
                           child: Container(
                             padding: EdgeInsets.only(left: 16.w),
                             child: TextFormField(
-                              onTap: (){
+                              onTap: () {
                                 data.isToCost = true;
                               },
                               controller: toCost,
@@ -654,10 +675,10 @@ class _FiltrPageState extends State<FiltrPage> {
                               data.isCourse ? Course : '0',
                               data.isTypeHouse ? TypeHouse : '0',
                               data.isCount ? roomCount : '0',
-                              data.isRent ? _titleTime: '0',
+                              data.isRent ? _titleTime : '0',
                               data.isSubway ? subwayof : '0',
                               data.isFromCost ? fromCost.text : '0',
-                              data.isToCost ? toCost.text: '0',
+                              data.isToCost ? toCost.text : '0',
                               // data.isRegion ? data.RegionId: '0',
                               // '11',
                               // '0',
@@ -678,10 +699,10 @@ class _FiltrPageState extends State<FiltrPage> {
                               data.isCourse ? Course : '0',
                               data.isTypeHouse ? TypeHouse : '0',
                               data.isCount ? roomCount : '0',
-                              data.isRent ? _titleTime: '0',
+                              data.isRent ? _titleTime : '0',
                               data.isSubway ? subwayof : '0',
                               data.isFromCost ? fromCost.text : '0',
-                              data.isToCost ? toCost.text: '0',
+                              data.isToCost ? toCost.text : '0',
                               // data.isRegion ? data.RegionId: '0',
                               // '11',
                               // '0',
@@ -694,7 +715,6 @@ class _FiltrPageState extends State<FiltrPage> {
                               // '0',
                               // '0',
                             );
-
 
                             Navigator.pop(context);
                             print(data.isRegion);

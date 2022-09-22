@@ -1,4 +1,5 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -181,56 +182,56 @@ class _FiltrForDayState extends State<FiltrForDay> {
                   SizedBox(height: 4.h),
                   data.isDistrict
                       ? Container(
-                    width: 324.w,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10.r)),
-                    child: DropdownButtonFormField(
-                      isExpanded: true,
-                      hint: Text("Tumanni tanlang"),
-                      decoration: const InputDecoration(
-                          isDense: true,
-                          border: OutlineInputBorder(),
-                          focusColor: Colors.grey),
-                      icon: Icon(Icons.arrow_drop_down_outlined),
-                      items: data.districts.map((e) {
-                        return DropdownMenuItem<String>(
-                          onTap: () {
-                            print("${e.name}${e.id}");
-                            data.districtId = e.id.toString();
-                          },
-                          value: data.isDistrict
-                              ? e.name.toString()
-                              : data.defaultvalue,
-                          child: Text(data.isDistrict
-                              ? e.name.toString()
-                              : data.defaultvalue),
-                        );
-                      }).toList(),
-                      onChanged: (newValue) {
-                        print("Selected ----------- $newValue");
-                        data.isDistrict = true;
-                        setState(() {
-                          // dropDown1 = newValue as GetDistrictModel?;
-                          dropDown = newValue.toString();
-                        });
-                      },
-                    ),
-                  )
+                          width: 324.w,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10.r)),
+                          child: DropdownButtonFormField(
+                            isExpanded: true,
+                            hint: Text("Tumanni tanlang"),
+                            decoration: const InputDecoration(
+                                isDense: true,
+                                border: OutlineInputBorder(),
+                                focusColor: Colors.grey),
+                            icon: Icon(Icons.arrow_drop_down_outlined),
+                            items: data.districts.map((e) {
+                              return DropdownMenuItem<String>(
+                                onTap: () {
+                                  print("${e.name}${e.id}");
+                                  data.districtId = e.id.toString();
+                                },
+                                value: data.isDistrict
+                                    ? e.name.toString()
+                                    : data.defaultvalue,
+                                child: Text(data.isDistrict
+                                    ? e.name.toString()
+                                    : data.defaultvalue),
+                              );
+                            }).toList(),
+                            onChanged: (newValue) {
+                              print("Selected ----------- $newValue");
+                              data.isDistrict = true;
+                              setState(() {
+                                // dropDown1 = newValue as GetDistrictModel?;
+                                dropDown = newValue.toString();
+                              });
+                            },
+                          ),
+                        )
                       : Container(
-                    width: 324.w,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10.r)),
-                    child: DropdownButtonFormField(
-                        isExpanded: true,
-                        hint: Text("Tumanni tanlang"),
-                        decoration: const InputDecoration(
-                            isDense: true,
-                            border: OutlineInputBorder(),
-                            focusColor: Colors.grey),
-                        icon: Icon(Icons.arrow_drop_down_outlined),
-                        items: [],
-                        onChanged: null),
-                  ),
+                          width: 324.w,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10.r)),
+                          child: DropdownButtonFormField(
+                              isExpanded: true,
+                              hint: Text("Tumanni tanlang"),
+                              decoration: const InputDecoration(
+                                  isDense: true,
+                                  border: OutlineInputBorder(),
+                                  focusColor: Colors.grey),
+                              icon: Icon(Icons.arrow_drop_down_outlined),
+                              items: [],
+                              onChanged: null),
+                        ),
                   SizedBox(height: 12.h),
                   Text(
                     "Oliy o’quv yurti",
@@ -241,41 +242,81 @@ class _FiltrForDayState extends State<FiltrForDay> {
                     ),
                   ),
                   SizedBox(height: 4.h),
-                  Container(
-                    width: 324.w,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10.r)),
-                    child: DropdownButtonFormField(
-                      isExpanded: true,
-                      hint: Text("OTM ni tanlang"),
-                      decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          focusColor: Colors.grey),
-                      // value: ,
-                      icon: Icon(Icons.arrow_drop_down_outlined),
-                      items: data.univer.map((e) {
-                        return DropdownMenuItem<String>(
-                          onTap: () {
-                            data.UniverId = e.id.toString();
-                          },
-                          value: e.name ?? "",
-                          child: SizedBox(
-                            width: MediaQuery.of(context).size.width - 150.w,
-                            child: Text(e.name.toString()),
-                          ),
-                        );
-                      }).toList(),
-                      onChanged: (newValue) async {
-                        // print("Selected ----------- $newValue");
-                        data.isUniver = true;
-                        final selected = data.univer
-                            .where((element) => element.name == newValue);
-                        data.getFaculty(selected.last.id!);
-                        setState(() {
-                          dropDown2 = newValue.toString();
-                        });
-                      },
-                    ),
+                  // Container(
+                  //   width: 324.w,
+                  //   decoration: BoxDecoration(
+                  //       borderRadius: BorderRadius.circular(10.r)),
+                  //   child: DropdownButtonFormField(
+                  //     isExpanded: true,
+                  //     hint: Text("OTM ni tanlang"),
+                  //     decoration: const InputDecoration(
+                  //         border: OutlineInputBorder(),
+                  //         focusColor: Colors.grey),
+                  //     // value: ,
+                  //     icon: Icon(Icons.arrow_drop_down_outlined),
+                  //     items: data.univer.map((e) {
+                  //       return DropdownMenuItem<String>(
+                  //         onTap: () {
+                  //           data.UniverId = e.id.toString();
+                  //         },
+                  //         value: e.name ?? "",
+                  //         child: SizedBox(
+                  //           width: MediaQuery.of(context).size.width - 150.w,
+                  //           child: Text(e.name.toString()),
+                  //         ),
+                  //       );
+                  //     }).toList(),
+                  //     onChanged: (newValue) async {
+                  //       // print("Selected ----------- $newValue");
+                  //       data.isUniver = true;
+                  //       final selected = data.univer
+                  //           .where((element) => element.name == newValue);
+                  //       data.getFaculty(selected.last.id!);
+                  //       setState(() {
+                  //         dropDown2 = newValue.toString();
+                  //       });
+                  //     },
+                  //   ),
+                  // ),
+                  DropdownSearch<String>(
+                    mode: Mode.MENU,
+                    items: data.univer.map((e) {
+                      if(dropDown2 == e.name){
+                        UniverId = e.id.toString();
+                        print(UniverId);
+                        print(dropDown2);
+                      }
+
+
+                      return e.name.toString();
+                    }).toList(),
+                    showSearchBox: true,
+                    // label: "Menu mode",
+                    // hint: "country in menu mode",
+
+                    onChanged: (value) {
+                      data.isUniver = true;
+                      final selected =
+                          data.univer.where((element) => element.name == value);
+                      data.getFaculty(selected.last.id!);
+                      print(data.isUniver);
+                      // final get  = data.univer.map((e) => data.UniverId = e.id.toString());
+                      // print('${get}----------------------');
+
+                      // print(data.UniverId);
+
+                      setState(() {
+                        dropDown2 = value.toString();
+                      });
+                    },
+
+                    selectedItem: "OTM ni tanlang",
+                    // onFind: (var item) => data.UniverId = item,
+                    //   onSaved: (val) {
+                    //     data.univer.map((e) =>   val =  e.id.toString() );
+                    //     // data.UniverId = value.toString();
+                    //   print(val);
+                    //   },
                   ),
                   SizedBox(
                     height: 18.h,
@@ -507,7 +548,7 @@ class _FiltrForDayState extends State<FiltrForDay> {
                           child: Container(
                             padding: EdgeInsets.only(left: 16.w),
                             child: TextFormField(
-                              onTap: (){
+                              onTap: () {
                                 data.isFromCost = true;
                               },
                               controller: fromCost,
@@ -537,7 +578,7 @@ class _FiltrForDayState extends State<FiltrForDay> {
                           child: Container(
                             padding: EdgeInsets.only(left: 16.w),
                             child: TextFormField(
-                              onTap: (){
+                              onTap: () {
                                 data.isToCost = true;
                               },
                               controller: toCost,
@@ -557,7 +598,7 @@ class _FiltrForDayState extends State<FiltrForDay> {
                   ),
                   Padding(
                     padding:
-                    EdgeInsets.symmetric(vertical: 18.h, horizontal: 31.w),
+                        EdgeInsets.symmetric(vertical: 18.h, horizontal: 31.w),
                     child: Container(
                         width: double.infinity,
                         child: ElevatedButton(
@@ -639,7 +680,7 @@ class _FiltrForDayState extends State<FiltrForDay> {
                               // data.isRent ? _titleTime: '0',
                               data.isSubway ? subwayof : '0',
                               data.isFromCost ? fromCost.text : '0',
-                              data.isToCost ? toCost.text: '0',
+                              data.isToCost ? toCost.text : '0',
                               // data.isRegion ? data.RegionId: '0',
                               // '11',
                               // '0',
@@ -663,7 +704,7 @@ class _FiltrForDayState extends State<FiltrForDay> {
                               // data.isRent ? _titleTime: '0',
                               data.isSubway ? subwayof : '0',
                               data.isFromCost ? fromCost.text : '0',
-                              data.isToCost ? toCost.text: '0',
+                              data.isToCost ? toCost.text : '0',
                               // data.isRegion ? data.RegionId: '0',
                               // '11',
                               // '0',
@@ -676,7 +717,6 @@ class _FiltrForDayState extends State<FiltrForDay> {
                               // '0',
                               // '0',
                             );
-
 
                             Navigator.pop(context);
                             // print(data.isRegion);
