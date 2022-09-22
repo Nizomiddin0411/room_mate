@@ -93,7 +93,7 @@ class _FiltrPageState extends State<FiltrPage> {
     super.initState();
     fromCost = TextEditingController();
     toCost = TextEditingController();
-    // context.read<AutCubit>().selectSettingLan(LangData.languageList.singleWhere((e) => e.locale == context.locale), context);
+
     Provider.of<RegionProvider>(context, listen: false).getUnivers();
     // Provider.of<RegionProvider>(context,listen: false).getFiltrApi();
     Provider.of<RegionProvider>(context, listen: false).getRegion().asStream();
@@ -101,6 +101,7 @@ class _FiltrPageState extends State<FiltrPage> {
 
   @override
   Widget build(BuildContext context) {
+    context.read<AutCubit>().selectSettingLan(LangData.languageList.singleWhere((e) => e.locale == context.locale), context);
     return Scaffold(
       backgroundColor: AppColors.backgroundWhite,
       appBar: AppBar(
@@ -300,7 +301,7 @@ class _FiltrPageState extends State<FiltrPage> {
                       if(dropDown2 == e.name){
                         data.UniverId = e.id.toString();
                       }
-                      return e.name.toString();
+                      return context.read<AutCubit>().selectedLang.index == 1 ? e.name.toString() : e.nameRu.toString();
                     }).toList(),
                     showSearchBox: true,
                     // label: "Menu mode",

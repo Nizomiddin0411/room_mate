@@ -49,6 +49,7 @@ class _OylikIjaraState extends State<OylikIjara> {
 
   @override
   Widget build(BuildContext context) {
+
     TabController? _tabController;
     return DefaultTabController(
       length: 2,

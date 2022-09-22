@@ -1,10 +1,13 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:dropdown_search/dropdown_search.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
 import 'package:talaba_uy/screens/All_Ads_Page/all_ads_page.dart';
+import '../../cubit/aut_cubit.dart';
+import '../../models/lang_model.dart';
 import '../../provider/day_provider.dart';
 import '../../provider/region_provider.dart';
 
@@ -88,7 +91,9 @@ class _FiltrForDayState extends State<FiltrForDay> {
   }
 
   @override
+
   Widget build(BuildContext context) {
+    context.read<AutCubit>().selectSettingLan(LangData.languageList.singleWhere((e) => e.locale == context.locale), context);
     return Scaffold(
       backgroundColor: AppColors.backgroundWhite,
       appBar: AppBar(
@@ -288,7 +293,7 @@ class _FiltrForDayState extends State<FiltrForDay> {
                       }
 
 
-                      return e.name.toString();
+                      return context.read<AutCubit>().selectedLang.index == 1 ? e.name.toString() : e.nameRu.toString();
                     }).toList(),
                     showSearchBox: true,
                     // label: "Menu mode",
