@@ -1,10 +1,13 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
 import 'package:talaba_uy/screens/menu/menu.dart';
+import '../../cubit/aut_cubit.dart';
+import '../../models/lang_model.dart';
 import '../../provider/region_provider.dart';
 import '../../services/post_create_ads_student.dart';
 
@@ -109,6 +112,7 @@ class _StudentState extends State<Student> {
 
   @override
   Widget build(BuildContext context) {
+    context.read<AutCubit>().selectSettingLan(LangData.languageList.singleWhere((e) => e.locale == context.locale), context);
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 12.h),
@@ -249,48 +253,83 @@ class _StudentState extends State<Student> {
                   ),
                 ),
                 SizedBox(height: 4.h),
+                // Container(
+                //   width: 324.w,
+                //   decoration: BoxDecoration(
+                //       borderRadius: BorderRadius.circular(10.r),
+                //       border: Border.all(color: _colorUniver)),
+                //   child: DropdownButtonFormField(
+                //     isExpanded: true,
+                //     hint: Padding(
+                //       padding: EdgeInsets.only(left: 8.w),
+                //       child: Text("OTM ni tanlang".tr()),
+                //     ),
+                //     decoration: InputDecoration(border: InputBorder.none),
+                //     // value: ,
+                //     icon: Icon(Icons.arrow_drop_down_outlined),
+                //     items: data.univer.map((e) {
+                //       return DropdownMenuItem<String>(
+                //         onTap: () {
+                //           data.UniverId = e.id.toString();
+                //         },
+                //         value: e.name ?? "",
+                //         child: SizedBox(
+                //           width: MediaQuery.of(context).size.width - 150.w,
+                //           child: Padding(
+                //             padding: EdgeInsets.only(left: 8.w),
+                //             child: Text(e.name.toString()),
+                //           ),
+                //         ),
+                //       );
+                //     }).toList(),
+                //     onChanged: (newValue) async {
+                //       // print("Selected ----------- $newValue");
+                //       setState(() {
+                //         _UniverOnClick = true;
+                //         _colorUniver = Colors.grey;
+                //       });
+                //       final selected = data.univer
+                //           .where((element) => element.name == newValue);
+                //       data.getFaculty(selected.last.id!);
+                //       setState(() {
+                //         dropDown2 = newValue.toString();
+                //       });
+                //     },
+                //   ),
+                // ),
                 Container(
-                  width: 324.w,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
-                      border: Border.all(color: _colorUniver)),
-                  child: DropdownButtonFormField(
-                    isExpanded: true,
-                    hint: Padding(
-                      padding: EdgeInsets.only(left: 8.w),
-                      child: Text("OTM ni tanlang".tr()),
-                    ),
-                    decoration: InputDecoration(border: InputBorder.none),
-                    // value: ,
-                    icon: Icon(Icons.arrow_drop_down_outlined),
+                  borderRadius: BorderRadius.circular(10.r),
+                  border: Border.all(color: _colorUniver)),
+                  child: DropdownSearch<String>(
+                    mode: Mode.MENU,
                     items: data.univer.map((e) {
-                      return DropdownMenuItem<String>(
-                        onTap: () {
-                          data.UniverId = e.id.toString();
-                        },
-                        value: e.name ?? "",
-                        child: SizedBox(
-                          width: MediaQuery.of(context).size.width - 150.w,
-                          child: Padding(
-                            padding: EdgeInsets.only(left: 8.w),
-                            child: Text(e.name.toString()),
-                          ),
-                        ),
-                      );
+                      if(dropDown2 == e.name){
+                        data.UniverId = e.id.toString();
+                        data.isId = e.id;
+                      }
+
+                      // final selected = data.univer.where((element) => element.name == e.name);
+                      // data.getFaculty(selected.last.id!);
+                      return context.read<AutCubit>().selectedLang.index == 1 ? e.name.toString() : e.nameRu.toString();
                     }).toList(),
-                    onChanged: (newValue) async {
-                      print("Selected ----------- $newValue");
+                    showSearchBox: true,
+                    // label: "Menu mode",
+                    // hint: "country in menu mode",
+                    onChanged: (value) async{
+                      // data.isUniver = true;
+                      final selected =
+                      data.univer.where((element) => element.name == value);
+                      await data.getFaculty(selected.last.id!);
+                      // data.getFaculty(data.isId!);
+                      print(selected);
                       setState(() {
+                        dropDown2 = value.toString();
                         _UniverOnClick = true;
                         _colorUniver = Colors.grey;
                       });
-                      final selected = data.univer
-                          .where((element) => element.name == newValue);
-                      data.getFaculty(selected.last.id!);
-                      setState(() {
-                        dropDown2 = newValue.toString();
-                      });
                     },
+                    selectedItem: tr("OTM ni tanlang"),
                   ),
                 ),
                 SizedBox(height: 12.h),
@@ -319,7 +358,7 @@ class _StudentState extends State<Student> {
                             border: InputBorder.none,
                           ),
                           // value: ,
-                          icon: Icon(Icons.arrow_drop_down_outlined),
+                          icon: const Icon(Icons.arrow_drop_down_outlined),
                           items: data.faculty.map((e) {
                             return DropdownMenuItem<String>(
                               onTap: () {
@@ -360,12 +399,12 @@ class _StudentState extends State<Student> {
                               padding: EdgeInsets.only(left: 8.w),
                               child: Text("Fakultetni tanlang".tr()),
                             ),
-                            decoration: InputDecoration(
+                            decoration: const InputDecoration(
                               border: InputBorder.none,
                             ),
                             // value: ,
-                            icon: Icon(Icons.arrow_drop_down_outlined),
-                            items: [],
+                            icon: const Icon(Icons.arrow_drop_down_outlined),
+                            items: const [],
                             onChanged: null),
                       ),
                 SizedBox(
