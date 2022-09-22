@@ -1,7 +1,10 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:talaba_uy/cubit/aut_cubit.dart';
+import 'package:talaba_uy/models/lang_model.dart';
 import 'package:talaba_uy/provider/search_universitet_provider.dart';
 import 'package:talaba_uy/provider/universitet_provider.dart';
 import 'package:talaba_uy/screens/Search_University/filtr_university.dart';
@@ -22,7 +25,7 @@ class _SearchPageState extends State<SearchPage> {
     WidgetsBinding.instance!.addPostFrameCallback((_) {
       context.read<SearchUniversitet>().getSearchUniver("");
       Provider.of<UniversitetProvider>(context, listen: false).getViloyat();
-      Provider.of<UniversitetProvider>(context, listen: false).getAds("0","0","0");
+
     });
     super.initState();
   }
@@ -31,9 +34,10 @@ class _SearchPageState extends State<SearchPage> {
     _controller.dispose();
     super.dispose();
   }
-
+  void setlocale(Locale locale) => context.setLocale(context.locale);
   Widget build(BuildContext context) {
-
+    return BlocBuilder<AutCubit, AutState>(
+  builder: (context, state) {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -95,10 +99,13 @@ class _SearchPageState extends State<SearchPage> {
                     ),
                   ),
                 ),
-                Consumer<SearchUniversitet>(
+  
+     Consumer<SearchUniversitet>(
                   builder: (_, data, __) {
-                    return ListView.builder(
-                        physics: NeverScrollableScrollPhysics(),
+                     return BlocBuilder<AutCubit, AutState>(
+                       builder: (context, state) {
+                      return ListView.builder(
+                          physics: NeverScrollableScrollPhysics(),
                         shrinkWrap: true,
                         itemCount: data.searchuniversitet.length,
                         itemBuilder: (context, int index) {
@@ -146,9 +153,10 @@ class _SearchPageState extends State<SearchPage> {
                                                   .size
                                                   .width -
                                                   150.w,
-                                              child: Text(
-                                                  data.searchuniversitet[index].name.toString()
-                                                  ,
+                                              child: Text(context.read<AutCubit>().selectedLang.index==1
+                                                  ?
+                                                  data.searchuniversitet[index].name.toString():
+                                                  data.searchuniversitet[index].nameRu.toString(),
                                                   style: TextStyle(
                                                       fontSize: 12.sp,
                                                       color: AppColors.mainColor)),
@@ -192,6 +200,8 @@ class _SearchPageState extends State<SearchPage> {
                             ],
                           );
                         });
+  },
+);
                   },
                 ),
               ],
@@ -199,5 +209,7 @@ class _SearchPageState extends State<SearchPage> {
 
       ),
     );
+  },
+);
   }
 }

@@ -36,6 +36,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
   void initState() {
     super.initState();
     Provider.of<UniversitetProvider>(context, listen: false).getViloyat();
+    Provider.of<UniversitetProvider>(context, listen: false).getAds("0","0","0");
   }
   @override
   Widget build(BuildContext context) {
