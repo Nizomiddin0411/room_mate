@@ -18,6 +18,7 @@ class UniversitetProvider extends ChangeNotifier{
   List<GetDistrictModel> tumanlar = [];
   List<SearchingStudents> ads = [];
   bool isFakultet = false;
+  bool isuniver = false;
   String RegionId = '';
   String DistrickId = '';
   String FacultyID = '';
@@ -33,6 +34,10 @@ class UniversitetProvider extends ChangeNotifier{
   }
 void _settuman(bool value){
     istuman=value;
+    notifyListeners();
+}
+void _univesitet(bool value){
+    isuniver=value;
     notifyListeners();
 }
 Future<void> getViloyat() async{
