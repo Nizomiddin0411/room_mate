@@ -3,10 +3,10 @@ class GetMyAdsModel {
   int? type;
   int? userId;
   int? districtId;
-  int? universityId;
-  int? facultyId;
-  dynamic address;
-  dynamic roomCount;
+  dynamic universityId;
+  dynamic facultyId;
+  String? address;
+  int? roomCount;
   int? liveWithOwner;
   int? houseType;
   int? rentType;
@@ -20,6 +20,10 @@ class GetMyAdsModel {
   String? createdAt;
   String? updatedAt;
   String? favorite;
+  Region? region;
+  District? district;
+  dynamic university;
+  dynamic faculty;
 
   GetMyAdsModel(
       {this.id,
@@ -42,7 +46,11 @@ class GetMyAdsModel {
         this.description,
         this.createdAt,
         this.updatedAt,
-        this.favorite});
+        this.favorite,
+        this.region,
+        this.district,
+        this.university,
+        this.faculty});
 
   GetMyAdsModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -66,6 +74,13 @@ class GetMyAdsModel {
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     favorite = json['favorite'];
+    region =
+    json['region'] != null ? new Region.fromJson(json['region']) : null;
+    district = json['district'] != null
+        ? new District.fromJson(json['district'])
+        : null;
+    university = json['university'];
+    faculty = json['faculty'];
   }
 
   Map<String, dynamic> toJson() {
@@ -91,8 +106,61 @@ class GetMyAdsModel {
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
     data['favorite'] = this.favorite;
+    if (this.region != null) {
+      data['region'] = this.region!.toJson();
+    }
+    if (this.district != null) {
+      data['district'] = this.district!.toJson();
+    }
+    data['university'] = this.university;
+    data['faculty'] = this.faculty;
     return data;
   }
 }
 
+class Region {
+  int? id;
+  String? name;
+  String? nameRu;
 
+  Region({this.id, this.name, this.nameRu});
+
+  Region.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    nameRu = json['name_ru'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['name'] = this.name;
+    data['name_ru'] = this.nameRu;
+    return data;
+  }
+}
+
+class District {
+  int? id;
+  int? regionId;
+  String? name;
+  String? nameRu;
+
+  District({this.id, this.regionId, this.name, this.nameRu});
+
+  District.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    regionId = json['region_id'];
+    name = json['name'];
+    nameRu = json['name_ru'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['region_id'] = this.regionId;
+    data['name'] = this.name;
+    data['name_ru'] = this.nameRu;
+    return data;
+  }
+}

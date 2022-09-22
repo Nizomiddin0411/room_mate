@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/cupertino.dart';
@@ -248,50 +249,72 @@ class _StudentUserState extends State<StudentUser> {
                   ),
                   Column(
                     children: [
-                      DropdownButtonFormField2(
-                        decoration: InputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: univerColor)),
-                          isDense: true,
-                          contentPadding: EdgeInsets.zero,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                        isExpanded: true,
-                        hint: const Text(
-                          'Oliy o’quv yurtini tanlang',
-                          style: TextStyle(fontSize: 14),
-                        ).tr(),
-                        icon: const Icon(
-                          Icons.arrow_drop_down,
-                          color: Colors.black45,
-                        ),
-                        iconSize: 30,
-                        buttonHeight: 60,
-                        buttonPadding:
-                            const EdgeInsets.only(left: 20, right: 10),
-                        dropdownDecoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        items: data.universitet.map((e) {
-                          return DropdownMenuItem<String>(
-                            onTap:(){
-                            data.universiterid=e.id.toString();
-                          },
-                            value: e.name ?? "",
-                            child: Text(
-                              e.name.toString(),
-                              style:  TextStyle(
-                                fontSize: 14,
-                              ),
-                            ),
-                          );
-                        }).toList(),
-                        onChanged: (newValue) async {
-                          print("Selected ----------- $newValue");
+                      // DropdownButtonFormField2(
+                      //   decoration: InputDecoration(
+                      //     enabledBorder: OutlineInputBorder(
+                      //         borderSide: BorderSide(color: univerColor)),
+                      //     isDense: true,
+                      //     contentPadding: EdgeInsets.zero,
+                      //     border: OutlineInputBorder(
+                      //       borderRadius: BorderRadius.circular(10),
+                      //     ),
+                      //   ),
+                      //   isExpanded: true,
+                      //   hint: const Text(
+                      //     'Oliy o’quv yurtini tanlang',
+                      //     style: TextStyle(fontSize: 14),
+                      //   ).tr(),
+                      //   icon: const Icon(
+                      //     Icons.arrow_drop_down,
+                      //     color: Colors.black45,
+                      //   ),
+                      //   iconSize: 30,
+                      //   buttonHeight: 60,
+                      //   buttonPadding:
+                      //       const EdgeInsets.only(left: 20, right: 10),
+                      //   dropdownDecoration: BoxDecoration(
+                      //     borderRadius: BorderRadius.circular(15),
+                      //   ),
+                      //   items: data.universitet.map((e) {
+                      //     return DropdownMenuItem<String>(
+                      //       onTap:(){
+                      //       data.universiterid=e.id.toString();
+                      //     },
+                      //       value: e.name ?? "",
+                      //       child: Text(
+                      //         e.name.toString(),
+                      //         style:  TextStyle(
+                      //           fontSize: 14,
+                      //         ),
+                      //       ),
+                      //     );
+                      //   }).toList(),
+                      //   onChanged: (newValue) async {
+                      //     print("Selected ----------- $newValue");
+                      //     final selected = data.universitet
+                      //         .where((element) => element.name == newValue);
+                      //     data.getFakultet(selected.last.id!);
+                      //     setState(() {
+                      //       drowdown1 = newValue.toString();
+                      //       drowdown1=UniderId;
+                      //       univer = true;
+                      //       univerColor = Colors.black12;
+                      //     });
+                      //   },
+                      // ),
+                      DropdownSearch<String>(
+                        mode: Mode.MENU,
+                        items: data.universitet.map((e)=>e.name.toString()).toList(),
+                        onPopupDismissed:(){
+                        } ,
+                        showSearchBox: true,
+                        // label: "Menu mode",
+                        // hint: "country in menu mode",
+                        onChanged: (newValue){
+                          print('$value  kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk');
+                          data.isuniver = true;
                           final selected = data.universitet
-                              .where((element) => element.name == newValue);
+                              .where((element) => element.name == value);
                           data.getFakultet(selected.last.id!);
                           setState(() {
                             drowdown1 = newValue.toString();
@@ -300,6 +323,7 @@ class _StudentUserState extends State<StudentUser> {
                             univerColor = Colors.black12;
                           });
                         },
+                        selectedItem: "Oliy o’quv yurtini tanlang",
                       ),
                     ],
                   ),

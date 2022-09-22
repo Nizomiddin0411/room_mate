@@ -1,11 +1,13 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
+import '../../cubit/aut_cubit.dart';
+import '../../models/lang_model.dart';
 import '../../provider/month_provider.dart';
-
 
 class FiltrForMonth extends StatefulWidget {
   const FiltrForMonth({Key? key}) : super(key: key);
@@ -88,6 +90,7 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
 
   @override
   Widget build(BuildContext context) {
+    context.read<AutCubit>().selectSettingLan(LangData.languageList.singleWhere((e) => e.locale == context.locale),context);
     return Scaffold(
       backgroundColor: AppColors.backgroundWhite,
       appBar: AppBar(
@@ -181,56 +184,56 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                   SizedBox(height: 4.h),
                   data.isDistrict
                       ? Container(
-                    width: 324.w,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10.r)),
-                    child: DropdownButtonFormField(
-                      isExpanded: true,
-                      hint: Text("Tumanni tanlang").tr(),
-                      decoration: const InputDecoration(
-                          isDense: true,
-                          border: OutlineInputBorder(),
-                          focusColor: Colors.grey),
-                      icon: Icon(Icons.arrow_drop_down_outlined),
-                      items: data.districts.map((e) {
-                        return DropdownMenuItem<String>(
-                          onTap: () {
-                            // print("${e.name}${e.id}");
-                            data.districtId = e.id.toString();
-                          },
-                          value: data.isDistrict
-                              ? e.name.toString()
-                              : data.defaultvalue,
-                          child: Text(data.isDistrict
-                              ? e.name.toString()
-                              : data.defaultvalue),
-                        );
-                      }).toList(),
-                      onChanged: (newValue) {
-                        // print("Selected ----------- $newValue");
-                        data.isDistrict = true;
-                        setState(() {
-                          // dropDown1 = newValue as GetDistrictModel?;
-                          dropDown = newValue.toString();
-                        });
-                      },
-                    ),
-                  )
+                          width: 324.w,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10.r)),
+                          child: DropdownButtonFormField(
+                            isExpanded: true,
+                            hint: Text("Tumanni tanlang").tr(),
+                            decoration: const InputDecoration(
+                                isDense: true,
+                                border: OutlineInputBorder(),
+                                focusColor: Colors.grey),
+                            icon: Icon(Icons.arrow_drop_down_outlined),
+                            items: data.districts.map((e) {
+                              return DropdownMenuItem<String>(
+                                onTap: () {
+                                  // print("${e.name}${e.id}");
+                                  data.districtId = e.id.toString();
+                                },
+                                value: data.isDistrict
+                                    ? e.name.toString()
+                                    : data.defaultvalue,
+                                child: Text(data.isDistrict
+                                    ? e.name.toString()
+                                    : data.defaultvalue),
+                              );
+                            }).toList(),
+                            onChanged: (newValue) {
+                              // print("Selected ----------- $newValue");
+                              data.isDistrict = true;
+                              setState(() {
+                                // dropDown1 = newValue as GetDistrictModel?;
+                                dropDown = newValue.toString();
+                              });
+                            },
+                          ),
+                        )
                       : Container(
-                    width: 324.w,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10.r)),
-                    child: DropdownButtonFormField(
-                        isExpanded: true,
-                        hint: Text("Tumanni tanlang").tr(),
-                        decoration: const InputDecoration(
-                            isDense: true,
-                            border: OutlineInputBorder(),
-                            focusColor: Colors.grey),
-                        icon: Icon(Icons.arrow_drop_down_outlined),
-                        items: [],
-                        onChanged: null),
-                  ),
+                          width: 324.w,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10.r)),
+                          child: DropdownButtonFormField(
+                              isExpanded: true,
+                              hint: Text("Tumanni tanlang").tr(),
+                              decoration: const InputDecoration(
+                                  isDense: true,
+                                  border: OutlineInputBorder(),
+                                  focusColor: Colors.grey),
+                              icon: Icon(Icons.arrow_drop_down_outlined),
+                              items: [],
+                              onChanged: null),
+                        ),
                   SizedBox(height: 12.h),
                   Text(
                     "Oliy o’quv yurti",
@@ -241,41 +244,64 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                     ),
                   ).tr(),
                   SizedBox(height: 4.h),
-                  Container(
-                    width: 324.w,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10.r)),
-                    child: DropdownButtonFormField(
-                      isExpanded: true,
-                      hint: Text("OTM ni tanlang").tr(),
-                      decoration: const InputDecoration(
-                          border: OutlineInputBorder(),
-                          focusColor: Colors.grey),
-                      // value: ,
-                      icon: Icon(Icons.arrow_drop_down_outlined),
-                      items: data.univer.map((e) {
-                        return DropdownMenuItem<String>(
-                          onTap: () {
-                            data.UniverId = e.id.toString();
-                          },
-                          value: e.name ?? "",
-                          child: SizedBox(
-                            width: MediaQuery.of(context).size.width - 150.w,
-                            child: Text(e.name.toString()),
-                          ),
-                        );
-                      }).toList(),
-                      onChanged: (newValue) async {
-                        // print("Selected ----------- $newValue");
-                        data.isUniver = true;
-                        final selected = data.univer
-                            .where((element) => element.name == newValue);
-                        data.getFaculty(selected.last.id!);
-                        setState(() {
-                          dropDown2 = newValue.toString();
-                        });
-                      },
-                    ),
+                  // Container(
+                  //   width: 324.w,
+                  //   decoration: BoxDecoration(
+                  //       borderRadius: BorderRadius.circular(10.r)),
+                  //   child: DropdownButtonFormField(
+                  //     isExpanded: true,
+                  //     hint: Text("OTM ni tanlang").tr(),
+                  //     decoration: const InputDecoration(
+                  //         border: OutlineInputBorder(),
+                  //         focusColor: Colors.grey),
+                  //     // value: ,
+                  //     icon: Icon(Icons.arrow_drop_down_outlined),
+                  //     items: data.univer.map((e) {
+                  //       return DropdownMenuItem<String>(
+                  //         onTap: () {
+                  //           data.UniverId = e.id.toString();
+                  //         },
+                  //         value: e.name ?? "",
+                  //         child: SizedBox(
+                  //           width: MediaQuery.of(context).size.width - 150.w,
+                  //           child: Text(e.name.toString()),
+                  //         ),
+                  //       );
+                  //     }).toList(),
+                  //     onChanged: (newValue) async {
+                  //       // print("Selected ----------- $newValue");
+                  //       data.isUniver = true;
+                  //       final selected = data.univer
+                  //           .where((element) => element.name == newValue);
+                  //       data.getFaculty(selected.last.id!);
+                  //       setState(() {
+                  //         dropDown2 = newValue.toString();
+                  //       });
+                  //     },
+                  //   ),
+                  // ),
+                  DropdownSearch<String>(
+                    mode: Mode.MENU,
+                    items: data.univer.map((e) {
+                      if(dropDown2 == e.name){
+                        data.UniverId = e.id.toString();
+                      }
+                      return context.read<AutCubit>().selectedLang.index == 1 ? e.name.toString() : e.nameRu.toString();
+                    }).toList(),
+                    showSearchBox: true,
+                    // label: "Menu mode",
+                    // hint: "country in menu mode",
+                    onChanged: (value) {
+                      print(value);
+                      data.isUniver = true;
+                      final selected =
+                          data.univer.where((element) => element.name == value);
+                      data.getFaculty(selected.last.id!);
+                      setState(() {
+                        dropDown2 = value.toString();
+                      });
+                    },
+                    selectedItem: "OTM ni tanlang",
                   ),
                   SizedBox(
                     height: 18.h,
@@ -356,7 +382,10 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10.r)),
                             child: DropdownButtonFormField(
-                              hint: Text("Kvartira,Xovli",style: TextStyle(fontSize: 14.sp),).tr(),
+                              hint: Text(
+                                "Kvartira,Xovli",
+                                style: TextStyle(fontSize: 14.sp),
+                              ).tr(),
                               decoration: const InputDecoration(
                                   border: OutlineInputBorder(),
                                   focusColor: Colors.grey),
@@ -395,7 +424,9 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10.r)),
                             child: DropdownButtonFormField(
-                              hint: Text("Xonalar soni",style: TextStyle(fontSize: 11.sp)).tr(),
+                              hint: Text("Xonalar soni",
+                                      style: TextStyle(fontSize: 11.sp))
+                                  .tr(),
                               decoration: const InputDecoration(
                                   border: OutlineInputBorder(),
                                   focusColor: Colors.grey),
@@ -507,7 +538,7 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                           child: Container(
                             padding: EdgeInsets.only(left: 16.w),
                             child: TextFormField(
-                              onTap: (){
+                              onTap: () {
                                 data.isFromCost = true;
                               },
                               controller: fromCost,
@@ -537,7 +568,7 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                           child: Container(
                             padding: EdgeInsets.only(left: 16.w),
                             child: TextFormField(
-                              onTap: (){
+                              onTap: () {
                                 data.isToCost = true;
                               },
                               controller: toCost,
@@ -557,7 +588,7 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                   ),
                   Padding(
                     padding:
-                    EdgeInsets.symmetric(vertical: 18.h, horizontal: 31.w),
+                        EdgeInsets.symmetric(vertical: 18.h, horizontal: 31.w),
                     child: Container(
                         width: double.infinity,
                         child: ElevatedButton(
@@ -639,7 +670,7 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                               // data.isRent ? _titleTime: '0',
                               data.isSubway ? subwayof : '0',
                               data.isFromCost ? fromCost.text : '0',
-                              data.isToCost ? toCost.text: '0',
+                              data.isToCost ? toCost.text : '0',
                               // data.isRegion ? data.RegionId: '0',
                               // '11',
                               // '0',
@@ -663,7 +694,7 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                               // data.isRent ? _titleTime: '0',
                               data.isSubway ? subwayof : '0',
                               data.isFromCost ? fromCost.text : '0',
-                              data.isToCost ? toCost.text: '0',
+                              data.isToCost ? toCost.text : '0',
                               // data.isRegion ? data.RegionId: '0',
                               // '11',
                               // '0',
@@ -676,7 +707,6 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                               // '0',
                               // '0',
                             );
-
 
                             Navigator.pop(context);
                             // print(data.isRegion);
