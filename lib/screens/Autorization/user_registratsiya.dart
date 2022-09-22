@@ -201,13 +201,6 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      "Sherik kerak",
-                      style: TextStyle(
-                          color: AppColors.textColor,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18),
-                    ),
                   ],
                 ),
               ],
