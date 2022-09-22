@@ -4,13 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
-import 'package:talaba_uy/models/get_favorite_model.dart';
-import 'package:talaba_uy/services/get_favorite_service.dart';
-
 import '../../provider/favorite_provider.dart';
 import '../../services/post_change_favoritr_service.dart';
 import '../Ads_Detail/ads_detail.dart';
-import '../All_Ads_Page/detail_page.dart';
 
 class FavoritPage extends StatefulWidget {
   const FavoritPage({Key? key}) : super(key: key);
@@ -50,159 +46,164 @@ class _FavoritPageState extends State<FavoritPage> {
           ),
         ),
         body: Consumer<FavoriteProvider>(builder: (_, data, __) {
-          return Column(
-              children: [
-            ListView.builder(
-                shrinkWrap: true,
-                itemCount: data.Like.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return Padding(
-                    padding: const EdgeInsets.all(18.0),
-                    child: SingleChildScrollView(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Container(
-                            width: 324.w,
-                            height: 100.h,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(6.r),
-                                color: AppColors.secondBackgroud),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(6.0),
-                                      child: Text(
-                                        '${data.Like[index].title} !!!',
-                                        style: TextStyle(fontSize: 18.sp),
+          return SingleChildScrollView(
+            child: Column(
+                children: [
+              ListView.builder(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: data.Like.length,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Padding(
+                      padding: const EdgeInsets.all(18.0),
+                      child: SingleChildScrollView(
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Container(
+                              width: 324.w,
+                              height: 105.h,
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(6.r),
+                                  color: AppColors.secondBackgroud),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(6.0),
+                                        child: Text(
+                                          '${data.Like[index].title} !!!',
+                                          style: TextStyle(fontSize: 18.sp),
+                                        ),
                                       ),
-                                    ),
-                                    Padding(
-                                        padding:
-                                            EdgeInsets.fromLTRB(1.w, 0, 8.w, 0),
-                                        child: FavoriteButton(
-                                          isFavorite: data.Like[index].favorite
-                                                      .toString() ==
-                                                  '0'
-                                              ? false
-                                              : true,
-                                          iconSize: 35.0,
-                                          valueChanged: (_isFavorite) {
-                                            setState(() {
-                                              FavoriteChange().Favoritefetch(
+                                      Padding(
+                                          padding:
+                                              EdgeInsets.fromLTRB(1.w, 0, 8.w, 0),
+                                          child: FavoriteButton(
+                                            isFavorite: data.Like[index].favorite
+                                                        .toString() ==
+                                                    '0'
+                                                ? false
+                                                : true,
+                                            iconSize: 35.0,
+                                            valueChanged: (_isFavorite) async{
+
+
+                                              await FavoriteChange().Favoritefetch(
                                                   id: data.Like[index].id
                                                       .toString());
-                                            });
-                                          },
-                                        ))
-                                  ],
-                                ),
-                                Padding(
-                                  padding: EdgeInsets.fromLTRB(8.w, 0, 8.w, 0),
-                                  child: Text(
-                                    '${data.Like[index].cost}',
-                                    style: TextStyle(
-                                        color: AppColors.mainColor,
-                                        fontSize: 24.sp),
+                                              // data.isFavorite = !data.isFavorite;
+                                             await data.getLike();
+                                            },
+                                          ))
+                                    ],
                                   ),
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Padding(
-                                      padding:
-                                          EdgeInsets.fromLTRB(8.w, 0, 8.w, 0),
-                                      child: Text(
-                                        "${data.Like[index].address}",
-                                        style: TextStyle(fontSize: 10.sp),
-                                      ),
+                                  Padding(
+                                    padding: EdgeInsets.fromLTRB(8.w, 0, 8.w, 0),
+                                    child: Text(
+                                      '${data.Like[index].cost}',
+                                      style: TextStyle(
+                                          color: AppColors.mainColor,
+                                          fontSize: 24.sp),
                                     ),
-                                    InkWell(
-                                      onTap: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    AdsDetail(
-                                                      title: data.Like[index].title
-                                                          .toString(),
-                                                      description: data
-                                                          .Like[index].description
-                                                          .toString(),
-                                                      houseType: data
-                                                          .Like[index].houseType
-                                                          .toString(),
-                                                      cost: data.Like[index].cost
-                                                          .toString(),
-                                                      costTayp: data
-                                                          .Like[index].costType
-                                                          .toString(),
-                                                      countRoom: data
-                                                          .Like[index].roomCount
-                                                          .toString(),
-                                                      countPeople: data.Like[index]
-                                                          .roommateCount
-                                                          .toString(),
-                                                      region: data
-                                                          .Like[index].region?.name
-                                                          .toString(),
-                                                      district: data.Like[index]
-                                                          .district?.name
-                                                          .toString(),
-                                                      univer: data.Like[index]
-                                                          .university?.name
-                                                          .toString(),
-                                                      facultet: data.Like[index]
-                                                          .faculty?.name
-                                                          .toString(),
-                                                      liveWithOwner: data
-                                                          .Like[index]
-                                                          .liveWithOwner
-                                                          .toString(),
-                                                      subway: data
-                                                          .Like[index].subway
-                                                          .toString(),
-                                                      favorite: data
-                                                          .Like[index].favorite
-                                                          .toString(),
-                                                      id: data.Like[index].id
-                                                          .toString(),
-                                                      type: data.Like[index].type
-                                                          .toString(),
-                                                    )));
-                                      },
-                                      child: Padding(
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Padding(
                                         padding:
                                             EdgeInsets.fromLTRB(8.w, 0, 8.w, 0),
-                                        child: const Text(
-                                          'Batafsil',
-                                          style: TextStyle(
-                                              decoration:
-                                                  TextDecoration.underline,
-                                              color: AppColors.mainColor),
-                                        ).tr(),
+                                        child: Text(
+                                          "${data.Like[index].address}",
+                                          style: TextStyle(fontSize: 10.sp),
+                                        ),
                                       ),
-                                    )
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 18.h,
-                                )
-                              ],
+                                      InkWell(
+                                        onTap: () {
+                                          Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                  builder: (context) =>
+                                                      AdsDetail(
+                                                        title: data.Like[index].title
+                                                            .toString(),
+                                                        description: data
+                                                            .Like[index].description
+                                                            .toString(),
+                                                        houseType: data
+                                                            .Like[index].houseType
+                                                            .toString(),
+                                                        cost: data.Like[index].cost
+                                                            .toString(),
+                                                        costTayp: data
+                                                            .Like[index].costType
+                                                            .toString(),
+                                                        countRoom: data
+                                                            .Like[index].roomCount
+                                                            .toString(),
+                                                        countPeople: data.Like[index]
+                                                            .roommateCount
+                                                            .toString(),
+                                                        region: data
+                                                            .Like[index].region?.name
+                                                            .toString(),
+                                                        district: data.Like[index]
+                                                            .district?.name
+                                                            .toString(),
+                                                        univer: data.Like[index]
+                                                            .university?.name
+                                                            .toString(),
+                                                        facultet: data.Like[index]
+                                                            .faculty?.name
+                                                            .toString(),
+                                                        liveWithOwner: data
+                                                            .Like[index]
+                                                            .liveWithOwner
+                                                            .toString(),
+                                                        subway: data
+                                                            .Like[index].subway
+                                                            .toString(),
+                                                        favorite: data
+                                                            .Like[index].favorite
+                                                            .toString(),
+                                                        id: data.Like[index].id
+                                                            .toString(),
+                                                        type: data.Like[index].type
+                                                            .toString(),
+                                                      )));
+                                        },
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsets.fromLTRB(8.w, 0, 8.w, 0),
+                                          child: const Text(
+                                            'Batafsil',
+                                            style: TextStyle(
+                                                decoration:
+                                                    TextDecoration.underline,
+                                                color: AppColors.mainColor),
+                                          ).tr(),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 18.h,
+                                  )
+                                ],
+                              ),
                             ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                  );
-                }),
-          ]);
+                    );
+                  }),
+            ]),
+          );
         }));
   }
 }
