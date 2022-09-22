@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hive/hive.dart';
 import 'package:talaba_uy/screens/Autorization/sms_confirmation.dart';
 import 'package:talaba_uy/services/login_service.dart';
 import 'package:easy_mask/easy_mask.dart';
@@ -95,7 +96,7 @@ class _LoginPageState extends State<LoginPage> {
                   ],
                   key: _key,
                   controller: _phoneController,
-                  onChanged: (e){
+                  onChanged: (e) {
                     print(_phoneController.text);
                   },
                   keyboardType: TextInputType.number,
@@ -109,6 +110,8 @@ class _LoginPageState extends State<LoginPage> {
             ),
             ElevatedButton(
               onPressed: () async {
+                await Hive.box('phone')
+                    .put('phone', _phoneController.text);
                 var dataService = await LoginService()
                     .loginService(phone: _phoneController.text);
                 if (dataService['status']) {

@@ -29,7 +29,7 @@ class SmsService {
       );
       await Hive.box('fullname').put(
         'fullname', 
-        jsonDecode(data)["fullname"]
+        jsonDecode(data)["full_name"]
       );
       return jsonDecode(data);
     }

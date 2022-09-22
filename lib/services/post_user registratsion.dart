@@ -30,7 +30,7 @@ class RegistratsiyaUser {
       print('---------------------');
       print("$gender ##########");
 
-      // await Hive.box('token').put('token', jsonDecode(data)["access_token"]);
+      //await Hive.box('token').put('token', jsonDecode(data)["access_token"]);
 
       return jsonDecode(data);
     }
