@@ -37,6 +37,7 @@ class _MenuPageState extends State<MenuPage> {
       key: _scaffoldKey,
       drawer:  DrawerPage(),
       appBar: AppBar(
+        elevation: 0,
         backgroundColor: AppColors.backgroundWhite,
         leading: InkWell(
           onTap: ()=>_scaffoldKey.currentState!.openDrawer(),
@@ -75,7 +76,7 @@ class _MenuPageState extends State<MenuPage> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             GridView(
-              padding: const EdgeInsets.fromLTRB(18, 100, 18, 0),
+              padding: const EdgeInsets.fromLTRB(18, 40, 18, 0),
               shrinkWrap: true,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisSpacing: 18.w,
@@ -192,7 +193,7 @@ class _MenuPageState extends State<MenuPage> {
               physics: const NeverScrollableScrollPhysics(),
             ),
              SizedBox(
-              height: 120.h,
+              height: 170.h,
             ),
             SizedBox(
               height: 48.h,
