@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
+import '../../cubit/aut_cubit.dart';
+import '../../models/lang_model.dart';
 import '../../provider/month_provider.dart';
 
 class FiltrForMonth extends StatefulWidget {
@@ -88,6 +90,7 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
 
   @override
   Widget build(BuildContext context) {
+    context.read<AutCubit>().selectSettingLan(LangData.languageList.singleWhere((e) => e.locale == context.locale),context);
     return Scaffold(
       backgroundColor: AppColors.backgroundWhite,
       appBar: AppBar(
@@ -283,7 +286,7 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                       if(dropDown2 == e.name){
                         data.UniverId = e.id.toString();
                       }
-                      return e.name.toString();
+                      return context.read<AutCubit>().selectedLang.index == 1 ? e.name.toString() : e.nameRu.toString();
                     }).toList(),
                     showSearchBox: true,
                     // label: "Menu mode",

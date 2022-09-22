@@ -3,20 +3,12 @@ import 'dart:convert';
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:http/http.dart' as http;
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
-import 'package:talaba_uy/screens/All_Ads_Page/all_ads_page.dart';
 import '../../cubit/aut_cubit.dart';
-import '../../models/get_univer_model.dart';
-import '../../models/lan_classs.dart';
-import '../../models/lan_classs.dart';
-import '../../models/lan_classs.dart';
-import '../../models/lan_classs.dart';
 import '../../models/lang_model.dart';
-import '../../models/search_universitety_model.dart';
 import '../../provider/region_provider.dart';
 
 class FiltrPage extends StatefulWidget {
@@ -93,7 +85,7 @@ class _FiltrPageState extends State<FiltrPage> {
     super.initState();
     fromCost = TextEditingController();
     toCost = TextEditingController();
-    // context.read<AutCubit>().selectSettingLan(LangData.languageList.singleWhere((e) => e.locale == context.locale), context);
+
     Provider.of<RegionProvider>(context, listen: false).getUnivers();
     // Provider.of<RegionProvider>(context,listen: false).getFiltrApi();
     Provider.of<RegionProvider>(context, listen: false).getRegion().asStream();
@@ -101,6 +93,7 @@ class _FiltrPageState extends State<FiltrPage> {
 
   @override
   Widget build(BuildContext context) {
+    context.read<AutCubit>().selectSettingLan(LangData.languageList.singleWhere((e) => e.locale == context.locale), context);
     return Scaffold(
       backgroundColor: AppColors.backgroundWhite,
       appBar: AppBar(
@@ -112,7 +105,7 @@ class _FiltrPageState extends State<FiltrPage> {
               color: AppColors.mainColor,
               fontSize: 18.sp,
               fontWeight: FontWeight.w500),
-        ),
+        ).tr(),
         centerTitle: true,
         leading: InkWell(
           child: const Icon(
@@ -138,7 +131,7 @@ class _FiltrPageState extends State<FiltrPage> {
                         color: AppColors.mainColor,
                         fontSize: 20.sp,
                         fontWeight: FontWeight.w500),
-                  ),
+                  ).tr(),
                   SizedBox(height: 12.h),
                   Text(
                     "Viloyat",
@@ -147,14 +140,14 @@ class _FiltrPageState extends State<FiltrPage> {
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w500,
                     ),
-                  ),
+                  ).tr(),
                   SizedBox(height: 4.h),
                   Container(
                     width: 324.w,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.r)),
                     child: DropdownButtonFormField(
-                      hint: Text("Viloyatni tanlang"),
+                      hint: Text("Viloyatni tanlang").tr(),
                       decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           focusColor: Colors.grey),
@@ -170,7 +163,7 @@ class _FiltrPageState extends State<FiltrPage> {
                         );
                       }).toList(),
                       onChanged: (newValue) async {
-                        print("Selected ----------- $newValue");
+                        // print("Selected ----------- $newValue");
                         data.isRegion = true;
                         print(data.isRegion);
                         final selected = data.regions
@@ -190,7 +183,7 @@ class _FiltrPageState extends State<FiltrPage> {
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w500,
                     ),
-                  ),
+                  ).tr(),
                   SizedBox(height: 4.h),
                   data.isDistrict
                       ? Container(
@@ -199,7 +192,7 @@ class _FiltrPageState extends State<FiltrPage> {
                               borderRadius: BorderRadius.circular(10.r)),
                           child: DropdownButtonFormField(
                             isExpanded: true,
-                            hint: Text("Tumanni tanlang"),
+                            hint: Text("Tumanni tanlang").tr(),
                             decoration: const InputDecoration(
                                 isDense: true,
                                 border: OutlineInputBorder(),
@@ -220,7 +213,7 @@ class _FiltrPageState extends State<FiltrPage> {
                               );
                             }).toList(),
                             onChanged: (newValue) {
-                              print("Selected ----------- $newValue");
+                              // print("Selected ----------- $newValue");
                               data.isDistrict = true;
                               setState(() {
                                 // dropDown1 = newValue as GetDistrictModel?;
@@ -235,7 +228,7 @@ class _FiltrPageState extends State<FiltrPage> {
                               borderRadius: BorderRadius.circular(10.r)),
                           child: DropdownButtonFormField(
                               isExpanded: true,
-                              hint: Text("Tumanni tanlang"),
+                              hint: Text("Tumanni tanlang").tr(),
                               decoration: const InputDecoration(
                                   isDense: true,
                                   border: OutlineInputBorder(),
@@ -252,7 +245,7 @@ class _FiltrPageState extends State<FiltrPage> {
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w500,
                     ),
-                  ),
+                  ).tr(),
                   SizedBox(height: 4.h),
                   // Container(
                   //   width: 324.w,
@@ -300,7 +293,7 @@ class _FiltrPageState extends State<FiltrPage> {
                       if(dropDown2 == e.name){
                         data.UniverId = e.id.toString();
                       }
-                      return e.name.toString();
+                      return context.read<AutCubit>().selectedLang.index == 1 ? e.name.toString() : e.nameRu.toString();
                     }).toList(),
                     showSearchBox: true,
                     // label: "Menu mode",
@@ -314,7 +307,7 @@ class _FiltrPageState extends State<FiltrPage> {
                         dropDown2 = value.toString();
                       });
                     },
-                    selectedItem: "OTM ni tanlang",
+                    selectedItem: tr("OTM ni tanlang"),
                   ),
                   SizedBox(
                     height: 18.h,
@@ -326,7 +319,7 @@ class _FiltrPageState extends State<FiltrPage> {
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w500,
                     ),
-                  ),
+                  ).tr(),
                   SizedBox(height: 4.h),
                   Container(
                     decoration: BoxDecoration(
@@ -338,7 +331,7 @@ class _FiltrPageState extends State<FiltrPage> {
                           borderRadius: BorderRadius.circular(10.r)),
                       child: DropdownButtonFormField2(
                         isExpanded: true,
-                        hint: Text("Kursingizni tanlang"),
+                        hint: Text("Kursingizni tanlang").tr(),
                         decoration: const InputDecoration(
                             isDense: true,
                             border: OutlineInputBorder(),
@@ -373,7 +366,7 @@ class _FiltrPageState extends State<FiltrPage> {
                         color: AppColors.mainColor,
                         fontSize: 20.sp,
                         fontWeight: FontWeight.w500),
-                  ),
+                  ).tr(),
                   SizedBox(height: 19.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -388,14 +381,14 @@ class _FiltrPageState extends State<FiltrPage> {
                               fontSize: 14.sp,
                               fontWeight: FontWeight.w500,
                             ),
-                          ),
+                          ).tr(),
                           SizedBox(height: 4.h),
                           Container(
                             width: 152.w,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10.r)),
                             child: DropdownButtonFormField(
-                              hint: Text("Kv yoki xovli"),
+                              hint: Text("Kv yoki xovli").tr(),
                               decoration: const InputDecoration(
                                   border: OutlineInputBorder(),
                                   focusColor: Colors.grey),
@@ -427,14 +420,14 @@ class _FiltrPageState extends State<FiltrPage> {
                               fontSize: 14.sp,
                               fontWeight: FontWeight.w500,
                             ),
-                          ),
+                          ).tr(),
                           SizedBox(height: 4.h),
                           Container(
                             width: 152.w,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10.r)),
                             child: DropdownButtonFormField(
-                              hint: Text("Xonalar soni"),
+                              hint: Text("Soni").tr(),
                               decoration: const InputDecoration(
                                   border: OutlineInputBorder(),
                                   focusColor: Colors.grey),
@@ -466,7 +459,7 @@ class _FiltrPageState extends State<FiltrPage> {
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w500,
                     ),
-                  ),
+                  ).tr(),
                   SizedBox(height: 4.h),
                   Container(
                     decoration: BoxDecoration(
@@ -477,7 +470,7 @@ class _FiltrPageState extends State<FiltrPage> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10.r)),
                       child: DropdownButtonFormField(
-                        hint: Text("Ijara muddati"),
+                        hint: Text("Ijara muddati").tr(),
                         decoration: const InputDecoration(
                             border: OutlineInputBorder(),
                             focusColor: Colors.grey),
@@ -520,7 +513,7 @@ class _FiltrPageState extends State<FiltrPage> {
                       SizedBox(
                         width: 12.w,
                       ),
-                      Text("Metroga yaqin")
+                      Text("Metroga yaqin").tr()
                     ],
                   ),
                   SizedBox(height: 22.h),
@@ -530,9 +523,9 @@ class _FiltrPageState extends State<FiltrPage> {
                         color: AppColors.mainColor,
                         fontSize: 20.sp,
                         fontWeight: FontWeight.w500),
-                  ),
+                  ).tr(),
                   SizedBox(height: 12.h),
-                  Text("Dan"),
+                  Text("Dan").tr(),
                   SizedBox(height: 6.h),
                   Row(
                     children: [
@@ -552,7 +545,7 @@ class _FiltrPageState extends State<FiltrPage> {
                               controller: fromCost,
                               decoration: InputDecoration(
                                 border: InputBorder.none,
-                                hintText: "dan",
+                                hintText: tr("dan"),
                                 hintStyle: TextStyle(
                                     fontSize: 14.sp, color: Colors.grey),
                               ),
@@ -582,7 +575,7 @@ class _FiltrPageState extends State<FiltrPage> {
                               controller: toCost,
                               decoration: InputDecoration(
                                 border: InputBorder.none,
-                                hintText: "gacha",
+                                hintText: tr("gacha"),
                                 hintStyle: TextStyle(
                                     fontSize: 14.sp, color: Colors.grey),
                               ),
@@ -723,7 +716,7 @@ class _FiltrPageState extends State<FiltrPage> {
                             "Saqlash",
                             style: TextStyle(
                                 fontSize: 20.sp, fontWeight: FontWeight.w500),
-                          ),
+                          ).tr(),
                         )),
                   )
                 ],

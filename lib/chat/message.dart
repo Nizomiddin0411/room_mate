@@ -6,17 +6,32 @@ import 'package:hive/hive.dart';
 class Messages extends StatefulWidget {
   String name;
   int id;
-  Messages({required this.name, required this.id});
+  ScrollController scrollController;
+  Messages({required this.name, required this.id, required this.scrollController});
   @override
-  _MessagesState createState() => _MessagesState(name: name, id: id);
+  _MessagesState createState() => _MessagesState(name: name, id: id, scrollController: scrollController);
 }
 
 class _MessagesState extends State<Messages> {
   String name;
   int id;
+  ScrollController scrollController;
   int myId = Hive.box('id').get('id');
   int _index = 0;
-  _MessagesState({required this.name, required this.id});
+  _MessagesState({required this.name, required this.id, required this.scrollController});
+
+  @override
+  void initState() {
+    scrollController.addListener(() {
+      if (scrollController.position.atEdge) {
+        bool isTop = scrollController.position.pixels == 0;
+        if (isTop) {
+          print('At the top');
+        }
+      }
+    });
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -40,10 +55,10 @@ class _MessagesState extends State<Messages> {
         return Padding(
           padding: EdgeInsets.symmetric(vertical: 6.h),
           child: ListView.builder(
+            controller: scrollController,
             itemCount: snapshot.data!.docs.length,
             physics: ScrollPhysics(),
             shrinkWrap: true,
-            primary: true,
             itemBuilder: (_, index) {
               QueryDocumentSnapshot qs = snapshot.data!.docs[index];
               Timestamp t = qs['time'];
@@ -51,7 +66,7 @@ class _MessagesState extends State<Messages> {
               return Padding(
                 padding: EdgeInsets.symmetric(
                     horizontal: 8.w,
-                    vertical: 3.h),
+                    vertical: 3.h,),
                 child: Column(
                   crossAxisAlignment: id == qs['id']
                       ? CrossAxisAlignment.end

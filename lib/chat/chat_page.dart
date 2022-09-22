@@ -35,15 +35,16 @@ class _ChatPageState extends State<ChatPage> {
   double val = 0;
   late CollectionReference imgRef;
   late firebase_storage.Reference ref;
+  ScrollController _scrollController = ScrollController();
 
   List<File> _image = [];
   final picker = ImagePicker();
   int? _lichId;
 
-
   @override
   void initState() {
     _lichId = myId * widget.id;
+    // Hive.box('scrollController').put('scrollController', _scrollController);
     super.initState();
   }
 
@@ -85,7 +86,12 @@ class _ChatPageState extends State<ChatPage> {
                         image: AssetImage("assets/images/bgimg.png"),
                         fit: BoxFit.fill)),
                 child: SingleChildScrollView(
-                  child: Messages(name: widget.name, id: widget.id),
+                  controller: _scrollController,
+                  child: Messages(
+                    name: widget.name,
+                    id: widget.id,
+                    scrollController: _scrollController,
+                  ),
                 ),
               ),
             ),
@@ -153,24 +159,33 @@ class _ChatPageState extends State<ChatPage> {
                         onTap: () {
                           if (message.text.isNotEmpty) {
                             // Messages page qismi uchun (all_chats.dart)
-                              fs.doc('Messages/$_lichId').set({
-                                'message': FieldValue.arrayUnion(
-                                    [message.text.trim()]),
-                                'time': FieldValue.arrayUnion([DateTime.now()]),
-                                'name': widget.name,
-                                'myId': myId,
-                                'id': widget.id
-                              });
+                            fs.doc('Messages/$_lichId').set({
+                              'message':
+                                  FieldValue.arrayUnion([message.text.trim()]),
+                              'time': FieldValue.arrayUnion([DateTime.now()]),
+                              'name': widget.name,
+                              'myId': myId,
+                              'id': widget.id
+                            });
                             // Lichkaga kirib yozish uchun  (message.dart)
-                            fs.doc('Messages/$_lichId').collection('msg').doc().set({
-                                'message': message.text.trim(),
-                                'time': DateTime.now(),
-                                'name': widget.name,
-                                'myId': myId,
-                                'id': widget.id
-                              });
+                            fs
+                                .doc('Messages/$_lichId')
+                                .collection('msg')
+                                .doc()
+                                .set({
+                              'message': message.text.trim(),
+                              'time': DateTime.now(),
+                              'name': widget.name,
+                              'myId': myId,
+                              'id': widget.id
+                            });
                             Hive.box('Id').put('Id', widget.id);
                             message.clear();
+
+                            _scrollController.animateTo(
+                                _scrollController.position.maxScrollExtent,
+                                duration: const Duration(seconds: 1),
+                                curve: Curves.fastOutSlowIn);
                           }
                         },
                       ),

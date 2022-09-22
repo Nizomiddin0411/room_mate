@@ -19,8 +19,8 @@ class AccountPage extends StatefulWidget {
 class _AccountPageState extends State<AccountPage> {
   bool _switchValue = false;
   bool isSwitched = false;
-  // String name = Hive.box('fullname').get('fullname');
-  // String number = Hive.box('number').get('number');
+  String name = Hive.box('fullname').get('fullname');
+  String number = Hive.box('phone').get('phone');
 
   @override
   Widget build(BuildContext context) {
@@ -64,10 +64,10 @@ class _AccountPageState extends State<AccountPage> {
             height: 20.h,
           ),
           Text(
-            "name",
+            name,
             style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
           ),
-          Text("number"),
+          Text(number),
           SizedBox(
             height: 20.h,
           ),
