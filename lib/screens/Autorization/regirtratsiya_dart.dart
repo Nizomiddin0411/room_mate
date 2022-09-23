@@ -72,7 +72,7 @@ class _RegistratsiyaState extends State<Registratsiya> {
                 padding: const EdgeInsets.fromLTRB(0, 60, 0, 0),
                 child: Column(
                   children: [
-                    Text("Ro’yxatdan o’tish",
+                    Text("Ro’yhatdan o’tish",
                         style: TextStyle(
                             color: AppColors.mainColor,
                             fontSize: 25,
@@ -81,7 +81,7 @@ class _RegistratsiyaState extends State<Registratsiya> {
                       height: 10,
                     ),
                     Text(
-                        "Ro’yxatdan o’tish uchun \nshaxsiy ma’lumotlaringizni  kiriting\n"),
+                        "Ro’yxatdan o’tish uchun shaxsiy\n ma’lumotlaringizni  kiriting\n"),
                   ],
                 ),
               ),

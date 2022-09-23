@@ -2,22 +2,11 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 import 'package:talaba_uy/chat/chat_page.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
-import 'package:talaba_uy/core/data/mockdata.dart';
-import 'package:talaba_uy/models/search_univer%20all.dart';
-import 'package:talaba_uy/models/searching_students_model.dart';
 import 'package:talaba_uy/provider/search_universitet_provider.dart';
-import 'package:talaba_uy/screens/All_Ads_Page/detail_page.dart';
-import 'package:talaba_uy/screens/Ijarachipage/filtr.dart';
-import 'package:talaba_uy/screens/Search_University/details_page.dart';
-import 'package:talaba_uy/screens/Search_University/filtr_university.dart';
-import 'package:talaba_uy/services/searching_ads_service.dart';
-import 'package:talaba_uy/services/searching_students_service.dart';
 
-import '../../models/searching_ads_model.dart';
 import '../../provider/universitet_provider.dart';
 import 'result _filtr_search.universitety.dart';
 
@@ -36,7 +25,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
   void initState() {
     super.initState();
     Provider.of<UniversitetProvider>(context, listen: false).getViloyat();
-    Provider.of<UniversitetProvider>(context, listen: false).getAds("0","0","0");
+    Provider.of<SearchUniversitet>(context, listen: false).getAds(widget.name,"0","0","0");
   }
   @override
   Widget build(BuildContext context) {
@@ -50,14 +39,14 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
             onTap: () {
               Navigator.pop(context);
             },
-            child: Icon(
+            child: const Icon(
               Icons.arrow_back,
               color: AppColors.iconColor,
             ),
           ),
           backgroundColor: AppColors.backgroundWhite,
           title: Center(
-            child: Text(
+            child: const Text(
               "Oliy o’quv yurti",
               style: TextStyle(color: AppColors.mainColor),
             ).tr(),
@@ -78,15 +67,15 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                       children: [
                         Image.asset('assets/images/image 7.png'),
                         SizedBox(
-                          width: 20,
+                          width: 20.w,
                         ),
-                        Container(
-                          height: 35.h,
+                        SizedBox(
+                          height: 60.h,
                           width: 200.w,
                           child: AutoSizeText(
-                            widget.name,
+                            widget.id,
                             style: TextStyle(fontSize: 10.sp),
-                            maxLines: 1,
+                            maxLines: 10,
                           ),
                         )
                       ],
@@ -107,7 +96,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Text(
+                          const Text(
                             "Filtr",
                             style: TextStyle(color: Colors.black),
                           ).tr(),
@@ -120,7 +109,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                             id: widget.id,
                                           )));
                             },
-                            child: Padding(
+                            child: const Padding(
                               padding: EdgeInsets.all(2.0),
                               child: Center(
                                 child: Icon(
@@ -140,7 +129,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                 ),
                 Column(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
+                  children: const [
                     Text(
                       "Sherik",
                       style: TextStyle(color: Colors.blue, fontSize: 14),
@@ -155,13 +144,13 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Consumer<UniversitetProvider>(
+            Consumer<SearchUniversitet>(
               builder: (_, data, __) {
                 return ListView.builder(
                     shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     itemCount: data.ads.length,
-                    itemBuilder: (BuildContext contex, int index) {
+                    itemBuilder: (BuildContext context, int index) {
                       return Padding(
                         padding: const EdgeInsets.all(12.0),
                         child: SingleChildScrollView(
@@ -191,7 +180,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                         Padding(
                                           padding: EdgeInsets.fromLTRB(
                                               1.w, 0, 8.w, 0),
-                                          child: Icon(
+                                          child: const Icon(
                                             Icons.favorite_border,
                                             color: AppColors.error,
                                           ),
@@ -229,7 +218,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                           ),
                                         ),
                                         Text(tr("Kursi:") +
-                                            "${data.ads[index].course.toString()}"),
+                                            data.ads[index].course.toString()),
                                         InkWell(
                                             onTap: () {
                                               Navigator.push(
@@ -257,7 +246,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                                         MainAxisAlignment
                                                             .spaceBetween,
                                                     children: [
-                                                      Icon(
+                                                      const Icon(
                                                         Icons.email,
                                                         color: Colors.blue,
                                                       ),
@@ -266,7 +255,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                                       ),
                                                       Text(
                                                         tr("Aloqa"),
-                                                        style: TextStyle(
+                                                        style: const TextStyle(
                                                             color:
                                                                 Colors.black),
                                                       )

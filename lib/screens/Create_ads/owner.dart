@@ -306,7 +306,7 @@ class _OwnerState extends State<Owner> {
                     SizedBox(
                       width: 12.w,
                     ),
-                    Text("Uy egasi bilan birga yashashga roziman !!!".tr())
+                    Text("Birga yashashga roziman !!!".tr())
                   ],
                 ),
                 SizedBox(height: 19.h),

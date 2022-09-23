@@ -105,7 +105,7 @@ class _FiltrForDayState extends State<FiltrForDay> {
               color: AppColors.mainColor,
               fontSize: 18.sp,
               fontWeight: FontWeight.w500),
-        ),
+        ).tr(),
         centerTitle: true,
         leading: InkWell(
           child: const Icon(
@@ -131,7 +131,7 @@ class _FiltrForDayState extends State<FiltrForDay> {
                         color: AppColors.mainColor,
                         fontSize: 20.sp,
                         fontWeight: FontWeight.w500),
-                  ),
+                  ).tr(),
                   SizedBox(height: 12.h),
                   Text(
                     "Viloyat",
@@ -140,14 +140,14 @@ class _FiltrForDayState extends State<FiltrForDay> {
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w500,
                     ),
-                  ),
+                  ).tr(),
                   SizedBox(height: 4.h),
                   Container(
                     width: 324.w,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.r)),
                     child: DropdownButtonFormField(
-                      hint: Text("Viloyatni tanlang"),
+                      hint: Text("Viloyatni tanlang").tr(),
                       decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           focusColor: Colors.grey),
@@ -163,7 +163,7 @@ class _FiltrForDayState extends State<FiltrForDay> {
                         );
                       }).toList(),
                       onChanged: (newValue) async {
-                        print("Selected ----------- $newValue");
+                        // print("Selected ----------- $newValue");
                         data.isRegion = true;
                         print(data.isRegion);
                         final selected = data.regions
@@ -183,7 +183,7 @@ class _FiltrForDayState extends State<FiltrForDay> {
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w500,
                     ),
-                  ),
+                  ).tr(),
                   SizedBox(height: 4.h),
                   data.isDistrict
                       ? Container(
@@ -192,7 +192,7 @@ class _FiltrForDayState extends State<FiltrForDay> {
                               borderRadius: BorderRadius.circular(10.r)),
                           child: DropdownButtonFormField(
                             isExpanded: true,
-                            hint: Text("Tumanni tanlang"),
+                            hint: Text("Tumanni tanlang").tr(),
                             decoration: const InputDecoration(
                                 isDense: true,
                                 border: OutlineInputBorder(),
@@ -213,7 +213,7 @@ class _FiltrForDayState extends State<FiltrForDay> {
                               );
                             }).toList(),
                             onChanged: (newValue) {
-                              print("Selected ----------- $newValue");
+                              // print("Selected ----------- $newValue");
                               data.isDistrict = true;
                               setState(() {
                                 // dropDown1 = newValue as GetDistrictModel?;
@@ -228,7 +228,7 @@ class _FiltrForDayState extends State<FiltrForDay> {
                               borderRadius: BorderRadius.circular(10.r)),
                           child: DropdownButtonFormField(
                               isExpanded: true,
-                              hint: Text("Tumanni tanlang"),
+                              hint: Text("Tumanni tanlang").tr(),
                               decoration: const InputDecoration(
                                   isDense: true,
                                   border: OutlineInputBorder(),
@@ -245,7 +245,7 @@ class _FiltrForDayState extends State<FiltrForDay> {
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w500,
                     ),
-                  ),
+                  ).tr(),
                   SizedBox(height: 4.h),
                   // Container(
                   //   width: 324.w,
@@ -315,7 +315,7 @@ class _FiltrForDayState extends State<FiltrForDay> {
                       });
                     },
 
-                    selectedItem: "OTM ni tanlang",
+                    selectedItem: tr("OTM ni tanlang"),
                     // onFind: (var item) => data.UniverId = item,
                     //   onSaved: (val) {
                     //     data.univer.map((e) =>   val =  e.id.toString() );
@@ -333,7 +333,7 @@ class _FiltrForDayState extends State<FiltrForDay> {
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w500,
                     ),
-                  ),
+                  ).tr(),
                   SizedBox(height: 4.h),
                   Container(
                     decoration: BoxDecoration(
@@ -345,7 +345,7 @@ class _FiltrForDayState extends State<FiltrForDay> {
                           borderRadius: BorderRadius.circular(10.r)),
                       child: DropdownButtonFormField2(
                         isExpanded: true,
-                        hint: Text("Kursingizni tanlang"),
+                        hint: Text("Kursingizni tanlang").tr(),
                         decoration: const InputDecoration(
                             isDense: true,
                             border: OutlineInputBorder(),
@@ -380,7 +380,7 @@ class _FiltrForDayState extends State<FiltrForDay> {
                         color: AppColors.mainColor,
                         fontSize: 20.sp,
                         fontWeight: FontWeight.w500),
-                  ),
+                  ).tr(),
                   SizedBox(height: 19.h),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -395,14 +395,14 @@ class _FiltrForDayState extends State<FiltrForDay> {
                               fontSize: 14.sp,
                               fontWeight: FontWeight.w500,
                             ),
-                          ),
+                          ).tr(),
                           SizedBox(height: 4.h),
                           Container(
                             width: 152.w,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10.r)),
                             child: DropdownButtonFormField(
-                              hint: Text("Kv yoki xovli"),
+                              hint: Text("Kv yoki xovli").tr(),
                               decoration: const InputDecoration(
                                   border: OutlineInputBorder(),
                                   focusColor: Colors.grey),
@@ -434,14 +434,14 @@ class _FiltrForDayState extends State<FiltrForDay> {
                               fontSize: 14.sp,
                               fontWeight: FontWeight.w500,
                             ),
-                          ),
+                          ).tr(),
                           SizedBox(height: 4.h),
                           Container(
                             width: 152.w,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10.r)),
                             child: DropdownButtonFormField(
-                              hint: Text("Xonalar soni"),
+                              hint: Text("Soni").tr(),
                               decoration: const InputDecoration(
                                   border: OutlineInputBorder(),
                                   focusColor: Colors.grey),
@@ -473,7 +473,7 @@ class _FiltrForDayState extends State<FiltrForDay> {
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w500,
                     ),
-                  ),
+                  ).tr(),
                   SizedBox(height: 4.h),
                   Container(
                     decoration: BoxDecoration(
@@ -484,7 +484,7 @@ class _FiltrForDayState extends State<FiltrForDay> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10.r)),
                       child: DropdownButtonFormField(
-                        hint: Text("Ijara muddati"),
+                        hint: Text("Ijara muddati").tr(),
                         decoration: const InputDecoration(
                             border: OutlineInputBorder(),
                             focusColor: Colors.grey),
@@ -527,7 +527,7 @@ class _FiltrForDayState extends State<FiltrForDay> {
                       SizedBox(
                         width: 12.w,
                       ),
-                      Text("Metroga yaqin")
+                      Text("Metroga yaqin").tr()
                     ],
                   ),
                   SizedBox(height: 22.h),
@@ -537,9 +537,9 @@ class _FiltrForDayState extends State<FiltrForDay> {
                         color: AppColors.mainColor,
                         fontSize: 20.sp,
                         fontWeight: FontWeight.w500),
-                  ),
+                  ).tr(),
                   SizedBox(height: 12.h),
-                  Text("Dan"),
+                  Text("Dan").tr(),
                   SizedBox(height: 6.h),
                   Row(
                     children: [
@@ -559,7 +559,7 @@ class _FiltrForDayState extends State<FiltrForDay> {
                               controller: fromCost,
                               decoration: InputDecoration(
                                 border: InputBorder.none,
-                                hintText: "dan",
+                                hintText: tr("dan"),
                                 hintStyle: TextStyle(
                                     fontSize: 14.sp, color: Colors.grey),
                               ),
@@ -589,7 +589,7 @@ class _FiltrForDayState extends State<FiltrForDay> {
                               controller: toCost,
                               decoration: InputDecoration(
                                 border: InputBorder.none,
-                                hintText: "gacha",
+                                hintText: tr("gacha"),
                                 hintStyle: TextStyle(
                                     fontSize: 14.sp, color: Colors.grey),
                               ),
@@ -730,7 +730,7 @@ class _FiltrForDayState extends State<FiltrForDay> {
                             "Saqlash",
                             style: TextStyle(
                                 fontSize: 20.sp, fontWeight: FontWeight.w500),
-                          ),
+                          ).tr(),
                         )),
                   )
                 ],

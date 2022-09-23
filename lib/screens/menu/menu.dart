@@ -76,7 +76,7 @@ class _MenuPageState extends State<MenuPage> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             GridView(
-              padding: const EdgeInsets.fromLTRB(18, 40, 18, 0),
+              padding:  EdgeInsets.fromLTRB(18.w, 40.h, 18.w, 0),
               shrinkWrap: true,
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisSpacing: 18.w,
@@ -100,7 +100,7 @@ class _MenuPageState extends State<MenuPage> {
                           height: 15.h
                         ),
                         const Text(
-                          "Oliy o’quv yurtlari",
+                          "Oliy o’quv yurti",
                           style: TextStyle(color: AppColors.textColor),
                         ).tr()
                       ],
@@ -199,7 +199,7 @@ class _MenuPageState extends State<MenuPage> {
               height: 48.h,
               width: 250.w,
               child: ElevatedButton(
-                child:  Text('E’lon berish').tr(),
+                child:  Text("E’lon yaratish").tr(),
                 onPressed: () {
                   Navigator.push(
                       context,

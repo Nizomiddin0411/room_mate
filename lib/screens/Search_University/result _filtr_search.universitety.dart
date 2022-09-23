@@ -1,4 +1,5 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -30,6 +31,13 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
   }
   @override
   Widget build(BuildContext context) {
+
+    final List<String> kursingizItems = [
+      '1 ',
+      '2',
+      '3 ',
+      '4 ',
+    ];
     String? Region;
     String? District;
     String? Fakultet;
@@ -281,7 +289,7 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                             isExpanded: true,
                             isDense: true,
                             hint: const Text(
-                              'Fakultetingiz',
+                              "Yo'nalishingiz",
                               style: TextStyle(fontSize: 14),
                             ),
                             icon: const Icon(
@@ -318,12 +326,72 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                         ],
                       );
                     }
-                    return Center(
+                    return const Center(
                       child: CircularProgressIndicator(),
                     );
                   },
                 ),
-                SizedBox(height: 250.h),
+                Column(
+                  children: [
+                    Row(
+                      children: [
+                        const Text("Kurs ").tr(),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 5.h,
+                    ),
+                    Column(
+                      children: [
+                        DropdownButtonFormField2(
+                          decoration: InputDecoration(
+                            enabledBorder: const OutlineInputBorder(
+                                borderSide: BorderSide()),
+                            isDense: true,
+                            contentPadding: EdgeInsets.zero,
+                            border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                          ),
+                          isDense: true,
+                          buttonElevation: 2,
+                          hint: const Text(
+                            "Kursni tanlang",
+                            style: TextStyle(fontSize: 14),
+                          ).tr(),
+                          icon: const Icon(
+                            Icons.arrow_drop_down,
+                            color: Colors.black45,
+                          ),
+                          iconSize: 30,
+                          buttonHeight: 60,
+                          buttonPadding:
+                          const EdgeInsets.only(left: 20, right: 10),
+                          dropdownDecoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          items: kursingizItems
+                              .map((item) => DropdownMenuItem<String>(
+                            value: item,
+                            child: Text(
+                              item,
+                              style: const TextStyle(
+                                fontSize: 14,
+                              ),
+                            ),
+                          ))
+                              .toList(),
+                          validator: (value) =>
+                          value == value ? 'Kursni tanlang' : null,
+                          onChanged: (String? value) {
+                            setState(() {});
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                SizedBox(height: 150.h),
                 Container(
                   width: double.infinity,
                   child: ElevatedButton(
@@ -332,8 +400,7 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10.r)),
                         primary: AppColors.buttonLinear),
-                    onPressed: () { provider.getAds(Fakultet.toString(), provider.RegionId, provider.DistrickId);
-                    Navigator.pop(context);
+                    onPressed: () {
                     },
                     child: Text(
                       "Saqlash",

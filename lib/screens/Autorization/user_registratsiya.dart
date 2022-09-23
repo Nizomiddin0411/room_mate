@@ -65,7 +65,7 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
                     if(e!.length > 3){
                       return null;
                     }else{
-                      return 'Kamida 4ta soz bolishi kerak';
+                      return 'Kamida 2 ta so’zdan iborat bo’lishi kerak';
                     }
                   },
                   controller: myController,
@@ -104,7 +104,7 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
                     if(e!.length > 12){
                       return null;
                     }else{
-                      return '12  ta raqam kiriting ';
+                      return '+998 9_ _ _ _ _ _ _ _ ';
                     }
                   },
                   keyboardType: TextInputType.phone,
@@ -201,13 +201,6 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
-                      "Sherik kerak",
-                      style: TextStyle(
-                          color: AppColors.textColor,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 18),
-                    ),
                   ],
                 ),
               ],
@@ -222,7 +215,6 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
                     });
                   },
                 ),
-                Text("Roziman "),
                 InkWell(
                     onTap: () => {
                       Navigator.push(

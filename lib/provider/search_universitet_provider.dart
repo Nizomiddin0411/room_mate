@@ -45,6 +45,11 @@ class SearchUniversitet  extends ChangeNotifier{
     searchuniversitet = (await GetSearchUniverService().fetchUniverSearch(query));
     setChange(true);
   }
+  Future<void> getAds(String id,String Fakultetid,String Regionid,String Districtid, ) async{
+    _settuman(false);
+    ads = await SearchingStudentsService().fetchSearchingStudents( univerid: id ,faculty_id: Fakultetid, birth_region_id: Regionid, birth_district_id: Districtid,);
+    _settuman(true);
+  }
   Future<void> getFakultet(int id) async{
     searchfakultet = await GetFacultyService().fetchFaculty(id);
 
@@ -56,11 +61,6 @@ class SearchUniversitet  extends ChangeNotifier{
   Future<void>  getTuman(int id)async{
     _settuman(false);
     tumanlar=await GetDistrictService().fetchDistrict(id);
-    _settuman(true);
-  }
-  Future<void> getAds(String Fakultetid,String Regionid,String Districtid) async{
-    _settuman(false);
-    ads = await SearchingStudentsService().fetchSearchingStudents(faculty_id: Fakultetid, birth_region_id: Regionid, birth_district_id: Districtid);
     _settuman(true);
   }
 }

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
 
+import '../../chat/chat_page.dart';
 import '../../services/post_change_favoritr_service.dart';
 
 class AdsDetail extends StatefulWidget {
@@ -23,6 +24,8 @@ class AdsDetail extends StatefulWidget {
   String? id;
   String? favorite;
   String? type;
+  int userId;
+  String? userFullName;
   AdsDetail(
       {Key? key,
       required this.title,
@@ -40,7 +43,9 @@ class AdsDetail extends StatefulWidget {
       required this.subway,
       required this.id,
       required this.favorite,
-      required this.type
+      required this.type,
+        required this.userId,
+        required this.userFullName
       })
       : super(key: key);
 
@@ -56,7 +61,7 @@ class _AdsDetailState extends State<AdsDetail> {
         backgroundColor: AppColors.backgroundWhite,
         title: Padding(
             padding: EdgeInsets.symmetric(horizontal: 65.w),
-            child: Text(
+            child: const Text(
           'Batafsil',
           style: TextStyle(color: AppColors.mainColor),
         ).tr()),
@@ -145,7 +150,7 @@ class _AdsDetailState extends State<AdsDetail> {
                           Container(
                             child: Row(
                               children: [
-                                Icon(
+                                const Icon(
                                   Icons.apartment,
                                   color: AppColors.mainColor,
                                 ),
@@ -156,7 +161,7 @@ class _AdsDetailState extends State<AdsDetail> {
                           Container(
                             child: Row(
                               children: [
-                                Icon(
+                                const Icon(
                                   Icons.directions_walk,
                                   color: AppColors.mainColor,
                                 ),
@@ -169,27 +174,33 @@ class _AdsDetailState extends State<AdsDetail> {
                     ),
                     Padding(
                       padding:  EdgeInsets.fromLTRB(12.w, 0, 12.w, 12.h),
-                      child: Container(
-                        width: 95.w,
-                        height: 42.h,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10.r),
-                            color: AppColors.colorBack3),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children:  [
-                            Padding(
-                              padding: EdgeInsets.all(11.0),
-                              child: Icon(
-                                Icons.mail,
-                                color: AppColors.succesColor,
+                      child: InkWell(
+                        onTap: (){
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => ChatPage(widget.userFullName!, widget.userId)));
+                        },
+                        child: Container(
+                          width: 95.w,
+                          height: 42.h,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10.r),
+                              color: AppColors.colorBack3),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children:  [
+                              const Padding(
+                                padding: EdgeInsets.all(5.0),
+                                child: Icon(
+                                  Icons.mail,
+                                  color: AppColors.succesColor,
+                                ),
                               ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(10.0),
-                              child: Text('Aloqa').tr(),
-                            )
-                          ],
+
+                              Padding(
+                                padding:  EdgeInsets.symmetric(horizontal: 10.w),
+                                child: Text('Aloqa').tr(),
+                              )
+                            ],
+                          ),
                         ),
                       ),
                     )

@@ -16,6 +16,7 @@ import 'package:talaba_uy/core/data/mockdata.dart';
 import 'package:talaba_uy/models/get_district_model.dart';
 import 'package:talaba_uy/models/get_faculty_model.dart';
 import 'package:talaba_uy/models/get_region_model.dart';
+import 'package:talaba_uy/models/lang_model.dart';
 import 'package:talaba_uy/provider/universitet_provider.dart';
 import 'package:talaba_uy/screens/Autorization/LoginPage.dart';
 import 'package:talaba_uy/screens/Autorization/offerto_dart.dart';
@@ -25,6 +26,7 @@ import 'package:talaba_uy/services/get_region_service.dart';
 import 'package:talaba_uy/services/get_univer_service.dart';
 import 'package:talaba_uy/services/post_create_student.dart';
 
+import '../../cubit/aut_cubit.dart';
 import '../../models/get_univer_model.dart';
 
 class StudentUser extends StatefulWidget {
@@ -83,6 +85,7 @@ class _StudentUserState extends State<StudentUser> {
 
   @override
   Widget build(BuildContext context) {
+    context.read<AutCubit>().selectSettingLan(LangData.languageList.singleWhere((e) => e.locale == context.locale), context);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SingleChildScrollView(
@@ -106,7 +109,7 @@ class _StudentUserState extends State<StudentUser> {
                       if (e!.length > 3) {
                         return null;
                       } else {
-                        return 'Kamida 4ta soz bolishi kerak'.tr();
+                        return 'Kamida 2 ta so’zdan iborat bo’lishi kerak'.tr();
                       }
                     },
                     controller: myController,
@@ -147,14 +150,14 @@ class _StudentUserState extends State<StudentUser> {
                       if (e!.length > 12) {
                         return null;
                       } else {
-                        return '12  ta raqam kiriting ';
+                        return '+ 998 9_ _ _ _ _ _ _ _ ';
                       }
                     },
                     keyboardType: TextInputType.phone,
                     controller: nameController,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
-                      labelText: 'Telefon raqamini kiriting',
+                      labelText: 'Telefon raqamini kiriting'.tr(),
                     ),
                   ),
                 ],
@@ -166,7 +169,7 @@ class _StudentUserState extends State<StudentUser> {
                 children: [
                   Row(
                     children: [
-                      Text("Jins ").tr(),
+                      Text("Jins ".tr()),
                     ],
                   ),
                   SizedBox(
@@ -187,7 +190,7 @@ class _StudentUserState extends State<StudentUser> {
                         hint: const Text(
                           'Jinsni tanlang',
                           style: TextStyle(fontSize: 14),
-                        ),
+                        ).tr(),
                         icon: const Icon(
                           Icons.arrow_drop_down,
                           color: Colors.black45,
@@ -305,17 +308,15 @@ class _StudentUserState extends State<StudentUser> {
                       DropdownSearch<String>(
                         mode: Mode.MENU,
                         items: data.universitet.map((e)=>e.name.toString()).toList(),
-                        onPopupDismissed:(){
-                        } ,
                         showSearchBox: true,
                         // label: "Menu mode",
                         // hint: "country in menu mode",
-                        onChanged: (newValue){
+                        onChanged: (newValue) async{
                           print('$value  kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk');
-                          data.isuniver = true;
+                          // data.isuniver = true;
                           final selected = data.universitet
-                              .where((element) => element.name == value);
-                          data.getFakultet(selected.last.id!);
+                              .where((element) => element.name == newValue);
+                         await data.getFakultet(selected.last.id!);
                           setState(() {
                             drowdown1 = newValue.toString();
                             drowdown1=UniderId;
@@ -387,9 +388,9 @@ class _StudentUserState extends State<StudentUser> {
                               ),
                             )
                             .toList(),
-                        onChanged: (newValue)async {
+                        onChanged: (value)async {
                           setState(() {
-                            drowdown1 =  newValue.toString();
+                            drowdown1 =  value.toString();
                             drowdown1 = fakultetId;
                             fakultet = true;
                             fakultColor = Colors.black12;
@@ -414,7 +415,7 @@ class _StudentUserState extends State<StudentUser> {
                         isExpanded: true,
                         isDense: true,
                         hint: const Text(
-                          'Fakultetni kiriting',
+                          "Yo'nalishni tanlang",
                           style: TextStyle(fontSize: 14),
                         ),
                         icon: const Icon(
@@ -734,7 +735,6 @@ class _StudentUserState extends State<StudentUser> {
                       });
                     },
                   ),
-                  Text("Roziman ".tr()),
                   InkWell(
                       child: InkWell(
                           onTap: () {
@@ -757,8 +757,7 @@ class _StudentUserState extends State<StudentUser> {
                 onPressed: () async {
                   showDialog(context: context, builder: ( context){
                     return AlertDialog(
-                      title: Text("Ro'yxatdan muaffaqiyatli o'tdingi  "),
-                      content: Text("Tabriklaymiz !!!"),
+                      title: Text("Ro’yxatdan muvaffaqiyatli o’tdingiz"),
                     );
                   });
 
@@ -822,7 +821,7 @@ class _StudentUserState extends State<StudentUser> {
                   ),
                   child: Center(
                     child: Text(
-                      "Ro’yxatda o’tish",
+                      "Ro’yxatdan o’tish",
                       style: TextStyle(
                           color: AppColors.backgroundWhite, fontSize: 20.sp),
                     ),

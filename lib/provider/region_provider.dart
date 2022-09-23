@@ -30,7 +30,7 @@ class RegionProvider extends ChangeNotifier {
   bool isFaculty = false;
   String defaultFaculty = 'Faqutetni tanlang';
   bool isChanded = false;
-
+   int? isId;
   bool isRegion = false;
   bool isDistricts = false;
   bool isUniver = false;
