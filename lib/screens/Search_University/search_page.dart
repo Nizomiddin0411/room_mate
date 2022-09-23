@@ -77,7 +77,7 @@ class _SearchPageState extends State<SearchPage> {
                                     builder: (context) => UniverFiltrPage()));
                           },
                           icon: Icon(
-                            Icons.tune,
+                            Icons.cancel_outlined,
                             color: AppColors.textColor,
                           ),
                         ),

@@ -1,4 +1,5 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
@@ -28,8 +29,8 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
   bool checkBox = false;
 
   final List<String> genderItems = [
-    'Ayol',
-    'Erkak',
+    "Ayol".tr(),
+    "Erkak".tr(),
   ];
   final List<String> kursingizItems = [
     '1 ',
@@ -53,7 +54,7 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
               children: [
                 Row(
                   children: [
-                    Text("Ism va familiya "),
+                    Text("Ism va familiya".tr()),
                   ],
                 ),
                 SizedBox(
@@ -65,7 +66,7 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
                     if(e!.length > 3){
                       return null;
                     }else{
-                      return 'Kamida 2 ta so’zdan iborat bo’lishi kerak';
+                      return "Kamida 2 ta so’zdan iborat bo’lishi kerak".tr();
                     }
                   },
                   controller: myController,
@@ -73,7 +74,7 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
                     border: OutlineInputBorder(
                         borderSide: BorderSide(color:myController.text == '' ? Colors.red : Colors.black12)
                     ),
-                    labelText: "Ism va familiyangizni kiriting",
+                    labelText: "Ism va familiyangizni kiriting".tr(),
                   ),
                 ),
               ],
@@ -85,7 +86,7 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
               children: [
                 Row(
                   children: [
-                    Text("Telefon raqami "),
+                    Text("Telefon raqami".tr()),
                   ],
                 ),
                 SizedBox(
@@ -111,7 +112,7 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
                   controller: nameController,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: 'Telefon raqamini kiriting',
+                    labelText: "Telefon raqamini kiriting".tr(),
                   ),
                 ),
               ],
@@ -123,7 +124,7 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
               children: [
                 Row(
                   children: [
-                    Text("Jins "),
+                    Text("Jins").tr(),
                   ],
                 ),
                 SizedBox(
@@ -142,9 +143,9 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
                       ),
                       isExpanded: true,
                       hint: const Text(
-                        'Jinsni tanlang',
+                        "Jinsni tanlang",
                         style: TextStyle(fontSize: 14),
-                      ),
+                      ).tr(),
                       icon: const Icon(
                         Icons.arrow_drop_down,
                         color: Colors.black45,
@@ -171,7 +172,7 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
                           .toList(),
                       validator: (value) {
                         if (value == null) {
-                          return 'Jinsingiz tanlang';
+                          return "Jinsni tanlang";
                         }
                       },
                       onChanged: (String? value) {
@@ -223,7 +224,7 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
                               builder: (context) => OffertoPage())),
                     },
                     child: Text(
-                      "Foydalanuvchi shartlariga roziman",
+                      "Foydalanuvchi shartlariga roziman".tr(),
                       style: TextStyle(
                           color: AppColors.mainColor, fontSize: 15),
                     ))
@@ -264,11 +265,11 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
                 ),
                 child: Center(
                   child: Text(
-                    "Ro’yxatda o’tish",
+                    "Ro’yhatdan o’tish",
                     style: TextStyle(
                         color: AppColors.backgroundWhite,
                         fontSize: 20.sp),
-                  ),
+                  ).tr(),
                 ),
               ),
             ),

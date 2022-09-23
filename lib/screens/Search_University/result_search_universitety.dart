@@ -73,7 +73,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                           height: 60.h,
                           width: 200.w,
                           child: AutoSizeText(
-                            widget.id,
+                            widget.name,
                             style: TextStyle(fontSize: 10.sp),
                             maxLines: 10,
                           ),
@@ -130,10 +130,10 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: const [
-                    Text(
-                      "Sherik",
-                      style: TextStyle(color: Colors.blue, fontSize: 14),
-                    )
+                    // Text(
+                    //   "Sherik",
+                    //   style: TextStyle(color: Colors.blue, fontSize: 14),
+                    // ),
                   ],
                 )
               ],

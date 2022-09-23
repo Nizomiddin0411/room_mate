@@ -34,7 +34,7 @@ class _LanguageSetttingState extends State<LanguageSettting> {
         ),
         elevation: 0,
         title: Text(
-          "Til sozlamalari",
+          "Til sozlamalari".tr(),
           style: TextStyle(
               color: AppColors.mainColor,
               fontSize: 18.sp,
