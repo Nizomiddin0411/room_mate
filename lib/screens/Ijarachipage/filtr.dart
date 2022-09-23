@@ -247,46 +247,7 @@ class _FiltrPageState extends State<FiltrPage> {
                     ),
                   ).tr(),
                   SizedBox(height: 4.h),
-                  // Container(
-                  //   width: 324.w,
-                  //   decoration: BoxDecoration(
-                  //       borderRadius: BorderRadius.circular(10.r)),
-                  //   child: DropdownButtonFormField(
-                  //     isExpanded: true,
-                  //     hint: Text("OTM ni tanlang"),
-                  //     decoration: const InputDecoration(
-                  //         border: OutlineInputBorder(),
-                  //         focusColor: Colors.grey),
-                  //     // value: ,
-                  //     icon: Icon(Icons.arrow_drop_down_outlined),
-                  //     items: data.univer.map((e) {
-                  //       return DropdownMenuItem<String>(
-                  //         onTap: () {
-                  //           data.UniverId = e.id.toString();
-                  //         },
-                  //         value:  e.name  ?? '',
-                  //         child: SizedBox(
-                  //           width: MediaQuery.of(context).size.width - 150.w,
-                  //           child: Text(
-                  //               // context.read<AutCubit>().selectedLang.index == 1 ?
-                  //               e.name.toString()
-                  //                   // : e.nameRu.toString()
-                  //           ),
-                  //         ),
-                  //       );
-                  //     }).toList(),
-                  //     onChanged: (newValue) async {
-                  //       // print("Selected ----------- $newValue");
-                  //       data.isUniver = true;
-                  //       final selected = data.univer
-                  //           .where((element) => element.name == newValue);
-                  //       data.getFaculty(selected.last.id!);
-                  //       setState(() {
-                  //         dropDown2 = newValue.toString();
-                  //       });
-                  //     },
-                  //   ),
-                  // ),
+
                   DropdownSearch<String>(
                     mode: Mode.MENU,
                     items: data.univer.map((e) {

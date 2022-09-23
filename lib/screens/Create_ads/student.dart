@@ -317,7 +317,7 @@ class _StudentState extends State<Student> {
                     // label: "Menu mode",
                     // hint: "country in menu mode",
                     onChanged: (value) async{
-                      // data.isUniver = true;
+                      data.isUniver = true;
                       final selected =
                       data.univer.where((element) => element.name == value);
                       await data.getFaculty(selected.last.id!);
@@ -334,7 +334,7 @@ class _StudentState extends State<Student> {
                 ),
                 SizedBox(height: 12.h),
                 Text(
-                  "Fakultetni tanlang".tr(),
+                  "Yo’nalishni tanlang".tr(),
                   style: TextStyle(
                     color: AppColors.textColor,
                     fontSize: 14.sp,
@@ -352,7 +352,7 @@ class _StudentState extends State<Student> {
                           isExpanded: true,
                           hint: Padding(
                             padding: EdgeInsets.only(left: 8.w),
-                            child: Text("Fakultetni tanlang".tr()),
+                            child: Text(" tanlang".tr()),
                           ),
                           decoration: const InputDecoration(
                             border: InputBorder.none,
@@ -397,7 +397,7 @@ class _StudentState extends State<Student> {
                             isExpanded: true,
                             hint: Padding(
                               padding: EdgeInsets.only(left: 8.w),
-                              child: Text("Fakultetni tanlang".tr()),
+                              child: Text("Yo’nalishni tanlang".tr()),
                             ),
                             decoration: const InputDecoration(
                               border: InputBorder.none,

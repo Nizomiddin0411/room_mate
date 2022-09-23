@@ -25,7 +25,7 @@
   "SMS tasdiqlash": "SMS tasdiqlash",
   "raqamga SMS xabar jo’natdik, SMS xabardagi kod bilan tasdiqlang": "Мы отправили смс на номер, подтвердите кодом в смс",
   "Qayta jo’natish": "Qayta jo’natish",
-  "Yo’nalish ": "Yo’nalish ",
+  "Yo’nalish": "Yo’nalish",
   "E’lonlar": "E’lonlar",
   "Kunlik kvartira": "Kunlik kvartira",
   "Oylik kvartira": "Oylik kvartira",
@@ -104,5 +104,10 @@
   "Rozi emas": "Rozi emas",
   "Viloyatni tanlang": "Viloyatni tanlang",
   "Tumanni tanlang": "Tumanni tanlang",
-  "OTM ni tanlang": "OTM ni tanlang"
+  "OTM ni tanlang": "OTM ni tanlang",
+  "Shaxsiy kabinet": "Shaxsiy kabinet",
+  "Akkauntdan chiqishga ishonchingiz komilmi ?": "Akkauntdan chiqishga ishonchingiz komilmi ?",
+  "Birga yashashga roziman !!!": "Birga yashashga roziman !!!",
+  "Xonadon":"Xonadon",
+  "Yo’nalishni tanlang": "Yo’nalishni tanlang"
 }
