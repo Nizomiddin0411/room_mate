@@ -221,7 +221,7 @@ class _ElonlarState extends State<Elonlar> {
                               Padding(
                                 padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
                                 child: Text(
-                                  '${data.isChanded ? data.Ads[index].cost.toString() : data.AdsForZero[index].cost.toString()}${data.isChanded ? data.Ads[index].costType.toString() : data.AdsForZero[index].costType.toString()}',
+                                  '${data.isChanded ? data.Ads[index].cost.toString() : data.AdsForZero[index].cost.toString()} ${data.isChanded ? (data.Ads[index].costType.toString() == 1 ? "so'm" : 'y.e') : ''}',
                                   style: TextStyle(
                                       color: AppColors.mainColor,
                                       fontSize: 24.sp),
@@ -295,12 +295,12 @@ class _ElonlarState extends State<Elonlar> {
                                                         .toString(),
                                                     type: data.Ads[index].type
                                                         .toString(),
-                                                    // userId: data
-                                                    //     .Ads[index].userId
-                                                    //     ,
-                                                    // userFullName: data
-                                                    //     .Ads[index].userFullName
-                                                    //     .toString(),
+                                                    userId: data
+                                                        .Ads[index].userId!
+                                                        ,
+                                                    userFullName: data
+                                                        .Ads[index].userFullName
+                                                        .toString(),
                                                   )
                                           )
                                       );
@@ -384,7 +384,7 @@ class _ElonlarState extends State<Elonlar> {
                               Padding(
                                 padding: EdgeInsets.fromLTRB(8.w, 0, 8.w, 0),
                                 child: Text(
-                                  '${data.AdsForStudent[index].cost.toString()}${data.AdsForStudent[index].costType.toString()}',
+                                  '${data.AdsForStudent[index].cost.toString()} ${data.AdsForStudent[index].costType.toString() == 1 ? "so'm" : 'y.e'}',
                                   style: TextStyle(
                                       color: AppColors.mainColor,
                                       fontSize: 24.sp),
@@ -476,14 +476,14 @@ class _ElonlarState extends State<Elonlar> {
                                                         .AdsForStudent[index]
                                                         .type
                                                         .toString(),
-                                                    // userId: data
-                                                    //     .AdsForStudent[index]
-                                                    //     .userId
-                                                    //     ,
-                                                    // userFullName: data
-                                                    //     .AdsForStudent[index]
-                                                    //     .userFullName
-                                                    //     .toString(),
+                                                    userId: data
+                                                        .AdsForStudent[index]
+                                                        .userId!
+                                                        ,
+                                                    userFullName: data
+                                                        .AdsForStudent[index]
+                                                        .userFullName
+                                                        .toString(),
                                                   )));
                                     },
                                     child: Padding(
