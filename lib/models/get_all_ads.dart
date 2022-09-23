@@ -2,6 +2,7 @@ class AllAdsModel {
   int? id;
   int? type;
   int? userId;
+  String? userFullName;
   int? districtId;
   int? universityId;
   int? facultyId;
@@ -11,7 +12,7 @@ class AllAdsModel {
   int? houseType;
   int? rentType;
   String? cost;
-  int? costType;
+  dynamic costType;
   int? subway;
   int? roommateGender;
   int? roommateCount;
@@ -20,6 +21,7 @@ class AllAdsModel {
   String? createdAt;
   String? updatedAt;
   String? favorite;
+  int? chatApproved;
   Region? region;
   District? district;
   University? university;
@@ -29,6 +31,7 @@ class AllAdsModel {
       {this.id,
         this.type,
         this.userId,
+        this.userFullName,
         this.districtId,
         this.universityId,
         this.facultyId,
@@ -47,6 +50,7 @@ class AllAdsModel {
         this.createdAt,
         this.updatedAt,
         this.favorite,
+        this.chatApproved,
         this.region,
         this.district,
         this.university,
@@ -56,6 +60,7 @@ class AllAdsModel {
     id = json['id'];
     type = json['type'];
     userId = json['user_id'];
+    userFullName = json['user_full_name'];
     districtId = json['district_id'];
     universityId = json['university_id'];
     facultyId = json['faculty_id'];
@@ -74,6 +79,7 @@ class AllAdsModel {
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     favorite = json['favorite'];
+    chatApproved = json['chat_approved'];
     region =
     json['region'] != null ? new Region.fromJson(json['region']) : null;
     district = json['district'] != null
@@ -91,6 +97,7 @@ class AllAdsModel {
     data['id'] = this.id;
     data['type'] = this.type;
     data['user_id'] = this.userId;
+    data['user_full_name'] = this.userFullName;
     data['district_id'] = this.districtId;
     data['university_id'] = this.universityId;
     data['faculty_id'] = this.facultyId;
@@ -109,6 +116,7 @@ class AllAdsModel {
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
     data['favorite'] = this.favorite;
+    data['chat_approved'] = this.chatApproved;
     if (this.region != null) {
       data['region'] = this.region!.toJson();
     }
@@ -128,7 +136,7 @@ class AllAdsModel {
 class Region {
   int? id;
   String? name;
-  dynamic nameRu;
+  String? nameRu;
 
   Region({this.id, this.name, this.nameRu});
 
@@ -151,7 +159,7 @@ class District {
   int? id;
   int? regionId;
   String? name;
-  dynamic nameRu;
+  String? nameRu;
 
   District({this.id, this.regionId, this.name, this.nameRu});
 
@@ -176,7 +184,7 @@ class University {
   int? id;
   String? name;
   String? nameRu;
-  dynamic short;
+  String? short;
   dynamic districtId;
   dynamic address;
   String? advertising;

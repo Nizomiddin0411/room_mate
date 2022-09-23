@@ -280,6 +280,14 @@ class _KunlikIjaraState extends State<KunlikIjara> {
                                                         .toString(),
                                                     type: data.Ads[index].type
                                                         .toString(),
+                                                // userId: data
+                                                //     .Ads[index]
+                                                //     .userId
+                                                //     ,
+                                                // userFullName: data
+                                                //     .Ads[index]
+                                                //     .userFullName
+                                                //     .toString(),
                                                   )));
                                     },
                                     child: Padding(
@@ -453,6 +461,14 @@ class _KunlikIjaraState extends State<KunlikIjara> {
                                                         .AdsForStudent[index]
                                                         .type
                                                         .toString(),
+                                                // userId: data
+                                                //     .AdsForStudent[index]
+                                                //     .userId
+                                                //     ,
+                                                // userFullName: data
+                                                //     .AdsForStudent[index]
+                                                //     .userFullName
+                                                //     .toString(),
                                                   )));
                                     },
                                     child:  Padding(

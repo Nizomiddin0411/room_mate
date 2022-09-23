@@ -267,6 +267,14 @@ class _OylikIjaraState extends State<OylikIjara> {
                                                         .toString(),
                                                     type: data.Ads[index].type
                                                         .toString(),
+                                                    // userId: data
+                                                    //     .Ads[index]
+                                                    //     .userId
+                                                    //     ,
+                                                    // userFullName: data
+                                                    //     .Ads[index]
+                                                    //     .userFullName
+                                                    //     .toString(),
                                                   )));
                                     },
                                     child: const Padding(
@@ -439,6 +447,14 @@ class _OylikIjaraState extends State<OylikIjara> {
                                                         .AdsForStudent[index]
                                                         .type
                                                         .toString(),
+                                                    // userId: data
+                                                    //     .AdsForStudent[index]
+                                                    //     .userId
+                                                    //     ,
+                                                    // userFullName: data
+                                                    //     .AdsForStudent[index]
+                                                    //     .userFullName
+                                                    //     .toString(),
                                                   )));
                                     },
                                     child: const Padding(

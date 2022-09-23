@@ -171,6 +171,8 @@ class _FavoritAdsState extends State<FavoritAds> {
                                                               .toString(),
                                                           type: data.MyAds[index].type
                                                               .toString(),
+                                                          // userId: data.MyAds[index].userId, userFullName: data.MyAds[index].userFullName,
+
                                                         )));
                                           },
                                           child: Padding(
