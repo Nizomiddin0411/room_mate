@@ -3,8 +3,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
-import 'package:switcher/core/switcher_size.dart';
-import 'package:switcher/switcher.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
 import 'package:talaba_uy/screens/Autorization/language_dart.dart';
 
@@ -127,7 +125,7 @@ class _AccountPageState extends State<AccountPage> {
             title: Text(
               "Sherik kerak",
               style: TextStyle(fontSize: 18.sp),
-            ),
+            ).tr(),
             trailing: Container(
               height: 60.h,
               width: 80.w,
@@ -160,15 +158,15 @@ class _AccountPageState extends State<AccountPage> {
                     color: AppColors.error,
                   )),
               title: Text(
-                "Hisobdan chiqish",
+                "Akkauntdan chiqish ",
                 style: TextStyle(fontSize: 18.sp, color: AppColors.error),
-              ),
+              ).tr(),
             ),
           ),
           SizedBox(
             height: 230.h,
           ),
-          Center(
+          const Center(
             child: Text("Version 1.1.0"),
           )
         ],
@@ -184,7 +182,7 @@ showAlertDialog(BuildContext context) {
     style: ElevatedButton.styleFrom(
         primary: AppColors.error
     ),
-    child: Text("Chiqish"),
+    child: Text("Chiqish").tr(),
     onPressed: () async{
       Hive.box('token').clear();
       Navigator.pushAndRemoveUntil(
@@ -196,15 +194,15 @@ showAlertDialog(BuildContext context) {
   );
   Widget notButton = ElevatedButton(
 
-    child: Text("Bekor qilish"),
+    child: Text("Bekor qilish").tr(),
     onPressed: () {
       Navigator.of(context).pop();
     },
   );
   // Create AlertDialog
   AlertDialog alert = AlertDialog(
-    title: Text("Hisobdan chiqish"),
-    content: Text("Hisobdan chiqishga ishonchingiz komilmi ?"),
+    title: Text("Akkauntdan chiqish ").tr(),
+    content: Text("Akkauntdan chiqishga ishonchingiz komilmi?").tr(),
     actions: [
       notButton,
       okButton,

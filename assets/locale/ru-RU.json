@@ -111,7 +111,6 @@
   "Viloyatni tanlang": "Выбрать регион",
   "Tumanni tanlang": "Выбрать район",
   "OTM ni tanlang":"Выбрать ВУЗ",
-  "Kvartira":"Квартира",
   "Xovli": "Участка",
   "1-kurs": "1-курс",
   "2-kurs": "2-курс",
@@ -131,6 +130,8 @@
   "Qiz,O'g'il": "Девочка,Мальчик",
   "Ijarachilar soni": "Количество арендаторов",
   "Message...": "Описание...",
-  "Kvartal , Uy , Xonadon": "Квартал, Дом, Квартира"
-  
+  "Kvartal , Uy , Xonadon": "Квартал, Дом, Квартира",
+  "Akkauntdan chiqish ": "Выйти из учетной записи",
+  "Shaxsiy kabinet": "Личный кабинет",
+  "Akkauntdan chiqishga ishonchingiz komilmi?": "Вы уверены, что хотите выйти из системы?"
 }
