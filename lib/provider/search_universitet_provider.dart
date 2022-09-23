@@ -58,9 +58,9 @@ class SearchUniversitet  extends ChangeNotifier{
     tumanlar=await GetDistrictService().fetchDistrict(id);
     _settuman(true);
   }
-  Future<void> getAds(String Fakultetid,String Regionid,String Districtid) async{
+  Future<void> getAds(String Fakultetid,String Regionid,String Districtid,int id) async{
     _settuman(false);
-    ads = await SearchingStudentsService().fetchSearchingStudents(faculty_id: Fakultetid, birth_region_id: Regionid, birth_district_id: Districtid);
+    ads = await SearchingStudentsService().fetchSearchingStudents(faculty_id: Fakultetid, birth_region_id: Regionid, birth_district_id: Districtid,);
     _settuman(true);
   }
 }
