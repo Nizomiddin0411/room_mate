@@ -7,9 +7,11 @@ class Messages extends StatefulWidget {
   String name;
   int id;
   ScrollController scrollController;
-  Messages({required this.name, required this.id, required this.scrollController});
+  Messages(
+      {required this.name, required this.id, required this.scrollController});
   @override
-  _MessagesState createState() => _MessagesState(name: name, id: id, scrollController: scrollController);
+  _MessagesState createState() =>
+      _MessagesState(name: name, id: id, scrollController: scrollController);
 }
 
 class _MessagesState extends State<Messages> {
@@ -18,7 +20,8 @@ class _MessagesState extends State<Messages> {
   ScrollController scrollController;
   int myId = Hive.box('id').get('id');
   int _index = 0;
-  _MessagesState({required this.name, required this.id, required this.scrollController});
+  _MessagesState(
+      {required this.name, required this.id, required this.scrollController});
 
   @override
   void initState() {
@@ -37,7 +40,9 @@ class _MessagesState extends State<Messages> {
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance
-          .collection("Messages").doc((id*myId).toString()).collection('msg')
+          .collection("Messages")
+          .doc((id * myId).toString())
+          .collection('msg')
           .orderBy("time", descending: false)
           .snapshots(),
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -53,9 +58,8 @@ class _MessagesState extends State<Messages> {
           return Container();
         }
         return Padding(
-          padding: EdgeInsets.symmetric(vertical: 6.h),
+          padding: EdgeInsets.only(top: 8.h, bottom: 8.h),
           child: ListView.builder(
-            controller: scrollController,
             itemCount: snapshot.data!.docs.length,
             physics: ScrollPhysics(),
             shrinkWrap: true,
@@ -65,68 +69,68 @@ class _MessagesState extends State<Messages> {
               DateTime d = t.toDate();
               return Padding(
                 padding: EdgeInsets.symmetric(
-                    horizontal: 8.w,
-                    vertical: 3.h,),
+                  horizontal: 8.w,
+                  vertical: 3.h,
+                ),
                 child: Column(
                   crossAxisAlignment: id == qs['id']
                       ? CrossAxisAlignment.end
                       : CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                         Container(
-                            width: 280.w,
-                            decoration: BoxDecoration(
-                                color: id != qs['id']
-                                    ? Colors.white
-                                    : Color.fromRGBO(225, 254, 198, 1),
-                                borderRadius: BorderRadius.circular(8.r),
-                                boxShadow: [
-                                  BoxShadow(
-                                    offset: Offset(2, 3),
-                                    color: id != qs['id']
-                                        ? Color.fromARGB(255, 171, 166, 166)
-                                        : Color.fromARGB(255, 146, 154, 142),
-                                    blurRadius: 4,
-                                  )
-                                ]),
-                            child: Padding(
-                              padding: EdgeInsets.fromLTRB(8.w, 8.h, 8.w, 4.h),
-                              child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.end,
-                                children: [
-                                  Container(
-                                    width: 236.w,
-                                    child: Padding(
-                                      padding: EdgeInsets.only(bottom: 12.h),
-                                      child: Text(
-                                        qs['message'],
-                                        softWrap: true,
-                                        style: TextStyle(
-                                          fontSize: 15.sp,
-                                        ),
-                                      ),
-                                    ),
+                    Container(
+                      width: 280.w,
+                      decoration: BoxDecoration(
+                          color: id != qs['id']
+                              ? Colors.white
+                              : Color.fromRGBO(225, 254, 198, 1),
+                          borderRadius: BorderRadius.circular(8.r),
+                          boxShadow: [
+                            BoxShadow(
+                              offset: Offset(2, 3),
+                              color: id != qs['id']
+                                  ? Color.fromARGB(255, 171, 166, 166)
+                                  : Color.fromARGB(255, 146, 154, 142),
+                              blurRadius: 4,
+                            )
+                          ]),
+                      child: Padding(
+                        padding: EdgeInsets.fromLTRB(8.w, 8.h, 8.w, 4.h),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: [
+                            Container(
+                              width: 236.w,
+                              child: Padding(
+                                padding: EdgeInsets.only(bottom: 12.h),
+                                child: Text(
+                                  qs['message'],
+                                  softWrap: true,
+                                  style: TextStyle(
+                                    fontSize: 15.sp,
                                   ),
-                                  Text(
-                                    d.minute > 9
-                                        ? d.hour.toString() +
-                                            ":" +
-                                            d.minute.toString()
-                                        : d.hour.toString() +
-                                            ":0" +
-                                            d.minute.toString(),
-                                    style: TextStyle(
-                                        color: id == qs['id']
-                                            ? Color.fromRGBO(45, 164, 48, 1)
-                                            : Color.fromRGBO(142, 142, 147, 1),
-                                        fontSize: 11.sp),
-                                  ),
-                                ],
+                                ),
                               ),
                             ),
-                          )
+                            Text(
+                              d.minute > 9
+                                  ? d.hour.toString() +
+                                      ":" +
+                                      d.minute.toString()
+                                  : d.hour.toString() +
+                                      ":0" +
+                                      d.minute.toString(),
+                              style: TextStyle(
+                                  color: id == qs['id']
+                                      ? Color.fromRGBO(45, 164, 48, 1)
+                                      : Color.fromRGBO(142, 142, 147, 1),
+                                  fontSize: 11.sp),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               );
