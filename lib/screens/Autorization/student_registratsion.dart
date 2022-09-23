@@ -307,7 +307,8 @@ class _StudentUserState extends State<StudentUser> {
                       // ),
                       DropdownSearch<String>(
                         mode: Mode.MENU,
-                        items: data.universitet.map((e)=>e.name.toString()).toList(),
+                        items: data.universitet.map((e){
+                          return  context.read<AutCubit>().selectedLang.index == 1 ? e.name.toString() : e.nameRu.toString();}).toList(),
                         showSearchBox: true,
                         // label: "Menu mode",
                         // hint: "country in menu mode",
