@@ -326,7 +326,7 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                         ],
                       );
                     }
-                    return Center(
+                    return const Center(
                       child: CircularProgressIndicator(),
                     );
                   },
@@ -335,17 +335,17 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                   children: [
                     Row(
                       children: [
-                        Text("Kurs ").tr(),
+                        const Text("Kurs ").tr(),
                       ],
                     ),
                     SizedBox(
-                      height: 5,
+                      height: 5.h,
                     ),
                     Column(
                       children: [
                         DropdownButtonFormField2(
                           decoration: InputDecoration(
-                            enabledBorder: OutlineInputBorder(
+                            enabledBorder: const OutlineInputBorder(
                                 borderSide: BorderSide()),
                             isDense: true,
                             contentPadding: EdgeInsets.zero,
@@ -400,8 +400,7 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(10.r)),
                         primary: AppColors.buttonLinear),
-                    onPressed: () { provider.getAds(Fakultet.toString(), provider.RegionId, provider.DistrickId,);
-                    Navigator.pop(context);
+                    onPressed: () {
                     },
                     child: Text(
                       "Saqlash",

@@ -109,7 +109,7 @@ class _StudentUserState extends State<StudentUser> {
                       if (e!.length > 3) {
                         return null;
                       } else {
-                        return 'Kamida 4ta soz bolishi kerak'.tr();
+                        return 'Kamida 2 ta so’zdan iborat bo’lishi kerak'.tr();
                       }
                     },
                     controller: myController,
@@ -150,7 +150,7 @@ class _StudentUserState extends State<StudentUser> {
                       if (e!.length > 12) {
                         return null;
                       } else {
-                        return '12  ta raqam kiriting ';
+                        return '+ 998 9_ _ _ _ _ _ _ _ ';
                       }
                     },
                     keyboardType: TextInputType.phone,
@@ -735,7 +735,6 @@ class _StudentUserState extends State<StudentUser> {
                       });
                     },
                   ),
-                  Text("Roziman ".tr()),
                   InkWell(
                       child: InkWell(
                           onTap: () {
@@ -758,8 +757,7 @@ class _StudentUserState extends State<StudentUser> {
                 onPressed: () async {
                   showDialog(context: context, builder: ( context){
                     return AlertDialog(
-                      title: Text("Ro'yxatdan muaffaqiyatli o'tdingi  "),
-                      content: Text("Tabriklaymiz !!!"),
+                      title: Text("Ro’yxatdan muvaffaqiyatli o’tdingiz"),
                     );
                   });
 
@@ -823,7 +821,7 @@ class _StudentUserState extends State<StudentUser> {
                   ),
                   child: Center(
                     child: Text(
-                      "Ro’yxatda o’tish",
+                      "Ro’yxatdan o’tish",
                       style: TextStyle(
                           color: AppColors.backgroundWhite, fontSize: 20.sp),
                     ),
