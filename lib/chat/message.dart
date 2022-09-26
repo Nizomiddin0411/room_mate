@@ -29,7 +29,6 @@ class _MessagesState extends State<Messages> {
       if (scrollController.position.atEdge) {
         bool isTop = scrollController.position.pixels == 0;
         if (isTop) {
-          print('At the top');
         }
       }
     });
