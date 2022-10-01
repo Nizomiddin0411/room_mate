@@ -1,7 +1,9 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:hive/hive.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
 
@@ -58,6 +60,13 @@ class AdsDetail extends StatefulWidget {
 }
 
 class _AdsDetailState extends State<AdsDetail> {
+  int _correntPage = 0;
+  static int _index= 0;
+  List<String> images = [
+    "https://images.wallpapersden.com/image/download/purple-sunrise-4k-vaporwave_bGplZmiUmZqaraWkpJRmbmdlrWZlbWU.jpg",
+    "https://wallpaperaccess.com/full/2637581.jpg",
+    "https://uhdwallpapers.org/uploads/converted/20/01/14/the-mandalorian-5k-1920x1080_477555-mm-90.jpg"
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -82,34 +91,67 @@ class _AdsDetailState extends State<AdsDetail> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Padding(
-              padding:  EdgeInsets.fromLTRB(18.w, 12.h, 18.w, 18.h),
-              child: Container(
-                width: 324.w,
-                height: 232.h,
-                decoration: BoxDecoration(
-                  color: AppColors.secondBackgroud,
-                  borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(6.r),
-                      topRight: Radius.circular(6.r)),
+            Stack(
+              children: [
+                SizedBox(
+                  height: 254.h,
+                  child: PageView.builder(
+                      itemCount: images.length,
+
+                      // controller: _pageController,
+                      onPageChanged: (int index) {
+                        setState(() {
+                          _correntPage = index % images.length;
+                        });
+                      },
+                      itemBuilder: (context, pagePosition) {
+                        return CachedNetworkImage(
+                          imageUrl: "https://source.unsplash.com/random/324x235",
+                          width: 324.w,
+                          height: 235.h,
+                          fit: BoxFit.cover,
+                        );
+                      }),
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Padding(
-                          padding:  EdgeInsets.fromLTRB(12.w, 12.h, 12.w, 0),
-                          child: Text(
-                            '${widget.cost} ${widget.costTayp == '1' ? "so'm" : 'y.e'}',
-                            style: TextStyle(
-                                fontSize: 24.sp, color: AppColors.mainColor),
-                          ),
+                Positioned(
+                  bottom: 10.h,
+                  left: 0,
+                  right: 0,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: List.generate(images.length, (i) {
+                      return Container(
+                        margin: const EdgeInsets.symmetric(horizontal: 5),
+                        width: 10.w,
+                        height: 10.h,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: _correntPage == i
+                                ? AppColors.backgroundWhite
+                                : Colors.grey),
+                      );
+                    }).toList(),
+                  ),
+                ),
+                Positioned(child:
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        width: 112.w,
+                        height: 24.h,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(2.r),
+                          color: AppColors.iconColor,
                         ),
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(12.w, 12.h, 12.w, 0),
+
+                        child: Center(child: Text("21 Sentabr,14:01",style: TextStyle(color: AppColors.backgroundWhite),)),
+                      ),
+                      Padding(
+                          padding:
+                          EdgeInsets.fromLTRB(1.w, 0, 8.w, 0),
                           child: FavoriteButton(
                             isFavorite: widget.favorite == '0' ? false : true,
                             iconSize: 35.0,
@@ -121,127 +163,134 @@ class _AdsDetailState extends State<AdsDetail> {
                               });
                             },
                           ),
-                        )
-                      ],
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: SizedBox(
-                          width: MediaQuery.of(context).size.width - 150.w,
-                          child: Text(
-                            "${widget.title}",
-                            style: TextStyle(fontSize: 18.sp),
-                          )),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Container(
-                            child: Row(
-                              children: [
-                                const Icon(
-                                  Icons.apartment,
-                                  color: AppColors.mainColor,
-                                ),
-                                Text(widget.houseType == '1'
-                                    ? tr('Kvartira')
-                                    : tr('Xonadon')),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            child: Row(
-                              children: [
-                                const Icon(
-                                  Icons.apartment,
-                                  color: AppColors.mainColor,
-                                ),
-                                Text('${widget.countRoom} '+tr('xona')),
-                              ],
-                            ),
-                          ),
-                          Container(
-                            child: Row(
-                              children: [
-                                const Icon(
-                                  Icons.directions_walk,
-                                  color: AppColors.mainColor,
-                                ),
-                                Text('${widget.countPeople} ' +tr('kishi')),
-                              ],
-                            ),
-                          ),
-                        ],
+
+                      )
+                    ],
+                  ),
+                )
+                )
+
+              ],
+            ),
+            Container(
+              width: 324.w,
+              height: 232.h,
+              decoration: BoxDecoration(
+                color: AppColors.backgroundWhite,
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(6.r),
+                    topRight: Radius.circular(6.r)),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding:  EdgeInsets.fromLTRB(12.w, 12.h, 12.w, 0),
+                        child: Text(
+                          '${widget.cost} ${widget.costTayp == '1' ? "so'm" : 'y.e'}',
+                          style: TextStyle(
+                              fontSize: 24.sp, color: AppColors.mainColor),
+                        ),
                       ),
-                    ),
-                   widget.chatApproved == 0 ? Padding(
+                    ],
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: SizedBox(
+                        width: MediaQuery.of(context).size.width - 150.w,
+                        child: Text(
+                          "${widget.description}",
+                          style: TextStyle(fontSize: 18.sp),
+                        )),
+                  ),
+                  Row(
+                    children: [
+                      Icon(Icons.location_on,color: AppColors.mainColor,),
+                    SizedBox(width: 10.w,),
+                    Text("${widget.region}",style: TextStyle(fontSize: 10.sp),)
+                    ],
+                  ),
+
+               Row(
+                 children: [
+                   // widget.chatApproved == 0 ?
+                   Padding(
                      padding:  EdgeInsets.fromLTRB(12.w, 0, 12.w, 12.h),
                      child: InkWell(
-                       onTap: () async{
-                         await ChatPermit().fetchApprov(Askid: widget.userId, Approvid: Hive.box('id').get('id'));
+                       onTap: (){
+                         Navigator.push(context, MaterialPageRoute(builder: (context) => ChatPage(widget.userFullName!, widget.userId)));
                        },
                        child: Container(
-                         width: 200.w,
+                         width: 95.w,
                          height: 42.h,
                          decoration: BoxDecoration(
-                             borderRadius: BorderRadius.circular(10.r),
-                             color: AppColors.colorBack3),
+                           borderRadius: BorderRadius.circular(10.r),
+                           border: Border.all(color: AppColors.mainColor),),
                          child: Row(
                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                            children:  [
                              const Padding(
                                padding: EdgeInsets.all(5.0),
                                child: Icon(
-                                 Icons.mail,
-                                 color: AppColors.succesColor,
+                                 Icons.mail_outline,
+                                 color: AppColors.mainColor,
                                ),
                              ),
 
                              Padding(
-                               padding: const EdgeInsets.all(5.0),
-                               child: Text("Sms uchun ruxasat so'rash").tr(),
+                               padding:  EdgeInsets.symmetric(horizontal: 10.w),
+                               child: Text('Aloqa').tr(),
                              )
                            ],
                          ),
                        ),
                      ),
-                   )
-                       : Padding(
-                      padding:  EdgeInsets.fromLTRB(12.w, 0, 12.w, 12.h),
-                      child: InkWell(
-                        onTap: (){
-                          Navigator.push(context, MaterialPageRoute(builder: (context) => ChatPage(widget.userFullName!, widget.userId)));
-                        },
-                        child: Container(
-                          width: 95.w,
-                          height: 42.h,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10.r),
-                              color: AppColors.colorBack3),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children:  [
-                              const Padding(
-                                padding: EdgeInsets.all(5.0),
-                                child: Icon(
-                                  Icons.mail,
-                                  color: AppColors.succesColor,
-                                ),
-                              ),
+                   ),
+                   Padding(
+                     padding:  EdgeInsets.fromLTRB(8.w, 0, 8.w, 12.h),
+                     child: InkWell(
+                       onTap: () async{
+                         await ChatPermit().fetchApprov(Askid: widget.userId, Approvid: Hive.box('id').get('id'));
+                       },
+                       child: Container(
+                         width: 170.w,
+                         height: 42.h,
 
-                              Padding(
-                                padding:  EdgeInsets.symmetric(horizontal: 10.w),
-                                child: Text('Aloqa').tr(),
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                    )
-                  ],
-                ),
+                         decoration: BoxDecoration(
+                           border: Border.all(color: AppColors.mainColor),
+                           borderRadius: BorderRadius.circular(10.r),
+
+
+                         ),
+                         child: Row(
+                           // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                           children:  [
+                             const Padding(
+                               padding: EdgeInsets.all(5.0),
+                               child: Icon(
+                                 Icons.phone,
+                                 color: AppColors.mainColor,
+                               ),
+                             ),
+
+                             Padding(
+                               padding: const EdgeInsets.all(5.0),
+                               child: Text("+99899 786 34 65",style: TextStyle(fontSize: 14.sp),).tr(),
+                             )
+                           ],
+                         ),
+                       ),
+                     ),
+                   ),
+                   // :
+
+                 ],
+               )
+                ],
               ),
             ),
             Container(
@@ -254,9 +303,95 @@ class _AdsDetailState extends State<AdsDetail> {
                 child: Column(
                   children: [
                     Text(
+                      'Sherik izlayabmiz',
+                      style: TextStyle(
+                          fontSize: 18.sp, fontWeight: FontWeight.bold,color: AppColors.mainColor),
+                    ).tr(),
+                    Row(
+                      children: [
+                        Container(
+                          width: 40.w,
+                          height: 40.h,
+                          decoration: BoxDecoration(
+                            color: AppColors.iconBack,
+                            borderRadius: BorderRadius.circular(8.r),
+                          ),
+                          child: const Center(
+                              child: Icon(
+                                Icons.accessibility_new,
+                                color: AppColors.mainColor,
+                              )),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            "2 kishi Qiz bola",
+                            style: TextStyle(fontSize: 14.sp),
+                          ),
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: 6.h,
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          width: 40.w,
+                          height: 40.h,
+                          decoration: BoxDecoration(
+                            color: AppColors.iconBack,
+                            borderRadius: BorderRadius.circular(8.r),
+                          ),
+                          child: const Center(
+                              child: Icon(
+                                Icons.location_on,
+                                color: AppColors.mainColor,
+                              )),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            "Buxoro viloyatidan",
+                            style: TextStyle(fontSize: 14.sp),
+                          ),
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: 6.h,
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          width: 40.w,
+                          height: 40.h,
+                          decoration: BoxDecoration(
+                            color: AppColors.iconBack,
+                            borderRadius: BorderRadius.circular(8.r),
+                          ),
+                          child: const Center(
+                              child: Icon(
+                                Icons.corporate_fare,
+                                color: AppColors.mainColor,
+                              )),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: SizedBox(
+                            width: MediaQuery.of(context).size.width -150.w,
+                            child: Text(
+                              "Muhammad  al-Xorazmiy nomidagi Toshkent axborot texnologiyalari Universiteti ",
+                              style: TextStyle(fontSize: 14.sp),
+                            ),
+                          ),
+                        )
+                      ],
+                    ),
+                    Text(
                       'Joylashuv',
                       style: TextStyle(
-                          fontSize: 18.sp, fontWeight: FontWeight.bold),
+                          fontSize: 18.sp, fontWeight: FontWeight.bold,color: AppColors.mainColor),
                     ).tr(),
                     Row(
                       children: [
@@ -269,9 +404,9 @@ class _AdsDetailState extends State<AdsDetail> {
                           ),
                           child: const Center(
                               child: Icon(
-                            Icons.location_on,
-                            color: AppColors.succesColor,
-                          )),
+                                Icons.location_on,
+                                color: AppColors.succesColor,
+                              )),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -369,9 +504,9 @@ class _AdsDetailState extends State<AdsDetail> {
                       ],
                     ) : const SizedBox(),
                     Text(
-                      tr("Ma’lumot"),
+                      tr("Xonadon ma’lumotlari"),
                       style: TextStyle(
-                          fontSize: 18.sp, fontWeight: FontWeight.bold),
+                          fontSize: 18.sp, fontWeight: FontWeight.bold,color: AppColors.mainColor),
                     ),
                     Row(
                       children: [
@@ -455,6 +590,95 @@ class _AdsDetailState extends State<AdsDetail> {
                     ),
                     SizedBox(
                       height: 6.h,
+                    ),
+                    Text(
+                      tr("To’lovlar"),
+                      style: TextStyle(
+                          fontSize: 18.sp, fontWeight: FontWeight.bold,color: AppColors.mainColor),
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          width: 40.w,
+                          height: 40.h,
+                          decoration: BoxDecoration(
+                            color: AppColors.colorBack2,
+                            borderRadius: BorderRadius.circular(8.r),
+                          ),
+                          child: const Center(
+                              child: Icon(
+                                Icons.countertops,
+                                color: AppColors.error,
+                              )),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: SizedBox(
+                              width: MediaQuery.of(context).size.width - 130.w,
+                              child: Text(
+                                "Kommunal to’lovlarni to’laydi  : Ijarachi",
+                                style: TextStyle(fontSize: 14.sp),
+                              )),
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: 6.h,
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          width: 40.w,
+                          height: 40.h,
+                          decoration: BoxDecoration(
+                            color: AppColors.colorBack2,
+                            borderRadius: BorderRadius.circular(8.r),
+                          ),
+                          child: const Center(
+                              child: Icon(
+                                Icons.account_balance_wallet,
+                                color: AppColors.error,
+                              )),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: SizedBox(
+                              width: MediaQuery.of(context).size.width - 130.w,
+                              child: Text(
+                                "${widget.cost}/oyiga",
+                                style: TextStyle(fontSize: 14.sp),
+                              )),
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: 6.h,
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          width: 40.w,
+                          height: 40.h,
+                          decoration: BoxDecoration(
+                            color: AppColors.colorBack2,
+                            borderRadius: BorderRadius.circular(8.r),
+                          ),
+                          child: const Center(
+                              child: Icon(
+                                Icons.check_box,
+                                color: AppColors.error,
+                              )),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: SizedBox(
+                              width: MediaQuery.of(context).size.width - 150.w,
+                              child: Text(
+                                "Qulayliklar : Muzlatgich , Kir yuvish mashinasi,Konditsioner , Chang yutgich",
+                                style: TextStyle(fontSize: 14.sp),
+                              )),
+                        )
+                      ],
                     ),
                   ],
                 ),
