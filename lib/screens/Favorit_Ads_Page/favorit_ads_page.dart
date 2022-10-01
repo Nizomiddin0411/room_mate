@@ -75,8 +75,7 @@ class _FavoritAdsState extends State<FavoritAds> {
                                         Padding(
                                           padding: const EdgeInsets.all(6.0),
                                           child: Text(
-                                            data.MyAds[index].title
-                                                .toString(),
+                                            data.MyAds[index].title.toString(),
                                             style: TextStyle(fontSize: 18.sp),
                                           ),
                                         ),
@@ -90,8 +89,8 @@ class _FavoritAdsState extends State<FavoritAds> {
                                           // when button is pressed
                                           onPressed: () {
                                             _showDialog(
-                                                data.MyAds[index].id,);
-
+                                              data.MyAds[index].id,
+                                            );
                                           },
                                         ),
                                       ],
@@ -126,53 +125,80 @@ class _FavoritAdsState extends State<FavoritAds> {
                                                 MaterialPageRoute(
                                                     builder: (context) =>
                                                         AdsDetail(
-                                                          title: data.MyAds[index].title
+                                                          title: data
+                                                              .MyAds[index]
+                                                              .title
                                                               .toString(),
                                                           description: data
-                                                              .MyAds[index].description
+                                                              .MyAds[index]
+                                                              .description
                                                               .toString(),
                                                           houseType: data
-                                                              .MyAds[index].houseType
+                                                              .MyAds[index]
+                                                              .houseType
                                                               .toString(),
-                                                          cost: data.MyAds[index].cost
+                                                          cost: data
+                                                              .MyAds[index].cost
                                                               .toString(),
                                                           costTayp: data
-                                                              .MyAds[index].costType
+                                                              .MyAds[index]
+                                                              .costType
                                                               .toString(),
                                                           countRoom: data
-                                                              .MyAds[index].roomCount
+                                                              .MyAds[index]
+                                                              .roomCount
                                                               .toString(),
-                                                          countPeople: data.MyAds[index]
+                                                          countPeople: data
+                                                              .MyAds[index]
                                                               .roommateCount
                                                               .toString(),
                                                           region: data
-                                                              .MyAds[index].region?.name
+                                                              .MyAds[index]
+                                                              .region
+                                                              ?.name
                                                               .toString(),
-                                                          district: data.MyAds[index]
-                                                              .district?.name
+                                                          district: data
+                                                              .MyAds[index]
+                                                              .district
+                                                              ?.name
                                                               .toString(),
-                                                          univer: data.MyAds[index]
-                                                              .university?.name
+                                                          univer: data
+                                                              .MyAds[index]
+                                                              .university
+                                                              ?.name
                                                               .toString(),
-                                                          facultet: data.MyAds[index]
-                                                              .faculty?.name
+                                                          facultet: data
+                                                              .MyAds[index]
+                                                              .faculty
+                                                              ?.name
                                                               .toString(),
                                                           liveWithOwner: data
                                                               .MyAds[index]
                                                               .liveWithOwner
                                                               .toString(),
                                                           subway: data
-                                                              .MyAds[index].subway
+                                                              .MyAds[index]
+                                                              .subway
                                                               .toString(),
                                                           favorite: data
-                                                              .MyAds[index].favorite
+                                                              .MyAds[index]
+                                                              .favorite
                                                               .toString(),
-                                                          id: data.MyAds[index].id
+                                                          id: data
+                                                              .MyAds[index].id
                                                               .toString(),
-                                                          type: data.MyAds[index].type
+                                                          type: data
+                                                              .MyAds[index].type
                                                               .toString(),
-                                                          userId: data.MyAds[index].userId!, userFullName: data.MyAds[index].userFullName,
-
+                                                          userId: data
+                                                              .MyAds[index]
+                                                              .userId!,
+                                                          userFullName: data
+                                                              .MyAds[index]
+                                                              .userFullName,
+                                                          chatApproved: data
+                                                              .MyAds[index]
+                                                              .chatApproved!,
                                                         )));
                                           },
                                           child: Padding(
@@ -219,8 +245,10 @@ class _FavoritAdsState extends State<FavoritAds> {
               Column(
                 children: [
                   Padding(
-                    padding:  EdgeInsets.symmetric(horizontal: 10.h,vertical: 15.w),
-                    child: Text("Ushbu e’lonni o’chirishga ishonchingiz komilmi ? "),
+                    padding:
+                        EdgeInsets.symmetric(horizontal: 10.h, vertical: 15.w),
+                    child: Text(
+                        "Ushbu e’lonni o’chirishga ishonchingiz komilmi ? "),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,

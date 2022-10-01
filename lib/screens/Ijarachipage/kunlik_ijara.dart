@@ -287,7 +287,7 @@ class _KunlikIjaraState extends State<KunlikIjara> {
                                                 userFullName: data
                                                     .Ads[index]
                                                     .userFullName
-                                                    .toString(),
+                                                    .toString(), chatApproved: data.Ads[index].chatApproved!,
                                                   )));
                                     },
                                     child: Padding(
@@ -468,7 +468,7 @@ class _KunlikIjaraState extends State<KunlikIjara> {
                                                 userFullName: data
                                                     .AdsForStudent[index]
                                                     .userFullName
-                                                    .toString(),
+                                                    .toString(), chatApproved: data.AdsForStudent[index].chatApproved!,
                                                   )));
                                     },
                                     child:  Padding(

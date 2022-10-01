@@ -2,9 +2,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hive/hive.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
 
 import '../../chat/chat_page.dart';
+import '../../services/post_add_chat_permit.dart';
 import '../../services/post_change_favoritr_service.dart';
 
 class AdsDetail extends StatefulWidget {
@@ -26,6 +28,7 @@ class AdsDetail extends StatefulWidget {
   String? type;
   int userId;
   String? userFullName;
+  int chatApproved;
   AdsDetail(
       {Key? key,
       required this.title,
@@ -44,8 +47,9 @@ class AdsDetail extends StatefulWidget {
       required this.id,
       required this.favorite,
       required this.type,
-        required this.userId,
-        required this.userFullName
+      required this.userId,
+      required this.userFullName,
+        required this.chatApproved,
       })
       : super(key: key);
 
@@ -172,7 +176,39 @@ class _AdsDetailState extends State<AdsDetail> {
                         ],
                       ),
                     ),
-                    Padding(
+                   widget.chatApproved == 0 ? Padding(
+                     padding:  EdgeInsets.fromLTRB(12.w, 0, 12.w, 12.h),
+                     child: InkWell(
+                       onTap: () async{
+                         await ChatPermit().fetchApprov(Askid: widget.userId, Approvid: Hive.box('id').get('id'));
+                       },
+                       child: Container(
+                         width: 200.w,
+                         height: 42.h,
+                         decoration: BoxDecoration(
+                             borderRadius: BorderRadius.circular(10.r),
+                             color: AppColors.colorBack3),
+                         child: Row(
+                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                           children:  [
+                             const Padding(
+                               padding: EdgeInsets.all(5.0),
+                               child: Icon(
+                                 Icons.mail,
+                                 color: AppColors.succesColor,
+                               ),
+                             ),
+
+                             Padding(
+                               padding: const EdgeInsets.all(5.0),
+                               child: Text("Sms uchun ruxasat so'rash").tr(),
+                             )
+                           ],
+                         ),
+                       ),
+                     ),
+                   )
+                       : Padding(
                       padding:  EdgeInsets.fromLTRB(12.w, 0, 12.w, 12.h),
                       child: InkWell(
                         onTap: (){

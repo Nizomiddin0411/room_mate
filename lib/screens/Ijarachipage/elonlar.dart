@@ -295,15 +295,15 @@ class _ElonlarState extends State<Elonlar> {
                                                         .toString(),
                                                     type: data.Ads[index].type
                                                         .toString(),
-                                                    userId: data
-                                                        .Ads[index].userId!
-                                                        ,
+                                                    userId:
+                                                        data.Ads[index].userId!,
                                                     userFullName: data
                                                         .Ads[index].userFullName
                                                         .toString(),
-                                                  )
-                                          )
-                                      );
+                                                    chatApproved: data
+                                                        .Ads[index]
+                                                        .chatApproved!,
+                                                  )));
                                     },
                                     child: Padding(
                                       padding:
@@ -478,12 +478,14 @@ class _ElonlarState extends State<Elonlar> {
                                                         .toString(),
                                                     userId: data
                                                         .AdsForStudent[index]
-                                                        .userId!
-                                                        ,
+                                                        .userId!,
                                                     userFullName: data
                                                         .AdsForStudent[index]
                                                         .userFullName
                                                         .toString(),
+                                                    chatApproved: data
+                                                        .AdsForStudent[index]
+                                                        .chatApproved!,
                                                   )));
                                     },
                                     child: Padding(
