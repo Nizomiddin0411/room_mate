@@ -20,6 +20,7 @@ import 'package:talaba_uy/models/lang_model.dart';
 import 'package:talaba_uy/provider/universitet_provider.dart';
 import 'package:talaba_uy/screens/Autorization/LoginPage.dart';
 import 'package:talaba_uy/screens/Autorization/offerto_dart.dart';
+import 'package:talaba_uy/screens/Autorization/registratsiya%20succedful_page.dart';
 import 'package:talaba_uy/services/get_district_service.dart';
 import 'package:talaba_uy/services/get_faculty_service.dart';
 import 'package:talaba_uy/services/get_region_service.dart';
@@ -62,8 +63,8 @@ class _StudentUserState extends State<StudentUser> {
   bool ktuman = false;
   bool fakultet = false;
   bool jinsi = false;
-  String drowdown1='';
-  String drowdown2='';
+  String drowdown1 = '';
+  String drowdown2 = '';
 
   final List<String> genderItems = [
     'Ayol',
@@ -76,6 +77,7 @@ class _StudentUserState extends State<StudentUser> {
     '4 ',
   ];
   bool value = false;
+  bool value5 = false;
   String? value3;
   final myController = TextEditingController();
   final nameController = TextEditingController();
@@ -85,12 +87,13 @@ class _StudentUserState extends State<StudentUser> {
 
   @override
   Widget build(BuildContext context) {
-    context.read<AutCubit>().selectSettingLan(LangData.languageList.singleWhere((e) => e.locale == context.locale), context);
+    context.read<AutCubit>().selectSettingLan(
+        LangData.languageList.singleWhere((e) => e.locale == context.locale),
+        context);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: SingleChildScrollView(
-        child: Consumer<UniversitetProvider>(
-            builder: (_, data, __) {
+        child: Consumer<UniversitetProvider>(builder: (_, data, __) {
           return Column(
             children: [
               Column(
@@ -137,28 +140,52 @@ class _StudentUserState extends State<StudentUser> {
                   SizedBox(
                     height: 5,
                   ),
-                  TextFormField(
-                    inputFormatters: [
-                      TextInputMask(
-                        mask: '\\+ 999 99 999 99 99',
-                        placeholder: '_ ',
-                        maxPlaceHolders: 13,
+                  Row(
+                    children: [
+                      Container(
+                        height: 80,
+                        width: 310,
+                        child: TextFormField(
+                          inputFormatters: [
+                            TextInputMask(
+                              mask: '\\+ 999 99 999 99 99',
+                              placeholder: '_ ',
+                              maxPlaceHolders: 13,
+                            )
+                          ],
+                          autovalidateMode: AutovalidateMode.always,
+                          validator: (e) {
+                            if (e!.length > 12) {
+                              return null;
+                            } else {
+                              return '+ 998 9_ _ _ _ _ _ _ _ ';
+                            }
+                          },
+                          keyboardType: TextInputType.phone,
+                          controller: nameController,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                            labelText: "Telefon raqamini kiriting".tr(),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        width: 7.w,
+                      ),
+                      Column(
+                        children: [
+                          Text("Ko’rinmasin"),
+                          Checkbox(
+                            value: this.value5,
+                            onChanged: (bool? value) {
+                              setState(() {
+                                this.value5 = value!;
+                              });
+                            },
+                          ),
+                        ],
                       )
                     ],
-                    autovalidateMode: AutovalidateMode.always,
-                    validator: (e) {
-                      if (e!.length > 12) {
-                        return null;
-                      } else {
-                        return '+ 998 9_ _ _ _ _ _ _ _ ';
-                      }
-                    },
-                    keyboardType: TextInputType.phone,
-                    controller: nameController,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: "Telefon raqamini kiriting".tr(),
-                    ),
                   ),
                 ],
               ),
@@ -307,20 +334,23 @@ class _StudentUserState extends State<StudentUser> {
                       // ),
                       DropdownSearch<String>(
                         mode: Mode.MENU,
-                        items: data.universitet.map((e){
-                          return  context.read<AutCubit>().selectedLang.index == 1 ? e.name.toString() : e.nameRu.toString();}).toList(),
+                        items: data.universitet.map((e) {
+                          return context.read<AutCubit>().selectedLang.index ==
+                                  1
+                              ? e.name.toString()
+                              : e.nameRu.toString();
+                        }).toList(),
                         showSearchBox: true,
                         // label: "Menu mode",
                         // hint: "country in menu mode",
-                        onChanged: (newValue) async{
-                          print('$value  kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk');
+                        onChanged: (newValue) async {
                           // data.isuniver = true;
                           final selected = data.universitet
                               .where((element) => element.name == newValue);
-                         await data.getFakultet(selected.last.id!);
+                          await data.getFakultet(selected.last.id!);
                           setState(() {
                             drowdown1 = newValue.toString();
-                            drowdown1=UniderId;
+                            drowdown1 = UniderId;
                             univer = true;
                             univerColor = Colors.black12;
                           });
@@ -343,100 +373,97 @@ class _StudentUserState extends State<StudentUser> {
                   ),
                   SizedBox(
                     height: 5,
-                  )
-                 , data.isFakultet
-                  ? Column(
-                    children: [
-                      DropdownButtonFormField2(
-                        decoration: InputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: fakultColor)),
-                          isDense: true,
-                          contentPadding: EdgeInsets.zero,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                        isExpanded: true,
-                        isDense: true,
-                        hint: const Text(
-                          'Fakultetni kiriting',
-                          style: TextStyle(fontSize: 14),
-                        ).tr(),
-                        icon: const Icon(
-                          Icons.arrow_drop_down,
-                          color: Colors.black45,
-                        ),
-                        iconSize: 30,
-                        buttonHeight: 60,
-                        buttonPadding:
-                            const EdgeInsets.only(left: 20, right: 10),
-                        dropdownDecoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        items: data.fakultet
-                            .map(
-                              (e) => DropdownMenuItem<String>(
-                                onTap: () {
-                                  data.fakultetid=e.id.toString();
-                                },
-                                value: data.isFakultet
-                                    ? e.name.toString()
-                                    : data.defaultvalue,
-                                child: Text(data.isFakultet
-                                    ? e.name.toString()
-                                    : data.defaultvalue),
-                              ),
-                            )
-                            .toList(),
-                        onChanged: (value)async {
-                          setState(() {
-                            drowdown1 =  value.toString();
-                            drowdown1 = fakultetId;
-                            fakultet = true;
-                            fakultColor = Colors.black12;
-                          });
-                        },
-                      ),
-
-                    ],
-                  ):
-                  Column(
-                    children: [
-                      DropdownButtonFormField2(
-                        decoration: InputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: fakultColor)),
-                          isDense: true,
-                          contentPadding: EdgeInsets.zero,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                        ),
-                        isExpanded: true,
-                        isDense: true,
-                        hint: const Text(
-                          "Yo'nalishni tanlang",
-                          style: TextStyle(fontSize: 14),
-                        ).tr(),
-                        icon: const Icon(
-                          Icons.arrow_drop_down,
-                          color: Colors.black45,
-                        ),
-                        iconSize: 30,
-                        buttonHeight: 60,
-                        buttonPadding:
-                        const EdgeInsets.only(left: 20, right: 10),
-                        dropdownDecoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        items: [],
-                        onChanged: null,
-
-                      ),
-
-                    ],
                   ),
+                  data.isFakultet
+                      ? Column(
+                          children: [
+                            DropdownButtonFormField2(
+                              decoration: InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: fakultColor)),
+                                isDense: true,
+                                contentPadding: EdgeInsets.zero,
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                              isExpanded: true,
+                              isDense: true,
+                              hint: const Text(
+                                'Fakultetni kiriting',
+                                style: TextStyle(fontSize: 14),
+                              ).tr(),
+                              icon: const Icon(
+                                Icons.arrow_drop_down,
+                                color: Colors.black45,
+                              ),
+                              iconSize: 30,
+                              buttonHeight: 60,
+                              buttonPadding:
+                                  const EdgeInsets.only(left: 20, right: 10),
+                              dropdownDecoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              items: data.fakultet
+                                  .map(
+                                    (e) => DropdownMenuItem<String>(
+                                      onTap: () {
+                                        data.fakultetid = e.id.toString();
+                                      },
+                                      value: data.isFakultet
+                                          ? e.name.toString()
+                                          : data.defaultvalue,
+                                      child: Text(data.isFakultet
+                                          ? e.name.toString()
+                                          : data.defaultvalue),
+                                    ),
+                                  )
+                                  .toList(),
+                              onChanged: (value) async {
+                                setState(() {
+                                  drowdown1 = value.toString();
+                                  drowdown1 = fakultetId;
+                                  fakultet = true;
+                                  fakultColor = Colors.black12;
+                                });
+                              },
+                            ),
+                          ],
+                        )
+                      : Column(
+                          children: [
+                            DropdownButtonFormField2(
+                              decoration: InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: fakultColor)),
+                                isDense: true,
+                                contentPadding: EdgeInsets.zero,
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                              isExpanded: true,
+                              isDense: true,
+                              hint: const Text(
+                                "Yo'nalishni tanlang",
+                                style: TextStyle(fontSize: 14),
+                              ).tr(),
+                              icon: const Icon(
+                                Icons.arrow_drop_down,
+                                color: Colors.black45,
+                              ),
+                              iconSize: 30,
+                              buttonHeight: 60,
+                              buttonPadding:
+                                  const EdgeInsets.only(left: 20, right: 10),
+                              dropdownDecoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              items: [],
+                              onChanged: null,
+                            ),
+                          ],
+                        ),
                 ],
               ),
               SizedBox(
@@ -521,67 +548,62 @@ class _StudentUserState extends State<StudentUser> {
                   Column(
                     children: [
                       DropdownButtonFormField2<String>(
-
-                              decoration: InputDecoration(
-                                enabledBorder: OutlineInputBorder(
-                                    borderSide:
-                                        BorderSide(color: viloyatColor)),
-                                isDense: true,
-                                contentPadding: EdgeInsets.zero,
-                                border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
+                        decoration: InputDecoration(
+                          enabledBorder: OutlineInputBorder(
+                              borderSide: BorderSide(color: viloyatColor)),
+                          isDense: true,
+                          contentPadding: EdgeInsets.zero,
+                          border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                          ),
+                        ),
+                        isExpanded: true,
+                        hint: const Text(
+                          "Viloyatni tanlang",
+                          style: TextStyle(fontSize: 14),
+                        ).tr(),
+                        icon: const Icon(
+                          Icons.arrow_drop_down,
+                          color: Colors.black45,
+                        ),
+                        iconSize: 30,
+                        buttonHeight: 60,
+                        buttonPadding:
+                            const EdgeInsets.only(left: 20, right: 10),
+                        dropdownDecoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        items: data.Viloyat.map(
+                          (e) => DropdownMenuItem<String>(
+                            onTap: () {
+                              data.districtid = e.id.toString();
+                              print('${data.districtid}hhcshcbscuvsycvtuc');
+                            },
+                            value: e.name ?? "",
+                            child: Text(
+                              e.name.toString(),
+                              style: const TextStyle(
+                                fontSize: 14,
                               ),
-                              isExpanded: true,
-                              hint: const Text(
-                                "Viloyatni tanlang",
-                                style: TextStyle(fontSize: 14),
-                              ).tr(),
-                              icon: const Icon(
-                                Icons.arrow_drop_down,
-                                color: Colors.black45,
-                              ),
-                              iconSize: 30,
-                              buttonHeight: 60,
-                              buttonPadding:
-                                  const EdgeInsets.only(left: 20, right: 10),
-                              dropdownDecoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              items: data.Viloyat
-                                  .map(
-                                    (e) => DropdownMenuItem<String>(
-                                      onTap:(){
-                                        data.districtid=e.id.toString();
-                                        print('${data.districtid}hhcshcbscuvsycvtuc');
-                                      },
-                                      value: e.name ??"",
-                                      child: Text(
-                                        e.name.toString(),
-                                        style: const TextStyle(
-                                          fontSize: 14,
-                                        ),
-                                      ),
-                                    ),
-                                  )
-                                  .toList(),
-                             onChanged: (newValue) async {
-                        print("Selected ----------- $newValue");
-                        final selected = data.Viloyat
-                            .where((element) => element.name == newValue);
-                        data.getTuman(selected.last.id!);
-                        setState(() {
-                          viloyat = true;
-                          viloyatColor = Colors.black12;
-                          drowdown2 = newValue.toString();
-                          drowdown2= District.toString();
-                        });
-                      },
-                              onSaved: (value) {
-                                dropdownvalue = value.toString();
-                              },
                             ),
-
+                          ),
+                        ).toList(),
+                        onChanged: (newValue) async {
+                          print("Selected ----------- $newValue");
+                          final selected = data.Viloyat.where(
+                              (element) => element.name == newValue);
+                          data.getTuman(selected.last.id!);
+                          setState(() {
+                            viloyat = true;
+                            viloyatColor = Colors.black12;
+                            drowdown2 = newValue.toString();
+                            drowdown2 = District.toString();
+                          });
+                        },
+                        onSaved: (value) {
+                          dropdownvalue = value.toString();
+                        },
+                      ),
                     ],
                   ),
                 ],
@@ -600,10 +622,9 @@ class _StudentUserState extends State<StudentUser> {
                     height: 5,
                   ),
                   data.istuman
-                  ?
-                  Column(
-                    children: [
-                             DropdownButtonFormField2<String>(
+                      ? Column(
+                          children: [
+                            DropdownButtonFormField2<String>(
                               decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(color: tumanColor)),
@@ -629,12 +650,12 @@ class _StudentUserState extends State<StudentUser> {
                               dropdownDecoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(15),
                               ),
-                              items:data.tumanlar
+                              items: data.tumanlar
                                   .map(
                                     (e) => DropdownMenuItem<String>(
                                       value: data.istuman
-                                      ?e.name.toString()
-                                      :data.defaultvalue1,
+                                          ? e.name.toString()
+                                          : data.defaultvalue1,
                                       child: Text(
                                         e.name.toString(),
                                         style: const TextStyle(
@@ -652,44 +673,42 @@ class _StudentUserState extends State<StudentUser> {
                                 });
                               },
                             ),
-                    ],
-                  ):
-                  Column(
-                    children: [
-                      DropdownButtonFormField2(
-                        decoration: InputDecoration(
-                          enabledBorder: OutlineInputBorder(
-                              borderSide: BorderSide(color: fakultColor)),
-                          isDense: true,
-                          contentPadding: EdgeInsets.zero,
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
-                          ),
+                          ],
+                        )
+                      : Column(
+                          children: [
+                            DropdownButtonFormField2(
+                              decoration: InputDecoration(
+                                enabledBorder: OutlineInputBorder(
+                                    borderSide: BorderSide(color: fakultColor)),
+                                isDense: true,
+                                contentPadding: EdgeInsets.zero,
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                              ),
+                              isExpanded: true,
+                              isDense: true,
+                              hint: const Text(
+                                'Tumanni tanlang',
+                                style: TextStyle(fontSize: 14),
+                              ).tr(),
+                              icon: const Icon(
+                                Icons.arrow_drop_down,
+                                color: Colors.black45,
+                              ),
+                              iconSize: 30,
+                              buttonHeight: 60,
+                              buttonPadding:
+                                  const EdgeInsets.only(left: 20, right: 10),
+                              dropdownDecoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(15),
+                              ),
+                              items: [],
+                              onChanged: null,
+                            ),
+                          ],
                         ),
-                        isExpanded: true,
-                        isDense: true,
-                        hint: const Text(
-                          'Tumanni tanlang',
-                          style: TextStyle(fontSize: 14),
-                        ).tr(),
-                        icon: const Icon(
-                          Icons.arrow_drop_down,
-                          color: Colors.black45,
-                        ),
-                        iconSize: 30,
-                        buttonHeight: 60,
-                        buttonPadding:
-                        const EdgeInsets.only(left: 20, right: 10),
-                        dropdownDecoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        items: [],
-                        onChanged: null,
-
-                      ),
-
-                    ],
-                  ),
                 ],
               ),
               SizedBox(
@@ -701,7 +720,7 @@ class _StudentUserState extends State<StudentUser> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "Sherik kerak".tr(),
+                        "Profilni ro’yxatda ko’rinmas qilish".tr(),
                         style: TextStyle(
                             color: AppColors.textColor,
                             fontWeight: FontWeight.bold,
@@ -737,18 +756,20 @@ class _StudentUserState extends State<StudentUser> {
                     },
                   ),
                   InkWell(
-                      child: InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => OffertoPage()));
-                          },
-                          child: Text(
-                            "Foydalanuvchi shartlariga roziman".tr(),
-                            style: TextStyle(
-                                color: AppColors.mainColor, fontSize: 15),
-                          )))
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => OffertoPage()));
+                      },
+                      child: Text(
+                        "Roziman  Foydalanuvchi shartlariga".tr(),
+                        style:
+                            TextStyle(color: AppColors.mainColor, fontSize: 15),
+                      ),
+                    ),
+                  ),
                 ],
               ),
               SizedBox(
@@ -756,11 +777,13 @@ class _StudentUserState extends State<StudentUser> {
               ),
               ElevatedButton(
                 onPressed: () async {
-                  showDialog(context: context, builder: ( context){
-                    return AlertDialog(
-                      title: Text("Ro’yxatdan muvaffaqiyatli o’tdingiz"),
-                    );
-                  });
+                  // showDialog(
+                  //     context: context,
+                  //     builder: (context) {
+                  //       return AlertDialog(
+                  //         title: Text("Ro’yxatdan muvaffaqiyatli o’tdingiz"),
+                  //       );
+                  //     });
 
                   if (kurs &&
                       viloyat &&
@@ -768,18 +791,17 @@ class _StudentUserState extends State<StudentUser> {
                       fakultet &&
                       ktuman &&
                       myController.text != '' &&
-                      jinsi
-                   &&value) {
+                      jinsi &&
+                      value) {
                     await RegistratsiyaStudent().CreateAdsStudent(
                         FullName: myController.text,
                         fakultetId: data.fakultetid.toString(),
                         Course: Course.toString(),
-                        Roommate: isSwitched.toString()=='ha' ? '1':'2',
+                        Roommate: isSwitched.toString() == 'ha' ? '1' : '2',
                         District: data.districtid.toString(),
                         Phonenumber: nameController.text,
                         gender: dropdownvalue.toString() == 'Erkak' ? '1' : '2',
-                        UniderId: data.universiterid.toString()
-                    );
+                        UniderId: data.universiterid.toString());
                     // Hive.box('name').put( 'name', myController.text );
                     // Hive.box('number').put( 'number', nameController.text );
                     print('${myController} maulotiiiiiiiii+++++++++++');
@@ -790,7 +812,7 @@ class _StudentUserState extends State<StudentUser> {
                     print('${nameController.text} maulotiiiiiiiii+++++++++++');
                     print('${dropdownvalue} maulotiiiiiiiii+++++++++++');
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) =>  LoginPage()));
+                        MaterialPageRoute(builder: (context) => SuccedfulPage()));
                   } else {
                     kursColor = Colors.red;
                     univerColor = Colors.red;
