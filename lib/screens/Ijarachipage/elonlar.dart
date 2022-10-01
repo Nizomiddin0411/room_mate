@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +34,7 @@ class _ElonlarState extends State<Elonlar> {
       '0',
       '0',
     );
-    Provider.of<RegionProvider>(context, listen: false).getRegion().asStream();
+    Provider.of<RegionProvider>(context, listen: false).getRegion();
     Provider.of<RegionProvider>(context, listen: false).getFiltrApi(
       '0',
       '0',
@@ -80,8 +81,8 @@ class _ElonlarState extends State<Elonlar> {
                 return Padding(
                   padding: EdgeInsets.fromLTRB(18.w, 85.h, 18.w, 18.h),
                   child: Container(
-                    height: 50.h,
                     width: 324.w,
+                    height: 50.h,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(6.r),
                         color: AppColors.secondBackgroud),
@@ -161,13 +162,78 @@ class _ElonlarState extends State<Elonlar> {
                         padding: const EdgeInsets.all(18.0),
                         child: Container(
                           width: 324.w,
-                          height: 105.h,
+                          height: 358.h,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(6.r),
+                                borderRadius: BorderRadius.only(bottomLeft: Radius.circular(6.r),bottomRight: Radius.circular(6.r)),
+                              // borderRadius: BorderRadius.circular(6.r),
                               color: AppColors.secondBackgroud),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              Stack(
+                                children:[ CachedNetworkImage(
+                                    imageUrl: "https://source.unsplash.com/random/324x235",
+                                  width: 324.w,
+                                  height: 235.h,
+                                  fit: BoxFit.cover,
+                                ),
+                                Positioned(child:
+                                Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Container(
+                                        width: 112.w,
+                                        height: 24.h,
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.circular(2.r),
+                                          color: AppColors.iconColor,
+                                        ),
+
+                                       child: Center(child: Text("21 Sentabr,14:01",style: TextStyle(color: AppColors.backgroundWhite),)),
+                                      ),
+                                      Padding(
+                                          padding:
+                                          EdgeInsets.fromLTRB(1.w, 0, 8.w, 0),
+                                          child: FavoriteButton(
+                                            isFavorite: data.isChanded
+                                                ? (data.Ads[index].favorite == '0'
+                                                ? false
+                                                : true)
+                                                : (data.AdsForZero[index]
+                                                .favorite ==
+                                                '0'
+                                                ? false
+                                                : true),
+                                            iconSize: 35.0,
+                                            valueChanged: (_isFavorite) {
+                                              // print('Is Favorite $_isFavorite)');
+                                              setState(() {
+                                                FavoriteChange().Favoritefetch(
+                                                    id: data.isChanded
+                                                        ? data.Ads[index].id
+                                                        .toString()
+                                                        : data.AdsForZero[index].id
+                                                        .toString());
+                                              });
+                                            },
+                                          )
+                                        // InkWell(
+                                        //   onTap: (){},
+                                        //   child:  Icon(
+                                        //     snapshot.data![index].favorite == '0' ? Icons.favorite_border:Icons.favorite,
+                                        //     color: AppColors.error,
+                                        //   ),
+                                        // ),
+                                      )
+                                    ],
+                                  ),
+                                )
+                                )
+                                ],
+
+                              ),
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -182,40 +248,7 @@ class _ElonlarState extends State<Elonlar> {
                                       style: TextStyle(fontSize: 18.sp),
                                     ),
                                   ),
-                                  Padding(
-                                      padding:
-                                          const EdgeInsets.fromLTRB(1, 0, 8, 0),
-                                      child: FavoriteButton(
-                                        isFavorite: data.isChanded
-                                            ? (data.Ads[index].favorite == '0'
-                                                ? false
-                                                : true)
-                                            : (data.AdsForZero[index]
-                                                        .favorite ==
-                                                    '0'
-                                                ? false
-                                                : true),
-                                        iconSize: 35.0,
-                                        valueChanged: (_isFavorite) {
-                                          // print('Is Favorite $_isFavorite)');
-                                          setState(() {
-                                            FavoriteChange().Favoritefetch(
-                                                id: data.isChanded
-                                                    ? data.Ads[index].id
-                                                        .toString()
-                                                    : data.AdsForZero[index].id
-                                                        .toString());
-                                          });
-                                        },
-                                      )
-                                      // InkWell(
-                                      //   onTap: (){},
-                                      //   child:  Icon(
-                                      //     snapshot.data![index].favorite == '0' ? Icons.favorite_border:Icons.favorite,
-                                      //     color: AppColors.error,
-                                      //   ),
-                                      // ),
-                                      )
+
                                 ],
                               ),
                               Padding(
@@ -339,13 +372,62 @@ class _ElonlarState extends State<Elonlar> {
                         padding: const EdgeInsets.all(18.0),
                         child: Container(
                           width: 324.w,
-                          height: 100.h,
+                          height: 358.h,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(6.r),
                               color: AppColors.secondBackgroud),
                           child: Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              Stack(
+                                children:[ CachedNetworkImage(
+                                  imageUrl: "https://source.unsplash.com/random/324x235",
+                                  width: 324.w,
+                                  height: 235.h,
+                                  fit: BoxFit.cover,
+                                ),
+                                  Positioned(child:
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Container(
+                                          width: 112.w,
+                                          height: 24.h,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.circular(2.r),
+                                            color: AppColors.iconColor,
+                                          ),
+
+                                          child: Center(child: Text("21 Sentabr,14:01",style: TextStyle(color: AppColors.backgroundWhite),)),
+                                        ),
+                                        Padding(
+                                            padding:
+                                            EdgeInsets.fromLTRB(1.w, 0, 8.w, 0),
+                                            child: FavoriteButton(
+                                              isFavorite: data.AdsForStudent[index]
+                                                  .favorite ==
+                                                  '0'
+                                                  ? false
+                                                  : true,
+                                              iconSize: 35.0,
+                                              valueChanged: (_isFavorite) {
+                                                // print('Is Favorite $_isFavorite)');
+                                                setState(() {
+                                                  FavoriteChange().Favoritefetch(
+                                                      id: data.AdsForStudent[index].id
+                                                          .toString());
+                                                });
+                                              },
+                                            ))
+                                      ],
+                                    ),
+                                  )
+                                  )
+                                ],
+
+                              ),
                               Row(
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
@@ -360,25 +442,7 @@ class _ElonlarState extends State<Elonlar> {
                                       style: TextStyle(fontSize: 18.sp),
                                     ),
                                   ),
-                                  Padding(
-                                      padding:
-                                          EdgeInsets.fromLTRB(1.w, 0, 8.w, 0),
-                                      child: FavoriteButton(
-                                        isFavorite: data.AdsForStudent[index]
-                                                    .favorite ==
-                                                '0'
-                                            ? false
-                                            : true,
-                                        iconSize: 35.0,
-                                        valueChanged: (_isFavorite) {
-                                          // print('Is Favorite $_isFavorite)');
-                                          setState(() {
-                                            FavoriteChange().Favoritefetch(
-                                                id: data.AdsForStudent[index].id
-                                                    .toString());
-                                          });
-                                        },
-                                      ))
+
                                 ],
                               ),
                               Padding(
