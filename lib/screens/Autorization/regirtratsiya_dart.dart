@@ -1,4 +1,6 @@
+import 'package:auto_size_text/auto_size_text.dart';
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -72,7 +74,7 @@ class _RegistratsiyaState extends State<Registratsiya> {
                 padding: const EdgeInsets.fromLTRB(0, 60, 0, 0),
                 child: Column(
                   children: [
-                    Text("Ro’yxatdan o’tish",
+                    Text("Ro’yhatdan o’tish".tr(),
                         style: TextStyle(
                             color: AppColors.mainColor,
                             fontSize: 25,
@@ -81,7 +83,7 @@ class _RegistratsiyaState extends State<Registratsiya> {
                       height: 10,
                     ),
                     Text(
-                        "Ro’yxatdan o’tish uchun \nshaxsiy ma’lumotlaringizni  kiriting\n"),
+                        "Ro’yxatdan o’tish uchun shaxsiy ma’lumotlaringizni  kiriting".tr(),),
                   ],
                 ),
               ),
@@ -96,14 +98,14 @@ class _RegistratsiyaState extends State<Registratsiya> {
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 8.h),
                   child: Text(
-                    "Talabaman",
+                    "Talabaman".tr(),
                     style: TextStyle(fontWeight: FontWeight.w500),
                   ),
                 ),
                 Text(
                   "Talaba emasman",
                   style: TextStyle(fontWeight: FontWeight.w500),
-                ),
+                ).tr(),
               ],
             ),
           ),

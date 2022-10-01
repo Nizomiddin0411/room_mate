@@ -43,7 +43,7 @@ class RegistratsiyaStudent {
       print("$fakultetId fakulted id si  ");
       print("$Course sheri kursi ");
       print("$District  viloyattt idisi  ");
-      print("$UniderId  univer idsi   ");
+      print("$UniderId  univer idhbdjydfujedhedjreyehjfkdsi   ");
       print("$Roommate  rommate sherik   ");
       return jsonDecode(data);
     }

@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
@@ -12,9 +13,12 @@ class LanguageSettting extends StatefulWidget {
 class _LanguageSetttingState extends State<LanguageSettting> {
   String? _groupValue;
   String _language = 'uz';
-
+  bool value1 = false;
+  bool lang = false;
+  void setlocale(Locale locale) => context.setLocale(context.locale);
   @override
   Widget build(BuildContext context) {
+    setlocale(context.locale);
     return Scaffold(
       backgroundColor: AppColors.backgroundWhite,
       appBar: AppBar(
@@ -30,7 +34,7 @@ class _LanguageSetttingState extends State<LanguageSettting> {
         ),
         elevation: 0,
         title: Text(
-          "Til sozlamalari",
+          "Til sozlamalari".tr(),
           style: TextStyle(
               color: AppColors.mainColor,
               fontSize: 18.sp,
@@ -48,8 +52,11 @@ class _LanguageSetttingState extends State<LanguageSettting> {
                   border: Border.all(color: AppColors.iconBack)),
               child: InkWell(
                 onTap: () {
+                  context.locale = Locale('uz', 'UZ');
                   setState(() {
+                    lang = true;
                     _language = 'uz';
+                    value1 = true;
                   });
                 },
                 child: ListTile(
@@ -57,28 +64,28 @@ class _LanguageSetttingState extends State<LanguageSettting> {
                   leading: Image.asset("assets/images/uzb.png"),
                   title: SizedBox(
                       child: Text(
-                    "O’zbek (Lotin)",
-                    style:
-                        TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
-                  )),
-                  trailing: _language == 'uz'
+                        "O’zbek (Lotin)",
+                        style: TextStyle(
+                            fontSize: 14.sp, fontWeight: FontWeight.w600),
+                      )),
+                  trailing: _language == 'uz' && lang
                       ? CircleAvatar(
-                          radius: 12.r,
-                          child: Icon(
-                            Icons.check,
-                            size: 14.sp,
-                          ),
-                        )
+                    radius: 12.r,
+                    child: Icon(
+                      Icons.check,
+                      size: 14.sp,
+                    ),
+                  )
                       : Container(
-                          decoration: BoxDecoration(
-                              color: Color.fromRGBO(149, 149, 149, 1),
-                              shape: BoxShape.circle,
-                              border: Border.all(width: 1.w)),
-                          child: CircleAvatar(
-                            backgroundColor: AppColors.backgroundWhite,
-                            radius: 10.r,
-                          ),
-                        ),
+                    decoration: BoxDecoration(
+                        color: Color.fromRGBO(149, 149, 149, 1),
+                        shape: BoxShape.circle,
+                        border: Border.all(width: 1.w)),
+                    child: CircleAvatar(
+                      backgroundColor: AppColors.backgroundWhite,
+                      radius: 10.r,
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -89,8 +96,11 @@ class _LanguageSetttingState extends State<LanguageSettting> {
                   border: Border.all(color: AppColors.iconBack)),
               child: InkWell(
                 onTap: () {
+                  context.locale = Locale('ru', 'RU');
                   setState(() {
+                    lang = true;
                     _language = 'rus';
+                    value1 = true;
                   });
                 },
                 child: ListTile(
@@ -98,28 +108,28 @@ class _LanguageSetttingState extends State<LanguageSettting> {
                   leading: Image.asset("assets/images/rus.png"),
                   title: SizedBox(
                       child: Text(
-                    "Русский",
-                    style:
-                        TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
-                  )),
-                  trailing: _language == 'rus'
+                        "Русский",
+                        style: TextStyle(
+                            fontSize: 14.sp, fontWeight: FontWeight.w600),
+                      )),
+                  trailing: _language == 'rus' && lang
                       ? CircleAvatar(
-                          radius: 12.r,
-                          child: Icon(
-                            Icons.check,
-                            size: 14.sp,
-                          ),
-                        )
+                    radius: 12.r,
+                    child: Icon(
+                      Icons.check,
+                      size: 14.sp,
+                    ),
+                  )
                       : Container(
-                          decoration: BoxDecoration(
-                              color: Color.fromRGBO(149, 149, 149, 1),
-                              shape: BoxShape.circle,
-                              border: Border.all(width: 1.w)),
-                          child: CircleAvatar(
-                            backgroundColor: AppColors.backgroundWhite,
-                            radius: 10.r,
-                          ),
-                        ),
+                    decoration: BoxDecoration(
+                        color: Color.fromRGBO(149, 149, 149, 1),
+                        shape: BoxShape.circle,
+                        border: Border.all(width: 1.w)),
+                    child: CircleAvatar(
+                      backgroundColor: AppColors.backgroundWhite,
+                      radius: 10.r,
+                    ),
+                  ),
                 ),
               ),
             ),

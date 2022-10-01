@@ -109,7 +109,7 @@ class _StudentUserState extends State<StudentUser> {
                       if (e!.length > 3) {
                         return null;
                       } else {
-                        return 'Kamida 4ta soz bolishi kerak'.tr();
+                        return "Kamida 2 ta so’zdan iborat bo’lishi kerak".tr();
                       }
                     },
                     controller: myController,
@@ -119,7 +119,7 @@ class _StudentUserState extends State<StudentUser> {
                               color: myController.text == ''
                                   ? Colors.red
                                   : Colors.black12)),
-                      labelText: 'Ism va familiyangizni kiriting'.tr(),
+                      labelText: "Ism va familiyangizni kiriting".tr(),
                     ),
                   ),
                 ],
@@ -150,14 +150,14 @@ class _StudentUserState extends State<StudentUser> {
                       if (e!.length > 12) {
                         return null;
                       } else {
-                        return '12  ta raqam kiriting ';
+                        return '+ 998 9_ _ _ _ _ _ _ _ ';
                       }
                     },
                     keyboardType: TextInputType.phone,
                     controller: nameController,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
-                      labelText: 'Telefon raqamini kiriting'.tr(),
+                      labelText: "Telefon raqamini kiriting".tr(),
                     ),
                   ),
                 ],
@@ -169,7 +169,7 @@ class _StudentUserState extends State<StudentUser> {
                 children: [
                   Row(
                     children: [
-                      Text("Jins ".tr()),
+                      Text("Jins".tr()),
                     ],
                   ),
                   SizedBox(
@@ -188,7 +188,7 @@ class _StudentUserState extends State<StudentUser> {
                         ),
                         isExpanded: true,
                         hint: const Text(
-                          'Jinsni tanlang',
+                          "Jinsni tanlang",
                           style: TextStyle(fontSize: 14),
                         ).tr(),
                         icon: const Icon(
@@ -307,7 +307,8 @@ class _StudentUserState extends State<StudentUser> {
                       // ),
                       DropdownSearch<String>(
                         mode: Mode.MENU,
-                        items: data.universitet.map((e)=>e.name.toString()).toList(),
+                        items: data.universitet.map((e){
+                          return  context.read<AutCubit>().selectedLang.index == 1 ? e.name.toString() : e.nameRu.toString();}).toList(),
                         showSearchBox: true,
                         // label: "Menu mode",
                         // hint: "country in menu mode",
@@ -324,7 +325,7 @@ class _StudentUserState extends State<StudentUser> {
                             univerColor = Colors.black12;
                           });
                         },
-                        selectedItem: "Oliy o’quv yurtini tanlang",
+                        selectedItem: tr("Oliy o’quv yurtini tanlang"),
                       ),
                     ],
                   ),
@@ -417,7 +418,7 @@ class _StudentUserState extends State<StudentUser> {
                         hint: const Text(
                           "Yo'nalishni tanlang",
                           style: TextStyle(fontSize: 14),
-                        ),
+                        ).tr(),
                         icon: const Icon(
                           Icons.arrow_drop_down,
                           color: Colors.black45,
@@ -511,7 +512,7 @@ class _StudentUserState extends State<StudentUser> {
                 children: [
                   Row(
                     children: [
-                      Text("Viloyat ").tr(),
+                      Text("Viloyat").tr(),
                     ],
                   ),
                   SizedBox(
@@ -735,7 +736,6 @@ class _StudentUserState extends State<StudentUser> {
                       });
                     },
                   ),
-                  Text("Roziman ".tr()),
                   InkWell(
                       child: InkWell(
                           onTap: () {
@@ -758,8 +758,7 @@ class _StudentUserState extends State<StudentUser> {
                 onPressed: () async {
                   showDialog(context: context, builder: ( context){
                     return AlertDialog(
-                      title: Text("Ro'yxatdan muaffaqiyatli o'tdingi  "),
-                      content: Text("Tabriklaymiz !!!"),
+                      title: Text("Ro’yxatdan muvaffaqiyatli o’tdingiz"),
                     );
                   });
 
@@ -781,8 +780,8 @@ class _StudentUserState extends State<StudentUser> {
                         gender: dropdownvalue.toString() == 'Erkak' ? '1' : '2',
                         UniderId: data.universiterid.toString()
                     );
-                    Hive.box('name').put( 'name', myController.text );
-                    Hive.box('number').put( 'number', nameController.text );
+                    // Hive.box('name').put( 'name', myController.text );
+                    // Hive.box('number').put( 'number', nameController.text );
                     print('${myController} maulotiiiiiiiii+++++++++++');
                     print('${Roommate} sherik kerak mi +++++++++++');
                     print('${UniderId} malumotlar  +++++++++++');
@@ -791,7 +790,7 @@ class _StudentUserState extends State<StudentUser> {
                     print('${nameController.text} maulotiiiiiiiii+++++++++++');
                     print('${dropdownvalue} maulotiiiiiiiii+++++++++++');
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => LoginPage()));
+                        MaterialPageRoute(builder: (context) =>  LoginPage()));
                   } else {
                     kursColor = Colors.red;
                     univerColor = Colors.red;
@@ -823,7 +822,7 @@ class _StudentUserState extends State<StudentUser> {
                   ),
                   child: Center(
                     child: Text(
-                      "Ro’yxatda o’tish",
+                      "Ro’yhatdan o’tish".tr(),
                       style: TextStyle(
                           color: AppColors.backgroundWhite, fontSize: 20.sp),
                     ),

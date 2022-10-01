@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -116,7 +117,7 @@ class _SmsConfirmationPageState extends State<SmsConfirmationPage> {
             SizedBox(
               width: MediaQuery.of(context).size.width - 150.w,
               child: Text(
-                "Biz *** $_partPhone raqamga SMS xabar jo’natdik, SMS xabardagi kod bilan tasdiqlang ! ",
+                "Biz *** $_partPhone raqamga SMS xabar jo’natdik, SMS xabardagi kod bilan tasdiqlang!".tr(),
                 style: TextStyle(fontSize: 16.sp),
                 textAlign: TextAlign.center,
               ),
@@ -139,7 +140,7 @@ class _SmsConfirmationPageState extends State<SmsConfirmationPage> {
               },
             ),
             SizedBox(height: 10.h,),
-            Text("SMS habardagi kodni kiriting"),
+            Text("SMS habardagi kodni kiriting".tr()),
             SizedBox(
               height: 32.h,
             ),
@@ -233,7 +234,7 @@ class _SmsConfirmationPageState extends State<SmsConfirmationPage> {
                 ),
                 child: Center(
                   child: Text(
-                    "Keyingi",
+                    "Keyingi".tr(),
                     style: TextStyle(
                         color: AppColors.backgroundWhite, fontSize: 20.sp),
                   ),

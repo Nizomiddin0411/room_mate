@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
@@ -28,7 +29,7 @@ class _SettingState extends State<Setting> {
           ),
         ),
         title: Text(
-          "Sozlamalar",
+          "Sozlamalar".tr(),
           style: TextStyle(
             color: AppColors.mainColor,
             fontWeight: FontWeight.w500,
@@ -63,7 +64,7 @@ class _SettingState extends State<Setting> {
                     ),
                   ),
                   title: Text(
-                    "Dastur tilini sozlash",
+                    "Dastur tilini sozlash".tr(),
                     style:
                         TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w500),
                   ),
@@ -93,7 +94,7 @@ class _SettingState extends State<Setting> {
                   ),
                 ),
                 title: Text(
-                  "Bildirishnomani sozlash",
+                  "Bildirishnomani sozlash".tr(),
                   style:
                       TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w500),
                 ),

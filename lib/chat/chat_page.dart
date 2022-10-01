@@ -40,11 +40,17 @@ class _ChatPageState extends State<ChatPage> {
   List<File> _image = [];
   final picker = ImagePicker();
   int? _lichId;
+  scrollList() {
+    return _scrollController.animateTo(
+      _scrollController.position.maxScrollExtent + 1,
+      duration: const Duration(seconds: 1),
+      curve: Curves.fastOutSlowIn,
+    );
+  }
 
   @override
   void initState() {
     _lichId = myId * widget.id;
-    // Hive.box('scrollController').put('scrollController', _scrollController);
     super.initState();
   }
 
@@ -83,14 +89,23 @@ class _ChatPageState extends State<ChatPage> {
               child: Container(
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage("assets/images/bgimg.png"),
-                        fit: BoxFit.fill)),
+                  image: AssetImage("assets/images/bgimg.png"),
+                  fit: BoxFit.fill,
+                )),
                 child: SingleChildScrollView(
                   controller: _scrollController,
-                  child: Messages(
-                    name: widget.name,
-                    id: widget.id,
-                    scrollController: _scrollController,
+                  child: Column(
+                    children: [
+                      Messages(
+                        name: widget.name,
+                        id: widget.id,
+                        scrollController: _scrollController,
+                      ),
+                      Container(
+                        width: 56.w,
+                        height: 56.h,
+                      )
+                    ],
                   ),
                 ),
               ),
@@ -108,7 +123,7 @@ class _ChatPageState extends State<ChatPage> {
                           // Navigator.push(
                           //     context,
                           //     MaterialPageRoute(
-                          //         builder: (context) => AddImage()));
+                          //         builder: (context) => AddImage()),);
                         },
                         child: Icon(
                           Icons.folder,
@@ -118,33 +133,37 @@ class _ChatPageState extends State<ChatPage> {
                       ),
                     ),
                     Expanded(
-                      child: TextFormField(
-                        controller: message,
-                        cursorColor: Colors.black87,
-                        decoration: InputDecoration(
-                          filled: true,
-                          fillColor: Colors.white,
-                          hintText: 'message',
-                          helperStyle: TextStyle(
-                              color: Color.fromRGBO(174, 174, 178, 1)),
-                          enabled: true,
-                          contentPadding: EdgeInsets.only(
-                              left: 12.0.w, bottom: 8.0.h, top: 8.0.h),
-                          focusedBorder: OutlineInputBorder(
-                            borderSide: new BorderSide(
-                                color: Color.fromRGBO(209, 209, 214, 1)),
-                            borderRadius: new BorderRadius.circular(18.r),
-                          ),
-                          border: OutlineInputBorder(
-                            borderSide: new BorderSide(
-                                color: Color.fromRGBO(209, 209, 214, 1)),
-                            borderRadius: new BorderRadius.circular(18.r),
-                          ),
-                        ),
-                        onSaved: (value) {
-                          message.text = value!;
-                          setState(() {});
+                      child: InkWell(
+                        onTap: () {
+                          scrollList();
                         },
+                        child: TextFormField(
+                          controller: message,
+                          cursorColor: Colors.black87,
+                          decoration: InputDecoration(
+                            filled: true,
+                            fillColor: Colors.white,
+                            hintText: 'message',
+                            helperStyle: TextStyle(
+                                color: Color.fromRGBO(174, 174, 178, 1)),
+                            enabled: true,
+                            contentPadding: EdgeInsets.only(
+                                left: 12.0.w, bottom: 8.0.h, top: 8.0.h),
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: new BorderSide(
+                                  color: Color.fromRGBO(209, 209, 214, 1)),
+                              borderRadius: new BorderRadius.circular(18.r),
+                            ),
+                            border: OutlineInputBorder(
+                              borderSide: new BorderSide(
+                                  color: Color.fromRGBO(209, 209, 214, 1)),
+                              borderRadius: new BorderRadius.circular(18.r),
+                            ),
+                          ),
+                          onSaved: (value) {
+                            message.text = value!;
+                          },
+                        ),
                       ),
                     ),
                     Padding(
@@ -182,10 +201,7 @@ class _ChatPageState extends State<ChatPage> {
                             Hive.box('Id').put('Id', widget.id);
                             message.clear();
 
-                            _scrollController.animateTo(
-                                _scrollController.position.maxScrollExtent,
-                                duration: const Duration(seconds: 1),
-                                curve: Curves.fastOutSlowIn);
+                            scrollList();
                           }
                         },
                       ),
