@@ -176,7 +176,7 @@ class _FavoritPageState extends State<FavoritPage> {
                                                         type: data.Like[index].type
                                                             .toString(),
                                                         userId: data.Like[index].userId!,
-                                                        userFullName: data.Like[index].userFullName.toString(),
+                                                        userFullName: data.Like[index].userFullName.toString(), chatApproved: data.Like[index].chatApproved!,
                                                       )));
                                         },
                                         child: Padding(

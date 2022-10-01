@@ -274,7 +274,7 @@ class _OylikIjaraState extends State<OylikIjara> {
                                                     userFullName: data
                                                         .Ads[index]
                                                         .userFullName
-                                                        .toString(),
+                                                        .toString(), chatApproved: data.Ads[index].chatApproved!,
                                                   )));
                                     },
                                     child: const Padding(
@@ -454,7 +454,7 @@ class _OylikIjaraState extends State<OylikIjara> {
                                                     userFullName: data
                                                         .AdsForStudent[index]
                                                         .userFullName
-                                                        .toString(),
+                                                        .toString(), chatApproved: data.AdsForStudent[index].chatApproved!,
                                                   )));
                                     },
                                     child: const Padding(

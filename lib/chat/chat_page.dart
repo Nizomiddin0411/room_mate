@@ -40,6 +40,13 @@ class _ChatPageState extends State<ChatPage> {
   List<File> _image = [];
   final picker = ImagePicker();
   int? _lichId;
+  scrollList() {
+    return _scrollController.animateTo(
+      _scrollController.position.maxScrollExtent + 1,
+      duration: const Duration(seconds: 1),
+      curve: Curves.fastOutSlowIn,
+    );
+  }
 
   @override
   void initState() {
@@ -47,16 +54,8 @@ class _ChatPageState extends State<ChatPage> {
     super.initState();
   }
 
-  scrollList(){
-      return _scrollController.animateTo(
-          _scrollController.position.maxScrollExtent + 1,
-          duration: const Duration(seconds: 1),
-          curve: Curves.fastOutSlowIn);
-    }
-
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -90,8 +89,9 @@ class _ChatPageState extends State<ChatPage> {
               child: Container(
                 decoration: BoxDecoration(
                     image: DecorationImage(
-                        image: AssetImage("assets/images/bgimg.png"),
-                        fit: BoxFit.fill)),
+                  image: AssetImage("assets/images/bgimg.png"),
+                  fit: BoxFit.fill,
+                )),
                 child: SingleChildScrollView(
                   controller: _scrollController,
                   child: Column(
@@ -123,7 +123,7 @@ class _ChatPageState extends State<ChatPage> {
                           // Navigator.push(
                           //     context,
                           //     MaterialPageRoute(
-                          //         builder: (context) => AddImage()));
+                          //         builder: (context) => AddImage()),);
                         },
                         child: Icon(
                           Icons.folder,
@@ -134,7 +134,7 @@ class _ChatPageState extends State<ChatPage> {
                     ),
                     Expanded(
                       child: InkWell(
-                        onTap: (){
+                        onTap: () {
                           scrollList();
                         },
                         child: TextFormField(
@@ -162,8 +162,6 @@ class _ChatPageState extends State<ChatPage> {
                           ),
                           onSaved: (value) {
                             message.text = value!;
-                            
-                            // setState(() {});
                           },
                         ),
                       ),

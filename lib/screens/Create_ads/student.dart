@@ -320,9 +320,9 @@ class _StudentState extends State<Student> {
                       data.isUniver = true;
                       final selected =
                       data.univer.where((element) => element.name == value);
-                      await data.getFaculty(selected.last.id!);
+                       data.getFaculty(selected.last.id!);
                       // data.getFaculty(data.isId!);
-                      print(selected);
+                      print('${selected}=================');
                       setState(() {
                         dropDown2 = value.toString();
                         _UniverOnClick = true;

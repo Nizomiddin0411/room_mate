@@ -8,6 +8,7 @@ import 'package:talaba_uy/screens/Settings/setting.dart';
 
 import '../Favorit_Ads_Page/favorit_ads_page.dart';
 import '../Favorit_Page/favorits_page.dart';
+import '../Notification_Page/notification_page.dart';
 
 
 class DrawerPage extends StatefulWidget {
@@ -63,7 +64,10 @@ class _DrawerPageState extends State<DrawerPage> {
                     ),
                     ListTile(
                         title:  Text("Bildirishnomalar").tr(),
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => const NotificationPage()));
+                        },
                         leading: const Icon(Icons.notifications_none)),
                     ListTile(
                       title:  Text("Chat").tr(),
