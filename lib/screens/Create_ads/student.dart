@@ -1,6 +1,7 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -67,6 +68,7 @@ class _StudentState extends State<Student> {
   bool _CountPupilOnClick = false;
   Color _colorForm = Colors.grey;
   bool _FormOnClick = false;
+  final TextEditingController _textEditingController = TextEditingController();
   var kurs = [
     '1-kurs',
     '2-kurs',
@@ -83,6 +85,20 @@ class _StudentState extends State<Student> {
     'Erkak',
     'Ayol',
   ];
+  var kvsherik = [
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
+    '6',
+    '7',
+    '8',
+    '9',
+    '10',
+    'Ayol',
+  ];
+  final List<String> genderItems = ["O'g'il bola ", "Qiz bola"];
   var kindOfMoment = [
     'kunlik',
     'oylik',
@@ -101,7 +117,11 @@ class _StudentState extends State<Student> {
     '4',
     '5-6',
   ];
+  final nameController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  bool value5 = false;
+  int id = 1;
+
   @override
   void initState() {
     super.initState();
@@ -112,7 +132,9 @@ class _StudentState extends State<Student> {
 
   @override
   Widget build(BuildContext context) {
-    context.read<AutCubit>().selectSettingLan(LangData.languageList.singleWhere((e) => e.locale == context.locale), context);
+    context.read<AutCubit>().selectSettingLan(
+        LangData.languageList.singleWhere((e) => e.locale == context.locale),
+        context);
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 12.h),
@@ -121,63 +143,32 @@ class _StudentState extends State<Student> {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  "Joylashuv".tr(),
-                  style: TextStyle(
-                      color: AppColors.mainColor,
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.w500),
+                Text("E’lonni nomlash"),
+                SizedBox(
+                  height: 5,
                 ),
-                SizedBox(height: 12.h),
-                Text(
-                  "Viloyat".tr(),
-                  style: TextStyle(
-                    color: AppColors.textColor,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                SizedBox(height: 4.h),
-                Container(
-                  width: 324.w,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
-                      border: Border.all(color: _colorRegion)),
-                  child: DropdownButtonFormField(
-                    hint: Padding(
-                      padding: EdgeInsets.only(left: 8.w),
-                      child: Text("Viloyatni tanlang".tr()),
-                    ),
-                    decoration: InputDecoration(border: InputBorder.none),
-                    // value: ,
-                    icon: Icon(Icons.arrow_drop_down_outlined),
-                    items: data.regions.map((e) {
-                      return DropdownMenuItem<String>(
-                        value: e.name ?? "",
-                        child: Padding(
-                          padding: EdgeInsets.only(left: 8.w),
-                          child: Text(e.name.toString()),
+                TextFormField(
+                  controller: _textEditingController,
+                  keyboardType: TextInputType.name,
+                  decoration: const InputDecoration(
+                      label: Text("E’lonni nomlang"),
+                      labelStyle: TextStyle(fontSize: 12.0, color: Colors.grey),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.black,
                         ),
-                      );
-                    }).toList(),
-                    onChanged: (newValue) async {
-                      setState(() {
-                        _RegionOnClick = true;
-                        _colorRegion = Colors.grey;
-                      });
-
-                      final selected = data.regions
-                          .where((element) => element.name == newValue);
-                      data.getDistrict(selected.last.id!);
-                      setState(() {
-                        dropDown = newValue.toString();
-                      });
-                    },
-                  ),
+                        borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.black,
+                          ),
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(20.0)))),
                 ),
                 SizedBox(height: 12.h),
                 Text(
-                  "Tuman".tr(),
+                  "Qaysi viloyatlik sherik izlayabsiz ?".tr(),
                   style: TextStyle(
                     color: AppColors.textColor,
                     fontSize: 14.sp,
@@ -185,67 +176,66 @@ class _StudentState extends State<Student> {
                   ),
                 ),
                 SizedBox(height: 4.h),
-                data.isDistrict
-                    ? Container(
-                        width: 324.w,
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                              color: _colorDistric,
+                Row(
+                  children: [
+                    Container(
+                      width: 245.w,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10.r),
+                          border: Border.all(color: _colorRegion)),
+                      child: DropdownButtonFormField(
+                        hint: Padding(
+                          padding: EdgeInsets.only(left: 8.w),
+                          child: Text("Viloyat/shaharni tanlang".tr()),
+                        ),
+                        decoration: InputDecoration(border: InputBorder.none),
+                        // value: ,
+                        icon: Icon(Icons.arrow_drop_down_outlined),
+                        items: data.regions.map((e) {
+                          return DropdownMenuItem<String>(
+                            value: e.name ?? "",
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 8.w),
+                              child: Text(e.name.toString()),
                             ),
-                            borderRadius: BorderRadius.circular(10.r)),
-                        child: DropdownButtonFormField(
-                          hint: Padding(
-                            padding: EdgeInsets.only(left: 8.w),
-                            child: Text("Tumanni tanlang".tr()),
-                          ),
-                          decoration: InputDecoration(
-                            border: InputBorder.none,
-                          ),
-                          icon: Icon(Icons.arrow_drop_down_outlined),
-                          items: data.districts.map((e) {
-                            return DropdownMenuItem<String>(
-                              onTap: () {
-                                print("${e.name}${e.id}");
-                                data.districtId = e.id.toString();
-                              },
-                              value: data.isDistrict
-                                  ? e.name.toString()
-                                  : data.defaultvalue,
-                              child: Padding(
-                                padding: EdgeInsets.only(left: 8.w),
-                                child: Text(data.isDistrict
-                                    ? e.name.toString()
-                                    : data.defaultvalue),
-                              ),
-                            );
-                          }).toList(),
-                          onChanged: (newValue) {
+                          );
+                        }).toList(),
+                        onChanged: (newValue) async {
+                          setState(() {
+                            _RegionOnClick = true;
+                            _colorRegion = Colors.grey;
+                          });
+
+                          final selected = data.regions
+                              .where((element) => element.name == newValue);
+                          data.getDistrict(selected.last.id!);
+                          setState(() {
+                            dropDown = newValue.toString();
+                          });
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      width: 7.w,
+                    ),
+                    Column(
+                      children: [
+                        Text("Ahamiyatsiz"),
+                        Checkbox(
+                          value: this.value5,
+                          onChanged: (bool? value) {
                             setState(() {
-                              _DiscritOnClick = true;
-                              _colorDistric = Colors.grey;
-                              dropDown = newValue.toString();
+                              this.value5 = value!;
                             });
                           },
                         ),
-                      )
-                    : Container(
-                        width: 324.w,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10.r)),
-                        child: DropdownButtonFormField(
-                            isExpanded: true,
-                            hint: Text("Tumanni tanlang".tr()),
-                            decoration: const InputDecoration(
-                                isDense: true,
-                                border: OutlineInputBorder(),
-                                focusColor: Colors.grey),
-                            icon: Icon(Icons.arrow_drop_down_outlined),
-                            items: [],
-                            onChanged: null),
-                      ),
+                      ],
+                    )
+                  ],
+                ),
                 SizedBox(height: 12.h),
                 Text(
-                  "Oliy o’quv yurti".tr(),
+                  "Qaysi OTM da o’qiydigan sherik izlayabsiz ?".tr(),
                   style: TextStyle(
                     color: AppColors.textColor,
                     fontSize: 14.sp,
@@ -297,481 +287,72 @@ class _StudentState extends State<Student> {
                 //     },
                 //   ),
                 // ),
-                Container(
-                  decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10.r),
-                  border: Border.all(color: _colorUniver)),
-                  child: DropdownSearch<String>(
-                    mode: Mode.MENU,
-                    items: data.univer.map((e) {
-                      if(dropDown2 == e.name){
-                        data.UniverId = e.id.toString();
-                        data.isId = e.id;
-                      }
+                Row(
+                  children: [
+                    Container(
+                      width: 250.w,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10.r),
+                          border: Border.all(color: _colorUniver)),
+                      child: DropdownSearch<String>(
+                        mode: Mode.MENU,
+                        items: data.univer.map((e) {
+                          if (dropDown2 == e.name) {
+                            data.UniverId = e.id.toString();
+                            data.isId = e.id;
+                          }
 
-                      // final selected = data.univer.where((element) => element.name == e.name);
-                      // data.getFaculty(selected.last.id!);
-                      return context.read<AutCubit>().selectedLang.index == 1 ? e.name.toString() : e.nameRu.toString();
-                    }).toList(),
-                    showSearchBox: true,
-                    // label: "Menu mode",
-                    // hint: "country in menu mode",
-                    onChanged: (value) async{
-                      data.isUniver = true;
-                      final selected =
-                      data.univer.where((element) => element.name == value);
-                       data.getFaculty(selected.last.id!);
-                      // data.getFaculty(data.isId!);
-                      print('${selected}=================');
-                      setState(() {
-                        dropDown2 = value.toString();
-                        _UniverOnClick = true;
-                        _colorUniver = Colors.grey;
-                      });
-                    },
-                    selectedItem: tr("OTM ni tanlang"),
-                  ),
-                ),
-                SizedBox(height: 12.h),
-                Text(
-                  "Yo’nalishni tanlang".tr(),
-                  style: TextStyle(
-                    color: AppColors.textColor,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                SizedBox(height: 4.h),
-                data.isFaculty
-                    ? Container(
-                        width: 324.w,
-                        decoration: BoxDecoration(
-                            border: Border.all(color: _colorFaculty),
-                            borderRadius: BorderRadius.circular(10.r)),
-                        child: DropdownButtonFormField(
-                          isExpanded: true,
-                          hint: Padding(
-                            padding: EdgeInsets.only(left: 8.w),
-                            child: Text(" tanlang".tr()),
-                          ),
-                          decoration: const InputDecoration(
-                            border: InputBorder.none,
-                          ),
-                          // value: ,
-                          icon: const Icon(Icons.arrow_drop_down_outlined),
-                          items: data.faculty.map((e) {
-                            return DropdownMenuItem<String>(
-                              onTap: () {
-                                data.FacutyId = e.id.toString();
-                              },
-                              value: data.isFaculty
-                                  ? e.name.toString()
-                                  : data.defaultFaculty,
-                              child: SizedBox(
-                                width:
-                                    MediaQuery.of(context).size.width - 150.w,
-                                child: Padding(
-                                  padding:  EdgeInsets.only(left: 8.w),
-                                  child: Text(data.isFaculty
-                                      ? e.name.toString()
-                                      : data.defaultFaculty),
-                                ),
-                              ),
-                            );
-                          }).toList(),
-                          onChanged: (newValue) async {
-                            _FacultyOnClick = true;
-                            _colorFaculty = Colors.grey;
+                          // final selected = data.univer.where((element) => element.name == e.name);
+                          // data.getFaculty(selected.last.id!);
+                          return context.read<AutCubit>().selectedLang.index ==
+                                  1
+                              ? e.name.toString()
+                              : e.nameRu.toString();
+                        }).toList(),
+                        showSearchBox: true,
+                        // label: "Menu mode",
+                        // hint: "country in menu mode",
+                        onChanged: (value) async {
+                          data.isUniver = true;
+                          final selected = data.univer
+                              .where((element) => element.name == value);
+                          data.getFaculty(selected.last.id!);
+                          // data.getFaculty(data.isId!);
+                          print('${selected}=================');
+                          setState(() {
+                            dropDown2 = value.toString();
+                            _UniverOnClick = true;
+                            _colorUniver = Colors.grey;
+                          });
+                        },
+                        selectedItem: tr("OTM ni tanlang"),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 7,
+                    ),
+                    Column(
+                      children: [
+                        Text("Ahamiyatsiz"),
+                        Checkbox(
+                          value: this.value5,
+                          onChanged: (bool? value) {
                             setState(() {
-                              dropDown2 = newValue.toString();
+                              this.value5 = value!;
                             });
                           },
                         ),
-                      )
-                    : Container(
-                        width: 324.w,
-                        decoration: BoxDecoration(
-                            border: Border.all(color: _colorFaculty),
-                            borderRadius: BorderRadius.circular(10.r)),
-                        child: DropdownButtonFormField(
-                            isExpanded: true,
-                            hint: Padding(
-                              padding: EdgeInsets.only(left: 8.w),
-                              child: Text("Yo’nalishni tanlang".tr()),
-                            ),
-                            decoration: const InputDecoration(
-                              border: InputBorder.none,
-                            ),
-                            // value: ,
-                            icon: const Icon(Icons.arrow_drop_down_outlined),
-                            items: const [],
-                            onChanged: null),
-                      ),
-                SizedBox(
-                  height: 18.h,
-                ),
-                Text(
-                  "Kurs".tr(),
-                  style: TextStyle(
-                    color: AppColors.textColor,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                SizedBox(height: 4.h),
-                Container(
-                  decoration: BoxDecoration(
-                      border: Border.all(color: _colorCourse),
-                      borderRadius: BorderRadius.circular(8.r)),
-                  child: Container(
-                    width: 324.w,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10.r)),
-                    child: DropdownButtonFormField2(
-                      isExpanded: true,
-                      hint: Padding(
-                        padding:  EdgeInsets.only(left: 8.w),
-                        child: Text("Kursingizni tanlang".tr()),
-                      ),
-                      decoration: const InputDecoration(
-                          border: InputBorder.none,),
-
-                      icon: Icon(Icons.arrow_drop_down_outlined),
-                      // value: snapshot.data!.length,
-                      items: kurs.map((e) {
-                        return DropdownMenuItem<String>(
-                          onTap: () {
-                            // print("${e.id}");
-                          },
-                          value: e.toString(),
-                          child: Padding(
-                            padding: EdgeInsets.only(left: 8.w),
-                            child: Text(e.toString().tr()),
-                          ),
-                        );
-                      }).toList(),
-                      onChanged: (newValue) {
-                        setState(() {
-                          _CourseOnClick = true;
-                          _colorCourse = Colors.grey;
-                          _titleCourse = newValue.toString();
-                        });
-                      },
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 18.h,
-                ),
-                Text(
-                  "Xonadon ma’lumoti".tr(),
-                  style: TextStyle(
-                      color: AppColors.mainColor,
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.w500),
-                ),
-                SizedBox(
-                  height: 14.h,
-                ),
-                Row(
-                  children: [
-                    Container(
-                      width: 20.w,
-                      height: 20.h,
-                      child: Checkbox(
-                        value: _checkHome,
-                        onChanged: (e) {
-                          setState(() {
-                            _checkHome = e!;
-                            if (_checkHome == true) {
-                              RoomOwner = '1';
-                            } else {
-                              RoomOwner = '2';
-                            }
-                          });
-                        },
-                      ),
-                    ),
-                    SizedBox(
-                      width: 12.w,
-                    ),
-                    Text("Uy egasi bilan birga yashashga roziman !!!".tr())
-                  ],
-                ),
-                SizedBox(height: 19.h),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Uy turi".tr(),
-                          style: TextStyle(
-                            color: AppColors.textColor,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        SizedBox(height: 4.h),
-                        Container(
-                          width: 152.w,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10.r),
-                              border: Border.all(color: _colorTypeHouse)),
-                          child: DropdownButtonFormField(
-                            hint: Padding(
-                              padding:  EdgeInsets.only(left: 8.w),
-                              child: Text("Kv yoki xovli".tr()),
-                            ),
-                            decoration:  InputDecoration(
-                                border: InputBorder.none),
-                            icon: Icon(Icons.arrow_drop_down_outlined),
-                            items: kvartira.map((e) {
-                              return DropdownMenuItem<String>(
-                                onTap: () {},
-                                value: e,
-                                child: Padding(
-                                  padding: EdgeInsets.only(left: 8.w),
-                                  child: Text(e.tr()),
-                                ),
-                              );
-                            }).toList(),
-                            onChanged: (newValue) {
-                              setState(() {
-                                _TypeHouseOnClick = true;
-                                _colorTypeHouse = Colors.grey;
-                                dropDown = newValue.toString();
-                              });
-                            },
-                          ),
-                        ),
                       ],
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Necha xona".tr(),
-                          style: TextStyle(
-                            color: AppColors.textColor,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        SizedBox(height: 4.h),
-                        Container(
-                          width: 152.w,
-                          decoration: BoxDecoration(
-                              border: Border.all(color: _colorRoomCount),
-                              borderRadius: BorderRadius.circular(10.r)),
-                          child: DropdownButtonFormField(
-                            hint: Padding(
-                              padding:  EdgeInsets.only(left: 8.w),
-                              child: Container(width: 118.w,child: Text("Xonalar soni".tr())),
-                            ),
-                            decoration: const InputDecoration(
-                                border: InputBorder.none),
-                            icon: Icon(Icons.arrow_drop_down_outlined),
-                            items: rooms.map((e) {
-                              return DropdownMenuItem<String>(
-                                onTap: () {},
-                                value: e,
-                                child: Padding(
-                                  padding: EdgeInsets.only(left: 8.w),
-                                  child: Text(e),
-                                ),
-                              );
-                            }).toList(),
-                            onChanged: (newValue) {
-                              setState(() {
-                                _RoomCountOnClick = true;
-                                _colorRoomCount = Colors.grey;
-                                roomCount = newValue.toString();
-                              });
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
+                    )
                   ],
                 ),
-                SizedBox(height: 12.h),
-                Text(
-                  "Ijara muddatini kiriting".tr(),
-                  style: TextStyle(
-                    color: AppColors.textColor,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                SizedBox(height: 4.h),
-                Container(
-                  decoration: BoxDecoration(
-                      border: Border.all(color: _colorRentType),
-                      borderRadius: BorderRadius.circular(8.r)),
-                  child: Container(
-                    width: 152.w,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10.r)),
-                    child: DropdownButtonFormField(
-                      hint: Padding(
-                        padding: EdgeInsets.only(left: 8.w),
-                        child: Text("Ijara muddati".tr()),
-                      ),
-                      decoration: const InputDecoration(
-                          border: InputBorder.none),
-                      icon: Icon(Icons.arrow_drop_down_outlined),
-                      items: kindOfMoment.map((e) {
-                        return DropdownMenuItem<String>(
-                          onTap: () {},
-                          value: e,
-                          child: Padding(
-                            padding:  EdgeInsets.only(left: 8.w),
-                            child: Text(e.tr()),
-                          ),
-                        );
-                      }).toList(),
-                      onChanged: (newValue) {
-                        setState(() {
-                          _RentTypeOnClick = true;
-                          _colorRentType = Colors.grey;
-                          TypeOfRent = newValue.toString();
-                        });
-                      },
-                    ),
-                  ),
-                ),
-                SizedBox(height: 12.h),
-                Text(
-                  "Narxi".tr(),
-                  style: TextStyle(
-                    color: AppColors.textColor,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                SizedBox(height: 4.h),
-                Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                      border: Border.all(color: _colorTypeCost),
-                      borderRadius: BorderRadius.circular(4.r)),
-                  child: Container(
-                    padding: EdgeInsets.only(left: 16.w),
-                    child: TextFormField(
-                      onChanged: (e) {
-                        setState(() {
-                          if (e.length > 0) {
-                            _TypeCostOnClick = true;
-                            _colorTypeCost = Colors.grey;
-                          } else {
-                            _TypeCostOnClick = false;
-                            _colorTypeCost = Colors.red;
-                          }
-                        });
-                      },
-                      controller: costcontroller,
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: "Xonadonni narxini kiriting / oyiga".tr(),
-                        hintStyle:
-                            TextStyle(fontSize: 14.sp, color: Colors.grey),
-                        suffixIcon: Container(
-                          decoration: BoxDecoration(
-                              border: Border(
-                                  left:
-                                      BorderSide(color: Colors.grey.shade300))),
-                          padding: EdgeInsets.only(left: 8.w, top: 0),
-                          width: 70.w,
-                          height: 0,
-                          child: DropdownButton(
-                            underline: Container(),
-                            value: _dropownUsd,
-                            onChanged: (String? e) {
-                              setState(() {
-                                _dropownUsd = e;
-                                if (_dropownUsd == 'sum') {
-                                  typeOfPayment = '1';
-                                } else {
-                                  typeOfPayment = '2';
-                                }
-                              });
-                            },
-                            hint: Text(
-                              "SO'M".tr(),
-                              style: TextStyle(
-                                  fontSize: 14.sp, color: AppColors.textColor),
-                            ),
-                            items: [
-                              DropdownMenuItem(
-                                child: Text(
-                                  "SO'M".tr(),
-                                  style: TextStyle(
-                                      fontSize: 14.sp,
-                                      color: AppColors.textColor),
-                                ),
-                                value: "sum",
-                              ),
-                              DropdownMenuItem(
-                                child: Text(
-                                  "USD",
-                                  style: TextStyle(
-                                      fontSize: 14.sp,
-                                      color: AppColors.textColor),
-                                ),
-                                value: "usd",
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                      cursorColor: Colors.grey.shade800,
-                      cursorWidth: 1.5.w,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 16.h,
-                ),
                 Row(
-                  children: [
-                    Container(
-                      width: 20.w,
-                      height: 20.h,
-                      decoration: BoxDecoration(),
-                      child: Checkbox(
-                        value: _checkMetro,
-                        onChanged: (e) {
-                          setState(() {
-                            _checkMetro = e!;
-                          });
-                        },
-                      ),
-                    ),
-                    SizedBox(
-                      width: 12.w,
-                    ),
-                    Text("Metroga yaqin".tr())
-                  ],
-                ),
-                SizedBox(height: 22.h),
-                Text(
-                  "Qo’shimcha".tr(),
-                  style: TextStyle(
-                      color: AppColors.mainColor,
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.w500),
-                ),
-                SizedBox(height: 12.h),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Sheriklarni tanlang".tr(),
+                          "Sherik izlayabmiz".tr(),
                           style: TextStyle(
                             color: AppColors.textColor,
                             fontSize: 14.sp,
@@ -787,10 +368,13 @@ class _StudentState extends State<Student> {
                           child: DropdownButtonFormField(
                             hint: Padding(
                               padding: EdgeInsets.only(left: 8.w),
-                              child: Text("Qiz,O'g'il".tr(), style: TextStyle(fontSize: 14.sp),),
+                              child: Text(
+                                "Qiz,O'g'il".tr(),
+                                style: TextStyle(fontSize: 14.sp),
+                              ),
                             ),
-                            decoration: const InputDecoration(
-                                border: InputBorder.none),
+                            decoration:
+                                const InputDecoration(border: InputBorder.none),
                             icon: Icon(Icons.arrow_drop_down_outlined),
                             items: genderone.map((e) {
                               return DropdownMenuItem<String>(
@@ -813,11 +397,14 @@ class _StudentState extends State<Student> {
                         ),
                       ],
                     ),
+                    SizedBox(
+                      width: 20,
+                    ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Ijarachilar soni".tr(),
+                          "Nechta sherik izlayabsiz ?".tr(),
                           style: TextStyle(
                             color: AppColors.textColor,
                             fontSize: 14.sp,
@@ -826,33 +413,36 @@ class _StudentState extends State<Student> {
                         ),
                         SizedBox(height: 4.h),
                         Container(
-                          width: 154.w,
+                          width: 152.w,
                           decoration: BoxDecoration(
-                              border: Border.all(color: _colorCountPupil),
-                              borderRadius: BorderRadius.circular(10.r)),
+                              borderRadius: BorderRadius.circular(10.r),
+                              border: Border.all(color: _colorGender)),
                           child: DropdownButtonFormField(
                             hint: Padding(
                               padding: EdgeInsets.only(left: 8.w),
-                              child: Container(width: 115,child: Text("Soni".tr(), style: TextStyle(fontSize: 14.sp),)),
+                              child: Text(
+                                "1 - 10".tr(),
+                                style: TextStyle(fontSize: 14.sp),
+                              ),
                             ),
-                            decoration: const InputDecoration(
-                                border: InputBorder.none,),
+                            decoration:
+                                const InputDecoration(border: InputBorder.none),
                             icon: Icon(Icons.arrow_drop_down_outlined),
-                            items: ijarachi.map((e) {
+                            items: kvsherik.map((e) {
                               return DropdownMenuItem<String>(
                                 onTap: () {},
                                 value: e,
                                 child: Padding(
                                   padding: EdgeInsets.only(left: 8.w),
-                                  child: Text(e),
+                                  child: Text(e.tr()),
                                 ),
                               );
                             }).toList(),
                             onChanged: (newValue) {
                               setState(() {
-                                _CountPupilOnClick = true;
-                                _colorCountPupil = Colors.grey;
-                                dropDown = newValue.toString();
+                                _GenderOnClick = true;
+                                _colorGender = Colors.grey;
+                                _titleGendor = newValue.toString();
                               });
                             },
                           ),
@@ -861,50 +451,109 @@ class _StudentState extends State<Student> {
                     ),
                   ],
                 ),
-                SizedBox(height: 12.h),
-                Text(
-                  "E’lonni nomlash".tr(),
-                  style: TextStyle(
-                    color: AppColors.textColor,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                SizedBox(height: 4.h),
-                Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                      border: Border.all(color: _colorForm),
-                      borderRadius: BorderRadius.circular(4.r)),
-                  child: Container(
-                    padding: EdgeInsets.only(left: 16.w),
-                    child: TextFormField(
-                      onChanged: (e) {
-                        setState(() {
-                          if (e.length > 0) {
-                            _FormOnClick = true;
-                            _colorForm = Colors.grey;
-                          } else {
-                            _FormOnClick = false;
-                            _colorForm = Colors.red;
-                          }
-                        });
-                      },
-                      controller: titlecontroller,
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: "E’lonni nomlang".tr(),
-                        hintStyle:
-                            TextStyle(fontSize: 14.sp, color: Colors.grey),
-                      ),
-                      cursorColor: Colors.grey.shade800,
-                      cursorWidth: 1.5.w,
+                Column(
+                  children: [
+                    Row(
+                      children: [
+                        Text("Telefon raqami").tr(),
+                      ],
                     ),
-                  ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          height: 60,
+                          width: 240,
+                          child: TextFormField(
+                            inputFormatters: [
+                              TextInputMask(
+                                mask: '\\+ 999 99 999 99 99',
+                                placeholder: '_ ',
+                                maxPlaceHolders: 13,
+                              )
+                            ],
+                            autovalidateMode: AutovalidateMode.always,
+                            keyboardType: TextInputType.phone,
+                            controller: nameController,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: "+998 ** *** ** **".tr(),
+                            ),
+                          ),
+                        ),
+                        SizedBox(
+                          width: 7.w,
+                        ),
+                        Column(
+                          children: [
+                            Text("Ko’rinmasin"),
+                            Checkbox(
+                              value: this.value5,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  this.value5 = value!;
+                                });
+                              },
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ],
+                ),
+                SizedBox(height: 10,),
+                Column(
+                  children: [
+                   Row(children: [
+                     Text("Ijaraga turishga joyingiz bormi ?",style: TextStyle(fontSize: 15),),
+                   ],),
+                    Row(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Radio(
+                              value: 1,
+                              groupValue: id,
+                              onChanged: (val) {
+                                setState(() {
+                                  id = 1;
+                                });
+                              },
+                            ),
+                            Text(
+                              'Ha',
+                              style: new TextStyle(fontSize: 17.0),
+                            ),
+                            SizedBox(width: 55,),
+                            Radio(
+                              value: 2,
+                              groupValue: id,
+                              onChanged: (val) {
+                                setState(() {
+
+                                  id = 2;
+                                });
+                              },
+                            ),
+                            Text(
+                              "Yo'q",
+                              style: new TextStyle(
+                                fontSize: 17.0,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    )
+
+                  ],
                 ),
                 SizedBox(height: 12.h),
                 Text(
-                  "Qo’shimcha ma’lumot".tr(),
+                  "Qo’shimcha xususiyatlarni kiriting ".tr(),
                   style: TextStyle(
                     color: AppColors.textColor,
                     fontSize: 14.sp,
@@ -946,17 +595,23 @@ class _StudentState extends State<Student> {
                             primary: AppColors.buttonLinear),
                         onPressed: () async {
                           setState(() {
-                            if (_titleCourse == '1-kurs' || _titleCourse == '1-курс') {
+                            if (_titleCourse == '1-kurs' ||
+                                _titleCourse == '1-курс') {
                               Course = '1';
-                            } else if (_titleCourse == '2-kurs' || _titleCourse == '2-курс') {
+                            } else if (_titleCourse == '2-kurs' ||
+                                _titleCourse == '2-курс') {
                               Course = '2';
-                            } else if (_titleCourse == '3-kurs' || _titleCourse == '3-курс') {
+                            } else if (_titleCourse == '3-kurs' ||
+                                _titleCourse == '3-курс') {
                               Course = '3';
-                            } else if (_titleCourse == '4-kurs' || _titleCourse == '4-курс') {
+                            } else if (_titleCourse == '4-kurs' ||
+                                _titleCourse == '4-курс') {
                               Course = '4';
-                            } else if (_titleCourse == '5-kurs' || _titleCourse == '5-курс') {
+                            } else if (_titleCourse == '5-kurs' ||
+                                _titleCourse == '5-курс') {
                               Course = '5';
-                            } else if (_titleCourse == '6-kurs' || _titleCourse == '6-курс') {
+                            } else if (_titleCourse == '6-kurs' ||
+                                _titleCourse == '6-курс') {
                               Course = '6';
                             }
                           });
@@ -968,7 +623,8 @@ class _StudentState extends State<Student> {
                             }
                           });
                           setState(() {
-                            if (TypeOfRent == 'kunlik' || TypeOfRent == 'день') {
+                            if (TypeOfRent == 'kunlik' ||
+                                TypeOfRent == 'день') {
                               _titleTime = '1';
                             } else {
                               _titleTime = '2';
@@ -982,29 +638,13 @@ class _StudentState extends State<Student> {
                             }
                           });
                           setState(() {
-                            if (_titleGendor == 'Ayol' || _titleGendor == 'Женщина') {
+                            if (_titleGendor == 'Ayol' ||
+                                _titleGendor == 'Женщина') {
                               gender = '2';
                             } else {
                               gender = '1';
                             }
                           });
-                          // print('-----------------');
-                          // print(Course);
-                          // print(RoomOwner);
-                          // print(TypeHouse);
-                          // // print(roomCount);
-                          // print(_titleTime);
-                          // print(costcontroller?.text);
-                          // print(typeOfPayment);
-                          // print(subwayof);
-                          // print(gender);
-                          // print(_titleCount);
-                          // print(titlecontroller?.text);
-                          // print(othercontroller?.text);
-                          // print('-----------------');
-                          // print(data.districtId);
-                          // print(data.UniverId);
-
                           await CreateAdsStudent().CreateAds(
                             districtId: data.districtId,
                             UniderId: data.UniverId,
@@ -1022,66 +662,10 @@ class _StudentState extends State<Student> {
                             description: othercontroller?.text,
                           );
 
-                          if (_RegionOnClick &&
-                              _DiscritOnClick &&
-                              _UniverOnClick &&
-                              _FacultyOnClick &&
-                              _CourseOnClick &&
-                              _TypeHouseOnClick &&
-                              _RoomCountOnClick &&
-                              _RentTypeOnClick &&
-                              _TypeCostOnClick &&
-                              _GenderOnClick &&
-                              _CountPupilOnClick &&
-                              _FormOnClick) {
-                            Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => MenuPage()),
-                                (route) => false);
-                          } else {
-                            setState(() {
-                              if (!_RegionOnClick) {
-                                _colorRegion = Colors.red;
-                              }
-                              if (!_DiscritOnClick) {
-                                _colorDistric = Colors.red;
-                              }
-                              if (!_UniverOnClick) {
-                                _colorUniver = Colors.red;
-                              }
-                              if (!_FacultyOnClick) {
-                                _colorFaculty = Colors.red;
-                              }
-                              if (!_CourseOnClick) {
-                                _colorCourse = Colors.red;
-                              }
-                              if (!_TypeHouseOnClick) {
-                                _colorTypeHouse = Colors.red;
-                              }
-                              if (!_RoomCountOnClick) {
-                                _colorRoomCount = Colors.red;
-                              }
-                              if (!_RentTypeOnClick) {
-                                _colorRentType = Colors.red;
-                              }
-                              if (!_TypeCostOnClick) {
-                                _colorTypeCost = Colors.red;
-                              }
-                              if (!_GenderOnClick) {
-                                _colorGender = Colors.red;
-                              }
-                              if (!_CountPupilOnClick) {
-                                _colorCountPupil = Colors.red;
-                              }
-                              if (!_FormOnClick) {
-                                _colorForm = Colors.red;
-                              }
-                            });
-                          }
+
                         },
                         child: Text(
-                          "E’lon saqlash".tr(),
+                          "Keyingi ".tr(),
                           style: TextStyle(
                               fontSize: 20.sp, fontWeight: FontWeight.w500),
                         ),

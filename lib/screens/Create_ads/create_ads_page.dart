@@ -47,30 +47,9 @@ class _CreateAdsPageState extends State<CreateAdsPage>
         title: Text("E’lon yaratish".tr(),
             style: TextStyle(color: AppColors.mainColor)),
         centerTitle: true,
-        bottom: TabBar(
-          controller: _tabController,
-          labelColor: AppColors.mainColor,
-          unselectedLabelColor: AppColors.textColor,
-          indicatorWeight: 4.h,
-          tabs: [
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 8.h),
-              child: Text(
-                "Talabaman".tr(),
-                style: TextStyle(fontWeight: FontWeight.w500),
-              ),
-            ),
-           Text(
-              "Uy beruvchiman".tr(),
-              style: TextStyle(fontWeight: FontWeight.w500),
-            ),
-          ],
-        ),
       ),
-      body: TabBarView(
-        controller: _tabController,
-        children:  [Student(), Owner()],
-      ),
+      body: Student(),
+
     );
   }
 }
