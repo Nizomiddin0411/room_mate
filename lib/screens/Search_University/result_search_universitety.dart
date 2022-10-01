@@ -1,5 +1,6 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -25,8 +26,10 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
   void initState() {
     super.initState();
     Provider.of<UniversitetProvider>(context, listen: false).getViloyat();
-    Provider.of<SearchUniversitet>(context, listen: false).getAds(widget.name,"0","0","0");
+    Provider.of<SearchUniversitet>(context, listen: false)
+        .getAds(widget.name, "0", "0", "0");
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -52,7 +55,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
             ).tr(),
           ),
           flexibleSpace: Padding(
-            padding: EdgeInsets.fromLTRB(18.w, 100.h, 18.w, 18.h),
+            padding: EdgeInsets.fromLTRB(18.w, 87.h, 18.w, 18.h),
             child: Column(
               children: [
                 Container(
@@ -89,33 +92,33 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                   height: 50.h,
                   width: 324.w,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(6.r),
-                      color: AppColors.secondBackgroud),
-                  child: Column(
+                    borderRadius: BorderRadius.circular(6.r),
+                    border: Border.all(color: Colors.blue),
+                  ),
+                  child: Row(
                     children: [
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text(
-                            "Filtr",
-                            style: TextStyle(color: Colors.black),
-                          ).tr(),
-                          InkWell(
-                            onTap: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => ResultFiltrPage(
-                                            id: widget.id,
-                                          )));
-                            },
-                            child: const Padding(
-                              padding: EdgeInsets.all(2.0),
-                              child: Center(
-                                child: Icon(
-                                  Icons.tune,
-                                  color: AppColors.mainColor,
-                                ),
+                          SizedBox(
+                            width: 10,
+                          ),
+                          IconButton(onPressed: (){
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>ResultFiltrPage(id: widget.id,)));
+                          }, icon: Icon(Icons.tune)),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Text("Qidirish "),
+                          SizedBox(
+                            width: 200,
+                          ),
+                          const Padding(
+                            padding: EdgeInsets.all(2.0),
+                            child: Center(
+                              child: Icon(
+                                Icons.add_location_alt_outlined,
+                                color: AppColors.mainColor,
                               ),
                             ),
                           )
@@ -130,10 +133,10 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: const [
-                    // Text(
-                    //   "Sherik",
-                    //   style: TextStyle(color: Colors.blue, fontSize: 14),
-                    // ),
+                    Text(
+                      "Sherik izlayotgan",
+                      style: TextStyle(color: Colors.blue, fontSize: 24),
+                    ),
                   ],
                 )
               ],
@@ -144,146 +147,162 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Consumer<SearchUniversitet>(
-              builder: (_, data, __) {
-                return ListView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    itemCount: data.ads.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Padding(
-                        padding: const EdgeInsets.all(12.0),
-                        child: SingleChildScrollView(
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Container(
-                                width: 324.w,
-                                height: 110.h,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(6.r),
-                                    color: AppColors.secondBackgroud),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Padding(
-                                          padding: EdgeInsets.all(6.0.w),
-                                          child: Text(
-                                            '${data.ads[index].fullName}',
-                                            style: TextStyle(fontSize: 18.sp),
-                                          ),
-                                        ),
-                                        Padding(
-                                          padding: EdgeInsets.fromLTRB(
-                                              1.w, 0, 8.w, 0),
-                                          child: const Icon(
-                                            Icons.favorite_border,
-                                            color: AppColors.error,
-                                          ),
-                                        )
-                                      ],
-                                    ),
-                                    Padding(
-                                      padding:
-                                          EdgeInsets.fromLTRB(8.w, 0, 8.w, 0),
-                                      child: Text(
-                                        '',
-                                        style: TextStyle(
-                                            color: AppColors.mainColor,
-                                            fontSize: 24.sp),
+            ListView.builder(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                itemCount: 5,
+                itemBuilder: (BuildContext context, int index) {
+                  return Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: SingleChildScrollView(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Container(
+                            width: 324.w,
+                            height: 170.h,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(6.r),
+                                color: AppColors.secondBackgroud),
+                            child: Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text("Karimov Ulug’bek"),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text("Axbarot havfsizligi ta’lim yo’nalishi"),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        "Talaba : Erkak",
+                                        style: TextStyle(fontSize: 15.sp),
                                       ),
-                                    ),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Padding(
-                                          padding: EdgeInsets.fromLTRB(
-                                              8.w, 0, 8.w, 0),
-                                          child: Text(
-                                            data.ads[index].gender.toString() ==
-                                                    '1'
-                                                ? tr("jinsi") +
-                                                    ":" +
-                                                    tr("Erkak")
-                                                : tr("jinsi") +
-                                                    ":" +
-                                                    tr("Ayol"),
-                                            // "jinsi",
-                                            style: TextStyle(fontSize: 15.sp),
-                                          ),
-                                        ),
-                                        Text(tr("Kursi:") +
-                                            data.ads[index].course.toString()),
-                                        InkWell(
-                                            onTap: () {
-                                              Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      ChatPage(
-                                                          data.ads[index]
-                                                              .fullName!,
-                                                          data.ads[index].id!),
-                                                ),
-                                              );
-                                            },
+                                      SizedBox(
+                                        width: 45,
+                                      ),
+                                      Text("Kursi : 2"),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        "Viloyat / Shahar: Xorazm ",
+                                        style: TextStyle(fontSize: 15.sp),
+                                      ),
+                                      SizedBox(
+                                        width: 45,
+                                      ),
+                                      Text("Tuman : Xonqo"),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 12,
+                                  ),
+                                  Row(
+                                    children: [
+                                      InkWell(
+                                        onTap: () {},
+                                        child: Padding(
+                                          padding:
+                                              EdgeInsets.fromLTRB(0, 0, 7.w, 0),
+                                          child: Container(
+                                            height: 42.h,
+                                            width: 90.w,
                                             child: Padding(
                                               padding: EdgeInsets.fromLTRB(
-                                                  0, 0, 7.w, 0),
-                                              child: Container(
-                                                height: 35.h,
-                                                width: 90.w,
-                                                child: Padding(
-                                                  padding: EdgeInsets.fromLTRB(
-                                                      5.w, 0, 5.w, 0),
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .spaceBetween,
-                                                    children: [
-                                                      const Icon(
-                                                        Icons.email,
-                                                        color: Colors.blue,
-                                                      ),
-                                                      SizedBox(
-                                                        width: 10.w,
-                                                      ),
-                                                      Text(
-                                                        tr("Aloqa"),
-                                                        style: const TextStyle(
-                                                            color:
-                                                                Colors.black),
-                                                      )
-                                                    ],
+                                                  5.w, 0, 5.w, 0),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  const Icon(
+                                                    Icons.email,
+                                                    color: Colors.blue,
                                                   ),
-                                                ),
-                                                decoration: BoxDecoration(
-                                                    color: AppColors
-                                                        .backgroundWhite,
-                                                    border: Border.all(
-                                                        color: Colors.blue),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10.r)),
+                                                  SizedBox(
+                                                    width: 10.w,
+                                                  ),
+                                                  Text(
+                                                    tr("Aloqa"),
+                                                    style: const TextStyle(
+                                                        color: Colors.black),
+                                                  )
+                                                ],
                                               ),
-                                            )),
-                                      ],
-                                    ),
-                                  ],
-                                ),
+                                            ),
+                                            decoration: BoxDecoration(
+                                                color:
+                                                    AppColors.backgroundWhite,
+                                                border: Border.all(
+                                                    color: Colors.blue),
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        10.r)),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 20,
+                                      ),
+                                      InkWell(
+                                          onTap: () {},
+                                          child: Padding(
+                                            padding: EdgeInsets.fromLTRB(
+                                                0, 0, 7.w, 0),
+                                            child: Container(
+                                              height: 42.h,
+                                              width: 187.w,
+                                              child: Padding(
+                                                padding: EdgeInsets.fromLTRB(
+                                                    5.w, 0, 5.w, 0),
+                                                child: Row(
+                                                  children: [
+                                                    const Icon(
+                                                      Icons.phone,
+                                                      color: Colors.blue,
+                                                    ),
+                                                    SizedBox(
+                                                      width: 10,
+                                                    ),
+                                                    Text(
+                                                      "+998 99 343 98 54",
+                                                      style: const TextStyle(
+                                                          color: Colors.black),
+                                                    )
+                                                  ],
+                                                ),
+                                              ),
+                                              decoration: BoxDecoration(
+                                                  color:
+                                                      AppColors.backgroundWhite,
+                                                  border: Border.all(
+                                                      color: Colors.blue),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          10.r)),
+                                            ),
+                                          )),
+                                    ],
+                                  )
+                                ],
                               ),
-                            ],
+                            ),
                           ),
-                        ),
-                      );
-                    });
-              },
-            ),
+                        ],
+                      ),
+                    ),
+                  );
+                })
           ],
         ),
       ),

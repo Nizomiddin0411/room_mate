@@ -20,6 +20,7 @@ import 'package:talaba_uy/models/lang_model.dart';
 import 'package:talaba_uy/provider/universitet_provider.dart';
 import 'package:talaba_uy/screens/Autorization/LoginPage.dart';
 import 'package:talaba_uy/screens/Autorization/offerto_dart.dart';
+import 'package:talaba_uy/screens/Autorization/registratsiya%20succedful_page.dart';
 import 'package:talaba_uy/services/get_district_service.dart';
 import 'package:talaba_uy/services/get_faculty_service.dart';
 import 'package:talaba_uy/services/get_region_service.dart';
@@ -776,13 +777,13 @@ class _StudentUserState extends State<StudentUser> {
               ),
               ElevatedButton(
                 onPressed: () async {
-                  showDialog(
-                      context: context,
-                      builder: (context) {
-                        return AlertDialog(
-                          title: Text("Ro’yxatdan muvaffaqiyatli o’tdingiz"),
-                        );
-                      });
+                  // showDialog(
+                  //     context: context,
+                  //     builder: (context) {
+                  //       return AlertDialog(
+                  //         title: Text("Ro’yxatdan muvaffaqiyatli o’tdingiz"),
+                  //       );
+                  //     });
 
                   if (kurs &&
                       viloyat &&
@@ -811,7 +812,7 @@ class _StudentUserState extends State<StudentUser> {
                     print('${nameController.text} maulotiiiiiiiii+++++++++++');
                     print('${dropdownvalue} maulotiiiiiiiii+++++++++++');
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => LoginPage()));
+                        MaterialPageRoute(builder: (context) => SuccedfulPage()));
                   } else {
                     kursColor = Colors.red;
                     univerColor = Colors.red;

@@ -68,25 +68,26 @@ class _SearchPageState extends State<SearchPage> {
                       controller: _controller,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
-                        // label: Text("Search"),
+                        label: Text("Search"),
                         suffixIcon: IconButton(
                           onPressed: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => UniverFiltrPage()));
                           },
                           icon: Icon(
-                            Icons.cancel_outlined,
+                            Icons.add_location_alt_outlined,
                             color: AppColors.textColor,
                           ),
                         ),
                         prefixIcon: IconButton(
                           icon: Icon(
-                            Icons.search,
+                            Icons.tune,
                             color: AppColors.textColor,
                           ),
                           onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => UniverFiltrPage()));
+
                             Provider.of<SearchUniversitet>(context,
                                     listen: false)
                                 .searchuniversitet;

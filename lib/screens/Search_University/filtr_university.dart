@@ -217,7 +217,27 @@ class _UniverFiltrPageState extends State<UniverFiltrPage> {
                   SizedBox(
                     height: 10,
                   ),
-                  SizedBox(height: 360.h),
+                  SizedBox(height: 300.h),
+
+                  Container(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          padding: EdgeInsets.symmetric(vertical: 14.h),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.r),side: BorderSide(color: Colors.red)),
+                          primary: Colors.white),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text(
+                        "Tozalash",
+                        style:
+                        TextStyle(color:Colors.red,fontSize: 20.sp, fontWeight: FontWeight.w500),
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 25,),
                   Container(
                     width: double.infinity,
                     child: ElevatedButton(
