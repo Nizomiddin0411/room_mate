@@ -18,6 +18,7 @@ class AccountPage extends StatefulWidget {
 class _AccountPageState extends State<AccountPage> {
   final bool _switchValue = false;
   bool isSwitched = false;
+  bool isSwitchedSecond = false;
   String name = Hive.box('fullname').get('fullname').toString();
   String number = Hive.box('phone').get('phone').toString();
 
@@ -120,13 +121,13 @@ class _AccountPageState extends State<AccountPage> {
                     borderRadius: BorderRadius.circular(8.r),
                   ),
                   child: const Icon(
-                    Icons.supervisor_account,
+                    Icons.call,
                     color: AppColors.mainColor,
                   )),
               title: Text(
-                "Sherik kerak",
+                "Telefon raqamni ko’rinmas qilish",
                 style: TextStyle(fontSize: 18.sp),
-              ).tr(),
+              ),
               trailing: Container(
                 height: 60.h,
                 width: 80.w,
@@ -137,6 +138,37 @@ class _AccountPageState extends State<AccountPage> {
                      ChangeProfile().ChangeProf(id: _switchValue ? '2': '1');
                     setState(() {
                       isSwitched = value;
+                    });
+                  },
+                ),
+              ),
+            ),
+            ListTile(
+              leading: Container(
+                  width: 40.w,
+                  height: 40.h,
+                  decoration: BoxDecoration(
+                    color: AppColors.iconBack,
+                    borderRadius: BorderRadius.circular(8.r),
+                  ),
+                  child: const Icon(
+                    Icons.visibility_off,
+                    color: AppColors.mainColor,
+                  )),
+              title: Text(
+                "Profilni ro’yxatda ko’rinmas qilish",
+                style: TextStyle(fontSize: 18.sp),
+              ),
+              trailing: Container(
+                height: 60.h,
+                width: 80.w,
+                child:
+                Switch(
+                  value: isSwitchedSecond,
+                  onChanged: (value) {
+                    // ChangeProfile().ChangeProf(id: _switchValue ? '2': '1');
+                    setState(() {
+                      isSwitchedSecond = value;
                     });
                   },
                 ),
