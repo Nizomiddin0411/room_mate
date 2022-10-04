@@ -1,4 +1,5 @@
 import 'package:easy_localization/easy_localization.dart';
+import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,10 +10,8 @@ import 'package:provider/provider.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
 
 import 'package:talaba_uy/provider/region_provider.dart';
-import 'package:talaba_uy/screens/menu/menu.dart';
-
+import 'package:talaba_uy/screens/Create_ads/owner_take_photo.dart';
 import '../../models/get_district_model.dart';
-import '../../services/post_create_ads_service.dart';
 
 class Owner extends StatefulWidget {
   const Owner({Key? key}) : super(key: key);
@@ -22,7 +21,6 @@ class Owner extends StatefulWidget {
 }
 
 class _OwnerState extends State<Owner> {
-  // bool isDistrict = false;
   bool _checkHome = false;
   bool _checkMetro = false;
   String RoomOwner = '';
@@ -58,15 +56,18 @@ class _OwnerState extends State<Owner> {
   Color _colorCountPupil = Colors.grey;
   bool _CountPupilOnClick = false;
   Color _colorForm = Colors.grey;
-  bool _FormOnClick = false;
-
+  bool value5 = false;
+  var pricetype = [
+    "1 ta odam kerak",
+    "kishi boshiga 500",
+  ];
   var kvartira = [
     'Kvartira',
     'Xovli',
   ];
   var gender = [
-    'Erkak',
-    'Ayol',
+    "O'g'il bolaga",
+    'Qiz bolaga',
   ];
   var kindOfMoment = [
     'kunlik',
@@ -86,6 +87,7 @@ class _OwnerState extends State<Owner> {
     '4',
     '5-6',
   ];
+
   @override
   void initState() {
     addressController = TextEditingController();
@@ -94,6 +96,17 @@ class _OwnerState extends State<Owner> {
     inputcontroller = TextEditingController();
     super.initState();
   }
+  int id = 1;
+  int id2 = 2;
+  int id3 = 3;
+  int id4 = 4;
+  int id5 = 5;
+  int idhouse = 6;
+  bool value1 = false;
+  bool value2 = false;
+  bool value3 = false;
+  bool value4 = false;
+  bool value6 = false;
 
   @override
   Widget build(BuildContext context) {
@@ -105,12 +118,100 @@ class _OwnerState extends State<Owner> {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  "Joylashuv".tr(),
-                  style: TextStyle(
-                      color: AppColors.mainColor,
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.w500),
+                Text("E’lonni nomlash"),
+                SizedBox(
+                  height: 5,
+                ),
+                TextFormField(
+                  controller: costController,
+                  keyboardType: TextInputType.name,
+                  decoration: const InputDecoration(
+                      label: Text("E’lonni nomlang"),
+                      labelStyle: TextStyle(fontSize: 12.0, color: Colors.grey),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: Colors.black,
+                        ),
+                        borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                          borderSide: BorderSide(
+                            color: Colors.black,
+                          ),
+                          borderRadius:
+                              BorderRadius.all(Radius.circular(20.0)))),
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Row(
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Ijaraga beraman".tr(),
+                          style: TextStyle(
+                            color: AppColors.textColor,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        SizedBox(height: 4.h),
+                        Container(
+                          width: 225.w,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10.r),
+                              border: Border.all(color: _colorGender)),
+                          child: DropdownButtonFormField(
+                            hint: Padding(
+                              padding: EdgeInsets.only(left: 8.w),
+                              child: Text(
+                                "O’gil bollarga / Qizlarga".tr(),
+                                style: TextStyle(fontSize: 14.sp),
+                              ),
+                            ),
+                            decoration:
+                                const InputDecoration(border: InputBorder.none),
+                            icon: Icon(Icons.arrow_drop_down_outlined),
+                            items: gender.map((e) {
+                              return DropdownMenuItem<String>(
+                                onTap: () {},
+                                value: e,
+                                child: Padding(
+                                  padding: EdgeInsets.only(left: 8.w),
+                                  child: Text(e.tr()),
+                                ),
+                              );
+                            }).toList(),
+                            onChanged: (newValue) {
+                              setState(() {
+                                _GenderOnClick = true;
+                                _colorGender = Colors.grey;
+                              });
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(width: 15),
+                    Column(
+                      children: [
+                        Text("Ahamiyatsiz"),
+                        Checkbox(
+                          value: this.value5,
+                          onChanged: (bool? value) {
+                            setState(() {
+                              this.value5 = value!;
+                            });
+                          },
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      width: 20,
+                    ),
+                  ],
                 ),
                 SizedBox(height: 12.h),
                 Text("Viloyat".tr(),
@@ -181,7 +282,8 @@ class _OwnerState extends State<Owner> {
                             child: Text("Tumanni tanlang".tr()),
                           ),
                           decoration: const InputDecoration(
-                               border: InputBorder.none,),
+                            border: InputBorder.none,
+                          ),
                           icon: Icon(Icons.arrow_drop_down_outlined),
                           items: data.districts.map((e) {
                             return DropdownMenuItem<String>(
@@ -214,7 +316,7 @@ class _OwnerState extends State<Owner> {
                     : Container(
                         width: 324.w,
                         decoration: BoxDecoration(
-                          border: Border.all(color: _colorDistric),
+                            border: Border.all(color: _colorDistric),
                             borderRadius: BorderRadius.circular(8.r)),
                         child: DropdownButtonFormField(
                             isExpanded: true,
@@ -223,7 +325,8 @@ class _OwnerState extends State<Owner> {
                               child: Text("Tumanni tanlang".tr()),
                             ),
                             decoration: const InputDecoration(
-                                 border: InputBorder.none,),
+                              border: InputBorder.none,
+                            ),
                             icon: Icon(Icons.arrow_drop_down_outlined),
                             items: [],
                             onChanged: null),
@@ -274,50 +377,163 @@ class _OwnerState extends State<Owner> {
                   ),
                 ),
                 SizedBox(height: 18.h),
-                Text(
-                  "Xonadon ma’lumoti".tr(),
-                  style: TextStyle(
-                      color: AppColors.mainColor,
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.w500),
-                ),
-                SizedBox(
-                  height: 14.h,
-                ),
-                Row(
+                Column(
                   children: [
-                    Container(
-                      width: 20.w,
-                      height: 20.h,
-                      child: Checkbox(
-                        value: _checkHome,
-                        onChanged: (e) {
-                          setState(() {
-                            _checkHome = e!;
-                            if (_checkHome == true) {
-                              RoomOwner = '1';
-                            } else {
-                              RoomOwner = '2';
-                            }
-                          });
-                        },
-                      ),
+                    Row(
+                      children: [
+                        Text("Geojoylashishni kiriting").tr(),
+                      ],
                     ),
                     SizedBox(
-                      width: 12.w,
+                      height: 5,
                     ),
-                    Text("Birga yashashga roziman !!!".tr())
+                    Column(
+                      children: [
+                        Container(
+                          child: Column(
+                            children: [
+                              Image.asset("assets/images/maps.png"),
+                              Row(
+                                children: [
+                                  SizedBox(
+                                    width: 7,
+                                  ),
+                                  Text(
+                                      "Amir Temur ko’chasi 21, Yunusobod tumani"),
+                                  SizedBox(
+                                    width: 45,
+                                  ),
+                                  Icon(Icons.arrow_forward)
+                                ],
+                              )
+                            ],
+                          ),
+                          height: 210.h,
+                          width: 324.w,
+                          decoration: BoxDecoration(
+                              border: Border.all(color: Colors.black),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(5))),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
-                SizedBox(height: 19.h),
+                SizedBox(
+                  height: 18,
+                ),
+                Column(
+                  children: [
+                    Row(
+                      children: [
+                        Text(
+                          "Metroga yaqinmi ?",
+                          style: TextStyle(
+                              fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Radio(
+                              value: 1,
+                              groupValue: id,
+                              onChanged: (val) {
+                                setState(() {
+                                  id = 1;
+                                });
+                              },
+                            ),
+                            Text(
+                              'Ha',
+                              style: new TextStyle(fontSize: 17.0),
+                            ),
+                            SizedBox(
+                              width: 55,
+                            ),
+                            Radio(
+                              value: 2,
+                              groupValue: id,
+                              onChanged: (val) {
+                                setState(() {
+                                  id = 2;
+                                });
+                              },
+                            ),
+                            Text(
+                              "Yo'q",
+                              style: new TextStyle(
+                                fontSize: 17.0,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+                Column(
+                  children: [
+                    Row(
+                      children: [
+                        Text("Telefon raqami").tr(),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          height: 50.h,
+                          width: 320.w,
+                          child: TextFormField(
+                            inputFormatters: [
+                              TextInputMask(
+                                mask: '\\+ 999 99 999 99 99',
+                                placeholder: '_ ',
+                                maxPlaceHolders: 13,
+                              )
+                            ],
+                            autovalidateMode: AutovalidateMode.always,
+                            keyboardType: TextInputType.phone,
+                            controller: costController,
+                            decoration: InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: "+998 ** *** ** **".tr(),
+                            ),
+                          ),
+                        ),
+                        // Column(
+                        //   children: [
+                        //     Text("Ko’rinmasin"),
+                        //     Checkbox(
+                        //       value: this.value5,
+                        //       onChanged: (bool? value) {
+                        //         setState(() {
+                        //           this.value5 = value!;
+                        //         });
+                        //       },
+                        //     ),
+                        //   ],
+                        // )
+                      ],
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 20,
+                ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Uy turi".tr(),
+                          "Uy turi ".tr(),
                           style: TextStyle(
                             color: AppColors.textColor,
                             fontSize: 14.sp,
@@ -326,20 +542,23 @@ class _OwnerState extends State<Owner> {
                         ),
                         SizedBox(height: 4.h),
                         Container(
-                          width: 152.w,
+                          height: 50.h,
+                          width: 130.w,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10.r),
-                            border: Border.all(color: _colorTypeHouse),
-                          ),
+                              borderRadius: BorderRadius.circular(10.r),
+                              border: Border.all(color: _colorGender)),
                           child: DropdownButtonFormField(
                             hint: Padding(
                               padding: EdgeInsets.only(left: 8.w),
-                              child: Text("Uy turi".tr()),
+                              child: Text(
+                                "Kvartira , Xovli".tr(),
+                                style: TextStyle(fontSize: 14.sp),
+                              ),
                             ),
-                            decoration: const InputDecoration(
-                                 border: InputBorder.none,),
+                            decoration:
+                                const InputDecoration(border: InputBorder.none),
                             icon: Icon(Icons.arrow_drop_down_outlined),
-                            items: kvartira.map((e) {
+                            items: gender.map((e) {
                               return DropdownMenuItem<String>(
                                 onTap: () {},
                                 value: e,
@@ -350,21 +569,20 @@ class _OwnerState extends State<Owner> {
                               );
                             }).toList(),
                             onChanged: (newValue) {
-                              setState(() {
-                                _TypeHouseOnClick = true;
-                                _colorTypeHouse = Colors.grey;
-                                TypeHouse = newValue.toString();
-                              });
+                              setState(() {});
                             },
                           ),
                         ),
                       ],
                     ),
+                    SizedBox(
+                      width: 70,
+                    ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Necha xona".tr(),
+                          "Ijara muddatini turi".tr(),
                           style: TextStyle(
                             color: AppColors.textColor,
                             fontSize: 14.sp,
@@ -373,35 +591,34 @@ class _OwnerState extends State<Owner> {
                         ),
                         SizedBox(height: 4.h),
                         Container(
-                          width: 152.w,
+                          height: 50.h,
+                          width: 130.w,
                           decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10.r),
-                            border: Border.all(color: _colorRoomCount),
-                          ),
+                              borderRadius: BorderRadius.circular(10.r),
+                              border: Border.all(color: _colorGender)),
                           child: DropdownButtonFormField(
                             hint: Padding(
                               padding: EdgeInsets.only(left: 8.w),
-                              child: Container(width: 115.w,child: Text("Xonalar soni".tr())),
+                              child: Text(
+                                "Kunlik  / Oylik".tr(),
+                                style: TextStyle(fontSize: 14.sp),
+                              ),
                             ),
-                            decoration: const InputDecoration(
-                                 border: InputBorder.none,),
+                            decoration:
+                                const InputDecoration(border: InputBorder.none),
                             icon: Icon(Icons.arrow_drop_down_outlined),
-                            items: rooms.map((e) {
+                            items: gender.map((e) {
                               return DropdownMenuItem<String>(
                                 onTap: () {},
                                 value: e,
                                 child: Padding(
                                   padding: EdgeInsets.only(left: 8.w),
-                                  child: Text(e),
+                                  child: Text(e.tr()),
                                 ),
                               );
                             }).toList(),
                             onChanged: (newValue) {
-                              setState(() {
-                                _RoomCountOnClick = true;
-                                _colorRoomCount = Colors.grey;
-                                CountRoom = newValue.toString();
-                              });
+                              setState(() {});
                             },
                           ),
                         ),
@@ -409,50 +626,164 @@ class _OwnerState extends State<Owner> {
                     ),
                   ],
                 ),
-                SizedBox(height: 12.h),
-                Text(
-                  "Ijara muddatini kiriting".tr(),
-                  style: TextStyle(
-                    color: AppColors.textColor,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w500,
-                  ),
+                SizedBox(
+                  height: 25.h,
                 ),
-                SizedBox(height: 4.h),
-                Container(
-                  width: 152.w,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.r),
-                    border: Border.all(color: _colorRentType),
-                  ),
-                  child: DropdownButtonFormField(
-                    hint: Padding(
-                      padding: EdgeInsets.only(left: 8.w),
-                      child: Text("Ijara muddati".tr()),
-                    ),
-                    decoration: const InputDecoration(
-                         border: InputBorder.none,),
-                    icon: Icon(Icons.arrow_drop_down_outlined),
-                    items: kindOfMoment.map((e) {
-                      return DropdownMenuItem<String>(
-                        onTap: () {},
-                        value: e,
-                        child: Padding(
-                          padding: EdgeInsets.only(left: 8.w),
-                          child: Text(e.tr()),
+                Row(
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Xonalar soni".tr(),
+                          style: TextStyle(
+                            color: AppColors.textColor,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
-                      );
-                    }).toList(),
-                    onChanged: (newValue) {
-                      setState(() {
-                        _RentTypeOnClick = true;
-                        _colorRentType = Colors.grey;
-                        RentOf = newValue.toString();
-                      });
-                    },
-                  ),
+                        SizedBox(height: 4.h),
+                        Container(
+                          height: 50.h,
+                          width: 130.w,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10.r),
+                              border: Border.all(color: _colorGender)),
+                          child: DropdownButtonFormField(
+                            hint: Padding(
+                              padding: EdgeInsets.only(left: 8.w),
+                              child: Text(
+                                "Xonalar soni".tr(),
+                                style: TextStyle(fontSize: 14.sp),
+                              ),
+                            ),
+                            decoration:
+                                const InputDecoration(border: InputBorder.none),
+                            icon: Icon(Icons.arrow_drop_down_outlined),
+                            items: gender.map((e) {
+                              return DropdownMenuItem<String>(
+                                onTap: () {},
+                                value: e,
+                                child: Padding(
+                                  padding: EdgeInsets.only(left: 8.w),
+                                  child: Text(e.tr()),
+                                ),
+                              );
+                            }).toList(),
+                            onChanged: (newValue) {
+                              setState(() {});
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-                SizedBox(height: 12.h),
+                SizedBox(
+                  height: 25,
+                ),
+                Row(
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Qavatlar soni ".tr(),
+                          style: TextStyle(
+                            color: AppColors.textColor,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        SizedBox(height: 4.h),
+                        Container(
+                          height: 50.h,
+                          width: 130.w,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10.r),
+                              border: Border.all(color: _colorGender)),
+                          child: DropdownButtonFormField(
+                            hint: Padding(
+                              padding: EdgeInsets.only(left: 8.w),
+                              child: Text(
+                                "1 - 10".tr(),
+                                style: TextStyle(fontSize: 14.sp),
+                              ),
+                            ),
+                            decoration:
+                                const InputDecoration(border: InputBorder.none),
+                            icon: Icon(Icons.arrow_drop_down_outlined),
+                            items: gender.map((e) {
+                              return DropdownMenuItem<String>(
+                                onTap: () {},
+                                value: e,
+                                child: Padding(
+                                  padding: EdgeInsets.only(left: 8.w),
+                                  child: Text(e.tr()),
+                                ),
+                              );
+                            }).toList(),
+                            onChanged: (newValue) {
+                              setState(() {});
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      width: 70,
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          "Nechinchi qavatda ?".tr(),
+                          style: TextStyle(
+                            color: AppColors.textColor,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        SizedBox(height: 4.h),
+                        Container(
+                          height: 50.h,
+                          width: 130.w,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10.r),
+                              border: Border.all(color: _colorGender)),
+                          child: DropdownButtonFormField(
+                            hint: Padding(
+                              padding: EdgeInsets.only(left: 8.w),
+                              child: Text(
+                                "1 - 10".tr(),
+                                style: TextStyle(fontSize: 14.sp),
+                              ),
+                            ),
+                            decoration:
+                                const InputDecoration(border: InputBorder.none),
+                            icon: Icon(Icons.arrow_drop_down_outlined),
+                            items: gender.map((e) {
+                              return DropdownMenuItem<String>(
+                                onTap: () {},
+                                value: e,
+                                child: Padding(
+                                  padding: EdgeInsets.only(left: 8.w),
+                                  child: Text(e.tr()),
+                                ),
+                              );
+                            }).toList(),
+                            onChanged: (newValue) {
+                              setState(() {});
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 15,
+                ),
                 Text(
                   "Narxi".tr(),
                   style: TextStyle(
@@ -484,7 +815,7 @@ class _OwnerState extends State<Owner> {
                       controller: costController,
                       decoration: InputDecoration(
                         border: InputBorder.none,
-                        hintText: "Xonadonni narxini kiriting / oyiga".tr(),
+                        hintText: "Xonadonni narxini kiriting".tr(),
                         hintStyle:
                             TextStyle(fontSize: 14.sp, color: Colors.grey),
                         suffixIcon: Container(
@@ -537,187 +868,397 @@ class _OwnerState extends State<Owner> {
                   ),
                 ),
                 SizedBox(
-                  height: 16.h,
+                  height: 15,
                 ),
-                Row(
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Text(
+                      "Narxning turlanishi".tr(),
+                      style: TextStyle(
+                        color: AppColors.textColor,
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    SizedBox(height: 4.h),
                     Container(
-                      width: 20,
-                      height: 20,
-                      child: Checkbox(
-                        value: _checkMetro,
-                        onChanged: (e) {
-                          setState(() {
-                            _checkMetro = e!;
-                            if (_checkMetro == true) {
-                              Subway = '1';
-                            } else {
-                              Subway = '2';
-                            }
-                          });
+                      height: 50.h,
+                      width: 150.w,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10.r),
+                          border: Border.all(color: _colorGender)),
+                      child: DropdownButtonFormField(
+                        hint: Padding(
+                          padding: EdgeInsets.only(left: 8.w),
+                          child: Text(
+                            "Turlari".tr(),
+                            style: TextStyle(fontSize: 14.sp),
+                          ),
+                        ),
+                        decoration:
+                            const InputDecoration(border: InputBorder.none),
+                        icon: Icon(Icons.arrow_drop_down_outlined),
+                        items: pricetype.map((e) {
+                          return DropdownMenuItem<String>(
+                            onTap: () {},
+                            value: e,
+                            child: Padding(
+                              padding: EdgeInsets.only(left: 8.w),
+                              child: Text(e.tr()),
+                            ),
+                          );
+                        }).toList(),
+                        onChanged: (newValue) {
+                          setState(() {});
                         },
                       ),
                     ),
-                    SizedBox(
-                      width: 12.w,
-                    ),
-                    Text("Metroga yaqin".tr())
                   ],
                 ),
-                SizedBox(height: 22.h),
-                Text(
-                  "Qo’shimcha".tr(),
-                  style: TextStyle(
-                      color: AppColors.mainColor,
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.w500),
+                SizedBox(
+                  height: 15.h,
                 ),
-                SizedBox(height: 12.h),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                Column(
                   children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    Row(
                       children: [
                         Text(
-                          "Sheriklarni tanlang".tr(),
-                          style: TextStyle(
-                            color: AppColors.textColor,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        SizedBox(height: 4.h),
-                        Container(
-                          width: 152.w,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10.r),
-                            border: Border.all(color: _colorGender),
-                          ),
-                          child: DropdownButtonFormField(
-                            hint: Padding(
-                              padding: EdgeInsets.only(left: 8.w),
-                              child: Text("Qiz,O'g'il".tr(), style: TextStyle(fontSize: 14.sp),),
-                            ),
-                            decoration: const InputDecoration(
-                                 border: InputBorder.none,),
-                            icon: Icon(Icons.arrow_drop_down_outlined),
-                            items: gender.map((e) {
-                              return DropdownMenuItem<String>(
-                                onTap: () {},
-                                value: e,
-                                child: Padding(
-                                  padding: EdgeInsets.only(left: 8.w),
-                                  child: Text(e.tr()),
-                                ),
-                              );
-                            }).toList(),
-                            onChanged: (newValue) {
-                              setState(() {
-                                _GenderOnClick = true;
-                                _colorGender = Colors.grey;
-                                genderString = newValue.toString();
-                              });
-                            },
-                          ),
+                          "Uy egasi ham yashaydimi ?",
+                          style: TextStyle(fontSize: 15.sp),
                         ),
                       ],
                     ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    Row(
                       children: [
-                        Text(
-                          "Ijarachilar soni".tr(),
-                          style: TextStyle(
-                            color: AppColors.textColor,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        SizedBox(height: 4.h),
-                        Container(
-                          width: 152.w,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(10.r),
-                            border: Border.all(color: _colorCountPupil),
-                          ),
-                          child: DropdownButtonFormField(
-                            hint: Padding(
-                              padding: EdgeInsets.only(left: 8.w),
-                              child: Container(width: 115.w,child: Text("Soni".tr(), style: TextStyle(fontSize: 14.sp),)),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            Radio(
+                              value: 1,
+                              groupValue: idhouse,
+                              onChanged: (val) {
+                                setState(() {
+                                  idhouse = 1;
+                                });
+                              },
                             ),
-                            decoration: const InputDecoration(
-                                 border: InputBorder.none,),
-                            icon: Icon(Icons.arrow_drop_down_outlined),
-                            items: ijarachi.map((e) {
-                              return DropdownMenuItem<String>(
-                                onTap: () {},
-                                value: e,
-                                child: Padding(
-                                  padding: EdgeInsets.only(left: 8.w),
-                                  child: Text(e),
-                                ),
-                              );
-                            }).toList(),
-                            onChanged: (newValue) {
-                              setState(() {
-                                _CountPupilOnClick = true;
-                                _colorCountPupil = Colors.grey;
-                                countRoom = newValue.toString();
-                              });
-                            },
-                          ),
+                            Text(
+                              'Ha',
+                              style: new TextStyle(fontSize: 17.0.sp),
+                            ),
+                            SizedBox(
+                              width: 55.w,
+                            ),
+                            Radio(
+                              value: 2,
+                              groupValue: idhouse,
+                              onChanged: (val) {
+                                setState(() {
+                                  idhouse = 2;
+                                });
+                              },
+                            ),
+                            Text(
+                              "Yo'q",
+                              style: new TextStyle(
+                                fontSize: 17.0,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    )
+                  ],
+                ),
+                Column(
+                  children: [
+                    Text("Kommunal to’lovlarni kim to’laydi ?"),
+                    SizedBox(
+                      height: 15.h,
+                    )
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    Text("Uy egasi"),
+                    SizedBox(
+                      width: 50.w,
+                    ),
+                    Text("Ijarachi")
+                  ],
+                ),
+                Row(
+                  children: [
+                    Row(
+                      children: [
+                        SizedBox(
+                          height: 1,
+                        ),
+                        Text("Elektr energiya"),
+                        SizedBox(width: 100.w,),
+                        Radio(
+                          value: 1,
+                          groupValue: id,
+                          onChanged: (val) {
+                            setState(() {
+                              id = 1;
+                            });
+                          },
+                        ),
+                        SizedBox(width: 50.w,),
+                        Radio(
+                          value: 2,
+                          groupValue: id,
+                          onChanged: (val) {
+                            setState(() {
+                              id = 2;
+                            });
+                          },
                         ),
                       ],
                     ),
                   ],
                 ),
-                SizedBox(height: 12.h),
-                Text(
-                  "E’lonni nomlash".tr(),
-                  style: TextStyle(
-                    color: AppColors.textColor,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                SizedBox(height: 4.h),
-                Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                      border: Border.all(color: _colorForm),
-                      borderRadius: BorderRadius.circular(4.r)),
-                  child: Container(
-                    padding: EdgeInsets.only(left: 16.w),
-                    child: TextFormField(
-                      onChanged: (e) {
-                        if (e.length > 0) {
-                          setState(() {
-                            _FormOnClick = true;
-                            _colorForm = Colors.grey;
-                          });
-                        } else {
-                          setState(() {
-                            _FormOnClick = false;
-                            _colorForm = Colors.red;
-                          });
-                        }
-                      },
-                      controller: adsTitleController,
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: "E’lonni nomlang".tr(),
-                        hintStyle:
-                            TextStyle(fontSize: 14.sp, color: Colors.grey),
-                      ),
-                      cursorColor: Colors.grey.shade800,
-                      cursorWidth: 1.5.w,
+                Column(
+                  children: [
+                    Row(
+                      children: [
+                        Row(
+                          children: [
+                            SizedBox(
+                              height: 1,
+                            ),
+                            Text("Gaz"),
+                            SizedBox(width: 159.w,),
+                            Radio(
+                              value: 1,
+                              groupValue: id2,
+                              onChanged: (val) {
+                                setState(() {
+                                  id2 = 1;
+                                });
+                              },
+                            ),
+                            SizedBox(width: 50.w,),
+                            Radio(
+                              value: 2,
+                              groupValue: id2,
+                              onChanged: (val) {
+                                setState(() {
+                                  id2 = 2;
+                                });
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
-                  ),
+                    Row(
+                      children: [
+                        Row(
+                          children: [
+                            SizedBox(
+                              height: 1,
+                            ),
+                            Text("Sovuq suv"),
+                            SizedBox(width: 126.w,),
+                            Radio(
+                              value: 1,
+                              groupValue: id3,
+                              onChanged: (val) {
+                                setState(() {
+                                  id3 = 1;
+                                });
+                              },
+                            ),
+                            SizedBox(width: 50.w,),
+                            Radio(
+                              value: 2,
+                              groupValue: id3,
+                              onChanged: (val) {
+                                setState(() {
+                                  id3 = 2;
+                                });
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Row(
+                          children: [
+                            SizedBox(
+                              height: 1,
+                            ),
+                            Text("Issiq suv"),
+                            SizedBox(width: 134.w,),
+                            Radio(
+                              value: 1,
+                              groupValue: id4,
+                              onChanged: (val) {
+                                setState(() {
+                                  id4 = 1;
+                                });
+                              },
+                            ),
+                            SizedBox(width: 50.w,),
+                            Radio(
+                              value: 2,
+                              groupValue: id4,
+                              onChanged: (val) {
+                                setState(() {
+                                  id4 = 2;
+                                });
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Row(
+                          children: [
+                            SizedBox(
+                              height: 1,
+                            ),
+                            Text("Chiqindi"),
+                            SizedBox(width: 138.w,),
+                            Radio(
+                              value: 1,
+                              groupValue: id5,
+                              onChanged: (val) {
+                                setState(() {
+                                  id5 = 1;
+                                });
+                              },
+                            ),
+                            SizedBox(width: 50.w,),
+                            Radio(
+                              value: 2,
+                              groupValue: id5,
+                              onChanged: (val) {
+                                setState(() {
+                                  id5 = 2;
+                                });
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ],
                 ),
-                SizedBox(height: 12.h),
+                Row(
+                  children: [
+                    Text(
+                      "Quyidagi qulayliklarga ega",
+                      style: TextStyle(color: Colors.blue, fontSize: 18),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 10.h,),
+                Column(
+                  children: [
+                    Row(
+                      children: [
+                        Text("Wi - fi "),
+                        SizedBox(width: 103.w,),
+                        Checkbox(
+                          value: this.value1,
+                          onChanged: (bool? value) {
+                            setState(() {
+                              this.value1 = value!;
+                            });
+                          },
+                        ),
+
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Text("TV"),
+                        SizedBox(width: 120.w,),
+                        Checkbox(
+                          value: this.value2,
+                          onChanged: (bool? value) {
+                            setState(() {
+                              this.value2 = value!;
+                            });
+                          },
+                        ),
+
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Text("Muzlatgich"),
+                        SizedBox(width: 75.w,),
+                        Checkbox(
+                          value: this.value3,
+                          onChanged: (bool? value) {
+                            setState(() {
+                              this.value3 = value!;
+                            });
+                          },
+                        ),
+
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Text("Kir yuvish mashinasi "),
+                        SizedBox(width: 20.w,),
+                        Checkbox(
+                          value: this.value4,
+                          onChanged: (bool? value) {
+                            setState(() {
+                              this.value4 = value!;
+                            });
+                          },
+                        ),
+
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Text("Konditsioner"),
+                        SizedBox(width: 76,),
+                        Checkbox(
+                          value: this.value6,
+                          onChanged: (bool? value) {
+                            setState(() {
+                              this.value6 = value!;
+                            });
+                          },
+                        ),
+
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Text("Chang yutgich"),
+                        SizedBox(width: 66,),
+                        Checkbox(
+                          value: this.value5,
+                          onChanged: (bool? value) {
+                            setState(() {
+                              this.value5 = value!;
+                            });
+                          },
+                        ),
+
+                      ],
+                    ),
+
+                  ],
+                ),
                 Text(
-                  "Qo’shimcha ma’lumot".tr(),
+                  "Qo’shimcha ma’lumotlar".tr(),
                   style: TextStyle(
                     color: AppColors.textColor,
                     fontSize: 14.sp,
@@ -733,13 +1274,13 @@ class _OwnerState extends State<Owner> {
                   child: Container(
                     padding: EdgeInsets.only(left: 16.w),
                     child: TextFormField(
-                      controller: inputcontroller,
+                      controller: adsTitleController,
                       maxLines: 6,
                       decoration: InputDecoration(
                         hintText: 'Message...'.tr(),
                         border: InputBorder.none,
                         hintStyle:
-                            TextStyle(fontSize: 14.sp, color: Colors.grey),
+                        TextStyle(fontSize: 14.sp, color: Colors.grey),
                       ),
                       cursorColor: Colors.grey.shade800,
                       cursorWidth: 1.5.w,
@@ -758,7 +1299,7 @@ class _OwnerState extends State<Owner> {
                                 borderRadius: BorderRadius.circular(10.r)),
                             primary: AppColors.buttonLinear),
                         onPressed: () {
-                          print(Hive.box('token').get('token'));
+                        Navigator.push(context, MaterialPageRoute(builder: (context)=>OwnerPhotoAdds()));
                           // print(RoomOwner);
                           // print(TypeHouse=='Kvartira'? '1':'2');
                           // print(CountRoom);
@@ -770,73 +1311,50 @@ class _OwnerState extends State<Owner> {
                           // print(adsTitleController?.text);//
                           // print(inputcontroller?.text);//
                           // print(addressController?.text);//
-                          CreateAdsUserServeice().CreateAds(
-                              districtId: data.districtOwnerId,
-                              roomOwner: RoomOwner,
-                              TypeHouse: TypeHouse == 'Kvartira' || TypeHouse == 'Квартира' ? '1' : '2',
-                              CountRoom: CountRoom,
-                              TypeOfRent: RentOf == 'kunlik' || RentOf == 'день' ? '1' : '2',
-                              cost: costController?.text,
-                              typePayment: _dropownUsd == "SO'M" || _dropownUsd == "СУМ" ? '1' : '2',
-                              subway: Subway,
-                              gender: genderString == 'Erkak' || genderString == 'Мужчина' ? '1' : '2',
-                              countRoom: countRoom,
-                              title: adsTitleController?.text,
-                              description: inputcontroller?.text,
-                              address: addressController?.text);
 
-                          if (_RegionOnClick &&
-                              _DiscritOnClick &&
-                              _UniverOnClick &&
-                              _TypeHouseOnClick &&
-                              _RoomCountOnClick &&
-                              _RentTypeOnClick &&
-                              _TypeCostOnClick &&
-                              _GenderOnClick &&
-                              _CountPupilOnClick &&
-                              _FormOnClick) {
-                            Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => MenuPage()),
-                                (route) => false);
-                          } else {
-                            setState(() {
-                              if (!_RegionOnClick) {
-                                _colorRegion = Colors.red;
-                              }
-                              if (!_DiscritOnClick) {
-                                _colorDistric = Colors.red;
-                              }
-                              if (!_UniverOnClick) {
-                                _colorUniver = Colors.red;
-                              }
-                              if (!_TypeHouseOnClick) {
-                                _colorTypeHouse = Colors.red;
-                              }
-                              if (!_RoomCountOnClick) {
-                                _colorRoomCount = Colors.red;
-                              }
-                              if (!_RentTypeOnClick) {
-                                _colorRentType = Colors.red;
-                              }
-                              if (!_TypeCostOnClick) {
-                                _colorTypeCost = Colors.red;
-                              }
-                              if (!_GenderOnClick) {
-                                _colorGender = Colors.red;
-                              }
-                              if (!_CountPupilOnClick) {
-                                _colorCountPupil = Colors.red;
-                              }
-                              if (!_FormOnClick) {
-                                _colorForm = Colors.red;
-                              }
-                            });
-                          }
+                          // if (_RegionOnClick &&
+                          //     _DiscritOnClick &&
+                          //     _UniverOnClick &&
+                          //     _TypeHouseOnClick &&
+                          //     _RoomCountOnClick &&
+                          //     _RentTypeOnClick &&
+                          //     _TypeCostOnClick &&
+                          //     _GenderOnClick &&
+                          //     _CountPupilOnClick) {
+                          // } else {
+                          //   setState(() {
+                          //     if (!_RegionOnClick) {
+                          //       _colorRegion = Colors.red;
+                          //     }
+                          //     if (!_DiscritOnClick) {
+                          //       _colorDistric = Colors.red;
+                          //     }
+                          //     if (!_UniverOnClick) {
+                          //       _colorUniver = Colors.red;
+                          //     }
+                          //     if (!_TypeHouseOnClick) {
+                          //       _colorTypeHouse = Colors.red;
+                          //     }
+                          //     if (!_RoomCountOnClick) {
+                          //       _colorRoomCount = Colors.red;
+                          //     }
+                          //     if (!_RentTypeOnClick) {
+                          //       _colorRentType = Colors.red;
+                          //     }
+                          //     if (!_TypeCostOnClick) {
+                          //       _colorTypeCost = Colors.red;
+                          //     }
+                          //     if (!_GenderOnClick) {
+                          //       _colorGender = Colors.red;
+                          //     }
+                          //     if (!_CountPupilOnClick) {
+                          //       _colorCountPupil = Colors.red;
+                          //     }
+                          //   });
+                          // }
                         },
                         child: Text(
-                          "E’lon saqlash".tr(),
+                          "Keyingi ".tr(),
                           style: TextStyle(
                               fontSize: 20.sp, fontWeight: FontWeight.w500),
                         ),

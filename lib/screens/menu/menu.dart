@@ -37,7 +37,6 @@ class _MenuPageState extends State<MenuPage> {
       key: _scaffoldKey,
       drawer:  DrawerPage(),
       appBar: AppBar(
-        elevation: 0,
         backgroundColor: AppColors.backgroundWhite,
         leading: InkWell(
           onTap: ()=>_scaffoldKey.currentState!.openDrawer(),

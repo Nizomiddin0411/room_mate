@@ -23,6 +23,8 @@ class ResultUniversitetPage extends StatefulWidget {
 }
 
 class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
+  final _controller = TextEditingController();
+
   void initState() {
     super.initState();
     Provider.of<UniversitetProvider>(context, listen: false).getViloyat();
@@ -33,120 +35,123 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundWhite,
-      appBar: PreferredSize(
-        preferredSize: Size.fromHeight(260.h),
-        child: AppBar(
-          elevation: 0,
-          leading: InkWell(
-            onTap: () {
-              Navigator.pop(context);
-            },
-            child: const Icon(
-              Icons.arrow_back,
-              color: AppColors.iconColor,
-            ),
+      appBar: AppBar(
+        backgroundColor: AppColors.backgroundWhite,
+        title: Center(
+          child: Text(
+            "Oliy o’quv yurti",
+            style: TextStyle(color: AppColors.mainColor),
           ),
-          backgroundColor: AppColors.backgroundWhite,
-          title: Center(
-            child: const Text(
-              "Oliy o’quv yurti",
-              style: TextStyle(color: AppColors.mainColor),
-            ).tr(),
+        ),
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back_outlined,
+            color: Colors.black,
           ),
-          flexibleSpace: Padding(
-            padding: EdgeInsets.fromLTRB(18.w, 87.h, 18.w, 18.h),
-            child: Column(
-              children: [
-                Container(
-                  height: 87.h,
-                  width: 360.w,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(6.r),
-                      color: AppColors.secondBackgroud),
-                  child: Padding(
-                    padding: EdgeInsets.all(10.0.w),
-                    child: Row(
-                      children: [
-                        Image.asset('assets/images/image 7.png'),
-                        SizedBox(
-                          width: 20.w,
-                        ),
-                        SizedBox(
-                          height: 60.h,
-                          width: 200.w,
-                          child: AutoSizeText(
-                            widget.name,
-                            style: TextStyle(fontSize: 10.sp),
-                            maxLines: 10,
-                          ),
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 6.h,
-                ),
-                Container(
-                  height: 50.h,
-                  width: 324.w,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(6.r),
-                    border: Border.all(color: Colors.blue),
-                  ),
-                  child: Row(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          SizedBox(
-                            width: 10,
-                          ),
-                          IconButton(onPressed: (){
-                            Navigator.push(context, MaterialPageRoute(builder: (context)=>ResultFiltrPage(id: widget.id,)));
-                          }, icon: Icon(Icons.tune)),
-                          SizedBox(
-                            width: 20,
-                          ),
-                          Text("Qidirish "),
-                          SizedBox(
-                            width: 200,
-                          ),
-                          const Padding(
-                            padding: EdgeInsets.all(2.0),
-                            child: Center(
-                              child: Icon(
-                                Icons.add_location_alt_outlined,
-                                color: AppColors.mainColor,
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 7.h,
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: const [
-                    Text(
-                      "Sherik izlayotgan",
-                      style: TextStyle(color: Colors.blue, fontSize: 24),
-                    ),
-                  ],
-                )
-              ],
-            ),
-          ),
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(15, 15, 15, 0),
+              child: Column(
+                children: [
+                  Row(
+                    children: [
+                      Container(
+                        height: 100.h,
+                        width: 330.w,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15.r),
+                            color: AppColors.secondBackgroud),
+                        child: Padding(
+                          padding: EdgeInsets.all(10.0.w),
+                          child: Row(
+                            children: [
+                              Image.asset('assets/images/image 7.png'),
+                              SizedBox(
+                                width: 20.w,
+                              ),
+                              SizedBox(
+                                height: 60.h,
+                                width: 200.w,
+                                child: AutoSizeText(
+                                  widget.name,
+                                  style: TextStyle(fontSize: 10.sp),
+                                  maxLines: 10,
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 15.h,
+                  ),
+                  Row(
+                    children: [
+                      Container(
+                        width: 330.w,
+                        height: 50.h,
+                        child: TextField(
+                          controller: _controller,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(
+                                borderSide: BorderSide(color: Colors.blue)),
+                            label: Text("Qidirish "),
+                            suffixIcon: IconButton(
+                              onPressed: () {},
+                              icon: Icon(
+                                Icons.add_location_alt_outlined,
+                                color: AppColors.textColor,
+                              ),
+                            ),
+                            prefixIcon: IconButton(
+                              icon: Icon(
+                                Icons.tune,
+                                color: AppColors.textColor,
+                              ),
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ResultFiltrPage(
+                                              id: widget.id,
+                                            )));
+                              },
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: const [
+                      Text(
+                        "Sherik izlayotgan",
+                        style: TextStyle(
+                            color: Colors.blue,
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold),
+                      ),
+                    ],
+                  ),
+                  Divider(
+                    thickness: 2,
+                  ),
+                ],
+              ),
+            ),
             ListView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),

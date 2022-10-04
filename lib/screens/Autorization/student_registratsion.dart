@@ -844,7 +844,7 @@ class _StudentUserState extends State<StudentUser> {
                   ),
                   child: Center(
                     child: Text(
-                      "Ro’yhatdan o’tish".tr(),
+                      "Ro’yxatdan o’tish".tr(),
                       style: TextStyle(
                           color: AppColors.backgroundWhite, fontSize: 20.sp),
                     ),

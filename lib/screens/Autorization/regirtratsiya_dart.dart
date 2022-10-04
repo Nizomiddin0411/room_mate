@@ -74,7 +74,7 @@ class _RegistratsiyaState extends State<Registratsiya> {
                 padding: const EdgeInsets.fromLTRB(0, 60, 0, 0),
                 child: Column(
                   children: [
-                    Text("Ro’yhatdan o’tish".tr(),
+                    Text("Ro’yxatdan o’tish".tr(),
                         style: TextStyle(
                             color: AppColors.mainColor,
                             fontSize: 25,
@@ -103,7 +103,7 @@ class _RegistratsiyaState extends State<Registratsiya> {
                   ),
                 ),
                 Text(
-                  "Talaba emasman",
+                  "Uy beruvchiman",
                   style: TextStyle(fontWeight: FontWeight.w500),
                 ).tr(),
               ],

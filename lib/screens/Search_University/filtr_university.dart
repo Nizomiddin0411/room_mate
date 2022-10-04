@@ -17,7 +17,6 @@ class _UniverFiltrPageState extends State<UniverFiltrPage> {
       backgroundColor: AppColors.backgroundWhite,
       appBar: AppBar(
         backgroundColor: AppColors.backgroundWhite,
-        elevation: 0,
         title: Text(
           "Filtr",
           style: TextStyle(
@@ -219,43 +218,50 @@ class _UniverFiltrPageState extends State<UniverFiltrPage> {
                   ),
                   SizedBox(height: 300.h),
 
-                  Container(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.symmetric(vertical: 14.h),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.r),side: BorderSide(color: Colors.red)),
-                          primary: Colors.white),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: Text(
-                        "Tozalash",
-                        style:
-                        TextStyle(color:Colors.red,fontSize: 20.sp, fontWeight: FontWeight.w500),
-                      ),
+                  Center(
+                    child: Column(
+                      children: [
+                        Container(
+                          width: 220.w,
+                          color: Colors.white,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                padding: EdgeInsets.symmetric(vertical: 14.h),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.r),
+                                    side: BorderSide(color: Colors.red)),
+                                primary: Colors.white
+                            ),
+                            onPressed: () {
+                            },
+                            child: Text(
+                              "Tozalash",
+                              style: TextStyle(color: Colors.red,
+                                  fontSize: 20.sp, fontWeight: FontWeight.w500),
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 20.h,),
+                        Container(
+                          width: 220.w,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                padding: EdgeInsets.symmetric(vertical: 14.h),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.r)),
+                                primary: AppColors.buttonLinear),
+                            onPressed: () {
+                            },
+                            child: Text(
+                              "Saqlash",
+                              style: TextStyle(
+                                  fontSize: 20.sp, fontWeight: FontWeight.w500),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                  SizedBox(height: 25,),
-                  Container(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.symmetric(vertical: 14.h),
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(10.r)),
-                          primary: AppColors.buttonLinear),
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                      child: Text(
-                        "Saqlash",
-                        style:
-                        TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w500),
-                      ),
-                    ),
-                  ),
+                  )
                 ],
               );
             },

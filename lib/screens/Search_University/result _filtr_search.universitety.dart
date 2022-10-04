@@ -45,7 +45,6 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
       backgroundColor: AppColors.backgroundWhite,
       appBar: AppBar(
         backgroundColor: AppColors.backgroundWhite,
-        elevation: 0,
         title: Text(
           "Filtr",
           style: TextStyle(

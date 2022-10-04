@@ -6,16 +6,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
-import 'package:talaba_uy/screens/Create_ads/create_image.ads.dart';
-
-class AdsImage extends StatefulWidget {
-  const AdsImage({Key? key}) : super(key: key);
+import 'package:talaba_uy/screens/Create_ads/owner_photo.dart';
+class OwnerPhotoAdds extends StatefulWidget {
+  const OwnerPhotoAdds({Key? key}) : super(key: key);
 
   @override
-  State<AdsImage> createState() => _AdsImageState();
+  State<OwnerPhotoAdds> createState() => _OwnerPhotoAddsState();
 }
 
-class _AdsImageState extends State<AdsImage> {
+class _OwnerPhotoAddsState extends State<OwnerPhotoAdds> {
+
+  List<File> imageList = [];
+  List<bool> imageExist = [];
   File? imgFile;
   final imgPicker = ImagePicker();
 
@@ -47,7 +49,6 @@ class _AdsImageState extends State<AdsImage> {
           );
         });
   }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -56,16 +57,16 @@ class _AdsImageState extends State<AdsImage> {
         elevation: 0,
         leading: IconButton(
           icon: Icon(Icons.arrow_back_outlined),
-          onPressed: () {
+          onPressed: (){
             Navigator.pop(context);
           },
           color: Colors.black,
         ),
         title: Center(
             child: Text(
-          "E’lon yaratish",
-          style: TextStyle(color: Colors.blue),
-        )),
+              "E’lon yaratish",
+              style: TextStyle(color: Colors.blue),
+            )),
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -95,10 +96,7 @@ class _AdsImageState extends State<AdsImage> {
                         SizedBox(
                           height: 10,
                         ),
-                        Text(
-                          "Rasm yuklang",
-                          style: TextStyle(fontSize: 15),
-                        )
+                        Text("Rasm yuklang",style: TextStyle(fontSize: 15),)
                       ],
                     ),
                   ),
@@ -121,13 +119,12 @@ class _AdsImageState extends State<AdsImage> {
                           borderRadius: BorderRadius.circular(10.r)),
                       primary: AppColors.buttonLinear),
                   onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Createimage()));
+                   Navigator.push(context, MaterialPageRoute(builder: (context)=>OwnerPhoto()));
                   },
                   child: Text(
                     "E’lonni saqlash ".tr(),
                     style:
-                        TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w500),
+                    TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w500),
                   ),
                 ),
               ),
@@ -222,7 +219,6 @@ class _AdsImageState extends State<AdsImage> {
       ),
     );
   }
-
   void openCamera() async {
     var imgCamera = await imgPicker.getImage(source: ImageSource.camera);
     setState(() {
@@ -239,11 +235,25 @@ class _AdsImageState extends State<AdsImage> {
     Navigator.of(context).pop();
   }
 
-  Widget displayImage() {
-    if (imgFile == null) {
+  Widget displayImage(){
+    if(imgFile == null){
       return Text("No Image Selected!");
-    } else {
+    } else{
       return Image.file(imgFile!, width: 350, height: 350);
     }
   }
+  _takeFromCamera(int Ind) async {
+    final XFile? photo =
+    await ImagePicker().pickImage(source: ImageSource.camera);
+    if (photo != null) {
+      final image = File(photo.path);
+      // imageList.add(image);
+      imageList.removeAt(Ind);
+      imageExist.removeAt(Ind);
+
+      imageList.insert(Ind, image);
+      imageExist.insert(Ind, true);
+    }
+  }
 }
+

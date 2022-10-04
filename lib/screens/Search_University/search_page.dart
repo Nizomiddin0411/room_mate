@@ -40,7 +40,6 @@ class _SearchPageState extends State<SearchPage> {
   builder: (context, state) {
     return Scaffold(
       appBar: AppBar(
-        elevation: 0,
         backgroundColor: AppColors.backgroundWhite,
         title:  Center(
           child: Text(
@@ -63,12 +62,12 @@ class _SearchPageState extends State<SearchPage> {
               children: [
                 Center(
                   child: Padding(
-                    padding: EdgeInsets.all(8.0),
+                    padding: EdgeInsets.all(15.0),
                     child: TextField(
                       controller: _controller,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
-                        label: Text("Search"),
+                        label: Text("Qidirish "),
                         suffixIcon: IconButton(
                           onPressed: () {
                           },

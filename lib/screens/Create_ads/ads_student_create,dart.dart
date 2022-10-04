@@ -9,6 +9,7 @@ import 'package:talaba_uy/provider/region_provider.dart';
 import 'package:talaba_uy/screens/Create_ads/house_data.dart';
 
 import '../../cubit/aut_cubit.dart';
+import 'Image_ads.dart';
 
 class Student2 extends StatefulWidget {
   const Student2({Key? key}) : super(key: key);
@@ -66,6 +67,13 @@ class _Student2State extends State<Student2> {
   bool _CountPupilOnClick = false;
   Color _colorForm = Colors.grey;
   bool _FormOnClick = false;
+  bool value1 = false;
+  bool value2 = false;
+  bool value3 = false;
+  bool value4 = false;
+  bool value5 = false;
+  bool value6 = false;
+  int id = 1;
   final TextEditingController _textEditingController = TextEditingController();
   var kurs = [
     '1-kurs',
@@ -75,6 +83,8 @@ class _Student2State extends State<Student2> {
     '5-kurs',
     '6-kurs',
   ];
+  var housecost = ["so'm", "USD"];
+  final List<String> genderItems = ["O'g'il bola ", "Qiz bola"];
   var kvartira = [
     'Kvartira',
     'Xovli',
@@ -96,7 +106,6 @@ class _Student2State extends State<Student2> {
     '10',
     'Ayol',
   ];
-  final List<String> genderItems = ["O'g'il bola ", "Qiz bola"];
   var kindOfMoment = [
     'kunlik',
     'oylik',
@@ -117,8 +126,6 @@ class _Student2State extends State<Student2> {
   ];
   final nameController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  bool value5 = false;
-  int id = 1;
 
   @override
   void initState() {
@@ -348,6 +355,7 @@ class _Student2State extends State<Student2> {
                       ),
                     ],
                   ),
+                  SizedBox(height: 10,),
                   Column(
                     children: [
                       Row(
@@ -403,13 +411,16 @@ class _Student2State extends State<Student2> {
                   SizedBox(
                     height: 10,
                   ),
+                  SizedBox(
+                    height: 10,
+                  ),
                   Row(
                     children: [
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Uy turi ".tr(),
+                            "Qavatlar soni  ".tr(),
                             style: TextStyle(
                               color: AppColors.textColor,
                               fontSize: 14.sp,
@@ -422,17 +433,17 @@ class _Student2State extends State<Student2> {
                             width: 130.w,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10.r),
-                                border: Border.all(color: _colorGender)),
+                                border: Border.all(color: Colors.black)),
                             child: DropdownButtonFormField(
                               hint: Padding(
                                 padding: EdgeInsets.only(left: 8.w),
                                 child: Text(
-                                  "Kvartira , Xovli".tr(),
+                                  "Qavatlar soni".tr(),
                                   style: TextStyle(fontSize: 14.sp),
                                 ),
                               ),
-                              decoration: const InputDecoration(
-                                  border: InputBorder.none),
+                              decoration:
+                              const InputDecoration(border: InputBorder.none),
                               icon: Icon(Icons.arrow_drop_down_outlined),
                               items: kvsherik.map((e) {
                                 return DropdownMenuItem<String>(
@@ -445,11 +456,7 @@ class _Student2State extends State<Student2> {
                                 );
                               }).toList(),
                               onChanged: (newValue) {
-                                setState(() {
-                                  _GenderOnClick = true;
-                                  _colorGender = Colors.grey;
-                                  _titleGendor = newValue.toString();
-                                });
+                                setState(() {});
                               },
                             ),
                           ),
@@ -462,7 +469,7 @@ class _Student2State extends State<Student2> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Xonalar soni".tr(),
+                            "Nechinchi qavatda ?".tr(),
                             style: TextStyle(
                               color: AppColors.textColor,
                               fontSize: 14.sp,
@@ -475,17 +482,17 @@ class _Student2State extends State<Student2> {
                             width: 130.w,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10.r),
-                                border: Border.all(color: _colorGender)),
+                                border: Border.all(color: Colors.black)),
                             child: DropdownButtonFormField(
                               hint: Padding(
                                 padding: EdgeInsets.only(left: 8.w),
                                 child: Text(
-                                  "Xonalar soni".tr(),
+                                  "Nechanchi qavat".tr(),
                                   style: TextStyle(fontSize: 14.sp),
                                 ),
                               ),
-                              decoration: const InputDecoration(
-                                  border: InputBorder.none),
+                              decoration:
+                              const InputDecoration(border: InputBorder.none),
                               icon: Icon(Icons.arrow_drop_down_outlined),
                               items: kvsherik.map((e) {
                                 return DropdownMenuItem<String>(
@@ -498,11 +505,7 @@ class _Student2State extends State<Student2> {
                                 );
                               }).toList(),
                               onChanged: (newValue) {
-                                setState(() {
-                                  _GenderOnClick = true;
-                                  _colorGender = Colors.grey;
-                                  _titleGendor = newValue.toString();
-                                });
+                                setState(() {});
                               },
                             ),
                           ),
@@ -511,8 +514,276 @@ class _Student2State extends State<Student2> {
                     ],
                   ),
                   SizedBox(
-                    height: 35,
+                    height: 18,
                   ),
+                  Row(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Narxning turlanishi  ?".tr(),
+                            style: TextStyle(
+                              color: AppColors.textColor,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          SizedBox(height: 4.h),
+                          Container(
+                            height: 50.h,
+                            width: 130.w,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.r),
+                                border: Border.all(color: Colors.black)),
+                            child: DropdownButtonFormField(
+                              hint: Padding(
+                                padding: EdgeInsets.only(left: 8.w),
+                                child: Text(
+                                  "Turlari".tr(),
+                                  style: TextStyle(fontSize: 14.sp),
+                                ),
+                              ),
+                              decoration:
+                              const InputDecoration(border: InputBorder.none),
+                              icon: Icon(Icons.arrow_drop_down_outlined),
+                              items: housecost.map((e) {
+                                return DropdownMenuItem<String>(
+                                  onTap: () {},
+                                  value: e,
+                                  child: Padding(
+                                    padding: EdgeInsets.only(left: 8.w),
+                                    child: Text(e.tr()),
+                                  ),
+                                );
+                              }).toList(),
+                              onChanged: (newValue) {
+                                setState(() {});
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Column(
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            "Uy egasi ham yashaydimi ?",
+                            style: TextStyle(fontSize: 15),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Radio(
+                                value: 1,
+                                groupValue: id,
+                                onChanged: (val) {
+                                  setState(() {
+                                    id = 1;
+                                  });
+                                },
+                              ),
+                              Text(
+                                'Ha',
+                                style: new TextStyle(fontSize: 17.0.sp),
+                              ),
+                              SizedBox(
+                                width: 86.w,
+                              ),
+                              Radio(
+                                value: 2,
+                                groupValue: id,
+                                onChanged: (val) {
+                                  setState(() {
+                                    id = 2;
+                                  });
+                                },
+                              ),
+                              Text(
+                                "Yo'q",
+                                style: new TextStyle(
+                                  fontSize: 17.0.sp,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Column(
+                    children: [
+                      Row(
+                        children: [
+                          Text(
+                            "Kommunal to’lovlarini kim to’laydi ?",
+                            style: TextStyle(fontSize: 15),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              Radio(
+                                value: 1,
+                                groupValue: id,
+                                onChanged: (val) {
+                                  setState(() {
+                                    id = 1;
+                                  });
+                                },
+                              ),
+                              Text(
+                                "Uy egasi",
+                                style: new TextStyle(fontSize: 17.0),
+                              ),
+                              SizedBox(
+                                width: 55,
+                              ),
+                              Radio(
+                                value: 2,
+                                groupValue: id,
+                                onChanged: (val) {
+                                  setState(() {
+                                    id = 2;
+                                  });
+                                },
+                              ),
+                              Text(
+                                "Ijarachi",
+                                style: new TextStyle(
+                                  fontSize: 17.0,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        "Quyidagi qulayliklarga ega",
+                        style: TextStyle(color: Colors.blue, fontSize: 18),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 10,),
+                  Column(
+                    children: [
+                      Row(
+                        children: [
+                          Text("Wi - fi "),
+                          SizedBox(width: 103.w,),
+                          Checkbox(
+                            value: this.value1,
+                            onChanged: (bool? value) {
+                              setState(() {
+                                this.value1 = value!;
+                              });
+                            },
+                          ),
+
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Text("TV"),
+                          SizedBox(width: 120.w,),
+                          Checkbox(
+                            value: this.value2,
+                            onChanged: (bool? value) {
+                              setState(() {
+                                this.value2 = value!;
+                              });
+                            },
+                          ),
+
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Text("Muzlatgich"),
+                          SizedBox(width: 75.w,),
+                          Checkbox(
+                            value: this.value3,
+                            onChanged: (bool? value) {
+                              setState(() {
+                                this.value3 = value!;
+                              });
+                            },
+                          ),
+
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Text("Kir yuvish mashinasi "),
+                          SizedBox(width: 20.w,),
+                          Checkbox(
+                            value: this.value4,
+                            onChanged: (bool? value) {
+                              setState(() {
+                                this.value4 = value!;
+                              });
+                            },
+                          ),
+
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Text("Konditsioner"),
+                          SizedBox(width: 76,),
+                          Checkbox(
+                            value: this.value6,
+                            onChanged: (bool? value) {
+                              setState(() {
+                                this.value6 = value!;
+                              });
+                            },
+                          ),
+
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          Text("Chang yutgich"),
+                          SizedBox(width: 66,),
+                          Checkbox(
+                            value: this.value5,
+                            onChanged: (bool? value) {
+                              setState(() {
+                                this.value5 = value!;
+                              });
+                            },
+                          ),
+
+                        ],
+                      ),
+
+                    ],
+                  ),
+                  SizedBox(height: 55,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -610,7 +881,7 @@ class _Student2State extends State<Student2> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => HouseData()));
+                                  builder: (context) => AdsImage()));
                         },
                         child: Text(
                           "Keyingi ".tr(),
