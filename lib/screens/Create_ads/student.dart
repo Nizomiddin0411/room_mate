@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
+import 'package:talaba_uy/screens/Create_ads/ads_student_create,dart.dart';
 import 'package:talaba_uy/screens/menu/menu.dart';
 import '../../cubit/aut_cubit.dart';
 import '../../models/lang_model.dart';
@@ -593,74 +594,75 @@ class _StudentState extends State<Student> {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.r)),
                             primary: AppColors.buttonLinear),
-                        onPressed: () async {
-                          setState(() {
-                            if (_titleCourse == '1-kurs' ||
-                                _titleCourse == '1-курс') {
-                              Course = '1';
-                            } else if (_titleCourse == '2-kurs' ||
-                                _titleCourse == '2-курс') {
-                              Course = '2';
-                            } else if (_titleCourse == '3-kurs' ||
-                                _titleCourse == '3-курс') {
-                              Course = '3';
-                            } else if (_titleCourse == '4-kurs' ||
-                                _titleCourse == '4-курс') {
-                              Course = '4';
-                            } else if (_titleCourse == '5-kurs' ||
-                                _titleCourse == '5-курс') {
-                              Course = '5';
-                            } else if (_titleCourse == '6-kurs' ||
-                                _titleCourse == '6-курс') {
-                              Course = '6';
-                            }
-                          });
-                          setState(() {
-                            if (kvartira == 'Xovli' || kvartira == 'Участка') {
-                              TypeHouse = '2';
-                            } else {
-                              TypeHouse = '1';
-                            }
-                          });
-                          setState(() {
-                            if (TypeOfRent == 'kunlik' ||
-                                TypeOfRent == 'день') {
-                              _titleTime = '1';
-                            } else {
-                              _titleTime = '2';
-                            }
-                          });
-                          setState(() {
-                            if (_checkMetro == true) {
-                              subwayof = '1';
-                            } else {
-                              subwayof = '2';
-                            }
-                          });
-                          setState(() {
-                            if (_titleGendor == 'Ayol' ||
-                                _titleGendor == 'Женщина') {
-                              gender = '2';
-                            } else {
-                              gender = '1';
-                            }
-                          });
-                          await CreateAdsStudent().CreateAds(
-                            districtId: data.districtId,
-                            UniderId: data.UniverId,
-                            fakultetId: data.FacutyId,
-                            Course: Course,
-                            roomOwner: RoomOwner,
-                            TypeHouse: TypeHouse,
-                            CountRoom: roomCount,
-                            TypeOfRent: _titleTime,
-                            cost: costcontroller?.text,
-                            typePayment: typeOfPayment,
-                            subway: subwayof,
-                            gender: gender,
-                            title: titlecontroller?.text,
-                            description: othercontroller?.text,
-                          );
+                        onPressed: ()  {
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>Student2()));
+                          // setState(() {
+                          //   if (_titleCourse == '1-kurs' ||
+                          //       _titleCourse == '1-курс') {
+                          //     Course = '1';
+                          //   } else if (_titleCourse == '2-kurs' ||
+                          //       _titleCourse == '2-курс') {
+                          //     Course = '2';
+                          //   } else if (_titleCourse == '3-kurs' ||
+                          //       _titleCourse == '3-курс') {
+                          //     Course = '3';
+                          //   } else if (_titleCourse == '4-kurs' ||
+                          //       _titleCourse == '4-курс') {
+                          //     Course = '4';
+                          //   } else if (_titleCourse == '5-kurs' ||
+                          //       _titleCourse == '5-курс') {
+                          //     Course = '5';
+                          //   } else if (_titleCourse == '6-kurs' ||
+                          //       _titleCourse == '6-курс') {
+                          //     Course = '6';
+                          //   }
+                          // });
+                          // setState(() {
+                          //   if (kvartira == 'Xovli' || kvartira == 'Участка') {
+                          //     TypeHouse = '2';
+                          //   } else {
+                          //     TypeHouse = '1';
+                          //   }
+                          // });
+                          // setState(() {
+                          //   if (TypeOfRent == 'kunlik' ||
+                          //       TypeOfRent == 'день') {
+                          //     _titleTime = '1';
+                          //   } else {
+                          //     _titleTime = '2';
+                          //   }
+                          // });
+                          // setState(() {
+                          //   if (_checkMetro == true) {
+                          //     subwayof = '1';
+                          //   } else {
+                          //     subwayof = '2';
+                          //   }
+                          // });
+                          // setState(() {
+                          //   if (_titleGendor == 'Ayol' ||
+                          //       _titleGendor == 'Женщина') {
+                          //     gender = '2';
+                          //   } else {
+                          //     gender = '1';
+                          //   }
+                          // });
+                          // await CreateAdsStudent().CreateAds(
+                          //   districtId: data.districtId,
+                          //   UniderId: data.UniverId,
+                          //   fakultetId: data.FacutyId,
+                          //   Course: Course,
+                          //   roomOwner: RoomOwner,
+                          //   TypeHouse: TypeHouse,
+                          //   CountRoom: roomCount,
+                          //   TypeOfRent: _titleTime,
+                          //   cost: costcontroller?.text,
+                          //   typePayment: typeOfPayment,
+                          //   subway: subwayof,
+                          //   gender: gender,
+                          //   title: titlecontroller?.text,
+                          //   description: othercontroller?.text,
+                          // );
 
 
                         },

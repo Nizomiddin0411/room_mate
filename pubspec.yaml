@@ -61,6 +61,7 @@ dependencies:
   cached_network_image: ^3.2.0
   flutter_svg: ^1.0.3
   group_radio_button: ^1.2.0
+  dotted_border: ^2.0.0+2
 dev_dependencies:
   flutter_test:
     sdk: flutter

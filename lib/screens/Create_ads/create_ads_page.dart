@@ -7,6 +7,7 @@ import 'package:talaba_uy/screens/Create_ads/owner.dart';
 import 'package:talaba_uy/screens/Create_ads/student.dart';
 
 import '../../provider/region_provider.dart';
+import 'ads_student_create,dart.dart';
 
 class CreateAdsPage extends StatefulWidget {
   const CreateAdsPage({Key? key}) : super(key: key);
@@ -48,7 +49,7 @@ class _CreateAdsPageState extends State<CreateAdsPage>
             style: TextStyle(color: AppColors.mainColor)),
         centerTitle: true,
       ),
-      body: Student(),
+      body: const Student(),
 
     );
   }
