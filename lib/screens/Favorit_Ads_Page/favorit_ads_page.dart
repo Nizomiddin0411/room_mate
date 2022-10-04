@@ -25,6 +25,7 @@ class _FavoritAdsState extends State<FavoritAds> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.backgroundWhite,
@@ -203,10 +204,12 @@ class _FavoritAdsState extends State<FavoritAds> {
                                                               ),
                                                               // the method which is called
                                                               // when button is pressed
-                                                              onPressed: () {
-                                                                _showDialog(
-                                                                  data.MyAds[index].id,
+                                                              onPressed: () async{
+                                                                _showDialog(adsId: data.MyAds[index].id,
+
+
                                                                 );
+                                                                // await data.getMyAds();
                                                               },
                                                             ),
                                                           ),
@@ -280,10 +283,15 @@ class _FavoritAdsState extends State<FavoritAds> {
         ),
       ),
     );
+
+
+
   }
 
-  void _showDialog(int? adsId) {
+  void _showDialog({ int? adsId}) {
     // flutter defined function
+    // final provider = Provider.of<FavoriteProvider>(context, listen: false).getMyAds();
+    final provider = context.read<FavoriteProvider>();
     showDialog(
         context: context,
         builder: (context) {
@@ -331,7 +339,7 @@ class _FavoritAdsState extends State<FavoritAds> {
                         child: ElevatedButton(
                           onPressed: () async {
                             await DeleteMyAds().DeleteAds(id: adsId);
-                            // await Data();
+                            await provider.getMyAds();
                             Navigator.pop(context);
                           },
                           style: ElevatedButton.styleFrom(

@@ -272,49 +272,64 @@ class _OylikIjaraState extends State<OylikIjara> {
                                   ],
 
                                 ),
-                                Row(
-                                  mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(6.0),
-                                      child: Text(
-                                        data.isChanded
-                                            ? data.Ads[index].title.toString()
-                                            : 'Studentlar uchun',
-                                        style: TextStyle(fontSize: 18.sp),
-                                      ),
-                                    ),
+                               Padding(
+                                 padding: const EdgeInsets.all(8.0),
+                                 child: Column(
+                                   children: [
+                                     Row(
+                                       children: [
+                                         Padding(
+                                           padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+                                           child: Text(
+                                             '${data.Ads[index].cost.toString()} ${data.Ads[index].costType.toString() == "1" ? "so'm" : "y.e"}',
+                                             style: TextStyle(
+                                                 color: AppColors.mainColor,
+                                                 fontSize: 24.sp),
+                                           ),
+                                         ),
+                                       ],
+                                     ),
+                                     Row(
+                                       mainAxisAlignment:
+                                       MainAxisAlignment.spaceBetween,
+                                       children: [
+                                         Padding(
+                                           padding: const EdgeInsets.all(6.0),
+                                           child: SizedBox(
+                                             width:MediaQuery.of(context).size.width -150.w,
+                                             child: Text(
+                                               data.isChanded
+                                                   ? data.Ads[index].title.toString()
+                                                   : 'Studentlar uchun',
+                                               style: TextStyle(fontSize: 14.sp),
+                                             ),
+                                           ),
+                                         ),
 
-                                  ],
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-                                  child: Text(
-                                    '${data.Ads[index].cost.toString()} ${data.Ads[index].costType.toString() == "1" ? "so'm" : "y.e"}',
-                                    style: TextStyle(
-                                        color: AppColors.mainColor,
-                                        fontSize: 24.sp),
-                                  ),
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Padding(
-                                      padding:
-                                      const EdgeInsets.fromLTRB(8, 0, 8, 0),
-                                      child: Text(
-                                        data.Ads[index].address.toString(),
-                                        style: TextStyle(fontSize: 10.sp),
-                                      ),
-                                    ),
+                                       ],
+                                     ),
+                                     Row(
 
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 18.h,
-                                )
+                                       children: [
+                                         const Icon(Icons.location_on,color:AppColors.mainColor),
+                                         Padding(
+                                           padding:
+                                            EdgeInsets.fromLTRB(8.w, 0, 8.w, 0),
+                                           child: SizedBox(
+                                             width:MediaQuery.of(context).size.width -150.w,
+                                             child: Text(
+                                               data.Ads[index].address.toString(),
+                                               style: TextStyle(fontSize: 10.sp),
+                                             ),
+                                           ),
+                                         ),
+
+                                       ],
+                                     ),
+                                   ],
+                                 ),
+                               )
+
                               ],
                             ),
                           ),
@@ -474,49 +489,63 @@ class _OylikIjaraState extends State<OylikIjara> {
                                   ],
 
                                 ),
-                                Row(
-                                  mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.all(6.0),
-                                      child: Text(
-                                        data.isChanded
-                                            ? data.AdsForStudent[index].title.toString()
-                                            : 'Studentlar uchun',
-                                        style: TextStyle(fontSize: 18.sp),
-                                      ),
-                                    ),
-
-                                  ],
-                                ),
                                 Padding(
-                                  padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
-                                  child: Text(
-                                    '${data.AdsForStudent[index].cost.toString()} ${data.AdsForStudent[index].costType.toString() == "1" ? "so'm" : "y.e"}',
-                                    style: TextStyle(
-                                        color: AppColors.mainColor,
-                                        fontSize: 24.sp),
-                                  ),
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                  MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Padding(
-                                      padding:
-                                      const EdgeInsets.fromLTRB(8, 0, 8, 0),
-                                      child: Text(
-                                        data.AdsForStudent[index].address.toString(),
-                                        style: TextStyle(fontSize: 10.sp),
-                                      ),
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(children: [
+                                    Row(
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+                                          child: Text(
+                                            '${data.AdsForStudent[index].cost.toString()} ${data.AdsForStudent[index].costType.toString() == "1" ? "so'm" : "y.e"}',
+                                            style: TextStyle(
+                                                color: AppColors.mainColor,
+                                                fontSize: 24.sp),
+                                          ),
+                                        ),
+                                      ],
                                     ),
+                                    Row(
+                                      mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Padding(
+                                          padding: const EdgeInsets.all(6.0),
+                                          child: SizedBox(
+                                            width: MediaQuery.of(context).size.width -150.w,
+                                            child: Text(
+                                              data.isChanded
+                                                  ? data.AdsForStudent[index].title.toString()
+                                                  : 'Studentlar uchun',
+                                              style: TextStyle(fontSize: 14.sp),
+                                            ),
+                                          ),
+                                        ),
 
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 18.h,
+                                      ],
+                                    ),
+                                    Row(
+
+                                      children: [
+                                        const Icon(Icons.location_on,color:AppColors.mainColor),
+                                        Padding(
+                                          padding:
+                                           EdgeInsets.fromLTRB(8.w, 0, 8.w, 0),
+                                          child: SizedBox(
+                                            width: MediaQuery.of(context).size.width -150.w,
+                                            child: Text(
+                                              data.AdsForStudent[index].address.toString(),
+                                              style: TextStyle(fontSize: 10.sp),
+                                            ),
+                                          ),
+                                        ),
+
+                                      ],
+                                    ),
+                                  ],),
                                 )
+
+
                               ],
                             ),
                           ),

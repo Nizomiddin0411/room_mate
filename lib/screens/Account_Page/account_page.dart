@@ -16,8 +16,9 @@ class AccountPage extends StatefulWidget {
 }
 
 class _AccountPageState extends State<AccountPage> {
-  bool _switchValue = false;
+  final bool _switchValue = false;
   bool isSwitched = false;
+  bool isSwitchedSecond = false;
   String name = Hive.box('fullname').get('fullname').toString();
   String number = Hive.box('phone').get('phone').toString();
 
@@ -28,7 +29,7 @@ class _AccountPageState extends State<AccountPage> {
         backgroundColor: AppColors.backgroundWhite,
         title:  Padding(
           padding: EdgeInsets.symmetric(horizontal: 45.w),
-          child: Text(
+          child: const Text(
             "Shaxsiy kabinet",
             style: TextStyle(color: AppColors.mainColor),
           ).tr(),
@@ -43,33 +44,34 @@ class _AccountPageState extends State<AccountPage> {
           },
         ),
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.only(top: 100),
-            child: Container(
-              width: 120.w,
-              height: 120.h,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(24.r),
-                  image: const DecorationImage(
-                    image: AssetImage(
-                      'assets/images/accountImage.png',
-                    ),
-                  )),
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 100),
+              child: Container(
+                width: 120.w,
+                height: 120.h,
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(24.r),
+                    image: const DecorationImage(
+                      image: AssetImage(
+                        'assets/images/accountImage.png',
+                      ),
+                    )),
+              ),
             ),
-          ),
-          SizedBox(
-            height: 20.h,
-          ),
-          Text(
-            Hive.box('fullname').isEmpty ? 'name' :  name,
-            style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
-          ),
-          Text(Hive.box('fullname').isEmpty ? 'phone' : number),
-          SizedBox(
-            height: 20.h,
-          ),
+            SizedBox(
+              height: 20.h,
+            ),
+            Text(
+              Hive.box('fullname').isEmpty ? 'name' :  name,
+              style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
+            ),
+            Text(Hive.box('fullname').isEmpty ? 'phone' : number),
+            SizedBox(
+              height: 20.h,
+            ),
     //       InkWell(
     //       onTap: () {},
     // child: ListTile(
@@ -110,66 +112,98 @@ class _AccountPageState extends State<AccountPage> {
     //         ),
     //       ),
     // ),
-          ListTile(
-            leading: Container(
-                width: 40.w,
-                height: 40.h,
-                decoration: BoxDecoration(
-                  color: AppColors.iconBack,
-                  borderRadius: BorderRadius.circular(8.r),
-                ),
-                child: const Icon(
-                  Icons.supervisor_account,
-                  color: AppColors.mainColor,
-                )),
-            title: Text(
-              "Sherik kerak",
-              style: TextStyle(fontSize: 18.sp),
-            ).tr(),
-            trailing: Container(
-              height: 60.h,
-              width: 80.w,
-              child:
-              Switch(
-                value: isSwitched,
-                onChanged: (value) {
-                   ChangeProfile().ChangeProf(id: _switchValue ? '2': '1');
-                  setState(() {
-                    isSwitched = value;
-                  });
-                },
-              ),
-            ),
-          ),
-          InkWell(
-            onTap: () {
-              showAlertDialog(context);
-            },
-            child: ListTile(
+            ListTile(
               leading: Container(
                   width: 40.w,
                   height: 40.h,
                   decoration: BoxDecoration(
-                    color: AppColors.colorBack2,
+                    color: AppColors.iconBack,
                     borderRadius: BorderRadius.circular(8.r),
                   ),
                   child: const Icon(
-                    Icons.exit_to_app,
-                    color: AppColors.error,
+                    Icons.call,
+                    color: AppColors.mainColor,
                   )),
               title: Text(
-                "Akkauntdan chiqish ",
-                style: TextStyle(fontSize: 18.sp, color: AppColors.error),
-              ).tr(),
+                "Telefon raqamni ko’rinmas qilish",
+                style: TextStyle(fontSize: 18.sp),
+              ),
+              trailing: Container(
+                height: 60.h,
+                width: 80.w,
+                child:
+                Switch(
+                  value: isSwitched,
+                  onChanged: (value) {
+                     ChangeProfile().ChangeProf(id: _switchValue ? '2': '1');
+                    setState(() {
+                      isSwitched = value;
+                    });
+                  },
+                ),
+              ),
             ),
-          ),
-          SizedBox(
-            height: 230.h,
-          ),
-          const Center(
-            child: Text("Version 1.1.0"),
-          )
-        ],
+            ListTile(
+              leading: Container(
+                  width: 40.w,
+                  height: 40.h,
+                  decoration: BoxDecoration(
+                    color: AppColors.iconBack,
+                    borderRadius: BorderRadius.circular(8.r),
+                  ),
+                  child: const Icon(
+                    Icons.visibility_off,
+                    color: AppColors.mainColor,
+                  )),
+              title: Text(
+                "Profilni ro’yxatda ko’rinmas qilish",
+                style: TextStyle(fontSize: 18.sp),
+              ),
+              trailing: Container(
+                height: 60.h,
+                width: 80.w,
+                child:
+                Switch(
+                  value: isSwitchedSecond,
+                  onChanged: (value) {
+                    // ChangeProfile().ChangeProf(id: _switchValue ? '2': '1');
+                    setState(() {
+                      isSwitchedSecond = value;
+                    });
+                  },
+                ),
+              ),
+            ),
+            InkWell(
+              onTap: () {
+                showAlertDialog(context);
+              },
+              child: ListTile(
+                leading: Container(
+                    width: 40.w,
+                    height: 40.h,
+                    decoration: BoxDecoration(
+                      color: AppColors.colorBack2,
+                      borderRadius: BorderRadius.circular(8.r),
+                    ),
+                    child: const Icon(
+                      Icons.exit_to_app,
+                      color: AppColors.error,
+                    )),
+                title: Text(
+                  "Akkauntdan chiqish ",
+                  style: TextStyle(fontSize: 18.sp, color: AppColors.error),
+                ).tr(),
+              ),
+            ),
+            SizedBox(
+              height: 230.h,
+            ),
+            const Center(
+              child: Text("Version 1.1.0"),
+            )
+          ],
+        ),
       ),
     );
   }
