@@ -230,7 +230,7 @@ class _OylikIjaraState extends State<OylikIjara> {
                                 Stack(
                                   children:[ CachedNetworkImage(
                                     imageUrl: "https://source.unsplash.com/random/324x235",
-                                    width: 324.w,
+                                    width: 327.w,
                                     height: 235.h,
                                     fit: BoxFit.cover,
                                   ),
@@ -442,7 +442,7 @@ class _OylikIjaraState extends State<OylikIjara> {
                                 Stack(
                                   children:[ CachedNetworkImage(
                                     imageUrl: "https://source.unsplash.com/random/324x235",
-                                    width: 324.w,
+                                    width: 327.w,
                                     height: 235.h,
                                     fit: BoxFit.cover,
                                   ),
@@ -495,7 +495,7 @@ class _OylikIjaraState extends State<OylikIjara> {
                                     Row(
                                       children: [
                                         Padding(
-                                          padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+                                          padding:  EdgeInsets.fromLTRB(8.w, 0, 8.w, 0),
                                           child: Text(
                                             '${data.AdsForStudent[index].cost.toString()} ${data.AdsForStudent[index].costType.toString() == "1" ? "so'm" : "y.e"}',
                                             style: TextStyle(
@@ -531,7 +531,8 @@ class _OylikIjaraState extends State<OylikIjara> {
                                         Padding(
                                           padding:
                                            EdgeInsets.fromLTRB(8.w, 0, 8.w, 0),
-                                          child: SizedBox(
+                                          child:
+                                          SizedBox(
                                             width: MediaQuery.of(context).size.width -150.w,
                                             child: Text(
                                               data.AdsForStudent[index].address.toString(),

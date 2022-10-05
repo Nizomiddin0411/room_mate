@@ -2,19 +2,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
-
-import 'package:talaba_uy/screens/All_Ads_Page/detail_page.dart';
-import 'package:talaba_uy/screens/Ijarachipage/filtr.dart';
-
-import '../../models/get_all_ads.dart';
 import '../../provider/day_provider.dart';
-import '../../provider/region_provider.dart';
-import '../../services/get_all_ads_sevice.dart';
-import '../../services/get_all_ads_user.dart';
 import '../../services/post_change_favoritr_service.dart';
 import '../Ads_Detail/ads_detail.dart';
 import 'filtr_for_day.dart';
@@ -230,7 +221,7 @@ class _KunlikIjaraState extends State<KunlikIjara> {
                                     CachedNetworkImage(
                                       imageUrl:
                                           "https://source.unsplash.com/random/324x235",
-                                      width: 324.w,
+                                      width: 327.w,
                                       height: 235.h,
                                       fit: BoxFit.cover,
                                     ),
@@ -249,7 +240,7 @@ class _KunlikIjaraState extends State<KunlikIjara> {
                                                   BorderRadius.circular(2.r),
                                               color: AppColors.iconColor,
                                             ),
-                                            child: Center(
+                                            child: const Center(
                                                 child: Text(
                                               "21 Sentabr,14:01",
                                               style: TextStyle(
@@ -430,7 +421,7 @@ class _KunlikIjaraState extends State<KunlikIjara> {
                                     CachedNetworkImage(
                                       imageUrl:
                                           "https://source.unsplash.com/random/324x235",
-                                      width: 324.w,
+                                      width: 327.w,
                                       height: 235.h,
                                       fit: BoxFit.cover,
                                     ),
@@ -526,7 +517,7 @@ class _KunlikIjaraState extends State<KunlikIjara> {
                                        // mainAxisAlignment:
                                        // MainAxisAlignment.spaceBetween,
                                        children: [
-                                         Icon(Icons.location_on,color: AppColors.mainColor,),
+                                         const Icon(Icons.location_on,color: AppColors.mainColor,),
                                          Padding(
                                            padding:
                                             EdgeInsets.fromLTRB(8.w, 0, 8.w, 0),

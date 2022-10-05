@@ -236,7 +236,7 @@ class _ElonlarState extends State<Elonlar> {
                                   children:[
                                     CachedNetworkImage(
                                       imageUrl: "https://source.unsplash.com/random/324x235",
-                                    width: 324.w,
+                                    width: 327.w,
                                     height: 235.h,
                                     fit: BoxFit.cover,
                                   ),
@@ -471,7 +471,7 @@ class _ElonlarState extends State<Elonlar> {
                                 Stack(
                                   children:[ CachedNetworkImage(
                                     imageUrl: "https://source.unsplash.com/random/324x235",
-                                    width: 324.w,
+                                    width: 327.w,
                                     height: 235.h,
                                     fit: BoxFit.cover,
                                   ),
@@ -558,7 +558,7 @@ class _ElonlarState extends State<Elonlar> {
                                        // mainAxisAlignment:
                                        // MainAxisAlignment.spaceBetween,
                                        children: [
-                                         Icon(
+                                         const Icon(
                                            Icons.location_on,color: AppColors.mainColor,
                                          ),
                                          Padding(
