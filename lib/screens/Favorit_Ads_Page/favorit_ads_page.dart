@@ -25,7 +25,6 @@ class _FavoritAdsState extends State<FavoritAds> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.backgroundWhite,
@@ -67,82 +66,56 @@ class _FavoritAdsState extends State<FavoritAds> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) =>
-                                              AdsDetail(
-                                                title: data
-                                                    .MyAds[index]
-                                                    .title
+                                          builder: (context) => AdsDetail(
+                                                title: data.MyAds[index].title
                                                     .toString(),
                                                 description: data
-                                                    .MyAds[index]
-                                                    .description
+                                                    .MyAds[index].description
                                                     .toString(),
                                                 houseType: data
-                                                    .MyAds[index]
-                                                    .houseType
+                                                    .MyAds[index].houseType
                                                     .toString(),
-                                                cost: data
-                                                    .MyAds[index].cost
+                                                cost: data.MyAds[index].cost
                                                     .toString(),
                                                 costTayp: data
-                                                    .MyAds[index]
-                                                    .costType
+                                                    .MyAds[index].costType
                                                     .toString(),
                                                 countRoom: data
-                                                    .MyAds[index]
-                                                    .roomCount
+                                                    .MyAds[index].roomCount
                                                     .toString(),
                                                 countPeople: data
-                                                    .MyAds[index]
-                                                    .roommateCount
+                                                    .MyAds[index].roommateCount
                                                     .toString(),
                                                 region: data
-                                                    .MyAds[index]
-                                                    .region
-                                                    ?.name
+                                                    .MyAds[index].region?.name
                                                     .toString(),
                                                 district: data
-                                                    .MyAds[index]
-                                                    .district
-                                                    ?.name
+                                                    .MyAds[index].district?.name
                                                     .toString(),
-                                                univer: data
-                                                    .MyAds[index]
-                                                    .university
-                                                    ?.name
+                                                univer: data.MyAds[index]
+                                                    .university?.name
                                                     .toString(),
                                                 facultet: data
-                                                    .MyAds[index]
-                                                    .faculty
-                                                    ?.name
+                                                    .MyAds[index].faculty?.name
                                                     .toString(),
                                                 liveWithOwner: data
-                                                    .MyAds[index]
-                                                    .liveWithOwner
+                                                    .MyAds[index].liveWithOwner
                                                     .toString(),
-                                                subway: data
-                                                    .MyAds[index]
-                                                    .subway
+                                                subway: data.MyAds[index].subway
                                                     .toString(),
                                                 favorite: data
-                                                    .MyAds[index]
-                                                    .favorite
+                                                    .MyAds[index].favorite
                                                     .toString(),
-                                                id: data
-                                                    .MyAds[index].id
+                                                id: data.MyAds[index].id
                                                     .toString(),
-                                                type: data
-                                                    .MyAds[index].type
+                                                type: data.MyAds[index].type
                                                     .toString(),
-                                                userId: data
-                                                    .MyAds[index]
-                                                    .userId!,
+                                                userId:
+                                                    data.MyAds[index].userId!,
                                                 userFullName: data
-                                                    .MyAds[index]
-                                                    .userFullName,
+                                                    .MyAds[index].userFullName,
                                                 chatApproved: data
-                                                    .MyAds[index]
-                                                    .chatApproved!,
+                                                    .MyAds[index].chatApproved!,
                                               )));
                                 },
                                 child: Container(
@@ -152,62 +125,90 @@ class _FavoritAdsState extends State<FavoritAds> {
                                       borderRadius: BorderRadius.circular(6.r),
                                       color: AppColors.secondBackgroud),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Stack(
-                                        children:[ CachedNetworkImage(
-                                          imageUrl: "https://source.unsplash.com/random/324x235",
-                                          width: 324.w,
-                                          height: 235.h,
-                                          fit: BoxFit.cover,
-                                        ),
-                                          Positioned(child:
-                                          Padding(
+                                        children: [
+                                          CachedNetworkImage(
+                                            imageUrl:
+                                                "https://source.unsplash.com/random/324x235",
+                                            width: 324.w,
+                                            height: 235.h,
+                                            fit: BoxFit.cover,
+                                          ),
+                                          Positioned(
+                                              child: Padding(
                                             padding: const EdgeInsets.all(8.0),
                                             child: Row(
-                                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
                                               children: [
                                                 Container(
                                                   width: 112.w,
                                                   height: 24.h,
                                                   decoration: BoxDecoration(
-                                                    borderRadius: BorderRadius.circular(2.r),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            2.r),
                                                     color: AppColors.iconColor,
                                                   ),
-
-                                                  child: Center(child: Text("21 Sentabr,14:01",style: TextStyle(color: AppColors.backgroundWhite),)),
+                                                  child: Center(
+                                                      child: Text(
+                                                    "21 Sentabr,14:01",
+                                                    style: TextStyle(
+                                                        color: AppColors
+                                                            .backgroundWhite),
+                                                  )),
                                                 ),
                                                 Padding(
                                                     padding:
-                                                    EdgeInsets.fromLTRB(1.w, 0, 8.w, 0),
+                                                        EdgeInsets.fromLTRB(
+                                                            1.w, 0, 8.w, 0),
                                                     child: Row(
                                                       children: [
                                                         Container(
                                                           width: 32.w,
                                                           height: 32.h,
-                                                          color: AppColors.backgroundWhite.withOpacity(0.7),
+                                                          color: AppColors
+                                                              .backgroundWhite
+                                                              .withOpacity(0.7),
                                                           child: const Center(
-                                                            child: Icon(Icons.create,color: AppColors.mainColor,),
+                                                            child: Icon(
+                                                              Icons.create,
+                                                              color: AppColors
+                                                                  .mainColor,
+                                                            ),
                                                           ),
                                                         ),
-                                                        SizedBox(width: 2.w,),
+                                                        SizedBox(
+                                                          width: 2.w,
+                                                        ),
                                                         Container(
                                                           width: 32.w,
                                                           height: 32.h,
-                                                          color: AppColors.backgroundWhite.withOpacity(0.7),
+                                                          color: AppColors
+                                                              .backgroundWhite
+                                                              .withOpacity(0.7),
                                                           child: Center(
-                                                            child:  IconButton(
+                                                            child: IconButton(
                                                               iconSize: 22.0,
                                                               icon: const Icon(
-                                                                Icons.delete_outline,
-                                                                color: AppColors.error,
+                                                                Icons
+                                                                    .delete_outline,
+                                                                color: AppColors
+                                                                    .error,
                                                               ),
                                                               // the method which is called
                                                               // when button is pressed
-                                                              onPressed: () async{
-                                                                _showDialog(adsId: data.MyAds[index].id,
-
-
+                                                              onPressed:
+                                                                  () async {
+                                                                _showDialog(
+                                                                  adsId: data
+                                                                      .MyAds[
+                                                                          index]
+                                                                      .id,
                                                                 );
                                                                 // await data.getMyAds();
                                                               },
@@ -215,15 +216,11 @@ class _FavoritAdsState extends State<FavoritAds> {
                                                           ),
                                                         )
                                                       ],
-                                                    )
-
-                                                )
+                                                    ))
                                               ],
                                             ),
-                                          )
-                                          )
+                                          ))
                                         ],
-
                                       ),
                                       Row(
                                         mainAxisAlignment:
@@ -232,11 +229,11 @@ class _FavoritAdsState extends State<FavoritAds> {
                                           Padding(
                                             padding: const EdgeInsets.all(6.0),
                                             child: Text(
-                                              data.MyAds[index].title.toString(),
+                                              data.MyAds[index].title
+                                                  .toString(),
                                               style: TextStyle(fontSize: 18.sp),
                                             ),
                                           ),
-
                                         ],
                                       ),
                                       Padding(
@@ -262,7 +259,6 @@ class _FavoritAdsState extends State<FavoritAds> {
                                               style: TextStyle(fontSize: 10.sp),
                                             ),
                                           ),
-
                                         ],
                                       ),
                                       SizedBox(
@@ -283,12 +279,9 @@ class _FavoritAdsState extends State<FavoritAds> {
         ),
       ),
     );
-
-
-
   }
 
-  void _showDialog({ int? adsId}) {
+  void _showDialog({int? adsId}) {
     // flutter defined function
     // final provider = Provider.of<FavoriteProvider>(context, listen: false).getMyAds();
     final provider = context.read<FavoriteProvider>();

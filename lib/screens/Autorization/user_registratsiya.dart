@@ -235,7 +235,7 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
               onPressed: () async {
                if(myController.text != ''&&jinsi&&checkBox){
                  await RegistratsiyaUser().CreateAdsUser(
-                   FullName: myController.toString(),
+                   FullName: myController.text,
                    Phonenumber: nameController.text,
                    gender: dropdownvalue.toString() == 'Erkak' ? '1' : '2',);
                  Navigator.push(

@@ -96,6 +96,7 @@ class _OwnerState extends State<Owner> {
     inputcontroller = TextEditingController();
     super.initState();
   }
+
   int id = 1;
   int id2 = 2;
   int id3 = 3;
@@ -120,29 +121,30 @@ class _OwnerState extends State<Owner> {
               children: [
                 Text("E’lonni nomlash"),
                 SizedBox(
-                  height: 5,
+                  height: 5.h,
                 ),
                 TextFormField(
                   controller: costController,
                   keyboardType: TextInputType.name,
-                  decoration: const InputDecoration(
+                  decoration: InputDecoration(
                       label: Text("E’lonni nomlang"),
-                      labelStyle: TextStyle(fontSize: 12.0, color: Colors.grey),
+                      labelStyle:
+                          TextStyle(fontSize: 12.0.sp, color: Colors.grey),
                       enabledBorder: OutlineInputBorder(
                         borderSide: BorderSide(
                           color: Colors.black,
                         ),
-                        borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                        borderRadius: BorderRadius.all(Radius.circular(15.0.r)),
                       ),
                       focusedBorder: OutlineInputBorder(
                           borderSide: BorderSide(
                             color: Colors.black,
                           ),
                           borderRadius:
-                              BorderRadius.all(Radius.circular(20.0)))),
+                              BorderRadius.all(Radius.circular(20.r)))),
                 ),
                 SizedBox(
-                  height: 15,
+                  height: 15.w,
                 ),
                 Row(
                   children: [
@@ -194,7 +196,7 @@ class _OwnerState extends State<Owner> {
                         ),
                       ],
                     ),
-                    SizedBox(width: 15),
+                    SizedBox(width: 15.w),
                     Column(
                       children: [
                         Text("Ahamiyatsiz"),
@@ -209,7 +211,7 @@ class _OwnerState extends State<Owner> {
                       ],
                     ),
                     SizedBox(
-                      width: 20,
+                      width: 15.w,
                     ),
                   ],
                 ),
@@ -385,7 +387,7 @@ class _OwnerState extends State<Owner> {
                       ],
                     ),
                     SizedBox(
-                      height: 5,
+                      height: 5.h,
                     ),
                     Column(
                       children: [
@@ -396,12 +398,12 @@ class _OwnerState extends State<Owner> {
                               Row(
                                 children: [
                                   SizedBox(
-                                    width: 7,
+                                    width: 7.w,
                                   ),
                                   Text(
                                       "Amir Temur ko’chasi 21, Yunusobod tumani"),
                                   SizedBox(
-                                    width: 45,
+                                    width: 45.w,
                                   ),
                                   Icon(Icons.arrow_forward)
                                 ],
@@ -413,14 +415,14 @@ class _OwnerState extends State<Owner> {
                           decoration: BoxDecoration(
                               border: Border.all(color: Colors.black),
                               borderRadius:
-                                  BorderRadius.all(Radius.circular(5))),
+                                  BorderRadius.all(Radius.circular(5.r))),
                         ),
                       ],
                     ),
                   ],
                 ),
                 SizedBox(
-                  height: 18,
+                  height: 18.h,
                 ),
                 Column(
                   children: [
@@ -429,7 +431,7 @@ class _OwnerState extends State<Owner> {
                         Text(
                           "Metroga yaqinmi ?",
                           style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.bold),
+                              fontSize: 18.sp, fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
@@ -452,7 +454,7 @@ class _OwnerState extends State<Owner> {
                               style: new TextStyle(fontSize: 17.0),
                             ),
                             SizedBox(
-                              width: 55,
+                              width: 55.w,
                             ),
                             Radio(
                               value: 2,
@@ -466,7 +468,7 @@ class _OwnerState extends State<Owner> {
                             Text(
                               "Yo'q",
                               style: new TextStyle(
-                                fontSize: 17.0,
+                                fontSize: 17.0.sp,
                               ),
                             ),
                           ],
@@ -525,7 +527,7 @@ class _OwnerState extends State<Owner> {
                   ],
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 20.h,
                 ),
                 Row(
                   children: [
@@ -576,7 +578,7 @@ class _OwnerState extends State<Owner> {
                       ],
                     ),
                     SizedBox(
-                      width: 70,
+                      width: 63.w,
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -680,7 +682,7 @@ class _OwnerState extends State<Owner> {
                   ],
                 ),
                 SizedBox(
-                  height: 25,
+                  height: 20.w,
                 ),
                 Row(
                   children: [
@@ -698,7 +700,7 @@ class _OwnerState extends State<Owner> {
                         SizedBox(height: 4.h),
                         Container(
                           height: 50.h,
-                          width: 130.w,
+                          width: 120.w,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.r),
                               border: Border.all(color: _colorGender)),
@@ -731,7 +733,7 @@ class _OwnerState extends State<Owner> {
                       ],
                     ),
                     SizedBox(
-                      width: 70,
+                      width: 70.w,
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -782,7 +784,7 @@ class _OwnerState extends State<Owner> {
                   ],
                 ),
                 SizedBox(
-                  height: 15,
+                  height: 15.h,
                 ),
                 Text(
                   "Narxi".tr(),
@@ -824,8 +826,8 @@ class _OwnerState extends State<Owner> {
                                   left:
                                       BorderSide(color: Colors.grey.shade300))),
                           padding: EdgeInsets.only(left: 8.w, top: 0),
-                          width: 70,
-                          height: 0,
+                          width: 70.w,
+                          height: 0.h,
                           child: DropdownButton(
                             underline: Container(),
                             value: _dropownUsd,
@@ -868,7 +870,7 @@ class _OwnerState extends State<Owner> {
                   ),
                 ),
                 SizedBox(
-                  height: 15,
+                  height: 15.h,
                 ),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -962,7 +964,7 @@ class _OwnerState extends State<Owner> {
                             Text(
                               "Yo'q",
                               style: new TextStyle(
-                                fontSize: 17.0,
+                                fontSize: 17.0.sp,
                               ),
                             ),
                           ],
@@ -997,7 +999,9 @@ class _OwnerState extends State<Owner> {
                           height: 1,
                         ),
                         Text("Elektr energiya"),
-                        SizedBox(width: 100.w,),
+                        SizedBox(
+                          width: 100.w,
+                        ),
                         Radio(
                           value: 1,
                           groupValue: id,
@@ -1007,7 +1011,9 @@ class _OwnerState extends State<Owner> {
                             });
                           },
                         ),
-                        SizedBox(width: 50.w,),
+                        SizedBox(
+                          width: 50.w,
+                        ),
                         Radio(
                           value: 2,
                           groupValue: id,
@@ -1031,7 +1037,9 @@ class _OwnerState extends State<Owner> {
                               height: 1,
                             ),
                             Text("Gaz"),
-                            SizedBox(width: 159.w,),
+                            SizedBox(
+                              width: 159.w,
+                            ),
                             Radio(
                               value: 1,
                               groupValue: id2,
@@ -1041,7 +1049,9 @@ class _OwnerState extends State<Owner> {
                                 });
                               },
                             ),
-                            SizedBox(width: 50.w,),
+                            SizedBox(
+                              width: 50.w,
+                            ),
                             Radio(
                               value: 2,
                               groupValue: id2,
@@ -1060,10 +1070,12 @@ class _OwnerState extends State<Owner> {
                         Row(
                           children: [
                             SizedBox(
-                              height: 1,
+                              height: 1.h,
                             ),
                             Text("Sovuq suv"),
-                            SizedBox(width: 126.w,),
+                            SizedBox(
+                              width: 124.w,
+                            ),
                             Radio(
                               value: 1,
                               groupValue: id3,
@@ -1073,7 +1085,9 @@ class _OwnerState extends State<Owner> {
                                 });
                               },
                             ),
-                            SizedBox(width: 50.w,),
+                            SizedBox(
+                              width: 50.w,
+                            ),
                             Radio(
                               value: 2,
                               groupValue: id3,
@@ -1095,7 +1109,9 @@ class _OwnerState extends State<Owner> {
                               height: 1,
                             ),
                             Text("Issiq suv"),
-                            SizedBox(width: 134.w,),
+                            SizedBox(
+                              width: 132.w,
+                            ),
                             Radio(
                               value: 1,
                               groupValue: id4,
@@ -1105,7 +1121,9 @@ class _OwnerState extends State<Owner> {
                                 });
                               },
                             ),
-                            SizedBox(width: 50.w,),
+                            SizedBox(
+                              width: 50.w,
+                            ),
                             Radio(
                               value: 2,
                               groupValue: id4,
@@ -1124,10 +1142,12 @@ class _OwnerState extends State<Owner> {
                         Row(
                           children: [
                             SizedBox(
-                              height: 1,
+                              height: 1.h,
                             ),
                             Text("Chiqindi"),
-                            SizedBox(width: 138.w,),
+                            SizedBox(
+                              width: 135.w,
+                            ),
                             Radio(
                               value: 1,
                               groupValue: id5,
@@ -1137,7 +1157,9 @@ class _OwnerState extends State<Owner> {
                                 });
                               },
                             ),
-                            SizedBox(width: 50.w,),
+                            SizedBox(
+                              width: 50.w,
+                            ),
                             Radio(
                               value: 2,
                               groupValue: id5,
@@ -1157,105 +1179,103 @@ class _OwnerState extends State<Owner> {
                   children: [
                     Text(
                       "Quyidagi qulayliklarga ega",
-                      style: TextStyle(color: Colors.blue, fontSize: 18),
+                      style: TextStyle(color: Colors.blue, fontSize: 18.sp),
                     ),
                   ],
                 ),
-                SizedBox(height: 10.h,),
-                Column(
-                  children: [
-                    Row(
-                      children: [
-                        Text("Wi - fi "),
-                        SizedBox(width: 103.w,),
-                        Checkbox(
-                          value: this.value1,
-                          onChanged: (bool? value) {
-                            setState(() {
-                              this.value1 = value!;
-                            });
-                          },
-                        ),
-
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Text("TV"),
-                        SizedBox(width: 120.w,),
-                        Checkbox(
-                          value: this.value2,
-                          onChanged: (bool? value) {
-                            setState(() {
-                              this.value2 = value!;
-                            });
-                          },
-                        ),
-
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Text("Muzlatgich"),
-                        SizedBox(width: 75.w,),
-                        Checkbox(
-                          value: this.value3,
-                          onChanged: (bool? value) {
-                            setState(() {
-                              this.value3 = value!;
-                            });
-                          },
-                        ),
-
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Text("Kir yuvish mashinasi "),
-                        SizedBox(width: 20.w,),
-                        Checkbox(
-                          value: this.value4,
-                          onChanged: (bool? value) {
-                            setState(() {
-                              this.value4 = value!;
-                            });
-                          },
-                        ),
-
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Text("Konditsioner"),
-                        SizedBox(width: 76,),
-                        Checkbox(
-                          value: this.value6,
-                          onChanged: (bool? value) {
-                            setState(() {
-                              this.value6 = value!;
-                            });
-                          },
-                        ),
-
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Text("Chang yutgich"),
-                        SizedBox(width: 66,),
-                        Checkbox(
-                          value: this.value5,
-                          onChanged: (bool? value) {
-                            setState(() {
-                              this.value5 = value!;
-                            });
-                          },
-                        ),
-
-                      ],
-                    ),
-
-                  ],
+                SizedBox(
+                  height: 10.h,
+                ),
+                Container(
+                  width: 170.w,
+                  child: Column(
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text("Wi - fi "),
+                          Checkbox(
+                            value: this.value1,
+                            onChanged: (bool? value) {
+                              setState(() {
+                                this.value1 = value!;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text("TV"),
+                          Checkbox(
+                            value: this.value2,
+                            onChanged: (bool? value) {
+                              setState(() {
+                                this.value2 = value!;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text("Muzlatgich"),
+                          Checkbox(
+                            value: this.value3,
+                            onChanged: (bool? value) {
+                              setState(() {
+                                this.value3 = value!;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text("Kir yuvish mashinasi"),
+                          Checkbox(
+                            value: this.value4,
+                            onChanged: (bool? value) {
+                              setState(() {
+                                this.value4 = value!;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text("Konditsioner"),
+                          Checkbox(
+                            value: this.value6,
+                            onChanged: (bool? value) {
+                              setState(() {
+                                this.value6 = value!;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text("Chang yutgich"),
+                          Checkbox(
+                            value: this.value5,
+                            onChanged: (bool? value) {
+                              setState(() {
+                                this.value5 = value!;
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
                 Text(
                   "Qo’shimcha ma’lumotlar".tr(),
@@ -1280,7 +1300,7 @@ class _OwnerState extends State<Owner> {
                         hintText: 'Message...'.tr(),
                         border: InputBorder.none,
                         hintStyle:
-                        TextStyle(fontSize: 14.sp, color: Colors.grey),
+                            TextStyle(fontSize: 14.sp, color: Colors.grey),
                       ),
                       cursorColor: Colors.grey.shade800,
                       cursorWidth: 1.5.w,
@@ -1299,7 +1319,10 @@ class _OwnerState extends State<Owner> {
                                 borderRadius: BorderRadius.circular(10.r)),
                             primary: AppColors.buttonLinear),
                         onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=>OwnerPhotoAdds()));
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => OwnerPhotoAdds()));
                           // print(RoomOwner);
                           // print(TypeHouse=='Kvartira'? '1':'2');
                           // print(CountRoom);

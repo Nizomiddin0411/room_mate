@@ -28,7 +28,7 @@ class RegistratsiyaUser {
     if (response.statusCode >= 200 && response.statusCode <= 300) {
       var data = await response.stream.bytesToString();
       print('---------------------');
-      print("$gender ##########");
+      print("$FullName ##########");
 
       //await Hive.box('token').put('token', jsonDecode(data)["access_token"]);
 
