@@ -217,7 +217,7 @@ class _AdsDetailState extends State<AdsDetail> {
 
                Row(
                  children: [
-                   // widget.chatApproved == 0 ?
+                   widget.chatApproved == 1 ?
                    Padding(
                      padding:  EdgeInsets.fromLTRB(12.w, 0, 12.w, 12.h),
                      child: InkWell(
@@ -244,6 +244,41 @@ class _AdsDetailState extends State<AdsDetail> {
                              Padding(
                                padding:  EdgeInsets.symmetric(horizontal: 10.w),
                                child: Text('Aloqa').tr(),
+                             )
+                           ],
+                         ),
+                       ),
+                     ),
+                   )
+                   :Padding(
+                     padding:  EdgeInsets.fromLTRB(8.w, 0, 8.w, 12.h),
+                     child: InkWell(
+                       onTap: () async{
+                         await ChatPermit().fetchApprov(Askid: widget.userId, Approvid: Hive.box('id').get('id'));
+                       },
+                       child: Container(
+                         width: 100.w,
+                         height: 42.h,
+                         decoration: BoxDecoration(
+                           border: Border.all(color: AppColors.mainColor),
+                           borderRadius: BorderRadius.circular(10.r),
+
+
+                         ),
+                         child: Row(
+                           // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                           children:  [
+                             const Padding(
+                               padding: EdgeInsets.all(0.0),
+                               child: Icon(
+                                 Icons.mail_outline,
+                                 color: AppColors.mainColor,
+                               ),
+                             ),
+
+                             Padding(
+                               padding: const EdgeInsets.all(0.0),
+                               child: Text("so'rov jo'natish",style: TextStyle(fontSize: 12.sp),).tr(),
                              )
                            ],
                          ),

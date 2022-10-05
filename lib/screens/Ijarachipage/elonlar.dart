@@ -92,7 +92,7 @@ class _ElonlarState extends State<Elonlar> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.location_on,
                             color: AppColors.mainColor,
                           ),
@@ -141,7 +141,7 @@ class _ElonlarState extends State<Elonlar> {
                   text: tr("Ijarachi kerak"),
                 ),
                 Tab(
-                  text: tr("Kvartira kerak"),
+                  text: tr("Ijaraga sherik kerak"),
                 )
               ],
             ),
