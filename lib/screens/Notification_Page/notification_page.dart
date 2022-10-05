@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,8 +16,26 @@ class _NotificationPageState extends State<NotificationPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Bildirishnoma"),
+        centerTitle: true,
+        backgroundColor: AppColors.backgroundWhite,
+        title: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 45.w),
+          child: const Text(
+            "Bildirishnoma",
+            style: TextStyle(color: AppColors.mainColor),
+          ).tr(),
+        ),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(
+            Icons.arrow_back,
+            color: AppColors.textColor,
+          ),
+        ),
       ),
+
       body: Padding(
         padding: EdgeInsets.fromLTRB(15.w, 15.h, 15.w, 15.h),
         child: Column(
