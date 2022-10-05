@@ -113,6 +113,7 @@ class _OwnerPhotoState extends State<OwnerPhoto> {
                       Row(
                         children: [
                           Container(
+                            color: Colors.blueGrey[100],
                             child: DottedBorder(
                               dashPattern: [6, 3],
                               color: Colors.black,
@@ -216,7 +217,7 @@ class _OwnerPhotoState extends State<OwnerPhoto> {
                 ],
               ),
               SizedBox(
-                height: 170.h,
+                height: 50.h,
               ),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 18.h, horizontal: 31.w),
@@ -238,91 +239,6 @@ class _OwnerPhotoState extends State<OwnerPhoto> {
                     ),
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 15,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CircleAvatar(
-                    radius: 6.r,
-                    child: CircleAvatar(
-                      backgroundColor: Colors.blue,
-                      radius: 7.r,
-                    ),
-                  ),
-                  SizedBox(
-                    width: 2.w,
-                  ),
-                  Container(
-                    width: 100.w,
-                    height: 5.h,
-                    color: Color.fromRGBO(228, 228, 228, 1),
-                  ),
-                  SizedBox(
-                    width: 3.w,
-                  ),
-                  CircleAvatar(
-                    backgroundColor: Colors.blue,
-                    radius: 6.r,
-                    child: CircleAvatar(
-                      backgroundColor: Colors.blue,
-                      radius: 7.r,
-                    ),
-                  ),
-                  SizedBox(
-                    width: 3.w,
-                  ),
-                  Container(
-                    width: 100.w,
-                    height: 5.h,
-                    color: Color.fromRGBO(228, 228, 228, 1),
-                  ),
-                  SizedBox(
-                    width: 3.w,
-                  ),
-                  CircleAvatar(
-                    backgroundColor: Colors.blue,
-                    radius: 6.r,
-                    child: CircleAvatar(
-                      backgroundColor: Colors.blue,
-                      radius: 7.r,
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    width: 70.w,
-                    child: Text(
-                      "E’lon",
-                      style: TextStyle(
-                        color: Colors.blue,
-                        fontSize: 14.w,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  Container(
-                    width: 70.w,
-                    child: Text(
-                      "Xonadon \nma’lumotlari\n",
-                      style: TextStyle(fontSize: 12.w, color: Colors.blue),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  Container(
-                    width: 70.w,
-                    child: Text(
-                      "E’lonni \njoylashtirish\n",
-                      style: TextStyle(fontSize: 12.w, color: Colors.blue),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                ],
               ),
             ],
           ),

@@ -5,6 +5,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:steps_indicator/steps_indicator.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
 import 'package:talaba_uy/screens/Create_ads/owner_photo.dart';
 class OwnerPhotoAdds extends StatefulWidget {
@@ -49,6 +50,8 @@ class _OwnerPhotoAddsState extends State<OwnerPhotoAdds> {
           );
         });
   }
+  int selectedStep = 0;
+  int nbSteps = 3;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -106,7 +109,7 @@ class _OwnerPhotoAddsState extends State<OwnerPhotoAdds> {
               ),
             ),
             SizedBox(
-              height: 250.h,
+              height: 300 .h,
             ),
             Padding(
               padding: EdgeInsets.symmetric(vertical: 18.h, horizontal: 31.w),
@@ -119,7 +122,7 @@ class _OwnerPhotoAddsState extends State<OwnerPhotoAdds> {
                           borderRadius: BorderRadius.circular(10.r)),
                       primary: AppColors.buttonLinear),
                   onPressed: () {
-                   Navigator.push(context, MaterialPageRoute(builder: (context)=>OwnerPhoto()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context)=>OwnerPhoto()));
                   },
                   child: Text(
                     "E’lonni saqlash ".tr(),
@@ -128,91 +131,6 @@ class _OwnerPhotoAddsState extends State<OwnerPhotoAdds> {
                   ),
                 ),
               ),
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CircleAvatar(
-                  radius: 6.r,
-                  child: CircleAvatar(
-                    backgroundColor: Colors.blue,
-                    radius: 7.r,
-                  ),
-                ),
-                SizedBox(
-                  width: 2.w,
-                ),
-                Container(
-                  width: 100.w,
-                  height: 5.h,
-                  color: Color.fromRGBO(228, 228, 228, 1),
-                ),
-                SizedBox(
-                  width: 3.w,
-                ),
-                CircleAvatar(
-                  backgroundColor: Colors.blue,
-                  radius: 6.r,
-                  child: CircleAvatar(
-                    backgroundColor: Colors.blue,
-                    radius: 7.r,
-                  ),
-                ),
-                SizedBox(
-                  width: 3.w,
-                ),
-                Container(
-                  width: 100.w,
-                  height: 5.h,
-                  color: Color.fromRGBO(228, 228, 228, 1),
-                ),
-                SizedBox(
-                  width: 3.w,
-                ),
-                CircleAvatar(
-                  backgroundColor: Colors.blue,
-                  radius: 6.r,
-                  child: CircleAvatar(
-                    backgroundColor: Colors.blue,
-                    radius: 7.r,
-                  ),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  width: 70.w,
-                  child: Text(
-                    "E’lon",
-                    style: TextStyle(
-                      color: Colors.blue,
-                      fontSize: 14.w,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                Container(
-                  width: 70.w,
-                  child: Text(
-                    "Xonadon \nma’lumotlari\n",
-                    style: TextStyle(fontSize: 12.w, color: Colors.blue),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                Container(
-                  width: 70.w,
-                  child: Text(
-                    "E’lonni \njoylashtirish\n",
-                    style: TextStyle(fontSize: 12.w, color: Colors.blue),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ],
             ),
           ],
         ),

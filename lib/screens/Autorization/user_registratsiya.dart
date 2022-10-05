@@ -120,80 +120,80 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
             SizedBox(
               height: 10,
             ),
-            Column(
-              children: [
-                Row(
-                  children: [
-                    Text("Jins").tr(),
-                  ],
-                ),
-                SizedBox(
-                  height: 5,
-                ),
-                Column(
-                  children: [
-                    DropdownButtonFormField2(
-                      decoration: InputDecoration(
-                        isDense: true,
-                        contentPadding: EdgeInsets.zero,
-                        enabledBorder: OutlineInputBorder(
-                          borderSide: BorderSide(color: jinsiColor),
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                      ),
-                      isExpanded: true,
-                      hint: const Text(
-                        "Jinsni tanlang",
-                        style: TextStyle(fontSize: 14),
-                      ).tr(),
-                      icon: const Icon(
-                        Icons.arrow_drop_down,
-                        color: Colors.black45,
-                      ),
-                      itemPadding: EdgeInsets.only(left: 10, right: 15),
-                      itemHeight: 30,
-                      iconSize: 30,
-                      buttonHeight: 60,
-                      buttonPadding:
-                      const EdgeInsets.only(left: 20, right: 10),
-                      dropdownDecoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      items: genderItems
-                          .map((item) => DropdownMenuItem<String>(
-                        value: item,
-                        child: Text(
-                          item,
-                          style: const TextStyle(
-                            fontSize: 14,
-                          ),
-                        ),
-                      ))
-                          .toList(),
-                      validator: (value) {
-                        if (value == null) {
-                          return "Jinsni tanlang";
-                        }
-                      },
-                      onChanged: (String? value) {
-                        setState(() {
-                          dropdownvalue = value;
-                          jinsi=true;
-                          jinsiColor = Colors.black12;
-                          print(dropdownvalue);
-                        });
-                      },
-                      onSaved: (value) {
-                        dropdownvalue = value.toString();
-                        setState(() {
-
-                        });
-                      },
-                    ),
-                  ],
-                ),
-              ],
-            ),
+            // Column(
+            //   children: [
+            //     Row(
+            //       children: [
+            //         Text("Jins").tr(),
+            //       ],
+            //     ),
+            //     SizedBox(
+            //       height: 5,
+            //     ),
+            //     // Column(
+            //     //   children: [
+            //     //     DropdownButtonFormField2(
+            //     //       decoration: InputDecoration(
+            //     //         isDense: true,
+            //     //         contentPadding: EdgeInsets.zero,
+            //     //         enabledBorder: OutlineInputBorder(
+            //     //           borderSide: BorderSide(color: jinsiColor),
+            //     //           borderRadius: BorderRadius.circular(10),
+            //     //         ),
+            //     //       ),
+            //     //       isExpanded: true,
+            //     //       hint: const Text(
+            //     //         "Jinsni tanlang",
+            //     //         style: TextStyle(fontSize: 14),
+            //     //       ).tr(),
+            //     //       icon: const Icon(
+            //     //         Icons.arrow_drop_down,
+            //     //         color: Colors.black45,
+            //     //       ),
+            //     //       itemPadding: EdgeInsets.only(left: 10, right: 15),
+            //     //       itemHeight: 30,
+            //     //       iconSize: 30,
+            //     //       buttonHeight: 60,
+            //     //       buttonPadding:
+            //     //       const EdgeInsets.only(left: 20, right: 10),
+            //     //       dropdownDecoration: BoxDecoration(
+            //     //         borderRadius: BorderRadius.circular(15),
+            //     //       ),
+            //     //       items: genderItems
+            //     //           .map((item) => DropdownMenuItem<String>(
+            //     //         value: item,
+            //     //         child: Text(
+            //     //           item,
+            //     //           style: const TextStyle(
+            //     //             fontSize: 14,
+            //     //           ),
+            //     //         ),
+            //     //       ))
+            //     //           .toList(),
+            //     //       validator: (value) {
+            //     //         if (value == null) {
+            //     //           return "Jinsni tanlang";
+            //     //         }
+            //     //       },
+            //     //       onChanged: (String? value) {
+            //     //         setState(() {
+            //     //           dropdownvalue = value;
+            //     //           jinsi=true;
+            //     //           jinsiColor = Colors.black12;
+            //     //           print(dropdownvalue);
+            //     //         });
+            //     //       },
+            //     //       onSaved: (value) {
+            //     //         dropdownvalue = value.toString();
+            //     //         setState(() {
+            //     //
+            //     //         });
+            //     //       },
+            //     //     ),
+            //     //   ],
+            //     // ),
+            //   ],
+            // ),
             SizedBox(
               height: 10,
             ),
@@ -233,7 +233,7 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
             SizedBox(height: 100.h),
             ElevatedButton(
               onPressed: () async {
-               if(myController.text != ''&&jinsi&&checkBox){
+               if(myController.text != ''&&checkBox){
                  await RegistratsiyaUser().CreateAdsUser(
                    FullName: myController.text,
                    Phonenumber: nameController.text,
