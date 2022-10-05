@@ -27,6 +27,7 @@ class _FavoritAdsState extends State<FavoritAds> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: AppColors.backgroundWhite,
         title: Padding(
           padding: EdgeInsets.symmetric(horizontal: 45.w),

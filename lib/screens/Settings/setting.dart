@@ -16,7 +16,7 @@ class _SettingState extends State<Setting> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: AppColors.backgroundWhite,
+      // backgroundColor: AppColors.backgroundWhite,
       appBar: AppBar(
         backgroundColor: AppColors.backgroundWhite,
         leading: IconButton(
@@ -37,7 +37,7 @@ class _SettingState extends State<Setting> {
           ),
         ),
         centerTitle: true,
-        elevation: 0,
+        // elevation: 0,
       ),
       body: Padding(
         padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 56.h),
