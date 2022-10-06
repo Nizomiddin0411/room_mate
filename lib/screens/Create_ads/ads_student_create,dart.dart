@@ -6,9 +6,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
 import 'package:talaba_uy/provider/region_provider.dart';
-import 'package:talaba_uy/screens/Create_ads/house_data.dart';
-
-import '../../cubit/aut_cubit.dart';
 import 'Image_ads.dart';
 
 class Student2 extends StatefulWidget {
@@ -140,7 +137,6 @@ class _Student2State extends State<Student2> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        elevation: 0,
         leading: IconButton(
           icon: Icon(
             Icons.arrow_back_outlined,
@@ -688,100 +684,96 @@ class _Student2State extends State<Student2> {
                     ],
                   ),
                   SizedBox(height: 10,),
-                  Column(
-                    children: [
-                      Row(
-                        children: [
-                          Text("Wi - fi "),
-                          SizedBox(width: 103.w,),
-                          Checkbox(
-                            value: this.value1,
-                            onChanged: (bool? value) {
-                              setState(() {
-                                this.value1 = value!;
-                              });
-                            },
-                          ),
-
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Text("TV"),
-                          SizedBox(width: 120.w,),
-                          Checkbox(
-                            value: this.value2,
-                            onChanged: (bool? value) {
-                              setState(() {
-                                this.value2 = value!;
-                              });
-                            },
-                          ),
-
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Text("Muzlatgich"),
-                          SizedBox(width: 75.w,),
-                          Checkbox(
-                            value: this.value3,
-                            onChanged: (bool? value) {
-                              setState(() {
-                                this.value3 = value!;
-                              });
-                            },
-                          ),
-
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Text("Kir yuvish mashinasi "),
-                          SizedBox(width: 20.w,),
-                          Checkbox(
-                            value: this.value4,
-                            onChanged: (bool? value) {
-                              setState(() {
-                                this.value4 = value!;
-                              });
-                            },
-                          ),
-
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Text("Konditsioner"),
-                          SizedBox(width: 76,),
-                          Checkbox(
-                            value: this.value6,
-                            onChanged: (bool? value) {
-                              setState(() {
-                                this.value6 = value!;
-                              });
-                            },
-                          ),
-
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Text("Chang yutgich"),
-                          SizedBox(width: 66,),
-                          Checkbox(
-                            value: this.value5,
-                            onChanged: (bool? value) {
-                              setState(() {
-                                this.value5 = value!;
-                              });
-                            },
-                          ),
-
-                        ],
-                      ),
-
-                    ],
+                  Container(
+                    width: 170.w,
+                    child: Column(
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("Wi - fi "),
+                            Checkbox(
+                              value: this.value1,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  this.value1 = value!;
+                                });
+                              },
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("TV"),
+                            Checkbox(
+                              value: this.value2,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  this.value2 = value!;
+                                });
+                              },
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("Muzlatgich"),
+                            Checkbox(
+                              value: this.value3,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  this.value3 = value!;
+                                });
+                              },
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("Kir yuvish mashinasi"),
+                            Checkbox(
+                              value: this.value4,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  this.value4 = value!;
+                                });
+                              },
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("Konditsioner"),
+                            Checkbox(
+                              value: this.value6,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  this.value6 = value!;
+                                });
+                              },
+                            ),
+                          ],
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text("Chang yutgich"),
+                            Checkbox(
+                              value: this.value5,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  this.value5 = value!;
+                                });
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
                   SizedBox(height: 55,),
                   Row(

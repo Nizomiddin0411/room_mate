@@ -1,3 +1,4 @@
+import 'package:dropdown_search/dropdown_search.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/material.dart';
@@ -8,8 +9,10 @@ import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 
 import 'package:talaba_uy/core/const/app_colors.dart';
+import 'package:talaba_uy/cubit/aut_cubit.dart';
 
 import 'package:talaba_uy/provider/region_provider.dart';
+import 'package:talaba_uy/screens/Create_ads/Owner_continue_Ads.dart';
 import 'package:talaba_uy/screens/Create_ads/owner_take_photo.dart';
 import '../../models/get_district_model.dart';
 
@@ -31,6 +34,7 @@ class _OwnerState extends State<Owner> {
   String TypeHouse = '';
   String CountRoom = '';
   String genderString = '';
+  String dropDown2 = "";
   String countRoom = '';
   TextEditingController? addressController;
   TextEditingController? costController;
@@ -119,29 +123,49 @@ class _OwnerState extends State<Owner> {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("E’lonni nomlash"),
-                SizedBox(
-                  height: 5.h,
+                Text(
+                  "E’lonni nomlash".tr(),
+                  style: TextStyle(
+                    color: AppColors.textColor,
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
-                TextFormField(
-                  controller: costController,
-                  keyboardType: TextInputType.name,
-                  decoration: InputDecoration(
-                      label: Text("E’lonni nomlang"),
-                      labelStyle:
-                          TextStyle(fontSize: 12.0.sp, color: Colors.grey),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.black,
-                        ),
-                        borderRadius: BorderRadius.all(Radius.circular(15.0.r)),
+                SizedBox(height: 4.h),
+                Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: _colorUniver),
+                      borderRadius: BorderRadius.circular(8.r)),
+                  child: Container(
+                    padding: EdgeInsets.only(left: 16.w),
+                    child: TextFormField(
+                      onChanged: (e) {
+                        setState(() {
+                          if (e.length > 0) {
+                            setState(() {
+                              _UniverOnClick = true;
+                              _colorUniver = Colors.grey;
+                            });
+                          } else {
+                            setState(() {
+                              _UniverOnClick = false;
+                              _colorUniver = Colors.red;
+                            });
+                          }
+                        });
+                      },
+                      controller: addressController,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: "E’lonni nomlang".tr(),
+                        hintStyle:
+                        TextStyle(fontSize: 14.sp, color: Colors.grey),
                       ),
-                      focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.black,
-                          ),
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(20.r)))),
+                      cursorColor: Colors.grey.shade800,
+                      cursorWidth: 1.5.w,
+                    ),
+                  ),
                 ),
                 SizedBox(
                   height: 15.w,
@@ -477,317 +501,8 @@ class _OwnerState extends State<Owner> {
                     )
                   ],
                 ),
-                Column(
-                  children: [
-                    Row(
-                      children: [
-                        Text("Telefon raqami").tr(),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 5,
-                    ),
-                    Row(
-                      children: [
-                        Container(
-                          height: 50.h,
-                          width: 320.w,
-                          child: TextFormField(
-                            inputFormatters: [
-                              TextInputMask(
-                                mask: '\\+ 999 99 999 99 99',
-                                placeholder: '_ ',
-                                maxPlaceHolders: 13,
-                              )
-                            ],
-                            autovalidateMode: AutovalidateMode.always,
-                            keyboardType: TextInputType.phone,
-                            controller: costController,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(),
-                              labelText: "+998 ** *** ** **".tr(),
-                            ),
-                          ),
-                        ),
-                        // Column(
-                        //   children: [
-                        //     Text("Ko’rinmasin"),
-                        //     Checkbox(
-                        //       value: this.value5,
-                        //       onChanged: (bool? value) {
-                        //         setState(() {
-                        //           this.value5 = value!;
-                        //         });
-                        //       },
-                        //     ),
-                        //   ],
-                        // )
-                      ],
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 20.h,
-                ),
-                Row(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Uy turi ".tr(),
-                          style: TextStyle(
-                            color: AppColors.textColor,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        SizedBox(height: 4.h),
-                        Container(
-                          height: 50.h,
-                          width: 130.w,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10.r),
-                              border: Border.all(color: _colorGender)),
-                          child: DropdownButtonFormField(
-                            hint: Padding(
-                              padding: EdgeInsets.only(left: 8.w),
-                              child: Text(
-                                "Kvartira , Xovli".tr(),
-                                style: TextStyle(fontSize: 14.sp),
-                              ),
-                            ),
-                            decoration:
-                                const InputDecoration(border: InputBorder.none),
-                            icon: Icon(Icons.arrow_drop_down_outlined),
-                            items: gender.map((e) {
-                              return DropdownMenuItem<String>(
-                                onTap: () {},
-                                value: e,
-                                child: Padding(
-                                  padding: EdgeInsets.only(left: 8.w),
-                                  child: Text(e.tr()),
-                                ),
-                              );
-                            }).toList(),
-                            onChanged: (newValue) {
-                              setState(() {});
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      width: 63.w,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Ijara muddatini turi".tr(),
-                          style: TextStyle(
-                            color: AppColors.textColor,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        SizedBox(height: 4.h),
-                        Container(
-                          height: 50.h,
-                          width: 130.w,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10.r),
-                              border: Border.all(color: _colorGender)),
-                          child: DropdownButtonFormField(
-                            hint: Padding(
-                              padding: EdgeInsets.only(left: 8.w),
-                              child: Text(
-                                "Kunlik  / Oylik".tr(),
-                                style: TextStyle(fontSize: 14.sp),
-                              ),
-                            ),
-                            decoration:
-                                const InputDecoration(border: InputBorder.none),
-                            icon: Icon(Icons.arrow_drop_down_outlined),
-                            items: gender.map((e) {
-                              return DropdownMenuItem<String>(
-                                onTap: () {},
-                                value: e,
-                                child: Padding(
-                                  padding: EdgeInsets.only(left: 8.w),
-                                  child: Text(e.tr()),
-                                ),
-                              );
-                            }).toList(),
-                            onChanged: (newValue) {
-                              setState(() {});
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 25.h,
-                ),
-                Row(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Xonalar soni".tr(),
-                          style: TextStyle(
-                            color: AppColors.textColor,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        SizedBox(height: 4.h),
-                        Container(
-                          height: 50.h,
-                          width: 130.w,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10.r),
-                              border: Border.all(color: _colorGender)),
-                          child: DropdownButtonFormField(
-                            hint: Padding(
-                              padding: EdgeInsets.only(left: 8.w),
-                              child: Text(
-                                "Xonalar soni".tr(),
-                                style: TextStyle(fontSize: 14.sp),
-                              ),
-                            ),
-                            decoration:
-                                const InputDecoration(border: InputBorder.none),
-                            icon: Icon(Icons.arrow_drop_down_outlined),
-                            items: gender.map((e) {
-                              return DropdownMenuItem<String>(
-                                onTap: () {},
-                                value: e,
-                                child: Padding(
-                                  padding: EdgeInsets.only(left: 8.w),
-                                  child: Text(e.tr()),
-                                ),
-                              );
-                            }).toList(),
-                            onChanged: (newValue) {
-                              setState(() {});
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 20.w,
-                ),
-                Row(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Qavatlar soni ".tr(),
-                          style: TextStyle(
-                            color: AppColors.textColor,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        SizedBox(height: 4.h),
-                        Container(
-                          height: 50.h,
-                          width: 120.w,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10.r),
-                              border: Border.all(color: _colorGender)),
-                          child: DropdownButtonFormField(
-                            hint: Padding(
-                              padding: EdgeInsets.only(left: 8.w),
-                              child: Text(
-                                "1 - 10".tr(),
-                                style: TextStyle(fontSize: 14.sp),
-                              ),
-                            ),
-                            decoration:
-                                const InputDecoration(border: InputBorder.none),
-                            icon: Icon(Icons.arrow_drop_down_outlined),
-                            items: gender.map((e) {
-                              return DropdownMenuItem<String>(
-                                onTap: () {},
-                                value: e,
-                                child: Padding(
-                                  padding: EdgeInsets.only(left: 8.w),
-                                  child: Text(e.tr()),
-                                ),
-                              );
-                            }).toList(),
-                            onChanged: (newValue) {
-                              setState(() {});
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      width: 70.w,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Nechinchi qavatda ?".tr(),
-                          style: TextStyle(
-                            color: AppColors.textColor,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        SizedBox(height: 4.h),
-                        Container(
-                          height: 50.h,
-                          width: 130.w,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10.r),
-                              border: Border.all(color: _colorGender)),
-                          child: DropdownButtonFormField(
-                            hint: Padding(
-                              padding: EdgeInsets.only(left: 8.w),
-                              child: Text(
-                                "1 - 10".tr(),
-                                style: TextStyle(fontSize: 14.sp),
-                              ),
-                            ),
-                            decoration:
-                                const InputDecoration(border: InputBorder.none),
-                            icon: Icon(Icons.arrow_drop_down_outlined),
-                            items: gender.map((e) {
-                              return DropdownMenuItem<String>(
-                                onTap: () {},
-                                value: e,
-                                child: Padding(
-                                  padding: EdgeInsets.only(left: 8.w),
-                                  child: Text(e.tr()),
-                                ),
-                              );
-                            }).toList(),
-                            onChanged: (newValue) {
-                              setState(() {});
-                            },
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 15.h,
-                ),
                 Text(
-                  "Narxi".tr(),
+                  "OTM ga yaqinmi ?".tr(),
                   style: TextStyle(
                     color: AppColors.textColor,
                     fontSize: 14.sp,
@@ -795,518 +510,110 @@ class _OwnerState extends State<Owner> {
                   ),
                 ),
                 SizedBox(height: 4.h),
-                Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                      border: Border.all(color: _colorTypeCost),
-                      borderRadius: BorderRadius.circular(8.r)),
-                  child: Container(
-                    padding: EdgeInsets.only(left: 16.w),
-                    child: TextFormField(
-                      onChanged: (e) {
-                        setState(() {
-                          if (e.length > 0) {
-                            _TypeCostOnClick = true;
-                            _colorTypeCost = Colors.grey;
-                          } else {
-                            _TypeCostOnClick = false;
-                            _colorTypeCost = Colors.red;
-                          }
-                        });
-                      },
-                      controller: costController,
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: "Xonadonni narxini kiriting".tr(),
-                        hintStyle:
-                            TextStyle(fontSize: 14.sp, color: Colors.grey),
-                        suffixIcon: Container(
-                          decoration: BoxDecoration(
-                              border: Border(
-                                  left:
-                                      BorderSide(color: Colors.grey.shade300))),
-                          padding: EdgeInsets.only(left: 8.w, top: 0),
-                          width: 70.w,
-                          height: 0.h,
-                          child: DropdownButton(
-                            underline: Container(),
-                            value: _dropownUsd,
-                            onChanged: (String? e) {
-                              setState(() {
-                                _dropownUsd = e;
-                              });
-                            },
-                            hint: Text(
-                              "SO'M".tr(),
-                              style: TextStyle(
-                                  fontSize: 14.sp, color: AppColors.textColor),
-                            ),
-                            items: [
-                              DropdownMenuItem(
-                                child: Text(
-                                  "SO'M".tr(),
-                                  style: TextStyle(
-                                      fontSize: 14.sp,
-                                      color: AppColors.textColor),
-                                ),
-                                value: "sum",
-                              ),
-                              DropdownMenuItem(
-                                child: Text(
-                                  "USD",
-                                  style: TextStyle(
-                                      fontSize: 14.sp,
-                                      color: AppColors.textColor),
-                                ),
-                                value: "usd",
-                              )
-                            ],
-                          ),
-                        ),
-                      ),
-                      cursorColor: Colors.grey.shade800,
-                      cursorWidth: 1.5.w,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  height: 15.h,
-                ),
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                // Container(
+                //   width: 324.w,
+                //   decoration: BoxDecoration(
+                //       borderRadius: BorderRadius.circular(10.r),
+                //       border: Border.all(color: _colorUniver)),
+                //   child: DropdownButtonFormField(
+                //     isExpanded: true,
+                //     hint: Padding(
+                //       padding: EdgeInsets.only(left: 8.w),
+                //       child: Text("OTM ni tanlang".tr()),
+                //     ),
+                //     decoration: InputDecoration(border: InputBorder.none),
+                //     // value: ,
+                //     icon: Icon(Icons.arrow_drop_down_outlined),
+                //     items: data.univer.map((e) {
+                //       return DropdownMenuItem<String>(
+                //         onTap: () {
+                //           data.UniverId = e.id.toString();
+                //         },
+                //         value: e.name ?? "",
+                //         child: SizedBox(
+                //           width: MediaQuery.of(context).size.width - 150.w,
+                //           child: Padding(
+                //             padding: EdgeInsets.only(left: 8.w),
+                //             child: Text(e.name.toString()),
+                //           ),
+                //         ),
+                //       );
+                //     }).toList(),
+                //     onChanged: (newValue) async {
+                //       // print("Selected ----------- $newValue");
+                //       setState(() {
+                //         _UniverOnClick = true;
+                //         _colorUniver = Colors.grey;
+                //       });
+                //       final selected = data.univer
+                //           .where((element) => element.name == newValue);
+                //       data.getFaculty(selected.last.id!);
+                //       setState(() {
+                //         dropDown2 = newValue.toString();
+                //       });
+                //     },
+                //   ),
+                // ),
+                Row(
                   children: [
-                    Text(
-                      "Narxning turlanishi".tr(),
-                      style: TextStyle(
-                        color: AppColors.textColor,
-                        fontSize: 14.sp,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    SizedBox(height: 4.h),
                     Container(
-                      height: 50.h,
-                      width: 150.w,
+                      width: 240.w,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10.r),
-                          border: Border.all(color: _colorGender)),
-                      child: DropdownButtonFormField(
-                        hint: Padding(
-                          padding: EdgeInsets.only(left: 8.w),
-                          child: Text(
-                            "Turlari".tr(),
-                            style: TextStyle(fontSize: 14.sp),
-                          ),
-                        ),
-                        decoration:
-                            const InputDecoration(border: InputBorder.none),
-                        icon: Icon(Icons.arrow_drop_down_outlined),
-                        items: pricetype.map((e) {
-                          return DropdownMenuItem<String>(
-                            onTap: () {},
-                            value: e,
-                            child: Padding(
-                              padding: EdgeInsets.only(left: 8.w),
-                              child: Text(e.tr()),
-                            ),
-                          );
+                          border: Border.all(color: _colorUniver)),
+                      child: DropdownSearch<String>(
+                        mode: Mode.MENU,
+                        items: data.univer.map((e) {
+                          if (dropDown2 == e.name) {
+                            data.UniverId = e.id.toString();
+                            data.isId = e.id;
+                          }
+
+                          // final selected = data.univer.where((element) => element.name == e.name);
+                          // data.getFaculty(selected.last.id!);
+                          return context.read<AutCubit>().selectedLang.index ==
+                              1
+                              ? e.name.toString()
+                              : e.nameRu.toString();
                         }).toList(),
-                        onChanged: (newValue) {
-                          setState(() {});
+                        showSearchBox: true,
+                        // label: "Menu mode",
+                        // hint: "country in menu mode",
+                        onChanged: (value) async {
+                          data.isUniver = true;
+                          final selected = data.univer
+                              .where((element) => element.name == value);
+                          data.getFaculty(selected.last.id!);
+                          // data.getFaculty(data.isId!);
+                          print('${selected}=================');
+                          setState(() {
+                            dropDown2 = value.toString();
+                            _UniverOnClick = true;
+                            _colorUniver = Colors.grey;
+                          });
                         },
+                        selectedItem: tr("OTM ni tanlang"),
                       ),
                     ),
-                  ],
-                ),
-                SizedBox(
-                  height: 15.h,
-                ),
-                Column(
-                  children: [
-                    Row(
-                      children: [
-                        Text(
-                          "Uy egasi ham yashaydimi ?",
-                          style: TextStyle(fontSize: 15.sp),
-                        ),
-                      ],
+                    SizedBox(
+                      width: 9.w,
                     ),
-                    Row(
+                    Column(
                       children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            Radio(
-                              value: 1,
-                              groupValue: idhouse,
-                              onChanged: (val) {
-                                setState(() {
-                                  idhouse = 1;
-                                });
-                              },
-                            ),
-                            Text(
-                              'Ha',
-                              style: new TextStyle(fontSize: 17.0.sp),
-                            ),
-                            SizedBox(
-                              width: 55.w,
-                            ),
-                            Radio(
-                              value: 2,
-                              groupValue: idhouse,
-                              onChanged: (val) {
-                                setState(() {
-                                  idhouse = 2;
-                                });
-                              },
-                            ),
-                            Text(
-                              "Yo'q",
-                              style: new TextStyle(
-                                fontSize: 17.0.sp,
-                              ),
-                            ),
-                          ],
+                        Text("Ahamiyatsiz"),
+                        Checkbox(
+                          value: this.value5,
+                          onChanged: (bool? value) {
+                            setState(() {
+                              this.value5 = value!;
+                            });
+                          },
                         ),
                       ],
                     )
                   ],
                 ),
-                Column(
-                  children: [
-                    Text("Kommunal to’lovlarni kim to’laydi ?"),
-                    SizedBox(
-                      height: 15.h,
-                    )
-                  ],
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    Text("Uy egasi"),
-                    SizedBox(
-                      width: 50.w,
-                    ),
-                    Text("Ijarachi")
-                  ],
-                ),
-                Row(
-                  children: [
-                    Row(
-                      children: [
-                        SizedBox(
-                          height: 1,
-                        ),
-                        Text("Elektr energiya"),
-                        SizedBox(
-                          width: 100.w,
-                        ),
-                        Radio(
-                          value: 1,
-                          groupValue: id,
-                          onChanged: (val) {
-                            setState(() {
-                              id = 1;
-                            });
-                          },
-                        ),
-                        SizedBox(
-                          width: 50.w,
-                        ),
-                        Radio(
-                          value: 2,
-                          groupValue: id,
-                          onChanged: (val) {
-                            setState(() {
-                              id = 2;
-                            });
-                          },
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                Column(
-                  children: [
-                    Row(
-                      children: [
-                        Row(
-                          children: [
-                            SizedBox(
-                              height: 1,
-                            ),
-                            Text("Gaz"),
-                            SizedBox(
-                              width: 159.w,
-                            ),
-                            Radio(
-                              value: 1,
-                              groupValue: id2,
-                              onChanged: (val) {
-                                setState(() {
-                                  id2 = 1;
-                                });
-                              },
-                            ),
-                            SizedBox(
-                              width: 50.w,
-                            ),
-                            Radio(
-                              value: 2,
-                              groupValue: id2,
-                              onChanged: (val) {
-                                setState(() {
-                                  id2 = 2;
-                                });
-                              },
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Row(
-                          children: [
-                            SizedBox(
-                              height: 1.h,
-                            ),
-                            Text("Sovuq suv"),
-                            SizedBox(
-                              width: 124.w,
-                            ),
-                            Radio(
-                              value: 1,
-                              groupValue: id3,
-                              onChanged: (val) {
-                                setState(() {
-                                  id3 = 1;
-                                });
-                              },
-                            ),
-                            SizedBox(
-                              width: 50.w,
-                            ),
-                            Radio(
-                              value: 2,
-                              groupValue: id3,
-                              onChanged: (val) {
-                                setState(() {
-                                  id3 = 2;
-                                });
-                              },
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Row(
-                          children: [
-                            SizedBox(
-                              height: 1,
-                            ),
-                            Text("Issiq suv"),
-                            SizedBox(
-                              width: 132.w,
-                            ),
-                            Radio(
-                              value: 1,
-                              groupValue: id4,
-                              onChanged: (val) {
-                                setState(() {
-                                  id4 = 1;
-                                });
-                              },
-                            ),
-                            SizedBox(
-                              width: 50.w,
-                            ),
-                            Radio(
-                              value: 2,
-                              groupValue: id4,
-                              onChanged: (val) {
-                                setState(() {
-                                  id4 = 2;
-                                });
-                              },
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Row(
-                          children: [
-                            SizedBox(
-                              height: 1.h,
-                            ),
-                            Text("Chiqindi"),
-                            SizedBox(
-                              width: 135.w,
-                            ),
-                            Radio(
-                              value: 1,
-                              groupValue: id5,
-                              onChanged: (val) {
-                                setState(() {
-                                  id5 = 1;
-                                });
-                              },
-                            ),
-                            SizedBox(
-                              width: 50.w,
-                            ),
-                            Radio(
-                              value: 2,
-                              groupValue: id5,
-                              onChanged: (val) {
-                                setState(() {
-                                  id5 = 2;
-                                });
-                              },
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Text(
-                      "Quyidagi qulayliklarga ega",
-                      style: TextStyle(color: Colors.blue, fontSize: 18.sp),
-                    ),
-                  ],
-                ),
-                SizedBox(
-                  height: 10.h,
-                ),
-                Container(
-                  width: 170.w,
-                  child: Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text("Wi - fi "),
-                          Checkbox(
-                            value: this.value1,
-                            onChanged: (bool? value) {
-                              setState(() {
-                                this.value1 = value!;
-                              });
-                            },
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text("TV"),
-                          Checkbox(
-                            value: this.value2,
-                            onChanged: (bool? value) {
-                              setState(() {
-                                this.value2 = value!;
-                              });
-                            },
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text("Muzlatgich"),
-                          Checkbox(
-                            value: this.value3,
-                            onChanged: (bool? value) {
-                              setState(() {
-                                this.value3 = value!;
-                              });
-                            },
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text("Kir yuvish mashinasi"),
-                          Checkbox(
-                            value: this.value4,
-                            onChanged: (bool? value) {
-                              setState(() {
-                                this.value4 = value!;
-                              });
-                            },
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text("Konditsioner"),
-                          Checkbox(
-                            value: this.value6,
-                            onChanged: (bool? value) {
-                              setState(() {
-                                this.value6 = value!;
-                              });
-                            },
-                          ),
-                        ],
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text("Chang yutgich"),
-                          Checkbox(
-                            value: this.value5,
-                            onChanged: (bool? value) {
-                              setState(() {
-                                this.value5 = value!;
-                              });
-                            },
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-                Text(
-                  "Qo’shimcha ma’lumotlar".tr(),
-                  style: TextStyle(
-                    color: AppColors.textColor,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w500,
-                  ),
-                ),
-                SizedBox(height: 4.h),
-                Container(
-                  width: double.infinity,
-                  decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(4.r)),
-                  child: Container(
-                    padding: EdgeInsets.only(left: 16.w),
-                    child: TextFormField(
-                      controller: adsTitleController,
-                      maxLines: 6,
-                      decoration: InputDecoration(
-                        hintText: 'Message...'.tr(),
-                        border: InputBorder.none,
-                        hintStyle:
-                            TextStyle(fontSize: 14.sp, color: Colors.grey),
-                      ),
-                      cursorColor: Colors.grey.shade800,
-                      cursorWidth: 1.5.w,
-                    ),
-                  ),
-                ),
+
                 Padding(
                   padding:
                       EdgeInsets.symmetric(vertical: 18.h, horizontal: 31.w),
@@ -1322,7 +629,7 @@ class _OwnerState extends State<Owner> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => OwnerPhotoAdds()));
+                                  builder: (context) => OwnerHouseInfo()));
                           // print(RoomOwner);
                           // print(TypeHouse=='Kvartira'? '1':'2');
                           // print(CountRoom);

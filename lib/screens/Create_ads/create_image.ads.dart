@@ -56,7 +56,6 @@ class _CreateimageState extends State<Createimage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        elevation: 0,
         leading: IconButton(
           icon:Icon(Icons.arrow_back_outlined),
           onPressed: (){
