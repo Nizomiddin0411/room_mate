@@ -61,6 +61,7 @@ class _KunlikIjaraState extends State<KunlikIjara> {
         appBar: PreferredSize(
           preferredSize: const Size.fromHeight(155),
           child: AppBar(
+              centerTitle:true,
             leading: InkWell(
               onTap: () {
                 Navigator.pop(context);
@@ -141,7 +142,7 @@ class _KunlikIjaraState extends State<KunlikIjara> {
                   text: tr("Ijarachi kerak"),
                 ),
                 Tab(
-                  text: tr("Kvartira kerak"),
+                  text: tr("Ijaraga sherik kerak"),
                 )
               ],
             ),
@@ -221,6 +222,17 @@ class _KunlikIjaraState extends State<KunlikIjara> {
                                     CachedNetworkImage(
                                       imageUrl:
                                           "https://source.unsplash.com/random/324x235",
+                                      imageBuilder:(context, imageProvider) => Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.only(topLeft: Radius.circular(6.r),topRight: Radius.circular(6.r)),
+                                          image: DecorationImage(
+                                            image: imageProvider,
+                                            fit: BoxFit.cover,
+                                            // colorFilter:,
+                                            // ColorFilter.mode(Colors.red, BlendMode.colorBurn)
+                                          ),
+                                        ),
+                                      ),
                                       width: 327.w,
                                       height: 235.h,
                                       fit: BoxFit.cover,
@@ -421,6 +433,17 @@ class _KunlikIjaraState extends State<KunlikIjara> {
                                     CachedNetworkImage(
                                       imageUrl:
                                           "https://source.unsplash.com/random/324x235",
+                                      imageBuilder:(context, imageProvider) => Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.only(topLeft: Radius.circular(6.r),topRight: Radius.circular(6.r)),
+                                          image: DecorationImage(
+                                            image: imageProvider,
+                                            fit: BoxFit.cover,
+                                            // colorFilter:,
+                                            // ColorFilter.mode(Colors.red, BlendMode.colorBurn)
+                                          ),
+                                        ),
+                                      ),
                                       width: 327.w,
                                       height: 235.h,
                                       fit: BoxFit.cover,
