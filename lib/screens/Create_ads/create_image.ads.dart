@@ -19,29 +19,32 @@ class Createimage extends StatefulWidget {
 class _CreateimageState extends State<Createimage> {
   List<File> imageList = [];
   List<bool> imageExist = [];
+  late int btn;
   File? imgFile;
   final imgPicker = ImagePicker();
+  File? file;
+  ImagePicker image = ImagePicker();
 
   Future<void> showOptionsDialog(BuildContext context) {
     return showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Center(child: Text("Add image")),
+            title: Center(child: Text("Rasm yuklash")),
             content: SingleChildScrollView(
               child: ListBody(
                 children: [
                   GestureDetector(
-                    child: Text("Image From Camera"),
+                    child: Text("From Camera"),
                     onTap: () {
-                      openCamera();
+                      getcam();
                     },
                   ),
                   Padding(padding: EdgeInsets.all(10)),
                   GestureDetector(
-                    child: Text("Take Image From Gallery"),
+                    child: Text("From Gallery"),
                     onTap: () {
-                      openGallery();
+                      getgall();
                     },
                   ),
                 ],
@@ -57,8 +60,8 @@ class _CreateimageState extends State<Createimage> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         leading: IconButton(
-          icon:Icon(Icons.arrow_back_outlined),
-          onPressed: (){
+          icon: Icon(Icons.arrow_back_outlined),
+          onPressed: () {
             Navigator.pop(context);
           },
           color: Colors.black,
@@ -79,26 +82,43 @@ class _CreateimageState extends State<Createimage> {
               ),
               Column(
                 children: [
-                  Stack(children: [
-                    Image.asset("assets/images/house.png"),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(220, 0, 0, 0),
-                      child: Container(
-                        child: Icon(
-                          Icons.delete,
-                          color: Colors.white,
-                        ),
-                        height: 30.h,
-                        width: 24.w,
-                        decoration: BoxDecoration(
-                          color: Colors.red,
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(5),
+                  Column(
+                    children: [
+                      Container(
+                        child: DottedBorder(
+                          dashPattern: [6, 3],
+                          color: Colors.black,
+                          strokeWidth: 1,
+                          child: InkWell(
+                            onTap: ()
+                            async{
+                              await _takeFromCamera(0);
+                              setState(() {
+                                btn = 0;
+                              });
+                            },
+                            child: Container(
+                              height: 250.h,
+                              width: 250.w,
+                              color: Colors.black12,
+                              child: file == null
+                                  ? Icon(
+                                Icons.camera_alt_sharp,
+                                size: 50,
+                              )
+                                  : Image.file(
+                                file!,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
                           ),
                         ),
+                        width: 250.w,
+                        height: 250.h,
                       ),
-                    ),
-                  ]),
+
+                    ],
+                  ),
                   SizedBox(
                     height: 15,
                   ),
@@ -108,94 +128,79 @@ class _CreateimageState extends State<Createimage> {
                     color: Colors.black,
                   ),
                   SizedBox(height: 10),
-                  Column(
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
-                        children: [
-                          Container(
-                            child: DottedBorder(
-                              dashPattern: [6, 3],
-                              color: Colors.black,
-                              strokeWidth: 1,
-                              child: Padding(
-                                padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    IconButton(onPressed: (){
-                                      showOptionsDialog(context);
-                                    }, icon: Icon(Icons.camera_alt_rounded))
-                                  ],
-                                ),
-                              ),
-                            ),
-                            width: 95.w,
-                            height: 95.h,
-                          ),
-                          Stack(
-                            children: [
-                              Container(
-                                height: 100.h,
-                                width: 100.w,
-                                child: Image.asset("assets/images/house.png"),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(95, 0, 2, 0),
-                                child: Container(
-                                  height: 20,
-                                  width: 24,
-                                  child: Icon(
-                                    Icons.remove,
-                                    color: Colors.white,
-                                  ),
-                                  decoration: BoxDecoration(
-                                      color: Colors.red,
-                                      borderRadius:
-                                      BorderRadius.all(Radius.circular(3))),
-                                ),
-                              ),
-                            ],
-                          ),
-                          Stack(
-                            children: [
-                              Container(
-                                height: 100.h,
-                                width: 100.w,
-                                child: Image.asset("assets/images/house.png"),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(95, 0, 2, 0),
-                                child: Container(
-                                  height: 20,
-                                  width: 24,
-                                  child: Icon(
-                                    Icons.remove,
-                                    color: Colors.white,
-                                  ),
-                                  decoration: BoxDecoration(
-                                      color: Colors.red,
-                                      borderRadius:
-                                      BorderRadius.all(Radius.circular(3))),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 25,),
-                  Column(children: [
-                    Row(children: [
+                     Stack(
+                       children: [
+                         Column(
+                           children: [
+                             InkWell(
+                               onTap: () {
+                                 showOptionsDialog(context);
+                               },
+                               child: Container(
+                                 height: 126.h,
+                                 width: 95.w,
+                                 color: Colors.black12,
+                                 child: file == null
+                                     ? Icon(
+                                   Icons.add,
+                                   size: 30,
+                                 )
+                                     : Image.file(
+                                   file!,
+                                   fit: BoxFit.cover,
+                                 ),
+                               ),
+                             ),
+                           ],
+                         ),
+                         Padding(
+                           padding: const EdgeInsets.fromLTRB(90, 0, 1, 0),
+                           child: Container(
+                             height: 20,
+                             width: 24,
+                             child: Icon(
+                               Icons.remove,
+                               color: Colors.white,
+                             ),
+                             decoration: BoxDecoration(
+                                 color: Colors.red,
+                                 borderRadius:
+                                 BorderRadius.all(Radius.circular(3))),
+                           ),
+                         ),
+                       ],
+                     ),
                       Stack(
                         children: [
-                          Container(
-                            height: 100.h,
-                            width: 100.w,
-                            child: Image.asset("assets/images/house.png"),
+                          Column(
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  showOptionsDialog(context);
+                                },
+                                child: Container(
+                                  height: 126.h,
+                                  width: 95.w,
+                                  color: Colors.black12,
+                                  child: file == null
+                                      ? Icon(
+                                    Icons.add,
+                                    size: 30,
+                                  )
+                                      : Image.file(
+                                    file!,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                           Padding(
-                            padding: const EdgeInsets.fromLTRB(95, 0, 2, 0),
+                            padding: const EdgeInsets.fromLTRB(90, 0, 1, 0),
                             child: Container(
                               height: 20,
                               width: 24,
@@ -211,8 +216,71 @@ class _CreateimageState extends State<Createimage> {
                           ),
                         ],
                       ),
-                    ],)
-                  ],)
+                      Stack(
+                        children: [
+                          Column(
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  showOptionsDialog(context);
+                                },
+                                child: Container(
+                                  height: 126.h,
+                                  width: 95.w,
+                                  color: Colors.black12,
+                                  child: file == null
+                                      ? Icon(
+                                    Icons.add,
+                                    size: 30,
+                                  )
+                                      : Image.file(
+                                    file!,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(90, 0, 1, 0),
+                            child: Container(
+                              height: 20,
+                              width: 24,
+                              child: Icon(
+                                Icons.remove,
+                                color: Colors.white,
+                              ),
+                              decoration: BoxDecoration(
+                                  color: Colors.red,
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(3))),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 25,
+                  ),
+                  Column(
+                    children: [
+                      Row(
+                        children: [
+                          Stack(
+                            children: [
+                              Container(
+                                height: 100.h,
+                                width: 100.w,
+                                child: Image.asset("assets/images/house.png"),
+                              ),
+
+                            ],
+                          ),
+                        ],
+                      )
+                    ],
+                  )
                 ],
               ),
               SizedBox(
@@ -229,7 +297,10 @@ class _CreateimageState extends State<Createimage> {
                             borderRadius: BorderRadius.circular(10.r)),
                         primary: AppColors.buttonLinear),
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>CreateSuccedful()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => CreateSuccedful()));
                     },
                     child: Text(
                       "E’lonni saqlash".tr(),
@@ -242,94 +313,13 @@ class _CreateimageState extends State<Createimage> {
               SizedBox(
                 height: 15,
               ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  CircleAvatar(
-                    radius: 6.r,
-                    child: CircleAvatar(
-                      backgroundColor: Colors.blue,
-                      radius: 7.r,
-                    ),
-                  ),
-                  SizedBox(
-                    width: 2.w,
-                  ),
-                  Container(
-                    width: 100.w,
-                    height: 5.h,
-                    color: Color.fromRGBO(228, 228, 228, 1),
-                  ),
-                  SizedBox(
-                    width: 3.w,
-                  ),
-                  CircleAvatar(
-                    backgroundColor: Colors.blue,
-                    radius: 6.r,
-                    child: CircleAvatar(
-                      backgroundColor: Colors.blue,
-                      radius: 7.r,
-                    ),
-                  ),
-                  SizedBox(
-                    width: 3.w,
-                  ),
-                  Container(
-                    width: 100.w,
-                    height: 5.h,
-                    color: Color.fromRGBO(228, 228, 228, 1),
-                  ),
-                  SizedBox(
-                    width: 3.w,
-                  ),
-                  CircleAvatar(
-                    backgroundColor: Colors.blue,
-                    radius: 6.r,
-                    child: CircleAvatar(
-                      backgroundColor: Colors.blue,
-                      radius: 7.r,
-                    ),
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                    width: 70.w,
-                    child: Text(
-                      "E’lon",
-                      style: TextStyle(
-                        color: Colors.blue,
-                        fontSize: 14.w,
-                      ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  Container(
-                    width: 70.w,
-                    child: Text(
-                      "Xonadon \nma’lumotlari\n",
-                      style: TextStyle(fontSize: 12.w, color: Colors.blue),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                  Container(
-                    width: 70.w,
-                    child: Text(
-                      "E’lonni \njoylashtirish\n",
-                      style: TextStyle(fontSize: 12.w, color: Colors.blue),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                ],
-              ),
             ],
           ),
         ),
       ),
     );
   }
+
   void openCamera() async {
     var imgCamera = await imgPicker.getImage(source: ImageSource.camera);
     setState(() {
@@ -346,16 +336,17 @@ class _CreateimageState extends State<Createimage> {
     Navigator.of(context).pop();
   }
 
-  Widget displayImage(){
-    if(imgFile == null){
+  Widget displayImage() {
+    if (imgFile == null) {
       return Text("No Image Selected!");
-    } else{
+    } else {
       return Image.file(imgFile!, width: 350, height: 350);
     }
   }
+
   _takeFromCamera(int Ind) async {
     final XFile? photo =
-    await ImagePicker().pickImage(source: ImageSource.camera);
+        await ImagePicker().pickImage(source: ImageSource.camera);
     if (photo != null) {
       final image = File(photo.path);
       // imageList.add(image);
@@ -365,5 +356,21 @@ class _CreateimageState extends State<Createimage> {
       imageList.insert(Ind, image);
       imageExist.insert(Ind, true);
     }
+  }
+
+  getcam() async {
+    // ignore: deprecated_member_use
+    var img = await image.getImage(source: ImageSource.camera);
+    setState(() {
+      file = File(img!.path);
+    });
+  }
+
+  getgall() async {
+    // ignore: deprecated_member_use
+    var img = await image.getImage(source: ImageSource.gallery);
+    setState(() {
+      file = File(img!.path);
+    });
   }
 }

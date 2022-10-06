@@ -83,21 +83,13 @@ class _StudentState extends State<Student> {
     'Xovli',
   ];
   var genderone = [
-    'Erkak',
-    'Ayol',
+    "O'g'il",
+    "Qiz",
   ];
   var kvsherik = [
-    '1',
-    '2',
-    '3',
-    '4',
-    '5',
-    '6',
-    '7',
-    '8',
-    '9',
-    '10',
-    'Ayol',
+    '1-2',
+    '3-4',
+    '5-6',
   ];
   final List<String> genderItems = ["O'g'il bola ", "Qiz bola"];
   var kindOfMoment = [
@@ -144,30 +136,53 @@ class _StudentState extends State<Student> {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text("E’lonni nomlash"),
-                SizedBox(
-                  height: 5,
+                Text(
+                  "E’lonni nomlash".tr(),
+                  style: TextStyle(
+                    color: AppColors.textColor,
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
-                TextFormField(
-                  controller: _textEditingController,
-                  keyboardType: TextInputType.name,
-                  decoration: const InputDecoration(
-                      label: Text("E’lonni nomlang"),
-                      labelStyle: TextStyle(fontSize: 12.0, color: Colors.grey),
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(
-                          color: Colors.black,
-                        ),
-                        borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                SizedBox(height: 4.h),
+                Container(
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                      border: Border.all(color: _colorUniver),
+                      borderRadius: BorderRadius.circular(8.r)),
+                  child: Container(
+                    padding: EdgeInsets.only(left: 16.w),
+                    child: TextFormField(
+                      onChanged: (e) {
+                        setState(() {
+                          if (e.length > 0) {
+                            setState(() {
+                              _UniverOnClick = true;
+                              _colorUniver = Colors.grey;
+                            });
+                          } else {
+                            setState(() {
+                              _UniverOnClick = false;
+                              _colorUniver = Colors.red;
+                            });
+                          }
+                        });
+                      },
+                      controller: titlecontroller,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: "E’lonni nomlang".tr(),
+                        hintStyle:
+                        TextStyle(fontSize: 14.sp, color: Colors.grey),
                       ),
-                      focusedBorder: OutlineInputBorder(
-                          borderSide: BorderSide(
-                            color: Colors.black,
-                          ),
-                          borderRadius:
-                              BorderRadius.all(Radius.circular(20.0)))),
+                      cursorColor: Colors.grey.shade800,
+                      cursorWidth: 1.5.w,
+                    ),
+                  ),
                 ),
-                SizedBox(height: 12.h),
+                SizedBox(
+                  height: 15.w,
+                ),
                 Text(
                   "Qaysi viloyatlik sherik izlayabsiz ?".tr(),
                   style: TextStyle(
@@ -180,14 +195,14 @@ class _StudentState extends State<Student> {
                 Row(
                   children: [
                     Container(
-                      width: 245.w,
+                      width: 240.w,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10.r),
                           border: Border.all(color: _colorRegion)),
                       child: DropdownButtonFormField(
                         hint: Padding(
                           padding: EdgeInsets.only(left: 8.w),
-                          child: Text("Viloyat/shaharni tanlang".tr()),
+                          child: Text("Viloyat/Shaharni tanlang".tr()),
                         ),
                         decoration: InputDecoration(border: InputBorder.none),
                         // value: ,
@@ -217,7 +232,7 @@ class _StudentState extends State<Student> {
                       ),
                     ),
                     SizedBox(
-                      width: 7.w,
+                      width: 14.w,
                     ),
                     Column(
                       children: [
@@ -291,7 +306,7 @@ class _StudentState extends State<Student> {
                 Row(
                   children: [
                     Container(
-                      width: 250.w,
+                      width: 240.w,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10.r),
                           border: Border.all(color: _colorUniver)),
@@ -330,7 +345,7 @@ class _StudentState extends State<Student> {
                       ),
                     ),
                     SizedBox(
-                      width: 7,
+                      width: 14.w,
                     ),
                     Column(
                       children: [
@@ -347,6 +362,7 @@ class _StudentState extends State<Student> {
                     )
                   ],
                 ),
+                SizedBox(height: 8.h,),
                 Row(
                   children: [
                     Column(
@@ -360,7 +376,7 @@ class _StudentState extends State<Student> {
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        SizedBox(height: 4.h),
+                        SizedBox(height: 8.h),
                         Container(
                           width: 152.w,
                           decoration: BoxDecoration(
@@ -399,7 +415,7 @@ class _StudentState extends State<Student> {
                       ],
                     ),
                     SizedBox(
-                      width: 20,
+                      width: 20.w,
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -460,13 +476,13 @@ class _StudentState extends State<Student> {
                       ],
                     ),
                     SizedBox(
-                      height: 5,
+                      height: 5.h,
                     ),
                     Row(
                       children: [
                         Container(
-                          height: 60,
-                          width: 240,
+                          height: 57.h,
+                          width: 240.w,
                           child: TextFormField(
                             inputFormatters: [
                               TextInputMask(
@@ -479,13 +495,15 @@ class _StudentState extends State<Student> {
                             keyboardType: TextInputType.phone,
                             controller: nameController,
                             decoration: InputDecoration(
-                              border: OutlineInputBorder(),
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.all(Radius.circular(8.r))
+                              ),
                               labelText: "+998 ** *** ** **".tr(),
                             ),
                           ),
                         ),
                         SizedBox(
-                          width: 7.w,
+                          width: 14.w,
                         ),
                         Column(
                           children: [

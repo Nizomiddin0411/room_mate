@@ -18,6 +18,8 @@ class AdsImage extends StatefulWidget {
 class _AdsImageState extends State<AdsImage> {
   File? imgFile;
   final imgPicker = ImagePicker();
+  File? file;
+  ImagePicker image = ImagePicker();
 
   Future<void> showOptionsDialog(BuildContext context) {
     return showDialog(
@@ -68,155 +70,118 @@ class _AdsImageState extends State<AdsImage> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            SizedBox(
-              height: 15,
-            ),
-            Center(
-              child: Container(
-                child: DottedBorder(
-                  dashPattern: [6, 3],
-                  color: Colors.black,
-                  strokeWidth: 1,
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(90, 70, 50, 0),
-                    child: Column(
-                      children: [
-                        IconButton(
-                            onPressed: () {
-                              showOptionsDialog(context);
-                            },
-                            icon: Icon(
-                              Icons.camera_alt,
-                              size: 40,
-                            )),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          "Rasm yuklang",
-                          style: TextStyle(fontSize: 15),
-                        )
-                      ],
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(
+                height: 15,
+              ),
+              Center(
+                child: Container(
+                  child: DottedBorder(
+                    dashPattern: [6, 3],
+                    color: Colors.black,
+                    strokeWidth: 1,
+                    child: Padding(
+                      padding: const EdgeInsets.fromLTRB(90, 70, 50, 0),
+                      child: Column(
+                        children: [
+                          IconButton(
+                              onPressed: () {
+                                showOptionsDialog(context);
+                              },
+                              icon: Icon(
+                                Icons.camera_alt,
+                                size: 40,
+                              )),
+                          SizedBox(
+                            height: 10,
+                          ),
+                          Text(
+                            "Rasm yuklang",
+                            style: TextStyle(fontSize: 15),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  width: 250.w,
+                  height: 250.h,
+                ),
+              ),
+          Column(
+            children: [
+              Container(
+                height: 160.h,
+                width: 180.w,
+                color: Colors.black12,
+                child: file == null
+                    ? Icon(
+                  Icons.image,
+                  size: 50,
+                )
+                    : Image.file(
+                  file!,
+                  fit: BoxFit.fill,
+                ),
+              ),
+              MaterialButton(
+                onPressed: () {
+                  getgall();
+                },
+                color: Colors.blue[900],
+                child: Text(
+                  "Gallery",
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+              MaterialButton(
+                onPressed: () {
+                  getcam();
+                },
+                color: Colors.blue[900],
+                child: Text(
+                  "Camera",
+                  style: TextStyle(
+                    color: Colors.white,
+                  ),
+                ),
+              ),
+            ],
+          ),
+              SizedBox(
+                height: 300.h,
+              ),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 18.h, horizontal: 31.w),
+                child: Container(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        padding: EdgeInsets.symmetric(vertical: 14.h),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.r)),
+                        primary: AppColors.buttonLinear),
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Createimage()));
+                    },
+                    child: Text(
+                      "E’lonni saqlash ".tr(),
+                      style:
+                          TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w500),
                     ),
                   ),
                 ),
-                width: 250.w,
-                height: 250.h,
               ),
-            ),
-            SizedBox(
-              height: 250.h,
-            ),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 18.h, horizontal: 31.w),
-              child: Container(
-                width: double.infinity,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(vertical: 14.h),
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.r)),
-                      primary: AppColors.buttonLinear),
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Createimage()));
-                  },
-                  child: Text(
-                    "E’lonni saqlash ".tr(),
-                    style:
-                        TextStyle(fontSize: 20.sp, fontWeight: FontWeight.w500),
-                  ),
-                ),
+              SizedBox(
+                height: 15,
               ),
-            ),
-            SizedBox(
-              height: 15,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                CircleAvatar(
-                  radius: 6.r,
-                  child: CircleAvatar(
-                    backgroundColor: Colors.blue,
-                    radius: 7.r,
-                  ),
-                ),
-                SizedBox(
-                  width: 2.w,
-                ),
-                Container(
-                  width: 100.w,
-                  height: 5.h,
-                  color: Color.fromRGBO(228, 228, 228, 1),
-                ),
-                SizedBox(
-                  width: 3.w,
-                ),
-                CircleAvatar(
-                  backgroundColor: Colors.blue,
-                  radius: 6.r,
-                  child: CircleAvatar(
-                    backgroundColor: Colors.blue,
-                    radius: 7.r,
-                  ),
-                ),
-                SizedBox(
-                  width: 3.w,
-                ),
-                Container(
-                  width: 100.w,
-                  height: 5.h,
-                  color: Color.fromRGBO(228, 228, 228, 1),
-                ),
-                SizedBox(
-                  width: 3.w,
-                ),
-                CircleAvatar(
-                  backgroundColor: Colors.blue,
-                  radius: 6.r,
-                  child: CircleAvatar(
-                    backgroundColor: Colors.blue,
-                    radius: 7.r,
-                  ),
-                ),
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Container(
-                  width: 70.w,
-                  child: Text(
-                    "E’lon",
-                    style: TextStyle(
-                      color: Colors.blue,
-                      fontSize: 14.w,
-                    ),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                Container(
-                  width: 70.w,
-                  child: Text(
-                    "Xonadon \nma’lumotlari\n",
-                    style: TextStyle(fontSize: 12.w, color: Colors.blue),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-                Container(
-                  width: 70.w,
-                  child: Text(
-                    "E’lonni \njoylashtirish\n",
-                    style: TextStyle(fontSize: 12.w, color: Colors.blue),
-                    textAlign: TextAlign.center,
-                  ),
-                ),
-              ],
-            ),
-          ],
+
+            ],
+          ),
         ),
       ),
     );
@@ -244,5 +209,19 @@ class _AdsImageState extends State<AdsImage> {
     } else {
       return Image.file(imgFile!, width: 350, height: 350);
     }
+  }
+  getcam() async {
+    // ignore: deprecated_member_use
+    var img = await image.getImage(source: ImageSource.camera);
+    setState(() {
+      file = File(img!.path);
+    });
+  }
+  getgall() async {
+    // ignore: deprecated_member_use
+    var img = await image.getImage(source: ImageSource.gallery);
+    setState(() {
+      file = File(img!.path);
+    });
   }
 }

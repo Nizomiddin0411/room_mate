@@ -237,7 +237,7 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
                  await RegistratsiyaUser().CreateAdsUser(
                    FullName: myController.text,
                    Phonenumber: nameController.text,
-                   gender: dropdownvalue.toString() == 'Erkak' ? '1' : '2',);
+                   );
                  Navigator.push(
                      context,
                      MaterialPageRoute(

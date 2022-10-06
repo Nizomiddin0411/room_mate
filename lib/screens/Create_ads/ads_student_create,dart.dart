@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
 import 'package:talaba_uy/provider/region_provider.dart';
 import 'Image_ads.dart';
+import 'create_image.ads.dart';
 
 class Student2 extends StatefulWidget {
   const Student2({Key? key}) : super(key: key);
@@ -91,17 +92,11 @@ class _Student2State extends State<Student2> {
     'Ayol',
   ];
   var kvsherik = [
-    '1',
-    '2',
-    '3',
-    '4',
-    '5',
-    '6',
-    '7',
-    '8',
-    '9',
-    '10',
-    'Ayol',
+    '1 xona',
+    "2 xona",
+    "3 xona",
+    "4 xona",
+    "5 xona",
   ];
   var kindOfMoment = [
     'kunlik',
@@ -416,32 +411,31 @@ class _Student2State extends State<Student2> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Qavatlar soni  ".tr(),
+                            "Uy turi".tr(),
                             style: TextStyle(
                               color: AppColors.textColor,
                               fontSize: 14.sp,
                               fontWeight: FontWeight.w500,
                             ),
                           ),
-                          SizedBox(height: 4.h),
+                          SizedBox(height: 8.h),
                           Container(
-                            height: 50.h,
-                            width: 130.w,
+                            width: 152.w,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10.r),
-                                border: Border.all(color: Colors.black)),
+                                border: Border.all(color: _colorGender)),
                             child: DropdownButtonFormField(
                               hint: Padding(
                                 padding: EdgeInsets.only(left: 8.w),
                                 child: Text(
-                                  "Qavatlar soni".tr(),
+                                  "Kvartira , Xovli".tr(),
                                   style: TextStyle(fontSize: 14.sp),
                                 ),
                               ),
                               decoration:
                               const InputDecoration(border: InputBorder.none),
                               icon: Icon(Icons.arrow_drop_down_outlined),
-                              items: kvsherik.map((e) {
+                              items: kvartira.map((e) {
                                 return DropdownMenuItem<String>(
                                   onTap: () {},
                                   value: e,
@@ -452,20 +446,24 @@ class _Student2State extends State<Student2> {
                                 );
                               }).toList(),
                               onChanged: (newValue) {
-                                setState(() {});
+                                setState(() {
+                                  _GenderOnClick = true;
+                                  _colorGender = Colors.grey;
+                                  _titleGendor = newValue.toString();
+                                });
                               },
                             ),
                           ),
                         ],
                       ),
                       SizedBox(
-                        width: 35,
+                        width: 20.w,
                       ),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Nechinchi qavatda ?".tr(),
+                            "Xonalar soni ?".tr(),
                             style: TextStyle(
                               color: AppColors.textColor,
                               fontSize: 14.sp,
@@ -474,16 +472,15 @@ class _Student2State extends State<Student2> {
                           ),
                           SizedBox(height: 4.h),
                           Container(
-                            height: 50.h,
-                            width: 130.w,
+                            width: 152.w,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10.r),
-                                border: Border.all(color: Colors.black)),
+                                border: Border.all(color: _colorGender)),
                             child: DropdownButtonFormField(
                               hint: Padding(
                                 padding: EdgeInsets.only(left: 8.w),
                                 child: Text(
-                                  "Nechanchi qavat".tr(),
+                                  "Xonalar soni".tr(),
                                   style: TextStyle(fontSize: 14.sp),
                                 ),
                               ),
@@ -501,7 +498,117 @@ class _Student2State extends State<Student2> {
                                 );
                               }).toList(),
                               onChanged: (newValue) {
-                                setState(() {});
+                                setState(() {
+                                  _GenderOnClick = true;
+                                  _colorGender = Colors.grey;
+                                  _titleGendor = newValue.toString();
+                                });
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 15.h,),
+                  Row(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Qavatlar soni ".tr(),
+                            style: TextStyle(
+                              color: AppColors.textColor,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          SizedBox(height: 8.h),
+                          Container(
+                            width: 152.w,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.r),
+                                border: Border.all(color: _colorGender)),
+                            child: DropdownButtonFormField(
+                              hint: Padding(
+                                padding: EdgeInsets.only(left: 8.w),
+                                child: Text(
+                                  "Qavatlar soni ".tr(),
+                                  style: TextStyle(fontSize: 14.sp),
+                                ),
+                              ),
+                              decoration:
+                              const InputDecoration(border: InputBorder.none),
+                              icon: Icon(Icons.arrow_drop_down_outlined),
+                              items: genderone.map((e) {
+                                return DropdownMenuItem<String>(
+                                  onTap: () {},
+                                  value: e,
+                                  child: Padding(
+                                    padding: EdgeInsets.only(left: 8.w),
+                                    child: Text(e.tr()),
+                                  ),
+                                );
+                              }).toList(),
+                              onChanged: (newValue) {
+                                setState(() {
+                                  _GenderOnClick = true;
+                                  _colorGender = Colors.grey;
+                                  _titleGendor = newValue.toString();
+                                });
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        width: 20.w,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Nechinchi qavatda  ?".tr(),
+                            style: TextStyle(
+                              color: AppColors.textColor,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          SizedBox(height: 4.h),
+                          Container(
+                            width: 152.w,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.r),
+                                border: Border.all(color: _colorGender)),
+                            child: DropdownButtonFormField(
+                              hint: Padding(
+                                padding: EdgeInsets.only(left: 8.w),
+                                child: Text(
+                                  "Nechinchi qavatda".tr(),
+                                  style: TextStyle(fontSize: 14.sp),
+                                ),
+                              ),
+                              decoration:
+                              const InputDecoration(border: InputBorder.none),
+                              icon: Icon(Icons.arrow_drop_down_outlined),
+                              items: kvsherik.map((e) {
+                                return DropdownMenuItem<String>(
+                                  onTap: () {},
+                                  value: e,
+                                  child: Padding(
+                                    padding: EdgeInsets.only(left: 8.w),
+                                    child: Text(e.tr()),
+                                  ),
+                                );
+                              }).toList(),
+                              onChanged: (newValue) {
+                                setState(() {
+                                  _GenderOnClick = true;
+                                  _colorGender = Colors.grey;
+                                  _titleGendor = newValue.toString();
+                                });
                               },
                             ),
                           ),
@@ -518,20 +625,19 @@ class _Student2State extends State<Student2> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Narxning turlanishi  ?".tr(),
+                            "Narxning turlanishi".tr(),
                             style: TextStyle(
                               color: AppColors.textColor,
                               fontSize: 14.sp,
                               fontWeight: FontWeight.w500,
                             ),
                           ),
-                          SizedBox(height: 4.h),
+                          SizedBox(height: 8.h),
                           Container(
-                            height: 50.h,
-                            width: 130.w,
+                            width: 152.w,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10.r),
-                                border: Border.all(color: Colors.black)),
+                                border: Border.all(color: _colorGender)),
                             child: DropdownButtonFormField(
                               hint: Padding(
                                 padding: EdgeInsets.only(left: 8.w),
@@ -554,7 +660,11 @@ class _Student2State extends State<Student2> {
                                 );
                               }).toList(),
                               onChanged: (newValue) {
-                                setState(() {});
+                                setState(() {
+                                  _GenderOnClick = true;
+                                  _colorGender = Colors.grey;
+                                  _titleGendor = newValue.toString();
+                                });
                               },
                             ),
                           ),
@@ -776,88 +886,7 @@ class _Student2State extends State<Student2> {
                     ),
                   ),
                   SizedBox(height: 55,),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      CircleAvatar(
-                        radius: 6.r,
-                        child: CircleAvatar(
-                          backgroundColor: Colors.blue,
-                          radius: 7.r,
-                        ),
-                      ),
-                      SizedBox(
-                        width: 2.w,
-                      ),
-                      Container(
-                        width: 100.w,
-                        height: 5.h,
-                        color: Color.fromRGBO(228, 228, 228, 1),
-                      ),
-                      SizedBox(
-                        width: 3.w,
-                      ),
-                      CircleAvatar(
-                        backgroundColor: Colors.blue,
-                        radius: 6.r,
-                        child: CircleAvatar(
-                          backgroundColor: Colors.blue,
-                          radius: 7.r,
-                        ),
-                      ),
-                      SizedBox(
-                        width: 3.w,
-                      ),
-                      Container(
-                        width: 100.w,
-                        height: 5.h,
-                        color: Color.fromRGBO(228, 228, 228, 1),
-                      ),
-                      SizedBox(
-                        width: 3.w,
-                      ),
-                      CircleAvatar(
-                        backgroundColor: Colors.blue,
-                        radius: 6.r,
-                        child: CircleAvatar(
-                          backgroundColor: Colors.blue,
-                          radius: 7.r,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Container(
-                        width: 70.w,
-                        child: Text(
-                          "E’lon",
-                          style: TextStyle(
-                            color: Colors.blue,
-                            fontSize: 14.w,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                      Container(
-                        width: 70.w,
-                        child: Text(
-                          "Xonadon \nma’lumotlari\n",
-                          style: TextStyle(fontSize: 12.w, color: Colors.blue),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                      Container(
-                        width: 70.w,
-                        child: Text(
-                          "E’lonni \njoylashtirish\n",
-                          style: TextStyle(fontSize: 12.w, color: Colors.blue),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    ],
-                  ),
+
                   Padding(
                     padding:
                         EdgeInsets.symmetric(vertical: 18.h, horizontal: 31.w),
@@ -873,7 +902,7 @@ class _Student2State extends State<Student2> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => AdsImage()));
+                                  builder: (context) => Createimage()));
                         },
                         child: Text(
                           "Keyingi ".tr(),

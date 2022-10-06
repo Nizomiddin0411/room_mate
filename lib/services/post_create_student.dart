@@ -7,14 +7,15 @@ import 'package:talaba_uy/services/post_create_ads_student.dart';
 
 class RegistratsiyaStudent {
   Future CreateAdsStudent({
-    required String Phonenumber,
     required String FullName,
+    required String Phonenumber,
+    required String Hidenumber,
     required String gender,
     required String fakultetId,
     required String UniderId,
     required String Course,
-    required String Roommate,
     required String District,
+    required String HideProfile,
   }) async {
     var request = http.MultipartRequest(
       'post',
@@ -24,14 +25,15 @@ class RegistratsiyaStudent {
     );
 
     request.fields.addAll({
-      'phone': Phonenumber,
-      'full_name':FullName,
+      'full_name': FullName,
+      'phone':Phonenumber,
+      'hide_phone':Hidenumber,
       'gender': gender,
       'faculty_id': fakultetId,
       'university_id': UniderId,
       'course': Course,
-      'roommate': Roommate,
-      'birth_district_id': District
+      'birth_district_id': District,
+      'hide_profile': HideProfile,
     });
     http.StreamedResponse response = await request.send();
 
@@ -39,12 +41,12 @@ class RegistratsiyaStudent {
       var data = await response.stream.bytesToString();
       print('$Phonenumber jjfhhfhdsdvtsdfstd');
       print("$gender    jinsi ");
-      print("$Roommate sherik rommate  ");
       print("$fakultetId fakulted id si  ");
       print("$Course sheri kursi ");
       print("$District  viloyattt idisi  ");
       print("$UniderId  univer idhbdjydfujedhedjreyehjfkdsi   ");
-      print("$Roommate  rommate sherik   ");
+      print("$HideProfile   number hide   ");
+      print("$Hidenumber  profile hide   ");
       return jsonDecode(data);
     }
   }

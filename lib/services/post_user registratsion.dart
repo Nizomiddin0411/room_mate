@@ -8,7 +8,6 @@ class RegistratsiyaUser {
   Future CreateAdsUser({
     required String Phonenumber,
     required String FullName,
-    required String gender,
 
   }) async {
     var request = http.MultipartRequest(
@@ -21,17 +20,14 @@ class RegistratsiyaUser {
     request.fields.addAll({
       'phone': Phonenumber,
       'full_name':FullName,
-      'gender': gender,
     });
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode >= 200 && response.statusCode <= 300) {
       var data = await response.stream.bytesToString();
       print('---------------------');
-      print("$FullName ##########");
-
-      //await Hive.box('token').put('token', jsonDecode(data)["access_token"]);
-
+      print("$FullName ismi");
+      print("$Phonenumber nomer");
       return jsonDecode(data);
     }
   }

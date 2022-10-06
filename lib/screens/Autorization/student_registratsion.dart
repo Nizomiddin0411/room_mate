@@ -77,7 +77,7 @@ class _StudentUserState extends State<StudentUser> {
     '4 ',
   ];
   bool value = false;
-  bool value5 = false;
+  bool hidenumber = false;
   String? value3;
   final myController = TextEditingController();
   final nameController = TextEditingController();
@@ -91,7 +91,7 @@ class _StudentUserState extends State<StudentUser> {
         LangData.languageList.singleWhere((e) => e.locale == context.locale),
         context);
     return Padding(
-      padding: const EdgeInsets.all(8.0),
+      padding: EdgeInsets.symmetric(horizontal: 14.w, vertical: 12.h),
       child: SingleChildScrollView(
         child: Consumer<UniversitetProvider>(builder: (_, data, __) {
           return Column(
@@ -104,7 +104,7 @@ class _StudentUserState extends State<StudentUser> {
                     ],
                   ),
                   SizedBox(
-                    height: 5,
+                    height: 5.h,
                   ),
                   TextFormField(
                     autovalidateMode: AutovalidateMode.always,
@@ -118,6 +118,7 @@ class _StudentUserState extends State<StudentUser> {
                     controller: myController,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(8),
                           borderSide: BorderSide(
                               color: myController.text == ''
                                   ? Colors.red
@@ -128,7 +129,7 @@ class _StudentUserState extends State<StudentUser> {
                 ],
               ),
               SizedBox(
-                height: 10,
+                height: 10.h,
               ),
               Column(
                 children: [
@@ -138,13 +139,13 @@ class _StudentUserState extends State<StudentUser> {
                     ],
                   ),
                   SizedBox(
-                    height: 5,
+                    height: 5.h,
                   ),
                   Row(
                     children: [
                       Container(
-                        height: 80,
-                        width: 310,
+                        height: 80.h,
+                        width: 250.w,
                         child: TextFormField(
                           inputFormatters: [
                             TextInputMask(
@@ -164,22 +165,26 @@ class _StudentUserState extends State<StudentUser> {
                           keyboardType: TextInputType.phone,
                           controller: nameController,
                           decoration: InputDecoration(
-                            border: OutlineInputBorder(),
+                            border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8)),
                             labelText: "Telefon raqamini kiriting".tr(),
                           ),
                         ),
                       ),
                       SizedBox(
-                        width: 7.w,
+                        width: 9.w,
                       ),
                       Column(
                         children: [
                           Text("Ko’rinmasin"),
+                          SizedBox(
+                            height: 10,
+                          ),
                           Checkbox(
-                            value: this.value5,
+                            value: this.hidenumber,
                             onChanged: (bool? value) {
                               setState(() {
-                                this.value5 = value!;
+                                this.hidenumber = value!;
                               });
                             },
                           ),
@@ -190,7 +195,7 @@ class _StudentUserState extends State<StudentUser> {
                 ],
               ),
               SizedBox(
-                height: 10,
+                height: 10.h,
               ),
               Column(
                 children: [
@@ -797,11 +802,13 @@ class _StudentUserState extends State<StudentUser> {
                         FullName: myController.text,
                         fakultetId: data.fakultetid.toString(),
                         Course: Course.toString(),
-                        Roommate: isSwitched.toString() == 'ha' ? '1' : '2',
+                        HideProfile: isSwitched.toString() == 'ha' ? '1' : '2',
                         District: data.districtid.toString(),
                         Phonenumber: nameController.text,
                         gender: dropdownvalue.toString() == 'Erkak' ? '1' : '2',
-                        UniderId: data.universiterid.toString());
+                        UniderId: data.universiterid.toString(),
+                        Hidenumber: hidenumber.toString()=='Ha'?'1':'2',
+                        );
                     // Hive.box('name').put( 'name', myController.text );
                     // Hive.box('number').put( 'number', nameController.text );
                     print('${myController} maulotiiiiiiiii+++++++++++');
@@ -811,8 +818,10 @@ class _StudentUserState extends State<StudentUser> {
                     print('${fakultetId} maulotiiiiiiiii+++++++++++');
                     print('${nameController.text} maulotiiiiiiiii+++++++++++');
                     print('${dropdownvalue} maulotiiiiiiiii+++++++++++');
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => SuccedfulPage()));
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => SuccedfulPage()));
                   } else {
                     kursColor = Colors.red;
                     univerColor = Colors.red;
