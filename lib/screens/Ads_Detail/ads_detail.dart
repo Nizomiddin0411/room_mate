@@ -3,7 +3,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:hive/hive.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
 
@@ -71,6 +70,7 @@ class _AdsDetailState extends State<AdsDetail> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle:true,
         backgroundColor: AppColors.backgroundWhite,
         title: Padding(
             padding: EdgeInsets.symmetric(horizontal: 65.w),
@@ -105,16 +105,19 @@ class _AdsDetailState extends State<AdsDetail> {
                         });
                       },
                       itemBuilder: (context, pagePosition) {
-                        return CachedNetworkImage(
-                          imageUrl: "https://source.unsplash.com/random/324x235",
-                          width: 324.w,
-                          height: 235.h,
-                          fit: BoxFit.cover,
+                        return Padding(
+                          padding: const EdgeInsets.all(18.0),
+                          child: CachedNetworkImage(
+                            imageUrl: "https://source.unsplash.com/random/324x235",
+                            width: 324.w,
+                            height: 235.h,
+                            fit: BoxFit.cover,
+                          ),
                         );
                       }),
                 ),
                 Positioned(
-                  bottom: 10.h,
+                  bottom: 20.h,
                   left: 0,
                   right: 0,
                   child: Row(
@@ -127,13 +130,17 @@ class _AdsDetailState extends State<AdsDetail> {
                         decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             color: _correntPage == i
-                                ? AppColors.backgroundWhite
+                                ? AppColors.mainColor
                                 : Colors.grey),
                       );
                     }).toList(),
                   ),
                 ),
-                Positioned(child:
+                Positioned(
+                    top: 16.h,
+                    left: 18.w,
+                    right: 8.w,
+                    child:
                 Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Row(
@@ -217,7 +224,7 @@ class _AdsDetailState extends State<AdsDetail> {
 
                Row(
                  children: [
-                   widget.chatApproved == 1 ?
+                   // widget.chatApproved == 1 ?
                    Padding(
                      padding:  EdgeInsets.fromLTRB(12.w, 0, 12.w, 12.h),
                      child: InkWell(
@@ -234,7 +241,7 @@ class _AdsDetailState extends State<AdsDetail> {
                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                            children:  [
                              const Padding(
-                               padding: EdgeInsets.all(5.0),
+                               padding: EdgeInsets.all(7.0),
                                child: Icon(
                                  Icons.mail_outline,
                                  color: AppColors.mainColor,
@@ -242,7 +249,7 @@ class _AdsDetailState extends State<AdsDetail> {
                              ),
 
                              Padding(
-                               padding:  EdgeInsets.symmetric(horizontal: 10.w),
+                               padding:  EdgeInsets.all(10.0),
                                child: Text('Aloqa').tr(),
                              )
                            ],
@@ -250,41 +257,42 @@ class _AdsDetailState extends State<AdsDetail> {
                        ),
                      ),
                    )
-                   :Padding(
-                     padding:  EdgeInsets.fromLTRB(8.w, 0, 8.w, 12.h),
-                     child: InkWell(
-                       onTap: () async{
-                         await ChatPermit().fetchApprov(Askid: widget.userId, Approvid: Hive.box('id').get('id'));
-                       },
-                       child: Container(
-                         width: 100.w,
-                         height: 42.h,
-                         decoration: BoxDecoration(
-                           border: Border.all(color: AppColors.mainColor),
-                           borderRadius: BorderRadius.circular(10.r),
-
-
-                         ),
-                         child: Row(
-                           // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                           children:  [
-                             const Padding(
-                               padding: EdgeInsets.all(0.0),
-                               child: Icon(
-                                 Icons.mail_outline,
-                                 color: AppColors.mainColor,
-                               ),
-                             ),
-
-                             Padding(
-                               padding: const EdgeInsets.all(0.0),
-                               child: Text("so'rov jo'natish",style: TextStyle(fontSize: 12.sp),).tr(),
-                             )
-                           ],
-                         ),
-                       ),
-                     ),
-                   ),
+                   // :Padding(
+                   //   padding:  EdgeInsets.fromLTRB(8.w, 0, 8.w, 12.h),
+                   //   child: InkWell(
+                   //     onTap: () async{
+                   //       await ChatPermit().fetchApprov(Askid: widget.userId, Approvid: Hive.box('id').get('id'));
+                   //     },
+                   //     child: Container(
+                   //       width: 100.w,
+                   //       height: 42.h,
+                   //       decoration: BoxDecoration(
+                   //         border: Border.all(color: AppColors.mainColor),
+                   //         borderRadius: BorderRadius.circular(10.r),
+                   //
+                   //
+                   //       ),
+                   //       child: Row(
+                   //         // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                   //         children:  [
+                   //           const Padding(
+                   //             padding: EdgeInsets.all(0.0),
+                   //             child: Icon(
+                   //               Icons.mail_outline,
+                   //               color: AppColors.mainColor,
+                   //             ),
+                   //           ),
+                   //
+                   //           Padding(
+                   //             padding: const EdgeInsets.all(0.0),
+                   //             child: Text("so'rov jo'natish",style: TextStyle(fontSize: 12.sp),).tr(),
+                   //           )
+                   //         ],
+                   //       ),
+                   //     ),
+                   //   ),
+                   // )
+                   ,
                    Padding(
                      padding:  EdgeInsets.fromLTRB(8.w, 0, 8.w, 12.h),
                      child: InkWell(
