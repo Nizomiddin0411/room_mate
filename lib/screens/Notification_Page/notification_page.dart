@@ -2,7 +2,11 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
+
+import '../../provider/chat_permit_provider.dart';
+import '../../services/get_permit_service.dart';
 
 class NotificationPage extends StatefulWidget {
   const NotificationPage({Key? key}) : super(key: key);
@@ -12,6 +16,13 @@ class NotificationPage extends StatefulWidget {
 }
 
 class _NotificationPageState extends State<NotificationPage> {
+  @override
+  void initState() {
+    super.initState();
+    print("dsd");
+    GetPermitSevice().fetchPermit();
+    Provider.of<ChatPermit>(context, listen: false).Permit();
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,8 +51,10 @@ class _NotificationPageState extends State<NotificationPage> {
         padding: EdgeInsets.fromLTRB(15.w, 15.h, 15.w, 15.h),
         child: Column(
           children: [
-            ListView.builder(
-              itemCount: 2,
+            Consumer<ChatPermit>(
+              builder: (_,data,__) {
+              return ListView.builder(
+              itemCount: data.permit.length,
               shrinkWrap: true,
               itemBuilder: (BuildContext context, int index) {
               return Column(
@@ -54,11 +67,11 @@ class _NotificationPageState extends State<NotificationPage> {
                       color: AppColors.iconBack,
                     ),
                     child: Padding(
-                      padding: EdgeInsets.all(18.0),
+                      padding: const EdgeInsets.all(18.0),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Karimov Ulug’bek ",style: TextStyle(fontSize: 18.sp),),
+                          Text(data.permit[index].userAskedFullName.toString(),style: TextStyle(fontSize: 18.sp),),
                           SizedBox(height: 5.h,),
                           Text("Siz bilan suxbatlashish uchun so’rov jo’natdi !!!",style: TextStyle(fontSize: 12.sp),),
                          SizedBox(
@@ -101,7 +114,9 @@ class _NotificationPageState extends State<NotificationPage> {
                 ],
               );
               },
-            ),
+            );
+  },
+),
           ],
         ),
       ),

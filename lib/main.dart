@@ -7,6 +7,7 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
 import 'package:talaba_uy/bloc/bloc_region/region_bloc.dart';
 import 'package:talaba_uy/cubit/aut_cubit.dart';
+import 'package:talaba_uy/provider/chat_permit_provider.dart';
 import 'package:talaba_uy/provider/day_provider.dart';
 import 'package:talaba_uy/provider/favorite_provider.dart';
 import 'package:talaba_uy/provider/month_provider.dart';
@@ -79,7 +80,8 @@ class MyApp extends StatelessWidget {
               ChangeNotifierProvider(create: (context) => DayProvider()),
               ChangeNotifierProvider(create: (context) => MonthProvider()),
               ChangeNotifierProvider(create: (context) => FavoriteProvider()),
-              ChangeNotifierProvider(create: (context) => SearchUniversitet())
+              ChangeNotifierProvider(create: (context) => SearchUniversitet()),
+              ChangeNotifierProvider(create: (context) => ChatPermit())
             ],
             child: BlocProvider(
               create: (context) => AutCubit(),

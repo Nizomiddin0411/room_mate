@@ -15,7 +15,8 @@ class ChangeProfile {
       ),
 
       );
-    request.fields.addAll({'roommate': id,});
+    request.fields.addAll({'hide_profile': id,});
+    request.fields.addAll({'hide_phone': id,});
     request.headers.addAll({HttpHeaders.authorizationHeader: 'Bearer ${Hive.box('token').get('token')}'});
     http.StreamedResponse response = await request.send();
     if (response.statusCode >= 200 && response.statusCode <= 300) {
