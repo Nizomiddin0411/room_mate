@@ -7,6 +7,7 @@ import 'package:talaba_uy/core/const/app_colors.dart';
 
 import '../../provider/chat_permit_provider.dart';
 import '../../services/get_permit_service.dart';
+import '../../services/post_chat_approve.dart';
 
 class NotificationPage extends StatefulWidget {
   const NotificationPage({Key? key}) : super(key: key);
@@ -23,6 +24,7 @@ class _NotificationPageState extends State<NotificationPage> {
     GetPermitSevice().fetchPermit();
     Provider.of<ChatPermit>(context, listen: false).Permit();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,77 +48,104 @@ class _NotificationPageState extends State<NotificationPage> {
           ),
         ),
       ),
-
       body: Padding(
         padding: EdgeInsets.fromLTRB(15.w, 15.h, 15.w, 15.h),
         child: Column(
           children: [
             Consumer<ChatPermit>(
-              builder: (_,data,__) {
-              return ListView.builder(
-              itemCount: data.permit.length,
-              shrinkWrap: true,
-              itemBuilder: (BuildContext context, int index) {
-              return Column(
-                children: [
-                  Container(
-                    height: 151.h,
-                    width: 324.w,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10.r),
-                      color: AppColors.iconBack,
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(18.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(data.permit[index].userAskedFullName.toString(),style: TextStyle(fontSize: 18.sp),),
-                          SizedBox(height: 5.h,),
-                          Text("Siz bilan suxbatlashish uchun so’rov jo’natdi !!!",style: TextStyle(fontSize: 12.sp),),
-                         SizedBox(
-                           height: 25.h,
-                         ),
-                          Row(
-                            children: [
-                              Container(
-                                width: 133.w,
-                                height: 38.h,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10.r),
-                                  color: AppColors.buttonLinear
-                                ),
-                                child: Center(
-                                  child: Text("Qabul qilish ",style: TextStyle(color: AppColors.backgroundWhite),),
-                                ),
-                              ),
-                              SizedBox(width: 18.w,),
-                              Container(
-                                width: 133.w,
-                                height: 38.h,
-                                decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10.r),
-                                    color: AppColors.error
-                                ),
-                                child: Center(
-                                  child: Text("Rad etish ",style: TextStyle(color: AppColors.backgroundWhite),),
-                                ),
-                              )
-                            ],
+              builder: (_, data, __) {
+                return ListView.builder(
+                  itemCount: data.permit.length,
+                  shrinkWrap: true,
+                  itemBuilder: (BuildContext context, int index) {
+                    return Column(
+                      children: [
+                        Container(
+                          height: 151.h,
+                          width: 324.w,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(10.r),
+                            color: AppColors.iconBack,
                           ),
-
-
-                        ],
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 10.h),
-                ],
-              );
+                          child: Padding(
+                            padding: const EdgeInsets.all(18.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  data.permit[index].userAskedFullName
+                                      .toString(),
+                                  style: TextStyle(fontSize: 18.sp),
+                                ),
+                                SizedBox(
+                                  height: 5.h,
+                                ),
+                                Text(
+                                  "Siz bilan suxbatlashish uchun so’rov jo’natdi !!!",
+                                  style: TextStyle(fontSize: 12.sp),
+                                ),
+                                SizedBox(
+                                  height: 25.h,
+                                ),
+                                Row(
+                                  children: [
+                                    InkWell(
+                                      onTap: () async{
+                                        await ChatApprove().fetchApprov(PermitId: data.permit[index].id.toString(), Approved: '0');
+                                      },
+                                      child: Container(
+                                        width: 133.w,
+                                        height: 38.h,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10.r),
+                                            color: AppColors.buttonLinear),
+                                        child: const Center(
+                                          child: Text(
+                                            "Qabul qilish ",
+                                            style: TextStyle(
+                                                color:
+                                                    AppColors.backgroundWhite),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      width: 18.w,
+                                    ),
+                                    InkWell(
+                                      onTap:() async{
+                                        await ChatApprove().fetchApprov(PermitId: data.permit[index].id.toString(), Approved: '2');
+                                      },
+                                      child: Container(
+                                        width: 133.w,
+                                        height: 38.h,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10.r),
+                                            color: AppColors.error),
+                                        child: const Center(
+                                          child: Text(
+                                            "Rad etish ",
+                                            style: TextStyle(
+                                                color: AppColors.backgroundWhite),
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        SizedBox(height: 10.h),
+                      ],
+                    );
+                  },
+                );
               },
-            );
-  },
-),
+            ),
           ],
         ),
       ),
