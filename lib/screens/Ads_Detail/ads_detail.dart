@@ -11,6 +11,10 @@ import '../../services/post_add_chat_permit.dart';
 import '../../services/post_change_favoritr_service.dart';
 
 class AdsDetail extends StatefulWidget {
+  String? phoneNumber;
+  String? comfort;
+  String? phoneNumberShow;
+  String? rentType;
   String? title;
   String? description;
   String? cost;
@@ -19,9 +23,12 @@ class AdsDetail extends StatefulWidget {
   String? countRoom;
   String? countPeople;
   String? region;
-  String? district;
-  String? univer;
-  String? facultet;
+  String? stay_region;
+  // String? univer;
+  String? stay_university;
+  String? roommate_gender;
+  String? roommate_count;
+  String? address;
   String? liveWithOwner;
   String? subway;
   String? id;
@@ -30,8 +37,23 @@ class AdsDetail extends StatefulWidget {
   int userId;
   String? userFullName;
   int chatApproved;
+  String? floorsCount;
+  String? inFloor;
+  String? district;
+  String? utility_bills;
+  String? createData;
   AdsDetail(
       {Key? key,
+      required this.roommate_count,
+      required this.rentType,
+      required this.utility_bills,
+      required this.floorsCount,
+      required this.inFloor,
+      required this.roommate_gender,
+      required this.stay_region,
+      required this.stay_university,
+      required this.phoneNumber,
+      required this.phoneNumberShow,
       required this.title,
       required this.description,
       required this.cost,
@@ -41,8 +63,9 @@ class AdsDetail extends StatefulWidget {
       required this.countPeople,
       required this.region,
       required this.district,
-      required this.univer,
-      required this.facultet,
+      // required this.univer,
+      required this.createData,
+      // required this.facultet,
       required this.liveWithOwner,
       required this.subway,
       required this.id,
@@ -51,6 +74,8 @@ class AdsDetail extends StatefulWidget {
       required this.userId,
       required this.userFullName,
         required this.chatApproved,
+        required this.address,
+        required this.comfort,
       })
       : super(key: key);
 
@@ -61,6 +86,7 @@ class AdsDetail extends StatefulWidget {
 class _AdsDetailState extends State<AdsDetail> {
   int _correntPage = 0;
   static int _index= 0;
+
   List<String> images = [
     "https://images.wallpapersden.com/image/download/purple-sunrise-4k-vaporwave_bGplZmiUmZqaraWkpJRmbmdlrWZlbWU.jpg",
     "https://wallpaperaccess.com/full/2637581.jpg",
@@ -68,6 +94,7 @@ class _AdsDetailState extends State<AdsDetail> {
   ];
   @override
   Widget build(BuildContext context) {
+    String date = widget.createData!.split(':')[2];
     return Scaffold(
       appBar: AppBar(
         centerTitle:true,
@@ -198,7 +225,7 @@ class _AdsDetailState extends State<AdsDetail> {
                       Padding(
                         padding:  EdgeInsets.fromLTRB(12.w, 12.h, 12.w, 0),
                         child: Text(
-                          '${widget.cost} ${widget.costTayp == '1' ? "so'm" : 'y.e'}',
+                          '${widget.cost} ${widget.costTayp == '1' ? "so'm" : 'usd'}/${widget.rentType == '1'? 'kunlik':'oylik'}',
                           style: TextStyle(
                               fontSize: 24.sp, color: AppColors.mainColor),
                         ),
@@ -216,9 +243,9 @@ class _AdsDetailState extends State<AdsDetail> {
                   ),
                   Row(
                     children: [
-                      Icon(Icons.location_on,color: AppColors.mainColor,),
+                      const Icon(Icons.location_on,color: AppColors.mainColor,),
                     SizedBox(width: 10.w,),
-                    Text("${widget.region}",style: TextStyle(fontSize: 10.sp),)
+                    Text("${widget.address}",style: TextStyle(fontSize: 10.sp),)
                     ],
                   ),
 
@@ -229,7 +256,13 @@ class _AdsDetailState extends State<AdsDetail> {
                      padding:  EdgeInsets.fromLTRB(12.w, 0, 12.w, 12.h),
                      child: InkWell(
                        onTap: (){
-                         Navigator.push(context, MaterialPageRoute(builder: (context) => ChatPage(widget.userFullName!, widget.userId)));
+                         // print('${Hive.box('id').get('id')}');
+                         // print(widget.userId);
+                         if(widget.chatApproved == '1'){
+                           Navigator.push(context, MaterialPageRoute(builder: (context) => ChatPage(widget.userFullName!, widget.userId)));
+                         }else {
+                           showAlertDialog(context, widget.userId);
+                         }
                        },
                        child: Container(
                          width: 95.w,
@@ -297,7 +330,7 @@ class _AdsDetailState extends State<AdsDetail> {
                      padding:  EdgeInsets.fromLTRB(8.w, 0, 8.w, 12.h),
                      child: InkWell(
                        onTap: () async{
-                         await ChatPermit().fetchApprov(Askid: widget.userId, Approvid: Hive.box('id').get('id'));
+                         // await ChatPermit().fetchApprov(Askid: widget.userId, Approvid: Hive.box('id').get('id'));
                        },
                        child: Container(
                          width: 170.w,
@@ -322,7 +355,7 @@ class _AdsDetailState extends State<AdsDetail> {
 
                              Padding(
                                padding: const EdgeInsets.all(5.0),
-                               child: Text("+99899 786 34 65",style: TextStyle(fontSize: 14.sp),).tr(),
+                               child: Text("${widget.phoneNumber}",style: TextStyle(fontSize: 14.sp),).tr(),
                              )
                            ],
                          ),
@@ -368,7 +401,7 @@ class _AdsDetailState extends State<AdsDetail> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
-                            "2 kishi Qiz bola",
+                            "${widget.roommate_count} kishi ${widget.roommate_gender =='1'? "O'g'il": 'Qiz'} bola",
                             style: TextStyle(fontSize: 14.sp),
                           ),
                         )
@@ -395,7 +428,7 @@ class _AdsDetailState extends State<AdsDetail> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
-                            "Buxoro viloyatidan",
+                            "${widget.stay_region}",
                             style: TextStyle(fontSize: 14.sp),
                           ),
                         )
@@ -424,73 +457,74 @@ class _AdsDetailState extends State<AdsDetail> {
                           child: SizedBox(
                             width: MediaQuery.of(context).size.width -150.w,
                             child: Text(
-                              "Muhammad  al-Xorazmiy nomidagi Toshkent axborot texnologiyalari Universiteti ",
+                              "${widget.stay_university}",
                               style: TextStyle(fontSize: 14.sp),
                             ),
                           ),
                         )
                       ],
                     ),
-                    Text(
-                      'Joylashuv',
-                      style: TextStyle(
-                          fontSize: 18.sp, fontWeight: FontWeight.bold,color: AppColors.mainColor),
-                    ).tr(),
-                    Row(
-                      children: [
-                        Container(
-                          width: 40.w,
-                          height: 40.h,
-                          decoration: BoxDecoration(
-                            color: AppColors.colorBack3,
-                            borderRadius: BorderRadius.circular(8.r),
-                          ),
-                          child: const Center(
-                              child: Icon(
-                                Icons.location_on,
-                                color: AppColors.succesColor,
-                              )),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            "${widget.region}",
-                            style: TextStyle(fontSize: 14.sp),
-                          ),
-                        )
-                      ],
-                    ),
+                    // Text(
+                    //   'Joylashuv',
+                    //   style: TextStyle(
+                    //       fontSize: 18.sp, fontWeight: FontWeight.bold,color: AppColors.mainColor),
+                    // ).tr(),
+                    // Row(
+                    //   children: [
+                    //     Container(
+                    //       width: 40.w,
+                    //       height: 40.h,
+                    //       decoration: BoxDecoration(
+                    //         color: AppColors.colorBack3,
+                    //         borderRadius: BorderRadius.circular(8.r),
+                    //       ),
+                    //       child: const Center(
+                    //           child: Icon(
+                    //             Icons.location_on,
+                    //             color: AppColors.succesColor,
+                    //           )),
+                    //     ),
+                    //     Padding(
+                    //       padding: const EdgeInsets.all(8.0),
+                    //       child: Text(
+                    //         "${widget.region}",
+                    //         style: TextStyle(fontSize: 14.sp),
+                    //       ),
+                    //     )
+                    //   ],
+                    // ),
+                    // SizedBox(
+                    //   height: 6.h,
+                    // ),
+                    // Row(
+                    //   children: [
+                    //     Container(
+                    //       width: 40.w,
+                    //       height: 40.h,
+                    //       decoration: BoxDecoration(
+                    //         color: AppColors.colorBack3,
+                    //         borderRadius: BorderRadius.circular(8.r),
+                    //       ),
+                    //       child: const Center(
+                    //           child: Icon(
+                    //         Icons.location_on,
+                    //         color: AppColors.succesColor,
+                    //       )),
+                    //     ),
+                    //     Padding(
+                    //       padding: const EdgeInsets.all(8.0),
+                    //       child: Text(
+                    //         "${widget.district}",
+                    //         style: TextStyle(fontSize: 14.sp),
+                    //       ),
+                    //     )
+                    //   ],
+                    // ),
                     SizedBox(
                       height: 6.h,
                     ),
+                    // widget.type == '1' ?
                     Row(
-                      children: [
-                        Container(
-                          width: 40.w,
-                          height: 40.h,
-                          decoration: BoxDecoration(
-                            color: AppColors.colorBack3,
-                            borderRadius: BorderRadius.circular(8.r),
-                          ),
-                          child: const Center(
-                              child: Icon(
-                            Icons.location_on,
-                            color: AppColors.succesColor,
-                          )),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            "${widget.district}",
-                            style: TextStyle(fontSize: 14.sp),
-                          ),
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: 6.h,
-                    ),
-                    widget.type == '1' ? Row(
                       children: [
                         Container(
                           width: 40.w,
@@ -510,42 +544,43 @@ class _AdsDetailState extends State<AdsDetail> {
                           child: Container(
                               width: MediaQuery.of(context).size.width - 150.w,
                               child: Text(
-                                "${widget.univer}",
+                                "${widget.stay_university}",
                                 style: TextStyle(fontSize: 14.sp),
                               )),
                         )
                       ],
-                    ) : const SizedBox(),
+                    ),
+                        // : const SizedBox(),
                     SizedBox(
                       height: 6.h,
                     ),
-                    widget.type == '1' ? Row(
-                      children: [
-                        Container(
-                          width: 40.w,
-                          height: 40.h,
-                          decoration: BoxDecoration(
-                            color: AppColors.iconBack,
-                            borderRadius: BorderRadius.circular(8.r),
-                          ),
-                          child: const Center(
-                              child: Icon(
-                            Icons.school,
-                            color: AppColors.mainColor,
-                          )),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: SizedBox(
-                            width: MediaQuery.of(context).size.width - 150.w,
-                            child: Text(
-                              "${widget.facultet}",
-                              style: TextStyle(fontSize: 14.sp),
-                            ),
-                          ),
-                        )
-                      ],
-                    ) : const SizedBox(),
+                    // widget.type == '1' ? Row(
+                    //   children: [
+                    //     Container(
+                    //       width: 40.w,
+                    //       height: 40.h,
+                    //       decoration: BoxDecoration(
+                    //         color: AppColors.iconBack,
+                    //         borderRadius: BorderRadius.circular(8.r),
+                    //       ),
+                    //       child: const Center(
+                    //           child: Icon(
+                    //         Icons.school,
+                    //         color: AppColors.mainColor,
+                    //       )),
+                    //     ),
+                    //     Padding(
+                    //       padding: const EdgeInsets.all(8.0),
+                    //       child: SizedBox(
+                    //         width: MediaQuery.of(context).size.width - 150.w,
+                    //         child: Text(
+                    //           "${widget.facultet}",
+                    //           style: TextStyle(fontSize: 14.sp),
+                    //         ),
+                    //       ),
+                    //     )
+                    //   ],
+                    // ) : const SizedBox(),
                     Text(
                       tr("Xonadon ma’lumotlari"),
                       style: TextStyle(
@@ -562,14 +597,14 @@ class _AdsDetailState extends State<AdsDetail> {
                           ),
                           child: const Center(
                               child: Icon(
-                            Icons.house,
-                            color: AppColors.succesColor,
-                          )),
+                                Icons.location_on,
+                                color: AppColors.succesColor,
+                              )),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
-                            tr("Uy egasi bilan birga yashshga:") + "${widget.liveWithOwner == '1' ? 'Rozi' : 'Roziemas'}",
+                            "${widget.region} | ${widget.district}",
                             style: TextStyle(fontSize: 14.sp),
                           ),
                         )
@@ -589,14 +624,96 @@ class _AdsDetailState extends State<AdsDetail> {
                           ),
                           child: const Center(
                               child: Icon(
-                            Icons.directions_subway,
-                            color: AppColors.succesColor,
-                          )),
+                                Icons.location_on,
+                                color: AppColors.succesColor,
+                              )),
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
-                            tr("Metroga yaqinmi") +"${widget.subway == '1' ? tr('Ha') : tr("Yo'q")}",
+                            "${widget.address}",
+                            style: TextStyle(fontSize: 14.sp),
+                          ),
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: 6.h,
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          width: 40.w,
+                          height: 40.h,
+                          decoration: BoxDecoration(
+                            color: AppColors.colorBack3,
+                            borderRadius: BorderRadius.circular(8.r),
+                          ),
+                          child: const Center(
+                              child: Icon(
+                                Icons.directions_subway,
+                                color: AppColors.succesColor,
+                              )),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            tr("Metroga yaqinmi?") +" ${widget.subway == '1' ? tr('Ha') : tr("Yo'q")}",
+                            style: TextStyle(fontSize: 14.sp),
+                          ),
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: 6.h,
+                    ),
+
+                    Row(
+                      children: [
+                        Container(
+                          width: 40.w,
+                          height: 40.h,
+                          decoration: BoxDecoration(
+                            color: AppColors.colorBack3,
+                            borderRadius: BorderRadius.circular(8.r),
+                          ),
+                          child: const Center(
+                              child: Icon(
+                                Icons.apartment,
+                                color: AppColors.succesColor,
+                              )),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            tr("${widget.houseType == '1'? 'Kvartira': 'Xonadon'}") + " | ${widget.countRoom} xonali" +" | ${widget.inFloor}/${widget.floorsCount} etajda",
+                            style: TextStyle(fontSize: 14.sp),
+                          ),
+                        )
+                      ],
+                    ),
+                    SizedBox(
+                      height: 6.h,
+                    ),
+                    Row(
+                      children: [
+                        Container(
+                          width: 40.w,
+                          height: 40.h,
+                          decoration: BoxDecoration(
+                            color: AppColors.colorBack3,
+                            borderRadius: BorderRadius.circular(8.r),
+                          ),
+                          child: const Center(
+                              child: Icon(
+                                Icons.apartment,
+                                color: AppColors.succesColor,
+                              )),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            tr("Uy egasi bilan birga yashshga:") + "${widget.liveWithOwner == '1' ? 'Rozi' : 'Roziemas'}",
                             style: TextStyle(fontSize: 14.sp),
                           ),
                         )
@@ -659,7 +776,7 @@ class _AdsDetailState extends State<AdsDetail> {
                           child: SizedBox(
                               width: MediaQuery.of(context).size.width - 130.w,
                               child: Text(
-                                "Kommunal to’lovlarni to’laydi  : Ijarachi",
+                                "Kommunal to’lovlarni to’laydi  : ${widget.utility_bills == '1'?'Uy egasi':'Ijarachi'}",
                                 style: TextStyle(fontSize: 14.sp),
                               )),
                         )
@@ -688,7 +805,7 @@ class _AdsDetailState extends State<AdsDetail> {
                           child: SizedBox(
                               width: MediaQuery.of(context).size.width - 130.w,
                               child: Text(
-                                "${widget.cost}/oyiga",
+                                "${widget.cost}/${widget.rentType == '1'? 'kunlik':'oylik'}",
                                 style: TextStyle(fontSize: 14.sp),
                               )),
                         )
@@ -732,4 +849,43 @@ class _AdsDetailState extends State<AdsDetail> {
       ),
     );
   }
+}
+showAlertDialog(BuildContext context,int askedid) {
+  // Create button
+  Widget okButton = ElevatedButton(
+
+    style: ElevatedButton.styleFrom(
+        primary: AppColors.mainColor
+    ),
+    child: Text("Ruhsat olish").tr(),
+    onPressed: () async{
+      ChatPermit().fetchApprov(Askid: askedid);
+    },
+  );
+  Widget notButton = ElevatedButton(
+    style: ElevatedButton.styleFrom(
+        primary: AppColors.error
+    ),
+    child: Text("Bekor qilish").tr(),
+    onPressed: () {
+      Navigator.of(context).pop();
+    },
+  );
+  // Create AlertDialog
+  AlertDialog alert = AlertDialog(
+    // title: Text("Akkauntdan chiqish ").tr(),
+    content: Text("Sms yozish uchun ruhsat so'rash ").tr(),
+    actions: [
+      notButton,
+      okButton,
+    ],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
 }
