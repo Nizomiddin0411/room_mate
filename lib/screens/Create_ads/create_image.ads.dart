@@ -10,7 +10,46 @@ import 'package:talaba_uy/screens/Create_ads/create_succed_dart.dart';
 import '../../core/const/app_colors.dart';
 
 class Createimage extends StatefulWidget {
-  const Createimage({Key? key}) : super(key: key);
+  String metro;
+  String titlecontroller1;
+  String viloyatidisi;
+  String viloyatvalue;
+  String universiteteid;
+  String univervalue;
+  String titleGendor;
+  String titlecount;
+  String phoneController;
+  String house;
+  String addinformation;
+  String numbervalue;
+  String comfort;
+  String? costlivekomunal;
+  String countroom;
+  String housetype;
+  String in_floor;
+  String cost_type;
+
+  Createimage(
+      {Key? key,
+      required this.numbervalue,
+      required this.house,
+      required this.phoneController,
+      required this.addinformation,
+      required this.univervalue,
+      required this.universiteteid,
+      required this.viloyatvalue,
+      required this.viloyatidisi,
+      required this.titlecontroller1,
+      required this.titlecount,
+      required this.titleGendor,
+      required this.comfort,
+      required this.metro,
+      required this.costlivekomunal,
+      required this.countroom,
+      required this.housetype,
+      required this.in_floor,
+      required this.cost_type})
+      : super(key: key);
 
   @override
   State<Createimage> createState() => _CreateimageState();
@@ -88,11 +127,10 @@ class _CreateimageState extends State<Createimage> {
                         child: DottedBorder(
                           dashPattern: [6, 3],
                           color: Colors.black,
-                          strokeWidth: 1,
+                          strokeWidth: 0.5,
                           child: InkWell(
-                            onTap: ()
-                            async{
-                              await _takeFromCamera(0);
+                            onTap: () async {
+                              showOptionsDialog(context);
                               setState(() {
                                 btn = 0;
                               });
@@ -103,20 +141,19 @@ class _CreateimageState extends State<Createimage> {
                               color: Colors.black12,
                               child: file == null
                                   ? Icon(
-                                Icons.camera_alt_sharp,
-                                size: 50,
-                              )
+                                      Icons.camera_alt_sharp,
+                                      size: 50,
+                                    )
                                   : Image.file(
-                                file!,
-                                fit: BoxFit.cover,
-                              ),
+                                      file!,
+                                      fit: BoxFit.cover,
+                                    ),
                             ),
                           ),
                         ),
                         width: 250.w,
                         height: 250.h,
                       ),
-
                     ],
                   ),
                   SizedBox(
@@ -128,52 +165,9 @@ class _CreateimageState extends State<Createimage> {
                     color: Colors.black,
                   ),
                   SizedBox(height: 10),
-
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                     Stack(
-                       children: [
-                         Column(
-                           children: [
-                             InkWell(
-                               onTap: () {
-                                 showOptionsDialog(context);
-                               },
-                               child: Container(
-                                 height: 126.h,
-                                 width: 95.w,
-                                 color: Colors.black12,
-                                 child: file == null
-                                     ? Icon(
-                                   Icons.add,
-                                   size: 30,
-                                 )
-                                     : Image.file(
-                                   file!,
-                                   fit: BoxFit.cover,
-                                 ),
-                               ),
-                             ),
-                           ],
-                         ),
-                         Padding(
-                           padding: const EdgeInsets.fromLTRB(90, 0, 1, 0),
-                           child: Container(
-                             height: 20,
-                             width: 24,
-                             child: Icon(
-                               Icons.remove,
-                               color: Colors.white,
-                             ),
-                             decoration: BoxDecoration(
-                                 color: Colors.red,
-                                 borderRadius:
-                                 BorderRadius.all(Radius.circular(3))),
-                           ),
-                         ),
-                       ],
-                     ),
                       Stack(
                         children: [
                           Column(
@@ -188,13 +182,13 @@ class _CreateimageState extends State<Createimage> {
                                   color: Colors.black12,
                                   child: file == null
                                       ? Icon(
-                                    Icons.add,
-                                    size: 30,
-                                  )
+                                          Icons.add,
+                                          size: 30,
+                                        )
                                       : Image.file(
-                                    file!,
-                                    fit: BoxFit.cover,
-                                  ),
+                                          file!,
+                                          fit: BoxFit.cover,
+                                        ),
                                 ),
                               ),
                             ],
@@ -211,7 +205,7 @@ class _CreateimageState extends State<Createimage> {
                               decoration: BoxDecoration(
                                   color: Colors.red,
                                   borderRadius:
-                                  BorderRadius.all(Radius.circular(3))),
+                                      BorderRadius.all(Radius.circular(3))),
                             ),
                           ),
                         ],
@@ -230,13 +224,13 @@ class _CreateimageState extends State<Createimage> {
                                   color: Colors.black12,
                                   child: file == null
                                       ? Icon(
-                                    Icons.add,
-                                    size: 30,
-                                  )
+                                          Icons.add,
+                                          size: 30,
+                                        )
                                       : Image.file(
-                                    file!,
-                                    fit: BoxFit.cover,
-                                  ),
+                                          file!,
+                                          fit: BoxFit.cover,
+                                        ),
                                 ),
                               ),
                             ],
@@ -253,7 +247,49 @@ class _CreateimageState extends State<Createimage> {
                               decoration: BoxDecoration(
                                   color: Colors.red,
                                   borderRadius:
-                                  BorderRadius.all(Radius.circular(3))),
+                                      BorderRadius.all(Radius.circular(3))),
+                            ),
+                          ),
+                        ],
+                      ),
+                      Stack(
+                        children: [
+                          Column(
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  showOptionsDialog(context);
+                                },
+                                child: Container(
+                                  height: 126.h,
+                                  width: 95.w,
+                                  color: Colors.black12,
+                                  child: file == null
+                                      ? Icon(
+                                          Icons.add,
+                                          size: 30,
+                                        )
+                                      : Image.file(
+                                          file!,
+                                          fit: BoxFit.cover,
+                                        ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(90, 0, 1, 0),
+                            child: Container(
+                              height: 20,
+                              width: 24,
+                              child: Icon(
+                                Icons.remove,
+                                color: Colors.white,
+                              ),
+                              decoration: BoxDecoration(
+                                  color: Colors.red,
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(3))),
                             ),
                           ),
                         ],
@@ -263,28 +299,10 @@ class _CreateimageState extends State<Createimage> {
                   SizedBox(
                     height: 25,
                   ),
-                  Column(
-                    children: [
-                      Row(
-                        children: [
-                          Stack(
-                            children: [
-                              Container(
-                                height: 100.h,
-                                width: 100.w,
-                                child: Image.asset("assets/images/house.png"),
-                              ),
-
-                            ],
-                          ),
-                        ],
-                      )
-                    ],
-                  )
                 ],
               ),
               SizedBox(
-                height: 170.h,
+                height: 150.h,
               ),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 18.h, horizontal: 31.w),
@@ -344,22 +362,7 @@ class _CreateimageState extends State<Createimage> {
     }
   }
 
-  _takeFromCamera(int Ind) async {
-    final XFile? photo =
-        await ImagePicker().pickImage(source: ImageSource.camera);
-    if (photo != null) {
-      final image = File(photo.path);
-      // imageList.add(image);
-      imageList.removeAt(Ind);
-      imageExist.removeAt(Ind);
-
-      imageList.insert(Ind, image);
-      imageExist.insert(Ind, true);
-    }
-  }
-
   getcam() async {
-    // ignore: deprecated_member_use
     var img = await image.getImage(source: ImageSource.camera);
     setState(() {
       file = File(img!.path);
@@ -367,7 +370,6 @@ class _CreateimageState extends State<Createimage> {
   }
 
   getgall() async {
-    // ignore: deprecated_member_use
     var img = await image.getImage(source: ImageSource.gallery);
     setState(() {
       file = File(img!.path);
