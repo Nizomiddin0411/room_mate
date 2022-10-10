@@ -50,20 +50,15 @@ class _OwnerState extends State<Owner> {
   bool _DiscritOnClick = false;
   Color _colorUniver = Colors.grey;
   bool _UniverOnClick = false;
-  Color _colorTypeHouse = Colors.grey;
-  bool _TypeHouseOnClick = false;
-  Color _colorRoomCount = Colors.grey;
-  bool _RoomCountOnClick = false;
-  Color _colorRentType = Colors.grey;
-  bool _RentTypeOnClick = false;
-  Color _colorTypeCost = Colors.grey;
-  bool _TypeCostOnClick = false;
   Color _colorGender = Colors.grey;
   bool _GenderOnClick = false;
-  Color _colorCountPupil = Colors.grey;
-  bool _CountPupilOnClick = false;
-  Color _colorForm = Colors.grey;
+  Color _addressColor = Colors.grey;
+  bool _addressOnClick = false;
+  Color _otmColor = Colors.grey;
+  bool _otmOnClick = false;
   bool value5 = false;
+  
+
   var pricetype = [
     "1 ta odam kerak",
     "kishi boshiga 500",
@@ -102,7 +97,7 @@ class _OwnerState extends State<Owner> {
     super.initState();
   }
 
-  String id = '1';
+  var id = '1';
   int id2 = 2;
   int id3 = 3;
   int id4 = 4;
@@ -283,7 +278,6 @@ class _OwnerState extends State<Owner> {
                       );
                     }).toList(),
                     onChanged: (newValue) async {
-                      print("Selected ----------- $newValue");
                       final selected = data.regions
                           .where((element) => element.name == newValue);
                       data.getDistrict(selected.last.id!);
@@ -295,8 +289,7 @@ class _OwnerState extends State<Owner> {
                     },
                   ),
                 ),
-                SizedBox(height: 4.h),
-                SizedBox(height: 12.h),
+                SizedBox(height: 16.h),
                 Text(
                   "Tuman".tr(),
                   style: TextStyle(
@@ -306,7 +299,7 @@ class _OwnerState extends State<Owner> {
                   ),
                 ),
                 SizedBox(height: 4.h),
-                data.isDistrict
+                _RegionOnClick
                     ? Container(
                         width: 324.w,
                         decoration: BoxDecoration(
@@ -383,7 +376,7 @@ class _OwnerState extends State<Owner> {
                 Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
-                      border: Border.all(color: _colorUniver),
+                      border: Border.all(color: _addressColor),
                       borderRadius: BorderRadius.circular(8.r)),
                   child: Container(
                     padding: EdgeInsets.only(left: 16.w),
@@ -392,13 +385,13 @@ class _OwnerState extends State<Owner> {
                         setState(() {
                           if (e.length > 0) {
                             setState(() {
-                              _UniverOnClick = true;
-                              _colorUniver = Colors.grey;
+                              _addressOnClick = true;
+                              _addressColor = Colors.grey;
                             });
                           } else {
                             setState(() {
-                              _UniverOnClick = false;
-                              _colorUniver = Colors.red;
+                              _addressOnClick = false;
+                              _addressColor = Colors.red;
                             });
                           }
                         });
@@ -484,11 +477,11 @@ class _OwnerState extends State<Owner> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Radio(
-                              value: 1,
+                              value: '1',
                               groupValue: id,
-                              onChanged: (val) {
+                              onChanged: (String? val) {
                                 setState(() {
-                                  id = '1';
+                                  id = val!;
                                   print(id);
                                 });
                               },
@@ -501,11 +494,12 @@ class _OwnerState extends State<Owner> {
                               width: 55.w,
                             ),
                             Radio(
-                              value: 2,
+                              value: '2',
                               groupValue: id,
-                              onChanged: (val) {
+                              onChanged: (String?val) {
                                 setState(() {
-                                  id = '2';
+                                  id = val!;
+                                  print(id);
                                 });
                               },
                             ),
@@ -580,7 +574,7 @@ class _OwnerState extends State<Owner> {
                       width: 240.w,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10.r),
-                          border: Border.all(color: _colorUniver)),
+                          border: Border.all(color: _otmColor),),
                       child: DropdownSearch<String>(
                         mode: Mode.MENU,
                         items: data.univer.map((e) {
@@ -608,8 +602,8 @@ class _OwnerState extends State<Owner> {
                           // data.getFaculty(data.isId!);
                           setState(() {
                             dropDown2 = value.toString();
-                            _UniverOnClick = true;
-                            _colorUniver = Colors.grey;
+                            _otmOnClick = true;
+                            _otmColor = Colors.grey;
                           });
                         },
                         selectedItem: tr("OTM ni tanlang"),
@@ -650,10 +644,6 @@ class _OwnerState extends State<Owner> {
                                 borderRadius: BorderRadius.circular(10.r)),
                             primary: AppColors.buttonLinear),
                         onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => OwnerHouseInfo(titleController!.text, roommate_gender, gender_matter, district_id, id, addressController!.text,  university_id, university_id_matter)));
                           // print(RoomOwner);
                           // print(TypeHouse=='Kvartira'? '1':'2');
                           // print(CountRoom);
@@ -666,46 +656,46 @@ class _OwnerState extends State<Owner> {
                           // print(inputcontroller?.text);//
                           // print(addressController?.text);//
 
-                          // if (_RegionOnClick &&
-                          //     _DiscritOnClick &&
-                          //     _UniverOnClick &&
-                          //     _TypeHouseOnClick &&
-                          //     _RoomCountOnClick &&
-                          //     _RentTypeOnClick &&
-                          //     _TypeCostOnClick &&
-                          //     _GenderOnClick &&
-                          //     _CountPupilOnClick) {
-                          // } else {
-                          //   setState(() {
-                          //     if (!_RegionOnClick) {
-                          //       _colorRegion = Colors.red;
-                          //     }
-                          //     if (!_DiscritOnClick) {
-                          //       _colorDistric = Colors.red;
-                          //     }
-                          //     if (!_UniverOnClick) {
-                          //       _colorUniver = Colors.red;
-                          //     }
-                          //     if (!_TypeHouseOnClick) {
-                          //       _colorTypeHouse = Colors.red;
-                          //     }
-                          //     if (!_RoomCountOnClick) {
-                          //       _colorRoomCount = Colors.red;
-                          //     }
-                          //     if (!_RentTypeOnClick) {
-                          //       _colorRentType = Colors.red;
-                          //     }
-                          //     if (!_TypeCostOnClick) {
-                          //       _colorTypeCost = Colors.red;
-                          //     }
-                          //     if (!_GenderOnClick) {
-                          //       _colorGender = Colors.red;
-                          //     }
-                          //     if (!_CountPupilOnClick) {
-                          //       _colorCountPupil = Colors.red;
-                          //     }
-                          //   });
-                          // }
+                          if (_RegionOnClick ||
+                              _DiscritOnClick ||
+                              _UniverOnClick ||
+                              _GenderOnClick ||
+                              _addressOnClick ||
+                              _otmOnClick) {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => OwnerHouseInfo(
+                                        titleController!.text,
+                                        roommate_gender,
+                                        gender_matter,
+                                        district_id,
+                                        id,
+                                        addressController!.text,
+                                        university_id,
+                                        university_id_matter)));
+                          } else {
+                            setState(() {
+                              if (!_RegionOnClick) {
+                                _colorRegion = Colors.red;
+                              }
+                              if (!_DiscritOnClick) {
+                                _colorDistric = Colors.red;
+                              }
+                              if (!_UniverOnClick) {
+                                _colorUniver = Colors.red;
+                              }
+                              if (!_GenderOnClick) {
+                                _colorGender = Colors.red;
+                              }
+                              if (!_addressOnClick) {
+                                _addressColor = Colors.red;
+                              }
+                              if (!_otmOnClick) {
+                                _otmColor = Colors.red;
+                              }
+                            });
+                          }
                         },
                         child: Text(
                           "Keyingi ".tr(),

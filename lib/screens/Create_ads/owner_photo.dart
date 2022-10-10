@@ -36,39 +36,50 @@ class OwnerCreateImage extends StatefulWidget {
   String? description;
 
   OwnerCreateImage(
-    this.titleController,
-    this.roommate_gender,
-    this.gender_matter,
-    this.district_id,
-    this.id,
-    this.addressController,
-    this.university_id,
-    this.university_id_matter,
-    this.phoneController,
-    this.house_type,
-    this.rent_type,
-    this.room_count,
-    this.floors_count,
-    this.in_floor,
-    this.costController,
-    this.cost_type,
-    this.live_with_owner,
-    this.utility_electricity,
-    this.unility_gaz,
-    this.utility_hot_water,
-    this.utility_cold_water,
-    this.utility_trash,
-    this.comfort,
-    this.description
-  );
-
-
+      this.titleController,
+      this.roommate_gender,
+      this.gender_matter,
+      this.district_id,
+      this.id,
+      this.addressController,
+      this.university_id,
+      this.university_id_matter,
+      this.phoneController,
+      this.house_type,
+      this.rent_type,
+      this.room_count,
+      this.floors_count,
+      this.in_floor,
+      this.costController,
+      this.cost_type,
+      this.live_with_owner,
+      this.utility_electricity,
+      this.unility_gaz,
+      this.utility_hot_water,
+      this.utility_cold_water,
+      this.utility_trash,
+      this.comfort,
+      this.description);
 
   @override
   State<OwnerCreateImage> createState() => _OwnerCreateImageState();
 }
 
 class _OwnerCreateImageState extends State<OwnerCreateImage> {
+  final ImagePicker imagePicker = ImagePicker();
+
+  List<XFile>? imageFileList = [];
+  List<XFile>? pickedFile;
+
+  void selectImages() async {
+    final List<XFile>? selectedImages = await imagePicker.pickMultiImage();
+    if (selectedImages!.isNotEmpty) {
+      imageFileList!.addAll(selectedImages);
+      pickedFile?.add(getcam());
+    }
+    setState(() {});
+  }
+
   List<File> imageList = [];
   List<bool> imageExist = [];
   late int btn;
@@ -76,6 +87,7 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
   final imgPicker = ImagePicker();
   File? file;
   ImagePicker image = ImagePicker();
+  int sum = 0;
 
   Future<void> showOptionsDialog(BuildContext context) {
     return showDialog(
@@ -90,13 +102,18 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
                     child: Text("From Camera"),
                     onTap: () {
                       getcam();
+                      Navigator.pop(context);
                     },
                   ),
                   Padding(padding: EdgeInsets.all(10)),
                   GestureDetector(
                     child: Text("From Gallery"),
                     onTap: () {
-                      getgall();
+                      sum += 1;
+                      selectImages();
+                      
+                      setState(() {});
+                      Navigator.pop(context);
                     },
                   ),
                 ],
@@ -109,272 +126,184 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back_outlined),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-          color: Colors.black,
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back_outlined),
+            onPressed: () {
+              widget.comfort = '';
+              setState(() {});
+              Navigator.pop(context);
+            },
+            color: Colors.black,
+          ),
+          title: Center(
+              child: Text(
+            "E’lon yaratish",
+            style: TextStyle(color: Colors.blue),
+          )),
         ),
-        title: Center(
-            child: Text(
-          "E’lon yaratish",
-          style: TextStyle(color: Colors.blue),
-        )),
-      ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 12.h),
-          child: Column(
-            children: [
-              SizedBox(
-                height: 10.h,
-              ),
-              Column(
-                children: [
-                  Column(
-                    children: [
+        body: Center(
+          child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 12.h),
+            child: Container(
+              child: SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Column(children: [
+                      Column(
+                        children: [
+                          Column(
+                            children: [
+                              Container(
+                                child: DottedBorder(
+                                  dashPattern: [6, 3],
+                                  color: Colors.black,
+                                  strokeWidth: 0.5.w,
+                                  child: InkWell(
+                                    onTap: () async {
+                                      if (sum < 3) {
+                                        showOptionsDialog(context);
+                                        print(imageList.length);
+                                      } else {}
+                                     
+                                    },
+                                    child: Container(
+                                      height: 250.h,
+                                      width: 250.w,
+                                      color: Colors.black12,
+                                      child: file == null
+                                          ? Icon(
+                                              Icons.camera_alt_sharp,
+                                              size: 50.sp,
+                                            )
+                                          : Image.file(
+                                              file!,
+                                              fit: BoxFit.cover,
+                                            ),
+                                    ),
+                                  ),
+                                ),
+                                width: 250.w,
+                                height: 250.h,
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 15.h,
+                          ),
+                          Text("Asosiy rasm"),
+                          Divider(
+                            height: 20.0.h,
+                            color: Colors.black,
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 20.h,
+                      ),
                       Container(
-                        child: DottedBorder(
-                          dashPattern: [6, 3],
-                          color: Colors.black,
-                          strokeWidth: 1,
-                          child: InkWell(
-                            onTap: ()
-                            async{
-                              await _takeFromCamera(0);
-                              setState(() {
-                                btn = 0;
-                              });
-                            },
-                            child: Container(
-                              height: 250.h,
-                              width: 250.w,
-                              color: Colors.black12,
-                              child: file == null
-                                  ? Icon(
-                                Icons.camera_alt_sharp,
-                                size: 50.sp,
-                              )
-                                  : Image.file(
-                                file!,
-                                fit: BoxFit.cover,
+                        height: 240.h,
+                        child: GridView.count(
+                          crossAxisSpacing: 6.w,
+                          mainAxisSpacing: 6.h,
+                          crossAxisCount: 3,
+                          children:
+                              List.generate(imageFileList!.length, (index) {
+                            return Column(children: <Widget>[
+                              Expanded(
+                                child: Stack(
+                                  children: [
+                                    Container(
+                                      width: 200.w,
+                                      height: 150.h,
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(10.r),
+                                      ),
+                                      child: ClipRRect(
+                                        child: Image.file(
+                                          File(imageFileList![index].path),
+                                          fit: BoxFit.cover,
+                                        ),
+                                        borderRadius:
+                                            BorderRadius.circular(10.r),
+                                      ),
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        setState(() {
+                                          imageFileList!.removeAt(index);
+                                        });
+                                        print(
+                                            "Nizomiddin${imageFileList!.length}");
+                                      },
+                                      child: Padding(
+                                        padding: EdgeInsets.fromLTRB(
+                                            60.w, 0, 0, 50.h),
+                                        child: Align(
+                                          alignment: Alignment.topRight,
+                                          child: Container(
+                                              height: 20.h,
+                                              width: 24.w,
+                                              decoration: BoxDecoration(
+                                                  color: Colors.red,
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          15.r)),
+                                              child: Icon(Icons.remove,
+                                                  color: Colors.white,
+                                                  size: 20.sp)),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
                               ),
-                            ),
-                          ),
+                            ]);
+                          }),
                         ),
-                        width: 250.w,
-                        height: 250.h,
                       ),
-
-                    ],
-                  ),
-                  SizedBox(
-                    height: 15.h,
-                  ),
-                  Text("Asosiy rasm"),
-                  Divider(
-                    height: 20.0.h,
-                    color: Colors.black,
-                  ),
-                  SizedBox(height: 10.h),
-
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                     Stack(
-                       children: [
-                         Column(
-                           children: [
-                             InkWell(
-                               onTap: () {
-                                 showOptionsDialog(context);
-                               },
-                               child: Container(
-                                 height: 110.h,
-                                 width: 90.w,
-                                 decoration: BoxDecoration(
-                                 color: Colors.black12,
-                                 borderRadius:
-                                 BorderRadius.all(Radius.circular(4.r))),
-                                 child: file == null
-                                     ? Icon(
-                                   Icons.add,
-                                   size: 30.sp,
-                                 )
-                                     : Image.file(
-                                   file!,
-                                   fit: BoxFit.fill,
-                                 ),
-                               ),
-                             ),
-                           ],
-                         ),
-                         Padding(
-                           padding:  EdgeInsets.fromLTRB(80.w, 0, 4.w, 0),
-                           child: Container(
-                             height: 18.h,
-                             width: 18.w,
-                             child: Icon(
-                               Icons.remove,
-                               color: Colors.white,
-                               size: 19.sp,
-                             ),
-                             decoration: BoxDecoration(
-                                 color: Colors.red,
-                                 borderRadius:
-                                 BorderRadius.all(Radius.circular(4.r))),
-                           ),
-                         ),
-                       ],
-                     ),
-                      Stack(
-                        children: [
-                          Column(
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  showOptionsDialog(context);
-                                },
-                                child: Container(
-                                  height: 110.h,
-                                  width: 90.w,
-                                  decoration: BoxDecoration(
-                                  color: Colors.black12,
-                                  borderRadius:
-                                  BorderRadius.all(Radius.circular(4.r))),
-                                  child: file == null
-                                      ? Icon(
-                                    Icons.add,
-                                    size: 30.sp,
-                                  )
-                                      : Image.file(
-                                    file!,
-                                    fit: BoxFit.fill,
-                                  ),
+                    ]),
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                          vertical: 18.h, horizontal: 31.w),
+                      child: Container(
+                          width: double.infinity,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                padding: EdgeInsets.symmetric(vertical: 14.h),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.r)),
+                                primary: AppColors.buttonLinear),
+                            onPressed: () {
+                              setState(() {});
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (context) => CreateSuccedful(),
                                 ),
-                              ),
-                            ],
-                          ),
-                          Padding(
-                            padding:  EdgeInsets.fromLTRB(80.w, 0, 4.w, 0),
-                            child: Container(
-                              height: 18.h,
-                              width: 18.w,
-                              child: Icon(
-                                Icons.remove,
-                                color: Colors.white,
-                                size: 19.sp,
-                              ),
-                              decoration: BoxDecoration(
-                                  color: Colors.red,
-                                  borderRadius:
-                                  BorderRadius.all(Radius.circular(3.r))),
+                              );
+                            },
+                            child: Text(
+                              "Keyingi ".tr(),
+                              style: TextStyle(
+                                  fontSize: 20.sp, fontWeight: FontWeight.w500),
                             ),
-                          ),
-                        ],
-                      ),
-                      Stack(
-                        children: [
-                          Column(
-                            children: [
-                              InkWell(
-                                onTap: () {
-                                  showOptionsDialog(context);
-                                },
-                                child: Container(
-                                  height: 110.h,
-                                  width: 90.w,
-                                  decoration: BoxDecoration(
-                                    color: Colors.black12,
-                                    borderRadius: BorderRadius.circular(4.r)
-                                  ),
-                                  child: file == null
-                                      ? Icon(
-                                    Icons.add,
-                                    size: 30.sp,
-                                  )
-                                      : Image.file(
-                                    file!,
-                                    fit: BoxFit.fill,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                          Padding(
-                            padding: EdgeInsets.fromLTRB(80.w, 0, 4.w, 0),
-                            child: Container(
-                              height: 18.h,
-                              width: 18.w,
-                              child: Icon(
-                                Icons.remove,
-                                color: Colors.white,
-                                size: 19.sp,
-                              ),
-                              decoration: BoxDecoration(
-                                  color: Colors.red,
-                                  borderRadius:
-                                  BorderRadius.all(Radius.circular(3.r))),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  ],
-              ),
-              SizedBox(
-                height: 134.h,
-              ),
-              Padding(
-                padding: EdgeInsets.symmetric(vertical: 18.h, horizontal: 31.w),
-                child: Container(
-                  width: double.infinity,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        padding: EdgeInsets.symmetric(vertical: 14.h),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.r)),
-                        primary: AppColors.buttonLinear),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => CreateSuccedful()));
-                    },
-                    child: Text(
-                      "E’lonni saqlash".tr(),
-                      style: TextStyle(
-                          fontSize: 20.sp, fontWeight: FontWeight.w500),
+                          )),
                     ),
-                  ),
+                  ],
                 ),
               ),
-              SizedBox(
-                height: 15.h,
-              ),
-            ],
+            ),
           ),
-        ),
-      ),
-    );
+        ));
   }
 
   void openCamera() async {
     var imgCamera = await imgPicker.getImage(source: ImageSource.camera);
     setState(() {
-      imgFile = File(imgCamera!.path);
-    });
-    Navigator.of(context).pop();
-  }
-
-  void openGallery() async {
-    var imgGallery = await imgPicker.getImage(source: ImageSource.gallery);
-    setState(() {
-      imgFile = File(imgGallery!.path);
+      imageList = File(imgCamera!.path) as List<File>;
     });
     Navigator.of(context).pop();
   }
@@ -387,22 +316,7 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
     }
   }
 
-  _takeFromCamera(int Ind) async {
-    final XFile? photo =
-        await ImagePicker().pickImage(source: ImageSource.camera);
-    if (photo != null) {
-      final image = File(photo.path);
-      // imageList.add(image);
-      imageList.removeAt(Ind);
-      imageExist.removeAt(Ind);
-
-      imageList.insert(Ind, image);
-      imageExist.insert(Ind, true);
-    }
-  }
-
   getcam() async {
-    // ignore: deprecated_member_use
     var img = await image.getImage(source: ImageSource.camera);
     setState(() {
       file = File(img!.path);
@@ -410,7 +324,6 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
   }
 
   getgall() async {
-    // ignore: deprecated_member_use
     var img = await image.getImage(source: ImageSource.gallery);
     setState(() {
       file = File(img!.path);

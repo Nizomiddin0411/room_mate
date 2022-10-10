@@ -7,7 +7,6 @@ import 'package:talaba_uy/screens/Create_ads/owner_photo.dart';
 import '../../core/const/app_colors.dart';
 import 'owner_take_photo.dart';
 
-
 class OwnerHouseInfo extends StatefulWidget {
   String? titleController;
   String? addressController;
@@ -48,7 +47,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
   String? utility_hot_water;
   String? utility_cold_water;
   String? utility_trash;
-  String comfort = '';
+  List comfort = [];
   String? description;
 
   bool _checkHome = false;
@@ -67,24 +66,22 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
   TextEditingController? costController;
   TextEditingController? adsTitleController;
   TextEditingController? inputcontroller;
-  Color _colorRegion = Colors.grey;
-  bool _RegionOnClick = false;
-  Color _colorDistric = Colors.grey;
-  bool _DiscritOnClick = false;
-  Color _colorUniver = Colors.grey;
-  bool _UniverOnClick = false;
-  Color _colorTypeHouse = Colors.grey;
-  bool _TypeHouseOnClick = false;
-  Color _colorRoomCount = Colors.grey;
-  bool _RoomCountOnClick = false;
-  Color _colorRentType = Colors.grey;
-  bool _RentTypeOnClick = false;
-  Color _colorTypeCost = Colors.grey;
-  bool _TypeCostOnClick = false;
-  Color _colorGender = Colors.grey;
-  bool _GenderOnClick = false;
-  Color _colorCountPupil = Colors.grey;
-  bool _CountPupilOnClick = false;
+  Color _phoneNumberColor = Colors.grey;
+  bool _phoneNumberOnClick = false;
+  Color _houseTypeColor = Colors.grey;
+  bool _houseTypeOnClick = false;
+  Color _rentTypeColor = Colors.grey;
+  bool _rentTypeOnClick = false;
+  Color _roomCountColor = Colors.grey;
+  bool _roomCountOnClick = false;
+  Color _floorsCountColor = Colors.grey;
+  bool _floorsCountOnClick = false;
+  Color _inFloorColor = Colors.grey;
+  bool _inFloorOnClick = false;
+  Color _costTypeColor = Colors.grey;
+  bool _costTypeOnClick = false;
+  Color _descriptionColor = Colors.grey;
+  bool _descriptionOnClick = false;
   Color _colorForm = Colors.grey;
   bool value5 = false;
   var pricetype = [
@@ -190,6 +187,11 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                     Container(
                       height: 50.h,
                       width: 320.w,
+                      padding: EdgeInsets.symmetric(horizontal: 8.w),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: _phoneNumberColor),
+                        borderRadius: BorderRadius.circular(6.r)
+                      ),
                       child: TextFormField(
                         inputFormatters: [
                           TextInputMask(
@@ -202,9 +204,23 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                         keyboardType: TextInputType.phone,
                         controller: phoneController,
                         decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: "+998 ** *** ** **".tr(),
+                          border: InputBorder.none,
+                          hintText: "+998 ** *** ** **".tr(),
                         ),
+                        
+                        onChanged: (e) {
+                          setState(() {
+                            print(e.length);
+                            if (e.length == 18) {
+                            _phoneNumberOnClick = true;
+                            _phoneNumberColor = Colors.grey;
+                          } else {
+                            _phoneNumberOnClick = false;
+                            _phoneNumberColor = Colors.red;
+                          }
+                          });
+                          
+                        },
                       ),
                     ),
                     // Column(
@@ -244,7 +260,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                           width: 130.w,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.r),
-                              border: Border.all(color: _colorGender)),
+                              border: Border.all(color: _houseTypeColor)),
                           child: DropdownButtonFormField(
                             hint: Padding(
                               padding: EdgeInsets.only(left: 8.w),
@@ -269,6 +285,8 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                             onChanged: (newValue) {
                               setState(() {
                                 house_type = newValue == 'Hovli' ? '2' : '1';
+                                _houseTypeOnClick = true;
+                                _houseTypeColor = Colors.grey;
                               });
                             },
                           ),
@@ -295,7 +313,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                           width: 130.w,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.r),
-                              border: Border.all(color: _colorGender)),
+                              border: Border.all(color: _rentTypeColor)),
                           child: DropdownButtonFormField(
                             hint: Padding(
                               padding: EdgeInsets.only(left: 8.w),
@@ -324,6 +342,8 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                                     : newValue == 'Oylik'
                                         ? '2'
                                         : '3';
+                                _rentTypeOnClick = true;
+                                _rentTypeColor = Colors.grey;
                               });
                             },
                           ),
@@ -354,7 +374,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                           width: 130.w,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.r),
-                              border: Border.all(color: _colorGender)),
+                              border: Border.all(color: _roomCountColor)),
                           child: DropdownButtonFormField(
                             hint: Padding(
                               padding: EdgeInsets.only(left: 8.w),
@@ -379,6 +399,8 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                             onChanged: (newValue) {
                               setState(() {
                                 room_count = newValue.toString();
+                                _roomCountOnClick = true;
+                                _roomCountColor = Colors.grey;
                               });
                             },
                           ),
@@ -409,7 +431,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                           width: 130.w,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.r),
-                              border: Border.all(color: _colorGender)),
+                              border: Border.all(color: _floorsCountColor)),
                           child: DropdownButtonFormField(
                             hint: Padding(
                               padding: EdgeInsets.only(left: 8.w),
@@ -434,6 +456,8 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                             onChanged: (newValue) {
                               setState(() {
                                 floors_count = newValue.toString();
+                                _floorsCountOnClick = true;
+                                _floorsCountColor = Colors.grey;
                               });
                             },
                           ),
@@ -460,7 +484,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                           width: 130.w,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.r),
-                              border: Border.all(color: _colorGender)),
+                              border: Border.all(color: _inFloorColor)),
                           child: DropdownButtonFormField(
                             hint: Padding(
                               padding: EdgeInsets.only(left: 8.w),
@@ -485,6 +509,8 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                             onChanged: (newValue) {
                               setState(() {
                                 in_floor = newValue.toString();
+                                _inFloorOnClick = true;
+                                _inFloorColor = Colors.grey;
                               });
                             },
                           ),
@@ -512,7 +538,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                 Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
-                      border: Border.all(color: _colorTypeCost),
+                      border: Border.all(color: _costTypeColor),
                       borderRadius: BorderRadius.circular(8.r)),
                   child: Container(
                     padding: EdgeInsets.only(left: 16.w),
@@ -520,11 +546,11 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                       onChanged: (e) {
                         setState(() {
                           if (e.length > 0) {
-                            _TypeCostOnClick = true;
-                            _colorTypeCost = Colors.grey;
+                            _costTypeOnClick = true;
+                            _costTypeColor = Colors.grey;
                           } else {
-                            _TypeCostOnClick = false;
-                            _colorTypeCost = Colors.red;
+                            _costTypeOnClick = false;
+                            _costTypeColor = Colors.red;
                           }
                         });
                       },
@@ -606,7 +632,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                           width: 160.w,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.r),
-                              border: Border.all(color: _colorGender)),
+                              border: Border.all(color: Colors.grey)),
                           child: DropdownButtonFormField(
                             hint: Padding(
                               padding: EdgeInsets.only(left: 8.w),
@@ -911,7 +937,11 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                                 onChanged: (bool? value) {
                                   setState(() {
                                     this.value1 = value!;
-                                    comfort += '1';
+                                    if (value) {
+                                      comfort.add('1');
+                                    } else {
+                                      comfort.remove('1');
+                                    }
                                   });
                                 },
                               ),
@@ -926,7 +956,11 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                                 onChanged: (bool? value) {
                                   setState(() {
                                     this.value2 = value!;
-                                    comfort += '2';
+                                    if (value) {
+                                      comfort.add('2');
+                                    } else {
+                                      comfort.remove('2');
+                                    }
                                   });
                                 },
                               ),
@@ -941,7 +975,11 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                                 onChanged: (bool? value) {
                                   setState(() {
                                     this.value3 = value!;
-                                    comfort += '3';
+                                    if (value) {
+                                      comfort.add('3');
+                                    } else {
+                                      comfort.remove('3');
+                                    }
                                   });
                                 },
                               ),
@@ -956,7 +994,11 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                                 onChanged: (bool? value) {
                                   setState(() {
                                     this.value4 = value!;
-                                    comfort += '4';
+                                    if (value) {
+                                      comfort.add('4');
+                                    } else {
+                                      comfort.remove('4');
+                                    }
                                   });
                                 },
                               ),
@@ -971,7 +1013,11 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                                 onChanged: (bool? value) {
                                   setState(() {
                                     this.value6 = value!;
-                                    comfort += '5';
+                                    if (value) {
+                                      comfort.add('5');
+                                    } else {
+                                      comfort.remove('5');
+                                    }
                                   });
                                 },
                               ),
@@ -986,7 +1032,11 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                                 onChanged: (bool? value) {
                                   setState(() {
                                     this.value5 = value!;
-                                    comfort += '6';
+                                    if (value) {
+                                      comfort.add('6');
+                                    } else {
+                                      comfort.remove('6');
+                                    }
                                   });
                                 },
                               ),
@@ -1009,11 +1059,21 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                 Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
+                      border: Border.all(color: _descriptionColor),
                       borderRadius: BorderRadius.circular(4.r)),
                   child: Container(
                     padding: EdgeInsets.only(left: 16.w),
                     child: TextFormField(
+                      onChanged: (e) {
+                        if (e.length > 0) {
+                          _descriptionOnClick = true;
+                          _descriptionColor = Colors.grey;
+                        } else {
+                          _descriptionOnClick = false;
+                          _descriptionColor = Colors.red;
+                        }
+                        setState(() {});
+                      },
                       controller: descriptionController,
                       maxLines: 6,
                       decoration: InputDecoration(
@@ -1045,44 +1105,16 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                           utility_hot_water = id3.toString();
                           utility_cold_water = id4.toString();
                           utility_trash = id5.toString();
-                          comfort = comfort.split('').join(',');
+                          String comfortItems = comfort.join(',');
                           // print(live_with_owner.toString() + "A");
                           // print(utility_electricity.toString() + "B");
                           // print(unility_gaz.toString() + "C");
                           // print(utility_hot_water.toString() + "D");
                           // print(utility_cold_water.toString() + "E");
                           // print(utility_trash.toString() + "F");
-                          print(comfort);
+                          print(comfortItems);
                           setState(() {});
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => OwnerCreateImage(
-                                        widget.titleController,
-                                        widget.roommate_gender,
-                                        widget.gender_matter,
-                                        widget.district_id,
-                                        widget.id,
-                                        widget.addressController,
-                                        widget.university_id,
-                                        widget.university_id_matter,
-                                        phoneController!.text.split(' ').join(''),
-                                        house_type,
-                                        rent_type,
-                                        room_count,
-                                        floors_count,
-                                        in_floor,
-                                        costController!.text.split(' ').join(''),
-                                        cost_type,
-                                        live_with_owner,
-                                        utility_electricity,
-                                        unility_gaz,
-                                        utility_hot_water,
-                                        utility_cold_water,
-                                        utility_trash,
-                                        comfort,
-                                        description
-                                      )));
+
                           // print(RoomOwner);
                           // print(TypeHouse=='Kvartira'? '1':'2');
                           // print(CountRoom);
@@ -1095,46 +1127,71 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                           // print(inputcontroller?.text);//
                           // print(addressController?.text);//
 
-                          // if (_RegionOnClick &&
-                          //     _DiscritOnClick &&
-                          //     _UniverOnClick &&
-                          //     _TypeHouseOnClick &&
-                          //     _RoomCountOnClick &&
-                          //     _RentTypeOnClick &&
-                          //     _TypeCostOnClick &&
-                          //     _GenderOnClick &&
-                          //     _CountPupilOnClick) {
-                          // } else {
-                          //   setState(() {
-                          //     if (!_RegionOnClick) {
-                          //       _colorRegion = Colors.red;
-                          //     }
-                          //     if (!_DiscritOnClick) {
-                          //       _colorDistric = Colors.red;
-                          //     }
-                          //     if (!_UniverOnClick) {
-                          //       _colorUniver = Colors.red;
-                          //     }
-                          //     if (!_TypeHouseOnClick) {
-                          //       _colorTypeHouse = Colors.red;
-                          //     }
-                          //     if (!_RoomCountOnClick) {
-                          //       _colorRoomCount = Colors.red;
-                          //     }
-                          //     if (!_RentTypeOnClick) {
-                          //       _colorRentType = Colors.red;
-                          //     }
-                          //     if (!_TypeCostOnClick) {
-                          //       _colorTypeCost = Colors.red;
-                          //     }
-                          //     if (!_GenderOnClick) {
-                          //       _colorGender = Colors.red;
-                          //     }
-                          //     if (!_CountPupilOnClick) {
-                          //       _colorCountPupil = Colors.red;
-                          //     }
-                          //   });
-                          // }
+                          if (_phoneNumberOnClick ||
+                              _houseTypeOnClick ||
+                              _rentTypeOnClick ||
+                              _roomCountOnClick ||
+                              _floorsCountOnClick ||
+                              _inFloorOnClick ||
+                              _costTypeOnClick ||
+                              _descriptionOnClick) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => OwnerCreateImage(
+                                      widget.titleController,
+                                      widget.roommate_gender,
+                                      widget.gender_matter,
+                                      widget.district_id,
+                                      widget.id,
+                                      widget.addressController,
+                                      widget.university_id,
+                                      widget.university_id_matter,
+                                      phoneController!.text.split(' ').join(''),
+                                      house_type,
+                                      rent_type,
+                                      room_count,
+                                      floors_count,
+                                      in_floor,
+                                      costController!.text.split(' ').join(''),
+                                      cost_type,
+                                      live_with_owner,
+                                      utility_electricity,
+                                      unility_gaz,
+                                      utility_hot_water,
+                                      utility_cold_water,
+                                      utility_trash,
+                                      comfortItems,
+                                      description)),
+                            );
+                          } else {
+                            setState(() {
+                              if (!_phoneNumberOnClick) {
+                                _phoneNumberColor = Colors.red;
+                              }
+                              if (!_houseTypeOnClick) {
+                                _houseTypeColor = Colors.red;
+                              }
+                              if (!_rentTypeOnClick) {
+                                _rentTypeColor = Colors.red;
+                              }
+                              if (!_roomCountOnClick) {
+                                _roomCountColor = Colors.red;
+                              }
+                              if (!_floorsCountOnClick) {
+                                _floorsCountColor = Colors.red;
+                              }
+                              if (!_inFloorOnClick) {
+                                _inFloorColor = Colors.red;
+                              }
+                              if (!_costTypeOnClick) {
+                                _costTypeColor = Colors.red;
+                              }
+                              if (!_descriptionOnClick) {
+                                _descriptionColor = Colors.red;
+                              }
+                            });
+                          }
                         },
                         child: Text(
                           "Keyingi ".tr(),
