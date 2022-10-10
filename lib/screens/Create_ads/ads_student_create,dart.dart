@@ -6,11 +6,35 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
 import 'package:talaba_uy/provider/region_provider.dart';
-import 'Image_ads.dart';
 import 'create_image.ads.dart';
 
 class Student2 extends StatefulWidget {
-  const Student2({Key? key}) : super(key: key);
+  String titlecontroller1;
+  String viloyatidisi;
+  String viloyatvalue;
+  String universiteteid;
+  String univervalue;
+  String titleGendor;
+  String titlecount;
+  String phoneController;
+  String house;
+  String addinformation;
+  String numbervalue;
+
+  Student2(
+      {Key? key,
+      required this.titlecontroller1,
+      required this.viloyatidisi,
+      required this.viloyatvalue,
+      required this.universiteteid,
+      required this.univervalue,
+      required this.titlecount,
+      required this.titleGendor,
+      required this.phoneController,
+      required this.house,
+      required this.addinformation,
+      required this.numbervalue})
+      : super(key: key);
 
   @override
   State<Student2> createState() => _Student2State();
@@ -22,13 +46,6 @@ class _Student2State extends State<Student2> {
   TextEditingController? othercontroller;
   String dropDown = "";
   String dropDown2 = "";
-  bool _checkHome = false;
-  bool _checkMetro = false;
-  String? _dropownUsd;
-  String _titleTime = "Ijara muddati";
-  String _titleGendor = "";
-  String _titleCount = "Ijarachilar soni";
-  String _titleCourse = "";
   String DistrictId = '';
   String UniverId = '';
   String Course = '';
@@ -44,21 +61,6 @@ class _Student2State extends State<Student2> {
   Color _colorRegion = Colors.grey;
   bool _RegionOnClick = false;
   Color _colorDistric = Colors.grey;
-  bool _DiscritOnClick = false;
-  Color _colorUniver = Colors.grey;
-  bool _UniverOnClick = false;
-  Color _colorFaculty = Colors.grey;
-  bool _FacultyOnClick = false;
-  Color _colorCourse = Colors.grey;
-  bool _CourseOnClick = false;
-  Color _colorTypeHouse = Colors.grey;
-  bool _TypeHouseOnClick = false;
-  Color _colorRoomCount = Colors.grey;
-  bool _RoomCountOnClick = false;
-  Color _colorRentType = Colors.grey;
-  bool _RentTypeOnClick = false;
-  Color _colorTypeCost = Colors.grey;
-  bool _TypeCostOnClick = false;
   Color _colorGender = Colors.grey;
   bool _GenderOnClick = false;
   Color _colorCountPupil = Colors.grey;
@@ -71,7 +73,9 @@ class _Student2State extends State<Student2> {
   bool value4 = false;
   bool value5 = false;
   bool value6 = false;
-  int id = 1;
+  int metro = 0;
+  int ownerlive = 0;
+  int costcommunal = 0;
   final TextEditingController _textEditingController = TextEditingController();
   var kurs = [
     '1-kurs',
@@ -87,16 +91,30 @@ class _Student2State extends State<Student2> {
     'Kvartira',
     'Xovli',
   ];
-  var genderone = [
-    'Erkak',
-    'Ayol',
+  var floors_count = [
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
+    '6',
+    '7',
+    '8',
+    '9',
+    '10',
   ];
-  var kvsherik = [
-    '1 xona',
-    "2 xona",
-    "3 xona",
-    "4 xona",
-    "5 xona",
+  var in_floor = [
+    '1 ',
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "10",
+    "11",
   ];
   var kindOfMoment = [
     'kunlik',
@@ -116,8 +134,21 @@ class _Student2State extends State<Student2> {
     '4',
     '5-6',
   ];
-  final nameController = TextEditingController();
+  var countroums = [
+    "1 xonali ",
+    "2 xonali ",
+    "3 xonali ",
+    "4 xonali ",
+    "5 xonali ",
+  ];
+  final addressController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
+  String? comfort;
+  String? housetype;
+  String? housecount;
+  String? housefloor;
+  String? qavatlarsoni;
+  String? cost_type;
 
   @override
   void initState() {
@@ -249,7 +280,6 @@ class _Student2State extends State<Student2> {
                             }).toList(),
                             onChanged: (newValue) {
                               setState(() {
-                                _DiscritOnClick = true;
                                 _colorDistric = Colors.grey;
                                 dropDown = newValue.toString();
                               });
@@ -276,7 +306,7 @@ class _Student2State extends State<Student2> {
                     children: [
                       Row(
                         children: [
-                          Text("Manzil ").tr(),
+                          Text("Manzil").tr(),
                         ],
                       ),
                       SizedBox(
@@ -288,9 +318,8 @@ class _Student2State extends State<Student2> {
                             height: 55.h,
                             width: 324.w,
                             child: TextFormField(
-                              autovalidateMode: AutovalidateMode.always,
-                              keyboardType: TextInputType.phone,
-                              controller: nameController,
+                              keyboardType: TextInputType.text,
+                              controller: addressController,
                               decoration: InputDecoration(
                                 border: OutlineInputBorder(),
                                 labelText: "Kvartal , Uy , Xonadon ".tr(),
@@ -346,7 +375,9 @@ class _Student2State extends State<Student2> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(
+                    height: 10,
+                  ),
                   Column(
                     children: [
                       Row(
@@ -364,10 +395,10 @@ class _Student2State extends State<Student2> {
                             children: <Widget>[
                               Radio(
                                 value: 1,
-                                groupValue: id,
+                                groupValue: metro,
                                 onChanged: (val) {
                                   setState(() {
-                                    id = 1;
+                                    metro = 1;
                                   });
                                 },
                               ),
@@ -380,10 +411,10 @@ class _Student2State extends State<Student2> {
                               ),
                               Radio(
                                 value: 2,
-                                groupValue: id,
+                                groupValue: metro,
                                 onChanged: (val) {
                                   setState(() {
-                                    id = 2;
+                                    metro = 2;
                                   });
                                 },
                               ),
@@ -432,8 +463,8 @@ class _Student2State extends State<Student2> {
                                   style: TextStyle(fontSize: 14.sp),
                                 ),
                               ),
-                              decoration:
-                              const InputDecoration(border: InputBorder.none),
+                              decoration: const InputDecoration(
+                                  border: InputBorder.none),
                               icon: Icon(Icons.arrow_drop_down_outlined),
                               items: kvartira.map((e) {
                                 return DropdownMenuItem<String>(
@@ -447,9 +478,8 @@ class _Student2State extends State<Student2> {
                               }).toList(),
                               onChanged: (newValue) {
                                 setState(() {
-                                  _GenderOnClick = true;
+                                  housetype = newValue.toString();
                                   _colorGender = Colors.grey;
-                                  _titleGendor = newValue.toString();
                                 });
                               },
                             ),
@@ -484,10 +514,10 @@ class _Student2State extends State<Student2> {
                                   style: TextStyle(fontSize: 14.sp),
                                 ),
                               ),
-                              decoration:
-                              const InputDecoration(border: InputBorder.none),
+                              decoration: const InputDecoration(
+                                  border: InputBorder.none),
                               icon: Icon(Icons.arrow_drop_down_outlined),
-                              items: kvsherik.map((e) {
+                              items: countroums.map((e) {
                                 return DropdownMenuItem<String>(
                                   onTap: () {},
                                   value: e,
@@ -499,9 +529,8 @@ class _Student2State extends State<Student2> {
                               }).toList(),
                               onChanged: (newValue) {
                                 setState(() {
-                                  _GenderOnClick = true;
+                                  housecount = newValue.toString();
                                   _colorGender = Colors.grey;
-                                  _titleGendor = newValue.toString();
                                 });
                               },
                             ),
@@ -510,7 +539,9 @@ class _Student2State extends State<Student2> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 15.h,),
+                  SizedBox(
+                    height: 15.h,
+                  ),
                   Row(
                     children: [
                       Column(
@@ -538,10 +569,10 @@ class _Student2State extends State<Student2> {
                                   style: TextStyle(fontSize: 14.sp),
                                 ),
                               ),
-                              decoration:
-                              const InputDecoration(border: InputBorder.none),
+                              decoration: const InputDecoration(
+                                  border: InputBorder.none),
                               icon: Icon(Icons.arrow_drop_down_outlined),
-                              items: genderone.map((e) {
+                              items: floors_count.map((e) {
                                 return DropdownMenuItem<String>(
                                   onTap: () {},
                                   value: e,
@@ -553,9 +584,8 @@ class _Student2State extends State<Student2> {
                               }).toList(),
                               onChanged: (newValue) {
                                 setState(() {
-                                  _GenderOnClick = true;
+                                  qavatlarsoni = newValue.toString();
                                   _colorGender = Colors.grey;
-                                  _titleGendor = newValue.toString();
                                 });
                               },
                             ),
@@ -590,10 +620,10 @@ class _Student2State extends State<Student2> {
                                   style: TextStyle(fontSize: 14.sp),
                                 ),
                               ),
-                              decoration:
-                              const InputDecoration(border: InputBorder.none),
+                              decoration: const InputDecoration(
+                                  border: InputBorder.none),
                               icon: Icon(Icons.arrow_drop_down_outlined),
-                              items: kvsherik.map((e) {
+                              items: in_floor.map((e) {
                                 return DropdownMenuItem<String>(
                                   onTap: () {},
                                   value: e,
@@ -605,9 +635,8 @@ class _Student2State extends State<Student2> {
                               }).toList(),
                               onChanged: (newValue) {
                                 setState(() {
-                                  _GenderOnClick = true;
+                                  housefloor = newValue.toString();
                                   _colorGender = Colors.grey;
-                                  _titleGendor = newValue.toString();
                                 });
                               },
                             ),
@@ -646,8 +675,8 @@ class _Student2State extends State<Student2> {
                                   style: TextStyle(fontSize: 14.sp),
                                 ),
                               ),
-                              decoration:
-                              const InputDecoration(border: InputBorder.none),
+                              decoration: const InputDecoration(
+                                  border: InputBorder.none),
                               icon: Icon(Icons.arrow_drop_down_outlined),
                               items: housecost.map((e) {
                                 return DropdownMenuItem<String>(
@@ -661,9 +690,8 @@ class _Student2State extends State<Student2> {
                               }).toList(),
                               onChanged: (newValue) {
                                 setState(() {
-                                  _GenderOnClick = true;
+                                  cost_type = newValue.toString();
                                   _colorGender = Colors.grey;
-                                  _titleGendor = newValue.toString();
                                 });
                               },
                             ),
@@ -692,10 +720,10 @@ class _Student2State extends State<Student2> {
                             children: <Widget>[
                               Radio(
                                 value: 1,
-                                groupValue: id,
+                                groupValue: ownerlive,
                                 onChanged: (val) {
                                   setState(() {
-                                    id = 1;
+                                    ownerlive = 1;
                                   });
                                 },
                               ),
@@ -708,10 +736,10 @@ class _Student2State extends State<Student2> {
                               ),
                               Radio(
                                 value: 2,
-                                groupValue: id,
+                                groupValue: ownerlive,
                                 onChanged: (val) {
                                   setState(() {
-                                    id = 2;
+                                    ownerlive = 2;
                                   });
                                 },
                               ),
@@ -747,10 +775,10 @@ class _Student2State extends State<Student2> {
                             children: <Widget>[
                               Radio(
                                 value: 1,
-                                groupValue: id,
+                                groupValue: costcommunal,
                                 onChanged: (val) {
                                   setState(() {
-                                    id = 1;
+                                    costcommunal = 1;
                                   });
                                 },
                               ),
@@ -763,10 +791,10 @@ class _Student2State extends State<Student2> {
                               ),
                               Radio(
                                 value: 2,
-                                groupValue: id,
+                                groupValue: costcommunal,
                                 onChanged: (val) {
                                   setState(() {
-                                    id = 2;
+                                    costcommunal = 2;
                                   });
                                 },
                               ),
@@ -793,7 +821,9 @@ class _Student2State extends State<Student2> {
                       ),
                     ],
                   ),
-                  SizedBox(height: 10,),
+                  SizedBox(
+                    height: 10,
+                  ),
                   Container(
                     width: 170.w,
                     child: Column(
@@ -845,10 +875,10 @@ class _Student2State extends State<Student2> {
                           children: [
                             Text("Kir yuvish mashinasi"),
                             Checkbox(
-                              value: this.value4,
+                              value: value4,
                               onChanged: (bool? value) {
                                 setState(() {
-                                  this.value4 = value!;
+                                  value4 = value!;
                                 });
                               },
                             ),
@@ -859,10 +889,10 @@ class _Student2State extends State<Student2> {
                           children: [
                             Text("Konditsioner"),
                             Checkbox(
-                              value: this.value6,
+                              value: value6,
                               onChanged: (bool? value) {
                                 setState(() {
-                                  this.value6 = value!;
+                                  value6 = value!;
                                 });
                               },
                             ),
@@ -873,10 +903,10 @@ class _Student2State extends State<Student2> {
                           children: [
                             Text("Chang yutgich"),
                             Checkbox(
-                              value: this.value5,
+                              value: value5,
                               onChanged: (bool? value) {
                                 setState(() {
-                                  this.value5 = value!;
+                                  value5 = value!;
                                 });
                               },
                             ),
@@ -885,8 +915,9 @@ class _Student2State extends State<Student2> {
                       ],
                     ),
                   ),
-                  SizedBox(height: 55,),
-
+                  SizedBox(
+                    height: 55,
+                  ),
                   Padding(
                     padding:
                         EdgeInsets.symmetric(vertical: 18.h, horizontal: 31.w),
@@ -900,9 +931,39 @@ class _Student2State extends State<Student2> {
                             primary: AppColors.buttonLinear),
                         onPressed: () {
                           Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Createimage()));
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Createimage(
+                                universiteteid: widget.universiteteid,
+                                house: widget.house,
+                                titleGendor: widget.titleGendor,
+                                numbervalue: widget.numbervalue,
+                                viloyatvalue: widget.viloyatvalue,
+                                phoneController: widget.phoneController,
+                                titlecontroller1: widget.titlecontroller1,
+                                addinformation: widget.addinformation,
+                                univervalue: widget.univervalue,
+                                titlecount: widget.titlecount,
+                                viloyatidisi: widget.viloyatidisi,
+                                comfort: value5 ? '1' : '2',
+                                costlivekomunal:
+                                    costcommunal.toString() == 'ha' ? '1' : '2',
+                                metro: metro.toString() == 'ha' ? '1' : '2',
+                                countroom: qavatlarsoni.toString(),
+                                housetype: housetype.toString(),
+                                in_floor: housefloor.toString(),
+                                cost_type: cost_type.toString()=='ha' ? '1' : '2',
+                              ),
+                            ),
+                          );
+                          print(
+                              '${costcommunal} kamunallllar  yooo+++++++++++');
+                          print('${housefloor} qavatlara soni +++++++++++');
+                          print('${housetype} uy turiilari yooo+++++++++++');
+                          print('${qavatlarsoni} xonlar soni yooo+++++++++++');
+                          print('${metro} metro yaqinmiiiiii yooo+++++++++++');
+                          print('${value5 ? '1' : '2'} comfortlarning turlari yooo+++++++++++');
+                          print('${cost_type} costtypeeeee turlari yooo+++++++++++');
                         },
                         child: Text(
                           "Keyingi ".tr(),

@@ -87,18 +87,18 @@ class _FavoritAdsState extends State<FavoritAds> {
                                                 countPeople: data
                                                     .MyAds[index].roommateCount
                                                     .toString(),
-                                                region: data
-                                                    .MyAds[index].region?.name
-                                                    .toString(),
-                                                district: data
-                                                    .MyAds[index].district?.name
-                                                    .toString(),
-                                                univer: data.MyAds[index]
-                                                    .university?.name
-                                                    .toString(),
-                                                facultet: data
-                                                    .MyAds[index].faculty?.name
-                                                    .toString(),
+                                                // region: data
+                                                //     .MyAds[index].region?.name
+                                                //     .toString(),
+                                                // district: data
+                                                //     .MyAds[index].district?.name
+                                                //     .toString(),
+                                                // univer: data.MyAds[index]
+                                                //     .university?.name
+                                                //     .toString(),
+                                                // facultet: data
+                                                //     .MyAds[index].faculty?.name
+                                                //     .toString(),
                                                 liveWithOwner: data
                                                     .MyAds[index].liveWithOwner
                                                     .toString(),
@@ -117,6 +117,37 @@ class _FavoritAdsState extends State<FavoritAds> {
                                                     .MyAds[index].userFullName,
                                                 chatApproved: data
                                                     .MyAds[index].chatApproved!,
+                                            phoneNumber: data
+                                                .MyAds[index].phoneNumber,
+                                            phoneNumberShow: data
+                                                .MyAds[index]
+                                                .phoneNumberShow,
+                                            floorsCount: data
+                                                .MyAds[index].floorsCount.toString(),
+                                            district: data
+                                                .MyAds[index].district,
+                                            stay_region: data
+                                                .MyAds[index].stayRegion,
+                                            stay_university: data
+                                                .MyAds[index].stayUniversity,
+                                            region: data
+                                                .MyAds[index].region,
+                                            rentType: data
+                                                .MyAds[index].rentType.toString(),
+                                            utility_bills: data
+                                                .MyAds[index].utilityBills,
+                                            createData: data
+                                                .MyAds[index].createdAt,
+                                            comfort: data
+                                                .MyAds[index].comfort,
+                                            inFloor: data
+                                                .MyAds[index].inFloor.toString(),
+                                            roommate_count: data
+                                                .MyAds[index].roommateCount,
+                                            address: data
+                                                .MyAds[index].address,
+                                            roommate_gender: data
+                                                .MyAds[index].roommateGender.toString(),
                                               )));
                                 },
                                 child: Container(

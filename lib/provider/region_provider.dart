@@ -21,6 +21,7 @@ class RegionProvider extends ChangeNotifier {
   List<AllAdsModel> AdsForZero = [];
 
   String RegionId = '';
+  String? viloyatid;
   String districtId = '';
   String UniverId = '';
   String FacutyId = '';

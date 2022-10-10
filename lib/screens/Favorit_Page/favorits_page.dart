@@ -17,7 +17,6 @@ class FavoritPage extends StatefulWidget {
 }
 
 class _FavoritPageState extends State<FavoritPage> {
-
   @override
   void initState() {
     Provider.of<FavoriteProvider>(context, listen: false).getLike().asStream();
@@ -48,8 +47,7 @@ class _FavoritPageState extends State<FavoritPage> {
         ),
         body: Consumer<FavoriteProvider>(builder: (_, data, __) {
           return SingleChildScrollView(
-            child: Column(
-                children: [
+            child: Column(children: [
               ListView.builder(
                   shrinkWrap: true,
                   physics: NeverScrollableScrollPhysics(),
@@ -66,8 +64,7 @@ class _FavoritPageState extends State<FavoritPage> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) =>
-                                            AdsDetail(
+                                        builder: (context) => AdsDetail(
                                               title: data.Like[index].title
                                                   .toString(),
                                               description: data
@@ -84,27 +81,13 @@ class _FavoritPageState extends State<FavoritPage> {
                                               countRoom: data
                                                   .Like[index].roomCount
                                                   .toString(),
-                                              countPeople: data.Like[index]
-                                                  .roommateCount
-                                                  .toString(),
-                                              region: data
-                                                  .Like[index].region?.name
-                                                  .toString(),
-                                              district: data.Like[index]
-                                                  .district?.name
-                                                  .toString(),
-                                              univer: data.Like[index]
-                                                  .university?.name
-                                                  .toString(),
-                                              facultet: data.Like[index]
-                                                  .faculty?.name
+                                              countPeople: data
+                                                  .Like[index].roommateCount
                                                   .toString(),
                                               liveWithOwner: data
-                                                  .Like[index]
-                                                  .liveWithOwner
+                                                  .Like[index].liveWithOwner
                                                   .toString(),
-                                              subway: data
-                                                  .Like[index].subway
+                                              subway: data.Like[index].subway
                                                   .toString(),
                                               favorite: data
                                                   .Like[index].favorite
@@ -114,7 +97,42 @@ class _FavoritPageState extends State<FavoritPage> {
                                               type: data.Like[index].type
                                                   .toString(),
                                               userId: data.Like[index].userId!,
-                                              userFullName: data.Like[index].userFullName.toString(), chatApproved: data.Like[index].chatApproved!,
+                                              userFullName: data
+                                                  .Like[index].userFullName
+                                                  .toString(),
+                                              chatApproved: data
+                                                  .Like[index].chatApproved!,
+                                          phoneNumber: data
+                                              .Like[index].phoneNumber,
+                                          phoneNumberShow: data
+                                              .Like[index]
+                                              .phoneNumberShow,
+                                          floorsCount: data
+                                              .Like[index].floorsCount.toString(),
+                                          district: data
+                                              .Like[index].district,
+                                          stay_region: data
+                                              .Like[index].stayRegion,
+                                          stay_university: data
+                                              .Like[index].stayUniversity,
+                                          region: data
+                                              .Like[index].region,
+                                          rentType: data
+                                              .Like[index].rentType.toString(),
+                                          utility_bills: data
+                                              .Like[index].utilityBills,
+                                          createData: data
+                                              .Like[index].createdAt,
+                                          comfort: data
+                                              .Like[index].comfort,
+                                          inFloor: data
+                                              .Like[index].inFloor.toString(),
+                                          roommate_count: data
+                                              .Like[index].roommateCount,
+                                          address: data
+                                              .Like[index].address,
+                                          roommate_gender: data
+                                              .Like[index].roommateGender.toString(),
                                             )));
                               },
                               child: Container(
@@ -127,53 +145,65 @@ class _FavoritPageState extends State<FavoritPage> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Stack(
-                                      children:[ CachedNetworkImage(
-                                        imageUrl: "https://source.unsplash.com/random/324x235",
-                                        width: 324.w,
-                                        height: 235.h,
-                                        fit: BoxFit.cover,
-                                      ),
-                                        Positioned(child:
-                                        Padding(
+                                      children: [
+                                        CachedNetworkImage(
+                                          imageUrl:
+                                              "https://source.unsplash.com/random/324x235",
+                                          width: 324.w,
+                                          height: 235.h,
+                                          fit: BoxFit.cover,
+                                        ),
+                                        Positioned(
+                                            child: Padding(
                                           padding: const EdgeInsets.all(8.0),
                                           child: Row(
-                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
                                             children: [
                                               Container(
                                                 width: 112.w,
                                                 height: 24.h,
                                                 decoration: BoxDecoration(
-                                                  borderRadius: BorderRadius.circular(2.r),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          2.r),
                                                   color: AppColors.iconColor,
                                                 ),
-
-                                                child: const Center(child: Text("21 Sentabr,14:01",style: TextStyle(color: AppColors.backgroundWhite),)),
+                                                child: const Center(
+                                                    child: Text(
+                                                  "21 Sentabr,14:01",
+                                                  style: TextStyle(
+                                                      color: AppColors
+                                                          .backgroundWhite),
+                                                )),
                                               ),
                                               Padding(
-                                                  padding:
-                                                  EdgeInsets.fromLTRB(1.w, 0, 8.w, 0),
+                                                  padding: EdgeInsets.fromLTRB(
+                                                      1.w, 0, 8.w, 0),
                                                   child: FavoriteButton(
-                                                    isFavorite: data.Like[index].favorite
-                                                        .toString() ==
-                                                        '0'
+                                                    isFavorite: data.Like[index]
+                                                                .favorite
+                                                                .toString() ==
+                                                            '0'
                                                         ? false
                                                         : true,
                                                     iconSize: 35.0,
-                                                    valueChanged: (_isFavorite) async{
-
-                                                      await FavoriteChange().Favoritefetch(
-                                                          id: data.Like[index].id
-                                                              .toString());
+                                                    valueChanged:
+                                                        (_isFavorite) async {
+                                                      await FavoriteChange()
+                                                          .Favoritefetch(
+                                                              id: data
+                                                                  .Like[index]
+                                                                  .id
+                                                                  .toString());
                                                       // data.isFavorite = !data.isFavorite;
                                                       await data.getLike();
                                                     },
                                                   ))
                                             ],
                                           ),
-                                        )
-                                        )
+                                        ))
                                       ],
-
                                     ),
                                     Row(
                                       mainAxisAlignment:
@@ -186,11 +216,11 @@ class _FavoritPageState extends State<FavoritPage> {
                                             style: TextStyle(fontSize: 18.sp),
                                           ),
                                         ),
-
                                       ],
                                     ),
                                     Padding(
-                                      padding: EdgeInsets.fromLTRB(8.w, 0, 8.w, 0),
+                                      padding:
+                                          EdgeInsets.fromLTRB(8.w, 0, 8.w, 0),
                                       child: Text(
                                         '${data.Like[index].cost}',
                                         style: TextStyle(
@@ -203,14 +233,13 @@ class _FavoritPageState extends State<FavoritPage> {
                                           MainAxisAlignment.spaceBetween,
                                       children: [
                                         Padding(
-                                          padding:
-                                              EdgeInsets.fromLTRB(8.w, 0, 8.w, 0),
+                                          padding: EdgeInsets.fromLTRB(
+                                              8.w, 0, 8.w, 0),
                                           child: Text(
                                             "${data.Like[index].address}",
                                             style: TextStyle(fontSize: 10.sp),
                                           ),
                                         ),
-
                                       ],
                                     ),
                                     SizedBox(

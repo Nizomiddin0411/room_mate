@@ -21,17 +21,17 @@ class Student extends StatefulWidget {
 }
 
 class _StudentState extends State<Student> {
-  TextEditingController? costcontroller;
-  TextEditingController? titlecontroller;
-  TextEditingController? othercontroller;
+  GlobalKey _keyAddInfo = GlobalKey();
   String dropDown = "";
   String dropDown2 = "";
+  String? phonenumber;
+  String? addInfo;
   bool _checkHome = false;
   bool _checkMetro = false;
   String? _dropownUsd;
   String _titleTime = "Ijara muddati";
   String _titleGendor = "";
-  String _titleCount = "Ijarachilar soni";
+  String _titleCount = "";
   String _titleCourse = "";
   String DistrictId = '';
   String UniverId = '';
@@ -110,18 +110,15 @@ class _StudentState extends State<Student> {
     '4',
     '5-6',
   ];
-  final nameController = TextEditingController();
+  final phoneController = TextEditingController();
+  final titlecontroller1 = TextEditingController();
+  final addinformation = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  bool value5 = false;
-  int id = 1;
+  bool regionsvalue = false;
+  bool univervalue = false;
+  bool numbervalue = false;
 
-  @override
-  void initState() {
-    super.initState();
-    costcontroller = TextEditingController();
-    titlecontroller = TextEditingController();
-    othercontroller = TextEditingController();
-  }
+  int house = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -153,27 +150,12 @@ class _StudentState extends State<Student> {
                   child: Container(
                     padding: EdgeInsets.only(left: 16.w),
                     child: TextFormField(
-                      onChanged: (e) {
-                        setState(() {
-                          if (e.length > 0) {
-                            setState(() {
-                              _UniverOnClick = true;
-                              _colorUniver = Colors.grey;
-                            });
-                          } else {
-                            setState(() {
-                              _UniverOnClick = false;
-                              _colorUniver = Colors.red;
-                            });
-                          }
-                        });
-                      },
-                      controller: titlecontroller,
+                      controller: titlecontroller1,
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         hintText: "E’lonni nomlang".tr(),
                         hintStyle:
-                        TextStyle(fontSize: 14.sp, color: Colors.grey),
+                            TextStyle(fontSize: 14.sp, color: Colors.grey),
                       ),
                       cursorColor: Colors.grey.shade800,
                       cursorWidth: 1.5.w,
@@ -209,6 +191,9 @@ class _StudentState extends State<Student> {
                         icon: Icon(Icons.arrow_drop_down_outlined),
                         items: data.regions.map((e) {
                           return DropdownMenuItem<String>(
+                            onTap: () {
+                              data.viloyatid = e.id.toString();
+                            },
                             value: e.name ?? "",
                             child: Padding(
                               padding: EdgeInsets.only(left: 8.w),
@@ -228,6 +213,7 @@ class _StudentState extends State<Student> {
                           setState(() {
                             dropDown = newValue.toString();
                           });
+                          print(dropDown + "viloyat adiii");
                         },
                       ),
                     ),
@@ -238,10 +224,10 @@ class _StudentState extends State<Student> {
                       children: [
                         Text("Ahamiyatsiz"),
                         Checkbox(
-                          value: this.value5,
+                          value: this.regionsvalue,
                           onChanged: (bool? value) {
                             setState(() {
-                              this.value5 = value!;
+                              this.regionsvalue = value!;
                             });
                           },
                         ),
@@ -259,50 +245,6 @@ class _StudentState extends State<Student> {
                   ),
                 ),
                 SizedBox(height: 4.h),
-                // Container(
-                //   width: 324.w,
-                //   decoration: BoxDecoration(
-                //       borderRadius: BorderRadius.circular(10.r),
-                //       border: Border.all(color: _colorUniver)),
-                //   child: DropdownButtonFormField(
-                //     isExpanded: true,
-                //     hint: Padding(
-                //       padding: EdgeInsets.only(left: 8.w),
-                //       child: Text("OTM ni tanlang".tr()),
-                //     ),
-                //     decoration: InputDecoration(border: InputBorder.none),
-                //     // value: ,
-                //     icon: Icon(Icons.arrow_drop_down_outlined),
-                //     items: data.univer.map((e) {
-                //       return DropdownMenuItem<String>(
-                //         onTap: () {
-                //           data.UniverId = e.id.toString();
-                //         },
-                //         value: e.name ?? "",
-                //         child: SizedBox(
-                //           width: MediaQuery.of(context).size.width - 150.w,
-                //           child: Padding(
-                //             padding: EdgeInsets.only(left: 8.w),
-                //             child: Text(e.name.toString()),
-                //           ),
-                //         ),
-                //       );
-                //     }).toList(),
-                //     onChanged: (newValue) async {
-                //       // print("Selected ----------- $newValue");
-                //       setState(() {
-                //         _UniverOnClick = true;
-                //         _colorUniver = Colors.grey;
-                //       });
-                //       final selected = data.univer
-                //           .where((element) => element.name == newValue);
-                //       data.getFaculty(selected.last.id!);
-                //       setState(() {
-                //         dropDown2 = newValue.toString();
-                //       });
-                //     },
-                //   ),
-                // ),
                 Row(
                   children: [
                     Container(
@@ -351,10 +293,10 @@ class _StudentState extends State<Student> {
                       children: [
                         Text("Ahamiyatsiz"),
                         Checkbox(
-                          value: this.value5,
+                          value: univervalue,
                           onChanged: (bool? value) {
                             setState(() {
-                              this.value5 = value!;
+                              univervalue = value!;
                             });
                           },
                         ),
@@ -362,7 +304,9 @@ class _StudentState extends State<Student> {
                     )
                   ],
                 ),
-                SizedBox(height: 8.h,),
+                SizedBox(
+                  height: 8.h,
+                ),
                 Row(
                   children: [
                     Column(
@@ -405,10 +349,9 @@ class _StudentState extends State<Student> {
                             }).toList(),
                             onChanged: (newValue) {
                               setState(() {
-                                _GenderOnClick = true;
-                                _colorGender = Colors.grey;
                                 _titleGendor = newValue.toString();
                               });
+                              print(_titleGendor + "njbnjbjbvhvgc");
                             },
                           ),
                         ),
@@ -459,8 +402,9 @@ class _StudentState extends State<Student> {
                               setState(() {
                                 _GenderOnClick = true;
                                 _colorGender = Colors.grey;
-                                _titleGendor = newValue.toString();
+                                _titleCount = newValue.toString();
                               });
+                              print(_titleCount + "sheriklar soni");
                             },
                           ),
                         ),
@@ -468,6 +412,7 @@ class _StudentState extends State<Student> {
                     ),
                   ],
                 ),
+                SizedBox(height: 8.h,),
                 Column(
                   children: [
                     Row(
@@ -481,8 +426,8 @@ class _StudentState extends State<Student> {
                     Row(
                       children: [
                         Container(
-                          height: 57.h,
-                          width: 240.w,
+                          height: 80.h,
+                          width: 250.w,
                           child: TextFormField(
                             inputFormatters: [
                               TextInputMask(
@@ -491,28 +436,29 @@ class _StudentState extends State<Student> {
                                 maxPlaceHolders: 13,
                               )
                             ],
-                            autovalidateMode: AutovalidateMode.always,
                             keyboardType: TextInputType.phone,
-                            controller: nameController,
+                            controller: phoneController,
                             decoration: InputDecoration(
                               border: OutlineInputBorder(
-                                borderRadius: BorderRadius.all(Radius.circular(8.r))
-                              ),
-                              labelText: "+998 ** *** ** **".tr(),
+                                  borderRadius: BorderRadius.circular(8)),
+                              labelText: "Telefon raqamini kiriting".tr(),
                             ),
                           ),
                         ),
                         SizedBox(
-                          width: 14.w,
+                          width: 9.w,
                         ),
                         Column(
                           children: [
                             Text("Ko’rinmasin"),
+                            SizedBox(
+                              height: 10,
+                            ),
                             Checkbox(
-                              value: this.value5,
+                              value: numbervalue,
                               onChanged: (bool? value) {
                                 setState(() {
-                                  this.value5 = value!;
+                                  numbervalue = value!;
                                 });
                               },
                             ),
@@ -522,12 +468,19 @@ class _StudentState extends State<Student> {
                     ),
                   ],
                 ),
-                SizedBox(height: 10,),
+                SizedBox(
+                  height: 10,
+                ),
                 Column(
                   children: [
-                   Row(children: [
-                     Text("Ijaraga turishga joyingiz bormi ?",style: TextStyle(fontSize: 15),),
-                   ],),
+                    Row(
+                      children: [
+                        Text(
+                          "Ijaraga turishga joyingiz bormi ?",
+                          style: TextStyle(fontSize: 15),
+                        ),
+                      ],
+                    ),
                     Row(
                       children: [
                         Row(
@@ -535,10 +488,10 @@ class _StudentState extends State<Student> {
                           children: <Widget>[
                             Radio(
                               value: 1,
-                              groupValue: id,
+                              groupValue: house,
                               onChanged: (val) {
                                 setState(() {
-                                  id = 1;
+                                  house = 1;
                                 });
                               },
                             ),
@@ -546,14 +499,15 @@ class _StudentState extends State<Student> {
                               'Ha',
                               style: new TextStyle(fontSize: 17.0),
                             ),
-                            SizedBox(width: 55,),
+                            SizedBox(
+                              width: 55,
+                            ),
                             Radio(
                               value: 2,
-                              groupValue: id,
+                              groupValue: house,
                               onChanged: (val) {
                                 setState(() {
-
-                                  id = 2;
+                                  house = 2;
                                 });
                               },
                             ),
@@ -567,7 +521,6 @@ class _StudentState extends State<Student> {
                         ),
                       ],
                     )
-
                   ],
                 ),
                 SizedBox(height: 12.h),
@@ -587,8 +540,9 @@ class _StudentState extends State<Student> {
                       borderRadius: BorderRadius.circular(4.r)),
                   child: Container(
                     padding: EdgeInsets.only(left: 16.w),
-                    child: TextFormField(
-                      controller: othercontroller,
+                    child: TextField(
+                      key: _keyAddInfo,
+                      controller: addinformation,
                       maxLines: 6,
                       decoration: InputDecoration(
                         hintText: 'Message...'.tr(),
@@ -612,77 +566,44 @@ class _StudentState extends State<Student> {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.r)),
                             primary: AppColors.buttonLinear),
-                        onPressed: ()  {
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>Student2()));
-                          // setState(() {
-                          //   if (_titleCourse == '1-kurs' ||
-                          //       _titleCourse == '1-курс') {
-                          //     Course = '1';
-                          //   } else if (_titleCourse == '2-kurs' ||
-                          //       _titleCourse == '2-курс') {
-                          //     Course = '2';
-                          //   } else if (_titleCourse == '3-kurs' ||
-                          //       _titleCourse == '3-курс') {
-                          //     Course = '3';
-                          //   } else if (_titleCourse == '4-kurs' ||
-                          //       _titleCourse == '4-курс') {
-                          //     Course = '4';
-                          //   } else if (_titleCourse == '5-kurs' ||
-                          //       _titleCourse == '5-курс') {
-                          //     Course = '5';
-                          //   } else if (_titleCourse == '6-kurs' ||
-                          //       _titleCourse == '6-курс') {
-                          //     Course = '6';
-                          //   }
-                          // });
-                          // setState(() {
-                          //   if (kvartira == 'Xovli' || kvartira == 'Участка') {
-                          //     TypeHouse = '2';
-                          //   } else {
-                          //     TypeHouse = '1';
-                          //   }
-                          // });
-                          // setState(() {
-                          //   if (TypeOfRent == 'kunlik' ||
-                          //       TypeOfRent == 'день') {
-                          //     _titleTime = '1';
-                          //   } else {
-                          //     _titleTime = '2';
-                          //   }
-                          // });
-                          // setState(() {
-                          //   if (_checkMetro == true) {
-                          //     subwayof = '1';
-                          //   } else {
-                          //     subwayof = '2';
-                          //   }
-                          // });
-                          // setState(() {
-                          //   if (_titleGendor == 'Ayol' ||
-                          //       _titleGendor == 'Женщина') {
-                          //     gender = '2';
-                          //   } else {
-                          //     gender = '1';
-                          //   }
-                          // });
-                          // await CreateAdsStudent().CreateAds(
-                          //   districtId: data.districtId,
-                          //   UniderId: data.UniverId,
-                          //   fakultetId: data.FacutyId,
-                          //   Course: Course,
-                          //   roomOwner: RoomOwner,
-                          //   TypeHouse: TypeHouse,
-                          //   CountRoom: roomCount,
-                          //   TypeOfRent: _titleTime,
-                          //   cost: costcontroller?.text,
-                          //   typePayment: typeOfPayment,
-                          //   subway: subwayof,
-                          //   gender: gender,
-                          //   title: titlecontroller?.text,
-                          //   description: othercontroller?.text,
-                          // );
-
-
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Student2(
+                                titlecontroller1: titlecontroller1.text,
+                                univervalue: univervalue ? '1' : '2',
+                                viloyatidisi: data.viloyatid.toString(),
+                                viloyatvalue: regionsvalue ? '1' : '2',
+                                universiteteid: data.UniverId,
+                                titleGendor: _titleGendor.toString() == 'Erkak' ? '1' : '2',
+                                titlecount: _titleCount.toString(),
+                                phoneController: phoneController.text,
+                                house: house.toString() == 'ha' ? '1' : '2',
+                                addinformation: addinformation.text,
+                                numbervalue: numbervalue? '1':'2',
+                              ),
+                            ),
+                          );
+                          print(
+                              '${titlecontroller1.text} elonni nomlashhhh yooo+++++++++++');
+                          print(
+                              '${univervalue ? '1' : '2'} univervalue shartemas -----');
+                          print('${data.viloyatid} viloyatid +++++++++++');
+                          print(
+                              '${regionsvalue ? '1' : '2'} regionsvalue shart emas ');
+                          print('${data.UniverId} UniverId idisi +++++++++++');
+                          print('${_titleGendor} kimlarga++++++');
+                          print(
+                              '${phoneController.text} telefon raqam   +++++++++++');
+                          print(
+                              '${house} telefon raqam  sherik vsdjvnsijvbs +++++++++++');
+                          print(
+                              '${addinformation.text} qoshimcha malumotlar   +++++++++++');
+                          print(
+                              '${_titleCount} qoshimcha malumotlar   +++++++++++');
+                          print(
+                              '${numbervalue? '1':'2'} qoshimcha telefon raqam   +++++++++++');
                         },
                         child: Text(
                           "Keyingi ".tr(),

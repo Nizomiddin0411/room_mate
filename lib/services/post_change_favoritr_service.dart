@@ -32,6 +32,7 @@ class FavoriteChange {
       var data = await response.stream.bytesToString();
       // await Hive.box('token').put('token', jsonDecode(data)["access_token"]);
       print(Hive.box('token').get('token'));
+      print(Hive.box('type').get('type'));
       return jsonDecode(data);
     }
   }

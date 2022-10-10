@@ -25,6 +25,7 @@ import 'package:talaba_uy/screens/Search_University/search_page.dart';
 import 'package:talaba_uy/screens/drawer/drawer.dart';
 import 'package:talaba_uy/screens/menu/menu.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:talaba_uy/screens/menu/menu_for.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -39,6 +40,7 @@ void main() async {
   await EasyLocalization.ensureInitialized();
   await Hive.initFlutter();
   await Hive.openBox('token');
+  await Hive.openBox('type');
   // await Hive.openBox('name');
   await Hive.openBox('number');
   await Hive.openBox('regionId');
@@ -118,7 +120,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       body: Hive
           .box('token')
-          .isEmpty ? LanguagePage() : MenuPage(),
+          .isEmpty ? LanguagePage() : Hive.box('type').get('type') == 1 ? MenuFor() : MenuPage()  ,
       // This trailing comma makes auto-formatting nicer for build methods.
     );
   }

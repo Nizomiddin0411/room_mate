@@ -162,62 +162,72 @@ class _OylikIjaraState extends State<OylikIjara> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) =>
-                                        AdsDetail(
-                                          title: data.Ads[index].title
-                                              .toString(),
-                                          description: data
-                                              .Ads[index].description
-                                              .toString(),
-                                          houseType: data
-                                              .Ads[index].houseType
-                                              .toString(),
-                                          cost: data.Ads[index].cost
-                                              .toString(),
-                                          costTayp: data
-                                              .Ads[index].costType
-                                              .toString(),
-                                          countRoom: data
-                                              .Ads[index].roomCount
-                                              .toString(),
-                                          countPeople: data.Ads[index]
-                                              .roommateCount
-                                              .toString(),
-                                          region: data
-                                              .Ads[index].region?.name
-                                              .toString(),
-                                          district: data.Ads[index]
-                                              .district?.name
-                                              .toString(),
-                                          univer: data.Ads[index]
-                                              .university?.name
-                                              .toString(),
-                                          facultet: data.Ads[index]
-                                              .faculty?.name
-                                              .toString(),
-                                          liveWithOwner: data
-                                              .Ads[index]
-                                              .liveWithOwner
-                                              .toString(),
-                                          subway: data
-                                              .Ads[index].subway
-                                              .toString(),
-                                          favorite: data
-                                              .Ads[index].favorite
-                                              .toString(),
-                                          id: data.Ads[index].id
-                                              .toString(),
-                                          type: data.Ads[index].type
-                                              .toString(),
-                                          userId: data
-                                              .Ads[index]
-                                              .userId!
-                                          ,
-                                          userFullName: data
-                                              .Ads[index]
-                                              .userFullName
-                                              .toString(), chatApproved: data.Ads[index].chatApproved!,
-                                        )));
+                                    builder: (context) => AdsDetail(
+                                      title:
+                                      data.Ads[index].title.toString(),
+                                      description: data
+                                          .Ads[index].description
+                                          .toString(),
+                                      houseType: data.Ads[index].houseType
+                                          .toString(),
+                                      cost: data.Ads[index].cost.toString(),
+                                      costTayp: data.Ads[index].costType
+                                          .toString(),
+                                      countRoom: data.Ads[index].roomCount
+                                          .toString(),
+                                      countPeople: data
+                                          .Ads[index].roommateCount
+                                          .toString(),
+                                      region: data.Ads[index].region?.name
+                                          .toString(),
+                                      district: data
+                                          .Ads[index].district?.name
+                                          .toString(),
+
+                                      // facultet: data.Ads[index]
+                                      //     .faculty?.name
+                                      //     .toString(),
+                                      liveWithOwner: data
+                                          .Ads[index].liveWithOwner
+                                          .toString(),
+                                      subway:
+                                      data.Ads[index].subway.toString(),
+                                      favorite: data.Ads[index].favorite
+                                          .toString(),
+                                      id: data.Ads[index].id.toString(),
+                                      type: data.Ads[index].type.toString(),
+                                      userId: data.Ads[index].userId!,
+                                      userFullName: data
+                                          .Ads[index].userFullName
+                                          .toString(),
+                                      chatApproved:
+                                      data.Ads[index].chatApproved!,
+                                      phoneNumberShow:
+                                      data.Ads[index].phoneNumberShow,
+                                      phoneNumber:
+                                      data.Ads[index].phoneNumber,
+                                      stay_university:
+                                      data.Ads[index].stayUniversity,
+                                      stay_region:
+                                      data.Ads[index].stayRegion,
+                                      roommate_count:
+                                      data.Ads[index].roommateCount,
+                                      roommate_gender: data
+                                          .Ads[index].roommateGender
+                                          .toString(),
+                                      address: data.Ads[index].address,
+                                      floorsCount: data
+                                          .Ads[index].floorsCount
+                                          .toString(),
+                                      inFloor: data.Ads[index].inFloor
+                                          .toString(),
+                                      utility_bills:
+                                      data.Ads[index].utilityBills,
+                                      rentType: data.Ads[index].rentType
+                                          .toString(),
+                                      comfort: data.Ads[index].comfort,
+                                      createData: data.Ads[index].createdAt,
+                                    )));
                           },
                           child: Container(
                             width: 324.w,
@@ -365,81 +375,78 @@ class _OylikIjaraState extends State<OylikIjara> {
                                 MaterialPageRoute(
                                     builder: (context) =>
                                         AdsDetail(
-                                          title: data
-                                              .AdsForStudent[index]
-                                              .title
+                                          title: data.AdsForStudent[index].title
                                               .toString(),
                                           description: data
-                                              .AdsForStudent[index]
-                                              .description
+                                              .AdsForStudent[index].description
                                               .toString(),
                                           houseType: data
-                                              .AdsForStudent[index]
-                                              .houseType
+                                              .AdsForStudent[index].houseType
                                               .toString(),
-                                          cost: data
-                                              .AdsForStudent[index]
-                                              .cost
+                                          cost: data.AdsForStudent[index].cost
                                               .toString(),
                                           costTayp: data
-                                              .AdsForStudent[index]
-                                              .costType
+                                              .AdsForStudent[index].costType
                                               .toString(),
                                           countRoom: data
-                                              .AdsForStudent[index]
-                                              .roomCount
+                                              .AdsForStudent[index].roomCount
                                               .toString(),
-                                          countPeople: data
-                                              .AdsForStudent[index]
+                                          countPeople: data.AdsForStudent[index]
                                               .roommateCount
-                                              .toString(),
-                                          region: data
-                                              .AdsForStudent[index]
-                                              .region
-                                              ?.name
-                                              .toString(),
-                                          district: data
-                                              .AdsForStudent[index]
-                                              .district
-                                              ?.name
-                                              .toString(),
-                                          univer: data
-                                              .AdsForStudent[index]
-                                              .university
-                                              ?.name
-                                              .toString(),
-                                          facultet: data
-                                              .AdsForStudent[index]
-                                              .faculty
-                                              ?.name
                                               .toString(),
                                           liveWithOwner: data
                                               .AdsForStudent[index]
                                               .liveWithOwner
                                               .toString(),
                                           subway: data
-                                              .AdsForStudent[index]
-                                              .subway
+                                              .AdsForStudent[index].subway
                                               .toString(),
                                           favorite: data
-                                              .AdsForStudent[index]
-                                              .favorite
+                                              .AdsForStudent[index].favorite
                                               .toString(),
-                                          id: data
-                                              .AdsForStudent[index].id
+                                          id: data.AdsForStudent[index].id
                                               .toString(),
-                                          type: data
-                                              .AdsForStudent[index]
-                                              .type
+                                          type: data.AdsForStudent[index].type
                                               .toString(),
-                                          userId: data
-                                              .AdsForStudent[index]
-                                              .userId!
-                                          ,
+                                          userId:
+                                          data.AdsForStudent[index].userId!,
                                           userFullName: data
+                                              .AdsForStudent[index].userFullName
+                                              .toString(),
+                                          chatApproved: data
                                               .AdsForStudent[index]
-                                              .userFullName
-                                              .toString(), chatApproved: data.AdsForStudent[index].chatApproved!,
+                                              .chatApproved!,
+                                          phoneNumber: data
+                                              .AdsForStudent[index].phoneNumber,
+                                          phoneNumberShow: data
+                                              .AdsForStudent[index]
+                                              .phoneNumberShow,
+                                          floorsCount: data
+                                              .AdsForStudent[index].floorsCount.toString(),
+                                          district: data
+                                              .AdsForStudent[index].district,
+                                          stay_region: data
+                                              .AdsForStudent[index].stayRegion,
+                                          stay_university: data
+                                              .AdsForStudent[index].stayUniversity,
+                                          region: data
+                                              .AdsForStudent[index].region,
+                                          rentType: data
+                                              .AdsForStudent[index].rentType.toString(),
+                                          utility_bills: data
+                                              .AdsForStudent[index].utilityBills,
+                                          createData: data
+                                              .AdsForStudent[index].createdAt,
+                                          comfort: data
+                                              .AdsForStudent[index].comfort,
+                                          inFloor: data
+                                              .AdsForStudent[index].inFloor.toString(),
+                                          roommate_count: data
+                                              .AdsForStudent[index].roommateCount,
+                                          address: data
+                                              .AdsForStudent[index].address,
+                                          roommate_gender: data
+                                              .AdsForStudent[index].roommateGender.toString(),
                                         )));
                           },
                           child: Container(
