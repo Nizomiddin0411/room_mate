@@ -2,18 +2,55 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:talaba_uy/screens/Create_ads/owner_photo.dart';
 
 import '../../core/const/app_colors.dart';
 import 'owner_take_photo.dart';
 
+
 class OwnerHouseInfo extends StatefulWidget {
-  const OwnerHouseInfo({Key? key}) : super(key: key);
+  String? titleController;
+  String? addressController;
+  String? roommate_gender;
+  String? gender_matter;
+  String? district_id;
+  String? university_id;
+  String? university_id_matter;
+  String? id;
+
+  OwnerHouseInfo(
+    this.titleController,
+    this.roommate_gender,
+    this.gender_matter,
+    this.district_id,
+    this.id,
+    this.addressController,
+    this.university_id,
+    this.university_id_matter,
+  );
 
   @override
   State<OwnerHouseInfo> createState() => _OwnerHouseInfoState();
 }
 
 class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
+  TextEditingController? phoneController = TextEditingController();
+  String? house_type;
+  String? rent_type;
+  String? room_count;
+  String? floors_count;
+  String? in_floor;
+  TextEditingController descriptionController = TextEditingController();
+  String? cost_type;
+  String? live_with_owner;
+  String? utility_electricity;
+  String? unility_gaz;
+  String? utility_hot_water;
+  String? utility_cold_water;
+  String? utility_trash;
+  String comfort = '';
+  String? description;
+
   bool _checkHome = false;
   bool _checkMetro = false;
   String RoomOwner = '';
@@ -103,10 +140,11 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
   }
 
   int id = 1;
-  int id2 = 2;
-  int id3 = 3;
-  int id4 = 4;
-  int id5 = 5;
+  int id1 = 1;
+  int id2 = 1;
+  int id3 = 1;
+  int id4 = 1;
+  int id5 = 1;
   int idhouse = 6;
   bool value1 = false;
   bool value2 = false;
@@ -162,7 +200,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                         ],
                         autovalidateMode: AutovalidateMode.always,
                         keyboardType: TextInputType.phone,
-                        controller: costController,
+                        controller: phoneController,
                         decoration: InputDecoration(
                           border: OutlineInputBorder(),
                           labelText: "+998 ** *** ** **".tr(),
@@ -229,7 +267,9 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                               );
                             }).toList(),
                             onChanged: (newValue) {
-                              setState(() {});
+                              setState(() {
+                                house_type = newValue == 'Hovli' ? '2' : '1';
+                              });
                             },
                           ),
                         ),
@@ -278,7 +318,13 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                               );
                             }).toList(),
                             onChanged: (newValue) {
-                              setState(() {});
+                              setState(() {
+                                rent_type = newValue == 'Kunlik'
+                                    ? '1'
+                                    : newValue == 'Oylik'
+                                        ? '2'
+                                        : '3';
+                              });
                             },
                           ),
                         ),
@@ -331,7 +377,9 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                               );
                             }).toList(),
                             onChanged: (newValue) {
-                              setState(() {});
+                              setState(() {
+                                room_count = newValue.toString();
+                              });
                             },
                           ),
                         ),
@@ -384,7 +432,9 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                               );
                             }).toList(),
                             onChanged: (newValue) {
-                              setState(() {});
+                              setState(() {
+                                floors_count = newValue.toString();
+                              });
                             },
                           ),
                         ),
@@ -433,7 +483,9 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                               );
                             }).toList(),
                             onChanged: (newValue) {
-                              setState(() {});
+                              setState(() {
+                                in_floor = newValue.toString();
+                              });
                             },
                           ),
                         ),
@@ -496,6 +548,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                             onChanged: (String? e) {
                               setState(() {
                                 _dropownUsd = e;
+                                cost_type = e == 'sum' ? '1' : '2';
                               });
                             },
                             hint: Text(
@@ -550,7 +603,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                         SizedBox(height: 4.h),
                         Container(
                           height: 50.h,
-                          width: 150.w,
+                          width: 160.w,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.r),
                               border: Border.all(color: _colorGender)),
@@ -576,7 +629,9 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                               );
                             }).toList(),
                             onChanged: (newValue) {
-                              setState(() {});
+                              setState(() {
+                                print(newValue);
+                              });
                             },
                           ),
                         ),
@@ -669,16 +724,16 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                         SizedBox(
                           height: 1,
                         ),
-                        Text("Elektr energiya"),
-                        SizedBox(
-                          width: 100.w,
+                        Container(
+                          width: 180.w,
+                          child: Text("Elektr energiya"),
                         ),
                         Radio(
                           value: 1,
-                          groupValue: id,
+                          groupValue: id1,
                           onChanged: (val) {
                             setState(() {
-                              id = 1;
+                              id1 = 1;
                             });
                           },
                         ),
@@ -687,10 +742,10 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                         ),
                         Radio(
                           value: 2,
-                          groupValue: id,
+                          groupValue: id1,
                           onChanged: (val) {
                             setState(() {
-                              id = 2;
+                              id1 = 2;
                             });
                           },
                         ),
@@ -702,8 +757,10 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                   children: [
                     Row(
                       children: [
-                        Text("Gaz"),
-                        SizedBox(width: 158.w,),
+                        Container(
+                          width: 180.w,
+                          child: Text("Gaz"),
+                        ),
                         Radio(
                           value: 1,
                           groupValue: id2,
@@ -734,10 +791,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                             SizedBox(
                               height: 1.h,
                             ),
-                            Text("Sovuq suv"),
-                            SizedBox(
-                              width: 124.w,
-                            ),
+                            Container(width: 180.w, child: Text("Sovuq suv")),
                             Radio(
                               value: 1,
                               groupValue: id3,
@@ -770,10 +824,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                             SizedBox(
                               height: 1,
                             ),
-                            Text("Issiq suv"),
-                            SizedBox(
-                              width: 132.w,
-                            ),
+                            Container(width: 180.w, child: Text("Issiq suv")),
                             Radio(
                               value: 1,
                               groupValue: id4,
@@ -806,10 +857,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                             SizedBox(
                               height: 1.h,
                             ),
-                            Text("Chiqindi"),
-                            SizedBox(
-                              width: 136.w,
-                            ),
+                            Container(width: 180.w, child: Text("Chiqindi")),
                             Radio(
                               value: 1,
                               groupValue: id5,
@@ -863,6 +911,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                                 onChanged: (bool? value) {
                                   setState(() {
                                     this.value1 = value!;
+                                    comfort += '1';
                                   });
                                 },
                               ),
@@ -877,6 +926,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                                 onChanged: (bool? value) {
                                   setState(() {
                                     this.value2 = value!;
+                                    comfort += '2';
                                   });
                                 },
                               ),
@@ -891,6 +941,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                                 onChanged: (bool? value) {
                                   setState(() {
                                     this.value3 = value!;
+                                    comfort += '3';
                                   });
                                 },
                               ),
@@ -905,6 +956,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                                 onChanged: (bool? value) {
                                   setState(() {
                                     this.value4 = value!;
+                                    comfort += '4';
                                   });
                                 },
                               ),
@@ -919,6 +971,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                                 onChanged: (bool? value) {
                                   setState(() {
                                     this.value6 = value!;
+                                    comfort += '5';
                                   });
                                 },
                               ),
@@ -933,6 +986,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                                 onChanged: (bool? value) {
                                   setState(() {
                                     this.value5 = value!;
+                                    comfort += '6';
                                   });
                                 },
                               ),
@@ -960,7 +1014,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                   child: Container(
                     padding: EdgeInsets.only(left: 16.w),
                     child: TextFormField(
-                      controller: adsTitleController,
+                      controller: descriptionController,
                       maxLines: 6,
                       decoration: InputDecoration(
                         hintText: 'Message...'.tr(),
@@ -985,10 +1039,50 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                                 borderRadius: BorderRadius.circular(10.r)),
                             primary: AppColors.buttonLinear),
                         onPressed: () {
+                          live_with_owner = id.toString();
+                          utility_electricity = id1.toString();
+                          unility_gaz = id2.toString();
+                          utility_hot_water = id3.toString();
+                          utility_cold_water = id4.toString();
+                          utility_trash = id5.toString();
+                          comfort = comfort.split('').join(',');
+                          // print(live_with_owner.toString() + "A");
+                          // print(utility_electricity.toString() + "B");
+                          // print(unility_gaz.toString() + "C");
+                          // print(utility_hot_water.toString() + "D");
+                          // print(utility_cold_water.toString() + "E");
+                          // print(utility_trash.toString() + "F");
+                          print(comfort);
+                          setState(() {});
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => OwnerPhotoAdds()));
+                                  builder: (context) => OwnerCreateImage(
+                                        widget.titleController,
+                                        widget.roommate_gender,
+                                        widget.gender_matter,
+                                        widget.district_id,
+                                        widget.id,
+                                        widget.addressController,
+                                        widget.university_id,
+                                        widget.university_id_matter,
+                                        phoneController!.text.split(' ').join(''),
+                                        house_type,
+                                        rent_type,
+                                        room_count,
+                                        floors_count,
+                                        in_floor,
+                                        costController!.text.split(' ').join(''),
+                                        cost_type,
+                                        live_with_owner,
+                                        utility_electricity,
+                                        unility_gaz,
+                                        utility_hot_water,
+                                        utility_cold_water,
+                                        utility_trash,
+                                        comfort,
+                                        description
+                                      )));
                           // print(RoomOwner);
                           // print(TypeHouse=='Kvartira'? '1':'2');
                           // print(CountRoom);

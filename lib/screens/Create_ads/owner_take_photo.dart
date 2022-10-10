@@ -122,7 +122,7 @@ class _OwnerPhotoAddsState extends State<OwnerPhotoAdds> {
                           borderRadius: BorderRadius.circular(10.r)),
                       primary: AppColors.buttonLinear),
                   onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context)=>OwnerPhoto()));
+                  // Navigator.push(context, MaterialPageRoute(builder: (context)=>OwnerCreateImage()));
                   },
                   child: Text(
                     "E’lonni saqlash ".tr(),

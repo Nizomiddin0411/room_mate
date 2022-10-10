@@ -36,10 +36,13 @@ class _OwnerState extends State<Owner> {
   String genderString = '';
   String dropDown2 = "";
   String countRoom = '';
+  TextEditingController? titleController;
   TextEditingController? addressController;
-  TextEditingController? costController;
-  TextEditingController? adsTitleController;
-  TextEditingController? inputcontroller;
+  String? roommate_gender;
+  String? gender_matter;
+  String? district_id;
+  String? university_id;
+  String? university_id_matter;
   GetDistrictModel? dropDown1;
   Color _colorRegion = Colors.grey;
   bool _RegionOnClick = false;
@@ -95,13 +98,11 @@ class _OwnerState extends State<Owner> {
   @override
   void initState() {
     addressController = TextEditingController();
-    costController = TextEditingController();
-    adsTitleController = TextEditingController();
-    inputcontroller = TextEditingController();
+    titleController = TextEditingController();
     super.initState();
   }
 
-  int id = 1;
+  String id = '1';
   int id2 = 2;
   int id3 = 3;
   int id4 = 4;
@@ -155,12 +156,12 @@ class _OwnerState extends State<Owner> {
                           }
                         });
                       },
-                      controller: addressController,
+                      controller: titleController,
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         hintText: "E’lonni nomlang".tr(),
                         hintStyle:
-                        TextStyle(fontSize: 14.sp, color: Colors.grey),
+                            TextStyle(fontSize: 14.sp, color: Colors.grey),
                       ),
                       cursorColor: Colors.grey.shade800,
                       cursorWidth: 1.5.w,
@@ -202,7 +203,12 @@ class _OwnerState extends State<Owner> {
                             icon: Icon(Icons.arrow_drop_down_outlined),
                             items: gender.map((e) {
                               return DropdownMenuItem<String>(
-                                onTap: () {},
+                                onTap: () {
+                                  setState(() {
+                                    roommate_gender =
+                                        e == "Qiz bolaga" ? '2' : '1';
+                                  });
+                                },
                                 value: e,
                                 child: Padding(
                                   padding: EdgeInsets.only(left: 8.w),
@@ -223,12 +229,17 @@ class _OwnerState extends State<Owner> {
                     SizedBox(width: 15.w),
                     Column(
                       children: [
-                        Text("Ahamiyatsiz"),
+                        Text(
+                          "Ahamiyatsiz",
+                          style: TextStyle(fontSize: 13.sp),
+                        ),
                         Checkbox(
                           value: this.value5,
                           onChanged: (bool? value) {
                             setState(() {
                               this.value5 = value!;
+                              gender_matter = value ? '1' : '2';
+                              print(value);
                             });
                           },
                         ),
@@ -314,8 +325,10 @@ class _OwnerState extends State<Owner> {
                           items: data.districts.map((e) {
                             return DropdownMenuItem<String>(
                               onTap: () {
-                                print("${e.id}");
                                 data.districtOwnerId = e.id.toString();
+
+                                district_id = e.id.toString();
+                                setState(() {});
                               },
                               value: data.isDistrict
                                   ? e.name.toString()
@@ -331,7 +344,7 @@ class _OwnerState extends State<Owner> {
                           onChanged: (newValue) {
                             _DiscritOnClick = true;
                             _colorDistric = Colors.grey;
-                            print("Selected ----------- $newValue");
+
                             setState(() {
                               // dropDown1 = newValue as GetDistrictModel?;
                               dropDown = newValue.toString();
@@ -418,19 +431,25 @@ class _OwnerState extends State<Owner> {
                         Container(
                           child: Column(
                             children: [
-                              Image.asset("assets/images/maps.png"),
-                              Row(
-                                children: [
-                                  SizedBox(
-                                    width: 7.w,
-                                  ),
-                                  Text(
-                                      "Amir Temur ko’chasi 21, Yunusobod tumani"),
-                                  SizedBox(
-                                    width: 45.w,
-                                  ),
-                                  Icon(Icons.arrow_forward)
-                                ],
+                              Container(
+                                child: Image.asset(
+                                  "assets/images/maps.png",
+                                  fit: BoxFit.fill,
+                                ),
+                              ),
+                              Container(
+                                margin: EdgeInsets.symmetric(horizontal: 4.w),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(
+                                      "Amir Temur ko’chasi 21, Yunusobod tumani",
+                                      style: TextStyle(fontSize: 14.sp),
+                                    ),
+                                    Icon(Icons.arrow_forward)
+                                  ],
+                                ),
                               )
                             ],
                           ),
@@ -469,7 +488,8 @@ class _OwnerState extends State<Owner> {
                               groupValue: id,
                               onChanged: (val) {
                                 setState(() {
-                                  id = 1;
+                                  id = '1';
+                                  print(id);
                                 });
                               },
                             ),
@@ -485,7 +505,7 @@ class _OwnerState extends State<Owner> {
                               groupValue: id,
                               onChanged: (val) {
                                 setState(() {
-                                  id = 2;
+                                  id = '2';
                                 });
                               },
                             ),
@@ -567,12 +587,13 @@ class _OwnerState extends State<Owner> {
                           if (dropDown2 == e.name) {
                             data.UniverId = e.id.toString();
                             data.isId = e.id;
+                            university_id = e.id.toString();
                           }
 
                           // final selected = data.univer.where((element) => element.name == e.name);
                           // data.getFaculty(selected.last.id!);
                           return context.read<AutCubit>().selectedLang.index ==
-                              1
+                                  1
                               ? e.name.toString()
                               : e.nameRu.toString();
                         }).toList(),
@@ -585,7 +606,6 @@ class _OwnerState extends State<Owner> {
                               .where((element) => element.name == value);
                           data.getFaculty(selected.last.id!);
                           // data.getFaculty(data.isId!);
-                          print('${selected}=================');
                           setState(() {
                             dropDown2 = value.toString();
                             _UniverOnClick = true;
@@ -600,12 +620,16 @@ class _OwnerState extends State<Owner> {
                     ),
                     Column(
                       children: [
-                        Text("Ahamiyatsiz"),
+                        Text(
+                          "Ahamiyatsiz",
+                          style: TextStyle(fontSize: 14.sp),
+                        ),
                         Checkbox(
                           value: this.value5,
                           onChanged: (bool? value) {
                             setState(() {
                               this.value5 = value!;
+                              university_id_matter = value ? '1' : '2';
                             });
                           },
                         ),
@@ -629,7 +653,7 @@ class _OwnerState extends State<Owner> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => OwnerHouseInfo()));
+                                  builder: (context) => OwnerHouseInfo(titleController!.text, roommate_gender, gender_matter, district_id, id, addressController!.text,  university_id, university_id_matter)));
                           // print(RoomOwner);
                           // print(TypeHouse=='Kvartira'? '1':'2');
                           // print(CountRoom);

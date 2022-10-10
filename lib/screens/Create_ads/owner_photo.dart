@@ -8,40 +8,95 @@ import 'package:image_picker/image_picker.dart';
 import 'package:talaba_uy/screens/Create_ads/create_succed_dart.dart';
 
 import '../../core/const/app_colors.dart';
-class OwnerPhoto extends StatefulWidget {
-  const OwnerPhoto({Key? key}) : super(key: key);
+
+class OwnerCreateImage extends StatefulWidget {
+  String? titleController;
+  String? roommate_gender;
+  String? gender_matter;
+  String? district_id;
+  String? id;
+  String? addressController;
+  String? university_id;
+  String? university_id_matter;
+  String? phoneController;
+  String? house_type;
+  String? rent_type;
+  String? room_count;
+  String? floors_count;
+  String? in_floor;
+  String? costController;
+  String? cost_type;
+  String? live_with_owner;
+  String? utility_electricity;
+  String? unility_gaz;
+  String? utility_hot_water;
+  String? utility_cold_water;
+  String? utility_trash;
+  String? comfort;
+  String? description;
+
+  OwnerCreateImage(
+    this.titleController,
+    this.roommate_gender,
+    this.gender_matter,
+    this.district_id,
+    this.id,
+    this.addressController,
+    this.university_id,
+    this.university_id_matter,
+    this.phoneController,
+    this.house_type,
+    this.rent_type,
+    this.room_count,
+    this.floors_count,
+    this.in_floor,
+    this.costController,
+    this.cost_type,
+    this.live_with_owner,
+    this.utility_electricity,
+    this.unility_gaz,
+    this.utility_hot_water,
+    this.utility_cold_water,
+    this.utility_trash,
+    this.comfort,
+    this.description
+  );
+
+
 
   @override
-  State<OwnerPhoto> createState() => _OwnerPhotoState();
+  State<OwnerCreateImage> createState() => _OwnerCreateImageState();
 }
 
-class _OwnerPhotoState extends State<OwnerPhoto> {
-
+class _OwnerCreateImageState extends State<OwnerCreateImage> {
   List<File> imageList = [];
   List<bool> imageExist = [];
+  late int btn;
   File? imgFile;
   final imgPicker = ImagePicker();
+  File? file;
+  ImagePicker image = ImagePicker();
 
   Future<void> showOptionsDialog(BuildContext context) {
     return showDialog(
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Center(child: Text("Add image")),
+            title: Center(child: Text("Rasm yuklash")),
             content: SingleChildScrollView(
               child: ListBody(
                 children: [
                   GestureDetector(
-                    child: Text("Image From Camera"),
+                    child: Text("From Camera"),
                     onTap: () {
-                      openCamera();
+                      getcam();
                     },
                   ),
                   Padding(padding: EdgeInsets.all(10)),
                   GestureDetector(
-                    child: Text("Take Image From Gallery"),
+                    child: Text("From Gallery"),
                     onTap: () {
-                      openGallery();
+                      getgall();
                     },
                   ),
                 ],
@@ -50,24 +105,24 @@ class _OwnerPhotoState extends State<OwnerPhoto> {
           );
         });
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
-        elevation: 0,
         leading: IconButton(
-          icon:Icon(Icons.arrow_back_outlined),
-          onPressed: (){
+          icon: Icon(Icons.arrow_back_outlined),
+          onPressed: () {
             Navigator.pop(context);
           },
           color: Colors.black,
         ),
         title: Center(
             child: Text(
-              "E’lon yaratish",
-              style: TextStyle(color: Colors.blue),
-            )),
+          "E’lon yaratish",
+          style: TextStyle(color: Colors.blue),
+        )),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -75,149 +130,204 @@ class _OwnerPhotoState extends State<OwnerPhoto> {
           child: Column(
             children: [
               SizedBox(
-                height: 10,
+                height: 10.h,
               ),
               Column(
                 children: [
-                  Stack(children: [
-                    Image.asset("assets/images/house.png"),
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(220, 0, 0, 0),
-                      child: Container(
-                        child: Icon(
-                          Icons.delete,
-                          color: Colors.white,
-                        ),
-                        height: 30.h,
-                        width: 24.w,
-                        decoration: BoxDecoration(
-                          color: Colors.red,
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(5),
+                  Column(
+                    children: [
+                      Container(
+                        child: DottedBorder(
+                          dashPattern: [6, 3],
+                          color: Colors.black,
+                          strokeWidth: 1,
+                          child: InkWell(
+                            onTap: ()
+                            async{
+                              await _takeFromCamera(0);
+                              setState(() {
+                                btn = 0;
+                              });
+                            },
+                            child: Container(
+                              height: 250.h,
+                              width: 250.w,
+                              color: Colors.black12,
+                              child: file == null
+                                  ? Icon(
+                                Icons.camera_alt_sharp,
+                                size: 50.sp,
+                              )
+                                  : Image.file(
+                                file!,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
                           ),
                         ),
+                        width: 250.w,
+                        height: 250.h,
                       ),
-                    ),
-                  ]),
+
+                    ],
+                  ),
                   SizedBox(
-                    height: 15,
+                    height: 15.h,
                   ),
                   Text("Asosiy rasm"),
                   Divider(
-                    height: 20.0,
+                    height: 20.0.h,
                     color: Colors.black,
                   ),
-                  SizedBox(height: 10),
-                  Column(
+                  SizedBox(height: 10.h),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Row(
+                     Stack(
+                       children: [
+                         Column(
+                           children: [
+                             InkWell(
+                               onTap: () {
+                                 showOptionsDialog(context);
+                               },
+                               child: Container(
+                                 height: 110.h,
+                                 width: 90.w,
+                                 decoration: BoxDecoration(
+                                 color: Colors.black12,
+                                 borderRadius:
+                                 BorderRadius.all(Radius.circular(4.r))),
+                                 child: file == null
+                                     ? Icon(
+                                   Icons.add,
+                                   size: 30.sp,
+                                 )
+                                     : Image.file(
+                                   file!,
+                                   fit: BoxFit.fill,
+                                 ),
+                               ),
+                             ),
+                           ],
+                         ),
+                         Padding(
+                           padding:  EdgeInsets.fromLTRB(80.w, 0, 4.w, 0),
+                           child: Container(
+                             height: 18.h,
+                             width: 18.w,
+                             child: Icon(
+                               Icons.remove,
+                               color: Colors.white,
+                               size: 19.sp,
+                             ),
+                             decoration: BoxDecoration(
+                                 color: Colors.red,
+                                 borderRadius:
+                                 BorderRadius.all(Radius.circular(4.r))),
+                           ),
+                         ),
+                       ],
+                     ),
+                      Stack(
                         children: [
-                          Container(
-                            color: Colors.blueGrey[100],
-                            child: DottedBorder(
-                              dashPattern: [6, 3],
-                              color: Colors.black,
-                              strokeWidth: 1,
-                              child: Padding(
-                                padding: const EdgeInsets.fromLTRB(0, 20, 0, 0),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    IconButton(onPressed: (){
-                                      showOptionsDialog(context);
-                                    }, icon: Icon(Icons.camera_alt_rounded))
-                                  ],
+                          Column(
+                            children: [
+                              InkWell(
+                                onTap: () {
+                                  showOptionsDialog(context);
+                                },
+                                child: Container(
+                                  height: 110.h,
+                                  width: 90.w,
+                                  decoration: BoxDecoration(
+                                  color: Colors.black12,
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(4.r))),
+                                  child: file == null
+                                      ? Icon(
+                                    Icons.add,
+                                    size: 30.sp,
+                                  )
+                                      : Image.file(
+                                    file!,
+                                    fit: BoxFit.fill,
+                                  ),
                                 ),
                               ),
+                            ],
+                          ),
+                          Padding(
+                            padding:  EdgeInsets.fromLTRB(80.w, 0, 4.w, 0),
+                            child: Container(
+                              height: 18.h,
+                              width: 18.w,
+                              child: Icon(
+                                Icons.remove,
+                                color: Colors.white,
+                                size: 19.sp,
+                              ),
+                              decoration: BoxDecoration(
+                                  color: Colors.red,
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(3.r))),
                             ),
-                            width: 95.w,
-                            height: 95.h,
                           ),
-                          Stack(
+                        ],
+                      ),
+                      Stack(
+                        children: [
+                          Column(
                             children: [
-                              Container(
-                                height: 100.h,
-                                width: 100.w,
-                                child: Image.asset("assets/images/house.png"),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(95, 0, 2, 0),
+                              InkWell(
+                                onTap: () {
+                                  showOptionsDialog(context);
+                                },
                                 child: Container(
-                                  height: 20,
-                                  width: 24,
-                                  child: Icon(
-                                    Icons.remove,
-                                    color: Colors.white,
-                                  ),
+                                  height: 110.h,
+                                  width: 90.w,
                                   decoration: BoxDecoration(
-                                      color: Colors.red,
-                                      borderRadius:
-                                      BorderRadius.all(Radius.circular(3))),
+                                    color: Colors.black12,
+                                    borderRadius: BorderRadius.circular(4.r)
+                                  ),
+                                  child: file == null
+                                      ? Icon(
+                                    Icons.add,
+                                    size: 30.sp,
+                                  )
+                                      : Image.file(
+                                    file!,
+                                    fit: BoxFit.fill,
+                                  ),
                                 ),
                               ),
                             ],
                           ),
-                          Stack(
-                            children: [
-                              Container(
-                                height: 100.h,
-                                width: 100.w,
-                                child: Image.asset("assets/images/house.png"),
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(80.w, 0, 4.w, 0),
+                            child: Container(
+                              height: 18.h,
+                              width: 18.w,
+                              child: Icon(
+                                Icons.remove,
+                                color: Colors.white,
+                                size: 19.sp,
                               ),
-                              Padding(
-                                padding: const EdgeInsets.fromLTRB(95, 0, 2, 0),
-                                child: Container(
-                                  height: 20,
-                                  width: 24,
-                                  child: Icon(
-                                    Icons.remove,
-                                    color: Colors.white,
-                                  ),
-                                  decoration: BoxDecoration(
-                                      color: Colors.red,
-                                      borderRadius:
-                                      BorderRadius.all(Radius.circular(3))),
-                                ),
-                              ),
-                            ],
+                              decoration: BoxDecoration(
+                                  color: Colors.red,
+                                  borderRadius:
+                                  BorderRadius.all(Radius.circular(3.r))),
+                            ),
                           ),
                         ],
                       ),
                     ],
                   ),
-                  SizedBox(height: 25,),
-                  Column(children: [
-                    Row(children: [
-                      Stack(
-                        children: [
-                          Container(
-                            height: 100.h,
-                            width: 100.w,
-                            child: Image.asset("assets/images/house.png"),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(95, 0, 2, 0),
-                            child: Container(
-                              height: 20,
-                              width: 24,
-                              child: Icon(
-                                Icons.remove,
-                                color: Colors.white,
-                              ),
-                              decoration: BoxDecoration(
-                                  color: Colors.red,
-                                  borderRadius:
-                                  BorderRadius.all(Radius.circular(3))),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],)
-                  ],)
-                ],
+                  ],
               ),
               SizedBox(
-                height: 50.h,
+                height: 134.h,
               ),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 18.h, horizontal: 31.w),
@@ -230,7 +340,10 @@ class _OwnerPhotoState extends State<OwnerPhoto> {
                             borderRadius: BorderRadius.circular(10.r)),
                         primary: AppColors.buttonLinear),
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context)=>CreateSuccedful()));
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => CreateSuccedful()));
                     },
                     child: Text(
                       "E’lonni saqlash".tr(),
@@ -240,12 +353,16 @@ class _OwnerPhotoState extends State<OwnerPhoto> {
                   ),
                 ),
               ),
+              SizedBox(
+                height: 15.h,
+              ),
             ],
           ),
         ),
       ),
     );
   }
+
   void openCamera() async {
     var imgCamera = await imgPicker.getImage(source: ImageSource.camera);
     setState(() {
@@ -262,16 +379,17 @@ class _OwnerPhotoState extends State<OwnerPhoto> {
     Navigator.of(context).pop();
   }
 
-  Widget displayImage(){
-    if(imgFile == null){
+  Widget displayImage() {
+    if (imgFile == null) {
       return Text("No Image Selected!");
-    } else{
-      return Image.file(imgFile!, width: 350, height: 350);
+    } else {
+      return Image.file(imgFile!, width: 350.w, height: 350.h);
     }
   }
+
   _takeFromCamera(int Ind) async {
     final XFile? photo =
-    await ImagePicker().pickImage(source: ImageSource.camera);
+        await ImagePicker().pickImage(source: ImageSource.camera);
     if (photo != null) {
       final image = File(photo.path);
       // imageList.add(image);
@@ -281,5 +399,21 @@ class _OwnerPhotoState extends State<OwnerPhoto> {
       imageList.insert(Ind, image);
       imageExist.insert(Ind, true);
     }
+  }
+
+  getcam() async {
+    // ignore: deprecated_member_use
+    var img = await image.getImage(source: ImageSource.camera);
+    setState(() {
+      file = File(img!.path);
+    });
+  }
+
+  getgall() async {
+    // ignore: deprecated_member_use
+    var img = await image.getImage(source: ImageSource.gallery);
+    setState(() {
+      file = File(img!.path);
+    });
   }
 }

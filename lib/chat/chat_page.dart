@@ -36,6 +36,7 @@ class _ChatPageState extends State<ChatPage> {
   late CollectionReference imgRef;
   late firebase_storage.Reference ref;
   ScrollController _scrollController = ScrollController();
+  double topMsg = 0;
 
   List<File> _image = [];
   final picker = ImagePicker();
@@ -72,9 +73,10 @@ class _ChatPageState extends State<ChatPage> {
             Text(
               widget.name,
               style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 17.sp),
+                color: Colors.white,
+                fontWeight: FontWeight.w500,
+                fontSize: 17.sp,
+              ),
             ),
           ],
         ),
@@ -96,6 +98,10 @@ class _ChatPageState extends State<ChatPage> {
                   controller: _scrollController,
                   child: Column(
                     children: [
+                      Container(
+                        width: 100,
+                        height: topMsg,
+                      ),
                       Messages(
                         name: widget.name,
                         id: widget.id,
