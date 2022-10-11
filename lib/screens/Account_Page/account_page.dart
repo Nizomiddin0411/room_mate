@@ -135,7 +135,7 @@ class _AccountPageState extends State<AccountPage> {
                 Switch(
                   value: isSwitched,
                   onChanged: (value) {
-                     ChangeProfile().ChangeProf(id: _switchValue ? '2': '1');
+                     ChangeProfile().ChangeProf(hidePhone: _switchValue ? '1': '2', hideProfile: '');
                     setState(() {
                       isSwitched = value;
                     });
@@ -166,7 +166,7 @@ class _AccountPageState extends State<AccountPage> {
                 Switch(
                   value: isSwitchedSecond,
                   onChanged: (value) {
-                    // ChangeProfile().ChangeProf(id: _switchValue ? '2': '1');
+                    ChangeProfile().ChangeProf(hideProfile: _switchValue ? '1': '2', hidePhone: '');
                     setState(() {
                       isSwitchedSecond = value;
                     });

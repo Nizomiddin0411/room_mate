@@ -28,8 +28,7 @@ class _MessagesState extends State<Messages> {
     scrollController.addListener(() {
       if (scrollController.position.atEdge) {
         bool isTop = scrollController.position.pixels == 0;
-        if (isTop) {
-        }
+        if (isTop) {}
       }
     });
     super.initState();
@@ -121,10 +120,11 @@ class _MessagesState extends State<Messages> {
                                       ":0" +
                                       d.minute.toString(),
                               style: TextStyle(
-                                  color: id == qs['id']
-                                      ? Color.fromRGBO(45, 164, 48, 1)
-                                      : Color.fromRGBO(142, 142, 147, 1),
-                                  fontSize: 11.sp),
+                                color: id == qs['id']
+                                    ? Color.fromRGBO(45, 164, 48, 1)
+                                    : Color.fromRGBO(142, 142, 147, 1),
+                                fontSize: 11.sp,
+                              ),
                             ),
                           ],
                         ),

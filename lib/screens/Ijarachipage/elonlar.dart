@@ -285,7 +285,8 @@ class _ElonlarState extends State<Elonlar> {
                                             ),
                                             child: Center(
                                                 child: Text(
-                                              "21 Sentabr,14:01",
+                                                  '21 Sentabr , 14:01',
+                                              // "${data.Ads[index].createdAt!.split(":").removeAt(2)}",
                                               style: TextStyle(
                                                   color: AppColors
                                                       .backgroundWhite),

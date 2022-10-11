@@ -2,18 +2,54 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:talaba_uy/screens/Create_ads/owner_photo.dart';
 
 import '../../core/const/app_colors.dart';
 import 'owner_take_photo.dart';
 
 class OwnerHouseInfo extends StatefulWidget {
-  const OwnerHouseInfo({Key? key}) : super(key: key);
+  String? titleController;
+  String? addressController;
+  String? roommate_gender;
+  String? gender_matter;
+  String? district_id;
+  String? university_id;
+  String? university_id_matter;
+  String? id;
+
+  OwnerHouseInfo(
+    this.titleController,
+    this.roommate_gender,
+    this.gender_matter,
+    this.district_id,
+    this.id,
+    this.addressController,
+    this.university_id,
+    this.university_id_matter,
+  );
 
   @override
   State<OwnerHouseInfo> createState() => _OwnerHouseInfoState();
 }
 
 class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
+  TextEditingController? phoneController = TextEditingController();
+  String? house_type;
+  String? rent_type;
+  String? room_count;
+  String? floors_count;
+  String? in_floor;
+  TextEditingController descriptionController = TextEditingController();
+  String? cost_type;
+  String? live_with_owner;
+  String? utility_electricity;
+  String? unility_gaz;
+  String? utility_hot_water;
+  String? utility_cold_water;
+  String? utility_trash;
+  List comfort = [];
+  String? description;
+
   bool _checkHome = false;
   bool _checkMetro = false;
   String RoomOwner = '';
@@ -30,24 +66,22 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
   TextEditingController? costController;
   TextEditingController? adsTitleController;
   TextEditingController? inputcontroller;
-  Color _colorRegion = Colors.grey;
-  bool _RegionOnClick = false;
-  Color _colorDistric = Colors.grey;
-  bool _DiscritOnClick = false;
-  Color _colorUniver = Colors.grey;
-  bool _UniverOnClick = false;
-  Color _colorTypeHouse = Colors.grey;
-  bool _TypeHouseOnClick = false;
-  Color _colorRoomCount = Colors.grey;
-  bool _RoomCountOnClick = false;
-  Color _colorRentType = Colors.grey;
-  bool _RentTypeOnClick = false;
-  Color _colorTypeCost = Colors.grey;
-  bool _TypeCostOnClick = false;
-  Color _colorGender = Colors.grey;
-  bool _GenderOnClick = false;
-  Color _colorCountPupil = Colors.grey;
-  bool _CountPupilOnClick = false;
+  Color _phoneNumberColor = Colors.grey;
+  bool _phoneNumberOnClick = false;
+  Color _houseTypeColor = Colors.grey;
+  bool _houseTypeOnClick = false;
+  Color _rentTypeColor = Colors.grey;
+  bool _rentTypeOnClick = false;
+  Color _roomCountColor = Colors.grey;
+  bool _roomCountOnClick = false;
+  Color _floorsCountColor = Colors.grey;
+  bool _floorsCountOnClick = false;
+  Color _inFloorColor = Colors.grey;
+  bool _inFloorOnClick = false;
+  Color _costTypeColor = Colors.grey;
+  bool _costTypeOnClick = false;
+  Color _descriptionColor = Colors.grey;
+  bool _descriptionOnClick = false;
   Color _colorForm = Colors.grey;
   bool value5 = false;
   var pricetype = [
@@ -103,10 +137,11 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
   }
 
   int id = 1;
-  int id2 = 2;
-  int id3 = 3;
-  int id4 = 4;
-  int id5 = 5;
+  int id1 = 1;
+  int id2 = 1;
+  int id3 = 1;
+  int id4 = 1;
+  int id5 = 1;
   int idhouse = 6;
   bool value1 = false;
   bool value2 = false;
@@ -152,6 +187,11 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                     Container(
                       height: 50.h,
                       width: 320.w,
+                      padding: EdgeInsets.symmetric(horizontal: 8.w),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: _phoneNumberColor),
+                        borderRadius: BorderRadius.circular(6.r)
+                      ),
                       child: TextFormField(
                         inputFormatters: [
                           TextInputMask(
@@ -162,11 +202,25 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                         ],
                         autovalidateMode: AutovalidateMode.always,
                         keyboardType: TextInputType.phone,
-                        controller: costController,
+                        controller: phoneController,
                         decoration: InputDecoration(
-                          border: OutlineInputBorder(),
-                          labelText: "+998 ** *** ** **".tr(),
+                          border: InputBorder.none,
+                          hintText: "+998 ** *** ** **".tr(),
                         ),
+                        
+                        onChanged: (e) {
+                          setState(() {
+                            print(e.length);
+                            if (e.length == 18) {
+                            _phoneNumberOnClick = true;
+                            _phoneNumberColor = Colors.grey;
+                          } else {
+                            _phoneNumberOnClick = false;
+                            _phoneNumberColor = Colors.red;
+                          }
+                          });
+                          
+                        },
                       ),
                     ),
                     // Column(
@@ -206,7 +260,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                           width: 130.w,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.r),
-                              border: Border.all(color: _colorGender)),
+                              border: Border.all(color: _houseTypeColor)),
                           child: DropdownButtonFormField(
                             hint: Padding(
                               padding: EdgeInsets.only(left: 8.w),
@@ -229,7 +283,11 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                               );
                             }).toList(),
                             onChanged: (newValue) {
-                              setState(() {});
+                              setState(() {
+                                house_type = newValue == 'Hovli' ? '2' : '1';
+                                _houseTypeOnClick = true;
+                                _houseTypeColor = Colors.grey;
+                              });
                             },
                           ),
                         ),
@@ -255,7 +313,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                           width: 130.w,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.r),
-                              border: Border.all(color: _colorGender)),
+                              border: Border.all(color: _rentTypeColor)),
                           child: DropdownButtonFormField(
                             hint: Padding(
                               padding: EdgeInsets.only(left: 8.w),
@@ -278,7 +336,15 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                               );
                             }).toList(),
                             onChanged: (newValue) {
-                              setState(() {});
+                              setState(() {
+                                rent_type = newValue == 'Kunlik'
+                                    ? '1'
+                                    : newValue == 'Oylik'
+                                        ? '2'
+                                        : '3';
+                                _rentTypeOnClick = true;
+                                _rentTypeColor = Colors.grey;
+                              });
                             },
                           ),
                         ),
@@ -308,7 +374,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                           width: 130.w,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.r),
-                              border: Border.all(color: _colorGender)),
+                              border: Border.all(color: _roomCountColor)),
                           child: DropdownButtonFormField(
                             hint: Padding(
                               padding: EdgeInsets.only(left: 8.w),
@@ -331,7 +397,11 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                               );
                             }).toList(),
                             onChanged: (newValue) {
-                              setState(() {});
+                              setState(() {
+                                room_count = newValue.toString();
+                                _roomCountOnClick = true;
+                                _roomCountColor = Colors.grey;
+                              });
                             },
                           ),
                         ),
@@ -361,7 +431,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                           width: 130.w,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.r),
-                              border: Border.all(color: _colorGender)),
+                              border: Border.all(color: _floorsCountColor)),
                           child: DropdownButtonFormField(
                             hint: Padding(
                               padding: EdgeInsets.only(left: 8.w),
@@ -384,7 +454,11 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                               );
                             }).toList(),
                             onChanged: (newValue) {
-                              setState(() {});
+                              setState(() {
+                                floors_count = newValue.toString();
+                                _floorsCountOnClick = true;
+                                _floorsCountColor = Colors.grey;
+                              });
                             },
                           ),
                         ),
@@ -410,7 +484,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                           width: 130.w,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.r),
-                              border: Border.all(color: _colorGender)),
+                              border: Border.all(color: _inFloorColor)),
                           child: DropdownButtonFormField(
                             hint: Padding(
                               padding: EdgeInsets.only(left: 8.w),
@@ -433,7 +507,11 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                               );
                             }).toList(),
                             onChanged: (newValue) {
-                              setState(() {});
+                              setState(() {
+                                in_floor = newValue.toString();
+                                _inFloorOnClick = true;
+                                _inFloorColor = Colors.grey;
+                              });
                             },
                           ),
                         ),
@@ -460,7 +538,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                 Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
-                      border: Border.all(color: _colorTypeCost),
+                      border: Border.all(color: _costTypeColor),
                       borderRadius: BorderRadius.circular(8.r)),
                   child: Container(
                     padding: EdgeInsets.only(left: 16.w),
@@ -468,11 +546,11 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                       onChanged: (e) {
                         setState(() {
                           if (e.length > 0) {
-                            _TypeCostOnClick = true;
-                            _colorTypeCost = Colors.grey;
+                            _costTypeOnClick = true;
+                            _costTypeColor = Colors.grey;
                           } else {
-                            _TypeCostOnClick = false;
-                            _colorTypeCost = Colors.red;
+                            _costTypeOnClick = false;
+                            _costTypeColor = Colors.red;
                           }
                         });
                       },
@@ -496,6 +574,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                             onChanged: (String? e) {
                               setState(() {
                                 _dropownUsd = e;
+                                cost_type = e == 'sum' ? '1' : '2';
                               });
                             },
                             hint: Text(
@@ -550,10 +629,10 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                         SizedBox(height: 4.h),
                         Container(
                           height: 50.h,
-                          width: 150.w,
+                          width: 160.w,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.r),
-                              border: Border.all(color: _colorGender)),
+                              border: Border.all(color: Colors.grey)),
                           child: DropdownButtonFormField(
                             hint: Padding(
                               padding: EdgeInsets.only(left: 8.w),
@@ -576,7 +655,9 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                               );
                             }).toList(),
                             onChanged: (newValue) {
-                              setState(() {});
+                              setState(() {
+                                print(newValue);
+                              });
                             },
                           ),
                         ),
@@ -669,16 +750,16 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                         SizedBox(
                           height: 1,
                         ),
-                        Text("Elektr energiya"),
-                        SizedBox(
-                          width: 100.w,
+                        Container(
+                          width: 180.w,
+                          child: Text("Elektr energiya"),
                         ),
                         Radio(
                           value: 1,
-                          groupValue: id,
+                          groupValue: id1,
                           onChanged: (val) {
                             setState(() {
-                              id = 1;
+                              id1 = 1;
                             });
                           },
                         ),
@@ -687,10 +768,10 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                         ),
                         Radio(
                           value: 2,
-                          groupValue: id,
+                          groupValue: id1,
                           onChanged: (val) {
                             setState(() {
-                              id = 2;
+                              id1 = 2;
                             });
                           },
                         ),
@@ -702,8 +783,10 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                   children: [
                     Row(
                       children: [
-                        Text("Gaz"),
-                        SizedBox(width: 158.w,),
+                        Container(
+                          width: 180.w,
+                          child: Text("Gaz"),
+                        ),
                         Radio(
                           value: 1,
                           groupValue: id2,
@@ -734,10 +817,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                             SizedBox(
                               height: 1.h,
                             ),
-                            Text("Sovuq suv"),
-                            SizedBox(
-                              width: 124.w,
-                            ),
+                            Container(width: 180.w, child: Text("Sovuq suv")),
                             Radio(
                               value: 1,
                               groupValue: id3,
@@ -770,10 +850,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                             SizedBox(
                               height: 1,
                             ),
-                            Text("Issiq suv"),
-                            SizedBox(
-                              width: 132.w,
-                            ),
+                            Container(width: 180.w, child: Text("Issiq suv")),
                             Radio(
                               value: 1,
                               groupValue: id4,
@@ -806,10 +883,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                             SizedBox(
                               height: 1.h,
                             ),
-                            Text("Chiqindi"),
-                            SizedBox(
-                              width: 136.w,
-                            ),
+                            Container(width: 180.w, child: Text("Chiqindi")),
                             Radio(
                               value: 1,
                               groupValue: id5,
@@ -863,6 +937,11 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                                 onChanged: (bool? value) {
                                   setState(() {
                                     this.value1 = value!;
+                                    if (value) {
+                                      comfort.add('1');
+                                    } else {
+                                      comfort.remove('1');
+                                    }
                                   });
                                 },
                               ),
@@ -877,6 +956,11 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                                 onChanged: (bool? value) {
                                   setState(() {
                                     this.value2 = value!;
+                                    if (value) {
+                                      comfort.add('2');
+                                    } else {
+                                      comfort.remove('2');
+                                    }
                                   });
                                 },
                               ),
@@ -891,6 +975,11 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                                 onChanged: (bool? value) {
                                   setState(() {
                                     this.value3 = value!;
+                                    if (value) {
+                                      comfort.add('3');
+                                    } else {
+                                      comfort.remove('3');
+                                    }
                                   });
                                 },
                               ),
@@ -905,6 +994,11 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                                 onChanged: (bool? value) {
                                   setState(() {
                                     this.value4 = value!;
+                                    if (value) {
+                                      comfort.add('4');
+                                    } else {
+                                      comfort.remove('4');
+                                    }
                                   });
                                 },
                               ),
@@ -919,6 +1013,11 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                                 onChanged: (bool? value) {
                                   setState(() {
                                     this.value6 = value!;
+                                    if (value) {
+                                      comfort.add('5');
+                                    } else {
+                                      comfort.remove('5');
+                                    }
                                   });
                                 },
                               ),
@@ -933,6 +1032,11 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                                 onChanged: (bool? value) {
                                   setState(() {
                                     this.value5 = value!;
+                                    if (value) {
+                                      comfort.add('6');
+                                    } else {
+                                      comfort.remove('6');
+                                    }
                                   });
                                 },
                               ),
@@ -955,12 +1059,22 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                 Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
+                      border: Border.all(color: _descriptionColor),
                       borderRadius: BorderRadius.circular(4.r)),
                   child: Container(
                     padding: EdgeInsets.only(left: 16.w),
                     child: TextFormField(
-                      controller: adsTitleController,
+                      onChanged: (e) {
+                        if (e.length > 0) {
+                          _descriptionOnClick = true;
+                          _descriptionColor = Colors.grey;
+                        } else {
+                          _descriptionOnClick = false;
+                          _descriptionColor = Colors.red;
+                        }
+                        setState(() {});
+                      },
+                      controller: descriptionController,
                       maxLines: 6,
                       decoration: InputDecoration(
                         hintText: 'Message...'.tr(),
@@ -985,10 +1099,22 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                                 borderRadius: BorderRadius.circular(10.r)),
                             primary: AppColors.buttonLinear),
                         onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => OwnerPhotoAdds()));
+                          live_with_owner = id.toString();
+                          utility_electricity = id1.toString();
+                          unility_gaz = id2.toString();
+                          utility_hot_water = id3.toString();
+                          utility_cold_water = id4.toString();
+                          utility_trash = id5.toString();
+                          String comfortItems = comfort.join(',');
+                          // print(live_with_owner.toString() + "A");
+                          // print(utility_electricity.toString() + "B");
+                          // print(unility_gaz.toString() + "C");
+                          // print(utility_hot_water.toString() + "D");
+                          // print(utility_cold_water.toString() + "E");
+                          // print(utility_trash.toString() + "F");
+                          print(comfortItems);
+                          setState(() {});
+
                           // print(RoomOwner);
                           // print(TypeHouse=='Kvartira'? '1':'2');
                           // print(CountRoom);
@@ -1001,46 +1127,71 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                           // print(inputcontroller?.text);//
                           // print(addressController?.text);//
 
-                          // if (_RegionOnClick &&
-                          //     _DiscritOnClick &&
-                          //     _UniverOnClick &&
-                          //     _TypeHouseOnClick &&
-                          //     _RoomCountOnClick &&
-                          //     _RentTypeOnClick &&
-                          //     _TypeCostOnClick &&
-                          //     _GenderOnClick &&
-                          //     _CountPupilOnClick) {
-                          // } else {
-                          //   setState(() {
-                          //     if (!_RegionOnClick) {
-                          //       _colorRegion = Colors.red;
-                          //     }
-                          //     if (!_DiscritOnClick) {
-                          //       _colorDistric = Colors.red;
-                          //     }
-                          //     if (!_UniverOnClick) {
-                          //       _colorUniver = Colors.red;
-                          //     }
-                          //     if (!_TypeHouseOnClick) {
-                          //       _colorTypeHouse = Colors.red;
-                          //     }
-                          //     if (!_RoomCountOnClick) {
-                          //       _colorRoomCount = Colors.red;
-                          //     }
-                          //     if (!_RentTypeOnClick) {
-                          //       _colorRentType = Colors.red;
-                          //     }
-                          //     if (!_TypeCostOnClick) {
-                          //       _colorTypeCost = Colors.red;
-                          //     }
-                          //     if (!_GenderOnClick) {
-                          //       _colorGender = Colors.red;
-                          //     }
-                          //     if (!_CountPupilOnClick) {
-                          //       _colorCountPupil = Colors.red;
-                          //     }
-                          //   });
-                          // }
+                          if (_phoneNumberOnClick ||
+                              _houseTypeOnClick ||
+                              _rentTypeOnClick ||
+                              _roomCountOnClick ||
+                              _floorsCountOnClick ||
+                              _inFloorOnClick ||
+                              _costTypeOnClick ||
+                              _descriptionOnClick) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => OwnerCreateImage(
+                                      widget.titleController,
+                                      widget.roommate_gender,
+                                      widget.gender_matter,
+                                      widget.district_id,
+                                      widget.id,
+                                      widget.addressController,
+                                      widget.university_id,
+                                      widget.university_id_matter,
+                                      phoneController!.text.split(' ').join(''),
+                                      house_type,
+                                      rent_type,
+                                      room_count,
+                                      floors_count,
+                                      in_floor,
+                                      costController!.text.split(' ').join(''),
+                                      cost_type,
+                                      live_with_owner,
+                                      utility_electricity,
+                                      unility_gaz,
+                                      utility_hot_water,
+                                      utility_cold_water,
+                                      utility_trash,
+                                      comfortItems,
+                                      description)),
+                            );
+                          } else {
+                            setState(() {
+                              if (!_phoneNumberOnClick) {
+                                _phoneNumberColor = Colors.red;
+                              }
+                              if (!_houseTypeOnClick) {
+                                _houseTypeColor = Colors.red;
+                              }
+                              if (!_rentTypeOnClick) {
+                                _rentTypeColor = Colors.red;
+                              }
+                              if (!_roomCountOnClick) {
+                                _roomCountColor = Colors.red;
+                              }
+                              if (!_floorsCountOnClick) {
+                                _floorsCountColor = Colors.red;
+                              }
+                              if (!_inFloorOnClick) {
+                                _inFloorColor = Colors.red;
+                              }
+                              if (!_costTypeOnClick) {
+                                _costTypeColor = Colors.red;
+                              }
+                              if (!_descriptionOnClick) {
+                                _descriptionColor = Colors.red;
+                              }
+                            });
+                          }
                         },
                         child: Text(
                           "Keyingi ".tr(),

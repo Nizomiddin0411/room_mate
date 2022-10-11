@@ -16,7 +16,7 @@ class _CreateSuccedfulState extends State<CreateSuccedful> {
   Widget build(BuildContext context) {
     return  Scaffold(
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(25, 115, 25, 100),
+        padding: EdgeInsets.fromLTRB(25.w, 115.h, 25.w, 0.h),
         child: Column(
           children: [
             SizedBox(
@@ -25,9 +25,9 @@ class _CreateSuccedfulState extends State<CreateSuccedful> {
             Center(
                 child:Image.asset('assets/images/illustration.png')
             ),
-            SizedBox(height: 50,),
-            Text("Siz muvaffaqiyatli ro’yxatdan o’tdingiz !!! \n",style: TextStyle(fontSize: 18),),
-            SizedBox(height: 100.h,),
+            SizedBox(height: 50.h,),
+            Center(child: Text("Siz muvaffaqiyatli ro’yxatdan o’tdingiz !!!",style: TextStyle(fontSize: 18.sp),)),
+            SizedBox(height: 236.h,),
             ElevatedButton(
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context)=>MenuPage()));
