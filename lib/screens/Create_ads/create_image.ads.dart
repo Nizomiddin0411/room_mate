@@ -6,8 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:talaba_uy/screens/Create_ads/create_succed_dart.dart';
+import 'package:talaba_uy/services/post_student_adds.dart';
 
 import '../../core/const/app_colors.dart';
+import '../../services/post_create_ads_student.dart';
 
 class Createimage extends StatefulWidget {
   String metro;
@@ -26,8 +28,11 @@ class Createimage extends StatefulWidget {
   String? costlivekomunal;
   String countroom;
   String housetype;
+  String housecount;
   String in_floor;
   String cost_type;
+  String addressController;
+  String ownerlive;
 
   Createimage(
       {Key? key,
@@ -48,7 +53,10 @@ class Createimage extends StatefulWidget {
       required this.countroom,
       required this.housetype,
       required this.in_floor,
-      required this.cost_type})
+      required this.cost_type,
+      required this.addressController,
+      required this.housecount,
+      required this.ownerlive})
       : super(key: key);
 
   @override
@@ -59,17 +67,15 @@ class _CreateimageState extends State<Createimage> {
   final ImagePicker imagePicker = ImagePicker();
 
   List<XFile>? imageFileList = [];
-  List<XFile> ? pickedFile;
+  List<XFile>? pickedFile;
 
   void selectImages() async {
     final List<XFile>? selectedImages = await imagePicker.pickMultiImage();
     if (selectedImages!.isNotEmpty) {
       imageFileList!.addAll(selectedImages);
-      pickedFile?.add(getcam());
     }
     setState(() {});
   }
-
 
   List<File> imageList = [];
   List<bool> imageExist = [];
@@ -91,7 +97,8 @@ class _CreateimageState extends State<Createimage> {
                   GestureDetector(
                     child: Text("From Camera"),
                     onTap: () {
-                      selectImages();
+                      getcam();
+                      Navigator.pop(context);
                     },
                   ),
                   Padding(padding: EdgeInsets.all(10)),
@@ -99,6 +106,7 @@ class _CreateimageState extends State<Createimage> {
                     child: Text("From Gallery"),
                     onTap: () {
                       selectImages();
+                      Navigator.pop(context);
                     },
                   ),
                 ],
@@ -112,7 +120,19 @@ class _CreateimageState extends State<Createimage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Image Picker Example"),
+          backgroundColor: AppColors.backgroundWhite,
+          leading: IconButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            icon: const Icon(
+              Icons.arrow_back,
+              color: AppColors.textColor,
+            ),
+          ),
+          title: Text("E’lon yaratish".tr(),
+              style: TextStyle(color: AppColors.mainColor)),
+          centerTitle: true,
         ),
         body: Center(
           child: Padding(
@@ -130,13 +150,13 @@ class _CreateimageState extends State<Createimage> {
                               color: Colors.black,
                               strokeWidth: 0.5,
                               child: InkWell(
-                                onTap: () async {
-                                  if(imageList.length<4){
-                                    showOptionsDialog(context);
-                                  }else{
+                                onTap: ()  {
 
-                                  }
-                                  print("Pahlavonnnn${imageFileList!.length}");
+                                    showOptionsDialog(context);
+
+
+
+                                  print("Nizomiddin${imageFileList!.length}");
                                 },
                                 child: Container(
                                   height: 250.h,
@@ -152,7 +172,7 @@ class _CreateimageState extends State<Createimage> {
                                           fit: BoxFit.cover,
                                         ),
                                 ),
-                              ),
+                              )
                             ),
                             width: 250.w,
                             height: 250.h,
@@ -173,7 +193,7 @@ class _CreateimageState extends State<Createimage> {
                     height: 20,
                   ),
                   Container(
-                    height: 1200,
+                    height: 250,
                     child: GridView.count(
                       crossAxisSpacing: 6,
                       mainAxisSpacing: 6,
@@ -192,34 +212,32 @@ class _CreateimageState extends State<Createimage> {
                                   child: ClipRRect(
                                     child: Image.file(
                                         File(imageFileList![index].path),
-
                                         fit: BoxFit.cover),
-
                                     borderRadius: BorderRadius.circular(10),
                                   ),
-
                                 ),
-
                                 GestureDetector(
                                   onTap: () {
                                     setState(() {
                                       imageFileList!.removeAt(index);
                                     });
-                                    print("Nizomiddin${imageFileList![index].path}");
+                                    print(
+                                        "Nizomiddin${imageFileList![index].path}");
                                   },
                                   child: Padding(
-                                    padding: const EdgeInsets.fromLTRB(60, 0, 0, 50),
+                                    padding:
+                                        const EdgeInsets.fromLTRB(60, 0, 0, 50),
                                     child: Align(
                                       alignment: Alignment.topRight,
-                                      child:
-                                      Container(
+                                      child: Container(
                                           height: 20,
                                           width: 24,
                                           decoration: BoxDecoration(
-                                            color: Colors.red,
-                                            borderRadius: BorderRadius.circular(15)
-                                          ),
-                                          child: Icon(Icons.remove, color: Colors.white, size: 20)),
+                                              color: Colors.red,
+                                              borderRadius:
+                                                  BorderRadius.circular(15)),
+                                          child: Icon(Icons.remove,
+                                              color: Colors.white, size: 20)),
                                     ),
                                   ),
                                 ),
@@ -230,6 +248,48 @@ class _CreateimageState extends State<Createimage> {
                       }),
                     ),
                   ),
+                  Container(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            padding: EdgeInsets.symmetric(vertical: 14.h),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.r)),
+                            primary: AppColors.buttonLinear),
+                        onPressed: () async {
+                          await CreateStudent().StudentsAdds(
+                              title: widget.titlecontroller1,
+                              stay_region_id: widget.viloyatidisi,
+                              stay_region_matter: widget.viloyatvalue,
+                              stay_university_id: widget.universiteteid,
+                              stay_university_matter: widget.univervalue,
+                              roommate_gender: widget.titleGendor,
+                              roommate_count: widget.titlecount,
+                              phone_number: widget.phoneController,
+                              phone_number_show: widget.numbervalue,
+                              have_living_home: widget.house,
+                              description: widget.addinformation,
+                              district_id: widget.viloyatidisi,
+                              address: widget.addressController,
+                              location: '',
+                              subway: widget.metro,
+                              house_type: widget.housetype,
+                              room_count: widget.housecount,
+                              floors_count: widget.countroom,
+                              in_floor: widget.in_floor,
+                              cost: widget.cost_type,
+                              cost_type: widget.cost_type,
+                              live_with_owner: widget.ownerlive,
+                              utility_bills: widget.costlivekomunal,
+                              comfort: widget.comfort,
+                              File: imageFileList.toString());
+                        },
+                        child: Text(
+                          "Keyingi ".tr(),
+                          style: TextStyle(
+                              fontSize: 20.sp, fontWeight: FontWeight.w500),
+                        ),
+                      ))
                 ]),
               ),
             ),
@@ -245,7 +305,6 @@ class _CreateimageState extends State<Createimage> {
     Navigator.of(context).pop();
   }
 
-
   Widget displayImage() {
     if (imgFile == null) {
       return Text("No Image Selected!");
@@ -257,8 +316,7 @@ class _CreateimageState extends State<Createimage> {
   getcam() async {
     var img = await image.getImage(source: ImageSource.camera);
     setState(() {
-      imageList = File(img!.path) as List<File>;
-
+      file = File(img!.path);
     });
   }
 

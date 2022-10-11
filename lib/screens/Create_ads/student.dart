@@ -593,7 +593,7 @@ class _StudentState extends State<Student> {
                           print(
                               '${regionsvalue ? '1' : '2'} regionsvalue shart emas ');
                           print('${data.UniverId} UniverId idisi +++++++++++');
-                          print('${_titleGendor} kimlarga++++++');
+                          print('${_titleGendor.toString() == 'Erkak' ? '1' : '2'} kimlarga++++++');
                           print(
                               '${phoneController.text} telefon raqam   +++++++++++');
                           print(

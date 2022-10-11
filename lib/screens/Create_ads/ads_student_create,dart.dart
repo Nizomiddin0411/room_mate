@@ -85,7 +85,7 @@ class _Student2State extends State<Student2> {
     '5-kurs',
     '6-kurs',
   ];
-  var housecost = ["so'm", "USD"];
+  var housecost = ["oylik", "kunlik","uzoq muddatga"];
   final List<String> genderItems = ["O'g'il bola ", "Qiz bola"];
   var kvartira = [
     'Kvartira',
@@ -946,13 +946,14 @@ class _Student2State extends State<Student2> {
                                 titlecount: widget.titlecount,
                                 viloyatidisi: widget.viloyatidisi,
                                 comfort: value5 ? '1' : '2',
-                                costlivekomunal:
-                                    costcommunal.toString() == 'ha' ? '1' : '2',
+                                costlivekomunal: costcommunal.toString() == 'ha' ? '1' : '2',
                                 metro: metro.toString() == 'ha' ? '1' : '2',
                                 countroom: qavatlarsoni.toString(),
                                 housetype: housetype.toString(),
                                 in_floor: housefloor.toString(),
-                                cost_type: cost_type.toString()=='ha' ? '1' : '2',
+                                cost_type: cost_type.toString() == 'ha' ? '1' : '2',
+                                addressController: addressController.toString(),
+                                housecount: housecount.toString(), ownerlive: ownerlive.toString(),
                               ),
                             ),
                           );
@@ -962,8 +963,10 @@ class _Student2State extends State<Student2> {
                           print('${housetype} uy turiilari yooo+++++++++++');
                           print('${qavatlarsoni} xonlar soni yooo+++++++++++');
                           print('${metro} metro yaqinmiiiiii yooo+++++++++++');
-                          print('${value5 ? '1' : '2'} comfortlarning turlari yooo+++++++++++');
-                          print('${cost_type} costtypeeeee turlari yooo+++++++++++');
+                          print(
+                              '${value5 ? '1' : '2'} comfortlarning turlari yooo+++++++++++');
+                          print(
+                              '${cost_type} costtypeeeee turlari yooo+++++++++++');
                         },
                         child: Text(
                           "Keyingi ".tr(),
