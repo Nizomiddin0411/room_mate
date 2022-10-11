@@ -87,9 +87,11 @@ class _StudentState extends State<Student> {
     "Qiz",
   ];
   var kvsherik = [
-    '1-2',
-    '3-4',
-    '5-6',
+    '1',
+    '2',
+    '3',
+    '4',
+    '5',
   ];
   final List<String> genderItems = ["O'g'il bola ", "Qiz bola"];
   var kindOfMoment = [
@@ -433,7 +435,6 @@ class _StudentState extends State<Student> {
                               TextInputMask(
                                 mask: '\\+ 999 99 999 99 99',
                                 placeholder: '_ ',
-                                maxPlaceHolders: 13,
                               )
                             ],
                             keyboardType: TextInputType.phone,
@@ -578,32 +579,24 @@ class _StudentState extends State<Student> {
                                 universiteteid: data.UniverId,
                                 titleGendor: _titleGendor.toString() == 'Erkak' ? '1' : '2',
                                 titlecount: _titleCount.toString(),
-                                phoneController: phoneController.text,
+                                phoneController: phoneController.toString(),
                                 house: house.toString() == 'ha' ? '1' : '2',
                                 addinformation: addinformation.text,
                                 numbervalue: numbervalue? '1':'2',
                               ),
                             ),
                           );
-                          print(
-                              '${titlecontroller1.text} elonni nomlashhhh yooo+++++++++++');
-                          print(
-                              '${univervalue ? '1' : '2'} univervalue shartemas -----');
+                          print('${titlecontroller1.text} elonni nomlashhhh yooo+++++++++++');
+                          print('${univervalue ? '1' : '2'} univervalue shartemas -----');
                           print('${data.viloyatid} viloyatid +++++++++++');
-                          print(
-                              '${regionsvalue ? '1' : '2'} regionsvalue shart emas ');
+                          print('${regionsvalue ? '1' : '2'} regionsvalue shart emas ');
                           print('${data.UniverId} UniverId idisi +++++++++++');
                           print('${_titleGendor.toString() == 'Erkak' ? '1' : '2'} kimlarga++++++');
-                          print(
-                              '${phoneController.text} telefon raqam   +++++++++++');
-                          print(
-                              '${house} telefon raqam  sherik vsdjvnsijvbs +++++++++++');
-                          print(
-                              '${addinformation.text} qoshimcha malumotlar   +++++++++++');
-                          print(
-                              '${_titleCount} qoshimcha malumotlar   +++++++++++');
-                          print(
-                              '${numbervalue? '1':'2'} qoshimcha telefon raqam   +++++++++++');
+                          print('${phoneController.text} telefon raqam   +++++++++++');
+                          print('${house} telefon raqam  sherik vsdjvnsijvbs +++++++++++');
+                          print('${addinformation.text} qoshimcha malumotlar   +++++++++++');
+                          print('${_titleCount} nechta odamga +++');
+                          print('${numbervalue? '1':'2'}  telefon raqam korinsin  +++++++++++');
                         },
                         child: Text(
                           "Keyingi ".tr(),

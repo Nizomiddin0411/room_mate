@@ -49,7 +49,7 @@ class _CreateAdsPageState extends State<CreateAdsPage>
             style: TextStyle(color: AppColors.mainColor)),
         centerTitle: true,
       ),
-      body:  Owner(),
+      body:  Student(),
 
     );
   }

@@ -44,6 +44,7 @@ class _Student2State extends State<Student2> {
   TextEditingController? costcontroller;
   TextEditingController? titlecontroller;
   TextEditingController? othercontroller;
+  TextEditingController? narxcontroller;
   String dropDown = "";
   String dropDown2 = "";
   String DistrictId = '';
@@ -58,6 +59,7 @@ class _Student2State extends State<Student2> {
   String gender = '';
   String CourseCount = '';
   String roomCount = '';
+  String? _dropownUsd;
   Color _colorRegion = Colors.grey;
   bool _RegionOnClick = false;
   Color _colorDistric = Colors.grey;
@@ -72,10 +74,16 @@ class _Student2State extends State<Student2> {
   bool value3 = false;
   bool value4 = false;
   bool value5 = false;
+  List comfort = [];
   bool value6 = false;
   int metro = 0;
   int ownerlive = 0;
   int costcommunal = 0;
+  var pricetype = [
+    "kunlik",
+    "oylik",
+    "kishi boshiga"
+  ];
   final TextEditingController _textEditingController = TextEditingController();
   var kurs = [
     '1-kurs',
@@ -85,7 +93,7 @@ class _Student2State extends State<Student2> {
     '5-kurs',
     '6-kurs',
   ];
-  var housecost = ["oylik", "kunlik","uzoq muddatga"];
+  var housecost = ["oylik", "kunlik", "uzoq muddatga"];
   final List<String> genderItems = ["O'g'il bola ", "Qiz bola"];
   var kvartira = [
     'Kvartira',
@@ -135,20 +143,21 @@ class _Student2State extends State<Student2> {
     '5-6',
   ];
   var countroums = [
-    "1 xonali ",
-    "2 xonali ",
-    "3 xonali ",
-    "4 xonali ",
-    "5 xonali ",
+    "1 ",
+    "2",
+    "3",
+    "4",
+    "5 ",
   ];
   final addressController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  String? comfort;
   String? housetype;
   String? housecount;
-  String? housefloor;
-  String? qavatlarsoni;
-  String? cost_type;
+  String? howcountroom;
+  String? housefloorcount;
+  String? narxnituri;
+  String? rent_type;
+  String? cost_period;
 
   @override
   void initState() {
@@ -168,7 +177,9 @@ class _Student2State extends State<Student2> {
             Icons.arrow_back_outlined,
             color: Colors.black,
           ),
-          onPressed: () {},
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
         title: Center(
           child: Text(
@@ -584,7 +595,7 @@ class _Student2State extends State<Student2> {
                               }).toList(),
                               onChanged: (newValue) {
                                 setState(() {
-                                  qavatlarsoni = newValue.toString();
+                                  housefloorcount = newValue.toString();
                                   _colorGender = Colors.grey;
                                 });
                               },
@@ -599,7 +610,7 @@ class _Student2State extends State<Student2> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Nechinchi qavatda  ?".tr(),
+                            "Nechinchi qavatda ?".tr(),
                             style: TextStyle(
                               color: AppColors.textColor,
                               fontSize: 14.sp,
@@ -635,7 +646,7 @@ class _Student2State extends State<Student2> {
                               }).toList(),
                               onChanged: (newValue) {
                                 setState(() {
-                                  housefloor = newValue.toString();
+                                  howcountroom = newValue.toString();
                                   _colorGender = Colors.grey;
                                 });
                               },
@@ -647,6 +658,145 @@ class _Student2State extends State<Student2> {
                   ),
                   SizedBox(
                     height: 18,
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        "Narxi".tr(),
+                        style: TextStyle(
+                          color: AppColors.textColor,
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
+                  ),
+                  SizedBox(height: 4.h),
+                  Container(
+                    width: double.infinity,
+                    decoration: BoxDecoration(
+                        border: Border.all(),
+                        borderRadius: BorderRadius.circular(8.r)),
+                    child: Container(
+                      padding: EdgeInsets.only(left: 16.w),
+                      child: TextFormField(
+                        onChanged: (e) {
+                          setState(() {});
+                        },
+                        controller: narxcontroller,
+                        decoration: InputDecoration(
+                          border: InputBorder.none,
+                          hintText: "Xonadonni narxini kiriting".tr(),
+                          hintStyle:
+                              TextStyle(fontSize: 14.sp, color: Colors.grey),
+                          suffixIcon: Container(
+                            decoration: BoxDecoration(
+                                border: Border(
+                                    left: BorderSide(
+                                        color: Colors.grey.shade300))),
+                            padding: EdgeInsets.only(left: 8.w, top: 0),
+                            width: 70.w,
+                            height: 0.h,
+                            child: DropdownButton(
+                              underline: Container(),
+                              value: _dropownUsd,
+                              onChanged: (String? e) {
+                                setState(() {
+                                  _dropownUsd = e;
+                                  narxnituri = e == 'sum' ? '1' : '2';
+                                });
+                              },
+                              hint: Text(
+                                "SO'M".tr(),
+                                style: TextStyle(
+                                    fontSize: 14.sp,
+                                    color: AppColors.textColor),
+                              ),
+                              items: [
+                                DropdownMenuItem(
+                                  child: Text(
+                                    "SO'M".tr(),
+                                    style: TextStyle(
+                                        fontSize: 14.sp,
+                                        color: AppColors.textColor),
+                                  ),
+                                  value: "sum",
+                                ),
+                                DropdownMenuItem(
+                                  child: Text(
+                                    "USD",
+                                    style: TextStyle(
+                                        fontSize: 14.sp,
+                                        color: AppColors.textColor),
+                                  ),
+                                  value: "usd",
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                        cursorColor: Colors.grey.shade800,
+                        cursorWidth: 1.5.w,
+                      ),
+                    ),
+                  ),
+                  SizedBox(
+                    height: 15.h,
+                  ),
+                  Row(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            "Narxning turlanishi".tr(),
+                            style: TextStyle(
+                              color: AppColors.textColor,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          SizedBox(height: 4.h),
+                          Container(
+                            height: 50.h,
+                            width: 160.w,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.r),
+                                border: Border.all(color: Colors.grey)),
+                            child: DropdownButtonFormField(
+                              hint: Padding(
+                                padding: EdgeInsets.only(left: 8.w),
+                                child: Text(
+                                  "Turlari".tr(),
+                                  style: TextStyle(fontSize: 14.sp),
+                                ),
+                              ),
+                              decoration: const InputDecoration(
+                                  border: InputBorder.none),
+                              icon: Icon(Icons.arrow_drop_down_outlined),
+                              items: pricetype.map((e) {
+                                return DropdownMenuItem<String>(
+                                  onTap: () {},
+                                  value: e,
+                                  child: Padding(
+                                    padding: EdgeInsets.only(left: 8.w),
+                                    child: Text(e.tr()),
+                                  ),
+                                );
+                              }).toList(),
+                              onChanged: (newValue) {
+                                setState(() {
+                                  cost_period=newValue.toString();
+                                });
+                              },
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 28.h,
                   ),
                   Row(
                     children: [
@@ -690,7 +840,7 @@ class _Student2State extends State<Student2> {
                               }).toList(),
                               onChanged: (newValue) {
                                 setState(() {
-                                  cost_type = newValue.toString();
+                                  rent_type = newValue.toString();
                                   _colorGender = Colors.grey;
                                 });
                               },
@@ -837,6 +987,11 @@ class _Student2State extends State<Student2> {
                               onChanged: (bool? value) {
                                 setState(() {
                                   this.value1 = value!;
+                                  if (value) {
+                                    comfort.add('1');
+                                  } else {
+                                    comfort.remove('1');
+                                  }
                                 });
                               },
                             ),
@@ -851,6 +1006,11 @@ class _Student2State extends State<Student2> {
                               onChanged: (bool? value) {
                                 setState(() {
                                   this.value2 = value!;
+                                  if (value) {
+                                    comfort.add('2');
+                                  } else {
+                                    comfort.remove('2');
+                                  }
                                 });
                               },
                             ),
@@ -865,6 +1025,11 @@ class _Student2State extends State<Student2> {
                               onChanged: (bool? value) {
                                 setState(() {
                                   this.value3 = value!;
+                                  if (value) {
+                                    comfort.add('3');
+                                  } else {
+                                    comfort.remove('3');
+                                  }
                                 });
                               },
                             ),
@@ -878,7 +1043,12 @@ class _Student2State extends State<Student2> {
                               value: value4,
                               onChanged: (bool? value) {
                                 setState(() {
-                                  value4 = value!;
+                                  this.value4 = value!;
+                                  if (value) {
+                                    comfort.add('4');
+                                  } else {
+                                    comfort.remove('4');
+                                  }
                                 });
                               },
                             ),
@@ -889,10 +1059,15 @@ class _Student2State extends State<Student2> {
                           children: [
                             Text("Konditsioner"),
                             Checkbox(
-                              value: value6,
+                              value: value5,
                               onChanged: (bool? value) {
                                 setState(() {
-                                  value6 = value!;
+                                  this.value5 = value!;
+                                  if (value) {
+                                    comfort.add('5');
+                                  } else {
+                                    comfort.remove('5');
+                                  }
                                 });
                               },
                             ),
@@ -903,10 +1078,15 @@ class _Student2State extends State<Student2> {
                           children: [
                             Text("Chang yutgich"),
                             Checkbox(
-                              value: value5,
+                              value: value6,
                               onChanged: (bool? value) {
                                 setState(() {
-                                  value5 = value!;
+                                  this.value6 = value!;
+                                  if (value) {
+                                    comfort.add('6');
+                                  } else {
+                                    comfort.remove('6');
+                                  }
                                 });
                               },
                             ),
@@ -930,6 +1110,7 @@ class _Student2State extends State<Student2> {
                                 borderRadius: BorderRadius.circular(10.r)),
                             primary: AppColors.buttonLinear),
                         onPressed: () {
+                          String comfortItems = comfort.join(',');
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -945,28 +1126,30 @@ class _Student2State extends State<Student2> {
                                 univervalue: widget.univervalue,
                                 titlecount: widget.titlecount,
                                 viloyatidisi: widget.viloyatidisi,
-                                comfort: value5 ? '1' : '2',
+                                comfort: comfortItems,
                                 costlivekomunal: costcommunal.toString() == 'ha' ? '1' : '2',
                                 metro: metro.toString() == 'ha' ? '1' : '2',
-                                countroom: qavatlarsoni.toString(),
-                                housetype: housetype.toString(),
-                                in_floor: housefloor.toString(),
-                                cost_type: cost_type.toString() == 'ha' ? '1' : '2',
+                                countroom: housefloorcount.toString(),
+                                housetype: housetype.toString() == 'ha' ? '1' : '2',
+                                howcountroom: howcountroom.toString(),
+                                narxnituri: narxnituri.toString() == 'ha' ? '1' : '2',
                                 addressController: addressController.toString(),
-                                housecount: housecount.toString(), ownerlive: ownerlive.toString(),
+                                housecount: housecount.toString(),
+                                ownerlive: ownerlive.toString(),
+                                cost: narxcontroller.toString(),
+                                  cost_type:narxnituri.toString(),
+                                rent_type: rent_type.toString()=='ha'?'1':'2',
+                                cost_period: cost_period.toString()=='ha'?'1':'2',
                               ),
                             ),
                           );
-                          print(
-                              '${costcommunal} kamunallllar  yooo+++++++++++');
-                          print('${housefloor} qavatlara soni +++++++++++');
-                          print('${housetype} uy turiilari yooo+++++++++++');
-                          print('${qavatlarsoni} xonlar soni yooo+++++++++++');
+                          print('${widget.universiteteid} widget.universiteteid  yooo+++++++++++');
+                          print('${widget.house} widget.house, widget.house, +++++++++++');
+                          print('${widget.titleGendor} widget.titleGendor, widget.titleGendor, yooo+++++++++++');
+                          print('${housefloorcount} xonlar soni yooo+++++++++++');
                           print('${metro} metro yaqinmiiiiii yooo+++++++++++');
-                          print(
-                              '${value5 ? '1' : '2'} comfortlarning turlari yooo+++++++++++');
-                          print(
-                              '${cost_type} costtypeeeee turlari yooo+++++++++++');
+                          print('${value5 ? '1' : '2'} comfortlarning turlari yooo+++++++++++');
+                          print('${narxnituri} narxnituri turlari yooo+++++++++++');
                         },
                         child: Text(
                           "Keyingi ".tr(),

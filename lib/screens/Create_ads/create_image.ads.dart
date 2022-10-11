@@ -13,8 +13,6 @@ import '../../services/post_create_ads_student.dart';
 
 class Createimage extends StatefulWidget {
   String metro;
-  String titlecontroller1;
-  String viloyatidisi;
   String viloyatvalue;
   String universiteteid;
   String univervalue;
@@ -25,14 +23,20 @@ class Createimage extends StatefulWidget {
   String addinformation;
   String numbervalue;
   String comfort;
-  String? costlivekomunal;
+  String costlivekomunal;
   String countroom;
   String housetype;
   String housecount;
-  String in_floor;
-  String cost_type;
+  String howcountroom;
+  String narxnituri;
   String addressController;
   String ownerlive;
+  String titlecontroller1;
+  String viloyatidisi;
+  String cost;
+  String rent_type;
+  String cost_period;
+  String cost_type;
 
   Createimage(
       {Key? key,
@@ -52,11 +56,15 @@ class Createimage extends StatefulWidget {
       required this.costlivekomunal,
       required this.countroom,
       required this.housetype,
-      required this.in_floor,
-      required this.cost_type,
+      required this.howcountroom,
+      required this.narxnituri,
       required this.addressController,
       required this.housecount,
-      required this.ownerlive})
+      required this.ownerlive,
+      required this.cost,
+      required this.rent_type,
+      required this.cost_period,
+      required this.cost_type})
       : super(key: key);
 
   @override
@@ -146,34 +154,30 @@ class _CreateimageState extends State<Createimage> {
                         children: [
                           Container(
                             child: DottedBorder(
-                              dashPattern: [6, 3],
-                              color: Colors.black,
-                              strokeWidth: 0.5,
-                              child: InkWell(
-                                onTap: ()  {
-
+                                dashPattern: [6, 3],
+                                color: Colors.black,
+                                strokeWidth: 0.5,
+                                child: InkWell(
+                                  onTap: () {
                                     showOptionsDialog(context);
 
-
-
-                                  print("Nizomiddin${imageFileList!.length}");
-                                },
-                                child: Container(
-                                  height: 250.h,
-                                  width: 250.w,
-                                  color: Colors.black12,
-                                  child: file == null
-                                      ? Icon(
-                                          Icons.camera_alt_sharp,
-                                          size: 50,
-                                        )
-                                      : Image.file(
-                                          file!,
-                                          fit: BoxFit.cover,
-                                        ),
-                                ),
-                              )
-                            ),
+                                    print("Nizomiddin${imageFileList!.length}");
+                                  },
+                                  child: Container(
+                                    height: 250.h,
+                                    width: 250.w,
+                                    color: Colors.black12,
+                                    child: file == null
+                                        ? Icon(
+                                            Icons.camera_alt_sharp,
+                                            size: 50,
+                                          )
+                                        : Image.file(
+                                            file!,
+                                            fit: BoxFit.cover,
+                                          ),
+                                  ),
+                                )),
                             width: 250.w,
                             height: 250.h,
                           ),
@@ -265,24 +269,32 @@ class _CreateimageState extends State<Createimage> {
                               stay_university_matter: widget.univervalue,
                               roommate_gender: widget.titleGendor,
                               roommate_count: widget.titlecount,
-                              phone_number: widget.phoneController,
+                              phone_number: widget.phoneController.toString(),
                               phone_number_show: widget.numbervalue,
                               have_living_home: widget.house,
-                              description: widget.addinformation,
+                              description: widget.addinformation.toString(),
                               district_id: widget.viloyatidisi,
-                              address: widget.addressController,
-                              location: '',
+                              address: widget.addressController.toString(),
+                              location: widget.titlecontroller1,
                               subway: widget.metro,
                               house_type: widget.housetype,
                               room_count: widget.housecount,
                               floors_count: widget.countroom,
-                              in_floor: widget.in_floor,
+                              howcountroom: widget.howcountroom,
                               cost: widget.cost_type,
                               cost_type: widget.cost_type,
                               live_with_owner: widget.ownerlive,
                               utility_bills: widget.costlivekomunal,
                               comfort: widget.comfort,
-                              File: imageFileList.toString());
+                              File: widget.titlecontroller1.toString(),
+                              renttype: widget.rent_type,
+                              cost_period: widget.cost_period);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => CreateSuccedful(),
+                            ),
+                          );
                         },
                         child: Text(
                           "Keyingi ".tr(),
