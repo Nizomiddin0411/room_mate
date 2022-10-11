@@ -57,7 +57,7 @@ class _OwnerState extends State<Owner> {
   Color _otmColor = Colors.grey;
   bool _otmOnClick = false;
   bool value5 = false;
-  
+  bool value7 = false;
 
   var pricetype = [
     "1 ta odam kerak",
@@ -195,13 +195,15 @@ class _OwnerState extends State<Owner> {
                             ),
                             decoration:
                                 const InputDecoration(border: InputBorder.none),
-                            icon: Icon(Icons.arrow_drop_down_outlined),
+                            icon: const Icon(Icons.arrow_drop_down_outlined),
                             items: gender.map((e) {
                               return DropdownMenuItem<String>(
                                 onTap: () {
                                   setState(() {
-                                    roommate_gender =
-                                        e == "Qiz bolaga" ? '2' : '1';
+                                    if (value5 == false) {
+                                      roommate_gender =
+                                          e == "Qiz bolaga" ? '2' : '1';
+                                    }
                                   });
                                 },
                                 value: e,
@@ -234,7 +236,7 @@ class _OwnerState extends State<Owner> {
                             setState(() {
                               this.value5 = value!;
                               gender_matter = value ? '1' : '2';
-                              print(value);
+                              print(value5);
                             });
                           },
                         ),
@@ -496,7 +498,7 @@ class _OwnerState extends State<Owner> {
                             Radio(
                               value: '2',
                               groupValue: id,
-                              onChanged: (String?val) {
+                              onChanged: (String? val) {
                                 setState(() {
                                   id = val!;
                                   print(id);
@@ -573,8 +575,9 @@ class _OwnerState extends State<Owner> {
                     Container(
                       width: 240.w,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10.r),
-                          border: Border.all(color: _otmColor),),
+                        borderRadius: BorderRadius.circular(10.r),
+                        border: Border.all(color: _otmColor),
+                      ),
                       child: DropdownSearch<String>(
                         mode: Mode.MENU,
                         items: data.univer.map((e) {
@@ -619,11 +622,13 @@ class _OwnerState extends State<Owner> {
                           style: TextStyle(fontSize: 14.sp),
                         ),
                         Checkbox(
-                          value: this.value5,
+                          value: this.value6,
                           onChanged: (bool? value) {
                             setState(() {
-                              this.value5 = value!;
+                              this.value6 = value!;
                               university_id_matter = value ? '1' : '2';
+                              print(value6);
+                              print(university_id_matter);
                             });
                           },
                         ),
@@ -644,17 +649,14 @@ class _OwnerState extends State<Owner> {
                                 borderRadius: BorderRadius.circular(10.r)),
                             primary: AppColors.buttonLinear),
                         onPressed: () {
-                          // print(RoomOwner);
-                          // print(TypeHouse=='Kvartira'? '1':'2');
-                          // print(CountRoom);
-                          // print(RentOf == 'kunlik'? '1':'2');
-                          // print(costController?.text);//
-                          // print(_dropownUsd == "SO'M"? '1':'2');
-                          // print(Subway);
-                          // print(genderString == 'Erkak'? '1':'2');
-                          // print(adsTitleController?.text);//
-                          // print(inputcontroller?.text);//
-                          // print(addressController?.text);//
+                          print('${titleController!.text}  title');
+                          print('${value5 ?  0 : roommate_gender}' + 'gender');
+                          print('${value5 ? 1 : 2} axamyatsiz gender');
+                          print( '${district_id} distruqt id');
+                          print( '${addressController!.text} Address');
+                          print( '${id} metrooo');
+                          print(  '${value6 ? 0 :university_id} univer id');
+                          print( '${value6? 1 : 2} axamyatsiz univer' );
 
                           if (_RegionOnClick ||
                               _DiscritOnClick ||
@@ -666,14 +668,18 @@ class _OwnerState extends State<Owner> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => OwnerHouseInfo(
-                                        titleController!.text,
-                                        roommate_gender,
-                                        gender_matter,
-                                        district_id,
-                                        id,
-                                        addressController!.text,
-                                        university_id,
-                                        university_id_matter)));
+                                          id: id,
+                                          addressController:
+                                              addressController!.text,
+                                          university_id: '${value6 ? 0 :university_id}',
+                                          roommate_gender: '${value5 ?  0 : roommate_gender}',
+                                          university_id_matter:
+                                          '${value6? 1 : 2}',
+                                          gender_matter: '${value5 ? 1 : 2}',
+                                          district_id: district_id,
+                                          titleController:
+                                              titleController!.text, location: '0',
+                                        )));
                           } else {
                             setState(() {
                               if (!_RegionOnClick) {
