@@ -84,9 +84,8 @@ class _ElonlarState extends State<Elonlar> {
                   child: Container(
                     width: 324.w,
                     height: 50.h,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(6.r),
-                        color: AppColors.secondBackgroud),
+                    decoration:
+                        BoxDecoration(borderRadius: BorderRadius.circular(6.r), color: AppColors.secondBackgroud),
                     child: Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Row(
@@ -98,15 +97,11 @@ class _ElonlarState extends State<Elonlar> {
                           ),
                           Text(
                             "Joylashuvni sozlash",
-                            style: TextStyle(
-                                color: AppColors.iconColor, fontSize: 16.sp),
+                            style: TextStyle(color: AppColors.iconColor, fontSize: 16.sp),
                           ).tr(),
                           InkWell(
                             onTap: () {
-                              Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => FiltrPage()))
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => FiltrPage()))
                                   .then((value) => data.isChanded);
                               data.isRegion = false;
                               data.isDistricts = false;
@@ -155,91 +150,60 @@ class _ElonlarState extends State<Elonlar> {
               builder: (_, data, __) {
                 return ListView.builder(
                     shrinkWrap: true,
-                    itemCount: data.isChanded
-                        ? data.Ads.length
-                        : data.AdsForZero.length,
+                    itemCount: data.isChanded ? data.Ads.length : data.AdsForZero.length,
                     itemBuilder: (BuildContext context, int index) {
                       return Padding(
                         padding: const EdgeInsets.all(18.0),
                         child: InkWell(
                           onTap: () {
                             Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => AdsDetail(
-                                          title:
-                                              data.Ads[index].title.toString(),
-                                          description: data
-                                              .Ads[index].description
-                                              .toString(),
-                                          houseType: data.Ads[index].houseType
-                                              .toString(),
-                                          cost: data.Ads[index].cost.toString(),
-                                          costTayp: data.Ads[index].costType
-                                              .toString(),
-                                          countRoom: data.Ads[index].roomCount
-                                              .toString(),
-                                          countPeople: data
-                                              .Ads[index].roommateCount
-                                              .toString(),
-                                          region: data.Ads[index].region?.name
-                                              .toString(),
-                                          district: data
-                                              .Ads[index].district?.name
-                                              .toString(),
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => AdsDetail(
+                                  title: data.Ads[index].title.toString(),
+                                  description: data.Ads[index].description.toString(),
+                                  houseType: data.Ads[index].houseType.toString(),
+                                  cost: data.Ads[index].cost.toString(),
+                                  costTayp: data.Ads[index].costType.toString(),
+                                  countRoom: data.Ads[index].roomCount.toString(),
+                                  countPeople: data.Ads[index].roommateCount.toString(),
+                                  region: data.Ads[index].region?.name.toString(),
+                                  district: data.Ads[index].district?.name.toString(),
 
-                                          // facultet: data.Ads[index]
-                                          //     .faculty?.name
-                                          //     .toString(),
-                                          liveWithOwner: data
-                                              .Ads[index].liveWithOwner
-                                              .toString(),
-                                          subway:
-                                              data.Ads[index].subway.toString(),
-                                          favorite: data.Ads[index].favorite
-                                              .toString(),
-                                          id: data.Ads[index].id.toString(),
-                                          type: data.Ads[index].type.toString(),
-                                          userId: data.Ads[index].userId!,
-                                          userFullName: data
-                                              .Ads[index].userFullName
-                                              .toString(),
-                                          chatApproved:
-                                              data.Ads[index].chatApproved!,
-                                          phoneNumberShow:
-                                              data.Ads[index].phoneNumberShow,
-                                          phoneNumber:
-                                              data.Ads[index].phoneNumber,
-                                          stay_university:
-                                              data.Ads[index].stayUniversity,
-                                          stay_region:
-                                              data.Ads[index].stayRegion,
-                                          roommate_count:
-                                              data.Ads[index].roommateCount,
-                                          roommate_gender: data
-                                              .Ads[index].roommateGender
-                                              .toString(),
-                                          address: data.Ads[index].address,
-                                          floorsCount: data
-                                              .Ads[index].floorsCount
-                                              .toString(),
-                                          inFloor: data.Ads[index].inFloor
-                                              .toString(),
-                                          utility_bills:
-                                              data.Ads[index].utilityBills,
-                                          rentType: data.Ads[index].rentType
-                                              .toString(),
-                                          comfort: data.Ads[index].comfort,
-                                          createData: data.Ads[index].createdAt,
-                                        )));
+                                  // facultet: data.Ads[index]
+                                  //     .faculty?.name
+                                  //     .toString(),
+                                  liveWithOwner: data.Ads[index].liveWithOwner.toString(),
+                                  subway: data.Ads[index].subway.toString(),
+                                  favorite: data.Ads[index].favorite.toString(),
+                                  id: data.Ads[index].id.toString(),
+                                  type: data.Ads[index].type.toString(),
+                                  userId: data.Ads[index].userId!,
+                                  userFullName: data.Ads[index].userFullName.toString(),
+                                  chatApproved: data.Ads[index].chatApproved!,
+                                  phoneNumberShow: data.Ads[index].phoneNumberShow,
+                                  phoneNumber: data.Ads[index].phoneNumber,
+                                  stay_university: data.Ads[index].stayUniversity,
+                                  stay_region: data.Ads[index].stayRegion,
+                                  roommate_count: data.Ads[index].roommateCount,
+                                  roommate_gender: data.Ads[index].roommateGender.toString(),
+                                  address: data.Ads[index].address,
+                                  floorsCount: data.Ads[index].floorsCount.toString(),
+                                  inFloor: data.Ads[index].inFloor.toString(),
+                                  utility_bills: data.Ads[index].utilityBills,
+                                  rentType: data.Ads[index].rentType.toString(),
+                                  comfort: data.Ads[index].comfort,
+                                  createData: data.Ads[index].createdAt,
+                                ),
+                              ),
+                            );
                           },
                           child: Container(
                             width: 324.w,
                             height: 358.h,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.only(
-                                    bottomLeft: Radius.circular(6.r),
-                                    bottomRight: Radius.circular(6.r)),
+                                    bottomLeft: Radius.circular(6.r), bottomRight: Radius.circular(6.r)),
                                 // borderRadius: BorderRadius.circular(6.r),
                                 color: AppColors.secondBackgroud),
                             child: Column(
@@ -248,14 +212,11 @@ class _ElonlarState extends State<Elonlar> {
                                 Stack(
                                   children: [
                                     CachedNetworkImage(
-                                      imageUrl:
-                                          "https://source.unsplash.com/random/324x235",
-                                      imageBuilder: (context, imageProvider) =>
-                                          Container(
+                                      imageUrl: "https://source.unsplash.com/random/324x235",
+                                      imageBuilder: (context, imageProvider) => Container(
                                         decoration: BoxDecoration(
                                           borderRadius: BorderRadius.only(
-                                              topLeft: Radius.circular(6.r),
-                                              topRight: Radius.circular(6.r)),
+                                              topLeft: Radius.circular(6.r), topRight: Radius.circular(6.r)),
                                           image: DecorationImage(
                                             image: imageProvider,
                                             fit: BoxFit.cover,
@@ -269,67 +230,50 @@ class _ElonlarState extends State<Elonlar> {
                                       fit: BoxFit.cover,
                                     ),
                                     Positioned(
-                                        child: Padding(
-                                      padding: const EdgeInsets.all(8.0),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Container(
-                                            width: 80.w,
-                                            height: 24.h,
-                                            decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(2.r),
-                                              color: AppColors.iconColor,
-                                            ),
-                                            child: Center(
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(8.0),
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          children: [
+                                            Container(
+                                              // width: 80.w,
+                                              height: 24.h,
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.circular(2.r),
+                                                color: AppColors.iconColor,
+                                              ),
+                                              child: Center(
                                                 child: Text(
-                                                  '${data.Ads[index].createdAt!.split(' ').first}',
+                                                  data.Ads[index].createdAt!.replaceRange(data.Ads[index].createdAt!.length - 3, data.Ads[index].createdAt!.length, ''),
                                                   // '21 Sentabr , 14:01',
-                                              // "${data.Ads[index].createdAt!.split(":").removeAt(2)}",
-                                              style: TextStyle(
-                                                  color: AppColors
-                                                      .backgroundWhite),
-                                            )),
-                                          ),
-                                          Padding(
-                                              padding: EdgeInsets.fromLTRB(
-                                                  1.w, 0, 8.w, 0),
+                                                  // "${data.Ads[index].createdAt!.split(':').removeAt(2)}",
+                                                  style: const TextStyle(color: AppColors.backgroundWhite),
+                                                ),
+                                              ),
+                                            ),
+                                            Padding(
+                                              padding: EdgeInsets.fromLTRB(1.w, 0, 8.w, 0),
                                               child: FavoriteButton(
                                                 isFavorite: data.isChanded
-                                                    ? (data.Ads[index]
-                                                                .favorite ==
-                                                            '0'
-                                                        ? false
-                                                        : true)
-                                                    : (data.AdsForZero[index]
-                                                                .favorite ==
-                                                            '0'
-                                                        ? false
-                                                        : true),
+                                                    ? (data.Ads[index].favorite == '0' ? false : true)
+                                                    : (data.AdsForZero[index].favorite == '0' ? false : true),
                                                 iconSize: 35.0,
                                                 valueChanged: (_isFavorite) {
                                                   // print('Is Favorite $_isFavorite)');
                                                   setState(() {
-                                                    FavoriteChange()
-                                                        .Favoritefetch(
-                                                            id: data.isChanded
-                                                                ? data
-                                                                    .Ads[index]
-                                                                    .id
-                                                                    .toString()
-                                                                : data
-                                                                    .AdsForZero[
-                                                                        index]
-                                                                    .id
-                                                                    .toString());
+                                                    FavoriteChange().Favoritefetch(
+                                                      id: data.isChanded
+                                                          ? data.Ads[index].id.toString()
+                                                          : data.AdsForZero[index].id.toString(),
+                                                    );
                                                   });
                                                 },
-                                              ))
-                                        ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
                                       ),
-                                    ))
+                                    ),
                                   ],
                                 ),
                                 Padding(
@@ -339,37 +283,26 @@ class _ElonlarState extends State<Elonlar> {
                                       Row(
                                         children: [
                                           Padding(
-                                            padding: EdgeInsets.fromLTRB(
-                                                8.w, 0, 8.w, 0),
+                                            padding: EdgeInsets.fromLTRB(8.w, 0, 8.w, 0),
                                             child: Text(
                                               '${data.isChanded ? data.Ads[index].cost.toString() : data.AdsForZero[index].cost.toString()} ${data.isChanded ? (data.Ads[index].costType.toString() == 1 ? "so'm" : 'y.e') : ''}',
-                                              style: TextStyle(
-                                                  color: AppColors.mainColor,
-                                                  fontSize: 24.sp),
+                                              style: TextStyle(color: AppColors.mainColor, fontSize: 24.sp),
                                             ),
                                           ),
                                         ],
                                       ),
                                       Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
                                           Padding(
                                             padding: const EdgeInsets.all(6.0),
                                             child: SizedBox(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width -
-                                                  150.w,
+                                              width: MediaQuery.of(context).size.width - 150.w,
                                               child: Text(
                                                 data.isChanded
-                                                    ? data.Ads[index].title
-                                                        .toString()
-                                                    : data
-                                                        .AdsForZero[index].title
-                                                        .toString(),
-                                                style:
-                                                    TextStyle(fontSize: 14.sp),
+                                                    ? data.Ads[index].title.toString()
+                                                    : data.AdsForZero[index].title.toString(),
+                                                style: TextStyle(fontSize: 14.sp),
                                               ),
                                             ),
                                           ),
@@ -384,23 +317,14 @@ class _ElonlarState extends State<Elonlar> {
                                             color: AppColors.mainColor,
                                           ),
                                           Padding(
-                                            padding: EdgeInsets.fromLTRB(
-                                                8.w, 0, 8.w, 0),
+                                            padding: EdgeInsets.fromLTRB(8.w, 0, 8.w, 0),
                                             child: SizedBox(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width -
-                                                  150.w,
+                                              width: MediaQuery.of(context).size.width - 150.w,
                                               child: Text(
                                                 data.isChanded
-                                                    ? data.Ads[index].address
-                                                        .toString()
-                                                        .toString()
-                                                    : data.AdsForZero[index]
-                                                        .address
-                                                        .toString(),
-                                                style:
-                                                    TextStyle(fontSize: 10.sp),
+                                                    ? data.Ads[index].address.toString().toString()
+                                                    : data.AdsForZero[index].address.toString(),
+                                                style: TextStyle(fontSize: 10.sp),
                                               ),
                                             ),
                                           ),
@@ -434,100 +358,54 @@ class _ElonlarState extends State<Elonlar> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => AdsDetail(
-                                          title: data.AdsForStudent[index].title
-                                              .toString(),
-                                          description: data
-                                              .AdsForStudent[index].description
-                                              .toString(),
-                                          houseType: data
-                                              .AdsForStudent[index].houseType
-                                              .toString(),
-                                          cost: data.AdsForStudent[index].cost
-                                              .toString(),
-                                          costTayp: data
-                                              .AdsForStudent[index].costType
-                                              .toString(),
-                                          countRoom: data
-                                              .AdsForStudent[index].roomCount
-                                              .toString(),
-                                          countPeople: data.AdsForStudent[index]
-                                              .roommateCount
-                                              .toString(),
-                                          liveWithOwner: data
-                                              .AdsForStudent[index]
-                                              .liveWithOwner
-                                              .toString(),
-                                          subway: data
-                                              .AdsForStudent[index].subway
-                                              .toString(),
-                                          favorite: data
-                                              .AdsForStudent[index].favorite
-                                              .toString(),
-                                          id: data.AdsForStudent[index].id
-                                              .toString(),
-                                          type: data.AdsForStudent[index].type
-                                              .toString(),
-                                          userId:
-                                              data.AdsForStudent[index].userId!,
-                                          userFullName: data
-                                              .AdsForStudent[index].userFullName
-                                              .toString(),
-                                          chatApproved: data
-                                              .AdsForStudent[index]
-                                              .chatApproved!,
-                                          phoneNumber: data
-                                              .AdsForStudent[index].phoneNumber,
-                                          phoneNumberShow: data
-                                              .AdsForStudent[index]
-                                              .phoneNumberShow,
-                                          floorsCount: data
-                                              .AdsForStudent[index].floorsCount.toString(),
-                                          district: data
-                                              .AdsForStudent[index].district,
-                                          stay_region: data
-                                              .AdsForStudent[index].stayRegion,
-                                          stay_university: data
-                                              .AdsForStudent[index].stayUniversity,
-                                          region: data
-                                              .AdsForStudent[index].region,
-                                          rentType: data
-                                              .AdsForStudent[index].rentType.toString(),
-                                          utility_bills: data
-                                              .AdsForStudent[index].utilityBills,
-                                          createData: data
-                                              .AdsForStudent[index].createdAt,
-                                          comfort: data
-                                              .AdsForStudent[index].comfort,
-                                          inFloor: data
-                                              .AdsForStudent[index].inFloor.toString(),
-                                          roommate_count: data
-                                              .AdsForStudent[index].roommateCount,
-                                          address: data
-                                              .AdsForStudent[index].address,
-                                          roommate_gender: data
-                                              .AdsForStudent[index].roommateGender.toString(),
+                                          title: data.AdsForStudent[index].title.toString(),
+                                          description: data.AdsForStudent[index].description.toString(),
+                                          houseType: data.AdsForStudent[index].houseType.toString(),
+                                          cost: data.AdsForStudent[index].cost.toString(),
+                                          costTayp: data.AdsForStudent[index].costType.toString(),
+                                          countRoom: data.AdsForStudent[index].roomCount.toString(),
+                                          countPeople: data.AdsForStudent[index].roommateCount.toString(),
+                                          liveWithOwner: data.AdsForStudent[index].liveWithOwner.toString(),
+                                          subway: data.AdsForStudent[index].subway.toString(),
+                                          favorite: data.AdsForStudent[index].favorite.toString(),
+                                          id: data.AdsForStudent[index].id.toString(),
+                                          type: data.AdsForStudent[index].type.toString(),
+                                          userId: data.AdsForStudent[index].userId!,
+                                          userFullName: data.AdsForStudent[index].userFullName.toString(),
+                                          chatApproved: data.AdsForStudent[index].chatApproved!,
+                                          phoneNumber: data.AdsForStudent[index].phoneNumber,
+                                          phoneNumberShow: data.AdsForStudent[index].phoneNumberShow,
+                                          floorsCount: data.AdsForStudent[index].floorsCount.toString(),
+                                          district: data.AdsForStudent[index].district,
+                                          stay_region: data.AdsForStudent[index].stayRegion,
+                                          stay_university: data.AdsForStudent[index].stayUniversity,
+                                          region: data.AdsForStudent[index].region,
+                                          rentType: data.AdsForStudent[index].rentType.toString(),
+                                          utility_bills: data.AdsForStudent[index].utilityBills,
+                                          createData: data.AdsForStudent[index].createdAt,
+                                          comfort: data.AdsForStudent[index].comfort,
+                                          inFloor: data.AdsForStudent[index].inFloor.toString(),
+                                          roommate_count: data.AdsForStudent[index].roommateCount,
+                                          address: data.AdsForStudent[index].address,
+                                          roommate_gender: data.AdsForStudent[index].roommateGender.toString(),
                                         )));
                           },
                           child: Container(
                             width: 324.w,
                             height: 358.h,
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(6.r),
-                                color: AppColors.secondBackgroud),
+                                borderRadius: BorderRadius.circular(6.r), color: AppColors.secondBackgroud),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Stack(
                                   children: [
                                     CachedNetworkImage(
-                                      imageUrl:
-                                          "https://source.unsplash.com/random/324x235",
-                                      imageBuilder: (context, imageProvider) =>
-                                          Container(
+                                      imageUrl: "https://source.unsplash.com/random/324x235",
+                                      imageBuilder: (context, imageProvider) => Container(
                                         decoration: BoxDecoration(
                                           borderRadius: BorderRadius.only(
-                                              topLeft: Radius.circular(6.r),
-                                              topRight: Radius.circular(6.r)),
+                                              topLeft: Radius.circular(6.r), topRight: Radius.circular(6.r)),
                                           image: DecorationImage(
                                             image: imageProvider,
                                             fit: BoxFit.cover,
@@ -544,46 +422,31 @@ class _ElonlarState extends State<Elonlar> {
                                         child: Padding(
                                       padding: const EdgeInsets.all(8.0),
                                       child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
                                           Container(
                                             width: 112.w,
                                             height: 24.h,
                                             decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(2.r),
+                                              borderRadius: BorderRadius.circular(2.r),
                                               color: AppColors.iconColor,
                                             ),
                                             child: Center(
                                                 child: Text(
                                               "21 Sentabr,14:01",
-                                              style: TextStyle(
-                                                  color: AppColors
-                                                      .backgroundWhite),
+                                              style: TextStyle(color: AppColors.backgroundWhite),
                                             )),
                                           ),
                                           Padding(
-                                              padding: EdgeInsets.fromLTRB(
-                                                  1.w, 0, 8.w, 0),
+                                              padding: EdgeInsets.fromLTRB(1.w, 0, 8.w, 0),
                                               child: FavoriteButton(
-                                                isFavorite:
-                                                    data.AdsForStudent[index]
-                                                                .favorite ==
-                                                            '0'
-                                                        ? false
-                                                        : true,
+                                                isFavorite: data.AdsForStudent[index].favorite == '0' ? false : true,
                                                 iconSize: 35.0,
                                                 valueChanged: (_isFavorite) {
                                                   // print('Is Favorite $_isFavorite)');
                                                   setState(() {
                                                     FavoriteChange()
-                                                        .Favoritefetch(
-                                                            id: data
-                                                                .AdsForStudent[
-                                                                    index]
-                                                                .id
-                                                                .toString());
+                                                        .Favoritefetch(id: data.AdsForStudent[index].id.toString());
                                                   });
                                                 },
                                               ))
@@ -599,36 +462,26 @@ class _ElonlarState extends State<Elonlar> {
                                       Row(
                                         children: [
                                           Padding(
-                                            padding: EdgeInsets.fromLTRB(
-                                                8.w, 0, 8.w, 0),
+                                            padding: EdgeInsets.fromLTRB(8.w, 0, 8.w, 0),
                                             child: Text(
                                               '${data.AdsForStudent[index].cost.toString()} ${data.AdsForStudent[index].costType.toString() == 1 ? "so'm" : 'y.e'}',
-                                              style: TextStyle(
-                                                  color: AppColors.mainColor,
-                                                  fontSize: 24.sp),
+                                              style: TextStyle(color: AppColors.mainColor, fontSize: 24.sp),
                                             ),
                                           ),
                                         ],
                                       ),
                                       Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
+                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                         children: [
                                           Padding(
                                             padding: const EdgeInsets.all(6.0),
                                             child: SizedBox(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width -
-                                                  150.w,
+                                              width: MediaQuery.of(context).size.width - 150.w,
                                               child: Text(
                                                 data.isChanded
-                                                    ? data.AdsForStudent[index]
-                                                        .title
-                                                        .toString()
+                                                    ? data.AdsForStudent[index].title.toString()
                                                     : 'Studentlar uchun',
-                                                style:
-                                                    TextStyle(fontSize: 14.sp),
+                                                style: TextStyle(fontSize: 14.sp),
                                               ),
                                             ),
                                           ),
@@ -643,19 +496,12 @@ class _ElonlarState extends State<Elonlar> {
                                             color: AppColors.mainColor,
                                           ),
                                           Padding(
-                                            padding: EdgeInsets.fromLTRB(
-                                                8.w, 0, 8.w, 0),
+                                            padding: EdgeInsets.fromLTRB(8.w, 0, 8.w, 0),
                                             child: SizedBox(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width -
-                                                  150.w,
+                                              width: MediaQuery.of(context).size.width - 150.w,
                                               child: Text(
-                                                data.AdsForStudent[index]
-                                                    .address
-                                                    .toString(),
-                                                style:
-                                                    TextStyle(fontSize: 10.sp),
+                                                data.AdsForStudent[index].address.toString(),
+                                                style: TextStyle(fontSize: 10.sp),
                                               ),
                                             ),
                                           ),
