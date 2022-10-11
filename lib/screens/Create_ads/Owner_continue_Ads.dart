@@ -64,6 +64,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
   String genderString = '';
   String dropDown2 = "";
   String countRoom = '';
+  String price = '';
   TextEditingController? addressController;
   TextEditingController? costController;
   TextEditingController? adsTitleController;
@@ -87,8 +88,9 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
   Color _colorForm = Colors.grey;
   bool value5 = false;
   var pricetype = [
-    "1 ta odam kerak",
-    "kishi boshiga 500",
+    "kunlik",
+    "oylik",
+    "kishi boshiga",
   ];
   var kvartira = [
     'Kvartira',
@@ -182,7 +184,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                   ],
                 ),
                 SizedBox(
-                  height: 5,
+                  height: 5.h,
                 ),
                 Row(
                   children: [
@@ -191,9 +193,8 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                       width: 320.w,
                       padding: EdgeInsets.symmetric(horizontal: 8.w),
                       decoration: BoxDecoration(
-                        border: Border.all(color: _phoneNumberColor),
-                        borderRadius: BorderRadius.circular(6.r)
-                      ),
+                          border: Border.all(color: _phoneNumberColor),
+                          borderRadius: BorderRadius.circular(6.r)),
                       child: TextFormField(
                         inputFormatters: [
                           TextInputMask(
@@ -209,19 +210,17 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                           border: InputBorder.none,
                           hintText: "+998 ** *** ** **".tr(),
                         ),
-                        
                         onChanged: (e) {
                           setState(() {
                             print(e.length);
                             if (e.length == 18) {
-                            _phoneNumberOnClick = true;
-                            _phoneNumberColor = Colors.grey;
-                          } else {
-                            _phoneNumberOnClick = false;
-                            _phoneNumberColor = Colors.red;
-                          }
+                              _phoneNumberOnClick = true;
+                              _phoneNumberColor = Colors.grey;
+                            } else {
+                              _phoneNumberOnClick = false;
+                              _phoneNumberColor = Colors.red;
+                            }
                           });
-                          
                         },
                       ),
                     ),
@@ -659,6 +658,14 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                             onChanged: (newValue) {
                               setState(() {
                                 print(newValue);
+                                if(newValue == 'kunlik'){
+                                  price = '1';
+                                }else if(newValue == 'oylik'){
+                                  price = '2';
+                                }else{
+                                  price = '3';
+                                }
+                                print(price);
                               });
                             },
                           ),
@@ -750,7 +757,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                     Row(
                       children: [
                         SizedBox(
-                          height: 1,
+                          height: 1.h,
                         ),
                         Container(
                           width: 180.w,
@@ -850,7 +857,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                         Row(
                           children: [
                             SizedBox(
-                              height: 1,
+                              height: 1.h,
                             ),
                             Container(width: 180.w, child: Text("Issiq suv")),
                             Radio(
@@ -1114,7 +1121,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                           // print(utility_hot_water.toString() + "D");
                           // print(utility_cold_water.toString() + "E");
                           // print(utility_trash.toString() + "F");
-                          print(comfortItems);
+                          // print(comfortItems);
                           setState(() {});
 
                           // print(RoomOwner);
@@ -1128,6 +1135,35 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                           // print(adsTitleController?.text);//
                           // print(inputcontroller?.text);//
                           // print(addressController?.text);//
+                          print('${phoneController!.text.split(' ').join('')}' +
+                              ' telefon');
+                          print('${house_type}  uy turi');
+                          print('${rent_type} rent type');
+                          print('${room_count}  hona soni');
+                          print('${floors_count} etaj soni');
+                          print('${in_floor} nechanchi etaj');
+                          print(
+                            '${costController!.text.split(' ').join('')}  narxi',
+                          );
+                          print('${cost_type} pul turi');
+                          print(
+                            '${live_with_owner} uy egasi yashashi',
+                          );
+                          print(
+                            '${utility_electricity} elktor',
+                          );
+                          print('${unility_gaz}  gaz');
+                          print('${utility_hot_water} issiq suv');
+                          print(
+                            '${utility_cold_water} sovuq suv',
+                          );
+                          print(
+                            '${utility_trash} musor',
+                          );
+                          print(
+                            '${comfortItems}  texnikalar',
+                          );
+                          print('${descriptionController.text} malumot');
 
                           if (_phoneNumberOnClick ||
                               _houseTypeOnClick ||
@@ -1141,30 +1177,36 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => OwnerCreateImage(
-                                      widget.titleController,
-                                      widget.roommate_gender,
-                                      widget.gender_matter,
-                                      widget.district_id,
-                                      widget.id,
-                                      widget.addressController,
-                                      widget.university_id,
-                                      widget.university_id_matter,
-                                      phoneController!.text.split(' ').join(''),
-                                      house_type,
-                                      rent_type,
-                                      room_count,
-                                      floors_count,
-                                      in_floor,
-                                      costController!.text.split(' ').join(''),
-                                      cost_type,
-                                      live_with_owner,
-                                      utility_electricity,
-                                      unility_gaz,
-                                      utility_hot_water,
-                                      utility_cold_water,
-                                      utility_trash,
-                                      comfortItems,
-                                      description)),
+                                    titleController: widget.titleController,
+                                    roommate_gender: widget.roommate_gender,
+                                    gender_matter: widget.gender_matter,
+                                    district_id: widget.district_id,
+                                    addressController: widget.addressController,
+                                    location: widget.location,
+                                    university_id:  widget.university_id,
+                                    university_id_matter: widget.university_id_matter,
+                                    id: widget.id,
+                                    phoneController:  phoneController!.text
+                                        .split(' ')
+                                        .join(''),
+                                    house_type:  house_type,
+                                    rent_type: rent_type,
+                                    room_count: room_count,
+                                    floors_count: floors_count,
+                                    in_floor: in_floor,
+                                    costController:  costController!.text
+                                            .split(' ')
+                                            .join(''),
+                                    cost_type: cost_type,
+                                    live_with_owner: live_with_owner,
+                                    utility_electricity:utility_electricity,
+                                    unility_gaz: unility_gaz,
+                                    utility_hot_water: utility_hot_water,
+                                    utility_cold_water: utility_cold_water,
+                                    utility_trash: utility_trash,
+                                    comfort:  comfortItems,
+                                    description: descriptionController.text, cost_period: price,
+                                      )),
                             );
                           } else {
                             setState(() {

@@ -671,11 +671,11 @@ class _OwnerState extends State<Owner> {
                                           id: id,
                                           addressController:
                                               addressController!.text,
-                                          university_id: university_id,
-                                          roommate_gender: roommate_gender,
+                                          university_id: '${value6 ? 0 :university_id}',
+                                          roommate_gender: '${value5 ?  0 : roommate_gender}',
                                           university_id_matter:
-                                              university_id_matter,
-                                          gender_matter: gender_matter,
+                                          '${value6? 1 : 2}',
+                                          gender_matter: '${value5 ? 1 : 2}',
                                           district_id: district_id,
                                           titleController:
                                               titleController!.text, location: '0',
