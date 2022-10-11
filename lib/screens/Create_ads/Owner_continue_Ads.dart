@@ -16,17 +16,19 @@ class OwnerHouseInfo extends StatefulWidget {
   String? university_id;
   String? university_id_matter;
   String? id;
+  String? location;
 
-  OwnerHouseInfo(
-    this.titleController,
-    this.roommate_gender,
-    this.gender_matter,
-    this.district_id,
-    this.id,
-    this.addressController,
-    this.university_id,
-    this.university_id_matter,
-  );
+  OwnerHouseInfo({
+    required this.location,
+    required this.titleController,
+    required this.roommate_gender,
+    required this.gender_matter,
+    required this.district_id,
+    required this.id,
+    required this.addressController,
+    required this.university_id,
+    required this.university_id_matter,
+  });
 
   @override
   State<OwnerHouseInfo> createState() => _OwnerHouseInfoState();
@@ -161,7 +163,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
           },
           color: Colors.black,
         ),
-        title: Center(
+        title: const Center(
             child: Text(
           "E’lon yaratish",
           style: TextStyle(color: Colors.blue),

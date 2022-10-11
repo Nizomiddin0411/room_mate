@@ -276,7 +276,7 @@ class _ElonlarState extends State<Elonlar> {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Container(
-                                            width: 112.w,
+                                            width: 80.w,
                                             height: 24.h,
                                             decoration: BoxDecoration(
                                               borderRadius:
@@ -285,7 +285,8 @@ class _ElonlarState extends State<Elonlar> {
                                             ),
                                             child: Center(
                                                 child: Text(
-                                                  '21 Sentabr , 14:01',
+                                                  '${data.Ads[index].createdAt!.split(' ').first}',
+                                                  // '21 Sentabr , 14:01',
                                               // "${data.Ads[index].createdAt!.split(":").removeAt(2)}",
                                               style: TextStyle(
                                                   color: AppColors

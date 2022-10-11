@@ -3,9 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hive/hive.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
-
 import '../../chat/chat_page.dart';
 import '../../services/post_add_chat_permit.dart';
 import '../../services/post_change_favoritr_service.dart';
@@ -63,9 +61,7 @@ class AdsDetail extends StatefulWidget {
       required this.countPeople,
       required this.region,
       required this.district,
-      // required this.univer,
       required this.createData,
-      // required this.facultet,
       required this.liveWithOwner,
       required this.subway,
       required this.id,
@@ -85,7 +81,6 @@ class AdsDetail extends StatefulWidget {
 
 class _AdsDetailState extends State<AdsDetail> {
   int _correntPage = 0;
-  static int _index= 0;
 
   List<String> images = [
     "https://images.wallpapersden.com/image/download/purple-sunrise-4k-vaporwave_bGplZmiUmZqaraWkpJRmbmdlrWZlbWU.jpg",
