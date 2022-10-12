@@ -41,7 +41,6 @@ class Student2 extends StatefulWidget {
 }
 
 class _Student2State extends State<Student2> {
-  TextEditingController? costcontroller;
   TextEditingController? titlecontroller;
   TextEditingController? othercontroller;
   TextEditingController? narxcontroller;
@@ -59,6 +58,10 @@ class _Student2State extends State<Student2> {
   String gender = '';
   String CourseCount = '';
   String roomCount = '';
+  String price = '';
+  String pricerent_type = '';
+  String priceturi = '';
+  String housetype = '';
   String? _dropownUsd;
   Color _colorRegion = Colors.grey;
   bool _RegionOnClick = false;
@@ -84,6 +87,7 @@ class _Student2State extends State<Student2> {
     "oylik",
     "kishi boshiga"
   ];
+   String ?cost_type;
   final TextEditingController _textEditingController = TextEditingController();
   var kurs = [
     '1-kurs',
@@ -149,9 +153,10 @@ class _Student2State extends State<Student2> {
     "4",
     "5 ",
   ];
+  Color _costTypeColor = Colors.grey;
   final addressController = TextEditingController();
+  final costcontroller = TextEditingController();
   final _formKey = GlobalKey<FormState>();
-  String? housetype;
   String? housecount;
   String? howcountroom;
   String? housefloorcount;
@@ -162,7 +167,6 @@ class _Student2State extends State<Student2> {
   @override
   void initState() {
     super.initState();
-    costcontroller = TextEditingController();
     titlecontroller = TextEditingController();
     othercontroller = TextEditingController();
   }
@@ -243,7 +247,7 @@ class _Student2State extends State<Student2> {
                     ),
                   ),
                   SizedBox(
-                    height: 15,
+                    height: 15.h,
                   ),
                   Column(
                     children: [
@@ -253,7 +257,7 @@ class _Student2State extends State<Student2> {
                     ],
                   ),
                   SizedBox(
-                    height: 5,
+                    height: 5.h,
                   ),
                   data.isDistrict
                       ? Container(
@@ -321,7 +325,7 @@ class _Student2State extends State<Student2> {
                         ],
                       ),
                       SizedBox(
-                        height: 5,
+                        height: 5.h,
                       ),
                       Row(
                         children: [
@@ -342,7 +346,7 @@ class _Student2State extends State<Student2> {
                     ],
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 10.h,
                   ),
                   Column(
                     children: [
@@ -352,7 +356,7 @@ class _Student2State extends State<Student2> {
                         ],
                       ),
                       SizedBox(
-                        height: 5,
+                        height: 5.h,
                       ),
                       Column(
                         children: [
@@ -363,12 +367,12 @@ class _Student2State extends State<Student2> {
                                 Row(
                                   children: [
                                     SizedBox(
-                                      width: 7,
+                                      width: 7.w,
                                     ),
                                     Text(
                                         "Amir Temur ko’chasi 21, Yunusobod tumani"),
                                     SizedBox(
-                                      width: 45,
+                                      width: 45.w,
                                     ),
                                     Icon(Icons.arrow_forward)
                                   ],
@@ -387,7 +391,7 @@ class _Student2State extends State<Student2> {
                     ],
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 10.h,
                   ),
                   Column(
                     children: [
@@ -395,7 +399,7 @@ class _Student2State extends State<Student2> {
                         children: [
                           Text(
                             "Metroga yaqinmi ?",
-                            style: TextStyle(fontSize: 15),
+                            style: TextStyle(fontSize: 15.sp),
                           ),
                         ],
                       ),
@@ -415,10 +419,10 @@ class _Student2State extends State<Student2> {
                               ),
                               Text(
                                 'Ha',
-                                style: new TextStyle(fontSize: 17.0),
+                                style: new TextStyle(fontSize: 17.sp),
                               ),
                               SizedBox(
-                                width: 55,
+                                width: 55.w,
                               ),
                               Radio(
                                 value: 2,
@@ -432,7 +436,7 @@ class _Student2State extends State<Student2> {
                               Text(
                                 "Yo'q",
                                 style: new TextStyle(
-                                  fontSize: 17.0,
+                                  fontSize: 17.sp,
                                 ),
                               ),
                             ],
@@ -442,10 +446,10 @@ class _Student2State extends State<Student2> {
                     ],
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 10.h,
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 10.h,
                   ),
                   Row(
                     children: [
@@ -492,6 +496,7 @@ class _Student2State extends State<Student2> {
                                   housetype = newValue.toString();
                                   _colorGender = Colors.grey;
                                 });
+                                print(housetype+"1 kunlik 2 kvartira");
                               },
                             ),
                           ),
@@ -657,7 +662,7 @@ class _Student2State extends State<Student2> {
                     ],
                   ),
                   SizedBox(
-                    height: 18,
+                    height: 18.h,
                   ),
                   Row(
                     children: [
@@ -675,25 +680,32 @@ class _Student2State extends State<Student2> {
                   Container(
                     width: double.infinity,
                     decoration: BoxDecoration(
-                        border: Border.all(),
+                        border: Border.all(color: _costTypeColor),
                         borderRadius: BorderRadius.circular(8.r)),
                     child: Container(
                       padding: EdgeInsets.only(left: 16.w),
                       child: TextFormField(
                         onChanged: (e) {
-                          setState(() {});
+                          setState(() {
+                            if (e.length > 0) {
+
+                              _costTypeColor = Colors.grey;
+                            } else {
+                              _costTypeColor = Colors.red;
+                            }
+                          });
                         },
-                        controller: narxcontroller,
+                        controller: costcontroller,
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           hintText: "Xonadonni narxini kiriting".tr(),
                           hintStyle:
-                              TextStyle(fontSize: 14.sp, color: Colors.grey),
+                          TextStyle(fontSize: 14.sp, color: Colors.grey),
                           suffixIcon: Container(
                             decoration: BoxDecoration(
                                 border: Border(
-                                    left: BorderSide(
-                                        color: Colors.grey.shade300))),
+                                    left:
+                                    BorderSide(color: Colors.grey.shade300))),
                             padding: EdgeInsets.only(left: 8.w, top: 0),
                             width: 70.w,
                             height: 0.h,
@@ -703,14 +715,13 @@ class _Student2State extends State<Student2> {
                               onChanged: (String? e) {
                                 setState(() {
                                   _dropownUsd = e;
-                                  narxnituri = e == 'sum' ? '1' : '2';
+                                  pricerent_type = e == 'sum' ? '1' : '2';
                                 });
                               },
                               hint: Text(
                                 "SO'M".tr(),
                                 style: TextStyle(
-                                    fontSize: 14.sp,
-                                    color: AppColors.textColor),
+                                    fontSize: 14.sp, color: AppColors.textColor),
                               ),
                               items: [
                                 DropdownMenuItem(
@@ -771,8 +782,8 @@ class _Student2State extends State<Student2> {
                                   style: TextStyle(fontSize: 14.sp),
                                 ),
                               ),
-                              decoration: const InputDecoration(
-                                  border: InputBorder.none),
+                              decoration:
+                              const InputDecoration(border: InputBorder.none),
                               icon: Icon(Icons.arrow_drop_down_outlined),
                               items: pricetype.map((e) {
                                 return DropdownMenuItem<String>(
@@ -786,7 +797,14 @@ class _Student2State extends State<Student2> {
                               }).toList(),
                               onChanged: (newValue) {
                                 setState(() {
-                                  cost_period=newValue.toString();
+                                  print(newValue);
+                                  if(newValue == 'sum'){
+                                    pricerent_type = '1';
+                                  }else if(newValue == 'dollar'){
+                                    pricerent_type = '2';
+                                  }
+
+                                  print(pricerent_type);
                                 });
                               },
                             ),
@@ -842,6 +860,11 @@ class _Student2State extends State<Student2> {
                                 setState(() {
                                   rent_type = newValue.toString();
                                   _colorGender = Colors.grey;
+                                  if(newValue == 'kunlik'){
+                                    price = '1';
+                                  }else if(newValue == 'oylik'){
+                                    price = '2';
+                                  }
                                 });
                               },
                             ),
@@ -851,7 +874,7 @@ class _Student2State extends State<Student2> {
                     ],
                   ),
                   SizedBox(
-                    height: 15,
+                    height: 15.h,
                   ),
                   Column(
                     children: [
@@ -859,7 +882,7 @@ class _Student2State extends State<Student2> {
                         children: [
                           Text(
                             "Uy egasi ham yashaydimi ?",
-                            style: TextStyle(fontSize: 15),
+                            style: TextStyle(fontSize: 15.sp),
                           ),
                         ],
                       ),
@@ -906,7 +929,7 @@ class _Student2State extends State<Student2> {
                     ],
                   ),
                   SizedBox(
-                    height: 15,
+                    height: 15.h,
                   ),
                   Column(
                     children: [
@@ -914,7 +937,7 @@ class _Student2State extends State<Student2> {
                         children: [
                           Text(
                             "Kommunal to’lovlarini kim to’laydi ?",
-                            style: TextStyle(fontSize: 15),
+                            style: TextStyle(fontSize: 15.sp),
                           ),
                         ],
                       ),
@@ -934,10 +957,10 @@ class _Student2State extends State<Student2> {
                               ),
                               Text(
                                 "Uy egasi",
-                                style: new TextStyle(fontSize: 17.0),
+                                style: new TextStyle(fontSize: 17.sp),
                               ),
                               SizedBox(
-                                width: 55,
+                                width: 55.w,
                               ),
                               Radio(
                                 value: 2,
@@ -951,7 +974,7 @@ class _Student2State extends State<Student2> {
                               Text(
                                 "Ijarachi",
                                 style: new TextStyle(
-                                  fontSize: 17.0,
+                                  fontSize: 17.sp,
                                 ),
                               ),
                             ],
@@ -961,18 +984,18 @@ class _Student2State extends State<Student2> {
                     ],
                   ),
                   SizedBox(
-                    height: 15,
+                    height: 15.h,
                   ),
                   Row(
                     children: [
                       Text(
                         "Quyidagi qulayliklarga ega",
-                        style: TextStyle(color: Colors.blue, fontSize: 18),
+                        style: TextStyle(color: Colors.blue, fontSize: 18.sp),
                       ),
                     ],
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 10.h,
                   ),
                   Container(
                     width: 170.w,
@@ -1096,7 +1119,7 @@ class _Student2State extends State<Student2> {
                     ),
                   ),
                   SizedBox(
-                    height: 55,
+                    height: 55.h,
                   ),
                   Padding(
                     padding:
@@ -1130,26 +1153,41 @@ class _Student2State extends State<Student2> {
                                 costlivekomunal: costcommunal.toString() == 'ha' ? '1' : '2',
                                 metro: metro.toString() == 'ha' ? '1' : '2',
                                 countroom: housefloorcount.toString(),
-                                housetype: housetype.toString() == 'ha' ? '1' : '2',
+                                housetype: housetype== 'kv' ? '1' : '2',
                                 howcountroom: howcountroom.toString(),
-                                narxnituri: narxnituri.toString() == 'ha' ? '1' : '2',
-                                addressController: addressController.toString(),
+                                narxnituri: pricerent_type,
+                                addressController: addressController.text,
                                 housecount: housecount.toString(),
                                 ownerlive: ownerlive.toString(),
-                                cost: narxcontroller.toString(),
-                                  cost_type:narxnituri.toString(),
-                                rent_type: rent_type.toString()=='ha'?'1':'2',
-                                cost_period: cost_period.toString()=='ha'?'1':'2',
+                                costController:costcontroller.text,
+                                rent_type: price,
+                                cost_period: price,
                               ),
                             ),
                           );
-                          print('${widget.universiteteid} widget.universiteteid  yooo+++++++++++');
-                          print('${widget.house} widget.house, widget.house, +++++++++++');
-                          print('${widget.titleGendor} widget.titleGendor, widget.titleGendor, yooo+++++++++++');
-                          print('${housefloorcount} xonlar soni yooo+++++++++++');
-                          print('${metro} metro yaqinmiiiiii yooo+++++++++++');
-                          print('${value5 ? '1' : '2'} comfortlarning turlari yooo+++++++++++');
-                          print('${narxnituri} narxnituri turlari yooo+++++++++++');
+                          // print('${widget.universiteteid} widget.universiteteid  yooo+++++++++++');
+                          // print('${widget.house} widget.house  +++++++++++');
+                          // print('${widget.titleGendor} titleGendor.titleGendor  +++++++++++');
+                          // print('${widget.numbervalue} numbervalue.numbervalue  +++++++++++');
+                          // print('${widget.viloyatvalue} viloyatvalue.viloyatvalue  +++++++++++');
+                          // print('${widget.phoneController} phoneController.phoneController  +++++++++++');
+                          // print('${widget.titlecontroller1} titlecontroller1.titlecontroller1  +++++++++++');
+                          // print('${widget.addinformation} addinformation.addinformation  +++++++++++');
+                          // print('${widget.univervalue} univervalue.univervalue  +++++++++++');
+                          // print('${widget.titlecount} titlecount.titlecount  +++++++++++');
+                          // print('${comfortItems} comfortItems.comfortItems  +++++++++++');
+                          // print('${costcommunal} costcommunal.costcommunal  +++++++++++');
+                          print('${pricerent_type} pricerent_type dollar  +++++++++++');
+                          // print('${housefloorcount} housefloorcount.housefloorcount  +++++++++++');
+                          print('${housetype== 'kv' ? '1' : '2'} kunlik.housetype  +++++++++++');
+                          // print('${pricerent_type} dropDown.dollar yoki sum  +++++++++++');
+                          // print('${addressController.text} addressController.addressController  +++++++++++');
+                          // print('${housecount} housecount.housecount  +++++++++++');
+                          // print('${ownerlive} ownerlive.ownerlive  +++++++++++');
+                          // print('${price} rent_type.rent_type  +++++++++++');
+                          // print('${price} price.price  +++++++++++');
+                          // print('${costcontroller.text} costcontroller.costcontroller  +++++++++++');
+
                         },
                         child: Text(
                           "Keyingi ".tr(),

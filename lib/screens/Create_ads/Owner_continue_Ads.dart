@@ -1205,7 +1205,8 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                                     utility_cold_water: utility_cold_water,
                                     utility_trash: utility_trash,
                                     comfort:  comfortItems,
-                                    description: descriptionController.text, cost_period: price,
+                                    description: descriptionController.text,
+                                    cost_period: price,
                                       )),
                             );
                           } else {

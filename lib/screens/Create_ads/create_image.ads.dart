@@ -33,11 +33,9 @@ class Createimage extends StatefulWidget {
   String ownerlive;
   String titlecontroller1;
   String viloyatidisi;
-  String cost;
+  String costController;
   String rent_type;
   String cost_period;
-  String cost_type;
-
   Createimage(
       {Key? key,
       required this.numbervalue,
@@ -61,10 +59,9 @@ class Createimage extends StatefulWidget {
       required this.addressController,
       required this.housecount,
       required this.ownerlive,
-      required this.cost,
+      required this.costController,
       required this.rent_type,
-      required this.cost_period,
-      required this.cost_type})
+      required this.cost_period,})
       : super(key: key);
 
   @override
@@ -170,7 +167,7 @@ class _CreateimageState extends State<Createimage> {
                                     child: file == null
                                         ? Icon(
                                             Icons.camera_alt_sharp,
-                                            size: 50,
+                                            size: 50.sp,
                                           )
                                         : Image.file(
                                             file!,
@@ -184,20 +181,20 @@ class _CreateimageState extends State<Createimage> {
                         ],
                       ),
                       SizedBox(
-                        height: 15,
+                        height: 15.h,
                       ),
                       Text("Asosiy rasm"),
                       Divider(
-                        height: 20.0,
+                        height: 20.0.h,
                         color: Colors.black,
                       ),
                     ],
                   ),
                   SizedBox(
-                    height: 20,
+                    height: 20.h,
                   ),
                   Container(
-                    height: 250,
+                    height: 250.h,
                     child: GridView.count(
                       crossAxisSpacing: 6,
                       mainAxisSpacing: 6,
@@ -208,8 +205,8 @@ class _CreateimageState extends State<Createimage> {
                             child: Stack(
                               children: [
                                 Container(
-                                  width: 200,
-                                  height: 150,
+                                  width: 200.w,
+                                  height: 150.h,
                                   decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(10),
                                   ),
@@ -234,14 +231,14 @@ class _CreateimageState extends State<Createimage> {
                                     child: Align(
                                       alignment: Alignment.topRight,
                                       child: Container(
-                                          height: 20,
-                                          width: 24,
+                                          height: 20.h,
+                                          width: 24.w,
                                           decoration: BoxDecoration(
                                               color: Colors.red,
                                               borderRadius:
                                                   BorderRadius.circular(15)),
                                           child: Icon(Icons.remove,
-                                              color: Colors.white, size: 20)),
+                                              color: Colors.white, size: 20.sp)),
                                     ),
                                   ),
                                 ),
@@ -275,18 +272,18 @@ class _CreateimageState extends State<Createimage> {
                               description: widget.addinformation.toString(),
                               district_id: widget.viloyatidisi,
                               address: widget.addressController.toString(),
-                              location: widget.titlecontroller1,
+                              location: "",
                               subway: widget.metro,
                               house_type: widget.housetype,
                               room_count: widget.housecount,
-                              floors_count: widget.countroom,
+                              floors_count: widget.howcountroom,
                               howcountroom: widget.howcountroom,
-                              cost: widget.cost_type,
-                              cost_type: widget.cost_type,
+                              cost: widget.costController,
+                              cost_type: widget.narxnituri,
                               live_with_owner: widget.ownerlive,
                               utility_bills: widget.costlivekomunal,
                               comfort: widget.comfort,
-                              File: widget.titlecontroller1.toString(),
+                              File: "",
                               renttype: widget.rent_type,
                               cost_period: widget.cost_period);
                           Navigator.push(
@@ -321,7 +318,7 @@ class _CreateimageState extends State<Createimage> {
     if (imgFile == null) {
       return Text("No Image Selected!");
     } else {
-      return Image.file(imgFile!, width: 350, height: 350);
+      return Image.file(imgFile!, width: 350.w, height: 350.h);
     }
   }
 

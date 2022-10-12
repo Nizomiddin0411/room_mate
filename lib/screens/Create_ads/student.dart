@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -30,8 +32,8 @@ class _StudentState extends State<Student> {
   bool _checkMetro = false;
   String? _dropownUsd;
   String _titleTime = "Ijara muddati";
-  String _titleGendor = "";
-  String _titleCount = "";
+  String? _titleGendor;
+  String? _titleCount;
   String _titleCourse = "";
   String DistrictId = '';
   String UniverId = '';
@@ -45,8 +47,10 @@ class _StudentState extends State<Student> {
   String gender = '';
   String CourseCount = '';
   String roomCount = '';
-  Color _colorRegion = Colors.grey;
-  bool _RegionOnClick = false;
+  Color titlecolor = Colors.grey;
+  bool univerColor = false;
+  bool titlecolor1 = false;
+  bool titlecolor2 = false;
   Color _colorDistric = Colors.grey;
   bool _DiscritOnClick = false;
   Color _colorUniver = Colors.grey;
@@ -68,7 +72,11 @@ class _StudentState extends State<Student> {
   Color _colorCountPupil = Colors.grey;
   bool _CountPupilOnClick = false;
   Color _colorForm = Colors.grey;
+  Color titlecolort = Colors.grey;
   bool _FormOnClick = false;
+  bool gender1 = false;
+  bool _phoneOnClick = false;
+  Color _phoneColor = Colors.grey;
   final TextEditingController _textEditingController = TextEditingController();
   var kurs = [
     '1-kurs',
@@ -120,7 +128,16 @@ class _StudentState extends State<Student> {
   bool univervalue = false;
   bool numbervalue = false;
 
-  int house = 0;
+  int house1 = 0;
+  var house = '1';
+  Color titleColor = Colors.black12;
+  Color viloyatColor = Colors.black12;
+  Color numberColor = Colors.black12;
+  Color nameColor = Colors.black12;
+  Color numbercolor = Colors.black12;
+  Color tumanColor = Colors.black12;
+  Color descriction = Colors.black12;
+  Color univerColor1 = Colors.black12;
 
   @override
   Widget build(BuildContext context) {
@@ -147,21 +164,28 @@ class _StudentState extends State<Student> {
                 Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
-                      border: Border.all(color: _colorUniver),
+                      border: Border.all(color: titleColor),
                       borderRadius: BorderRadius.circular(8.r)),
-                  child: Container(
-                    padding: EdgeInsets.only(left: 16.w),
-                    child: TextFormField(
-                      controller: titlecontroller1,
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                        hintText: "E’lonni nomlang".tr(),
-                        hintStyle:
-                            TextStyle(fontSize: 14.sp, color: Colors.grey),
-                      ),
-                      cursorColor: Colors.grey.shade800,
-                      cursorWidth: 1.5.w,
+                  child: TextFormField(
+                    onChanged: (e) {
+                      setState(() {
+                        if (e.length > 0) {
+                          titleColor = Colors.grey;
+                          titlecolor2 = true;
+                        } else {
+                          titleColor = Colors.red;
+                          titlecolor2 = true;
+                        }
+                      });
+                    },
+                    controller: titlecontroller1,
+                    decoration: InputDecoration(
+                      border: InputBorder.none,
+                      hintText: "E’lonni nomlang".tr(),
+                      hintStyle: TextStyle(fontSize: 14.sp, color: Colors.grey),
                     ),
+                    cursorColor: Colors.grey.shade800,
+                    cursorWidth: 1.5.w,
                   ),
                 ),
                 SizedBox(
@@ -182,7 +206,7 @@ class _StudentState extends State<Student> {
                       width: 240.w,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10.r),
-                          border: Border.all(color: _colorRegion)),
+                          border: Border.all(color: titlecolor)),
                       child: DropdownButtonFormField(
                         hint: Padding(
                           padding: EdgeInsets.only(left: 8.w),
@@ -205,8 +229,8 @@ class _StudentState extends State<Student> {
                         }).toList(),
                         onChanged: (newValue) async {
                           setState(() {
-                            _RegionOnClick = true;
-                            _colorRegion = Colors.grey;
+                            univerColor = true;
+                            univerColor1 = Colors.grey;
                           });
 
                           final selected = data.regions
@@ -299,6 +323,11 @@ class _StudentState extends State<Student> {
                           onChanged: (bool? value) {
                             setState(() {
                               univervalue = value!;
+                              if(value){
+                                _colorUniver = Colors.grey;
+                              }else if(!value && !univervalue){
+                                _colorUniver = Colors.red;
+                              }
                             });
                           },
                         ),
@@ -349,11 +378,12 @@ class _StudentState extends State<Student> {
                                 ),
                               );
                             }).toList(),
-                            onChanged: (newValue) {
+                            onChanged: (gender) {
                               setState(() {
-                                _titleGendor = newValue.toString();
+                                if (gender1 == false) {
+                                  _titleGendor = e == "Qiz bolaga" ? '2' : '1';
+                                }
                               });
-                              print(_titleGendor + "njbnjbjbvhvgc");
                             },
                           ),
                         ),
@@ -402,11 +432,8 @@ class _StudentState extends State<Student> {
                             }).toList(),
                             onChanged: (newValue) {
                               setState(() {
-                                _GenderOnClick = true;
-                                _colorGender = Colors.grey;
                                 _titleCount = newValue.toString();
                               });
-                              print(_titleCount + "sheriklar soni");
                             },
                           ),
                         ),
@@ -414,7 +441,9 @@ class _StudentState extends State<Student> {
                     ),
                   ],
                 ),
-                SizedBox(height: 8.h,),
+                SizedBox(
+                  height: 8.h,
+                ),
                 Column(
                   children: [
                     Row(
@@ -428,9 +457,26 @@ class _StudentState extends State<Student> {
                     Row(
                       children: [
                         Container(
-                          height: 80.h,
+                          padding: EdgeInsets.symmetric(horizontal: 8.w),
+                          height: 60.h,
                           width: 250.w,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(6.r),
+                              border: Border.all(color: _phoneColor)),
                           child: TextFormField(
+                            scrollPadding:
+                                EdgeInsets.symmetric(horizontal: 8.w),
+                            onChanged: (e) {
+                              setState(() {
+                                if (e.length > 12) {
+                                  _phoneColor = Colors.grey;
+                                  _phoneOnClick = true;
+                                } else {
+                                  _phoneColor = Colors.red;
+                                  _phoneOnClick = false;
+                                }
+                              });
+                            },
                             inputFormatters: [
                               TextInputMask(
                                 mask: '\\+ 999 99 999 99 99',
@@ -440,9 +486,8 @@ class _StudentState extends State<Student> {
                             keyboardType: TextInputType.phone,
                             controller: phoneController,
                             decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(8)),
-                              labelText: "Telefon raqamini kiriting".tr(),
+                              border: InputBorder.none,
+                              hintText: "Telefon raqamini kiriting".tr(),
                             ),
                           ),
                         ),
@@ -478,7 +523,8 @@ class _StudentState extends State<Student> {
                       children: [
                         Text(
                           "Ijaraga turishga joyingiz bormi ?",
-                          style: TextStyle(fontSize: 15),
+                          style: TextStyle(
+                              fontSize: 18.sp, fontWeight: FontWeight.bold),
                         ),
                       ],
                     ),
@@ -488,11 +534,12 @@ class _StudentState extends State<Student> {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             Radio(
-                              value: 1,
+                              value: '1',
                               groupValue: house,
-                              onChanged: (val) {
+                              onChanged: (String? val) {
                                 setState(() {
-                                  house = 1;
+                                  house = val!;
+                                  print(house);
                                 });
                               },
                             ),
@@ -501,21 +548,22 @@ class _StudentState extends State<Student> {
                               style: new TextStyle(fontSize: 17.0),
                             ),
                             SizedBox(
-                              width: 55,
+                              width: 55.w,
                             ),
                             Radio(
-                              value: 2,
+                              value: '2',
                               groupValue: house,
-                              onChanged: (val) {
+                              onChanged: (String? val) {
                                 setState(() {
-                                  house = 2;
+                                  house = val!;
+                                  print(house);
                                 });
                               },
                             ),
                             Text(
                               "Yo'q",
                               style: new TextStyle(
-                                fontSize: 17.0,
+                                fontSize: 17.0.sp,
                               ),
                             ),
                           ],
@@ -537,11 +585,22 @@ class _StudentState extends State<Student> {
                 Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey),
+                      border: Border.all(color: _colorForm),
                       borderRadius: BorderRadius.circular(4.r)),
                   child: Container(
                     padding: EdgeInsets.only(left: 16.w),
                     child: TextField(
+                      onChanged: (e) {
+                        setState(() {
+                          if (e.length > 0) {
+                            _colorForm = Colors.grey;
+                            _FormOnClick = true;
+                          } else {
+                            _colorForm = Colors.red;
+                            _FormOnClick = false;
+                          }
+                        });
+                      },
                       key: _keyAddInfo,
                       controller: addinformation,
                       maxLines: 6,
@@ -568,35 +627,67 @@ class _StudentState extends State<Student> {
                                 borderRadius: BorderRadius.circular(10.r)),
                             primary: AppColors.buttonLinear),
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Student2(
-                                titlecontroller1: titlecontroller1.text,
-                                univervalue: univervalue ? '1' : '2',
-                                viloyatidisi: data.viloyatid.toString(),
-                                viloyatvalue: regionsvalue ? '1' : '2',
-                                universiteteid: data.UniverId,
-                                titleGendor: _titleGendor.toString() == 'Erkak' ? '1' : '2',
-                                titlecount: _titleCount.toString(),
-                                phoneController: phoneController.toString(),
-                                house: house.toString() == 'ha' ? '1' : '2',
-                                addinformation: addinformation.text,
-                                numbervalue: numbervalue? '1':'2',
+                          if (titlecolor2 &&
+                              univerColor &&
+                              _phoneOnClick &&
+                              _FormOnClick&&_UniverOnClick) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Student2(
+                                    titlecontroller1: titlecontroller1.text,
+                                    univervalue: '${univervalue ? 1 : 2}',
+                                    viloyatidisi: data.viloyatid.toString(),
+                                    viloyatvalue: '${regionsvalue ? 1 : 2}',
+                                    universiteteid: data.UniverId,
+                                    titleGendor:
+                                        '${gender1 ? 0 : _titleGendor}',
+                                    titlecount: '${gender1 ? 0 : _titleCount}',
+                                    phoneController: phoneController.text
+                                        .split(' ')
+                                        .join(''),
+                                    house: house,
+                                    addinformation: addinformation.text,
+                                    numbervalue: '${numbervalue ? 1 : 2}'),
                               ),
-                            ),
-                          );
-                          print('${titlecontroller1.text} elonni nomlashhhh yooo+++++++++++');
-                          print('${univervalue ? '1' : '2'} univervalue shartemas -----');
+                            );
+                          } else {
+                            if (!titlecolor2) {
+                              titlecolor = Colors.red;
+                            }
+                            if (!univerColor) {
+                              univerColor1 = Colors.red;
+                            }
+                            if (!_phoneOnClick) {
+                              _phoneColor = Colors.red;
+                            }
+                            if (!_FormOnClick) {
+                              _colorForm = Colors.red;
+                            }if (!_UniverOnClick) {
+                              _colorUniver = Colors.red;
+                            }
+                            setState(() {});
+                          }
+
+                          print(
+                              '${titlecontroller1.text} elonni nomlashhhh yooo+++++++++++');
+                          print(
+                              '${univervalue ? '1' : '2'} univervalue shartemas -----');
                           print('${data.viloyatid} viloyatid +++++++++++');
-                          print('${regionsvalue ? '1' : '2'} regionsvalue shart emas ');
+                          print(
+                              '${regionsvalue ? '1' : '2'} regionsvalue shart emas ');
                           print('${data.UniverId} UniverId idisi +++++++++++');
-                          print('${_titleGendor.toString() == 'Erkak' ? '1' : '2'} kimlarga++++++');
-                          print('${phoneController.text} telefon raqam   +++++++++++');
-                          print('${house} telefon raqam  sherik vsdjvnsijvbs +++++++++++');
-                          print('${addinformation.text} qoshimcha malumotlar   +++++++++++');
+                          print(
+                              '${_titleGendor.toString() == 'Erkak' ? '1' : '2'} kimlarga++++++');
+                          print(
+                              '${phoneController.text} telefon raqam   +++++++++++');
+                          print(
+                              '${house} telefon raqam  sherik vsdjvnsijvbs +++++++++++');
+                          print(
+                              '${addinformation.text} qoshimcha malumotlar   +++++++++++');
                           print('${_titleCount} nechta odamga +++');
-                          print('${numbervalue? '1':'2'}  telefon raqam korinsin  +++++++++++');
+                          print(
+                              '${numbervalue ? '1' : '2'}  telefon raqam korinsin  +++++++++++');
                         },
                         child: Text(
                           "Keyingi ".tr(),

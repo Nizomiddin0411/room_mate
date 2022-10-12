@@ -99,9 +99,9 @@ class CreateStudent {
     print('${cost_period} cost_period +++++++++++');
     print('${File} File +++++++++++');
     // request.fields['district_id']='1';
-    request.headers.addAll({
-      HttpHeaders.authorizationHeader: 'Bearer ${Hive.box('token').get('token')}'
-    });
+    request.headers.addAll(
+        {HttpHeaders.authorizationHeader: 'Bearer ${Hive.box('token').get('token')}'}
+    );
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode >= 200 && response.statusCode <= 300) {
