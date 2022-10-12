@@ -50,6 +50,23 @@ class UserCreateAds {
 
 
     );
+    var file_ = await file1.exists();
+    if(!file_){
+      request.files.addAll([
+        await http.MultipartFile.fromPath(
+          'file1',
+          file1.path,
+        )
+      ]);
+    }else{
+      request.files.addAll([
+        await http.MultipartFile.fromPath(
+          'file1',
+          file1.path,
+        )
+      ]);
+    }
+
 
     request.fields.addAll({'title': '${titleController}',});
     request.fields.addAll({'roommate_gender': '${roommate_gender}',});
@@ -76,7 +93,7 @@ class UserCreateAds {
     request.fields.addAll({'utility_trash': '${utility_trash}',});
     request.fields.addAll({'comfort': '${comfort}',});
     request.fields.addAll({'description': '${description}',});
-    request.fields.addAll({'file1': '${file1}',});
+    // request.fields.addAll({'file1': '${file1}',});
     request.fields.addAll({'cost_period': '${cost_period}',});
     // request.fields['advertising_id']='$id';
     request.headers.addAll({HttpHeaders.authorizationHeader: 'Bearer ${Hive.box('token').get('token')}'});
