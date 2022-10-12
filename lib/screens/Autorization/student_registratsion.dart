@@ -349,7 +349,7 @@ class _StudentUserState extends State<StudentUser> {
                         // label: "Menu mode",
                         // hint: "country in menu mode",
                         onChanged: (newValue) async {
-                          // data.isuniver = true;
+                          data.isuniver = true;
                           final selected = data.universitet
                               .where((element) => element.name == newValue);
                           await data.getFakultet(selected.last.id!);
@@ -373,7 +373,7 @@ class _StudentUserState extends State<StudentUser> {
                 children: [
                   Row(
                     children: [
-                      Text("Fakultet ").tr(),
+                      Text("Ta'lim yo'nalishini tanglang ").tr(),
                     ],
                   ),
                   SizedBox(
@@ -395,7 +395,7 @@ class _StudentUserState extends State<StudentUser> {
                               isExpanded: true,
                               isDense: true,
                               hint: const Text(
-                                'Fakultetni kiriting',
+                                "Yo'nalishni tanlang",
                                 style: TextStyle(fontSize: 14),
                               ).tr(),
                               icon: const Icon(
@@ -793,7 +793,7 @@ class _StudentUserState extends State<StudentUser> {
                   if (kurs &&
                       viloyat &&
                       univer &&
-                      fakultet &&
+
                       ktuman &&
                       myController.text != '' &&
                       jinsi &&
@@ -811,11 +811,11 @@ class _StudentUserState extends State<StudentUser> {
                         );
                     // Hive.box('name').put( 'name', myController.text );
                     // Hive.box('number').put( 'number', nameController.text );
-                    print('${myController} maulotiiiiiiiii+++++++++++');
+                    print('${myController.text} maulotiiiiiiiii+++++++++++');
                     print('${Roommate} sherik kerak mi +++++++++++');
                     print('${UniderId} malumotlar  +++++++++++');
                     print('${District} maulotiiiiiiiii+++++++++++');
-                    print('${fakultetId} maulotiiiiiiiii+++++++++++');
+                    print('${data.isFakultet} fakultetid+++++++++++');
                     print('${nameController.text} maulotiiiiiiiii+++++++++++');
                     print('${dropdownvalue} maulotiiiiiiiii+++++++++++');
                     Navigator.push(

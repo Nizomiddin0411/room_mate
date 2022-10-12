@@ -19,11 +19,6 @@ class CreateAdsStudent {
     required String subway,
     required String gender,
     required String CountRoom,
-
-
-
-
-
     required String? title,
     required String? description
   }) async {
