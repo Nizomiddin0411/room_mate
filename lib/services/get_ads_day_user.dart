@@ -20,7 +20,8 @@ class GetAdsForDayUser {
     try {
       var response = await http.get(
           Uri.parse(
-            'http://164.68.114.231:8081/roommate/backend/web/api/advertising/get-advertising?region_id=$regionId&district_id=$districtId&university_id=$univerId&faculty_id=0&course=$course&live_with_owner=0&house_type=$houseType&room_count=$roomCount&rent_type=1&subway=$subway&cost_from=$costFrom&cost_to=$costTo&type=2&roommate_gender=0',
+            // 'http://164.68.114.231:8081/roommate/backend/web/api/advertising/get-advertising?region_id=$regionId&district_id=$districtId&university_id=$univerId&faculty_id=0&course=$course&live_with_owner=0&house_type=$houseType&room_count=$roomCount&rent_type=1&subway=$subway&cost_from=$costFrom&cost_to=$costTo&type=2&roommate_gender=0',
+          'http://164.68.114.231:8081/roommate/backend/web/api/advertising/get-advertising?stay_university_id=$univerId&university_id=$univerId&house_type=$houseType&room_count=$roomCount&rent_type=1&subway=$subway&cost_from=$costFrom&cost_to=$costTo&type=2&roommate_gender=0&district_id=$districtId',
           ),
           headers: {
             HttpHeaders.authorizationHeader:

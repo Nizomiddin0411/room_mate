@@ -35,6 +35,14 @@ class SmsService {
         'type',
         jsonDecode(data)["role_id"]
       );
+      await Hive.box('hide_profile').put(
+          'hide_profile',
+          jsonDecode(data)["hide_profile"]
+      );
+      await Hive.box('hide_phone').put(
+          'hide_phone',
+          jsonDecode(data)["hide_phone"]
+      );
       return jsonDecode(data);
     }
   }

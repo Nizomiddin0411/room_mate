@@ -203,17 +203,17 @@ class _KunlikIjaraState extends State<KunlikIjara> {
                                           .Ads[index].userFullName
                                           .toString(),
                                       chatApproved:
-                                      data.Ads[index].chatApproved!,
+                                      data.Ads[index].chatApproved,
                                       phoneNumberShow:
                                       data.Ads[index].phoneNumberShow,
                                       phoneNumber:
                                       data.Ads[index].phoneNumber,
                                       stay_university:
-                                      data.Ads[index].stayUniversity,
+                                      data.Ads[index].stayUniversity?.name.toString(),
                                       stay_region:
-                                      data.Ads[index].stayRegion,
+                                      data.Ads[index].stayRegion.toString(),
                                       roommate_count:
-                                      data.Ads[index].roommateCount,
+                                      data.Ads[index].roommateCount.toString(),
                                       roommate_gender: data
                                           .Ads[index].roommateGender
                                           .toString(),
@@ -224,10 +224,11 @@ class _KunlikIjaraState extends State<KunlikIjara> {
                                       inFloor: data.Ads[index].inFloor
                                           .toString(),
                                       utility_bills:
-                                      data.Ads[index].utilityBills,
+                                      data.Ads[index].utilityBills.toString(),
                                       rentType: data.Ads[index].rentType
                                           .toString(),
-                                      comfort: data.Ads[index].comfort,
+                                      comfort:'2',
+                                      // data.Ads[index].comfort,
                                       createData: data.Ads[index].createdAt,
                                     )));
                           },
@@ -421,42 +422,42 @@ class _KunlikIjaraState extends State<KunlikIjara> {
                                       type: data.AdsForStudent[index].type
                                           .toString(),
                                       userId:
-                                      data.AdsForStudent[index].userId!,
+                                      data.AdsForStudent[index].userId,
                                       userFullName: data
                                           .AdsForStudent[index].userFullName
                                           .toString(),
                                       chatApproved: data
                                           .AdsForStudent[index]
-                                          .chatApproved!,
+                                          .chatApproved,
                                       phoneNumber: data
-                                          .AdsForStudent[index].phoneNumber,
+                                          .AdsForStudent[index].phoneNumber.toString(),
                                       phoneNumberShow: data
                                           .AdsForStudent[index]
-                                          .phoneNumberShow,
+                                          .phoneNumberShow.toString(),
                                       floorsCount: data
                                           .AdsForStudent[index].floorsCount.toString(),
                                       district: data
-                                          .AdsForStudent[index].district,
+                                          .AdsForStudent[index].district?.name.toString(),
                                       stay_region: data
-                                          .AdsForStudent[index].stayRegion,
+                                          .AdsForStudent[index].stayRegion?.name.toString(),
                                       stay_university: data
-                                          .AdsForStudent[index].stayUniversity,
+                                          .AdsForStudent[index].stayUniversity?.name.toString(),
                                       region: data
-                                          .AdsForStudent[index].region,
+                                          .AdsForStudent[index].region.toString(),
                                       rentType: data
                                           .AdsForStudent[index].rentType.toString(),
                                       utility_bills: data
-                                          .AdsForStudent[index].utilityBills,
+                                          .AdsForStudent[index].utilityBills.toString(),
                                       createData: data
                                           .AdsForStudent[index].createdAt,
-                                      comfort: data
-                                          .AdsForStudent[index].comfort,
+                                      comfort:'2',
+                                      // data.AdsForStudent[index].comfort,
                                       inFloor: data
                                           .AdsForStudent[index].inFloor.toString(),
                                       roommate_count: data
-                                          .AdsForStudent[index].roommateCount,
+                                          .AdsForStudent[index].roommateCount.toString(),
                                       address: data
-                                          .AdsForStudent[index].address,
+                                          .AdsForStudent[index].address.toString(),
                                       roommate_gender: data
                                           .AdsForStudent[index].roommateGender.toString(),
                                     )));
