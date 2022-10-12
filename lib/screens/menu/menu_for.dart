@@ -62,7 +62,7 @@ class _MenuForState extends State<MenuFor> {
         ],
         title:  Center(
             child: Text(
-              "Rommate",
+              "Roommate",
               style: TextStyle(color: AppColors.buttonLinear, fontSize: 24.sp),
             )),
         // flexibleSpace:

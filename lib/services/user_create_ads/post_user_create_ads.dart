@@ -36,7 +36,7 @@ class UserCreateAds {
     required String? comfort,
     required String? description,
     required String? location,
-    required String file1,
+    required File file1,
     required String? cost_period,
 }) async {
     var request = http.MultipartRequest(
@@ -87,6 +87,7 @@ class UserCreateAds {
       // await Hive.box('token').put('token', jsonDecode(data)["access_token"]);
       print(Hive.box('token').get('token'));
       print(Hive.box('type').get('type'));
+      print(file1.toString() + 'filllllllll');
       return jsonDecode(data);
     }else{
       print('ishlamadi');

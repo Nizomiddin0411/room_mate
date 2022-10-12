@@ -3,13 +3,13 @@ class FavoritemModel {
   int? type;
   int? userId;
   String? title;
-  dynamic stayRegionId;
-  dynamic stayRegionMatter;
-  dynamic stayUniversityId;
-  dynamic stayUniversityMatter;
+  int? stayRegionId;
+  int? stayRegionMatter;
+  int? stayUniversityId;
+  int? stayUniversityMatter;
   int? roommateGender;
   dynamic genderMatter;
-  dynamic roommateCount;
+  int? roommateCount;
   String? phoneNumber;
   dynamic phoneNumberShow;
   dynamic haveLivingHome;
@@ -19,33 +19,34 @@ class FavoritemModel {
   String? location;
   int? subway;
   int? houseType;
-  int? roomCount;
-  int? floorsCount;
-  int? inFloor;
+  dynamic roomCount;
+  dynamic floorsCount;
+  dynamic inFloor;
   String? cost;
-  int? costType;
+  dynamic costType;
   int? liveWithOwner;
-  dynamic utilityBills;
-  int? utilityElectricity;
-  int? unilityGaz;
-  int? utilityHotWater;
-  int? utilityColdWater;
+  int? utilityBills;
+  dynamic utilityElectricity;
+  dynamic unilityGaz;
+  dynamic utilityHotWater;
+  dynamic utilityColdWater;
   dynamic utilityTrash;
   String? comfort;
-  int? universityId;
+  dynamic universityId;
   dynamic universityIdMatter;
-  int? rentType;
+  dynamic rentType;
   String? createdAt;
   String? updatedAt;
+  dynamic costPeriod;
   String? userFullName;
   String? favorite;
   int? chatApproved;
   List<dynamic>? images;
-  dynamic region;
-  dynamic stayRegion;
-  dynamic district;
-  University? university;
-  Null? stayUniversity;
+  Region? region;
+  Region? stayRegion;
+  District? district;
+  dynamic university;
+  StayUniversity? stayUniversity;
 
   FavoritemModel(
       {this.id,
@@ -86,6 +87,7 @@ class FavoritemModel {
         this.rentType,
         this.createdAt,
         this.updatedAt,
+        this.costPeriod,
         this.userFullName,
         this.favorite,
         this.chatApproved,
@@ -135,22 +137,28 @@ class FavoritemModel {
     rentType = json['rent_type'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    costPeriod = json['cost_period'];
     userFullName = json['user_full_name'];
     favorite = json['favorite'];
     chatApproved = json['chat_approved'];
     if (json['images'] != null) {
       images = <dynamic>[];
       json['images'].forEach((v) {
-        images!.add( v.fromJson(v));
+        images!.add(v.fromJson(v));
       });
     }
-    region = json['region'];
-    stayRegion = json['stay_region'];
-    district = json['district'];
-    university = json['university'] != null
-        ? new University.fromJson(json['university'])
+    region =
+    json['region'] != null ? new Region.fromJson(json['region']) : null;
+    stayRegion = json['stay_region'] != null
+        ? new Region.fromJson(json['stay_region'])
         : null;
-    stayUniversity = json['stay_university'];
+    district = json['district'] != null
+        ? new District.fromJson(json['district'])
+        : null;
+    university = json['university'];
+    stayUniversity = json['stay_university'] != null
+        ? new StayUniversity.fromJson(json['stay_university'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -193,24 +201,78 @@ class FavoritemModel {
     data['rent_type'] = this.rentType;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
+    data['cost_period'] = this.costPeriod;
     data['user_full_name'] = this.userFullName;
     data['favorite'] = this.favorite;
     data['chat_approved'] = this.chatApproved;
     if (this.images != null) {
       data['images'] = this.images!.map((v) => v.toJson()).toList();
     }
-    data['region'] = this.region;
-    data['stay_region'] = this.stayRegion;
-    data['district'] = this.district;
-    if (this.university != null) {
-      data['university'] = this.university!.toJson();
+    if (this.region != null) {
+      data['region'] = this.region!.toJson();
     }
-    data['stay_university'] = this.stayUniversity;
+    if (this.stayRegion != null) {
+      data['stay_region'] = this.stayRegion!.toJson();
+    }
+    if (this.district != null) {
+      data['district'] = this.district!.toJson();
+    }
+    data['university'] = this.university;
+    if (this.stayUniversity != null) {
+      data['stay_university'] = this.stayUniversity!.toJson();
+    }
     return data;
   }
 }
 
-class University {
+class Region {
+  int? id;
+  String? name;
+  String? nameRu;
+
+  Region({this.id, this.name, this.nameRu});
+
+  Region.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    nameRu = json['name_ru'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['name'] = this.name;
+    data['name_ru'] = this.nameRu;
+    return data;
+  }
+}
+
+class District {
+  int? id;
+  int? regionId;
+  String? name;
+  String? nameRu;
+
+  District({this.id, this.regionId, this.name, this.nameRu});
+
+  District.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    regionId = json['region_id'];
+    name = json['name'];
+    nameRu = json['name_ru'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['region_id'] = this.regionId;
+    data['name'] = this.name;
+    data['name_ru'] = this.nameRu;
+    return data;
+  }
+}
+
+class StayUniversity {
   int? id;
   String? name;
   String? nameRu;
@@ -220,7 +282,7 @@ class University {
   String? advertising;
   String? searching;
 
-  University(
+  StayUniversity(
       {this.id,
         this.name,
         this.nameRu,
@@ -230,7 +292,7 @@ class University {
         this.advertising,
         this.searching});
 
-  University.fromJson(Map<String, dynamic> json) {
+  StayUniversity.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     nameRu = json['name_ru'];

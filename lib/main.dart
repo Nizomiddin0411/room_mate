@@ -49,6 +49,8 @@ void main() async {
   await Hive.openBox('fullname');
   await Hive.openBox('phone');
   await Hive.openBox('scrollController');
+  await Hive.openBox('hide_profile');
+  await Hive.openBox('hide_phone');
 
   runApp(EasyLocalization(
     path: 'assets/locale',

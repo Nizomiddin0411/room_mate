@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
@@ -74,7 +75,8 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
 
   List<XFile>? imageFileList = [];
   List<XFile>? pickedFile;
-
+  List<File> FileList = [];
+  List<bool> FileExist = [];
   void selectImages() async {
     final List<XFile>? selectedImages = await imagePicker.pickMultiImage();
     if (selectedImages!.isNotEmpty) {
@@ -92,7 +94,23 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
   File? file;
   ImagePicker image = ImagePicker();
   int sum = 0;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    FileList.insert(0, File(''));
+    FileList.insert(1, File(''));
+    FileExist.insert(0, false);
+    FileExist.insert(1, false);
 
+
+
+  }
+  @override
+  void dispose(){
+    // _connectivitySubscription.cancel();
+    super.dispose();
+  }
   Future<void> showOptionsDialog(BuildContext context) {
     return showDialog(
         context: context,
@@ -104,18 +122,24 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
                 children: [
                   GestureDetector(
                     child: Text("From Camera"),
-                    onTap: () {
-                      getcam();
+                    onTap: () async{
+                      // getcam();
+
+                        await _takeFromCamera();
+                      setState(() {
+
+                      });
+
                       Navigator.pop(context);
                     },
                   ),
-                  Padding(padding: EdgeInsets.all(10)),
+                  const Padding(padding: EdgeInsets.all(10)),
                   GestureDetector(
                     child: Text("From Gallery"),
-                    onTap: () {
+                    onTap: () async{
                       sum += 1;
-                      selectImages();
-                      
+                      // selectImages();
+                      await _takeFile();
                       setState(() {});
                       Navigator.pop(context);
                     },
@@ -129,6 +153,8 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
 
   @override
   Widget build(BuildContext context) {
+
+
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
@@ -203,69 +229,145 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
                           ),
                         ],
                       ),
-                      SizedBox(
-                        height: 20.h,
-                      ),
+                      // SizedBox(
+                      //   height: 20.h,
+                      // ),
                       Container(
                         height: 240.h,
                         child: GridView.count(
-                          crossAxisSpacing: 6.w,
-                          mainAxisSpacing: 6.h,
+                          // crossAxisSpacing: 6.w,
+                          // mainAxisSpacing: 6.h,
                           crossAxisCount: 3,
                           children:
-                              List.generate(imageFileList!.length, (index) {
-                            return Column(children: <Widget>[
-                              Expanded(
-                                child: Stack(
-                                  children: [
-                                    Container(
-                                      width: 200.w,
-                                      height: 150.h,
-                                      decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(10.r),
-                                      ),
-                                      child: ClipRRect(
-                                        child: Image.file(
-                                          File(imageFileList![index].path),
-                                          fit: BoxFit.cover,
-                                        ),
-                                        borderRadius:
-                                            BorderRadius.circular(10.r),
-                                      ),
-                                    ),
-                                    GestureDetector(
-                                      onTap: () {
-                                        setState(() {
-                                          imageFileList!.removeAt(index);
-                                        });
-                                        print(
-                                            "Nizomiddin${imageFileList!.length}");
-                                      },
-                                      child: Padding(
-                                        padding: EdgeInsets.fromLTRB(
-                                            60.w, 0, 0, 50.h),
-                                        child: Align(
-                                          alignment: Alignment.topRight,
-                                          child: Container(
-                                              height: 20.h,
-                                              width: 24.w,
+                          //     List.generate(imageFileList!.length, (index) {
+                          //   return Column(children: <Widget>[
+                          //     Expanded(
+                          //       child: Stack(
+                          //         children: [
+                          //           Container(
+                          //             width: 200.w,
+                          //             height: 150.h,
+                          //             decoration: BoxDecoration(
+                          //               borderRadius:
+                          //                   BorderRadius.circular(10.r),
+                          //             ),
+                          //             child: ClipRRect(
+                          //               child: Image.file(
+                          //                 File(imageFileList![index].path),
+                          //                 fit: BoxFit.cover,
+                          //               ),
+                          //               borderRadius:
+                          //                   BorderRadius.circular(10.r),
+                          //             ),
+                          //           ),
+                          //           GestureDetector(
+                          //             onTap: () {
+                          //               setState(() {
+                          //                 // imageFileList!.removeAt(index);
+                          //               });
+                          //               print(
+                          //                   "Nizomiddin${imageFileList!.length}");
+                          //             },
+                          //             child: Padding(
+                          //               padding: EdgeInsets.fromLTRB(
+                          //                   60.w, 0, 0, 50.h),
+                          //               child: Align(
+                          //                 alignment: Alignment.topRight,
+                          //                 child: Container(
+                          //                     height: 20.h,
+                          //                     width: 24.w,
+                          //                     decoration: BoxDecoration(
+                          //                         color: Colors.red,
+                          //                         borderRadius:
+                          //                             BorderRadius.circular(
+                          //                                 15.r)),
+                          //                     child: Icon(Icons.remove,
+                          //                         color: Colors.white,
+                          //                         size: 20.sp)),
+                          //               ),
+                          //             ),
+                          //           ),
+                          //         ],
+                          //       ),
+                          //     ),
+                          //   ]);
+                          // }),
+                          [
+                          //   SizedBox(
+                          //   height: 10.h,
+                          // ),
+                            FileList.isNotEmpty
+                                ? Row(
+                              children: List.generate(FileList.length,
+                                      (index) {
+                                    return (FileExist[index])
+                                        ? Container(
+                                      // margin: EdgeInsets.symmetric(
+                                      //   horizontal: 5.0.w,
+                                      // ),
+                                      width: 100.w,
+                                      height: 200.h,
+                                      // decoration: BoxDecoration(
+                                      //   border: Border.all(
+                                      //     color: AppColors.mainColor,
+                                      //   ),
+                                      //   borderRadius: BorderRadius.all(
+                                      //     Radius.circular(
+                                      //       12.r,
+                                      //     ),
+                                      //   ),
+                                      // ),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                        CrossAxisAlignment.end,
+                                        children: [
+                                          GestureDetector(
+                                            child: SizedBox(
+                                              height: 10.h,
+                                              width: 20.w,
+                                              child: Icon(
+                                                Icons.clear,
+                                                size: 17.sp,
+                                                color: Colors.black,
+                                              ),
+                                            ),
+                                            onTap: () async{
+                                              await FileList
+                                                  .removeAt(index);
+                                              setState(() {});
+                                            },
+                                          ),
+                                          SizedBox(
+                                            height: 5.h,
+                                          ),
+                                          Expanded(
+                                            child: Container(
+                                              margin: EdgeInsets.all(4.w),
                                               decoration: BoxDecoration(
-                                                  color: Colors.red,
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          15.r)),
-                                              child: Icon(Icons.remove,
-                                                  color: Colors.white,
-                                                  size: 20.sp)),
-                                        ),
+                                                // borderRadius:
+                                                // BorderRadius.circular(
+                                                //   10.r,
+                                                // ),
+                                                image: DecorationImage(
+                                                  fit: BoxFit.cover,
+                                                  image: FileImage(
+                                                      FileList[
+                                                      index]),
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
                                       ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ]);
-                          }),
+                                    )
+                                        : Container();
+                                  }),
+                            )
+                                : const SizedBox(),
+                            SizedBox(
+                              height: 10.h,
+                            ),
+                          ]
                         ),
                       ),
                     ]),
@@ -333,7 +435,7 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
                                  comfort:widget.comfort,
                                  description:widget.description,
                                  location:widget.location,
-                                 file1:'',
+                                 file1: FileExist[0] ? FileList[0]:FileList[1],
                                  cost_period: widget.cost_period,
                               );
                               setState(() {});
@@ -379,6 +481,7 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
     var img = await image.getImage(source: ImageSource.camera);
     setState(() {
       file = File(img!.path);
+      print(file);
     });
   }
 
@@ -386,6 +489,45 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
     var img = await image.getImage(source: ImageSource.gallery);
     setState(() {
       file = File(img!.path);
+      print(file);
     });
+  }
+  _takeFromCamera() async {
+    final XFile? photo = await ImagePicker().pickImage(
+      source: ImageSource.camera,
+    );
+    if (photo != null) {
+      final image = File(photo.path);
+      // MockData.homeworkFile = image;
+      FileList.insert(1, image);
+      FileExist.insert(1, true);
+      print(image.toString());
+    }
+  }
+  _takeFile() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: [
+        'jpg',
+        'pdf',
+        'doc',
+      ],
+    );
+    if (result != null) {
+      PlatformFile file = result.files.first;
+      // var request = http.MultipartRequest("POST", Uri.parse("http://164.68.114.231:8081/bolakay/backend/web//api/homework/save"));
+      // request.fields["file"] = file.toString();
+      // var pic = await http.MultipartFile.fromPath("file_field", file.path);
+      // print(file.name);
+      // MockData.fileName = file.name;
+      // print(file.path);
+      // MockData.homeworkFile = File(file.path!);
+      // homeWorkList.add(File(file.path!));
+      FileList.insert(0, File(file.path!));
+      FileExist.insert(0, true);
+      return file.path.toString();
+    } else {
+      return null;
+    }
   }
 }

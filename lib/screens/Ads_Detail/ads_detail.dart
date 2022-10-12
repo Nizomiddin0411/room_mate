@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hive/hive.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
 import '../../chat/chat_page.dart';
 import '../../services/post_add_chat_permit.dart';
@@ -33,9 +34,9 @@ class AdsDetail extends StatefulWidget {
   String? id;
   String? favorite;
   String? type;
-  int userId;
+  int? userId;
   String? userFullName;
-  int chatApproved;
+  int? chatApproved;
   String? floorsCount;
   String? inFloor;
   String? district;
@@ -82,7 +83,7 @@ class AdsDetail extends StatefulWidget {
 
 class _AdsDetailState extends State<AdsDetail> {
   int _correntPage = 0;
-  late List<String> haveComfort = widget.comfort!.split(',');
+  late List<String> haveComfort = widget.comfort.toString().split(',');
   late List<int> haveInt = haveComfort.map(int.parse).toList();
   late List<String> comfort = [];
   String comfortList = '';
@@ -201,7 +202,7 @@ class _AdsDetailState extends State<AdsDetail> {
                               borderRadius: BorderRadius.circular(2.r),
                               color: AppColors.iconColor,
                             ),
-                            child: Center(
+                            child: const Center(
                                 child: Text(
                               "21 Sentabr,14:01",
                               style: TextStyle(color: AppColors.backgroundWhite),
@@ -279,15 +280,15 @@ class _AdsDetailState extends State<AdsDetail> {
                         padding: EdgeInsets.fromLTRB(12.w, 0, 12.w, 12.h),
                         child: InkWell(
                           onTap: () {
-                            // print('${Hive.box('id').get('id')}');
-                            // print(widget.userId);
+                            print('${Hive.box('id').get('id')}');
+                            print(widget.userId);
                             if (widget.chatApproved == '1') {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => ChatPage(widget.userFullName!, widget.userId)));
+                                      builder: (context) => ChatPage(widget.userFullName!, widget.userId!)));
                             } else {
-                              showAlertDialog(context, widget.userId);
+                              showAlertDialog(context, widget.userId!);
                             }
                           },
                           child: Container(
