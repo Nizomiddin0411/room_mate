@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hive/hive.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
 import '../../chat/chat_page.dart';
 import '../../services/post_add_chat_permit.dart';
@@ -279,16 +280,16 @@ class _AdsDetailState extends State<AdsDetail> {
                         padding: EdgeInsets.fromLTRB(12.w, 0, 12.w, 12.h),
                         child: InkWell(
                           onTap: () {
-                            // print('${Hive.box('id').get('id')}');
-                            // print(widget.userId);
-                            // if (widget.chatApproved == '1') {
-                            //   Navigator.push(
-                            //       context,
-                            //       MaterialPageRoute(
-                            //           builder: (context) => ChatPage(widget.userFullName!, widget.userId)));
-                            // } else {
-                            //   showAlertDialog(context, widget.userId);
-                            // }
+                            print('${Hive.box('id').get('id')}');
+                            print(widget.userId);
+                            if (widget.chatApproved == '1') {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => ChatPage(widget.userFullName!, widget.userId!)));
+                            } else {
+                              showAlertDialog(context, widget.userId!);
+                            }
                           },
                           child: Container(
                             width: 95.w,
