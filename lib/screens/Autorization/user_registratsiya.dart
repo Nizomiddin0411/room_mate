@@ -74,7 +74,7 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
                     border: OutlineInputBorder(
                         borderSide: BorderSide(color:myController.text == '' ? Colors.red : Colors.black12)
                     ),
-                    labelText: "Ism va familiyangizni kiriting".tr(),
+                    hintText: "Ism va familiyangizni kiriting".tr(),
                   ),
                 ),
               ],
@@ -105,14 +105,14 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
                     if(e!.length > 12){
                       return null;
                     }else{
-                      return '+998 9_ _ _ _ _ _ _ _ ';
+                      return '12 ta raqam kiriting';
                     }
                   },
                   keyboardType: TextInputType.phone,
                   controller: nameController,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(),
-                    labelText: "Telefon raqamini kiriting".tr(),
+                    hintText: "+998 9_ _ _ _ _ _ _ _".tr(),
                   ),
                 ),
               ],
@@ -223,10 +223,20 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
                           MaterialPageRoute(
                               builder: (context) => OffertoPage())),
                     },
-                    child: Text(
-                      "Foydalanuvchi shartlariga roziman".tr(),
-                      style: TextStyle(
-                          color: AppColors.mainColor, fontSize: 15),
+                    child: Row(
+                      children: [
+                        Text(
+                          "Roziman".tr(),
+                          style: TextStyle(
+                              color: Colors.black, fontSize: 15.sp),
+                        ),
+                        SizedBox(width: 7.w,),
+                        Text(
+                          "Foydalanuvchi shartlariga roziman".tr(),
+                          style: TextStyle(
+                              color: AppColors.mainColor, fontSize: 15.sp),
+                        ),
+                      ],
                     ))
               ],
             ),

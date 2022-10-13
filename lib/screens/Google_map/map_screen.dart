@@ -2,8 +2,12 @@ import 'dart:async';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:talaba_uy/core/const/app_colors.dart';
+
+import '../../provider/favorite_provider.dart';
 
 class MapScreen extends StatefulWidget {
   const MapScreen({Key? key}) : super(key: key);
@@ -45,13 +49,25 @@ class _MapScreenState extends State<MapScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar:  AppBar(
+        backgroundColor: AppColors.backgroundWhite,
         title: const Text("User current location"),
         centerTitle: true,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(
+            Icons.arrow_back,
+            color: AppColors.textColor,
+          ),
+        ),
       ),
       body: Container(
         child: SafeArea(
           // on below line creating google maps
           child: GoogleMap(
+            zoomControlsEnabled: false,
+            myLocationButtonEnabled: false,
             // on below line setting camera position
             initialCameraPosition: _kGoogle,
             // on below line we are setting markers on the map
@@ -70,11 +86,12 @@ class _MapScreenState extends State<MapScreen> {
         ),
       ),
       // on pressing floating action button the camera will take to user current location
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: FloatingActionButton.extended(
         onPressed: () async{
           getUserCurrentLocation().then((value) async {
+            final mapLatitude = context.read<FavoriteProvider>();
             print(value.latitude.toString() +" "+value.longitude.toString());
-
+            mapLatitude.forMap = value.latitude.toString()+','+value.longitude.toString();
             // marker added for current users location
             _markers.add(
                 Marker(
@@ -97,8 +114,11 @@ class _MapScreenState extends State<MapScreen> {
             setState(() {
             });
           });
+          Navigator.pop(context);
         },
-        child: Icon(Icons.local_activity),
+        label: const Text("Joylashuvimni jo'natish",),
+        icon: const Icon(Icons.location_history),
+        // child: Icon(Icons.local_activity),
       ),
     );
   }

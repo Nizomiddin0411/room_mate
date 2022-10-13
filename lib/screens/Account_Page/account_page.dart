@@ -133,7 +133,7 @@ class _AccountPageState extends State<AccountPage> {
                 width: 80.w,
                 child:
                 Switch(
-                  value: isSwitched,
+                  value: Hive.box('hide_phone').get('hide_phone') == null ? isSwitched= false:isSwitched= true,
                   onChanged: (value) {
                      ChangeProfile().ChangeProf(hidePhone: _switchValue ? '1': '2', hideProfile: '');
                     setState(() {

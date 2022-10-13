@@ -100,8 +100,12 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
     super.initState();
     FileList.insert(0, File(''));
     FileList.insert(1, File(''));
+    FileList.insert(2, File(''));
+    FileList.insert(3, File(''));
     FileExist.insert(0, false);
     FileExist.insert(1, false);
+    FileExist.insert(2, false);
+    FileExist.insert(3, false);
 
 
 
@@ -124,8 +128,9 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
                     child: Text("From Camera"),
                     onTap: () async{
                       // getcam();
-
+                      //     for(int i = 0; i<=2;i++){
                         await _takeFromCamera();
+                          // }
                       setState(() {
 
                       });
@@ -410,8 +415,8 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
                                  comfort:widget.comfort,
                                  description:widget.description,
                                  location:widget.location,
-                                 file1: FileExist[0] ? FileList[0]:FileList[1],
-                                 cost_period: widget.cost_period,
+                                 file1: FileExist[1] ? FileList[1]:FileList[0],
+                                 cost_period: widget.cost_period, file2: FileExist[2] ? FileList[2]:FileList[0], file3: FileExist[3] ? FileList[3]:FileList[0],
                               );
                               setState(() {});
                               if(data['status']){
@@ -504,9 +509,15 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
     if (photo != null) {
       final image = File(photo.path);
       // MockData.homeworkFile = image;
-      FileList.insert(1, image);
-      FileExist.insert(1, true);
-      print(image.toString());
+      // for(int i = 1;i<=3;i++) {
+        FileList.insert(1, image);
+        FileExist.insert(1, true);
+        FileList.insert(2, image);
+        FileExist.insert(2, true);
+        FileList.insert(3, image);
+        FileExist.insert(3, true);
+        print(image.toString());
+      // }
     }
   }
   _takeFile() async {

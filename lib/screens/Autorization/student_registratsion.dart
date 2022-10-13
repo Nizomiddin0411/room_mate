@@ -123,7 +123,7 @@ class _StudentUserState extends State<StudentUser> {
                               color: myController.text == ''
                                   ? Colors.red
                                   : Colors.black12)),
-                      labelText: "Ism va familiyangizni kiriting".tr(),
+                      hintText: "Ism va familiyangizni kiriting".tr(),
                     ),
                   ),
                 ],
@@ -159,7 +159,7 @@ class _StudentUserState extends State<StudentUser> {
                             if (e!.length > 12) {
                               return null;
                             } else {
-                              return '+ 998 9_ _ _ _ _ _ _ _ ';
+                              return '12 ta raqam kiriting';
                             }
                           },
                           keyboardType: TextInputType.phone,
@@ -167,7 +167,7 @@ class _StudentUserState extends State<StudentUser> {
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8)),
-                            labelText: "Telefon raqamini kiriting".tr(),
+                            hintText: "+ 998 9_ _ _ _ _ _ _ _ ".tr(),
                           ),
                         ),
                       ),
@@ -768,10 +768,23 @@ class _StudentUserState extends State<StudentUser> {
                             MaterialPageRoute(
                                 builder: (context) => OffertoPage()));
                       },
-                      child: Text(
-                        "Roziman  Foydalanuvchi shartlariga".tr(),
-                        style:
-                            TextStyle(color: AppColors.mainColor, fontSize: 15),
+                      child: Row(
+                        children: [
+                          Text(
+                            "Roziman".tr(),
+                            style:
+                                TextStyle(color: Colors.black, fontSize: 15.sp),
+                          ),
+                          SizedBox(
+                            width: 7.w,
+                          ),
+                          Text(
+                            "Foydalanuvchi shartlariga",
+                            style: TextStyle(
+                                color: AppColors.mainColor, fontSize: 15.sp),
+                          ),
+                          Divider(color: Colors.red,thickness: 2,)
+                        ],
                       ),
                     ),
                   ),
@@ -793,22 +806,21 @@ class _StudentUserState extends State<StudentUser> {
                   if (kurs &&
                       viloyat &&
                       univer &&
-
                       ktuman &&
                       myController.text != '' &&
                       jinsi &&
                       value) {
                     await RegistratsiyaStudent().CreateAdsStudent(
-                        FullName: myController.text,
-                        fakultetId: data.fakultetid.toString(),
-                        Course: Course.toString(),
-                        HideProfile: isSwitched.toString() == 'ha' ? '1' : '2',
-                        District: data.districtid.toString(),
-                        Phonenumber: nameController.text,
-                        gender: dropdownvalue.toString() == 'Erkak' ? '1' : '2',
-                        UniderId: data.universiterid.toString(),
-                        Hidenumber: hidenumber.toString()=='Ha'?'1':'2',
-                        );
+                      FullName: myController.text,
+                      fakultetId: data.fakultetid.toString(),
+                      Course: Course.toString(),
+                      HideProfile: isSwitched.toString() == 'ha' ? '1' : '2',
+                      District: data.districtid.toString(),
+                      Phonenumber: nameController.text,
+                      gender: dropdownvalue.toString() == 'Erkak' ? '1' : '2',
+                      UniderId: data.universiterid.toString(),
+                      Hidenumber: hidenumber.toString() == 'Ha' ? '1' : '2',
+                    );
                     // Hive.box('name').put( 'name', myController.text );
                     // Hive.box('number').put( 'number', nameController.text );
                     print('${myController.text} maulotiiiiiiiii+++++++++++');

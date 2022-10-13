@@ -50,7 +50,7 @@ class _FavoritPageState extends State<FavoritPage> {
             child: Column(children: [
               ListView.builder(
                   shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: data.Like.length,
                   itemBuilder: (BuildContext context, int index) {
                     return Padding(
@@ -96,41 +96,41 @@ class _FavoritPageState extends State<FavoritPage> {
                                                   .toString(),
                                               type: data.Like[index].type
                                                   .toString(),
-                                              userId: data.Like[index].userId!,
+                                              userId: data.Like[index].userId,
                                               userFullName: data
                                                   .Like[index].userFullName
                                                   .toString(),
                                               chatApproved: data
-                                                  .Like[index].chatApproved!,
+                                                  .Like[index].chatApproved,
                                           phoneNumber: data
-                                              .Like[index].phoneNumber,
+                                              .Like[index].phoneNumber.toString(),
                                           phoneNumberShow: data
                                               .Like[index]
-                                              .phoneNumberShow,
+                                              .phoneNumberShow.toString(),
                                           floorsCount: data
                                               .Like[index].floorsCount.toString(),
                                           district: data
-                                              .Like[index].district,
+                                              .Like[index].district!.name.toString(),
                                           stay_region: data
-                                              .Like[index].stayRegion,
+                                              .Like[index].stayRegion?.name.toString(),
                                           stay_university: data
-                                              .Like[index].stayUniversity,
+                                              .Like[index].stayUniversity.toString(),
                                           region: data
-                                              .Like[index].region,
+                                              .Like[index].region?.name.toString(),
                                           rentType: data
                                               .Like[index].rentType.toString(),
                                           utility_bills: data
-                                              .Like[index].utilityBills,
+                                              .Like[index].utilityBills.toString(),
                                           createData: data
-                                              .Like[index].createdAt,
-                                          comfort: data
-                                              .Like[index].comfort,
+                                              .Like[index].createdAt.toString(),
+                                          comfort:'2',
+                                          // data.Like[index].comfort,
                                           inFloor: data
                                               .Like[index].inFloor.toString(),
                                           roommate_count: data
-                                              .Like[index].roommateCount,
+                                              .Like[index].roommateCount.toString(),
                                           address: data
-                                              .Like[index].address,
+                                              .Like[index].address.toString(),
                                           roommate_gender: data
                                               .Like[index].roommateGender.toString(),
                                             )));
@@ -148,7 +148,7 @@ class _FavoritPageState extends State<FavoritPage> {
                                       children: [
                                         CachedNetworkImage(
                                           imageUrl:
-                                              "https://source.unsplash.com/random/324x235",
+                                              "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.Like[index].images?[index].image}",
                                           width: 324.w,
                                           height: 235.h,
                                           fit: BoxFit.cover,

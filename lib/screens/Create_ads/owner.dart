@@ -1,9 +1,13 @@
+import 'dart:async';
+
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:hive/hive.dart';
 
 import 'package:provider/provider.dart';
@@ -15,6 +19,8 @@ import 'package:talaba_uy/provider/region_provider.dart';
 import 'package:talaba_uy/screens/Create_ads/Owner_continue_Ads.dart';
 import 'package:talaba_uy/screens/Create_ads/owner_take_photo.dart';
 import '../../models/get_district_model.dart';
+import '../../provider/favorite_provider.dart';
+import '../Google_map/map_screen.dart';
 
 class Owner extends StatefulWidget {
   const Owner({Key? key}) : super(key: key);
@@ -24,6 +30,33 @@ class Owner extends StatefulWidget {
 }
 
 class _OwnerState extends State<Owner> {
+  Completer<GoogleMapController> _controller = Completer();
+  // on below line we have specified camera position
+  static final CameraPosition _kGoogle = const CameraPosition(
+    target: LatLng(41.311081, 69.240562),
+    zoom: 14.4746,
+  );
+
+  // on below line we have created the list of markers
+  final List<Marker> _markers = <Marker>[
+    const Marker(
+        markerId: MarkerId('1'),
+        position: LatLng(41.311081,69.240562),
+        infoWindow: InfoWindow(
+          title: 'My Position',
+        )
+    ),
+  ];
+
+  // created method for getting user current location
+  Future<Position> getUserCurrentLocation() async {
+    await Geolocator.requestPermission().then((value){
+    }).onError((error, stackTrace) async {
+      await Geolocator.requestPermission();
+      print("ERROR"+error.toString());
+    });
+    return await Geolocator.getCurrentPosition();
+  }
   bool _checkHome = false;
   bool _checkMetro = false;
   String RoomOwner = '';
@@ -428,41 +461,45 @@ class _OwnerState extends State<Owner> {
                     SizedBox(
                       height: 5.h,
                     ),
-                    Column(
-                      children: [
-                        Container(
-                          child: Column(
-                            children: [
-                              Container(
-                                child: Image.asset(
-                                  "assets/images/maps.png",
-                                  fit: BoxFit.fill,
+                    InkWell(
+                      onTap: (){
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => MapScreen()));
+                      },
+                      child: Column(
+                        children: [
+                          InkWell(
+                            onTap: (){
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => MapScreen()));
+                            },
+                            child: Container(
+                              width: 324.w,
+                              height: 210.h,
+                              child: IgnorePointer(
+                                ignoring: true,
+                                child: SafeArea(
+                                  // on below line creating google maps
+                                  child: GoogleMap(
+                                    // on below line setting camera position
+                                    initialCameraPosition: _kGoogle,
+                                    // on below line we are setting markers on the map
+                                    markers: Set<Marker>.of(_markers),
+                                    // on below line specifying map type.
+                                    mapType: MapType.normal,
+                                    // on below line setting user location enabled.
+                                    myLocationEnabled: true,
+                                    // on below line setting compass enabled.
+                                    compassEnabled: true,
+                                    // on below line specifying controller on map complete.
+                                    onMapCreated: (GoogleMapController controller){
+                                      _controller.complete(controller);
+                                    },
+                                  ),
                                 ),
                               ),
-                              Container(
-                                margin: EdgeInsets.symmetric(horizontal: 4.w),
-                                child: Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(
-                                      "Amir Temur ko’chasi 21, Yunusobod tumani",
-                                      style: TextStyle(fontSize: 14.sp),
-                                    ),
-                                    Icon(Icons.arrow_forward)
-                                  ],
-                                ),
-                              )
-                            ],
+                            ),
                           ),
-                          height: 210.h,
-                          width: 324.w,
-                          decoration: BoxDecoration(
-                              border: Border.all(color: Colors.black),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(5.r))),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -660,6 +697,8 @@ class _OwnerState extends State<Owner> {
                                 borderRadius: BorderRadius.circular(10.r)),
                             primary: AppColors.buttonLinear),
                         onPressed: () {
+                          final map = context.read<FavoriteProvider>();
+                          print(map.forMap.toString()+'MAPPPPPPPPPPPPPPPPPPPPPPP');
                           print('${titleController!.text}  title');
                           print('${value5 ?  0 : roommate_gender}' + 'gender');
                           print('${value5 ? 1 : 2} axamyatsiz gender');
@@ -689,7 +728,8 @@ class _OwnerState extends State<Owner> {
                                           gender_matter: '${value5 ? 1 : 2}',
                                           district_id: district_id,
                                           titleController:
-                                              titleController!.text, location: '0',
+                                              titleController!.text,
+                                      location: '${map.forMap}',
                                         )));
                           } else {
                             setState(() {

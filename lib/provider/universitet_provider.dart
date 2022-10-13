@@ -36,10 +36,6 @@ void _settuman(bool value){
     istuman=value;
     notifyListeners();
 }
-void _univesitet(bool value){
-    isuniver=value;
-    notifyListeners();
-}
 Future<void> getViloyat() async{
   Viloyat=await GetRegionService().fetchRegion();
 }
@@ -51,8 +47,6 @@ Future<void>  getTuman(int id)async{
   Future<void> getUniver() async{
     universitet = await GetUniverService().fetchUniver();
   }
-
-
 
   Future<void> getFakultet(int id) async{
     _setFakultet(false);

@@ -112,40 +112,40 @@ class _FavoritAdsState extends State<FavoritAds> {
                                                 type: data.MyAds[index].type
                                                     .toString(),
                                                 userId:
-                                                    data.MyAds[index].userId!,
+                                                    data.MyAds[index].userId,
                                                 userFullName: data
-                                                    .MyAds[index].userFullName,
+                                                    .MyAds[index].userFullName.toString(),
                                                 chatApproved: data
-                                                    .MyAds[index].chatApproved!,
+                                                    .MyAds[index].chatApproved,
                                             phoneNumber: data
-                                                .MyAds[index].phoneNumber,
+                                                .MyAds[index].phoneNumber.toString(),
                                             phoneNumberShow: data
                                                 .MyAds[index]
-                                                .phoneNumberShow,
+                                                .phoneNumberShow.toString(),
                                             floorsCount: data
                                                 .MyAds[index].floorsCount.toString(),
                                             district: data
-                                                .MyAds[index].district,
+                                                .MyAds[index].district?.name.toString(),
                                             stay_region: data
-                                                .MyAds[index].stayRegion,
+                                                .MyAds[index].stayRegion?.name.toString(),
                                             stay_university: data
-                                                .MyAds[index].stayUniversity,
+                                                .MyAds[index].stayUniversity.toString(),
                                             region: data
-                                                .MyAds[index].region,
+                                                .MyAds[index].region?.name.toString(),
                                             rentType: data
                                                 .MyAds[index].rentType.toString(),
                                             utility_bills: data
-                                                .MyAds[index].utilityBills,
+                                                .MyAds[index].utilityBills.toString(),
                                             createData: data
-                                                .MyAds[index].createdAt,
-                                            comfort: data
-                                                .MyAds[index].comfort,
+                                                .MyAds[index].createdAt.toString(),
+                                            comfort:'2' ,
+                                            // data.MyAds[index].comfort,
                                             inFloor: data
                                                 .MyAds[index].inFloor.toString(),
                                             roommate_count: data
-                                                .MyAds[index].roommateCount,
+                                                .MyAds[index].roommateCount.toString(),
                                             address: data
-                                                .MyAds[index].address,
+                                                .MyAds[index].address.toString(),
                                             roommate_gender: data
                                                 .MyAds[index].roommateGender.toString(),
                                               )));
