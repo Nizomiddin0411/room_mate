@@ -307,21 +307,21 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
                                       (index) {
                                     return (FileExist[index])
                                         ? Container(
-                                      // margin: EdgeInsets.symmetric(
-                                      //   horizontal: 5.0.w,
-                                      // ),
+                                      margin: EdgeInsets.symmetric(
+                                        horizontal: 5.0.w,
+                                      ),
                                       width: 100.w,
                                       height: 200.h,
-                                      // decoration: BoxDecoration(
-                                      //   border: Border.all(
-                                      //     color: AppColors.mainColor,
-                                      //   ),
-                                      //   borderRadius: BorderRadius.all(
-                                      //     Radius.circular(
-                                      //       12.r,
-                                      //     ),
-                                      //   ),
-                                      // ),
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                          color: AppColors.mainColor,
+                                        ),
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(
+                                            12.r,
+                                          ),
+                                        ),
+                                      ),
                                       child: Column(
                                         crossAxisAlignment:
                                         CrossAxisAlignment.end,
@@ -420,12 +420,7 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
                               );
                               setState(() {});
                               if(data['status']){
-                                Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => CreateSuccedful(),
-                                ),
-                              );
+                                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>CreateSuccedful()), (route) => false);
                               }else{
                                 print(widget.titleController!+'title');
                               print(widget.roommate_gender.toString()+'gender');
