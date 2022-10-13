@@ -1,8 +1,3 @@
-
-
-
-
-
 import 'dart:io';
 import 'dart:convert';
 
@@ -38,7 +33,7 @@ class UserCreateAds {
     required String? location,
     required File file1,
     required String? cost_period,
-}) async {
+  }) async {
     var request = http.MultipartRequest(
       'post',
       Uri.parse(
@@ -47,49 +42,102 @@ class UserCreateAds {
       // headers: {
       //   HttpHeaders.authorizationHeader: 'Bearer ${Hive.box('token').get('token')}'
       // }
-
-
     );
-
-    request.fields.addAll({'title': '${titleController}',});
-    request.fields.addAll({'roommate_gender': '${roommate_gender}',});
-    request.fields.addAll({'gender_matter': '${gender_matter}',});
-    request.fields.addAll({'district_id': '${district_id}',});
-    request.fields.addAll({'address': '${addressController}',});
-    request.fields.addAll({'location': '${location}',});
-    request.fields.addAll({'subway': '${subway}',});
-    request.fields.addAll({'university_id': '${university_id}',});
-    request.fields.addAll({'university_id_matter': '${university_id_matter}',});
-    request.fields.addAll({'phone_number': '${phoneController}',});
-    request.fields.addAll({'house_type': '${house_type}',});
-    request.fields.addAll({'rent_type': '${rent_type}',});
-    request.fields.addAll({'room_count': '${room_count}',});
-    request.fields.addAll({'floors_count': '${floors_count}',});
-    request.fields.addAll({'in_floor': '${in_floor}',});
-    request.fields.addAll({'cost': '${costController}',});
-    request.fields.addAll({'cost_type': '${cost_type}',});
-    request.fields.addAll({'live_with_owner': '${live_with_owner}',});
-    request.fields.addAll({'utility_electricity': '${utility_electricity}',});
-    request.fields.addAll({'unility_gaz': '${unility_gaz}',});
-    request.fields.addAll({'utility_hot_water': '${utility_hot_water}',});
-    request.fields.addAll({'utility_cold_water': '${utility_cold_water}',});
-    request.fields.addAll({'utility_trash': '${utility_trash}',});
-    request.fields.addAll({'comfort': '${comfort}',});
-    request.fields.addAll({'description': '${description}',});
-    request.fields.addAll({'file1': '${file1}',});
-    request.fields.addAll({'cost_period': '${cost_period}',});
+    // String token = Hive.box('token').get('token');
+    request.fields.addAll({
+      'title': '${titleController}',
+    });
+    request.fields.addAll({
+      'roommate_gender': '${roommate_gender}',
+    });
+    request.fields.addAll({
+      'gender_matter': '${gender_matter}',
+    });
+    request.fields.addAll({
+      'district_id': '${district_id}',
+    });
+    request.fields.addAll({
+      'address': '${addressController}',
+    });
+    request.fields.addAll({
+      'location': '${location}',
+    });
+    request.fields.addAll({
+      'subway': '${subway}',
+    });
+    request.fields.addAll({
+      'university_id': '${university_id}',
+    });
+    request.fields.addAll({
+      'university_id_matter': '${university_id_matter}',
+    });
+    request.fields.addAll({
+      'phone_number': '${phoneController}',
+    });
+    request.fields.addAll({
+      'house_type': '${house_type}',
+    });
+    request.fields.addAll({
+      'rent_type': '${rent_type}',
+    });
+    request.fields.addAll({
+      'room_count': '${room_count}',
+    });
+    request.fields.addAll({
+      'floors_count': '${floors_count}',
+    });
+    request.fields.addAll({
+      'in_floor': '${in_floor}',
+    });
+    request.fields.addAll({
+      'cost': '${costController}',
+    });
+    request.fields.addAll({
+      'cost_type': '${cost_type}',
+    });
+    request.fields.addAll({
+      'live_with_owner': '${live_with_owner}',
+    });
+    request.fields.addAll({
+      'utility_electricity': '${utility_electricity}',
+    });
+    request.fields.addAll({
+      'unility_gaz': '${unility_gaz}',
+    });
+    request.fields.addAll({
+      'utility_hot_water': '${utility_hot_water}',
+    });
+    request.fields.addAll({
+      'utility_cold_water': '${utility_cold_water}',
+    });
+    request.fields.addAll({
+      'utility_trash': '${utility_trash}',
+    });
+    request.fields.addAll({
+      'comfort': '${comfort}',
+    });
+    request.fields.addAll({
+      'description': '${description}',
+    });
+    request.fields.addAll({
+      'file1': '${file1}',
+    });
+    request.fields.addAll({
+      'cost_period': '${cost_period}',
+    });
+   
     // request.fields['advertising_id']='$id';
-    request.headers.addAll({HttpHeaders.authorizationHeader: 'Bearer ${Hive.box('token').get('token')}'});
+    String token = Hive.box('token').get('token');
+    request.headers.addAll({
+      HttpHeaders.authorizationHeader: 'Bearer $token'
+    });
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode >= 200 && response.statusCode <= 300) {
       var data = await response.stream.bytesToString();
-      // await Hive.box('token').put('token', jsonDecode(data)["access_token"]);
-      print(Hive.box('token').get('token'));
-      print(Hive.box('type').get('type'));
       print(file1.toString() + 'filllllllll');
       return jsonDecode(data);
-    }else{
+    } else {
       print('ishlamadi');
     }
   }

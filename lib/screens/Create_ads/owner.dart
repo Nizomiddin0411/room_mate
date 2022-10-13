@@ -111,6 +111,7 @@ class _OwnerState extends State<Owner> {
 
   @override
   Widget build(BuildContext context) {
+    print(Hive.box('token').get('token'));
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 12.h),
@@ -236,7 +237,13 @@ class _OwnerState extends State<Owner> {
                             setState(() {
                               this.value5 = value!;
                               gender_matter = value ? '1' : '2';
-                              print(value5);
+
+                              if (value) {
+                                _colorGender = Colors.grey;
+                              }if(!value && !_GenderOnClick){
+                                 _colorGender = Colors.red;
+                                _GenderOnClick = false;
+                              }
                             });
                           },
                         ),
@@ -627,8 +634,12 @@ class _OwnerState extends State<Owner> {
                             setState(() {
                               this.value6 = value!;
                               university_id_matter = value ? '1' : '2';
-                              print(value6);
-                              print(university_id_matter);
+                              if (value) {
+                                _otmColor = Colors.grey;
+                              }if(!value && !_otmOnClick){
+                                 _otmColor = Colors.red;
+                                _otmOnClick = false;
+                              }
                             });
                           },
                         ),
@@ -658,12 +669,12 @@ class _OwnerState extends State<Owner> {
                           print(  '${value6 ? 0 :university_id} univer id');
                           print( '${value6? 1 : 2} axamyatsiz univer' );
 
-                          if (_RegionOnClick ||
-                              _DiscritOnClick ||
-                              _UniverOnClick ||
-                              _GenderOnClick ||
-                              _addressOnClick ||
-                              _otmOnClick) {
+                          if (_RegionOnClick &&
+                              _DiscritOnClick &&
+                              _UniverOnClick &&
+                              (_GenderOnClick || gender_matter == '1') &&
+                              _addressOnClick &&
+                              (_otmOnClick || university_id_matter == '1')) {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -691,13 +702,14 @@ class _OwnerState extends State<Owner> {
                               if (!_UniverOnClick) {
                                 _colorUniver = Colors.red;
                               }
-                              if (!_GenderOnClick) {
+                              if (!_GenderOnClick && gender_matter == null) {
                                 _colorGender = Colors.red;
                               }
                               if (!_addressOnClick) {
                                 _addressColor = Colors.red;
                               }
-                              if (!_otmOnClick) {
+                              if (!_otmOnClick && university_id_matter == null
+                              ) {
                                 _otmColor = Colors.red;
                               }
                             });
