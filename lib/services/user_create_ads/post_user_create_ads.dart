@@ -37,6 +37,8 @@ class UserCreateAds {
     required String? description,
     required String? location,
     required File file1,
+    required File file2,
+    required File file3,
     required String? cost_period,
 }) async {
     var request = http.MultipartRequest(
@@ -51,6 +53,8 @@ class UserCreateAds {
 
     );
     var file_ = await file1.exists();
+    var fileSecond = await file2.exists();
+    var fileThreeth = await file3.exists();
     if(!file_){
       request.files.addAll([
         await http.MultipartFile.fromPath(
@@ -66,7 +70,35 @@ class UserCreateAds {
         )
       ]);
     }
-
+    if(!fileSecond){
+      request.files.addAll([
+        await http.MultipartFile.fromPath(
+          'file2',
+          file1.path,
+        )
+      ]);
+    }else{
+      request.files.addAll([
+        await http.MultipartFile.fromPath(
+          'file2',
+          file1.path,
+        )
+      ]);
+    } if(!fileThreeth){
+      request.files.addAll([
+        await http.MultipartFile.fromPath(
+          'file3',
+          file1.path,
+        )
+      ]);
+    }else{
+      request.files.addAll([
+        await http.MultipartFile.fromPath(
+          'file3',
+          file1.path,
+        )
+      ]);
+    }
 
     request.fields.addAll({'title': '${titleController}',});
     request.fields.addAll({'roommate_gender': '${roommate_gender}',});

@@ -50,7 +50,7 @@ class _FavoritPageState extends State<FavoritPage> {
             child: Column(children: [
               ListView.builder(
                   shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: data.Like.length,
                   itemBuilder: (BuildContext context, int index) {
                     return Padding(
@@ -148,7 +148,7 @@ class _FavoritPageState extends State<FavoritPage> {
                                       children: [
                                         CachedNetworkImage(
                                           imageUrl:
-                                              "https://source.unsplash.com/random/324x235",
+                                              "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.Like[index].images?[index].image}",
                                           width: 324.w,
                                           height: 235.h,
                                           fit: BoxFit.cover,

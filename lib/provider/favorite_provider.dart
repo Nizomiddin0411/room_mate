@@ -12,6 +12,7 @@ class FavoriteProvider extends ChangeNotifier{
   List<GetMyAdsModel> MyAds = [];
   bool isFavorite = false;
   bool isMyAds = false;
+  String? forMap;
   void _setFavorite(bool value) {
     isFavorite = value;
     notifyListeners();
