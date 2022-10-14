@@ -3,13 +3,13 @@ class AllAdsModel {
   int? type;
   int? userId;
   String? title;
-  int? stayRegionId;
-  int? stayRegionMatter;
-  int? stayUniversityId;
-  int? stayUniversityMatter;
+  dynamic stayRegionId;
+  dynamic stayRegionMatter;
+  dynamic stayUniversityId;
+  dynamic stayUniversityMatter;
   int? roommateGender;
-  dynamic genderMatter;
-  int? roommateCount;
+  int? genderMatter;
+  dynamic roommateCount;
   String? phoneNumber;
   dynamic phoneNumberShow;
   dynamic haveLivingHome;
@@ -19,34 +19,34 @@ class AllAdsModel {
   String? location;
   int? subway;
   int? houseType;
-  dynamic roomCount;
-  dynamic floorsCount;
-  dynamic inFloor;
+  int? roomCount;
+  int? floorsCount;
+  int? inFloor;
   String? cost;
-  dynamic costType;
+  int? costType;
   int? liveWithOwner;
-  int? utilityBills;
-  dynamic utilityElectricity;
-  dynamic unilityGaz;
-  dynamic utilityHotWater;
-  dynamic utilityColdWater;
-  dynamic utilityTrash;
+  dynamic utilityBills;
+  int? utilityElectricity;
+  int? unilityGaz;
+  int? utilityHotWater;
+  int? utilityColdWater;
+  int? utilityTrash;
   String? comfort;
-  dynamic universityId;
-  dynamic universityIdMatter;
-  dynamic rentType;
+  int? universityId;
+  int? universityIdMatter;
+  int? rentType;
   String? createdAt;
   String? updatedAt;
-  dynamic costPeriod;
+  int? costPeriod;
   String? userFullName;
   String? favorite;
   int? chatApproved;
   List<dynamic>? images;
   Region? region;
-  Region? stayRegion;
+  dynamic stayRegion;
   District? district;
   dynamic university;
-  StayUniversity? stayUniversity;
+  dynamic stayUniversity;
 
   AllAdsModel(
       {this.id,
@@ -142,23 +142,21 @@ class AllAdsModel {
     favorite = json['favorite'];
     chatApproved = json['chat_approved'];
     if (json['images'] != null) {
-      images = <dynamic>[];
+      images = <Images>[];
       json['images'].forEach((v) {
-        images!.add(v.fromJson(v));
+        images!.add(new Images.fromJson(v));
       });
     }
     region =
     json['region'] != null ? new Region.fromJson(json['region']) : null;
-    stayRegion = json['stay_region'] != null
-        ? new Region.fromJson(json['stay_region'])
-        : null;
+    stayRegion = json['stay_region'];
     district = json['district'] != null
         ? new District.fromJson(json['district'])
         : null;
-    university = json['university'];
-    stayUniversity = json['stay_university'] != null
-        ? new StayUniversity.fromJson(json['stay_university'])
+    university = json['university'] != null
+        ? new University.fromJson(json['university'])
         : null;
+    stayUniversity = json['stay_university'];
   }
 
   Map<String, dynamic> toJson() {
@@ -211,16 +209,36 @@ class AllAdsModel {
     if (this.region != null) {
       data['region'] = this.region!.toJson();
     }
-    if (this.stayRegion != null) {
-      data['stay_region'] = this.stayRegion!.toJson();
-    }
+    data['stay_region'] = this.stayRegion;
     if (this.district != null) {
       data['district'] = this.district!.toJson();
     }
-    data['university'] = this.university;
-    if (this.stayUniversity != null) {
-      data['stay_university'] = this.stayUniversity!.toJson();
+    if (this.university != null) {
+      data['university'] = this.university!.toJson();
     }
+    data['stay_university'] = this.stayUniversity;
+    return data;
+  }
+}
+
+class Images {
+  int? id;
+  int? advertisingId;
+  String? image;
+
+  Images({this.id, this.advertisingId, this.image});
+
+  Images.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    advertisingId = json['advertising_id'];
+    image = json['image'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['advertising_id'] = this.advertisingId;
+    data['image'] = this.image;
     return data;
   }
 }
@@ -272,7 +290,7 @@ class District {
   }
 }
 
-class StayUniversity {
+class University {
   int? id;
   String? name;
   String? nameRu;
@@ -282,7 +300,7 @@ class StayUniversity {
   String? advertising;
   String? searching;
 
-  StayUniversity(
+  University(
       {this.id,
         this.name,
         this.nameRu,
@@ -292,7 +310,7 @@ class StayUniversity {
         this.advertising,
         this.searching});
 
-  StayUniversity.fromJson(Map<String, dynamic> json) {
+  University.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     nameRu = json['name_ru'];

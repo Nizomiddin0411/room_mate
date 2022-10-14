@@ -20,6 +20,7 @@ class _FavoritPageState extends State<FavoritPage> {
   @override
   void initState() {
     Provider.of<FavoriteProvider>(context, listen: false).getLike().asStream();
+    // Provider.of<FavoriteProvider>(context, listen: false).getImage().asStream();
     super.initState();
   }
 
@@ -100,40 +101,56 @@ class _FavoritPageState extends State<FavoritPage> {
                                               userFullName: data
                                                   .Like[index].userFullName
                                                   .toString(),
-                                              chatApproved: data
-                                                  .Like[index].chatApproved,
-                                          phoneNumber: data
-                                              .Like[index].phoneNumber.toString(),
-                                          phoneNumberShow: data
-                                              .Like[index]
-                                              .phoneNumberShow.toString(),
-                                          floorsCount: data
-                                              .Like[index].floorsCount.toString(),
-                                          district: data
-                                              .Like[index].district!.name.toString(),
-                                          stay_region: data
-                                              .Like[index].stayRegion?.name.toString(),
-                                          stay_university: data
-                                              .Like[index].stayUniversity.toString(),
-                                          region: data
-                                              .Like[index].region?.name.toString(),
-                                          rentType: data
-                                              .Like[index].rentType.toString(),
-                                          utility_bills: data
-                                              .Like[index].utilityBills.toString(),
-                                          createData: data
-                                              .Like[index].createdAt.toString(),
-                                          comfort:'2',
-                                          // data.Like[index].comfort,
-                                          inFloor: data
-                                              .Like[index].inFloor.toString(),
-                                          roommate_count: data
-                                              .Like[index].roommateCount.toString(),
-                                          address: data
-                                              .Like[index].address.toString(),
-                                          roommate_gender: data
-                                              .Like[index].roommateGender.toString(),
+                                              chatApproved:
+                                                  data.Like[index].chatApproved,
+                                              phoneNumber: data
+                                                  .Like[index].phoneNumber
+                                                  .toString(),
+                                              phoneNumberShow: data
+                                                  .Like[index].phoneNumberShow
+                                                  .toString(),
+                                              floorsCount: data
+                                                  .Like[index].floorsCount
+                                                  .toString(),
+                                              district: data
+                                                  .Like[index].district?.name
+                                                  .toString(),
+                                              stay_region: data
+                                                  .Like[index].stayRegion?.name
+                                                  .toString(),
+                                              stay_university: data
+                                                  .Like[index].stayUniversity
+                                                  .toString(),
+                                              region: data
+                                                  .Like[index].region?.name
+                                                  .toString(),
+                                              rentType: data
+                                                  .Like[index].rentType
+                                                  .toString(),
+                                              utility_bills: data
+                                                  .Like[index].utilityBills
+                                                  .toString(),
+                                              createData: data
+                                                  .Like[index].createdAt
+                                                  .toString(),
+                                              comfort: '2',
+                                              // data.Like[index].comfort,
+                                              inFloor: data.Like[index].inFloor
+                                                  .toString(),
+                                              roommate_count: data
+                                                  .Like[index].roommateCount
+                                                  .toString(),
+                                              address: data.Like[index].address
+                                                  .toString(),
+                                              roommate_gender: data
+                                                  .Like[index].roommateGender
+                                                  .toString(),
+                                              Image: data.Like[index].images,
+                                              locations: data.Like[index].location,
                                             )));
+
+                                print(data.Like[index].id.toString() +
+                                    '+++++++++++++++++++++++++++++++++++++++++++++++');
                               },
                               child: Container(
                                 width: 324.w,
@@ -146,12 +163,41 @@ class _FavoritPageState extends State<FavoritPage> {
                                   children: [
                                     Stack(
                                       children: [
-                                        CachedNetworkImage(
-                                          imageUrl:
-                                              "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.Like[index].images?[index].image}",
-                                          width: 324.w,
-                                          height: 235.h,
-                                          fit: BoxFit.cover,
+                                        ...List.generate(
+                                          data.Like[index].images!.length,
+                                          (index1) {
+                                            return data.Like[index].images !=
+                                                    null
+                                                ? CachedNetworkImage(
+                                                    imageUrl:
+                                                        "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.Like[index].images?[index1].image.toString()}",
+                                                    placeholder: (context,
+                                                            url) =>
+                                                        CircularProgressIndicator(),
+                                                    errorWidget:
+                                                        (context, url, error) =>
+                                                            Image.asset(
+                                                      'assets/images/notImage.png',
+                                                    ),
+                                                    width: 324.w,
+                                                    height: 235.h,
+                                                    fit: BoxFit.cover,
+                                                  )
+                                                : data.Like[index]
+                                                        .images![index1].isEmpty
+                                                    ? Image.asset(
+                                                        'assets/images/notImage.png',
+                                                        width: 324.w,
+                                                        height: 235.h,
+                                                        fit: BoxFit.cover,
+                                                      )
+                                                    : Image.asset(
+                                                        'assets/images/notImage.png',
+                                                        width: 324.w,
+                                                        height: 235.h,
+                                                        fit: BoxFit.cover,
+                                                      );
+                                          },
                                         ),
                                         Positioned(
                                             child: Padding(
@@ -169,10 +215,21 @@ class _FavoritPageState extends State<FavoritPage> {
                                                           2.r),
                                                   color: AppColors.iconColor,
                                                 ),
-                                                child: const Center(
+                                                child:  Center(
                                                     child: Text(
-                                                  "21 Sentabr,14:01",
-                                                  style: TextStyle(
+                                                      data.Like[index].createdAt!
+                                                          .replaceRange(
+                                                          data
+                                                              .Like[index]
+                                                              .createdAt!
+                                                              .length -
+                                                              3,
+                                                          data
+                                                              .Like[index]
+                                                              .createdAt!
+                                                              .length,
+                                                          ''),
+                                                  style: const TextStyle(
                                                       color: AppColors
                                                           .backgroundWhite),
                                                 )),

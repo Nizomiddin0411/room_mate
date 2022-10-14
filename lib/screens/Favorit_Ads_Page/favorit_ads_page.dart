@@ -114,40 +114,57 @@ class _FavoritAdsState extends State<FavoritAds> {
                                                 userId:
                                                     data.MyAds[index].userId,
                                                 userFullName: data
-                                                    .MyAds[index].userFullName.toString(),
+                                                    .MyAds[index].userFullName
+                                                    .toString(),
                                                 chatApproved: data
                                                     .MyAds[index].chatApproved,
-                                            phoneNumber: data
-                                                .MyAds[index].phoneNumber.toString(),
-                                            phoneNumberShow: data
-                                                .MyAds[index]
-                                                .phoneNumberShow.toString(),
-                                            floorsCount: data
-                                                .MyAds[index].floorsCount.toString(),
-                                            district: data
-                                                .MyAds[index].district?.name.toString(),
-                                            stay_region: data
-                                                .MyAds[index].stayRegion?.name.toString(),
-                                            stay_university: data
-                                                .MyAds[index].stayUniversity.toString(),
-                                            region: data
-                                                .MyAds[index].region?.name.toString(),
-                                            rentType: data
-                                                .MyAds[index].rentType.toString(),
-                                            utility_bills: data
-                                                .MyAds[index].utilityBills.toString(),
-                                            createData: data
-                                                .MyAds[index].createdAt.toString(),
-                                            comfort:'2' ,
-                                            // data.MyAds[index].comfort,
-                                            inFloor: data
-                                                .MyAds[index].inFloor.toString(),
-                                            roommate_count: data
-                                                .MyAds[index].roommateCount.toString(),
-                                            address: data
-                                                .MyAds[index].address.toString(),
-                                            roommate_gender: data
-                                                .MyAds[index].roommateGender.toString(),
+                                                phoneNumber: data
+                                                    .MyAds[index].phoneNumber
+                                                    .toString(),
+                                                phoneNumberShow: data
+                                                    .MyAds[index]
+                                                    .phoneNumberShow
+                                                    .toString(),
+                                                floorsCount: data
+                                                    .MyAds[index].floorsCount
+                                                    .toString(),
+                                                district: data
+                                                    .MyAds[index].district?.name
+                                                    .toString(),
+                                                stay_region: data.MyAds[index]
+                                                    .stayRegion?.name
+                                                    .toString(),
+                                                stay_university: data
+                                                    .MyAds[index].stayUniversity
+                                                    .toString(),
+                                                region: data
+                                                    .MyAds[index].region?.name
+                                                    .toString(),
+                                                rentType: data
+                                                    .MyAds[index].rentType
+                                                    .toString(),
+                                                utility_bills: data
+                                                    .MyAds[index].utilityBills
+                                                    .toString(),
+                                                createData: data
+                                                    .MyAds[index].createdAt
+                                                    .toString(),
+                                                comfort: '2',
+                                                // data.MyAds[index].comfort,
+                                                inFloor: data
+                                                    .MyAds[index].inFloor
+                                                    .toString(),
+                                                roommate_count: data
+                                                    .MyAds[index].roommateCount
+                                                    .toString(),
+                                                address: data
+                                                    .MyAds[index].address
+                                                    .toString(),
+                                                roommate_gender: data
+                                                    .MyAds[index].roommateGender
+                                                    .toString(),
+                                                Image: data.MyAds[index].images,
+                                                locations: data.MyAds[index].location,
                                               )));
                                 },
                                 child: Container(
@@ -186,10 +203,21 @@ class _FavoritAdsState extends State<FavoritAds> {
                                                             2.r),
                                                     color: AppColors.iconColor,
                                                   ),
-                                                  child: Center(
+                                                  child:  Center(
                                                       child: Text(
-                                                    "21 Sentabr,14:01",
-                                                    style: TextStyle(
+                                                        data.MyAds[index].createdAt!
+                                                            .replaceRange(
+                                                            data
+                                                                .MyAds[index]
+                                                                .createdAt!
+                                                                .length -
+                                                                3,
+                                                            data
+                                                                .MyAds[index]
+                                                                .createdAt!
+                                                                .length,
+                                                            ''),
+                                                    style: const TextStyle(
                                                         color: AppColors
                                                             .backgroundWhite),
                                                   )),

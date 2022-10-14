@@ -5,9 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
+import 'package:talaba_uy/models/get_all_ads.dart';
 import '../../chat/chat_page.dart';
 import '../../services/post_add_chat_permit.dart';
 import '../../services/post_change_favoritr_service.dart';
+import '../Google_map/map_for_ads_detail.dart';
 
 class AdsDetail extends StatefulWidget {
   String? phoneNumber;
@@ -23,8 +25,7 @@ class AdsDetail extends StatefulWidget {
   String? countPeople;
   String? region;
   String? stay_region;
-
-  // String? univer;
+  String? locations;
   String? stay_university;
   String? roommate_gender;
   String? roommate_count;
@@ -42,9 +43,11 @@ class AdsDetail extends StatefulWidget {
   String? district;
   String? utility_bills;
   String? createData;
-
+  List<dynamic>? Image;
   AdsDetail({
     Key? key,
+    required this.locations,
+    required this.Image,
     required this.roommate_count,
     required this.rentType,
     required this.utility_bills,
@@ -105,6 +108,7 @@ class _AdsDetailState extends State<AdsDetail> {
       }
     }
   }
+
   List<String> images = [
     "https://images.wallpapersden.com/image/download/purple-sunrise-4k-vaporwave_bGplZmiUmZqaraWkpJRmbmdlrWZlbWU.jpg",
     "https://wallpaperaccess.com/full/2637581.jpg",
@@ -115,9 +119,11 @@ class _AdsDetailState extends State<AdsDetail> {
   void initState() {
     // TODO: implement initState
     super.initState();
-   isHaveComfort(haveInt, comfort);
+    isHaveComfort(haveInt, comfort);
     comfortList = comfort.reduce((value, element) => value + ', ' + element);
+    print('${widget.Image}');
   }
+
   @override
   Widget build(BuildContext context) {
     String date = widget.createData!.split(':')[2];
@@ -159,14 +165,41 @@ class _AdsDetailState extends State<AdsDetail> {
                       },
                       itemBuilder: (context, pagePosition) {
                         return Padding(
-                          padding: const EdgeInsets.all(18.0),
-                          child: CachedNetworkImage(
-                            imageUrl: "https://source.unsplash.com/random/324x235",
-                            width: 324.w,
-                            height: 235.h,
-                            fit: BoxFit.cover,
-                          ),
-                        );
+                            padding: const EdgeInsets.all(18.0),
+                            child: Column(children: [
+                              ...List.generate(
+                                widget.Image!.length,
+                                (index1) {
+                                  return widget.Image != null
+                                      ? CachedNetworkImage(
+                                          imageUrl:
+                                              "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${widget.Image![index1].image.toString()}",
+                                          placeholder: (context, url) =>
+                                              CircularProgressIndicator(),
+                                          errorWidget: (context, url, error) =>
+                                              Image.asset(
+                                            'assets/images/notImage.png',
+                                          ),
+                                          width: 324.w,
+                                          height: 219.h,
+                                          fit: BoxFit.cover,
+                                        )
+                                      : widget.Image![index1].isEmpty
+                                          ? Image.asset(
+                                              'assets/images/notImage.png',
+                                              width: 324.w,
+                                              height: 219.h,
+                                              fit: BoxFit.cover,
+                                            )
+                                          : Image.asset(
+                                              'assets/images/notImage.png',
+                                              width: 324.w,
+                                              height: 235.h,
+                                              fit: BoxFit.cover,
+                                            );
+                                },
+                              ),
+                            ]));
                       }),
                 ),
                 Positioned(
@@ -181,7 +214,10 @@ class _AdsDetailState extends State<AdsDetail> {
                         width: 10.w,
                         height: 10.h,
                         decoration: BoxDecoration(
-                            shape: BoxShape.circle, color: _correntPage == i ? AppColors.mainColor : Colors.grey),
+                            shape: BoxShape.circle,
+                            color: _correntPage == i
+                                ? AppColors.mainColor
+                                : Colors.grey),
                       );
                     }).toList(),
                   ),
@@ -202,10 +238,15 @@ class _AdsDetailState extends State<AdsDetail> {
                               borderRadius: BorderRadius.circular(2.r),
                               color: AppColors.iconColor,
                             ),
-                            child: const Center(
+                            child:  Center(
                                 child: Text(
-                              "21 Sentabr,14:01",
-                              style: TextStyle(color: AppColors.backgroundWhite),
+                                  widget.createData!
+                                      .replaceRange(
+                                      widget.createData!.length - 3,
+                                     widget.createData!.length,
+                                      ''),
+                              style:
+                                  const TextStyle(color: AppColors.backgroundWhite),
                             )),
                           ),
                           Padding(
@@ -216,7 +257,8 @@ class _AdsDetailState extends State<AdsDetail> {
                               valueChanged: (_isFavorite) {
                                 // print('Is Favorite $_isFavorite)');
                                 setState(() {
-                                  FavoriteChange().Favoritefetch(id: widget.id.toString());
+                                  FavoriteChange()
+                                      .Favoritefetch(id: widget.id.toString());
                                 });
                               },
                             ),
@@ -231,7 +273,9 @@ class _AdsDetailState extends State<AdsDetail> {
               height: 232.h,
               decoration: BoxDecoration(
                 color: AppColors.backgroundWhite,
-                borderRadius: BorderRadius.only(topLeft: Radius.circular(6.r), topRight: Radius.circular(6.r)),
+                borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(6.r),
+                    topRight: Radius.circular(6.r)),
               ),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -244,7 +288,8 @@ class _AdsDetailState extends State<AdsDetail> {
                         padding: EdgeInsets.fromLTRB(12.w, 12.h, 12.w, 0),
                         child: Text(
                           '${widget.cost} ${widget.costTayp == '1' ? "so'm" : 'usd'}/${widget.rentType == '1' ? 'kunlik' : 'oylik'}',
-                          style: TextStyle(fontSize: 24.sp, color: AppColors.mainColor),
+                          style: TextStyle(
+                              fontSize: 24.sp, color: AppColors.mainColor),
                         ),
                       ),
                     ],
@@ -273,6 +318,33 @@ class _AdsDetailState extends State<AdsDetail> {
                       )
                     ],
                   ),
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => MapDerail(
+                                    location: widget.locations != null
+                                        ? widget.locations
+                                        : '',
+                                  )));
+                    },
+                    child: Row(
+                      children: [
+                        const Icon(
+                          Icons.location_on,
+                          color: AppColors.mainColor,
+                        ),
+                        SizedBox(
+                          width: 10.w,
+                        ),
+                        const Text(
+                          "Joylashuvni ko'rish",
+                          style: TextStyle(color: AppColors.mainColor),
+                        )
+                      ],
+                    ),
+                  ),
                   Row(
                     children: [
                       // widget.chatApproved == 1 ?
@@ -286,7 +358,9 @@ class _AdsDetailState extends State<AdsDetail> {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => ChatPage(widget.userFullName!, widget.userId!)));
+                                      builder: (context) => ChatPage(
+                                          widget.userFullName!,
+                                          widget.userId!)));
                             } else {
                               showAlertDialog(context, widget.userId!);
                             }
@@ -310,7 +384,7 @@ class _AdsDetailState extends State<AdsDetail> {
                                 ),
                                 Padding(
                                   padding: EdgeInsets.all(10.0),
-                                  child: Text('Aloqa').tr(),
+                                  child: const Text('Aloqa').tr(),
                                 )
                               ],
                             ),
@@ -405,7 +479,10 @@ class _AdsDetailState extends State<AdsDetail> {
                   children: [
                     Text(
                       'Sherik izlayabmiz',
-                      style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold, color: AppColors.mainColor),
+                      style: TextStyle(
+                          fontSize: 18.sp,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.mainColor),
                     ).tr(),
                     Row(
                       children: [
@@ -607,7 +684,10 @@ class _AdsDetailState extends State<AdsDetail> {
                     // ) : const SizedBox(),
                     Text(
                       tr("Xonadon ma’lumotlari"),
-                      style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold, color: AppColors.mainColor),
+                      style: TextStyle(
+                          fontSize: 18.sp,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.mainColor),
                     ),
                     Row(
                       children: [
@@ -681,7 +761,8 @@ class _AdsDetailState extends State<AdsDetail> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
-                            tr("Metroga yaqinmi?") + " ${widget.subway == '1' ? tr('Ha') : tr("Yo'q")}",
+                            tr("Metroga yaqinmi?") +
+                                " ${widget.subway == '1' ? tr('Ha') : tr("Yo'q")}",
                             style: TextStyle(fontSize: 14.sp),
                           ),
                         )
@@ -779,7 +860,10 @@ class _AdsDetailState extends State<AdsDetail> {
                     ),
                     Text(
                       tr("To’lovlar"),
-                      style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold, color: AppColors.mainColor),
+                      style: TextStyle(
+                          fontSize: 18.sp,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.mainColor),
                     ),
                     Row(
                       children: [
