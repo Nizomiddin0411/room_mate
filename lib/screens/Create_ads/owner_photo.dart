@@ -199,7 +199,7 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
                                     onTap: () async {
                                       if (sum < 3) {
                                         showOptionsDialog(context);
-                                        print(imageList.length);
+                                        print(imageList.length.toString() + "aa");
                                       } else {}
                                      
                                     },
@@ -240,8 +240,8 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
                       Container(
                         height: 240.h,
                         child: GridView.count(
-                          // crossAxisSpacing: 6.w,
-                          // mainAxisSpacing: 6.h,
+                          crossAxisSpacing: 6.w,
+                          mainAxisSpacing: 6.h,
                           crossAxisCount: 3,
                           children:
                           //     List.generate(imageFileList!.length, (index) {
@@ -307,21 +307,21 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
                                       (index) {
                                     return (FileExist[index])
                                         ? Container(
-                                      // margin: EdgeInsets.symmetric(
-                                      //   horizontal: 5.0.w,
-                                      // ),
+                                      margin: EdgeInsets.symmetric(
+                                        horizontal: 5.0.w,
+                                      ),
                                       width: 100.w,
                                       height: 200.h,
-                                      // decoration: BoxDecoration(
-                                      //   border: Border.all(
-                                      //     color: AppColors.mainColor,
-                                      //   ),
-                                      //   borderRadius: BorderRadius.all(
-                                      //     Radius.circular(
-                                      //       12.r,
-                                      //     ),
-                                      //   ),
-                                      // ),
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                          color: AppColors.mainColor,
+                                        ),
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(
+                                            12.r,
+                                          ),
+                                        ),
+                                      ),
                                       child: Column(
                                         crossAxisAlignment:
                                         CrossAxisAlignment.end,
@@ -388,33 +388,8 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
                                     borderRadius: BorderRadius.circular(10.r)),
                                 primary: AppColors.buttonLinear),
                             onPressed: () async{
-                              print(widget.titleController!+'title');
-                              print(widget.roommate_gender.toString()+'gender');
-                              print(widget.gender_matter.toString() +'gendermatter');
-                              print(widget.district_id.toString() + 'district id');
-                              print(widget.id.toString() + 'metro');
-                              print(widget.addressController.toString() + 'address');
-                              print(widget.university_id.toString() + 'univerid');
-                              print(widget.university_id_matter.toString() + 'univer matter');
-                              print(widget.phoneController.toString() + 'phonecontrol');
-                              print(widget.house_type.toString() + 'house type');
-                              print(widget.rent_type.toString() + 'rent type');
-                              print(widget.room_count.toString() + 'hona soni');
-                              print(widget.floors_count.toString() + 'etaj soni');
-                              print(widget.in_floor.toString() + 'etaj');
-                              print(widget.costController.toString() + 'narxi');
-                              print(widget.cost_type.toString() + 'cost type');
-                              print(widget.live_with_owner.toString() + 'uyni egasi') ;
-                              print(widget.utility_electricity.toString() + 'elktor');
-                              print(widget.unility_gaz.toString() + 'gaz');
-                              print(widget.utility_hot_water.toString() + 'issiq suv');
-                              print(widget.utility_cold_water.toString() + 'sovuq suv');
-                              print(widget.utility_trash.toString() + 'musor');
-                              print(widget.comfort.toString() + 'komford');
-                              print(widget.description.toString() + 'qoshimcha');
-                              print(widget.location.toString() + 'location');
-                              print(widget.cost_period.toString() + 'cost period');
-                              await UserCreateAds().FetchAds(
+                              
+                             var data =  await UserCreateAds().FetchAds(
                                 titleController:widget.titleController,
                                  roommate_gender:widget.roommate_gender,
                                  gender_matter:widget.gender_matter,
@@ -444,12 +419,37 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
                                  cost_period: widget.cost_period, file2: FileExist[2] ? FileList[2]:FileList[0], file3: FileExist[3] ? FileList[3]:FileList[0],
                               );
                               setState(() {});
-                              Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => CreateSuccedful(),
-                                ),
-                              );
+                              if(data['status']){
+                                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>CreateSuccedful()), (route) => false);
+                              }else{
+                                print(widget.titleController!+'title');
+                              print(widget.roommate_gender.toString()+'gender');
+                              print(widget.gender_matter.toString() +'gendermatter');
+                              print(widget.district_id.toString() + 'district id');
+                              print(widget.id.toString() + 'metro');
+                              print(widget.addressController.toString() + 'address');
+                              print(widget.university_id.toString() + 'univerid');
+                              print(widget.university_id_matter.toString() + 'univer matter');
+                              print(widget.phoneController.toString() + 'phonecontrol');
+                              print(widget.house_type.toString() + 'house type');
+                              print(widget.rent_type.toString() + 'rent type');
+                              print(widget.room_count.toString() + 'hona soni');
+                              print(widget.floors_count.toString() + 'etaj soni');
+                              print(widget.in_floor.toString() + 'etaj');
+                              print(widget.costController.toString() + 'narxi');
+                              print(widget.cost_type.toString() + 'cost type');
+                              print(widget.live_with_owner.toString() + 'uyni egasi') ;
+                              print(widget.utility_electricity.toString() + 'elktor');
+                              print(widget.unility_gaz.toString() + 'gaz');
+                              print(widget.utility_hot_water.toString() + 'issiq suv');
+                              print(widget.utility_cold_water.toString() + 'sovuq suv');
+                              print(widget.utility_trash.toString() + 'musor');
+                              print(widget.comfort.toString() + 'komford');
+                              print(widget.description.toString() + 'qoshimcha');
+                              print(widget.location.toString() + 'location');
+                              print(widget.cost_period.toString() + 'cost period');
+                                ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(data['error'])));
+                              }
                             },
                             child: Text(
                               "Keyingi ".tr(),

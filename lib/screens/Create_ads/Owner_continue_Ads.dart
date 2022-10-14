@@ -85,6 +85,8 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
   bool _costTypeOnClick = false;
   Color _descriptionColor = Colors.grey;
   bool _descriptionOnClick = false;
+    Color _priceColor = Colors.grey;
+  bool _priceOnClick = false;
   Color _colorForm = Colors.grey;
   bool value5 = false;
   var pricetype = [
@@ -311,7 +313,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                         SizedBox(height: 4.h),
                         Container(
                           height: 50.h,
-                          width: 130.w,
+                          width: 134.w,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.r),
                               border: Border.all(color: _rentTypeColor)),
@@ -544,6 +546,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                   child: Container(
                     padding: EdgeInsets.only(left: 16.w),
                     child: TextFormField(
+                      keyboardType: TextInputType.phone,
                       onChanged: (e) {
                         setState(() {
                           if (e.length > 0) {
@@ -633,7 +636,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                           width: 160.w,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.r),
-                              border: Border.all(color: Colors.grey)),
+                              border: Border.all(color: _priceColor)),
                           child: DropdownButtonFormField(
                             hint: Padding(
                               padding: EdgeInsets.only(left: 8.w),
@@ -665,7 +668,8 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                                 }else{
                                   price = '3';
                                 }
-                                print(price);
+                                _priceOnClick = true;
+                                _priceColor = Colors.grey;
                               });
                             },
                           ),
@@ -1164,14 +1168,17 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                             '${comfortItems}  texnikalar',
                           );
                           print('${descriptionController.text} malumot');
+                          if(cost_type == null){
+                            cost_type = '1';
+                          }
 
-                          if (_phoneNumberOnClick ||
-                              _houseTypeOnClick ||
-                              _rentTypeOnClick ||
-                              _roomCountOnClick ||
-                              _floorsCountOnClick ||
-                              _inFloorOnClick ||
-                              _costTypeOnClick ||
+                          if (_phoneNumberOnClick &&
+                              _houseTypeOnClick &&
+                              _rentTypeOnClick &&
+                              _roomCountOnClick &&
+                              _floorsCountOnClick &&
+                              _inFloorOnClick &&
+                              _costTypeOnClick &&
                               _descriptionOnClick) {
                             Navigator.push(
                               context,
@@ -1234,6 +1241,9 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                               }
                               if (!_descriptionOnClick) {
                                 _descriptionColor = Colors.red;
+                              }
+                              if (!_priceOnClick) {
+                                _priceColor = Colors.red;
                               }
                             });
                           }
