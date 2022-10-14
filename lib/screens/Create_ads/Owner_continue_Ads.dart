@@ -1172,14 +1172,16 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                             cost_type = '1';
                           }
 
-                          if (_phoneNumberOnClick &&
-                              _houseTypeOnClick &&
-                              _rentTypeOnClick &&
-                              _roomCountOnClick &&
-                              _floorsCountOnClick &&
-                              _inFloorOnClick &&
-                              _costTypeOnClick &&
-                              _descriptionOnClick) {
+// _phoneNumberOnClick &&
+//                               _houseTypeOnClick &&
+//                               _rentTypeOnClick &&
+//                               _roomCountOnClick &&
+//                               _floorsCountOnClick &&
+//                               _inFloorOnClick &&
+//                               _costTypeOnClick &&
+//                               _descriptionOnClick
+
+                          if (true) {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
