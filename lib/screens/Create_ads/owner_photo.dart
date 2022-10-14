@@ -240,8 +240,8 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
                       Container(
                         height: 240.h,
                         child: GridView.count(
-                          // crossAxisSpacing: 6.w,
-                          // mainAxisSpacing: 6.h,
+                          crossAxisSpacing: 6.w,
+                          mainAxisSpacing: 6.h,
                           crossAxisCount: 3,
                           children:
                           //     List.generate(imageFileList!.length, (index) {

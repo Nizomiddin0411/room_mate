@@ -313,7 +313,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                         SizedBox(height: 4.h),
                         Container(
                           height: 50.h,
-                          width: 130.w,
+                          width: 134.w,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.r),
                               border: Border.all(color: _rentTypeColor)),
