@@ -9,9 +9,12 @@ import '../services/get_my_ads_service.dart';
 
 class FavoriteProvider extends ChangeNotifier{
   List<FavoritemModel> Like = [];
+  List<FavoritemModel> Image = [];
+  FavoritemModel Image2 = FavoritemModel();
   List<GetMyAdsModel> MyAds = [];
   bool isFavorite = false;
   bool isMyAds = false;
+  String? imagess;
   String? forMap;
   void _setFavorite(bool value) {
     isFavorite = value;
@@ -27,9 +30,29 @@ class FavoriteProvider extends ChangeNotifier{
   Future<void> getLike() async{
     _setFavorite(false);
     Like = await FavoriteService().fetchFavorite();
+    // List.generate(Like.length, (index)
+    // {
+    //   List.generate(Like[index].images!.length, (index1) {
+    //     Image = Like[index].images![index1].image.toList() ;}
+    //   );
+    // }
+    // );
+    for(var i in Like){
+      for(var j in i.images!) {
+        Image = j.image.toList();
+      }
+    }
     _setFavorite(true);
   }
-
+  // Future<void> getImage() async{
+  //   _setFavorite(false);
+  //   Image.images?.map((e) => imagess = e.image
+  //   );
+  //   _setFavorite(true);
+  // }
+  
+  
+  
   Future<void> getMyAds() async{
     _setMyAds(false);
     MyAds = await GetMyAdsService().fetchADS();
