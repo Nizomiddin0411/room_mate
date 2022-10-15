@@ -17,8 +17,12 @@ class AccountPage extends StatefulWidget {
 
 class _AccountPageState extends State<AccountPage> {
   final bool _switchValue = false;
-  bool isSwitched = false;
-  bool isSwitchedSecond = false;
+  bool isSwitched = Hive.box('hide_phone').get('hide_phone') != null
+      ?   true
+      :  false;
+  bool isSwitchedSecond = Hive.box('hide_profile').get('hide_profile') != null
+      ? true
+      : false;
   String name = Hive.box('fullname').get('fullname').toString();
   String number = Hive.box('phone').get('phone').toString();
 
@@ -27,7 +31,7 @@ class _AccountPageState extends State<AccountPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.backgroundWhite,
-        title:  Padding(
+        title: Padding(
           padding: EdgeInsets.symmetric(horizontal: 45.w),
           child: const Text(
             "Shaxsiy kabinet",
@@ -65,53 +69,53 @@ class _AccountPageState extends State<AccountPage> {
               height: 20.h,
             ),
             Text(
-              Hive.box('fullname').isEmpty ? 'name' :  name,
+              Hive.box('fullname').isEmpty ? 'name' : name,
               style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
             ),
             Text(Hive.box('fullname').isEmpty ? 'phone' : number),
             SizedBox(
               height: 20.h,
             ),
-    //       InkWell(
-    //       onTap: () {},
-    // child: ListTile(
-    //         leading: Container(
-    //             width: 40.w,
-    //             height: 40.h,
-    //             decoration: BoxDecoration(
-    //               color: AppColors.iconBack,
-    //               borderRadius: BorderRadius.circular(8.r),
-    //             ),
-    //             child: const Icon(
-    //               Icons.payment,
-    //               color: AppColors.mainColor,
-    //             )),
-    //         title: Text(
-    //           "To'lovlar",
-    //           style: TextStyle(fontSize: 18.sp),
-    //         ),
-    //       ),
-    //       ),
-    // InkWell(
-    // onTap: () {},
-    // child: ListTile(
-    //         leading: Container(
-    //             width: 40.w,
-    //             height: 40.h,
-    //             decoration: BoxDecoration(
-    //               color: AppColors.iconBack,
-    //               borderRadius: BorderRadius.circular(8.r),
-    //             ),
-    //             child: const Icon(
-    //               Icons.chat,
-    //               color: AppColors.mainColor,
-    //             )),
-    //         title: Text(
-    //           "Fikr qoldirish",
-    //           style: TextStyle(fontSize: 18.sp),
-    //         ),
-    //       ),
-    // ),
+            //       InkWell(
+            //       onTap: () {},
+            // child: ListTile(
+            //         leading: Container(
+            //             width: 40.w,
+            //             height: 40.h,
+            //             decoration: BoxDecoration(
+            //               color: AppColors.iconBack,
+            //               borderRadius: BorderRadius.circular(8.r),
+            //             ),
+            //             child: const Icon(
+            //               Icons.payment,
+            //               color: AppColors.mainColor,
+            //             )),
+            //         title: Text(
+            //           "To'lovlar",
+            //           style: TextStyle(fontSize: 18.sp),
+            //         ),
+            //       ),
+            //       ),
+            // InkWell(
+            // onTap: () {},
+            // child: ListTile(
+            //         leading: Container(
+            //             width: 40.w,
+            //             height: 40.h,
+            //             decoration: BoxDecoration(
+            //               color: AppColors.iconBack,
+            //               borderRadius: BorderRadius.circular(8.r),
+            //             ),
+            //             child: const Icon(
+            //               Icons.chat,
+            //               color: AppColors.mainColor,
+            //             )),
+            //         title: Text(
+            //           "Fikr qoldirish",
+            //           style: TextStyle(fontSize: 18.sp),
+            //         ),
+            //       ),
+            // ),
             ListTile(
               leading: Container(
                   width: 40.w,
@@ -131,13 +135,15 @@ class _AccountPageState extends State<AccountPage> {
               trailing: Container(
                 height: 60.h,
                 width: 80.w,
-                child:
-                Switch(
-                  value: Hive.box('hide_phone').get('hide_phone') == null ? isSwitched= false:isSwitched= true,
+                child: Switch(
+                  value: isSwitched,
                   onChanged: (value) {
-                     ChangeProfile().ChangeProf(hidePhone: _switchValue ? '1': '2', hideProfile: '');
+                    ChangeProfile().ChangeProf(
+                        hidePhone: _switchValue ? '1' : '2', hideProfile: ''
+                    );
                     setState(() {
                       isSwitched = value;
+                      Hive.box('hide_phone').put('hide_phone',value);
                     });
                   },
                 ),
@@ -162,13 +168,14 @@ class _AccountPageState extends State<AccountPage> {
               trailing: Container(
                 height: 60.h,
                 width: 80.w,
-                child:
-                Switch(
+                child: Switch(
                   value: isSwitchedSecond,
                   onChanged: (value) {
-                    ChangeProfile().ChangeProf(hideProfile: _switchValue ? '1': '2', hidePhone: '');
+                    ChangeProfile().ChangeProf(
+                        hideProfile: _switchValue ? '1' : '2', hidePhone: '');
                     setState(() {
                       isSwitchedSecond = value;
+                      Hive.box('hide_profile').put('hide_profile',value);
                     });
                   },
                 ),
@@ -212,22 +219,17 @@ class _AccountPageState extends State<AccountPage> {
 showAlertDialog(BuildContext context) {
   // Create button
   Widget okButton = ElevatedButton(
-
-    style: ElevatedButton.styleFrom(
-        primary: AppColors.error
-    ),
+    style: ElevatedButton.styleFrom(primary: AppColors.error),
     child: Text("Chiqish").tr(),
-    onPressed: () async{
+    onPressed: () async {
       Hive.box('token').clear();
       Navigator.pushAndRemoveUntil(
           context,
-          MaterialPageRoute(
-              builder: (_) => const LanguagePage()),
-              (route) => false);
+          MaterialPageRoute(builder: (_) => const LanguagePage()),
+          (route) => false);
     },
   );
   Widget notButton = ElevatedButton(
-
     child: Text("Bekor qilish").tr(),
     onPressed: () {
       Navigator.of(context).pop();
