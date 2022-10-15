@@ -17,7 +17,7 @@ class AccountPage extends StatefulWidget {
 
 class _AccountPageState extends State<AccountPage> {
   final bool _switchValue = false;
-  bool isSwitched = Hive.box('hide_phone').get('hide_phone') != null
+  bool isSwitched = Hive.box('hide_phone').get('hide_phone') != null && Hive.box('hide_phone').get('hide_phone') == 1
       ?   true
       :  false;
   bool isSwitchedSecond = Hive.box('hide_profile').get('hide_profile') != null
@@ -116,7 +116,7 @@ class _AccountPageState extends State<AccountPage> {
             //         ),
             //       ),
             // ),
-            ListTile(
+            Hive.box('type').get('type') != 2 ? ListTile(
               leading: Container(
                   width: 40.w,
                   height: 40.h,
@@ -143,13 +143,13 @@ class _AccountPageState extends State<AccountPage> {
                     );
                     setState(() {
                       isSwitched = value;
-                      Hive.box('hide_phone').put('hide_phone',value);
+                      Hive.box('hide_phone').put('hide_phone',value ? '1':'2');
                     });
                   },
                 ),
               ),
-            ),
-            ListTile(
+            ):Container(),
+            Hive.box('type').get('type') != 2 ? ListTile(
               leading: Container(
                   width: 40.w,
                   height: 40.h,
@@ -180,7 +180,7 @@ class _AccountPageState extends State<AccountPage> {
                   },
                 ),
               ),
-            ),
+            ) : Container(),
             InkWell(
               onTap: () {
                 showAlertDialog(context);
