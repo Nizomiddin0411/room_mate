@@ -77,14 +77,14 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
   List<XFile>? pickedFile;
   List<File> FileList = [];
   List<bool> FileExist = [];
-  // void selectImages() async {
-  //   final List<XFile>? selectedImages = await imagePicker.pickMultiImage();
-  //   if (selectedImages!.isNotEmpty) {
-  //     imageFileList!.addAll(selectedImages);
-  //     pickedFile?.add(getcam());
-  //   }
-  //   setState(() {});
-  // }
+  void selectImages() async {
+    final List<XFile>? selectedImages = await imagePicker.pickMultiImage();
+    if (selectedImages!.isNotEmpty) {
+      imageFileList!.addAll(selectedImages);
+      pickedFile?.add(getcam());
+    }
+    setState(() {});
+  }
 
   List<File> imageList = [];
   List<bool> imageExist = [];
@@ -108,16 +108,6 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
     FileExist.insert(3, false);
   }
 
-
-void selectImages() async {
-    final List<XFile>? selectedImages = await imagePicker.pickMultiImage();
-    if (selectedImages!.isNotEmpty) {
-      imageFileList!.addAll(selectedImages);
-    }
-    setState(() {});
-  }
-
-
   @override
   void dispose() {
     // _connectivitySubscription.cancel();
@@ -136,9 +126,9 @@ void selectImages() async {
                   GestureDetector(
                     child: Text("From Camera"),
                     onTap: () async {
-                      // getcam();
+                      getcam();
                       //     for(int i = 0; i<=2;i++){
-                      await getcam();
+                      // await _takeFromCamera();
                       // }
                       setState(() {});
 
@@ -147,14 +137,18 @@ void selectImages() async {
                   ),
                   const Padding(padding: EdgeInsets.all(10)),
                   GestureDetector(
-                    child: Text("From Gallery", style: TextStyle(color: sum < 3 ? Colors.black : Colors.grey.shade300),),
+                    child: Text(
+                      "From Gallery",
+                      style: TextStyle(
+                          color: sum < 3 ? Colors.black : Colors.grey.shade300),
+                    ),
                     onTap: () async {
-                      if(sum < 3){
+                      if (sum < 3) {
                         sum += 1;
-                      selectImages();
-                      // await selectImages();
-                      setState(() {});
-                      Navigator.pop(context);
+                        // selectImages();
+                        await _takeFile();
+                        setState(() {});
+                        Navigator.pop(context);
                       }
                     },
                   ),
@@ -190,214 +184,315 @@ void selectImages() async {
             padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 12.h),
             child: Container(
               child: SingleChildScrollView(
-                child: Column(children: [
-                  Column(
-                    children: [
+                child: Column(
+                  children: [
+                    Column(children: [
                       Column(
                         children: [
-                          Container(
-                            child: DottedBorder(
-                                dashPattern: [6, 3],
-                                color: Colors.black,
-                                strokeWidth: 0.5,
-                                child: InkWell(
-                                  onTap: () {
+                          Column(
+                            children: [
+                              Container(
+                                child: DottedBorder(
+                                  dashPattern: [6, 3],
+                                  color: Colors.black,
+                                  strokeWidth: 0.5.w,
+                                  child: InkWell(
+                                    onTap: () async {
                                       showOptionsDialog(context);
-
-                                  },
-                                  child: Container(
-                                    height: 250.h,
-                                    width: 250.w,
-                                    color: Colors.black12,
-                                    child: file == null
-                                        ? Icon(
-                                            Icons.camera_alt_sharp,
-                                            size: 50.sp,
-                                          )
-                                        : Image.file(
-                                            file!,
-                                            fit: BoxFit.cover,
-                                          ),
-                                  ),
-                                )),
-                            width: 250.w,
-                            height: 250.h,
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 15.h,
-                      ),
-                      Text("Asosiy rasm"),
-                      Divider(
-                        height: 20.0.h,
-                        color: Colors.black,
-                      ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 20.h,
-                  ),
-                  Container(
-                    height: 250.h,
-                    child: GridView.count(
-                      crossAxisSpacing: 6,
-                      mainAxisSpacing: 6,
-                      crossAxisCount: 3,
-                      children: List.generate(imageFileList!.length, (index) {
-                        return Column(children: <Widget>[
-                          Expanded(
-                            child: Stack(
-                              children: [
-                                Container(
-                                  width: 200.w,
-                                  height: 150.h,
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: ClipRRect(
-                                    child: Image.file(
-                                        File(imageFileList![index].path),
-                                        fit: BoxFit.cover),
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                ),
-                                GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      imageFileList!.removeAt(index);
-                                      sum -= 1;
-                                    });
-                                  },
-                                  child: Padding(
-                                    padding:
-                                        const EdgeInsets.fromLTRB(60, 0, 0, 50),
-                                    child: Align(
-                                      alignment: Alignment.topRight,
-                                      child: Container(
-                                          height: 20.h,
-                                          width: 24.w,
-                                          decoration: BoxDecoration(
-                                              color: Colors.red,
-                                              borderRadius:
-                                                  BorderRadius.circular(15)),
-                                          child: Icon(Icons.remove,
-                                              color: Colors.white,
-                                              size: 20.sp)),
+                                    },
+                                    child: Container(
+                                      height: 250.h,
+                                      width: 250.w,
+                                      color: Colors.black12,
+                                      child: file == null
+                                          ? Icon(
+                                              Icons.camera_alt_sharp,
+                                              size: 50.sp,
+                                            )
+                                          : Image.file(
+                                              file!,
+                                              fit: BoxFit.cover,
+                                            ),
                                     ),
                                   ),
                                 ),
-                              ],
+                                width: 250.w,
+                                height: 250.h,
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 15.h,
+                          ),
+                          Text("Asosiy rasm"),
+                          Divider(
+                            height: 20.0.h,
+                            color: Colors.black,
+                          ),
+                        ],
+                      ),
+                      // SizedBox(
+                      //   height: 20.h,
+                      // ),
+                      Container(
+                        height: 240.h,
+                        child: ListView(children:
+                            //     List.generate(imageFileList!.length, (index) {
+                            //   return Column(children: <Widget>[
+                            //     Expanded(
+                            //       child: Stack(
+                            //         children: [
+                            //           Container(
+                            //             width: 200.w,
+                            //             height: 150.h,
+                            //             decoration: BoxDecoration(
+                            //               borderRadius:
+                            //                   BorderRadius.circular(10.r),
+                            //             ),
+                            //             child: ClipRRect(
+                            //               child: Image.file(
+                            //                 File(imageFileList![index].path),
+                            //                 fit: BoxFit.cover,
+                            //               ),
+                            //               borderRadius:
+                            //                   BorderRadius.circular(10.r),
+                            //             ),
+                            //           ),
+                            //           GestureDetector(
+                            //             onTap: () {
+                            //               setState(() {
+                            //                 // imageFileList!.removeAt(index);
+                            //               });
+                            //               print(
+                            //                   "Nizomiddin${imageFileList!.length}");
+                            //             },
+                            //             child: Padding(
+                            //               padding: EdgeInsets.fromLTRB(
+                            //                   60.w, 0, 0, 50.h),
+                            //               child: Align(
+                            //                 alignment: Alignment.topRight,
+                            //                 child: Container(
+                            //                     height: 20.h,
+                            //                     width: 24.w,
+                            //                     decoration: BoxDecoration(
+                            //                         color: Colors.red,
+                            //                         borderRadius:
+                            //                             BorderRadius.circular(
+                            //                                 15.r)),
+                            //                     child: Icon(Icons.remove,
+                            //                         color: Colors.white,
+                            //                         size: 20.sp)),
+                            //               ),
+                            //             ),
+                            //           ),
+                            //         ],
+                            //       ),
+                            //     ),
+                            //   ]);
+                            // }),
+                            [
+                          SizedBox(
+                            height: 10.h,
+                          ),
+                          FileList.isNotEmpty
+                              ? Row(
+                                  children:
+                                      List.generate(FileList.length, (index) {
+                                    return (FileExist[index])
+                                        ? 
+                                            // width: 120.w,
+                                            Container(
+                                              width: 108.w,
+                                              height: 116.h,
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.all(
+                                                  Radius.circular(
+                                                    12.r,
+                                                  ),
+                                                ),
+                                              ),
+                                              child: Stack(
+                                                children: [
+                                                  Expanded(
+                                                    child: Container(
+                                                      margin:
+                                                          EdgeInsets.symmetric(
+                                                              horizontal: 8.w,
+                                                              vertical: 8.h),
+                                                      decoration: BoxDecoration(
+                                                        // border: Border.all(
+                                                        //     color:
+                                                        //         Colors.),
+                                                        boxShadow: [
+                                                          BoxShadow(
+                                                              offset: Offset(
+                                                                  .1.w, .1.h),
+                                                              color: Colors.grey
+                                                                  .shade400,
+                                                              blurRadius: 6),
+                                                        ],
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(
+                                                          10.r,
+                                                        ),
+                                                        image: DecorationImage(
+                                                          fit: BoxFit.cover,
+                                                          image: FileImage(
+                                                              FileList[index]),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Positioned(
+                                                    right: 0,
+                                                    child: GestureDetector(
+                                                      child: Container(
+                                                        width: 18.w,
+                                                        height: 18.h,
+                                                        decoration: BoxDecoration(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4.r),
+                                                            color: Colors
+                                                                .red[400]),
+                                                        child: Icon(
+                                                          Icons.remove,
+                                                          size: 15.sp,
+                                                          color: Colors.white,
+                                                        ),
+                                                      ),
+                                                      onTap: () async {
+                                                         FileList.removeAt(
+                                                            index);
+                                                            // index -= 4;
+                                                            sum -= 1;
+                                                        setState(() {});
+                                                      },
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ): Container();
+                                  }),
+                                )
+                              : const SizedBox(),
+                        ]),
+                      ),
+                    ]),
+                    Padding(
+                      padding: EdgeInsets.symmetric(
+                          vertical: 18.h, horizontal: 31.w),
+                      child: Container(
+                          width: double.infinity,
+                          child: ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                                padding: EdgeInsets.symmetric(vertical: 14.h),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.r)),
+                                primary: AppColors.buttonLinear),
+                            onPressed: () async {
+                              var data = await UserCreateAds().FetchAds(
+                                titleController: widget.titleController,
+                                roommate_gender: widget.roommate_gender,
+                                gender_matter: widget.gender_matter,
+                                district_id: widget.district_id,
+                                subway: widget.id,
+                                addressController: widget.addressController,
+                                university_id: widget.university_id,
+                                university_id_matter:
+                                    widget.university_id_matter,
+                                phoneController: widget.phoneController,
+                                house_type: widget.house_type,
+                                rent_type: widget.rent_type,
+                                room_count: widget.room_count,
+                                floors_count: widget.floors_count,
+                                in_floor: widget.in_floor,
+                                costController: widget.costController,
+                                cost_type: widget.cost_type,
+                                live_with_owner: widget.live_with_owner,
+                                utility_electricity: widget.utility_electricity,
+                                unility_gaz: widget.unility_gaz,
+                                utility_hot_water: widget.utility_hot_water,
+                                utility_cold_water: widget.utility_cold_water,
+                                utility_trash: widget.utility_trash,
+                                comfort: widget.comfort,
+                                description: widget.description,
+                                location: widget.location,
+                                file1: FileExist[1] ? FileList[1] : FileList[0],
+                                cost_period: widget.cost_period,
+                                file2: FileExist[2] ? FileList[2] : FileList[0],
+                                file3: FileExist[3] ? FileList[3] : FileList[0],
+                              );
+                              setState(() {});
+                              if (data['status']) {
+                                Navigator.pushAndRemoveUntil(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            CreateSuccedful()),
+                                    (route) => false);
+                              } else {
+                                print(widget.titleController! + 'title');
+                                print(widget.roommate_gender.toString() +
+                                    'gender');
+                                print(widget.gender_matter.toString() +
+                                    'gendermatter');
+                                print(widget.district_id.toString() +
+                                    'district id');
+                                print(widget.id.toString() + 'metro');
+                                print(widget.addressController.toString() +
+                                    'address');
+                                print(widget.university_id.toString() +
+                                    'univerid');
+                                print(widget.university_id_matter.toString() +
+                                    'univer matter');
+                                print(widget.phoneController.toString() +
+                                    'phonecontrol');
+                                print(widget.house_type.toString() +
+                                    'house type');
+                                print(
+                                    widget.rent_type.toString() + 'rent type');
+                                print(
+                                    widget.room_count.toString() + 'hona soni');
+                                print(widget.floors_count.toString() +
+                                    'etaj soni');
+                                print(widget.in_floor.toString() + 'etaj');
+                                print(
+                                    widget.costController.toString() + 'narxi');
+                                print(
+                                    widget.cost_type.toString() + 'cost type');
+                                print(widget.live_with_owner.toString() +
+                                    'uyni egasi');
+                                print(widget.utility_electricity.toString() +
+                                    'elktor');
+                                print(widget.unility_gaz.toString() + 'gaz');
+                                print(widget.utility_hot_water.toString() +
+                                    'issiq suv');
+                                print(widget.utility_cold_water.toString() +
+                                    'sovuq suv');
+                                print(
+                                    widget.utility_trash.toString() + 'musor');
+                                print(widget.comfort.toString() + 'komford');
+                                print(widget.description.toString() +
+                                    'qoshimcha');
+                                print(widget.location.toString() + 'location');
+                                print(widget.cost_period.toString() +
+                                    'cost period');
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(content: Text(data['error'])));
+                              }
+                            },
+                            child: Text(
+                              "Keyingi ".tr(),
+                              style: TextStyle(
+                                  fontSize: 20.sp, fontWeight: FontWeight.w500),
                             ),
-                          ),
-                        ]);
-                      }),
+                          )),
                     ),
-                  ),
-                  Padding(
-                    padding:
-                        EdgeInsets.symmetric(vertical: 18.h, horizontal: 31.w),
-                    child: Container(
-                        width: double.infinity,
-                        child: ElevatedButton(
-                          style: ElevatedButton.styleFrom(
-                              padding: EdgeInsets.symmetric(vertical: 14.h),
-                              shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(10.r)),
-                              primary: AppColors.buttonLinear),
-                          onPressed: () async {
-                            var data = await UserCreateAds().FetchAds(
-                              titleController: widget.titleController,
-                              roommate_gender: widget.roommate_gender,
-                              gender_matter: widget.gender_matter,
-                              district_id: widget.district_id,
-                              subway: widget.id,
-                              addressController: widget.addressController,
-                              university_id: widget.university_id,
-                              university_id_matter: widget.university_id_matter,
-                              phoneController: widget.phoneController,
-                              house_type: widget.house_type,
-                              rent_type: widget.rent_type,
-                              room_count: widget.room_count,
-                              floors_count: widget.floors_count,
-                              in_floor: widget.in_floor,
-                              costController: widget.costController,
-                              cost_type: widget.cost_type,
-                              live_with_owner: widget.live_with_owner,
-                              utility_electricity: widget.utility_electricity,
-                              unility_gaz: widget.unility_gaz,
-                              utility_hot_water: widget.utility_hot_water,
-                              utility_cold_water: widget.utility_cold_water,
-                              utility_trash: widget.utility_trash,
-                              comfort: widget.comfort,
-                              description: widget.description,
-                              location: widget.location,
-                              file1: FileExist[1] ? FileList[1] : FileList[0],
-                              cost_period: widget.cost_period,
-                              file2: FileExist[2] ? FileList[2] : FileList[0],
-                              file3: FileExist[3] ? FileList[3] : FileList[0],
-                            );
-                            setState(() {});
-                            if (data['status']) {
-                              Navigator.pushAndRemoveUntil(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => CreateSuccedful()),
-                                  (route) => false);
-                            } else {
-                              print(widget.titleController! + 'title');
-                              print(
-                                  widget.roommate_gender.toString() + 'gender');
-                              print(widget.gender_matter.toString() +
-                                  'gendermatter');
-                              print(widget.district_id.toString() +
-                                  'district id');
-                              print(widget.id.toString() + 'metro');
-                              print(widget.addressController.toString() +
-                                  'address');
-                              print(
-                                  widget.university_id.toString() + 'univerid');
-                              print(widget.university_id_matter.toString() +
-                                  'univer matter');
-                              print(widget.phoneController.toString() +
-                                  'phonecontrol');
-                              print(
-                                  widget.house_type.toString() + 'house type');
-                              print(widget.rent_type.toString() + 'rent type');
-                              print(widget.room_count.toString() + 'hona soni');
-                              print(
-                                  widget.floors_count.toString() + 'etaj soni');
-                              print(widget.in_floor.toString() + 'etaj');
-                              print(widget.costController.toString() + 'narxi');
-                              print(widget.cost_type.toString() + 'cost type');
-                              print(widget.live_with_owner.toString() +
-                                  'uyni egasi');
-                              print(widget.utility_electricity.toString() +
-                                  'elktor');
-                              print(widget.unility_gaz.toString() + 'gaz');
-                              print(widget.utility_hot_water.toString() +
-                                  'issiq suv');
-                              print(widget.utility_cold_water.toString() +
-                                  'sovuq suv');
-                              print(widget.utility_trash.toString() + 'musor');
-                              print(widget.comfort.toString() + 'komford');
-                              print(
-                                  widget.description.toString() + 'qoshimcha');
-                              print(widget.location.toString() + 'location');
-                              print(widget.cost_period.toString() +
-                                  'cost period');
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                  SnackBar(content: Text(data['message'])));
-                            }
-                          },
-                          child: Text(
-                            "Keyingi ".tr(),
-                            style: TextStyle(
-                                fontSize: 20.sp, fontWeight: FontWeight.w500),
-                          ),
-                        )),
-                  ),
-                ]),
+                  ],
+                ),
               ),
             ),
           ),
@@ -414,7 +509,7 @@ void selectImages() async {
 
   Widget displayImage() {
     if (imgFile == null) {
-      return Text("No Image Selected!");
+      return const Text("No Image Selected!");
     } else {
       return Image.file(imgFile!, width: 350.w, height: 350.h);
     }
@@ -424,6 +519,7 @@ void selectImages() async {
     var img = await image.getImage(source: ImageSource.camera);
     setState(() {
       file = File(img!.path);
+      print(file);
     });
   }
 
@@ -431,82 +527,53 @@ void selectImages() async {
     var img = await image.getImage(source: ImageSource.gallery);
     setState(() {
       file = File(img!.path);
+      print(file);
     });
   }
 
-  // void openCamera() async {
-  //   var imgCamera = await imgPicker.getImage(source: ImageSource.camera);
-  //   setState(() {
-  //     imageList = File(imgCamera!.path) as List<File>;
-  //   });
-  //   Navigator.of(context).pop();
-  // }
+  _takeFromCamera() async {
+    final XFile? photo = await ImagePicker().pickImage(
+      source: ImageSource.camera,
+    );
+    if (photo != null) {
+      final image = File(photo.path);
+      // MockData.homeworkFile = image;
+      // for(int i = 1;i<=3;i++) {
+      FileList.insert(1, image);
+      FileExist.insert(1, true);
+      FileList.insert(2, image);
+      FileExist.insert(2, true);
+      FileList.insert(3, image);
+      FileExist.insert(3, true);
+      print(image.toString());
+      // }
+    }
+  }
 
-  // Widget displayImage() {
-  //   if (imgFile == null) {
-  //     return const Text("No Image Selected!");
-  //   } else {
-  //     return Image.file(imgFile!, width: 350.w, height: 350.h);
-  //   }
-  // }
-
-  // getcam() async {
-  //   var img = await image.getImage(source: ImageSource.camera);
-  //   setState(() {
-  //     file = File(img!.path);
-  //     print(file);
-  //   });
-  // }
-
-  // getgall() async {
-  //   var img = await image.getImage(source: ImageSource.gallery);
-  //   setState(() {
-  //     file = File(img!.path);
-  //     print(file);
-  //   });
-  // }
-  // _takeFromCamera() async {
-  //   final XFile? photo = await ImagePicker().pickImage(
-  //     source: ImageSource.camera,
-  //   );
-  //   if (photo != null) {
-  //     final image = File(photo.path);
-  //     // MockData.homeworkFile = image;
-  //     // for(int i = 1;i<=3;i++) {
-  //       FileList.insert(1, image);
-  //       FileExist.insert(1, true);
-  //       FileList.insert(2, image);
-  //       FileExist.insert(2, true);
-  //       FileList.insert(3, image);
-  //       FileExist.insert(3, true);
-  //       print(image.toString());
-  //     // }
-  //   }
-  // }
-  // _takeFile() async {
-  //   FilePickerResult? result = await FilePicker.platform.pickFiles(
-  //     type: FileType.custom,
-  //     allowedExtensions: [
-  //       'jpg',
-  //       'pdf',
-  //       'doc',
-  //     ],
-  //   );
-  //   if (result != null) {
-  //     PlatformFile file = result.files.first;
-  //     // var request = http.MultipartRequest("POST", Uri.parse("http://164.68.114.231:8081/bolakay/backend/web//api/homework/save"));
-  //     // request.fields["file"] = file.toString();
-  //     // var pic = await http.MultipartFile.fromPath("file_field", file.path);
-  //     // print(file.name);
-  //     // MockData.fileName = file.name;
-  //     // print(file.path);
-  //     // MockData.homeworkFile = File(file.path!);
-  //     // homeWorkList.add(File(file.path!));
-  //     FileList.insert(0, File(file.path!));
-  //     FileExist.insert(0, true);
-  //     return file.path.toString();
-  //   } else {
-  //     return null;
-  //   }
-  // }
+  _takeFile() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: [
+        'jpg',
+        'pdf',
+        'doc',
+      ],
+    );
+    if (result != null) {
+      PlatformFile file = result.files.first;
+      // var request = http.MultipartRequest("POST", Uri.parse("http://164.68.114.231:8081/bolakay/backend/web//api/homework/save"));
+      // request.fields["file"] = file.toString();
+      // var pic = await http.MultipartFile.fromPath("file_field", file.path);
+      // print(file.name);
+      // MockData.fileName = file.name;
+      // print(file.path);
+      // MockData.homeworkFile = File(file.path!);
+      // homeWorkList.add(File(file.path!));
+      FileList.insert(0, File(file.path!));
+      FileExist.insert(0, true);
+      return file.path.toString();
+    } else {
+      return null;
+    }
+  }
 }

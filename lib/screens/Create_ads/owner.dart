@@ -709,14 +709,14 @@ class _OwnerState extends State<Owner> {
                           print( '${value6? 1 : 2} axamyatsiz univer' );
 
 
-// _RegionOnClick &&
-//                               _DiscritOnClick &&
-//                               _UniverOnClick &&
-//                               (_GenderOnClick || gender_matter == '1') &&
-//                               _addressOnClick &&
-//                               (_otmOnClick || university_id_matter == '1')
 
-                          if (true) {
+
+                          if (_RegionOnClick &&
+                              _DiscritOnClick &&
+                              _UniverOnClick &&
+                              (_GenderOnClick || gender_matter == '1') &&
+                              _addressOnClick &&
+                              (_otmOnClick || university_id_matter == '1')) {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
