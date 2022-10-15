@@ -31,10 +31,11 @@ class _MapScreenState extends State<MapScreen> {
         position: LatLng(41.311081,69.240562),
         infoWindow: InfoWindow(
           title: 'My Position',
-        )
+        ),
+
     ),
   ];
-
+  List<Marker> mymarker = [];
   // created method for getting user current location
   Future<Position> getUserCurrentLocation() async {
     await Geolocator.requestPermission().then((value){
@@ -47,6 +48,7 @@ class _MapScreenState extends State<MapScreen> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       appBar:  AppBar(
         backgroundColor: AppColors.backgroundWhite,
@@ -66,12 +68,20 @@ class _MapScreenState extends State<MapScreen> {
         child: SafeArea(
           // on below line creating google maps
           child: GoogleMap(
+           onTap: _handlerTap,
             zoomControlsEnabled: false,
+
             myLocationButtonEnabled: false,
             // on below line setting camera position
-            initialCameraPosition: _kGoogle,
+            // initialCameraPosition: _kGoogle,
+            initialCameraPosition: const CameraPosition(
+              target: LatLng(41.311081,69.240562),
+              zoom: 14,
+
+            ),
+            markers: Set.from(mymarker),
             // on below line we are setting markers on the map
-            markers: Set<Marker>.of(_markers),
+            // markers: Set<Marker>.of(_markers),
             // on below line specifying map type.
             mapType: MapType.normal,
             // on below line setting user location enabled.
@@ -88,40 +98,53 @@ class _MapScreenState extends State<MapScreen> {
       // on pressing floating action button the camera will take to user current location
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () async{
-          getUserCurrentLocation().then((value) async {
-            final mapLatitude = context.read<FavoriteProvider>();
-            print(value.latitude.toString() +" "+value.longitude.toString());
-            mapLatitude.forMap = value.latitude.toString()+','+value.longitude.toString();
-            // marker added for current users location
-            _markers.add(
-                Marker(
-                  markerId: MarkerId("2"),
-                  position: LatLng(value.latitude, value.longitude),
-                  infoWindow: InfoWindow(
-                    title: 'My Current Location',
-                  ),
-                )
-            );
-
-            // specified current users location
-            CameraPosition cameraPosition = new CameraPosition(
-              target: LatLng(value.latitude, value.longitude),
-              zoom: 14,
-            );
-
-            final GoogleMapController controller = await _controller.future;
-            controller.animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
-            setState(() {
-            });
-          });
+          // getUserCurrentLocation().then((value) async {
+          //
+          //   print(value.latitude.toString() +" "+value.longitude.toString());
+          //   // mapLatitude.forMap = value.latitude.toString()+','+value.longitude.toString();
+          //   // marker added for current users location
+          //   // _markers.add(
+          //   //     Marker(
+          //   //       markerId: MarkerId("2"),
+          //   //       position: LatLng(value.latitude, value.longitude),
+          //   //       infoWindow: InfoWindow(
+          //   //         title: 'My Current Location',
+          //   //       ),
+          //   //     )
+          //   // );
+          //
+          //   // specified current users location
+          //   CameraPosition cameraPosition = new CameraPosition(
+          //     target: LatLng(value.latitude, value.longitude),
+          //     zoom: 14,
+          //   );
+          //
+          //   final GoogleMapController controller = await _controller.future;
+          //   controller.animateCamera(CameraUpdate.newCameraPosition(cameraPosition));
+          //   setState(() {
+          //   });
+          // });
           Navigator.pop(context);
         },
-        label: const Text("Joylashuvimni jo'natish",),
+        label: const Text("Joylashuvni saqlash",),
         icon: const Icon(Icons.location_history),
         // child: Icon(Icons.local_activity),
       ),
     );
   }
+_handlerTap(LatLng tappadPoint){
+  final mapLatitude = context.read<FavoriteProvider>();
+  mapLatitude.forMap =(tappadPoint.toString());
+  print(tappadPoint);
+  setState(() {
+    mymarker = [];
+    mymarker.add(Marker(
+        markerId: MarkerId(tappadPoint.toString()),
+        position: tappadPoint,
+
+    ));
+  });
+}
 }
 Future<Position> _determinePosition() async {
   bool serviceEnabled;

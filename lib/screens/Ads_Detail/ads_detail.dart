@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:favorite_button/favorite_button.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
@@ -166,7 +167,7 @@ class _AdsDetailState extends State<AdsDetail> {
                       itemBuilder: (context, pagePosition) {
                         return Padding(
                             padding: const EdgeInsets.all(18.0),
-                            child: Column(children: [
+                            child: Stack(children: [
                               ...List.generate(
                                 widget.Image!.length,
                                 (index1) {
@@ -323,10 +324,8 @@ class _AdsDetailState extends State<AdsDetail> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => MapDerail(
-                                    location: widget.locations != null
-                                        ? widget.locations
-                                        : '',
+                              builder: (context) => MapDetail(
+                                    location: widget.locations,
                                   )));
                     },
                     child: Row(
@@ -345,10 +344,11 @@ class _AdsDetailState extends State<AdsDetail> {
                       ],
                     ),
                   ),
+
                   Row(
                     children: [
                       // widget.chatApproved == 1 ?
-                      Padding(
+                      Hive.box('type').get('type') != 2 ? Padding(
                         padding: EdgeInsets.fromLTRB(12.w, 0, 12.w, 12.h),
                         child: InkWell(
                           onTap: () {
@@ -426,7 +426,7 @@ class _AdsDetailState extends State<AdsDetail> {
                       //     ),
                       //   ),
                       // )
-                      ,
+                     :Container() ,
                       Padding(
                         padding: EdgeInsets.fromLTRB(8.w, 0, 8.w, 12.h),
                         child: InkWell(
@@ -462,7 +462,7 @@ class _AdsDetailState extends State<AdsDetail> {
                           ),
                         ),
                       ),
-                      // :
+
                     ],
                   )
                 ],
