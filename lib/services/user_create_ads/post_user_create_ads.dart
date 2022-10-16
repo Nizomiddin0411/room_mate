@@ -74,28 +74,30 @@ class UserCreateAds {
       request.files.addAll([
         await http.MultipartFile.fromPath(
           'file2',
-          file1.path,
+          file2.path,
         )
       ]);
     }else{
       request.files.addAll([
         await http.MultipartFile.fromPath(
           'file2',
-          file1.path,
+          file2.path,
         )
       ]);
-    } if(!fileThreeth){
+    }
+
+    if(!fileThreeth){
       request.files.addAll([
         await http.MultipartFile.fromPath(
           'file3',
-          file1.path,
+          file3.path,
         )
       ]);
     }else{
       request.files.addAll([
         await http.MultipartFile.fromPath(
           'file3',
-          file1.path,
+          file3.path,
         )
       ]);
     }

@@ -251,9 +251,17 @@ class _FiltrPageState extends State<FiltrPage> {
                   DropdownSearch<String>(
                     mode: Mode.MENU,
                     items: data.univer.map((e) {
+                      if(context.read<AutCubit>().selectedLang.index == 1){
                       if(dropDown2 == e.name){
+
+                          data.UniverId = e.id.toString();
+
+                            print(data.UniverId);
+                      }}else{
+                      if(dropDown2 == e.nameRu){
                         data.UniverId = e.id.toString();
-                      }
+                        print(data.UniverId);
+                      }}
                       return context.read<AutCubit>().selectedLang.index == 1 ? e.name.toString() : e.nameRu.toString();
                     }).toList(),
                     showSearchBox: true,

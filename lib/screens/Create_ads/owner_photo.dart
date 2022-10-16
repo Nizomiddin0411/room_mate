@@ -102,10 +102,14 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
     FileList.insert(1, File(''));
     FileList.insert(2, File(''));
     FileList.insert(3, File(''));
+    FileList.insert(4, File(''));
+    FileList.insert(3, File(''));
     FileExist.insert(0, false);
     FileExist.insert(1, false);
     FileExist.insert(2, false);
     FileExist.insert(3, false);
+    FileExist.insert(4, false);
+    FileExist.insert(5, false);
   }
 
   @override
@@ -126,10 +130,11 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
                   GestureDetector(
                     child: Text("From Camera"),
                     onTap: () async {
-                      getcam();
-                      //     for(int i = 0; i<=2;i++){
-                      // await _takeFromCamera();
-                      // }
+                      // getcam();
+                          if(sum<3){
+                            sum+=1;
+                      await _takeFromCamera(sum);
+                      }
                       setState(() {});
 
                       Navigator.pop(context);
@@ -146,8 +151,11 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
                       if (sum < 3) {
                         sum += 1;
                         // selectImages();
-                        await _takeFile();
+                        await _takeFile(sum);
                         setState(() {});
+                        print(FileList[0]);
+                        print(FileList[1]);
+                        print(FileList[2]);
                         Navigator.pop(context);
                       }
                     },
@@ -393,6 +401,9 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
                                     borderRadius: BorderRadius.circular(10.r)),
                                 primary: AppColors.buttonLinear),
                             onPressed: () async {
+                              print(FileList[3]);
+                              print(FileList[1]);
+                              print(FileList[2]);
                               var data = await UserCreateAds().FetchAds(
                                 titleController: widget.titleController,
                                 roommate_gender: widget.roommate_gender,
@@ -420,10 +431,10 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
                                 comfort: widget.comfort,
                                 description: widget.description,
                                 location: widget.location,
-                                file1: FileExist[1] ? FileList[1] : FileList[0],
+                                file1: FileExist[0] ? FileList[0] : FileList[3],
                                 cost_period: widget.cost_period,
-                                file2: FileExist[2] ? FileList[2] : FileList[0],
-                                file3: FileExist[3] ? FileList[3] : FileList[0],
+                                file2: FileExist[1] ? FileList[1] : FileList[4],
+                                file3: FileExist[2] ? FileList[2] : FileList[5],
                               );
                               setState(() {});
                               if (data['status']) {
@@ -531,8 +542,10 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
     });
   }
 
-  _takeFromCamera() async {
+  _takeFromCamera(int sum) async {
     final XFile? photo = await ImagePicker().pickImage(
+      maxHeight: 235.h,
+      maxWidth: 327.w,
       source: ImageSource.camera,
     );
     if (photo != null) {
@@ -541,16 +554,12 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
       // for(int i = 1;i<=3;i++) {
       FileList.insert(1, image);
       FileExist.insert(1, true);
-      FileList.insert(2, image);
-      FileExist.insert(2, true);
-      FileList.insert(3, image);
-      FileExist.insert(3, true);
       print(image.toString());
       // }
     }
   }
 
-  _takeFile() async {
+  _takeFile(int sum) async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       type: FileType.custom,
       allowedExtensions: [
@@ -569,8 +578,8 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
       // print(file.path);
       // MockData.homeworkFile = File(file.path!);
       // homeWorkList.add(File(file.path!));
-      FileList.insert(0, File(file.path!));
-      FileExist.insert(0, true);
+      FileList.insert(sum, File(file.path!));
+      FileExist.insert(sum, true);
       return file.path.toString();
     } else {
       return null;

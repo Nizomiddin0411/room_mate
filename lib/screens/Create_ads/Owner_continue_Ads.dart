@@ -108,6 +108,10 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
     "3",
     "4",
     "5",
+    "6",
+    "7",
+    "8",
+    "9",
   ];
   var ijaramuddat = [
     "Kunlik",
@@ -123,7 +127,11 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
     '2',
     '3',
     '4',
-    '5-6',
+    '5',
+    '6',
+    '7',
+    '8',
+    '9',
   ];
   var ijarachi = [
     '1',
@@ -382,14 +390,14 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                             hint: Padding(
                               padding: EdgeInsets.only(left: 8.w),
                               child: Text(
-                                "Xonalar soni".tr(),
+                                "Soni".tr(),
                                 style: TextStyle(fontSize: 14.sp),
                               ),
                             ),
                             decoration:
                                 const InputDecoration(border: InputBorder.none),
                             icon: Icon(Icons.arrow_drop_down_outlined),
-                            items: rooms.map((e) {
+                            items: ijarachi.map((e) {
                               return DropdownMenuItem<String>(
                                 onTap: () {},
                                 value: e,
@@ -439,7 +447,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                             hint: Padding(
                               padding: EdgeInsets.only(left: 8.w),
                               child: Text(
-                                "1 - 10".tr(),
+                                "1 - 9".tr(),
                                 style: TextStyle(fontSize: 14.sp),
                               ),
                             ),
@@ -492,7 +500,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                             hint: Padding(
                               padding: EdgeInsets.only(left: 8.w),
                               child: Text(
-                                "1 - 10".tr(),
+                                "1 - 9".tr(),
                                 style: TextStyle(fontSize: 14.sp),
                               ),
                             ),

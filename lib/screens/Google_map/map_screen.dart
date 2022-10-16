@@ -136,6 +136,8 @@ _handlerTap(LatLng tappadPoint){
   final mapLatitude = context.read<FavoriteProvider>();
   mapLatitude.forMap =(tappadPoint.toString());
   print(tappadPoint);
+  print(mapLatitude.forMap);
+
   setState(() {
     mymarker = [];
     mymarker.add(Marker(

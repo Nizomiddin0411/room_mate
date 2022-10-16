@@ -3,8 +3,8 @@ class GetUniverModel {
   String? name;
   String? nameRu;
   String? short;
-  int? districtId;
-  String? address;
+  dynamic districtId;
+  dynamic address;
   String? advertising;
   String? searching;
 
@@ -42,3 +42,5 @@ class GetUniverModel {
     return data;
   }
 }
+
+

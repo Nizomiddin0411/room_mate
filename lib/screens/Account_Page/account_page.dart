@@ -116,7 +116,7 @@ class _AccountPageState extends State<AccountPage> {
             //         ),
             //       ),
             // ),
-            Hive.box('type').get('type') != 2 ? ListTile(
+            Hive.box('type').get('type') == 2 ? ListTile(
               leading: Container(
                   width: 40.w,
                   height: 40.h,
@@ -149,7 +149,7 @@ class _AccountPageState extends State<AccountPage> {
                 ),
               ),
             ):Container(),
-            Hive.box('type').get('type') != 2 ? ListTile(
+            Hive.box('type').get('type') == 2 ? ListTile(
               leading: Container(
                   width: 40.w,
                   height: 40.h,
@@ -181,7 +181,7 @@ class _AccountPageState extends State<AccountPage> {
                 ),
               ),
             ) : Container(),
-            InkWell(
+            Hive.box('type').get('type') != 2 ? InkWell(
               onTap: () {
                 showAlertDialog(context);
               },
@@ -201,6 +201,29 @@ class _AccountPageState extends State<AccountPage> {
                   "Akkauntdan chiqish ",
                   style: TextStyle(fontSize: 18.sp, color: AppColors.error),
                 ).tr(),
+              ),
+            ):Center(
+              child: InkWell(
+                onTap: () {
+                  showAlertDialog(context);
+                },
+                child: ListTile(
+                  leading: Container(
+                      width: 40.w,
+                      height: 40.h,
+                      decoration: BoxDecoration(
+                        color: AppColors.colorBack2,
+                        borderRadius: BorderRadius.circular(8.r),
+                      ),
+                      child: const Icon(
+                        Icons.exit_to_app,
+                        color: AppColors.error,
+                      )),
+                  title: Text(
+                    "Akkauntdan chiqish ",
+                    style: TextStyle(fontSize: 18.sp, color: AppColors.error),
+                  ).tr(),
+                ),
               ),
             ),
             SizedBox(

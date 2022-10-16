@@ -9,7 +9,9 @@ import 'package:talaba_uy/core/const/app_colors.dart';
 
 class MapDetail extends StatefulWidget {
   String? location;
-  MapDetail({Key? key,required this.location}) : super(key: key);
+  double lat;
+  double long;
+  MapDetail({Key? key,required this.location,required this.lat,required this.long}) : super(key: key);
 
   @override
   State<MapDetail> createState() => _MapDetailState();
@@ -41,16 +43,16 @@ class _MapDetailState extends State<MapDetail> {
 
   @override
   Widget build(BuildContext context) {
-    String map = '41.311081, 69.240562';
+    // String map = '41.311081, 69.240562';
 
-    // String ls = widget.location.split(',').first.toString();
-    // String ls1 = widget.location.split(',').last.toString();
-    // double mapDouble = double.parse('${ls}');
-    // double mapDouble1 = double.parse('${ls1}');
+    String lat = widget.location!.split(',').first.toString();
+    String long = widget.location!.split(',').last.toString();
+    // double Lat = double.parse(lat).toDouble();
+    // double Long = double.parse(long).toDouble();
     _markers.add(
       Marker(
           markerId: MarkerId('1'),
-          position: LatLng(41.314995966135704, 69.2348812893033),
+          position: LatLng(widget.lat, widget.long),
           infoWindow: InfoWindow(
             title: 'My Position',
           )
@@ -80,8 +82,8 @@ class _MapDetailState extends State<MapDetail> {
             myLocationButtonEnabled: false,
             // on below line setting camera position
             // initialCameraPosition: _kGoogle,
-            initialCameraPosition: const CameraPosition(
-              target: LatLng(41.30343928785916, 69.2437744885683),
+            initialCameraPosition:  CameraPosition(
+              target: LatLng(widget.lat, widget.long),
               zoom: 14,
 
             ),
@@ -105,11 +107,15 @@ class _MapDetailState extends State<MapDetail> {
       // floatingActionButton: FloatingActionButton.extended(
       //   onPressed: () async{
       //     getUserCurrentLocation().then((value) async {
-      //       final mapLatitude = context.read<FavoriteProvider>();
+      //       // final mapLatitude = context.read<FavoriteProvider>();
+      //       print(lat + 'lattt string');
+      //       print(long + 'long string');
+      //       // print('${Lat} + +++++++++++++++++');
+      //       // print('${Long} + +++++++++++++++++');
       //       print(value.latitude.toString() +" "+value.longitude.toString());
       //       // print(mapDouble);
       //       // print(mapDouble1);
-      //       mapLatitude.forMap = value.latitude.toString()+','+value.longitude.toString();
+      //       // mapLatitude.forMap = value.latitude.toString()+','+value.longitude.toString();
       //       // marker added for current users location
       //       _markers.add(
       //           Marker(

@@ -179,9 +179,33 @@ class _FavoritAdsState extends State<FavoritAds> {
                                     children: [
                                       Stack(
                                         children: [
-                                          CachedNetworkImage(
+                                          data.MyAds[index].images !=
+                                              null
+                                              ? CachedNetworkImage(
                                             imageUrl:
-                                                "https://source.unsplash.com/random/324x235",
+                                            "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.MyAds[index].images?[0].image.toString()}",
+                                            placeholder: (context,
+                                                url) =>
+                                                CircularProgressIndicator(),
+                                            errorWidget:
+                                                (context, url, error) =>
+                                                Image.asset(
+                                                  'assets/images/notImage.png',
+                                                ),
+                                            width: 324.w,
+                                            height: 235.h,
+                                            fit: BoxFit.cover,
+                                          )
+                                              : data.MyAds[index]
+                                              .images![0].isEmpty
+                                              ? Image.asset(
+                                            'assets/images/notImage.png',
+                                            width: 324.w,
+                                            height: 235.h,
+                                            fit: BoxFit.cover,
+                                          )
+                                              : Image.asset(
+                                            'assets/images/notImage.png',
                                             width: 324.w,
                                             height: 235.h,
                                             fit: BoxFit.cover,

@@ -46,6 +46,7 @@ dependencies:
   easy_localization: ^3.0.0
   switcher: ^1.0.0
   file_picker: ^4.4.0
+  card_swiper: ^2.0.4
   draggable_scrollbar: ^0.1.0
   firebase_core:
   firebase_auth: ^3.4.2

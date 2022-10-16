@@ -39,13 +39,7 @@ class _OwnerState extends State<Owner> {
 
   // on below line we have created the list of markers
   final List<Marker> _markers = <Marker>[
-    const Marker(
-        markerId: MarkerId('1'),
-        position: LatLng(41.311081,69.240562),
-        infoWindow: InfoWindow(
-          title: 'My Position',
-        )
-    ),
+
   ];
 
   // created method for getting user current location
@@ -144,6 +138,17 @@ class _OwnerState extends State<Owner> {
 
   @override
   Widget build(BuildContext context) {
+    final mapLat = context.read<FavoriteProvider>();
+    _markers.add(
+      Marker(
+          markerId: MarkerId('1'),
+          position: LatLng(41.311081, 69.240562),
+          infoWindow: InfoWindow(
+            title: 'My Position',
+          )
+      ),
+    );
+
     print(Hive.box('token').get('token'));
     return SingleChildScrollView(
       child: Padding(
@@ -451,57 +456,57 @@ class _OwnerState extends State<Owner> {
                   ),
                 ),
                 SizedBox(height: 18.h),
-                Column(
-                  children: [
-                    Row(
-                      children: [
-                        Text("Geojoylashishni kiriting").tr(),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 5.h,
-                    ),
-                    InkWell(
-                      onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => MapScreen()));
-                      },
-                      child: Column(
-                        children: [
-                          InkWell(
-                            onTap: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => MapScreen()));
-                            },
-                            child: Container(
-                              width: 324.w,
-                              height: 210.h,
-                              child: IgnorePointer(
-                                ignoring: true,
-                                child: SafeArea(
-                                  // on below line creating google maps
-                                  child: GoogleMap(
-                                    // on below line setting camera position
-                                    initialCameraPosition: _kGoogle,
-                                    // on below line we are setting markers on the map
-                                    markers: Set<Marker>.of(_markers),
-                                    // on below line specifying map type.
-                                    mapType: MapType.normal,
-                                    // on below line setting user location enabled.
-                                    myLocationEnabled: true,
-                                    // on below line setting compass enabled.
-                                    compassEnabled: true,
-                                    // on below line specifying controller on map complete.
-                                    onMapCreated: (GoogleMapController controller){
-                                      _controller.complete(controller);
-                                    },
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
+                SizedBox(
+                  height: 5.h,
+                ),
+                InkWell(
+                  onTap: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => MapScreen()));
+                  },
+                  child: Container(
+                    width: 324.w,
+                    height: 60.h,
+                    child: Card(
+                      shadowColor: AppColors.buttonLinear,
+                      child: ListTile(
+                        title: Text("Geojoylashishni kiriting").tr(),
+                        leading: Icon(Icons.location_on,color: AppColors.mainColor,),
                       ),
                     ),
-                  ],
+                  )
+                  // Container(
+                  //   width: 324.w,
+                  //   height: 210.h,
+                  //   child: SafeArea(
+                  //     // on below line creating google maps
+                  //     child: GoogleMap(
+                  //       onTap: _handlerTap,
+                  //       zoomControlsEnabled: false,
+                  //
+                  //       myLocationButtonEnabled: false,
+                  //       // on below line setting camera position
+                  //       // initialCameraPosition: _kGoogle,
+                  //       initialCameraPosition: const CameraPosition(
+                  //         target: LatLng(41.311081,69.240562),
+                  //         zoom: 14,
+                  //
+                  //       ),
+                  //       markers: Set.from(mymarker),
+                  //       // on below line we are setting markers on the map
+                  //       // markers: Set<Marker>.of(_markers),
+                  //       // on below line specifying map type.
+                  //       mapType: MapType.normal,
+                  //       // on below line setting user location enabled.
+                  //       myLocationEnabled: true,
+                  //       // on below line setting compass enabled.
+                  //       compassEnabled: true,
+                  //       // on below line specifying controller on map complete.
+                  //       onMapCreated: (GoogleMapController controller){
+                  //         _controller.complete(controller);
+                  //       },
+                  //     ),
+                  //   ),
+                  // ),
                 ),
                 SizedBox(
                   height: 18.h,
@@ -771,5 +776,21 @@ class _OwnerState extends State<Owner> {
         ),
       ),
     );
+  }
+  List<Marker> mymarker = [];
+  _handlerTap(LatLng tappadPoint){
+    final mapLatitude = context.read<FavoriteProvider>();
+    mapLatitude.forMap =(tappadPoint.toString());
+    print(tappadPoint);
+    print(mapLatitude.forMap);
+
+    setState(() {
+      mymarker = [];
+      mymarker.add(Marker(
+        markerId: MarkerId(tappadPoint.toString()),
+        position: tappadPoint,
+
+      ));
+    });
   }
 }
