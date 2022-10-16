@@ -36,7 +36,7 @@ class MonthProvider extends ChangeNotifier {
   bool isRegion = false;
   bool isDistricts = false;
   bool isUniver = false;
-  bool isCourse = false;
+  // bool isCourse = false;
   bool isTypeHouse = false;
   bool isCount = false;
   bool isRent = false;
@@ -87,7 +87,7 @@ class MonthProvider extends ChangeNotifier {
       String regionId,
       String districtId,
       String univerId,
-      String course,
+      // String course,
       String houseType,
       String roomCount,
       String subway,
@@ -100,7 +100,7 @@ class MonthProvider extends ChangeNotifier {
       regionId,
       districtId,
       univerId,
-      course,
+      // course,
       houseType,
       roomCount,
       subway,
@@ -115,7 +115,7 @@ class MonthProvider extends ChangeNotifier {
       String regionId,
       String districtId,
       String univerId,
-      String course,
+      // String course,
       String houseType,
       String roomCount,
       String subway,
@@ -127,7 +127,7 @@ class MonthProvider extends ChangeNotifier {
       regionId,
       districtId,
       univerId,
-      course,
+      // course,
       houseType,
       roomCount,
       subway,

@@ -28,7 +28,7 @@ class _KunlikIjaraState extends State<KunlikIjara> {
           '0',
           '0',
           '0',
-          '0',
+          // '0',
           '0',
           '0',
           '0',
@@ -46,7 +46,7 @@ class _KunlikIjaraState extends State<KunlikIjara> {
           '0',
           '0',
           '0',
-          '0',
+          // '0',
         )
         .asStream();
   }
@@ -113,7 +113,7 @@ class _KunlikIjaraState extends State<KunlikIjara> {
                               data.isRegion = false;
                               data.isDistricts = false;
                               data.isUniver = false;
-                              data.isCourse = false;
+                              // data.isCourse = false;
                               data.isTypeHouse = false;
                               data.isCount = false;
                               data.isRent = false;

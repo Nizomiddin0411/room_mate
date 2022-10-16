@@ -33,7 +33,7 @@ class _OylikIjaraState extends State<OylikIjara> {
           '0',
           '0',
           '0',
-          '0',
+          // '0',
         )
         .asStream();
     Provider.of<MonthProvider>(context, listen: false)
@@ -46,7 +46,7 @@ class _OylikIjaraState extends State<OylikIjara> {
           '0',
           '0',
           '0',
-          '0',
+          // '0',
         )
         .asStream();
   }
@@ -114,7 +114,7 @@ class _OylikIjaraState extends State<OylikIjara> {
                               data.isRegion = false;
                               data.isDistricts = false;
                               data.isUniver = false;
-                              data.isCourse = false;
+                              // data.isCourse = false;
                               data.isTypeHouse = false;
                               data.isCount = false;
                               data.isRent = false;

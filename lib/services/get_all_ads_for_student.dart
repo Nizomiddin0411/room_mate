@@ -10,7 +10,7 @@ class GetAdsForStudent {
       String regionId,
       String districtId,
       String univerId,
-      String course,
+      // String course,
       String houseType,
       String roomCount,
       String rentType,

@@ -35,7 +35,7 @@ class RegionProvider extends ChangeNotifier {
   bool isRegion = false;
   bool isDistricts = false;
   bool isUniver = false;
-  bool isCourse = false;
+  // bool isCourse = false;
   bool isTypeHouse = false;
   bool isCount = false;
   bool isRent = false;
@@ -85,7 +85,7 @@ class RegionProvider extends ChangeNotifier {
   Future<void> getFiltrApi(String regionId,
       String districtId,
       String univerId,
-      String course,
+      // String course,
       String houseType,
       String roomCount,
       String rentType,
@@ -100,7 +100,7 @@ class RegionProvider extends ChangeNotifier {
       regionId,
       districtId,
       univerId,
-      course,
+      // course,
       houseType,
       roomCount,
       rentType,
@@ -116,7 +116,7 @@ class RegionProvider extends ChangeNotifier {
   Future<void> getFiltrForStudent(String regionId,
       String districtId,
       String univerId,
-      String course,
+      // String course,
       String houseType,
       String roomCount,
       String rentType,
@@ -130,7 +130,7 @@ class RegionProvider extends ChangeNotifier {
       regionId,
       districtId,
       univerId,
-      course,
+      // course,
       houseType,
       roomCount,
       rentType,
@@ -148,7 +148,7 @@ class RegionProvider extends ChangeNotifier {
       String regionId,
       String districtId,
       String univerId,
-      String course,
+      // String course,
       String houseType,
       String roomCount,
       String rentType,
@@ -161,7 +161,7 @@ class RegionProvider extends ChangeNotifier {
       regionId,
       districtId,
       univerId,
-      course,
+      // course,
       houseType,
       roomCount,
       rentType,

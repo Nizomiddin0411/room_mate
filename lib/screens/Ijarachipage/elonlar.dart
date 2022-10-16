@@ -32,7 +32,7 @@ class _ElonlarState extends State<Elonlar> {
       '0',
       '0',
       '0',
-      '0',
+      // '0',
     );
     Provider.of<RegionProvider>(context, listen: false).getRegion();
     Provider.of<RegionProvider>(context, listen: false).getFiltrApi(
@@ -45,7 +45,7 @@ class _ElonlarState extends State<Elonlar> {
       '0',
       '0',
       '0',
-      '0',
+      // '0',
     );
   }
 
@@ -111,7 +111,7 @@ class _ElonlarState extends State<Elonlar> {
                               data.isRegion = false;
                               data.isDistricts = false;
                               data.isUniver = false;
-                              data.isCourse = false;
+                              // data.isCourse = false;
                               data.isTypeHouse = false;
                               data.isCount = false;
                               data.isRent = false;
