@@ -5,7 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
+import 'package:talaba_uy/provider/favorite_provider.dart';
 import 'package:talaba_uy/provider/region_provider.dart';
+import 'package:talaba_uy/screens/Google_map/map_screen.dart';
 import 'create_image.ads.dart';
 
 class Student2 extends StatefulWidget {
@@ -348,47 +350,58 @@ class _Student2State extends State<Student2> {
                   SizedBox(
                     height: 10.h,
                   ),
-                  Column(
-                    children: [
-                      Row(
-                        children: [
-                          Text("Geojoylashishni kiriting").tr(),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 5.h,
-                      ),
-                      Column(
-                        children: [
-                          Container(
-                            child: Column(
-                              children: [
-                                Image.asset("assets/images/maps.png"),
-                                Row(
-                                  children: [
-                                    SizedBox(
-                                      width: 7.w,
-                                    ),
-                                    Text(
-                                        "Amir Temur ko’chasi 21, Yunusobod tumani"),
-                                    SizedBox(
-                                      width: 45.w,
-                                    ),
-                                    Icon(Icons.arrow_forward)
-                                  ],
-                                )
-                              ],
+                  InkWell(
+                      onTap: () {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => MapScreen()));
+                      },
+                      child: Container(
+                        width: 324.w,
+                        height: 60.h,
+                        child: Card(
+                          shadowColor: AppColors.buttonLinear,
+                          child: ListTile(
+                            title: Text("Geojoylashishni kiriting").tr(),
+                            leading: Icon(
+                              Icons.location_on,
+                              color: AppColors.mainColor,
                             ),
-                            height: 210.h,
-                            width: 324.w,
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.black),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(5))),
                           ),
-                        ],
-                      ),
-                    ],
+                        ),
+                      )
+                    // Container(
+                    //   width: 324.w,
+                    //   height: 210.h,
+                    //   child: SafeArea(
+                    //     // on below line creating google maps
+                    //     child: GoogleMap(
+                    //       onTap: _handlerTap,
+                    //       zoomControlsEnabled: false,
+                    //
+                    //       myLocationButtonEnabled: false,
+                    //       // on below line setting camera position
+                    //       // initialCameraPosition: _kGoogle,
+                    //       initialCameraPosition: const CameraPosition(
+                    //         target: LatLng(41.311081,69.240562),
+                    //         zoom: 14,
+                    //
+                    //       ),
+                    //       markers: Set.from(mymarker),
+                    //       // on below line we are setting markers on the map
+                    //       // markers: Set<Marker>.of(_markers),
+                    //       // on below line specifying map type.
+                    //       mapType: MapType.normal,
+                    //       // on below line setting user location enabled.
+                    //       myLocationEnabled: true,
+                    //       // on below line setting compass enabled.
+                    //       compassEnabled: true,
+                    //       // on below line specifying controller on map complete.
+                    //       onMapCreated: (GoogleMapController controller){
+                    //         _controller.complete(controller);
+                    //       },
+                    //     ),
+                    //   ),
+                    // ),
                   ),
                   SizedBox(
                     height: 10.h,
@@ -1133,6 +1146,7 @@ class _Student2State extends State<Student2> {
                                 borderRadius: BorderRadius.circular(10.r)),
                             primary: AppColors.buttonLinear),
                         onPressed: () {
+                          final map = context.read<FavoriteProvider>();
                           String comfortItems = comfort.join(',');
                           Navigator.push(
                             context,
@@ -1162,6 +1176,7 @@ class _Student2State extends State<Student2> {
                                 costController:costcontroller.text,
                                 rent_type: price,
                                 cost_period: price,
+                                location:'${map.forMap}',
                               ),
                             ),
                           );
