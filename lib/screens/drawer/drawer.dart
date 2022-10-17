@@ -8,6 +8,7 @@ import 'package:talaba_uy/screens/Settings/setting.dart';
 
 import '../Favorit_Ads_Page/favorit_ads_page.dart';
 import '../Favorit_Page/favorits_page.dart';
+import '../Feedback_Page/feedback_page.dart';
 import '../Notification_Page/notification_page.dart';
 
 
@@ -83,6 +84,13 @@ class _DrawerPageState extends State<DrawerPage> {
                               MaterialPageRoute(builder: (context) => const FavoritPage()));
                         },
                         leading: const Icon(Icons.favorite_border)),
+                    ListTile(
+                        title:  Text("Feedback qoldirish").tr(),
+                        onTap: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (context) => const FeedbackPage()));
+                        },
+                        leading: const Icon(Icons.textsms)),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(80, 100, 0, 0),
                       child: ListTile(
