@@ -64,7 +64,7 @@ class _StudentUserState extends State<StudentUser> {
     '3 ',
     '4 ',
   ];
-  bool value = false;
+  bool checkBox = false;
   bool hidenumber = false;
   String? value3;
   final myController = TextEditingController();
@@ -745,10 +745,10 @@ class _StudentUserState extends State<StudentUser> {
               Row(
                 children: [
                   Checkbox(
-                    value: this.value,
+                    value: this.checkBox,
                     onChanged: (bool? value) {
                       setState(() {
-                        this.value = value!;
+                        this.checkBox = value!;
                       });
                     },
                   ),
@@ -797,14 +797,15 @@ class _StudentUserState extends State<StudentUser> {
                   //         title: Text("Ro’yxatdan muvaffaqiyatli o’tdingiz"),
                   //       );
                   //     });
-
+                  if(!checkBox)
+                    _showToast(context, checkBox);
                   if (kurs &&
                       viloyat &&fakultet&&
                       univer &&
                       ktuman &&
                       myController.text != '' &&
                       jinsi &&
-                      value) {
+                      checkBox) {
                     await RegistratsiyaStudent().CreateAdsStudent(
                       FullName: myController.text,
                       fakultetId: data.fakultetid.toString(),
@@ -860,6 +861,21 @@ class _StudentUserState extends State<StudentUser> {
               ),
             ],
           );
+        }),
+      ),
+    );
+  }
+  void _showToast(BuildContext context, bool isCheck) {
+    final scaffold = ScaffoldMessenger.of(context);
+    scaffold.showSnackBar(
+      SnackBar(
+        backgroundColor: Colors.white,
+        content: const Text('Foydalanish shartini bajarmadingiz !!!', style: TextStyle(
+            color: Colors.red, fontWeight: FontWeight.bold, fontSize: 15),),
+        action: SnackBarAction(label: '', onPressed: (){
+          scaffold.hideCurrentSnackBar();
+          isCheck = true;
+          print(isCheck);
         }),
       ),
     );

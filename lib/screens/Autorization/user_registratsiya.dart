@@ -8,6 +8,7 @@ import 'package:talaba_uy/screens/Autorization/offerto_dart.dart';
 import 'package:easy_mask/easy_mask.dart';
 
 import '../../services/post_user registratsion.dart';
+
 class UserRegistratsion extends StatefulWidget {
   const UserRegistratsion({Key? key}) : super(key: key);
 
@@ -25,7 +26,7 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
   String District = '';
   String? gender;
   Color jinsiColor = Colors.black12;
-  bool jinsi= false;
+  bool jinsi = false;
   bool checkBox = false;
 
   final List<String> genderItems = [
@@ -40,9 +41,10 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
   ];
 
   final myController = TextEditingController();
-  final nameController = TextEditingController(text: "+998");
+  final nameController = TextEditingController(text: "+998 ");
   String? selectedValue;
   String? dropdownvalue;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -212,8 +214,7 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                  ],
+                  children: [],
                 ),
               ],
             ),
@@ -229,19 +230,21 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
                 ),
                 InkWell(
                     onTap: () => {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => OffertoPage())),
-                    },
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => OffertoPage())),
+                        },
                     child: Row(
                       children: [
                         Text(
                           "Roziman".tr(),
-                          style: TextStyle(
-                              color: Colors.black, fontSize: 15.sp),
+                          style:
+                              TextStyle(color: Colors.black, fontSize: 15.sp),
                         ),
-                        SizedBox(width: 7.w,),
+                        SizedBox(
+                          width: 7.w,
+                        ),
                         Text(
                           "Foydalanuvchi shartlariga roziman".tr(),
                           style: TextStyle(
@@ -254,23 +257,21 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
             SizedBox(height: 100.h),
             ElevatedButton(
               onPressed: () async {
-                _showToast(context);
-               if(myController.text != ''&&checkBox&&nameController.text!=''){
-                 await RegistratsiyaUser().CreateAdsUser(
-                   FullName: myController.text,
-                   Phonenumber: nameController.text,
-                   );
-                 Navigator.push(
-                     context,
-                     MaterialPageRoute(
-                         builder: (context) => LoginPage()));
-               }
-               else{
-                 jinsiColor = Colors.red;
-                 if(jinsi) jinsiColor = Colors.black12;
-                 setState(() {
-                 });
-               }
+                if (!checkBox) _showToast(context, checkBox);
+                if (myController.text != '' &&
+                    checkBox &&
+                    nameController.text != '') {
+                  await RegistratsiyaUser().CreateAdsUser(
+                    FullName: myController.text,
+                    Phonenumber: nameController.text,
+                  );
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => LoginPage()));
+                } else {
+                  jinsiColor = Colors.red;
+                  if (jinsi) jinsiColor = Colors.black12;
+                  setState(() {});
+                }
               },
               style: ElevatedButton.styleFrom(
                 primary: AppColors.mainColor,
@@ -289,8 +290,7 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
                   child: Text(
                     "Ro’yhatdan o’tish",
                     style: TextStyle(
-                        color: AppColors.backgroundWhite,
-                        fontSize: 20.sp),
+                        color: AppColors.backgroundWhite, fontSize: 20.sp),
                   ).tr(),
                 ),
               ),
@@ -301,12 +301,23 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
     );
   }
 }
-void _showToast(BuildContext context) {
+
+void _showToast(BuildContext context, bool isCheck) {
   final scaffold = ScaffoldMessenger.of(context);
   scaffold.showSnackBar(
     SnackBar(
-      content: const Text('Foydalanish shartlariga rozimisiz!!!'),
-      action: SnackBarAction(label: 'HA', onPressed: scaffold.hideCurrentSnackBar),
+      content: const Text(
+        'Foydalanish shartini bajarmadingiz !!!',
+        style: TextStyle(
+            color: Colors.red, fontWeight: FontWeight.bold, fontSize: 15),
+      ),
+      action: SnackBarAction(
+          label: '',
+          onPressed: () {
+            scaffold.hideCurrentSnackBar();
+            isCheck = true;
+            print(isCheck);
+          }),
     ),
   );
 }
