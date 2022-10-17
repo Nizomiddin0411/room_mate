@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:dotted_border/dotted_border.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
@@ -36,6 +37,8 @@ class Createimage extends StatefulWidget {
   String costController;
   String rent_type;
   String cost_period;
+  String location;
+
   Createimage(
       {Key? key,
       required this.numbervalue,
@@ -61,7 +64,8 @@ class Createimage extends StatefulWidget {
       required this.ownerlive,
       required this.costController,
       required this.rent_type,
-      required this.cost_period,})
+      required this.cost_period,
+      required this.location})
       : super(key: key);
 
   @override
@@ -73,11 +77,14 @@ class _CreateimageState extends State<Createimage> {
 
   List<XFile>? imageFileList = [];
   List<XFile>? pickedFile;
+  List<File> FileList = [];
+  List<bool> FileExist = [];
 
   void selectImages() async {
     final List<XFile>? selectedImages = await imagePicker.pickMultiImage();
     if (selectedImages!.isNotEmpty) {
       imageFileList!.addAll(selectedImages);
+      pickedFile?.add(getcam());
     }
     setState(() {});
   }
@@ -89,6 +96,24 @@ class _CreateimageState extends State<Createimage> {
   final imgPicker = ImagePicker();
   File? file;
   ImagePicker image = ImagePicker();
+  int sum = 0;
+
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    FileList.insert(0, File(''));
+    FileList.insert(1, File(''));
+    FileList.insert(2, File(''));
+    FileList.insert(3, File(''));
+    FileList.insert(4, File(''));
+    FileList.insert(3, File(''));
+    FileExist.insert(0, false);
+    FileExist.insert(1, false);
+    FileExist.insert(2, false);
+    FileExist.insert(3, false);
+    FileExist.insert(4, false);
+    FileExist.insert(5, false);
+  }
 
   Future<void> showOptionsDialog(BuildContext context) {
     return showDialog(
@@ -101,17 +126,35 @@ class _CreateimageState extends State<Createimage> {
                 children: [
                   GestureDetector(
                     child: Text("From Camera"),
-                    onTap: () {
-                      getcam();
+                    onTap: () async {
+                      // getcam();
+                      if (sum < 3) {
+                        sum += 1;
+                        await _takeFromCamera(sum);
+                      }
+                      setState(() {});
+
                       Navigator.pop(context);
                     },
                   ),
-                  Padding(padding: EdgeInsets.all(10)),
+                  const Padding(padding: EdgeInsets.all(10)),
                   GestureDetector(
-                    child: Text("From Gallery"),
-                    onTap: () {
-                      selectImages();
-                      Navigator.pop(context);
+                    child: Text(
+                      "From Gallery",
+                      style: TextStyle(
+                          color: sum < 3 ? Colors.black : Colors.grey.shade300),
+                    ),
+                    onTap: () async {
+                      if (sum < 3) {
+                        sum += 1;
+                        // selectImages();
+                        await _takeFile(sum);
+                        setState(() {});
+                        print(FileList[0]);
+                        print(FileList[1]);
+                        print(FileList[2]);
+                        Navigator.pop(context);
+                      }
                     },
                   ),
                 ],
@@ -238,7 +281,8 @@ class _CreateimageState extends State<Createimage> {
                                               borderRadius:
                                                   BorderRadius.circular(15)),
                                           child: Icon(Icons.remove,
-                                              color: Colors.white, size: 20.sp)),
+                                              color: Colors.white,
+                                              size: 20.sp)),
                                     ),
                                   ),
                                 ),
@@ -272,7 +316,7 @@ class _CreateimageState extends State<Createimage> {
                               description: widget.addinformation.toString(),
                               district_id: widget.viloyatidisi,
                               address: widget.addressController.toString(),
-                              location: "",
+                              location: widget.location,
                               subway: widget.metro,
                               house_type: widget.housetype,
                               room_count: widget.housecount,
@@ -283,9 +327,11 @@ class _CreateimageState extends State<Createimage> {
                               live_with_owner: widget.ownerlive,
                               utility_bills: widget.costlivekomunal,
                               comfort: widget.comfort,
-                              File: "",
                               renttype: widget.rent_type,
-                              cost_period: widget.cost_period);
+                              cost_period: widget.cost_period,
+                              file1:  FileExist[0] ? FileList[0] : FileList[3],
+                            file2: FileExist[1] ? FileList[1] : FileList[4],
+                            file3: FileExist[2] ? FileList[2] : FileList[5],);
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -312,6 +358,50 @@ class _CreateimageState extends State<Createimage> {
       imageList = File(imgCamera!.path) as List<File>;
     });
     Navigator.of(context).pop();
+  }
+
+  _takeFromCamera(int sum) async {
+    final XFile? photo = await ImagePicker().pickImage(
+      maxHeight: 235.h,
+      maxWidth: 327.w,
+      source: ImageSource.camera,
+    );
+    if (photo != null) {
+      final image = File(photo.path);
+      // MockData.homeworkFile = image;
+      // for(int i = 1;i<=3;i++) {
+      FileList.insert(1, image);
+      FileExist.insert(1, true);
+      print(image.toString());
+      // }
+    }
+  }
+
+  _takeFile(int sum) async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: [
+        'jpg',
+        'pdf',
+        'doc',
+      ],
+    );
+    if (result != null) {
+      PlatformFile file = result.files.first;
+      // var request = http.MultipartRequest("POST", Uri.parse("http://164.68.114.231:8081/bolakay/backend/web//api/homework/save"));
+      // request.fields["file"] = file.toString();
+      // var pic = await http.MultipartFile.fromPath("file_field", file.path);
+      // print(file.name);
+      // MockData.fileName = file.name;
+      // print(file.path);
+      // MockData.homeworkFile = File(file.path!);
+      // homeWorkList.add(File(file.path!));
+      FileList.insert(sum, File(file.path!));
+      FileExist.insert(sum, true);
+      return file.path.toString();
+    } else {
+      return null;
+    }
   }
 
   Widget displayImage() {

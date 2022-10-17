@@ -39,13 +39,15 @@ class RegistratsiyaStudent {
 
     if (response.statusCode >= 200 && response.statusCode <= 300) {
       var data = await response.stream.bytesToString();
-      print('$Phonenumber jjfhhfhdsdvtsdfstd');
+      print('$Phonenumber Phonenumber');
       print("$gender    jinsi ");
       print("$fakultetId fakulted id si  ");
       print("$Course sheri kursi ");
       print("$District  viloyattt idisi  ");
-      print("$UniderId  univer idhbdjydfujedhedjreyehjfkdsi   ");
+      print("$UniderId  UniderId idissiiiii   ");
       print("$HideProfile   number hide   ");
+      print("$District  District District   ");
+      print("$Hidenumber  profile hide   ");
       print("$Hidenumber  profile hide   ");
       return jsonDecode(data);
     }

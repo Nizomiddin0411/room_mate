@@ -33,7 +33,9 @@ class CreateStudent {
     required String comfort,
     required String renttype,
     required String cost_period,
-    required String File,
+  required File file1,
+  required File file2,
+  required File file3,
   }) async {
     var request = http.MultipartRequest(
       'post',
@@ -41,6 +43,54 @@ class CreateStudent {
         'http://164.68.114.231:8081/roommate/backend/web/api/advertising/student-add-advertising',
       ),
     );
+    var file_ = await file1.exists();
+    var fileSecond = await file2.exists();
+    var fileThreeth = await file3.exists();
+    if(!file_){
+      request.files.addAll([
+        await http.MultipartFile.fromPath(
+          'file1',
+          file1.path,
+        )
+      ]);
+    }else{
+      request.files.addAll([
+        await http.MultipartFile.fromPath(
+          'file1',
+          file1.path,
+        )
+      ]);
+    }
+    if(!fileSecond){
+      request.files.addAll([
+        await http.MultipartFile.fromPath(
+          'file2',
+          file2.path,
+        )
+      ]);
+    }else{
+      request.files.addAll([
+        await http.MultipartFile.fromPath(
+          'file2',
+          file2.path,
+        )
+      ]);
+    }
+
+    if(!fileThreeth){
+      request.files.addAll([
+        await http.MultipartFile.fromPath(
+          'file3',
+          file3.path,
+        )
+      ]);
+    }else{
+      request.files.addAll([
+        await http.MultipartFile.fromPath(
+          'file3',
+          file3.path,
+        )
+      ]);
 
     request.fields.addAll({
       'title': title,
@@ -69,7 +119,7 @@ class CreateStudent {
       'comfort': comfort,
       'rent_type':renttype,
       'cost_period':cost_period,
-      'file1': File,
+      'file1': "",
 
     });
     print('${title} titletitle nomi +++++++++++');
@@ -109,5 +159,4 @@ class CreateStudent {
       print("nizomiddin");
       return jsonDecode(data);
     }
-  }
-}
+  }}}

@@ -18,15 +18,17 @@ class UniversitetProvider extends ChangeNotifier{
   List<GetDistrictModel> tumanlar = [];
   List<SearchingStudents> ads = [];
   bool isFakultet = false;
-  bool isuniver = false;
+
   String RegionId = '';
+  String UniversiterId = '';
   String DistrickId = '';
   String FacultyID = '';
   String defaultvalue = 'Fakultetni tanlang';
   String defaultvalue1 = 'Tumanni tanlang';
   bool istuman=false;
-  String? universiterid;
+  bool isUniver = false;
   String? fakultetid;
+  int? isId;
   String? districtid;
   void _setFakultet(bool value){
     isFakultet = value;
