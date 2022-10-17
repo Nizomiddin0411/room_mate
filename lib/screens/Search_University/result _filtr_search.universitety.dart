@@ -307,7 +307,7 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                                   (value) => DropdownMenuItem<String?>(
                                 value: value.name,
                                 child: Text(
-                                  value.name,
+                                 "",
                                   style: const TextStyle(
                                     fontSize: 14,
                                   ),

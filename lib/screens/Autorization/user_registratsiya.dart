@@ -40,7 +40,7 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
   ];
 
   final myController = TextEditingController();
-  final nameController = TextEditingController();
+  final nameController = TextEditingController(text: "+998");
   String? selectedValue;
   String? dropdownvalue;
   @override
@@ -54,26 +54,29 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
               children: [
                 Row(
                   children: [
-                    Text("Ism va familiya".tr()),
+                    Text("Ism va familiya ").tr(),
                   ],
                 ),
                 SizedBox(
-                  height: 5,
+                  height: 5.h,
                 ),
                 TextFormField(
                   autovalidateMode: AutovalidateMode.always,
-                  validator: (e){
-                    if(e!.length > 3){
+                  validator: (e) {
+                    if (e!.length > 3) {
                       return null;
-                    }else{
+                    } else {
                       return "Kamida 2 ta so’zdan iborat bo’lishi kerak".tr();
                     }
                   },
                   controller: myController,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
-                        borderSide: BorderSide(color:myController.text == '' ? Colors.red : Colors.black12)
-                    ),
+                        borderRadius: BorderRadius.circular(8),
+                        borderSide: BorderSide(
+                            color: myController.text == ''
+                                ? Colors.red
+                                : Colors.black12)),
                     hintText: "Ism va familiyangizni kiriting".tr(),
                   ),
                 ),
@@ -86,34 +89,42 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
               children: [
                 Row(
                   children: [
-                    Text("Telefon raqami".tr()),
+                    Text("Telefon raqami").tr(),
                   ],
                 ),
                 SizedBox(
-                  height: 5,
+                  height: 5.h,
                 ),
-                TextFormField(
-                  inputFormatters: [
-                    TextInputMask(
-                      mask: '\\+ 999 99 999 99 99',
-                      placeholder: '_ ',
-                      maxPlaceHolders: 13,
-                    )
+                Row(
+                  children: [
+                    Container(
+                      height: 95.h,
+                      width: 345.w,
+                      child: TextFormField(
+                        inputFormatters: [
+                          TextInputMask(
+                            mask: '\\+ 999 99 999 99 99',
+                            placeholder: '_ ',
+                            maxPlaceHolders: 13,
+                          )
+                        ],
+                        autovalidateMode: AutovalidateMode.always,
+                        validator: (e) {
+                          if (e!.length > 12) {
+                            return null;
+                          } else {
+                            return '12 ta raqam kiriting';
+                          }
+                        },
+                        keyboardType: TextInputType.phone,
+                        controller: nameController,
+                        decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(8)),
+                        ),
+                      ),
+                    ),
                   ],
-                  autovalidateMode: AutovalidateMode.always,
-                  validator: (e){
-                    if(e!.length > 12){
-                      return null;
-                    }else{
-                      return '12 ta raqam kiriting';
-                    }
-                  },
-                  keyboardType: TextInputType.phone,
-                  controller: nameController,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    hintText: "+998 9_ _ _ _ _ _ _ _".tr(),
-                  ),
                 ),
               ],
             ),
@@ -243,7 +254,8 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
             SizedBox(height: 100.h),
             ElevatedButton(
               onPressed: () async {
-               if(myController.text != ''&&checkBox){
+                _showToast(context);
+               if(myController.text != ''&&checkBox&&nameController.text!=''){
                  await RegistratsiyaUser().CreateAdsUser(
                    FullName: myController.text,
                    Phonenumber: nameController.text,
@@ -288,4 +300,13 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
       ),
     );
   }
+}
+void _showToast(BuildContext context) {
+  final scaffold = ScaffoldMessenger.of(context);
+  scaffold.showSnackBar(
+    SnackBar(
+      content: const Text('Foydalanish shartlariga rozimisiz!!!'),
+      action: SnackBarAction(label: 'HA', onPressed: scaffold.hideCurrentSnackBar),
+    ),
+  );
 }

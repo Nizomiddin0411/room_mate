@@ -7,28 +7,16 @@ import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
-import 'package:switcher/core/switcher_size.dart';
-import 'package:switcher/switcher.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
-import 'package:talaba_uy/core/data/mockdata.dart';
-import 'package:talaba_uy/models/get_district_model.dart';
-import 'package:talaba_uy/models/get_faculty_model.dart';
-import 'package:talaba_uy/models/get_region_model.dart';
 import 'package:talaba_uy/models/lang_model.dart';
 import 'package:talaba_uy/provider/universitet_provider.dart';
-import 'package:talaba_uy/screens/Autorization/LoginPage.dart';
 import 'package:talaba_uy/screens/Autorization/offerto_dart.dart';
 import 'package:talaba_uy/screens/Autorization/registratsiya%20succedful_page.dart';
-import 'package:talaba_uy/services/get_district_service.dart';
-import 'package:talaba_uy/services/get_faculty_service.dart';
-import 'package:talaba_uy/services/get_region_service.dart';
-import 'package:talaba_uy/services/get_univer_service.dart';
 import 'package:talaba_uy/services/post_create_student.dart';
 
 import '../../cubit/aut_cubit.dart';
-import '../../models/get_univer_model.dart';
+
 
 class StudentUser extends StatefulWidget {
   const StudentUser({Key? key}) : super(key: key);
@@ -40,7 +28,7 @@ class StudentUser extends StatefulWidget {
 class _StudentUserState extends State<StudentUser> {
   String Phonenumber = '';
   String FullName = '';
-  String UniderId = '';
+  String? university_id;
   String fakultetId = '';
   String Course = '';
   String? Roommate;
@@ -80,7 +68,7 @@ class _StudentUserState extends State<StudentUser> {
   bool hidenumber = false;
   String? value3;
   final myController = TextEditingController();
-  final nameController = TextEditingController();
+  final nameController = TextEditingController(text: "+998");
   String? selectedValue;
   String? dropdownvalue;
   bool isSwitched = false;
@@ -167,7 +155,6 @@ class _StudentUserState extends State<StudentUser> {
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(8)),
-                            hintText: "+ 998 9_ _ _ _ _ _ _ _ ".tr(),
                           ),
                         ),
                       ),
@@ -338,27 +325,32 @@ class _StudentUserState extends State<StudentUser> {
                       //   },
                       // ),
                       DropdownSearch<String>(
-                        mode: Mode.MENU,
+                        mode: Mode.BOTTOM_SHEET,
                         items: data.universitet.map((e) {
+
+                          if (drowdown2 == e.name) {
+                            data.UniversiterId = e.id.toString();
+                            data.isId = e.id;
+                            university_id = e.id.toString();
+                          }
                           return context.read<AutCubit>().selectedLang.index ==
-                                  1
+                              1
                               ? e.name.toString()
                               : e.nameRu.toString();
                         }).toList(),
                         showSearchBox: true,
-                        // label: "Menu mode",
-                        // hint: "country in menu mode",
-                        onChanged: (newValue) async {
-                          data.isuniver = true;
+                        onChanged: (value) async {
+                          data.isUniver = true;
                           final selected = data.universitet
-                              .where((element) => element.name == newValue);
-                          await data.getFakultet(selected.last.id!);
+                              .where((element) => element.name == value);
+                          data.getFakultet(selected.last.id!);
+                          print("${selected.last.id}iminjonov");
                           setState(() {
-                            drowdown1 = newValue.toString();
-                            drowdown1 = UniderId;
+                            drowdown2 = value.toString();
                             univer = true;
                             univerColor = Colors.black12;
                           });
+                          print(drowdown2+"LLLKLKLJJJHHHGGGGGGGGGGGGG");
                         },
                         selectedItem: tr("Oliy o’quv yurtini tanlang"),
                       ),
@@ -377,7 +369,7 @@ class _StudentUserState extends State<StudentUser> {
                     ],
                   ),
                   SizedBox(
-                    height: 5,
+                    height: 5.h,
                   ),
                   data.isFakultet
                       ? Column(
@@ -450,7 +442,7 @@ class _StudentUserState extends State<StudentUser> {
                               isExpanded: true,
                               isDense: true,
                               hint: const Text(
-                                "Yo'nalishni tanlang",
+                                "Yo'nalishni tanlang ",
                                 style: TextStyle(fontSize: 14),
                               ).tr(),
                               icon: const Icon(
@@ -783,7 +775,10 @@ class _StudentUserState extends State<StudentUser> {
                             style: TextStyle(
                                 color: AppColors.mainColor, fontSize: 15.sp),
                           ),
-                          Divider(color: Colors.red,thickness: 2,)
+                          Divider(
+                            color: Colors.red,
+                            thickness: 2,
+                          )
                         ],
                       ),
                     ),
@@ -804,7 +799,7 @@ class _StudentUserState extends State<StudentUser> {
                   //     });
 
                   if (kurs &&
-                      viloyat &&
+                      viloyat &&fakultet&&
                       univer &&
                       ktuman &&
                       myController.text != '' &&
@@ -816,20 +811,11 @@ class _StudentUserState extends State<StudentUser> {
                       Course: Course.toString(),
                       HideProfile: isSwitched.toString() == 'ha' ? '1' : '2',
                       District: data.districtid.toString(),
-                      Phonenumber: nameController.text,
+                      Phonenumber: '${hidenumber ? 0 :nameController.text}',
                       gender: dropdownvalue.toString() == 'Erkak' ? '1' : '2',
-                      UniderId: data.universiterid.toString(),
+                      UniderId: university_id.toString(),
                       Hidenumber: hidenumber.toString() == 'Ha' ? '1' : '2',
                     );
-                    // Hive.box('name').put( 'name', myController.text );
-                    // Hive.box('number').put( 'number', nameController.text );
-                    print('${myController.text} maulotiiiiiiiii+++++++++++');
-                    print('${Roommate} sherik kerak mi +++++++++++');
-                    print('${UniderId} malumotlar  +++++++++++');
-                    print('${District} maulotiiiiiiiii+++++++++++');
-                    print('${data.isFakultet} fakultetid+++++++++++');
-                    print('${nameController.text} maulotiiiiiiiii+++++++++++');
-                    print('${dropdownvalue} maulotiiiiiiiii+++++++++++');
                     Navigator.push(
                         context,
                         MaterialPageRoute(
