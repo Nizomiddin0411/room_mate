@@ -91,9 +91,10 @@ class _FiltrForDayState extends State<FiltrForDay> {
   }
 
   @override
-
   Widget build(BuildContext context) {
-    context.read<AutCubit>().selectSettingLan(LangData.languageList.singleWhere((e) => e.locale == context.locale), context);
+    context.read<AutCubit>().selectSettingLan(
+        LangData.languageList.singleWhere((e) => e.locale == context.locale),
+        context);
     return Scaffold(
       backgroundColor: AppColors.backgroundWhite,
       appBar: AppBar(
@@ -286,14 +287,21 @@ class _FiltrForDayState extends State<FiltrForDay> {
                   DropdownSearch<String>(
                     mode: Mode.MENU,
                     items: data.univer.map((e) {
-                      if(dropDown2 == e.name){
-                        UniverId = e.id.toString();
-                        print(UniverId);
-                        print(dropDown2);
+                      if (context.read<AutCubit>().selectedLang.index == 1) {
+                        if (dropDown2 == e.name) {
+                          UniverId = e.id.toString();
+                          print(UniverId);
+                          print(dropDown2);
+                        }
+                      } else {
+                        if (dropDown2 == e.nameRu) {
+                          data.UniverId = e.id.toString();
+                          print(data.UniverId);
+                        }
                       }
-
-
-                      return context.read<AutCubit>().selectedLang.index == 1 ? e.name.toString() : e.nameRu.toString();
+                      return context.read<AutCubit>().selectedLang.index == 1
+                          ? e.name.toString()
+                          : e.nameRu.toString();
                     }).toList(),
                     showSearchBox: true,
                     // label: "Menu mode",
@@ -301,9 +309,9 @@ class _FiltrForDayState extends State<FiltrForDay> {
 
                     onChanged: (value) {
                       data.isUniver = true;
-                      final selected =
-                          data.univer.where((element) => element.name == value);
-                      data.getFaculty(selected.last.id!);
+                      // final selected =
+                      //     data.univer.where((element) => element.name == value);
+                      // data.getFaculty(selected.last.id!);
                       print(data.isUniver);
                       // final get  = data.univer.map((e) => data.UniverId = e.id.toString());
                       // print('${get}----------------------');
@@ -326,54 +334,54 @@ class _FiltrForDayState extends State<FiltrForDay> {
                   SizedBox(
                     height: 18.h,
                   ),
-                  Text(
-                    "Kurs",
-                    style: TextStyle(
-                      color: AppColors.textColor,
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ).tr(),
-                  SizedBox(height: 4.h),
-                  Container(
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey.shade400),
-                        borderRadius: BorderRadius.circular(4.r)),
-                    child: Container(
-                      width: 324.w,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10.r)),
-                      child: DropdownButtonFormField2(
-                        isExpanded: true,
-                        hint: Text("Kursingizni tanlang").tr(),
-                        decoration: const InputDecoration(
-                            isDense: true,
-                            border: OutlineInputBorder(),
-                            focusColor: Colors.grey),
-
-                        icon: Icon(Icons.arrow_drop_down_outlined),
-                        // value: snapshot.data!.length,
-                        items: kurs.map((e) {
-                          return DropdownMenuItem<String>(
-                            onTap: () {
-                              // print("${e.id}");
-                            },
-                            value: e.toString(),
-                            child: Text(e.toString()),
-                          );
-                        }).toList(),
-                        onChanged: (newValue) {
-                          data.isCourse = true;
-                          setState(() {
-                            _titleCourse = newValue.toString();
-                          });
-                        },
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 18.h,
-                  ),
+                  // Text(
+                  //   "Kurs",
+                  //   style: TextStyle(
+                  //     color: AppColors.textColor,
+                  //     fontSize: 14.sp,
+                  //     fontWeight: FontWeight.w500,
+                  //   ),
+                  // ).tr(),
+                  // SizedBox(height: 4.h),
+                  // Container(
+                  //   decoration: BoxDecoration(
+                  //       border: Border.all(color: Colors.grey.shade400),
+                  //       borderRadius: BorderRadius.circular(4.r)),
+                  //   child: Container(
+                  //     width: 324.w,
+                  //     decoration: BoxDecoration(
+                  //         borderRadius: BorderRadius.circular(10.r)),
+                  //     child: DropdownButtonFormField2(
+                  //       isExpanded: true,
+                  //       hint: Text("Kursingizni tanlang").tr(),
+                  //       decoration: const InputDecoration(
+                  //           isDense: true,
+                  //           border: OutlineInputBorder(),
+                  //           focusColor: Colors.grey),
+                  //
+                  //       icon: Icon(Icons.arrow_drop_down_outlined),
+                  //       // value: snapshot.data!.length,
+                  //       items: kurs.map((e) {
+                  //         return DropdownMenuItem<String>(
+                  //           onTap: () {
+                  //             // print("${e.id}");
+                  //           },
+                  //           value: e.toString(),
+                  //           child: Text(e.toString()),
+                  //         );
+                  //       }).toList(),
+                  //       onChanged: (newValue) {
+                  //         data.isCourse = true;
+                  //         setState(() {
+                  //           _titleCourse = newValue.toString();
+                  //         });
+                  //       },
+                  //     ),
+                  //   ),
+                  // ),
+                  // SizedBox(
+                  //   height: 18.h,
+                  // ),
                   Text(
                     "Xonadon ma’lumoti",
                     style: TextStyle(
@@ -679,7 +687,7 @@ class _FiltrForDayState extends State<FiltrForDay> {
                               data.isRegion ? data.RegionId : '0',
                               data.isDistrict ? data.districtId : '0',
                               data.isUniver ? data.UniverId : '0',
-                              data.isCourse ? Course : '0',
+                              // data.isCourse ? Course : '0',
                               data.isTypeHouse ? TypeHouse : '0',
                               data.isCount ? roomCount : '0',
                               // data.isRent ? _titleTime: '0',
@@ -703,7 +711,7 @@ class _FiltrForDayState extends State<FiltrForDay> {
                               data.isRegion ? data.RegionId : '0',
                               data.isDistrict ? data.districtId : '0',
                               data.isUniver ? data.UniverId : '0',
-                              data.isCourse ? Course : '0',
+                              // data.isCourse ? Course : '0',
                               data.isTypeHouse ? TypeHouse : '0',
                               data.isCount ? roomCount : '0',
                               // data.isRent ? _titleTime: '0',

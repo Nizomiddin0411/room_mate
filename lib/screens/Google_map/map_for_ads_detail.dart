@@ -1,23 +1,23 @@
 import 'dart:async';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
 
-import '../../provider/favorite_provider.dart';
 
-class MapDerail extends StatefulWidget {
+
+class MapDetail extends StatefulWidget {
   String? location;
-  MapDerail({Key? key,required this.location}) : super(key: key);
+  double lat;
+  double long;
+  MapDetail({Key? key,required this.location,required this.lat,required this.long}) : super(key: key);
 
   @override
-  State<MapDerail> createState() => _MapDerailState();
+  State<MapDetail> createState() => _MapDetailState();
 }
 //20.42796133580664, 80.885749655962
-class _MapDerailState extends State<MapDerail> {
+class _MapDetailState extends State<MapDetail> {
   // double lat = .first.parse();
   Completer<GoogleMapController> _controller = Completer();
   // on below line we have specified camera position
@@ -28,15 +28,9 @@ class _MapDerailState extends State<MapDerail> {
 
   // on below line we have created the list of markers
   final List<Marker> _markers = <Marker>[
-    const Marker(
-        markerId: MarkerId('1'),
-        position: LatLng(41.311081,69.240562),
-        infoWindow: InfoWindow(
-          title: 'My Position',
-        )
-    ),
-  ];
 
+  ];
+  List<Marker> mymarker = [];
   // created method for getting user current location
   Future<Position> getUserCurrentLocation() async {
     await Geolocator.requestPermission().then((value){
@@ -49,7 +43,23 @@ class _MapDerailState extends State<MapDerail> {
 
   @override
   Widget build(BuildContext context) {
+    // String map = '41.311081, 69.240562';
+
+    String lat = widget.location!.split(',').first.toString();
+    String long = widget.location!.split(',').last.toString();
+    // double Lat = double.parse(lat).toDouble();
+    // double Long = double.parse(long).toDouble();
+    _markers.add(
+      Marker(
+          markerId: MarkerId('1'),
+          position: LatLng(widget.lat, widget.long),
+          infoWindow: InfoWindow(
+            title: 'My Position',
+          )
+      ),
+    );
     return Scaffold(
+
       appBar:  AppBar(
         backgroundColor: AppColors.backgroundWhite,
         title: const Text("User current location"),
@@ -71,9 +81,15 @@ class _MapDerailState extends State<MapDerail> {
             zoomControlsEnabled: false,
             myLocationButtonEnabled: false,
             // on below line setting camera position
-            initialCameraPosition: _kGoogle,
+            // initialCameraPosition: _kGoogle,
+            initialCameraPosition:  CameraPosition(
+              target: LatLng(widget.lat, widget.long),
+              zoom: 14,
+
+            ),
             // on below line we are setting markers on the map
             markers: Set<Marker>.of(_markers),
+
             // on below line specifying map type.
             mapType: MapType.normal,
             // on below line setting user location enabled.
@@ -91,22 +107,28 @@ class _MapDerailState extends State<MapDerail> {
       // floatingActionButton: FloatingActionButton.extended(
       //   onPressed: () async{
       //     getUserCurrentLocation().then((value) async {
-      //       final mapLatitude = context.read<FavoriteProvider>();
+      //       // final mapLatitude = context.read<FavoriteProvider>();
+      //       print(lat + 'lattt string');
+      //       print(long + 'long string');
+      //       // print('${Lat} + +++++++++++++++++');
+      //       // print('${Long} + +++++++++++++++++');
       //       print(value.latitude.toString() +" "+value.longitude.toString());
-      //       mapLatitude.forMap = value.latitude.toString()+','+value.longitude.toString();
+      //       // print(mapDouble);
+      //       // print(mapDouble1);
+      //       // mapLatitude.forMap = value.latitude.toString()+','+value.longitude.toString();
       //       // marker added for current users location
       //       _markers.add(
       //           Marker(
       //             markerId: MarkerId("2"),
       //             position: LatLng(value.latitude, value.longitude),
-      //             infoWindow: InfoWindow(
+      //             infoWindow: const InfoWindow(
       //               title: 'My Current Location',
       //             ),
       //           )
       //       );
       //
       //       // specified current users location
-      //       CameraPosition cameraPosition = new CameraPosition(
+      //       CameraPosition cameraPosition = CameraPosition(
       //         target: LatLng(value.latitude, value.longitude),
       //         zoom: 14,
       //       );
@@ -116,7 +138,7 @@ class _MapDerailState extends State<MapDerail> {
       //       setState(() {
       //       });
       //     });
-      //     Navigator.pop(context);
+      //     // Navigator.pop(context);
       //   },
       //   label: const Text("Joylashuvimni jo'natish",),
       //   icon: const Icon(Icons.location_history),

@@ -93,7 +93,9 @@ class _FiltrPageState extends State<FiltrPage> {
 
   @override
   Widget build(BuildContext context) {
-    context.read<AutCubit>().selectSettingLan(LangData.languageList.singleWhere((e) => e.locale == context.locale), context);
+    context.read<AutCubit>().selectSettingLan(
+        LangData.languageList.singleWhere((e) => e.locale == context.locale),
+        context);
     return Scaffold(
       backgroundColor: AppColors.backgroundWhite,
       appBar: AppBar(
@@ -247,25 +249,37 @@ class _FiltrPageState extends State<FiltrPage> {
                     ),
                   ).tr(),
                   SizedBox(height: 4.h),
-
                   DropdownSearch<String>(
                     mode: Mode.MENU,
                     items: data.univer.map((e) {
-                      if(dropDown2 == e.name){
-                        data.UniverId = e.id.toString();
+                      if (context.read<AutCubit>().selectedLang.index == 1) {
+                        if (dropDown2 == e.name) {
+                          data.UniverId = e.id.toString();
+
+                          print(data.UniverId);
+                        }
+                      } else {
+                        if (dropDown2 == e.nameRu) {
+                          data.UniverId = e.id.toString();
+                          print(data.UniverId);
+                        }
                       }
-                      return context.read<AutCubit>().selectedLang.index == 1 ? e.name.toString() : e.nameRu.toString();
+                      return context.read<AutCubit>().selectedLang.index == 1
+                          ? e.name.toString()
+                          : e.nameRu.toString();
                     }).toList(),
                     showSearchBox: true,
                     // label: "Menu mode",
                     // hint: "country in menu mode",
                     onChanged: (value) {
                       data.isUniver = true;
-                      final selected =
-                      data.univer.where((element) => element.name == value);
-                      data.getFaculty(selected.last.id!);
+                      print('${data.isUniver}  is univer bool');
+                      // final selected =
+                      // data.univer.where((element) => element.name == value);
+                      // data.getFaculty(selected.last.id!);
                       setState(() {
                         dropDown2 = value.toString();
+                        print(dropDown2);
                       });
                     },
                     selectedItem: tr("OTM ni tanlang"),
@@ -273,54 +287,54 @@ class _FiltrPageState extends State<FiltrPage> {
                   SizedBox(
                     height: 18.h,
                   ),
-                  Text(
-                    "Kurs",
-                    style: TextStyle(
-                      color: AppColors.textColor,
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ).tr(),
-                  SizedBox(height: 4.h),
-                  Container(
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey.shade400),
-                        borderRadius: BorderRadius.circular(4.r)),
-                    child: Container(
-                      width: 324.w,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10.r)),
-                      child: DropdownButtonFormField2(
-                        isExpanded: true,
-                        hint: Text("Kursingizni tanlang").tr(),
-                        decoration: const InputDecoration(
-                            isDense: true,
-                            border: OutlineInputBorder(),
-                            focusColor: Colors.grey),
-
-                        icon: Icon(Icons.arrow_drop_down_outlined),
-                        // value: snapshot.data!.length,
-                        items: kurs.map((e) {
-                          return DropdownMenuItem<String>(
-                            onTap: () {
-                              // print("${e.id}");
-                            },
-                            value: e.toString(),
-                            child: Text(e.toString()),
-                          );
-                        }).toList(),
-                        onChanged: (newValue) {
-                          data.isCourse = true;
-                          setState(() {
-                            _titleCourse = newValue.toString();
-                          });
-                        },
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 18.h,
-                  ),
+                  // Text(
+                  //   "Kurs",
+                  //   style: TextStyle(
+                  //     color: AppColors.textColor,
+                  //     fontSize: 14.sp,
+                  //     fontWeight: FontWeight.w500,
+                  //   ),
+                  // ).tr(),
+                  // SizedBox(height: 4.h),
+                  // Container(
+                  //   decoration: BoxDecoration(
+                  //       border: Border.all(color: Colors.grey.shade400),
+                  //       borderRadius: BorderRadius.circular(4.r)),
+                  //   child: Container(
+                  //     width: 324.w,
+                  //     decoration: BoxDecoration(
+                  //         borderRadius: BorderRadius.circular(10.r)),
+                  //     child: DropdownButtonFormField2(
+                  //       isExpanded: true,
+                  //       hint: Text("Kursingizni tanlang").tr(),
+                  //       decoration: const InputDecoration(
+                  //           isDense: true,
+                  //           border: OutlineInputBorder(),
+                  //           focusColor: Colors.grey),
+                  //
+                  //       icon: Icon(Icons.arrow_drop_down_outlined),
+                  //       // value: snapshot.data!.length,
+                  //       items: kurs.map((e) {
+                  //         return DropdownMenuItem<String>(
+                  //           onTap: () {
+                  //             // print("${e.id}");
+                  //           },
+                  //           value: e.toString(),
+                  //           child: Text(e.toString()),
+                  //         );
+                  //       }).toList(),
+                  //       onChanged: (newValue) {
+                  //         data.isCourse = true;
+                  //         setState(() {
+                  //           _titleCourse = newValue.toString();
+                  //         });
+                  //       },
+                  //     ),
+                  //   ),
+                  // ),
+                  // SizedBox(
+                  //   height: 18.h,
+                  // ),
                   Text(
                     "Xonadon ma’lumoti",
                     style: TextStyle(
@@ -605,16 +619,16 @@ class _FiltrPageState extends State<FiltrPage> {
                               }
                             });
                             print('-----------------');
-                            print(data.RegionId);
-                            print(data.districtId);
-                            print(data.UniverId);
-                            print(Course);
-                            print(TypeHouse);
-                            print(roomCount);
-                            print(_titleTime);
-                            print(subwayof);
-                            print(fromCost.text);
-                            print(toCost.text);
+                            print(data.RegionId + 'region id ');
+                            print(data.districtId + 'district id');
+                            print(data.UniverId + 'Univer id');
+                            print(Course + 'kurs');
+                            print(TypeHouse + 'Uy turi');
+                            print(roomCount +' hona soni');
+                            print(_titleTime + 'ijara vaqti');
+                            print(subwayof +'metro');
+                            print(fromCost.text + 'Cost from');
+                            print(toCost.text + 'cost to');
                             print('-----------------');
 
                             // Navigator.pushAndRemoveUntil(
@@ -626,7 +640,7 @@ class _FiltrPageState extends State<FiltrPage> {
                               data.isRegion ? data.RegionId : '0',
                               data.isDistrict ? data.districtId : '0',
                               data.isUniver ? data.UniverId : '0',
-                              data.isCourse ? Course : '0',
+                              // data.isCourse ? Course : '0',
                               data.isTypeHouse ? TypeHouse : '0',
                               data.isCount ? roomCount : '0',
                               data.isRent ? _titleTime : '0',
@@ -650,7 +664,7 @@ class _FiltrPageState extends State<FiltrPage> {
                               data.isRegion ? data.RegionId : '0',
                               data.isDistrict ? data.districtId : '0',
                               data.isUniver ? data.UniverId : '0',
-                              data.isCourse ? Course : '0',
+                              // data.isCourse ? Course : '0',
                               data.isTypeHouse ? TypeHouse : '0',
                               data.isCount ? roomCount : '0',
                               data.isRent ? _titleTime : '0',

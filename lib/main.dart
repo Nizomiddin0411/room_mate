@@ -122,7 +122,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       body: Hive
           .box('token')
-          .isEmpty ? LanguagePage() : Hive.box('type').get('type') == 1 ? MenuFor() : MenuPage()  ,
+          .isEmpty ? LanguagePage() : Hive.box('type').get('type') == 2 ? MenuPage() :MenuFor() ,
       // This trailing comma makes auto-formatting nicer for build methods.
     );
   }

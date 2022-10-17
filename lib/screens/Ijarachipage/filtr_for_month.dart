@@ -1,4 +1,4 @@
-import 'package:dropdown_button2/dropdown_button2.dart';
+
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -283,8 +283,13 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                   DropdownSearch<String>(
                     mode: Mode.MENU,
                     items: data.univer.map((e) {
+                      if(context.read<AutCubit>().selectedLang.index == 1){
                       if(dropDown2 == e.name){
                         data.UniverId = e.id.toString();
+                      }}else{
+                        if(dropDown2 == e.nameRu){
+                          data.UniverId = e.id.toString();
+                        }
                       }
                       return context.read<AutCubit>().selectedLang.index == 1 ? e.name.toString() : e.nameRu.toString();
                     }).toList(),
@@ -306,54 +311,54 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                   SizedBox(
                     height: 18.h,
                   ),
-                  Text(
-                    "Kursi",
-                    style: TextStyle(
-                      color: AppColors.textColor,
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ).tr(),
-                  SizedBox(height: 4.h),
-                  Container(
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.grey.shade400),
-                        borderRadius: BorderRadius.circular(4.r)),
-                    child: Container(
-                      width: 324.w,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10.r)),
-                      child: DropdownButtonFormField2(
-                        isExpanded: true,
-                        hint: Text("Kursingizni tanlang"),
-                        decoration: const InputDecoration(
-                            isDense: true,
-                            border: OutlineInputBorder(),
-                            focusColor: Colors.grey),
-
-                        icon: Icon(Icons.arrow_drop_down_outlined),
-                        // value: snapshot.data!.length,
-                        items: kurs.map((e) {
-                          return DropdownMenuItem<String>(
-                            onTap: () {
-                              // print("${e.id}");
-                            },
-                            value: e.toString(),
-                            child: Text(e.toString()),
-                          );
-                        }).toList(),
-                        onChanged: (newValue) {
-                          data.isCourse = true;
-                          setState(() {
-                            _titleCourse = newValue.toString();
-                          });
-                        },
-                      ),
-                    ),
-                  ),
-                  SizedBox(
-                    height: 18.h,
-                  ),
+                  // Text(
+                  //   "Kursi",
+                  //   style: TextStyle(
+                  //     color: AppColors.textColor,
+                  //     fontSize: 14.sp,
+                  //     fontWeight: FontWeight.w500,
+                  //   ),
+                  // ).tr(),
+                  // SizedBox(height: 4.h),
+                  // Container(
+                  //   decoration: BoxDecoration(
+                  //       border: Border.all(color: Colors.grey.shade400),
+                  //       borderRadius: BorderRadius.circular(4.r)),
+                  //   child: Container(
+                  //     width: 324.w,
+                  //     decoration: BoxDecoration(
+                  //         borderRadius: BorderRadius.circular(10.r)),
+                  //     child: DropdownButtonFormField2(
+                  //       isExpanded: true,
+                  //       hint: Text("Kursingizni tanlang"),
+                  //       decoration: const InputDecoration(
+                  //           isDense: true,
+                  //           border: OutlineInputBorder(),
+                  //           focusColor: Colors.grey),
+                  //
+                  //       icon: Icon(Icons.arrow_drop_down_outlined),
+                  //       // value: snapshot.data!.length,
+                  //       items: kurs.map((e) {
+                  //         return DropdownMenuItem<String>(
+                  //           onTap: () {
+                  //             // print("${e.id}");
+                  //           },
+                  //           value: e.toString(),
+                  //           child: Text(e.toString()),
+                  //         );
+                  //       }).toList(),
+                  //       onChanged: (newValue) {
+                  //         data.isCourse = true;
+                  //         setState(() {
+                  //           _titleCourse = newValue.toString();
+                  //         });
+                  //       },
+                  //     ),
+                  //   ),
+                  // ),
+                  // SizedBox(
+                  //   height: 18.h,
+                  // ),
                   Text(
                     "Xonadon ma’lumoti",
                     style: TextStyle(
@@ -664,7 +669,7 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                               data.isRegion ? data.RegionId : '0',
                               data.isDistrict ? data.districtId : '0',
                               data.isUniver ? data.UniverId : '0',
-                              data.isCourse ? Course : '0',
+                              // data.isCourse ? Course : '0',
                               data.isTypeHouse ? TypeHouse : '0',
                               data.isCount ? roomCount : '0',
                               // data.isRent ? _titleTime: '0',
@@ -688,7 +693,7 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                               data.isRegion ? data.RegionId : '0',
                               data.isDistrict ? data.districtId : '0',
                               data.isUniver ? data.UniverId : '0',
-                              data.isCourse ? Course : '0',
+                              // data.isCourse ? Course : '0',
                               data.isTypeHouse ? TypeHouse : '0',
                               data.isCount ? roomCount : '0',
                               // data.isRent ? _titleTime: '0',

@@ -1,6 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:card_swiper/card_swiper.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:favorite_button/favorite_button.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
@@ -165,63 +167,64 @@ class _AdsDetailState extends State<AdsDetail> {
                       },
                       itemBuilder: (context, pagePosition) {
                         return Padding(
-                            padding: const EdgeInsets.all(18.0),
-                            child: Column(children: [
-                              ...List.generate(
-                                widget.Image!.length,
-                                (index1) {
-                                  return widget.Image != null
-                                      ? CachedNetworkImage(
-                                          imageUrl:
-                                              "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${widget.Image![index1].image.toString()}",
-                                          placeholder: (context, url) =>
-                                              CircularProgressIndicator(),
-                                          errorWidget: (context, url, error) =>
-                                              Image.asset(
-                                            'assets/images/notImage.png',
-                                          ),
+                          padding: const EdgeInsets.all(18.0),
+                          child: Swiper(
+                            // indicatorLayout: PageIndicatorLayout.,
+                            pagination: SwiperPagination(),
+                            itemCount: widget.Image!.length,
+                            itemBuilder: (BuildContext context, int index1) {
+                              return widget.Image != null
+                                  ? CachedNetworkImage(
+                                      imageUrl:
+                                          "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${widget.Image![index1].image.toString()}",
+                                      placeholder: (context, url) =>
+                                          CircularProgressIndicator(),
+                                      errorWidget: (context, url, error) =>
+                                          Image.asset(
+                                        'assets/images/notImage.png',
+                                      ),
+                                      width: 324.w,
+                                      height: 219.h,
+                                      fit: BoxFit.cover,
+                                    )
+                                  : widget.Image![index1].isEmpty
+                                      ? Image.asset(
+                                          'assets/images/notImage.png',
                                           width: 324.w,
                                           height: 219.h,
                                           fit: BoxFit.cover,
                                         )
-                                      : widget.Image![index1].isEmpty
-                                          ? Image.asset(
-                                              'assets/images/notImage.png',
-                                              width: 324.w,
-                                              height: 219.h,
-                                              fit: BoxFit.cover,
-                                            )
-                                          : Image.asset(
-                                              'assets/images/notImage.png',
-                                              width: 324.w,
-                                              height: 235.h,
-                                              fit: BoxFit.cover,
-                                            );
-                                },
-                              ),
-                            ]));
+                                      : Image.asset(
+                                          'assets/images/notImage.png',
+                                          width: 324.w,
+                                          height: 235.h,
+                                          fit: BoxFit.cover,
+                                        );
+                            },
+                          ),
+                        );
                       }),
                 ),
-                Positioned(
-                  bottom: 20.h,
-                  left: 0,
-                  right: 0,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: List.generate(images.length, (i) {
-                      return Container(
-                        margin: const EdgeInsets.symmetric(horizontal: 5),
-                        width: 10.w,
-                        height: 10.h,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            color: _correntPage == i
-                                ? AppColors.mainColor
-                                : Colors.grey),
-                      );
-                    }).toList(),
-                  ),
-                ),
+                // Positioned(
+                //   bottom: 20.h,
+                //   left: 0,
+                //   right: 0,
+                //   child: Row(
+                //     mainAxisAlignment: MainAxisAlignment.center,
+                //     children: List.generate(images.length, (i) {
+                //       return Container(
+                //         margin: const EdgeInsets.symmetric(horizontal: 5),
+                //         width: 10.w,
+                //         height: 10.h,
+                //         decoration: BoxDecoration(
+                //             shape: BoxShape.circle,
+                //             color: _correntPage == i
+                //                 ? AppColors.mainColor
+                //                 : Colors.grey),
+                //       );
+                //     }).toList(),
+                //   ),
+                // ),
                 Positioned(
                     top: 16.h,
                     left: 18.w,
@@ -238,15 +241,14 @@ class _AdsDetailState extends State<AdsDetail> {
                               borderRadius: BorderRadius.circular(2.r),
                               color: AppColors.iconColor,
                             ),
-                            child:  Center(
+                            child: Center(
                                 child: Text(
-                                  widget.createData!
-                                      .replaceRange(
-                                      widget.createData!.length - 3,
-                                     widget.createData!.length,
-                                      ''),
-                              style:
-                                  const TextStyle(color: AppColors.backgroundWhite),
+                              widget.createData!.replaceRange(
+                                  widget.createData!.length - 3,
+                                  widget.createData!.length,
+                                  ''),
+                              style: const TextStyle(
+                                  color: AppColors.backgroundWhite),
                             )),
                           ),
                           Padding(
@@ -320,13 +322,24 @@ class _AdsDetailState extends State<AdsDetail> {
                   ),
                   InkWell(
                     onTap: () {
+                      String lat =
+                          widget.locations!.split(',').first.toString();
+                      String long =
+                          widget.locations!.split(',').last.toString();
+                      lat = lat.split('(').last.toString();
+                      long = long.split(')').first.toString();
+                      print(widget.locations);
+                      print(lat);
+                      print(long);
+                      double Lat = double.parse(lat).toDouble();
+                      double Long = double.parse(long).toDouble();
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => MapDerail(
-                                    location: widget.locations != null
-                                        ? widget.locations
-                                        : '',
+                              builder: (context) => MapDetail(
+                                    location: widget.locations,
+                                    long: Long,
+                                    lat: Lat,
                                   )));
                     },
                     child: Row(
@@ -348,85 +361,88 @@ class _AdsDetailState extends State<AdsDetail> {
                   Row(
                     children: [
                       // widget.chatApproved == 1 ?
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(12.w, 0, 12.w, 12.h),
-                        child: InkWell(
-                          onTap: () {
-                            print('${Hive.box('id').get('id')}');
-                            print(widget.userId);
-                            if (widget.chatApproved == '1') {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => ChatPage(
-                                          widget.userFullName!,
-                                          widget.userId!)));
-                            } else {
-                              showAlertDialog(context, widget.userId!);
-                            }
-                          },
-                          child: Container(
-                            width: 95.w,
-                            height: 42.h,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10.r),
-                              border: Border.all(color: AppColors.mainColor),
-                            ),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const Padding(
-                                  padding: EdgeInsets.all(7.0),
-                                  child: Icon(
-                                    Icons.mail_outline,
-                                    color: AppColors.mainColor,
+                      Hive.box('type').get('type') != 2
+                          ? Padding(
+                              padding: EdgeInsets.fromLTRB(12.w, 0, 12.w, 12.h),
+                              child: InkWell(
+                                onTap: () {
+                                  print('${Hive.box('id').get('id')}');
+                                  print(widget.userId);
+                                  if (widget.chatApproved == '1') {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => ChatPage(
+                                                widget.userFullName!,
+                                                widget.userId!)));
+                                  } else {
+                                    showAlertDialog(context, widget.userId!);
+                                  }
+                                },
+                                child: Container(
+                                  width: 95.w,
+                                  height: 42.h,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(10.r),
+                                    border:
+                                        Border.all(color: AppColors.mainColor),
+                                  ),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      const Padding(
+                                        padding: EdgeInsets.all(7.0),
+                                        child: Icon(
+                                          Icons.mail_outline,
+                                          color: AppColors.mainColor,
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: EdgeInsets.all(10.0),
+                                        child: const Text('Aloqa').tr(),
+                                      )
+                                    ],
                                   ),
                                 ),
-                                Padding(
-                                  padding: EdgeInsets.all(10.0),
-                                  child: const Text('Aloqa').tr(),
-                                )
-                              ],
-                            ),
-                          ),
-                        ),
-                      )
-                      // :Padding(
-                      //   padding:  EdgeInsets.fromLTRB(8.w, 0, 8.w, 12.h),
-                      //   child: InkWell(
-                      //     onTap: () async{
-                      //       await ChatPermit().fetchApprov(Askid: widget.userId, Approvid: Hive.box('id').get('id'));
-                      //     },
-                      //     child: Container(
-                      //       width: 100.w,
-                      //       height: 42.h,
-                      //       decoration: BoxDecoration(
-                      //         border: Border.all(color: AppColors.mainColor),
-                      //         borderRadius: BorderRadius.circular(10.r),
-                      //
-                      //
-                      //       ),
-                      //       child: Row(
-                      //         // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      //         children:  [
-                      //           const Padding(
-                      //             padding: EdgeInsets.all(0.0),
-                      //             child: Icon(
-                      //               Icons.mail_outline,
-                      //               color: AppColors.mainColor,
-                      //             ),
-                      //           ),
-                      //
-                      //           Padding(
-                      //             padding: const EdgeInsets.all(0.0),
-                      //             child: Text("so'rov jo'natish",style: TextStyle(fontSize: 12.sp),).tr(),
-                      //           )
-                      //         ],
-                      //       ),
-                      //     ),
-                      //   ),
-                      // )
-                      ,
+                              ),
+                            )
+                          // :Padding(
+                          //   padding:  EdgeInsets.fromLTRB(8.w, 0, 8.w, 12.h),
+                          //   child: InkWell(
+                          //     onTap: () async{
+                          //       await ChatPermit().fetchApprov(Askid: widget.userId, Approvid: Hive.box('id').get('id'));
+                          //     },
+                          //     child: Container(
+                          //       width: 100.w,
+                          //       height: 42.h,
+                          //       decoration: BoxDecoration(
+                          //         border: Border.all(color: AppColors.mainColor),
+                          //         borderRadius: BorderRadius.circular(10.r),
+                          //
+                          //
+                          //       ),
+                          //       child: Row(
+                          //         // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          //         children:  [
+                          //           const Padding(
+                          //             padding: EdgeInsets.all(0.0),
+                          //             child: Icon(
+                          //               Icons.mail_outline,
+                          //               color: AppColors.mainColor,
+                          //             ),
+                          //           ),
+                          //
+                          //           Padding(
+                          //             padding: const EdgeInsets.all(0.0),
+                          //             child: Text("so'rov jo'natish",style: TextStyle(fontSize: 12.sp),).tr(),
+                          //           )
+                          //         ],
+                          //       ),
+                          //     ),
+                          //   ),
+                          // )
+                          : Container(),
                       Padding(
                         padding: EdgeInsets.fromLTRB(8.w, 0, 8.w, 12.h),
                         child: InkWell(
@@ -462,7 +478,6 @@ class _AdsDetailState extends State<AdsDetail> {
                           ),
                         ),
                       ),
-                      // :
                     ],
                   )
                 ],
@@ -477,94 +492,107 @@ class _AdsDetailState extends State<AdsDetail> {
                 padding: const EdgeInsets.all(10.0),
                 child: Column(
                   children: [
-                    Text(
-                      'Sherik izlayabmiz',
-                      style: TextStyle(
-                          fontSize: 18.sp,
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.mainColor),
-                    ).tr(),
-                    Row(
-                      children: [
-                        Container(
-                          width: 40.w,
-                          height: 40.h,
-                          decoration: BoxDecoration(
-                            color: AppColors.iconBack,
-                            borderRadius: BorderRadius.circular(8.r),
-                          ),
-                          child: const Center(
-                              child: Icon(
-                            Icons.accessibility_new,
-                            color: AppColors.mainColor,
-                          )),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            "${widget.roommate_count} kishi ${widget.roommate_gender == '1' ? "O'g'il" : 'Qiz'} bola",
-                            style: TextStyle(fontSize: 14.sp),
-                          ),
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: 6.h,
-                    ),
-                    Row(
-                      children: [
-                        Container(
-                          width: 40.w,
-                          height: 40.h,
-                          decoration: BoxDecoration(
-                            color: AppColors.iconBack,
-                            borderRadius: BorderRadius.circular(8.r),
-                          ),
-                          child: const Center(
-                              child: Icon(
-                            Icons.location_on,
-                            color: AppColors.mainColor,
-                          )),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            "${widget.stay_region}",
-                            style: TextStyle(fontSize: 14.sp),
-                          ),
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      height: 6.h,
-                    ),
-                    Row(
-                      children: [
-                        Container(
-                          width: 40.w,
-                          height: 40.h,
-                          decoration: BoxDecoration(
-                            color: AppColors.iconBack,
-                            borderRadius: BorderRadius.circular(8.r),
-                          ),
-                          child: const Center(
-                              child: Icon(
-                            Icons.corporate_fare,
-                            color: AppColors.mainColor,
-                          )),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: SizedBox(
-                            width: MediaQuery.of(context).size.width - 150.w,
-                            child: Text(
-                              "${widget.stay_university}",
-                              style: TextStyle(fontSize: 14.sp),
-                            ),
-                          ),
-                        )
-                      ],
-                    ),
+                    Hive.box('type').get('type') == 2
+                        ? Text(
+                            'Sherik izlayabmiz',
+                            style: TextStyle(
+                                fontSize: 18.sp,
+                                fontWeight: FontWeight.bold,
+                                color: AppColors.mainColor),
+                          ).tr()
+                        : Container(),
+                    Hive.box('type').get('type') == 2
+                        ? Row(
+                            children: [
+                              Container(
+                                width: 40.w,
+                                height: 40.h,
+                                decoration: BoxDecoration(
+                                  color: AppColors.iconBack,
+                                  borderRadius: BorderRadius.circular(8.r),
+                                ),
+                                child: const Center(
+                                    child: Icon(
+                                  Icons.accessibility_new,
+                                  color: AppColors.mainColor,
+                                )),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  "${widget.roommate_count} kishi ${widget.roommate_gender == '1' ? "O'g'il" : 'Qiz'} bola",
+                                  style: TextStyle(fontSize: 14.sp),
+                                ),
+                              )
+                            ],
+                          )
+                        : Container(),
+                    Hive.box('type').get('type') == 2
+                        ? SizedBox(
+                            height: 6.h,
+                          )
+                        : Container(),
+                    Hive.box('type').get('type') == 2
+                        ? Row(
+                            children: [
+                              Container(
+                                width: 40.w,
+                                height: 40.h,
+                                decoration: BoxDecoration(
+                                  color: AppColors.iconBack,
+                                  borderRadius: BorderRadius.circular(8.r),
+                                ),
+                                child: const Center(
+                                    child: Icon(
+                                  Icons.location_on,
+                                  color: AppColors.mainColor,
+                                )),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Text(
+                                  "${widget.stay_region}",
+                                  style: TextStyle(fontSize: 14.sp),
+                                ),
+                              )
+                            ],
+                          )
+                        : Container(),
+                    Hive.box('type').get('type') == 2
+                        ? SizedBox(
+                            height: 6.h,
+                          )
+                        : Container(),
+                    Hive.box('type').get('type') == 2
+                        ? Row(
+                            children: [
+                              Container(
+                                width: 40.w,
+                                height: 40.h,
+                                decoration: BoxDecoration(
+                                  color: AppColors.iconBack,
+                                  borderRadius: BorderRadius.circular(8.r),
+                                ),
+                                child: const Center(
+                                    child: Icon(
+                                  Icons.corporate_fare,
+                                  color: AppColors.mainColor,
+                                )),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: SizedBox(
+                                  width:
+                                      MediaQuery.of(context).size.width - 150.w,
+                                  child: Text(
+                                    "${widget.stay_university}",
+                                    style: TextStyle(fontSize: 14.sp),
+                                  ),
+                                ),
+                              )
+                            ],
+                          )
+                        : Container(),
                     // Text(
                     //   'Joylashuv',
                     //   style: TextStyle(
@@ -621,36 +649,41 @@ class _AdsDetailState extends State<AdsDetail> {
                     //     )
                     //   ],
                     // ),
-                    SizedBox(
-                      height: 6.h,
-                    ),
+                    Hive.box('type').get('type') == 2
+                        ? SizedBox(
+                            height: 6.h,
+                          )
+                        : Container(),
                     // widget.type == '1' ?
-                    Row(
-                      children: [
-                        Container(
-                          width: 40.w,
-                          height: 40.h,
-                          decoration: BoxDecoration(
-                            color: AppColors.iconBack,
-                            borderRadius: BorderRadius.circular(8.r),
-                          ),
-                          child: const Center(
-                              child: Icon(
-                            Icons.corporate_fare,
-                            color: AppColors.mainColor,
-                          )),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: Container(
-                              width: MediaQuery.of(context).size.width - 150.w,
-                              child: Text(
-                                "${widget.stay_university}",
-                                style: TextStyle(fontSize: 14.sp),
-                              )),
-                        )
-                      ],
-                    ),
+                    Hive.box('type').get('type') == 2
+                        ? Row(
+                            children: [
+                              Container(
+                                width: 40.w,
+                                height: 40.h,
+                                decoration: BoxDecoration(
+                                  color: AppColors.iconBack,
+                                  borderRadius: BorderRadius.circular(8.r),
+                                ),
+                                child: const Center(
+                                    child: Icon(
+                                  Icons.corporate_fare,
+                                  color: AppColors.mainColor,
+                                )),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: Container(
+                                    width: MediaQuery.of(context).size.width -
+                                        150.w,
+                                    child: Text(
+                                      "${widget.stay_university}",
+                                      style: TextStyle(fontSize: 14.sp),
+                                    )),
+                              )
+                            ],
+                          )
+                        : Container(),
                     // : const SizedBox(),
                     SizedBox(
                       height: 6.h,

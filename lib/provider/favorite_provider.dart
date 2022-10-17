@@ -15,7 +15,7 @@ class FavoriteProvider extends ChangeNotifier{
   bool isFavorite = false;
   bool isMyAds = false;
   String? imagess;
-  String? forMap;
+  String forMap='41.311081';
   void _setFavorite(bool value) {
     isFavorite = value;
     notifyListeners();

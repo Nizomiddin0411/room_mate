@@ -38,25 +38,19 @@ class _OwnerState extends State<Owner> {
   );
 
   // on below line we have created the list of markers
-  final List<Marker> _markers = <Marker>[
-    const Marker(
-        markerId: MarkerId('1'),
-        position: LatLng(41.311081,69.240562),
-        infoWindow: InfoWindow(
-          title: 'My Position',
-        )
-    ),
-  ];
+  final List<Marker> _markers = <Marker>[];
 
   // created method for getting user current location
   Future<Position> getUserCurrentLocation() async {
-    await Geolocator.requestPermission().then((value){
-    }).onError((error, stackTrace) async {
+    await Geolocator.requestPermission()
+        .then((value) {})
+        .onError((error, stackTrace) async {
       await Geolocator.requestPermission();
-      print("ERROR"+error.toString());
+      print("ERROR" + error.toString());
     });
     return await Geolocator.getCurrentPosition();
   }
+
   bool _checkHome = false;
   bool _checkMetro = false;
   String RoomOwner = '';
@@ -144,6 +138,16 @@ class _OwnerState extends State<Owner> {
 
   @override
   Widget build(BuildContext context) {
+    final mapLat = context.read<FavoriteProvider>();
+    _markers.add(
+      Marker(
+          markerId: MarkerId('1'),
+          position: LatLng(41.311081, 69.240562),
+          infoWindow: InfoWindow(
+            title: 'My Position',
+          )),
+    );
+
     print(Hive.box('token').get('token'));
     return SingleChildScrollView(
       child: Padding(
@@ -273,8 +277,9 @@ class _OwnerState extends State<Owner> {
 
                               if (value) {
                                 _colorGender = Colors.grey;
-                              }if(!value && !_GenderOnClick){
-                                 _colorGender = Colors.red;
+                              }
+                              if (!value && !_GenderOnClick) {
+                                _colorGender = Colors.red;
                                 _GenderOnClick = false;
                               }
                             });
@@ -451,58 +456,62 @@ class _OwnerState extends State<Owner> {
                   ),
                 ),
                 SizedBox(height: 18.h),
-                Column(
-                  children: [
-                    Row(
-                      children: [
-                        Text("Geojoylashishni kiriting").tr(),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 5.h,
-                    ),
-                    InkWell(
-                      onTap: (){
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => MapScreen()));
-                      },
-                      child: Column(
-                        children: [
-                          InkWell(
-                            onTap: (){
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => MapScreen()));
-                            },
-                            child: Container(
-                              width: 324.w,
-                              height: 210.h,
-                              child: IgnorePointer(
-                                ignoring: true,
-                                child: SafeArea(
-                                  // on below line creating google maps
-                                  child: GoogleMap(
-                                    // on below line setting camera position
-                                    initialCameraPosition: _kGoogle,
-                                    // on below line we are setting markers on the map
-                                    markers: Set<Marker>.of(_markers),
-                                    // on below line specifying map type.
-                                    mapType: MapType.normal,
-                                    // on below line setting user location enabled.
-                                    myLocationEnabled: true,
-                                    // on below line setting compass enabled.
-                                    compassEnabled: true,
-                                    // on below line specifying controller on map complete.
-                                    onMapCreated: (GoogleMapController controller){
-                                      _controller.complete(controller);
-                                    },
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
+                SizedBox(
+                  height: 5.h,
                 ),
+                InkWell(
+                    onTap: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => MapScreen()));
+                    },
+                    child: Container(
+                      width: 324.w,
+                      height: 60.h,
+                      child: Card(
+                        shadowColor: AppColors.buttonLinear,
+                        child: ListTile(
+                          title: Text("Geojoylashishni kiriting").tr(),
+                          leading: Icon(
+                            Icons.location_on,
+                            color: AppColors.mainColor,
+                          ),
+                        ),
+                      ),
+                    )
+                    // Container(
+                    //   width: 324.w,
+                    //   height: 210.h,
+                    //   child: SafeArea(
+                    //     // on below line creating google maps
+                    //     child: GoogleMap(
+                    //       onTap: _handlerTap,
+                    //       zoomControlsEnabled: false,
+                    //
+                    //       myLocationButtonEnabled: false,
+                    //       // on below line setting camera position
+                    //       // initialCameraPosition: _kGoogle,
+                    //       initialCameraPosition: const CameraPosition(
+                    //         target: LatLng(41.311081,69.240562),
+                    //         zoom: 14,
+                    //
+                    //       ),
+                    //       markers: Set.from(mymarker),
+                    //       // on below line we are setting markers on the map
+                    //       // markers: Set<Marker>.of(_markers),
+                    //       // on below line specifying map type.
+                    //       mapType: MapType.normal,
+                    //       // on below line setting user location enabled.
+                    //       myLocationEnabled: true,
+                    //       // on below line setting compass enabled.
+                    //       compassEnabled: true,
+                    //       // on below line specifying controller on map complete.
+                    //       onMapCreated: (GoogleMapController controller){
+                    //         _controller.complete(controller);
+                    //       },
+                    //     ),
+                    //   ),
+                    // ),
+                    ),
                 SizedBox(
                   height: 18.h,
                 ),
@@ -625,10 +634,17 @@ class _OwnerState extends State<Owner> {
                       child: DropdownSearch<String>(
                         mode: Mode.MENU,
                         items: data.univer.map((e) {
-                          if (dropDown2 == e.name) {
+                          if (context.read<AutCubit>().selectedLang.index == 1) {
+                            if (dropDown2 == e.name) {
                             data.UniverId = e.id.toString();
                             data.isId = e.id;
                             university_id = e.id.toString();
+                          }}else{
+                            if(dropDown2 == e.nameRu){
+                              data.UniverId = e.id.toString();
+                              data.isId = e.id;
+                              university_id = e.id.toString();
+                            }
                           }
 
                           // final selected = data.univer.where((element) => element.name == e.name);
@@ -642,10 +658,10 @@ class _OwnerState extends State<Owner> {
                         // label: "Menu mode",
                         // hint: "country in menu mode",
                         onChanged: (value) async {
-                          data.isUniver = true;
-                          final selected = data.univer
-                              .where((element) => element.name == value);
-                          data.getFaculty(selected.last.id!);
+                          // data.isUniver = true;
+                          // final selected = data.univer
+                          //     .where((element) => element.name == value);
+                          // data.getFaculty(selected.last.id!);
                           // data.getFaculty(data.isId!);
                           setState(() {
                             dropDown2 = value.toString();
@@ -673,8 +689,9 @@ class _OwnerState extends State<Owner> {
                               university_id_matter = value ? '1' : '2';
                               if (value) {
                                 _otmColor = Colors.grey;
-                              }if(!value && !_otmOnClick){
-                                 _otmColor = Colors.red;
+                              }
+                              if (!value && !_otmOnClick) {
+                                _otmColor = Colors.red;
                                 _otmOnClick = false;
                               }
                             });
@@ -698,25 +715,23 @@ class _OwnerState extends State<Owner> {
                             primary: AppColors.buttonLinear),
                         onPressed: () {
                           final map = context.read<FavoriteProvider>();
-                          print(map.forMap.toString()+'MAPPPPPPPPPPPPPPPPPPPPPPP');
+                          print(map.forMap.toString() +
+                              'MAPPPPPPPPPPPPPPPPPPPPPPP');
                           print('${titleController!.text}  title');
-                          print('${value5 ?  0 : roommate_gender}' + 'gender');
+                          print('${value5 ? 0 : roommate_gender}' + 'gender');
                           print('${value5 ? 1 : 2} axamyatsiz gender');
-                          print( '${district_id} distruqt id');
-                          print( '${addressController!.text} Address');
-                          print( '${id} metrooo');
-                          print(  '${value6 ? 0 :university_id} univer id');
-                          print( '${value6? 1 : 2} axamyatsiz univer' );
+                          print('${district_id} distruqt id');
+                          print('${addressController!.text} Address');
+                          print('${id} metrooo');
+                          print('${value6 ? 0 : university_id} univer id');
+                          print('${value6 ? 1 : 2} axamyatsiz univer');
 
-
-// _RegionOnClick &&
-//                               _DiscritOnClick &&
-//                               _UniverOnClick &&
-//                               (_GenderOnClick || gender_matter == '1') &&
-//                               _addressOnClick &&
-//                               (_otmOnClick || university_id_matter == '1')
-
-                          if (true) {
+                          if (_RegionOnClick &&
+                              _DiscritOnClick &&
+                              _UniverOnClick &&
+                              (_GenderOnClick || gender_matter == '1') &&
+                              _addressOnClick &&
+                              (_otmOnClick || university_id_matter == '1')) {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -724,15 +739,17 @@ class _OwnerState extends State<Owner> {
                                           id: id,
                                           addressController:
                                               addressController!.text,
-                                          university_id: '${value6 ? 0 :university_id}',
-                                          roommate_gender: '${value5 ?  0 : roommate_gender}',
+                                          university_id:
+                                              '${value6 ? 0 : university_id}',
+                                          roommate_gender:
+                                              '${value5 ? 0 : roommate_gender}',
                                           university_id_matter:
-                                          '${value6? 1 : 2}',
+                                              '${value6 ? 1 : 2}',
                                           gender_matter: '${value5 ? 1 : 2}',
                                           district_id: district_id,
                                           titleController:
                                               titleController!.text,
-                                      location: '${map.forMap}',
+                                          location: '${map.forMap}',
                                         )));
                           } else {
                             setState(() {
@@ -751,8 +768,8 @@ class _OwnerState extends State<Owner> {
                               if (!_addressOnClick) {
                                 _addressColor = Colors.red;
                               }
-                              if (!_otmOnClick && university_id_matter == null
-                              ) {
+                              if (!_otmOnClick &&
+                                  university_id_matter == null) {
                                 _otmColor = Colors.red;
                               }
                             });
@@ -771,5 +788,21 @@ class _OwnerState extends State<Owner> {
         ),
       ),
     );
+  }
+
+  List<Marker> mymarker = [];
+  _handlerTap(LatLng tappadPoint) {
+    final mapLatitude = context.read<FavoriteProvider>();
+    mapLatitude.forMap = (tappadPoint.toString());
+    print(tappadPoint);
+    print(mapLatitude.forMap);
+
+    setState(() {
+      mymarker = [];
+      mymarker.add(Marker(
+        markerId: MarkerId(tappadPoint.toString()),
+        position: tappadPoint,
+      ));
+    });
   }
 }

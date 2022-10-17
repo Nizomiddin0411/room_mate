@@ -163,14 +163,12 @@ class _FavoritPageState extends State<FavoritPage> {
                                   children: [
                                     Stack(
                                       children: [
-                                        ...List.generate(
-                                          data.Like[index].images!.length,
-                                          (index1) {
-                                            return data.Like[index].images !=
+
+                                             data.Like[index].images !=
                                                     null
                                                 ? CachedNetworkImage(
                                                     imageUrl:
-                                                        "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.Like[index].images?[index1].image.toString()}",
+                                                        "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.Like[index].images?[0].image.toString()}",
                                                     placeholder: (context,
                                                             url) =>
                                                         CircularProgressIndicator(),
@@ -184,7 +182,7 @@ class _FavoritPageState extends State<FavoritPage> {
                                                     fit: BoxFit.cover,
                                                   )
                                                 : data.Like[index]
-                                                        .images![index1].isEmpty
+                                                        .images![0].isEmpty
                                                     ? Image.asset(
                                                         'assets/images/notImage.png',
                                                         width: 324.w,
@@ -196,9 +194,7 @@ class _FavoritPageState extends State<FavoritPage> {
                                                         width: 324.w,
                                                         height: 235.h,
                                                         fit: BoxFit.cover,
-                                                      );
-                                          },
-                                        ),
+                                                      ),
                                         Positioned(
                                             child: Padding(
                                           padding: const EdgeInsets.all(8.0),

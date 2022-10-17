@@ -33,7 +33,7 @@ class _OylikIjaraState extends State<OylikIjara> {
           '0',
           '0',
           '0',
-          '0',
+          // '0',
         )
         .asStream();
     Provider.of<MonthProvider>(context, listen: false)
@@ -46,7 +46,7 @@ class _OylikIjaraState extends State<OylikIjara> {
           '0',
           '0',
           '0',
-          '0',
+          // '0',
         )
         .asStream();
   }
@@ -114,7 +114,7 @@ class _OylikIjaraState extends State<OylikIjara> {
                               data.isRegion = false;
                               data.isDistricts = false;
                               data.isUniver = false;
-                              data.isCourse = false;
+                              // data.isCourse = false;
                               data.isTypeHouse = false;
                               data.isCount = false;
                               data.isRent = false;
@@ -254,13 +254,11 @@ class _OylikIjaraState extends State<OylikIjara> {
                               children: [
                                 Stack(
                                   children: [
-                                    ...List.generate(
-                                      data.Ads[index].images!.length,
-                                      (index1) {
-                                        return data.Ads[index].images != null
+
+                                         data.Ads[index].images != null
                                             ? CachedNetworkImage(
                                                 imageUrl:
-                                                    "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.Ads[index].images?[index1].image.toString()}",
+                                                    "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.Ads[index].images?[0].image.toString()}",
                                                 placeholder: (context, url) =>
                                                     CircularProgressIndicator(),
                                                 errorWidget:
@@ -291,7 +289,7 @@ class _OylikIjaraState extends State<OylikIjara> {
                                                         // ColorFilter.mode(Colors.red, BlendMode.colorBurn)
                                                       ),
                                                     )))
-                                            : data.Ads[index].images![index1]
+                                            : data.Ads[index].images![0]
                                                     .isEmpty
                                                 ? Image.asset(
                                                     'assets/images/notImage.png',
@@ -304,9 +302,8 @@ class _OylikIjaraState extends State<OylikIjara> {
                                                     width: 324.w,
                                                     height: 235.h,
                                                     fit: BoxFit.cover,
-                                                  );
-                                      },
-                                    ),
+                                                  ),
+
                                     Positioned(
                                         child: Padding(
                                       padding: const EdgeInsets.all(8.0),
@@ -559,15 +556,12 @@ class _OylikIjaraState extends State<OylikIjara> {
                               children: [
                                 Stack(
                                   children: [
-                                    ...List.generate(
-                                      data.AdsForStudent[index].images!.length,
-                                      (index1) {
-                                        return data.AdsForStudent[index]
+                                   data.AdsForStudent[index]
                                                     .images !=
                                                 null
                                             ? CachedNetworkImage(
                                                 imageUrl:
-                                                    "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.AdsForStudent[index].images?[index1].image.toString()}",
+                                                    "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.AdsForStudent[index].images?[0].image.toString()}",
                                                 placeholder: (context, url) =>
                                                     CircularProgressIndicator(),
                                                 errorWidget:
@@ -599,7 +593,7 @@ class _OylikIjaraState extends State<OylikIjara> {
                                                       ),
                                                     )))
                                             : data.AdsForStudent[index]
-                                                    .images![index1].isEmpty
+                                                    .images![0].isEmpty
                                                 ? Image.asset(
                                                     'assets/images/notImage.png',
                                                     width: 324.w,
@@ -611,9 +605,8 @@ class _OylikIjaraState extends State<OylikIjara> {
                                                     width: 324.w,
                                                     height: 235.h,
                                                     fit: BoxFit.cover,
-                                                  );
-                                      },
-                                    ),
+                                                  ),
+
                                     Positioned(
                                         child: Padding(
                                       padding: const EdgeInsets.all(8.0),

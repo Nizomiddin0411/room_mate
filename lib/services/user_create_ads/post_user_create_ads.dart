@@ -52,11 +52,9 @@ class UserCreateAds {
 
 
     );
-
     var file_ = await file1.exists();
     var fileSecond = await file2.exists();
     var fileThreeth = await file3.exists();
-
     if(!file_){
       request.files.addAll([
         await http.MultipartFile.fromPath(
@@ -64,9 +62,7 @@ class UserCreateAds {
           file1.path,
         )
       ]);
-    }
-    
-    else{
+    }else{
       request.files.addAll([
         await http.MultipartFile.fromPath(
           'file1',
@@ -78,33 +74,33 @@ class UserCreateAds {
       request.files.addAll([
         await http.MultipartFile.fromPath(
           'file2',
-          file1.path,
+          file2.path,
         )
       ]);
     }else{
       request.files.addAll([
         await http.MultipartFile.fromPath(
           'file2',
-          file1.path,
+          file2.path,
         )
       ]);
-    } if(!fileThreeth){
+    }
+
+    if(!fileThreeth){
       request.files.addAll([
         await http.MultipartFile.fromPath(
           'file3',
-          file1.path,
+          file3.path,
         )
       ]);
     }else{
       request.files.addAll([
         await http.MultipartFile.fromPath(
           'file3',
-          file1.path,
+          file3.path,
         )
       ]);
     }
-    print("=====");
-
 
     request.fields.addAll({'title': '${titleController}',});
     request.fields.addAll({'roommate_gender': '${roommate_gender}',});
