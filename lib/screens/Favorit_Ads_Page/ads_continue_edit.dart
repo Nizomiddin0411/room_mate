@@ -6,7 +6,7 @@ import 'package:talaba_uy/screens/Create_ads/owner_photo.dart';
 
 import '../../core/const/app_colors.dart';
 
-class OwnerHouseInfo extends StatefulWidget {
+class AdsContinueEdit extends StatefulWidget {
   String? titleController;
   String? addressController;
   String? roommate_gender;
@@ -17,7 +17,7 @@ class OwnerHouseInfo extends StatefulWidget {
   String? id;
   String? location;
 
-  OwnerHouseInfo({
+  AdsContinueEdit({
     required this.location,
     required this.titleController,
     required this.roommate_gender,
@@ -30,10 +30,10 @@ class OwnerHouseInfo extends StatefulWidget {
   });
 
   @override
-  State<OwnerHouseInfo> createState() => _OwnerHouseInfoState();
+  State<AdsContinueEdit> createState() => _AdsContinueEditState();
 }
 
-class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
+class _AdsContinueEditState extends State<AdsContinueEdit> {
   TextEditingController? phoneController = TextEditingController();
   String? house_type;
   String? rent_type;
@@ -1174,7 +1174,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                           print(
                             '${comfortItems}  texnikalar',
                           );
-                          print('${widget.university_id} malumot');
+                          print('${descriptionController.text} malumot');
                           if(cost_type == null){
                             cost_type = '1';
                           }

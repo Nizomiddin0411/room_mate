@@ -11,7 +11,7 @@ import 'package:talaba_uy/screens/Create_ads/create_succed_dart.dart';
 import '../../core/const/app_colors.dart';
 import '../../services/user_create_ads/post_user_create_ads.dart';
 
-class OwnerCreateImage extends StatefulWidget {
+class AdsPhotoEdit extends StatefulWidget {
   String? titleController;
   String? roommate_gender;
   String? gender_matter;
@@ -38,7 +38,7 @@ class OwnerCreateImage extends StatefulWidget {
   String? description;
   String? location;
   String? cost_period;
-  OwnerCreateImage(
+  AdsPhotoEdit(
       {required this.cost_period,
       required this.location,
       required this.titleController,
@@ -67,10 +67,10 @@ class OwnerCreateImage extends StatefulWidget {
       required this.description});
 
   @override
-  State<OwnerCreateImage> createState() => _OwnerCreateImageState();
+  State<AdsPhotoEdit> createState() => _AdsPhotoEditState();
 }
 
-class _OwnerCreateImageState extends State<OwnerCreateImage> {
+class _AdsPhotoEditState extends State<AdsPhotoEdit> {
   final ImagePicker imagePicker = ImagePicker();
 
   List<XFile>? imageFileList = [];
@@ -438,14 +438,12 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
                               );
                               setState(() {});
                               if (data['status']) {
-                                print(widget.university_id.toString() +
-                                    'cost period');
                                 Navigator.pushAndRemoveUntil(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
                                             CreateSuccedful()),
-                                    (route) => true);
+                                    (route) => false);
                               } else {
                                 print(widget.titleController! + 'title');
                                 print(widget.roommate_gender.toString() +
@@ -491,7 +489,7 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
                                 print(widget.description.toString() +
                                     'qoshimcha');
                                 print(widget.location.toString() + 'location');
-                                print(widget.university_id.toString() +
+                                print(widget.cost_period.toString() +
                                     'cost period');
                                 ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(content: Text(data['error'])));

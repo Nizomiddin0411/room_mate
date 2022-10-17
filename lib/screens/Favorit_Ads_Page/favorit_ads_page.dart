@@ -1,9 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:talaba_uy/screens/Favorit_Ads_Page/ads_edit.dart';
+import 'package:talaba_uy/screens/Favorit_Ads_Page/ads_page_edit.dart';
 import '../../core/const/app_colors.dart';
 import '../../provider/favorite_provider.dart';
 import '../../services/post_my_ads_delete_Service.dart';
@@ -57,13 +58,17 @@ class _FavoritAdsState extends State<FavoritAds> {
                     itemCount: data.MyAds.length,
                     itemBuilder: (context, index) {
                       return Padding(
-                        padding: const EdgeInsets.all(18.0),
+                        padding: EdgeInsets.all(18.0.w),
                         child: SingleChildScrollView(
                           child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               InkWell(
                                 onTap: () {
+                                  print(data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .universityId.toString() + 'aaaaaaaa');
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -164,7 +169,8 @@ class _FavoritAdsState extends State<FavoritAds> {
                                                     .MyAds[index].roommateGender
                                                     .toString(),
                                                 Image: data.MyAds[index].images,
-                                                locations: data.MyAds[index].location,
+                                                locations:
+                                                    data.MyAds[index].location,
                                               )));
                                 },
                                 child: Container(
@@ -179,40 +185,38 @@ class _FavoritAdsState extends State<FavoritAds> {
                                     children: [
                                       Stack(
                                         children: [
-                                          data.MyAds[index].images !=
-                                              null
+                                          data.MyAds[index].images != null
                                               ? CachedNetworkImage(
-                                            imageUrl:
-                                            "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.MyAds[index].images?[0].image.toString()}",
-                                            placeholder: (context,
-                                                url) =>
-                                                CircularProgressIndicator(),
-                                            errorWidget:
-                                                (context, url, error) =>
-                                                Image.asset(
-                                                  'assets/images/notImage.png',
-                                                ),
-                                            width: 324.w,
-                                            height: 235.h,
-                                            fit: BoxFit.cover,
-                                          )
-                                              : data.MyAds[index]
-                                              .images![0].isEmpty
-                                              ? Image.asset(
-                                            'assets/images/notImage.png',
-                                            width: 324.w,
-                                            height: 235.h,
-                                            fit: BoxFit.cover,
-                                          )
-                                              : Image.asset(
-                                            'assets/images/notImage.png',
-                                            width: 324.w,
-                                            height: 235.h,
-                                            fit: BoxFit.cover,
-                                          ),
+                                                  imageUrl:
+                                                      "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.MyAds[index].images?[0].image.toString()}",
+                                                  placeholder: (context, url) =>
+                                                      CircularProgressIndicator(),
+                                                  errorWidget:
+                                                      (context, url, error) =>
+                                                          Image.asset(
+                                                    'assets/images/notImage.png',
+                                                  ),
+                                                  width: 324.w,
+                                                  height: 235.h,
+                                                  fit: BoxFit.cover,
+                                                )
+                                              : data.MyAds[index].images![0]
+                                                      .isEmpty
+                                                  ? Image.asset(
+                                                      'assets/images/notImage.png',
+                                                      width: 324.w,
+                                                      height: 235.h,
+                                                      fit: BoxFit.cover,
+                                                    )
+                                                  : Image.asset(
+                                                      'assets/images/notImage.png',
+                                                      width: 324.w,
+                                                      height: 235.h,
+                                                      fit: BoxFit.cover,
+                                                    ),
                                           Positioned(
                                               child: Padding(
-                                            padding: const EdgeInsets.all(8.0),
+                                            padding: EdgeInsets.all(8.0.w),
                                             child: Row(
                                               mainAxisAlignment:
                                                   MainAxisAlignment
@@ -227,14 +231,15 @@ class _FavoritAdsState extends State<FavoritAds> {
                                                             2.r),
                                                     color: AppColors.iconColor,
                                                   ),
-                                                  child:  Center(
+                                                  child: Center(
                                                       child: Text(
-                                                        data.MyAds[index].createdAt!
-                                                            .replaceRange(
+                                                    data.MyAds[index].createdAt!
+                                                        .replaceRange(
                                                             data
-                                                                .MyAds[index]
-                                                                .createdAt!
-                                                                .length -
+                                                                    .MyAds[
+                                                                        index]
+                                                                    .createdAt!
+                                                                    .length -
                                                                 3,
                                                             data
                                                                 .MyAds[index]
@@ -252,17 +257,135 @@ class _FavoritAdsState extends State<FavoritAds> {
                                                             1.w, 0, 8.w, 0),
                                                     child: Row(
                                                       children: [
-                                                        Container(
-                                                          width: 32.w,
-                                                          height: 32.h,
-                                                          color: AppColors
-                                                              .backgroundWhite
-                                                              .withOpacity(0.7),
-                                                          child: const Center(
-                                                            child: Icon(
-                                                              Icons.create,
-                                                              color: AppColors
-                                                                  .mainColor,
+                                                        InkWell(
+                                                          onTap: () =>
+                                                              Navigator.push(
+                                                                  context,
+                                                                  MaterialPageRoute(
+                                                                    builder:
+                                                                        (context) =>
+                                                                            AdspageEdit(
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .title
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .description
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .houseType
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .cost
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .costType
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .roomCount
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .roommateCount
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .liveWithOwner
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .subway
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .favorite
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .id
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .type
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .userId,
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .phoneNumber
+                                                                          .toString(),
+                                                                      '2',
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .inFloor
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .roommateCount
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .address
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .roommateGender
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .location,
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .images,
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .universityId
+                                                                          .toString(),
+                                                                          data
+                                                                          .MyAds[
+                                                                              index].districtId.toString(),
+                                                                    ),
+                                                                  )),
+                                                          child: Container(
+                                                            width: 32.w,
+                                                            height: 32.h,
+                                                            color: AppColors
+                                                                .backgroundWhite
+                                                                .withOpacity(
+                                                                    0.7),
+                                                            child: const Center(
+                                                              child: Icon(
+                                                                Icons.edit,
+                                                                color: AppColors
+                                                                    .mainColor,
+                                                              ),
                                                             ),
                                                           ),
                                                         ),
@@ -277,7 +400,7 @@ class _FavoritAdsState extends State<FavoritAds> {
                                                               .withOpacity(0.7),
                                                           child: Center(
                                                             child: IconButton(
-                                                              iconSize: 22.0,
+                                                              iconSize: 22.0.sp,
                                                               icon: const Icon(
                                                                 Icons
                                                                     .delete_outline,
@@ -311,7 +434,7 @@ class _FavoritAdsState extends State<FavoritAds> {
                                             MainAxisAlignment.spaceBetween,
                                         children: [
                                           Padding(
-                                            padding: const EdgeInsets.all(6.0),
+                                            padding: EdgeInsets.all(6.0.w),
                                             child: Text(
                                               data.MyAds[index].title
                                                   .toString(),
