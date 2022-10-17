@@ -178,7 +178,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                   SizedBox(
                                     height: 10,
                                   ),
-                                  Text("Axbarot havfsizligi ta’lim yo’nalishi"),
+                                  Text("Axbarot xavfsizligi ta’lim yo’nalishi"),
                                   SizedBox(
                                     height: 10,
                                   ),
