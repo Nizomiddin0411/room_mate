@@ -809,7 +809,7 @@ class _StudentUserState extends State<StudentUser> {
                       FullName: myController.text,
                       fakultetId: data.fakultetid.toString(),
                       Course: Course.toString(),
-                      HideProfile: isSwitched.toString() == 'ha' ? '1' : '2',
+                      HideProfile: isSwitched.toString() == 'Ha' ? '1' : '2',
                       District: data.districtid.toString(),
                       Phonenumber: '${hidenumber ? 0 :nameController.text}',
                       gender: dropdownvalue.toString() == 'Erkak' ? '1' : '2',
