@@ -171,7 +171,7 @@ class _SearchPageState extends State<SearchPage> {
                                                 onTap: () {
                                                   // Navigator.push(context, MaterialPageRoute(builder: (context)=>ResultUniversitetPage()));
                                                 },
-                                                child: Text(data.searchuniversitet[index].address.toString(),
+                                                child: Text("",
                                                   style: TextStyle(fontSize: 12.sp),
                                                 ))),
                                         SizedBox(

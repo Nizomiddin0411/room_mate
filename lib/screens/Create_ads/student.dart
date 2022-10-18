@@ -1,6 +1,4 @@
 import 'dart:math';
-
-import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_mask/easy_mask.dart';
@@ -9,12 +7,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
 import 'package:talaba_uy/screens/Create_ads/ads_student_create,dart.dart';
-import 'package:talaba_uy/screens/menu/menu.dart';
 import '../../cubit/aut_cubit.dart';
 import '../../models/lang_model.dart';
 import '../../provider/region_provider.dart';
-import '../../services/post_create_ads_student.dart';
-
 class Student extends StatefulWidget {
   const Student({Key? key}) : super(key: key);
 
@@ -28,13 +23,8 @@ class _StudentState extends State<Student> {
   String dropDown2 = "";
   String? phonenumber;
   String? addInfo;
-  bool _checkHome = false;
-  bool _checkMetro = false;
-  String? _dropownUsd;
-  String _titleTime = "Ijara muddati";
   String? _titleGendor;
   String? _titleCount;
-  String _titleCourse = "";
   String DistrictId = '';
   String UniverId = '';
   String Course = '';
@@ -49,35 +39,18 @@ class _StudentState extends State<Student> {
   String roomCount = '';
   Color titlecolor = Colors.grey;
   bool univerColor = false;
+  bool _otmOnClick = false;
   bool titlecolor1 = false;
   bool titlecolor2 = false;
-  Color _colorDistric = Colors.grey;
-  bool _DiscritOnClick = false;
   Color _colorUniver = Colors.grey;
   bool _UniverOnClick = false;
-  Color _colorFaculty = Colors.grey;
-  bool _FacultyOnClick = false;
-  Color _colorCourse = Colors.grey;
-  bool _CourseOnClick = false;
-  Color _colorTypeHouse = Colors.grey;
-  bool _TypeHouseOnClick = false;
-  Color _colorRoomCount = Colors.grey;
-  bool _RoomCountOnClick = false;
-  Color _colorRentType = Colors.grey;
-  bool _RentTypeOnClick = false;
-  Color _colorTypeCost = Colors.grey;
-  bool _TypeCostOnClick = false;
   Color _colorGender = Colors.grey;
-  bool _GenderOnClick = false;
-  Color _colorCountPupil = Colors.grey;
-  bool _CountPupilOnClick = false;
   Color _colorForm = Colors.grey;
   Color titlecolort = Colors.grey;
   bool _FormOnClick = false;
   bool gender1 = false;
   bool _phoneOnClick = false;
   Color _phoneColor = Colors.grey;
-  final TextEditingController _textEditingController = TextEditingController();
   var kurs = [
     '1-kurs',
     '2-kurs',
@@ -120,17 +93,17 @@ class _StudentState extends State<Student> {
     '4',
     '5-6',
   ];
-  final phoneController = TextEditingController();
+  final phoneController = TextEditingController(text: "+9989");
   final titlecontroller1 = TextEditingController();
   final addinformation = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
   bool regionsvalue = false;
-  bool univervalue = false;
   bool numbervalue = false;
+  String? univervalue;
+  bool value6 = false;
 
   int house1 = 0;
   var house = '1';
-  Color titleColor = Colors.black12;
+  Color titleColor = Colors.black;
   Color viloyatColor = Colors.black12;
   Color numberColor = Colors.black12;
   Color nameColor = Colors.black12;
@@ -165,7 +138,7 @@ class _StudentState extends State<Student> {
                   width: double.infinity,
                   decoration: BoxDecoration(
                       border: Border.all(color: titleColor),
-                      borderRadius: BorderRadius.circular(8.r)),
+                      borderRadius: BorderRadius.circular(10.r)),
                   child: TextFormField(
                     onChanged: (e) {
                       setState(() {
@@ -185,7 +158,7 @@ class _StudentState extends State<Student> {
                       hintStyle: TextStyle(fontSize: 14.sp, color: Colors.grey),
                     ),
                     cursorColor: Colors.grey.shade800,
-                    cursorWidth: 1.5.w,
+                    cursorWidth: 2.w,
                   ),
                 ),
                 SizedBox(
@@ -319,14 +292,17 @@ class _StudentState extends State<Student> {
                       children: [
                         Text("Ahamiyatsiz"),
                         Checkbox(
-                          value: univervalue,
+                          value: value6,
                           onChanged: (bool? value) {
                             setState(() {
-                              univervalue = value!;
-                              if(value){
-                                _colorUniver = Colors.grey;
-                              }else if(!value && !univervalue){
-                                _colorUniver = Colors.red;
+                              this.value6 = value!;
+                              univervalue = value ? '1' : '2';
+                              if (value) {
+                                univerColor1 = Colors.grey;
+                              }
+                              if (!value && !_otmOnClick) {
+                                univerColor1 = Colors.red;
+                                _otmOnClick = false;
                               }
                             });
                           },
@@ -636,7 +612,7 @@ class _StudentState extends State<Student> {
                               MaterialPageRoute(
                                 builder: (context) => Student2(
                                     titlecontroller1: titlecontroller1.text,
-                                    univervalue: '${univervalue ? 1 : 2}',
+                                    univervalue: '${value6 ? 1 : 2}',
                                     viloyatidisi: data.viloyatid.toString(),
                                     viloyatvalue: '${regionsvalue ? 1 : 2}',
                                     universiteteid: data.UniverId,
@@ -672,7 +648,7 @@ class _StudentState extends State<Student> {
                           print(
                               '${titlecontroller1.text} elonni nomlashhhh yooo+++++++++++');
                           print(
-                              '${univervalue ? '1' : '2'} univervalue shartemas -----');
+                              '${value6 ? '1' : '2'} univervalue shartemas -----');
                           print('${data.viloyatid} viloyatid +++++++++++');
                           print(
                               '${regionsvalue ? '1' : '2'} regionsvalue shart emas ');
