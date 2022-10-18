@@ -4,11 +4,13 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:talaba_uy/screens/Create_ads/create_succed_dart.dart';
 
 import '../../core/const/app_colors.dart';
+import '../../provider/favorite_provider.dart';
 import '../../services/user_create_ads/post_user_create_ads.dart';
 
 class OwnerCreateImage extends StatefulWidget {
@@ -131,9 +133,9 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
                     child: Text("From Camera"),
                     onTap: () async {
                       // getcam();
-                          if(sum<3){
-                            sum+=1;
-                      await _takeFromCamera(sum);
+                      if (sum < 3) {
+                        sum += 1;
+                        await _takeFromCamera(sum);
                       }
                       setState(() {});
 
@@ -169,6 +171,8 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
 
   @override
   Widget build(BuildContext context) {
+    final load = context.read<FavoriteProvider>();
+    bool loading = false;
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
@@ -307,82 +311,81 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
                                   children:
                                       List.generate(FileList.length, (index) {
                                     return (FileExist[index])
-                                        ? 
-                                            // width: 120.w,
-                                            Container(
-                                              width: 108.w,
-                                              height: 116.h,
-                                              decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.all(
-                                                  Radius.circular(
-                                                    12.r,
-                                                  ),
+                                        ?
+                                        // width: 120.w,
+                                        Container(
+                                            width: 108.w,
+                                            height: 116.h,
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.all(
+                                                Radius.circular(
+                                                  12.r,
                                                 ),
                                               ),
-                                              child: Stack(
-                                                children: [
-                                                  Expanded(
-                                                    child: Container(
-                                                      margin:
-                                                          EdgeInsets.symmetric(
-                                                              horizontal: 8.w,
-                                                              vertical: 8.h),
-                                                      decoration: BoxDecoration(
-                                                        // border: Border.all(
-                                                        //     color:
-                                                        //         Colors.),
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                              offset: Offset(
-                                                                  .1.w, .1.h),
-                                                              color: Colors.grey
-                                                                  .shade400,
-                                                              blurRadius: 6),
-                                                        ],
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(
-                                                          10.r,
-                                                        ),
-                                                        image: DecorationImage(
-                                                          fit: BoxFit.cover,
-                                                          image: FileImage(
-                                                              FileList[index]),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Positioned(
-                                                    right: 0,
-                                                    child: GestureDetector(
-                                                      child: Container(
-                                                        width: 18.w,
-                                                        height: 18.h,
-                                                        decoration: BoxDecoration(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        4.r),
+                                            ),
+                                            child: Stack(
+                                              children: [
+                                                Expanded(
+                                                  child: Container(
+                                                    margin:
+                                                        EdgeInsets.symmetric(
+                                                            horizontal: 8.w,
+                                                            vertical: 8.h),
+                                                    decoration: BoxDecoration(
+                                                      // border: Border.all(
+                                                      //     color:
+                                                      //         Colors.),
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                            offset: Offset(
+                                                                .1.w, .1.h),
                                                             color: Colors
-                                                                .red[400]),
-                                                        child: Icon(
-                                                          Icons.remove,
-                                                          size: 15.sp,
-                                                          color: Colors.white,
-                                                        ),
+                                                                .grey.shade400,
+                                                            blurRadius: 6),
+                                                      ],
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                        10.r,
                                                       ),
-                                                      onTap: () async {
-                                                         FileList.removeAt(
-                                                            index);
-                                                            // index -= 4;
-                                                            sum -= 1;
-                                                        setState(() {});
-                                                      },
+                                                      image: DecorationImage(
+                                                        fit: BoxFit.cover,
+                                                        image: FileImage(
+                                                            FileList[index]),
+                                                      ),
                                                     ),
                                                   ),
-                                                ],
-                                              ),
-                                            ): Container();
+                                                ),
+                                                Positioned(
+                                                  right: 0,
+                                                  child: GestureDetector(
+                                                    child: Container(
+                                                      width: 18.w,
+                                                      height: 18.h,
+                                                      decoration: BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      4.r),
+                                                          color:
+                                                              Colors.red[400]),
+                                                      child: Icon(
+                                                        Icons.remove,
+                                                        size: 15.sp,
+                                                        color: Colors.white,
+                                                      ),
+                                                    ),
+                                                    onTap: () async {
+                                                      FileList.removeAt(index);
+                                                      // index -= 4;
+                                                      sum -= 1;
+                                                      setState(() {});
+                                                    },
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          )
+                                        : Container();
                                   }),
                                 )
                               : const SizedBox(),
@@ -404,7 +407,14 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
                               print(FileList[3]);
                               print(FileList[1]);
                               print(FileList[2]);
-                              var data = await UserCreateAds().FetchAds(
+                              // if (load.isLoading) {
+                              //   return Center(
+                              //       child: CircularProgressIndicator());
+                              // }
+                              // print('oldin');
+                              // print(load.isLoading);
+                              // load.isload = true;
+                               load.PostUser(
                                 titleController: widget.titleController,
                                 roommate_gender: widget.roommate_gender,
                                 gender_matter: widget.gender_matter,
@@ -436,67 +446,112 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
                                 file2: FileExist[1] ? FileList[1] : FileList[4],
                                 file3: FileExist[2] ? FileList[2] : FileList[5],
                               );
+                              // print(load.isLoading);
+                              // load.isload = false;
+                              // if(load.isLoading != true){
+                              //   showAlertDialog(context);
+                              // }
+                              // setState(() {
+                              //   loading =
+                              //       load.isLoading;
+                              // });
+
+                              // var data = await UserCreateAds().FetchAds(
+                              //   titleController: widget.titleController,
+                              //   roommate_gender: widget.roommate_gender,
+                              //   gender_matter: widget.gender_matter,
+                              //   district_id: widget.district_id,
+                              //   subway: widget.id,
+                              //   addressController: widget.addressController,
+                              //   university_id: widget.university_id,
+                              //   university_id_matter:
+                              //       widget.university_id_matter,
+                              //   phoneController: widget.phoneController,
+                              //   house_type: widget.house_type,
+                              //   rent_type: widget.rent_type,
+                              //   room_count: widget.room_count,
+                              //   floors_count: widget.floors_count,
+                              //   in_floor: widget.in_floor,
+                              //   costController: widget.costController,
+                              //   cost_type: widget.cost_type,
+                              //   live_with_owner: widget.live_with_owner,
+                              //   utility_electricity: widget.utility_electricity,
+                              //   unility_gaz: widget.unility_gaz,
+                              //   utility_hot_water: widget.utility_hot_water,
+                              //   utility_cold_water: widget.utility_cold_water,
+                              //   utility_trash: widget.utility_trash,
+                              //   comfort: widget.comfort,
+                              //   description: widget.description,
+                              //   location: widget.location,
+                              //   file1: FileExist[0] ? FileList[0] : FileList[3],
+                              //   cost_period: widget.cost_period,
+                              //   file2: FileExist[1] ? FileList[1] : FileList[4],
+                              //   file3: FileExist[2] ? FileList[2] : FileList[5],
+                              // );
+
+                              // Navigator.pushAndRemoveUntil(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //         builder: (context) => CreateSuccedful()),
+                              //     (route) => false);
                               setState(() {});
-                              if (data['status']) {
-                                Navigator.pushAndRemoveUntil(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            CreateSuccedful()),
-                                    (route) => false);
-                              } else {
-                                print(widget.titleController! + 'title');
-                                print(widget.roommate_gender.toString() +
-                                    'gender');
-                                print(widget.gender_matter.toString() +
-                                    'gendermatter');
-                                print(widget.district_id.toString() +
-                                    'district id');
-                                print(widget.id.toString() + 'metro');
-                                print(widget.addressController.toString() +
-                                    'address');
-                                print(widget.university_id.toString() +
-                                    'univerid');
-                                print(widget.university_id_matter.toString() +
-                                    'univer matter');
-                                print(widget.phoneController.toString() +
-                                    'phonecontrol');
-                                print(widget.house_type.toString() +
-                                    'house type');
-                                print(
-                                    widget.rent_type.toString() + 'rent type');
-                                print(
-                                    widget.room_count.toString() + 'hona soni');
-                                print(widget.floors_count.toString() +
-                                    'etaj soni');
-                                print(widget.in_floor.toString() + 'etaj');
-                                print(
-                                    widget.costController.toString() + 'narxi');
-                                print(
-                                    widget.cost_type.toString() + 'cost type');
-                                print(widget.live_with_owner.toString() +
-                                    'uyni egasi');
-                                print(widget.utility_electricity.toString() +
-                                    'elktor');
-                                print(widget.unility_gaz.toString() + 'gaz');
-                                print(widget.utility_hot_water.toString() +
-                                    'issiq suv');
-                                print(widget.utility_cold_water.toString() +
-                                    'sovuq suv');
-                                print(
-                                    widget.utility_trash.toString() + 'musor');
-                                print(widget.comfort.toString() + 'komford');
-                                print(widget.description.toString() +
-                                    'qoshimcha');
-                                print(widget.location.toString() + 'location');
-                                print(widget.cost_period.toString() +
-                                    'cost period');
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(content: Text(data['error'])));
-                              }
+                              // if (data['status']) {
+                              //
+                              // Navigator.pushAndRemoveUntil(
+                              //     context,
+                              //     MaterialPageRoute(
+                              //         builder: (context) =>
+                              //             CreateSuccedful()),
+                              //     (route) => false);
+                              // } else {
+                              print(widget.titleController! + 'title');
+                              print(
+                                  widget.roommate_gender.toString() + 'gender');
+                              print(widget.gender_matter.toString() +
+                                  'gendermatter');
+                              print(widget.district_id.toString() +
+                                  'district id');
+                              print(widget.id.toString() + 'metro');
+                              print(widget.addressController.toString() +
+                                  'address');
+                              print(
+                                  widget.university_id.toString() + 'univerid');
+                              print(widget.university_id_matter.toString() +
+                                  'univer matter');
+                              print(widget.phoneController.toString() +
+                                  'phonecontrol');
+                              print(
+                                  widget.house_type.toString() + 'house type');
+                              print(widget.rent_type.toString() + 'rent type');
+                              print(widget.room_count.toString() + 'hona soni');
+                              print(
+                                  widget.floors_count.toString() + 'etaj soni');
+                              print(widget.in_floor.toString() + 'etaj');
+                              print(widget.costController.toString() + 'narxi');
+                              print(widget.cost_type.toString() + 'cost type');
+                              print(widget.live_with_owner.toString() +
+                                  'uyni egasi');
+                              print(widget.utility_electricity.toString() +
+                                  'elktor');
+                              print(widget.unility_gaz.toString() + 'gaz');
+                              print(widget.utility_hot_water.toString() +
+                                  'issiq suv');
+                              print(widget.utility_cold_water.toString() +
+                                  'sovuq suv');
+                              print(widget.utility_trash.toString() + 'musor');
+                              print(widget.comfort.toString() + 'komford');
+                              print(
+                                  widget.description.toString() + 'qoshimcha');
+                              print(widget.location.toString() + 'location');
+                              print(widget.cost_period.toString() +
+                                  'cost period');
+                              //   ScaffoldMessenger.of(context).showSnackBar(
+                              //       SnackBar(content: Text(data['error'])));
+                              // }
                             },
-                            child: Text(
-                              "Keyingi ".tr(),
+                            child:
+                            Text(
+                              "Keyingi".tr(),
                               style: TextStyle(
                                   fontSize: 20.sp, fontWeight: FontWeight.w500),
                             ),
@@ -585,4 +640,26 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
       return null;
     }
   }
+
+  Circular(BuildContext context){
+    return CircularProgressIndicator();
+  }
+
+}
+showAlertDialog(BuildContext context) {
+  AlertDialog alert = AlertDialog(
+    // title: Text("Akkauntdan chiqish ").tr(),
+    // content: Text("Akkauntdan chiqishga ishonchingiz komilmi?").tr(),
+    actions: const [
+      Center(child: CircularProgressIndicator(),)
+    ],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
 }

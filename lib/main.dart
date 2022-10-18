@@ -10,6 +10,7 @@ import 'package:talaba_uy/cubit/aut_cubit.dart';
 import 'package:talaba_uy/provider/chat_permit_provider.dart';
 import 'package:talaba_uy/provider/day_provider.dart';
 import 'package:talaba_uy/provider/favorite_provider.dart';
+import 'package:talaba_uy/provider/feedback_provider.dart';
 import 'package:talaba_uy/provider/month_provider.dart';
 import 'package:talaba_uy/provider/region_provider.dart';
 import 'package:talaba_uy/provider/search_universitet_provider.dart';
@@ -85,7 +86,8 @@ class MyApp extends StatelessWidget {
               ChangeNotifierProvider(create: (context) => MonthProvider()),
               ChangeNotifierProvider(create: (context) => FavoriteProvider()),
               ChangeNotifierProvider(create: (context) => SearchUniversitet()),
-              ChangeNotifierProvider(create: (context) => ChatPermit())
+              ChangeNotifierProvider(create: (context) => ChatPermit()),
+              ChangeNotifierProvider(create: (context) => FeedbackProvider())
             ],
             child: BlocProvider(
               create: (context) => AutCubit(),
