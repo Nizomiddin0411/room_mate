@@ -16,6 +16,15 @@ class AdsContinueEdit extends StatefulWidget {
   String? university_id_matter;
   String? id;
   String? location;
+  String? phoneNumber;
+  String? houseType;
+  String? rent_type;
+  String? room_count;
+  String? floors_count;
+  String? in_floor;
+  String? cost;
+  String? cost_period;
+  String?  description;
 
   AdsContinueEdit({
     required this.location,
@@ -27,6 +36,15 @@ class AdsContinueEdit extends StatefulWidget {
     required this.addressController,
     required this.university_id,
     required this.university_id_matter,
+    required this.phoneNumber,
+    required this.houseType,
+    required this.rent_type,
+    required this.room_count,
+    required this.floors_count,
+    required this.in_floor,
+    required this.cost,
+    required this.cost_period,
+    required this.description,
   });
 
   @override
@@ -34,13 +52,13 @@ class AdsContinueEdit extends StatefulWidget {
 }
 
 class _AdsContinueEditState extends State<AdsContinueEdit> {
-  TextEditingController? phoneController = TextEditingController();
+  TextEditingController? phoneController;
   String? house_type;
   String? rent_type;
   String? room_count;
   String? floors_count;
   String? in_floor;
-  TextEditingController descriptionController = TextEditingController();
+  TextEditingController? descriptionController;
   String? cost_type;
   String? live_with_owner;
   String? utility_electricity;
@@ -69,23 +87,23 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
   TextEditingController? adsTitleController;
   TextEditingController? inputcontroller;
   Color _phoneNumberColor = Colors.grey;
-  bool _phoneNumberOnClick = false;
+  bool _phoneNumberOnClick = true;
   Color _houseTypeColor = Colors.grey;
-  bool _houseTypeOnClick = false;
+  bool _houseTypeOnClick = true;
   Color _rentTypeColor = Colors.grey;
-  bool _rentTypeOnClick = false;
+  bool _rentTypeOnClick = true;
   Color _roomCountColor = Colors.grey;
-  bool _roomCountOnClick = false;
+  bool _roomCountOnClick = true;
   Color _floorsCountColor = Colors.grey;
-  bool _floorsCountOnClick = false;
+  bool _floorsCountOnClick = true;
   Color _inFloorColor = Colors.grey;
-  bool _inFloorOnClick = false;
+  bool _inFloorOnClick = true;
   Color _costTypeColor = Colors.grey;
-  bool _costTypeOnClick = false;
+  bool _costTypeOnClick = true;
   Color _descriptionColor = Colors.grey;
-  bool _descriptionOnClick = false;
+  bool _descriptionOnClick = true;
     Color _priceColor = Colors.grey;
-  bool _priceOnClick = false;
+  bool _priceOnClick = true;
   Color _colorForm = Colors.grey;
   bool value5 = false;
   var pricetype = [
@@ -143,9 +161,11 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
   @override
   void initState() {
     addressController = TextEditingController();
-    costController = TextEditingController();
+    costController = TextEditingController(text: widget.cost);
     adsTitleController = TextEditingController();
     inputcontroller = TextEditingController();
+    phoneController = TextEditingController(text: widget.phoneNumber);
+    descriptionController = TextEditingController(text: widget.description);
     super.initState();
   }
 
@@ -275,7 +295,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                             hint: Padding(
                               padding: EdgeInsets.only(left: 8.w),
                               child: Text(
-                                "Kvartira , Xovli".tr(),
+                              widget.houseType == '2' ? 'Hovli' : widget.houseType == '1' ? 'Kvartira' : "Kvartira , Xovli".tr(),
                                 style: TextStyle(fontSize: 14.sp),
                               ),
                             ),
@@ -283,6 +303,8 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                                 const InputDecoration(border: InputBorder.none),
                             icon: Icon(Icons.arrow_drop_down_outlined),
                             items: housetype.map((e) {
+                              house_type = widget.houseType;
+                              print(widget.houseType);
                               return DropdownMenuItem<String>(
                                 onTap: () {},
                                 value: e,
@@ -328,7 +350,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                             hint: Padding(
                               padding: EdgeInsets.only(left: 8.w),
                               child: Text(
-                                "Kunlik  / Oylik".tr(),
+                               widget.rent_type == '1' ? 'Kunlik' : widget.rent_type == '2' ? "Oylik" : widget.rent_type == '3' ? "Uzoq muddat" : "Kunlik  / Oylik".tr(),
                                 style: TextStyle(fontSize: 14.sp),
                               ),
                             ),
@@ -336,6 +358,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                                 const InputDecoration(border: InputBorder.none),
                             icon: Icon(Icons.arrow_drop_down_outlined),
                             items: ijaramuddat.map((e) {
+                              rent_type = widget.rent_type;
                               return DropdownMenuItem<String>(
                                 onTap: () {},
                                 value: e,
@@ -389,7 +412,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                             hint: Padding(
                               padding: EdgeInsets.only(left: 8.w),
                               child: Text(
-                                "Soni".tr(),
+                                widget.room_count.toString(),
                                 style: TextStyle(fontSize: 14.sp),
                               ),
                             ),
@@ -397,6 +420,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                                 const InputDecoration(border: InputBorder.none),
                             icon: Icon(Icons.arrow_drop_down_outlined),
                             items: ijarachi.map((e) {
+                              room_count = widget.room_count;
                               return DropdownMenuItem<String>(
                                 onTap: () {},
                                 value: e,
@@ -446,7 +470,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                             hint: Padding(
                               padding: EdgeInsets.only(left: 8.w),
                               child: Text(
-                                "1 - 9".tr(),
+                                widget.floors_count.toString(),
                                 style: TextStyle(fontSize: 14.sp),
                               ),
                             ),
@@ -454,6 +478,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                                 const InputDecoration(border: InputBorder.none),
                             icon: Icon(Icons.arrow_drop_down_outlined),
                             items: houseroom.map((e) {
+                              floors_count = widget.floors_count;
                               return DropdownMenuItem<String>(
                                 onTap: () {},
                                 value: e,
@@ -499,7 +524,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                             hint: Padding(
                               padding: EdgeInsets.only(left: 8.w),
                               child: Text(
-                                "1 - 9".tr(),
+                                widget.in_floor.toString(),
                                 style: TextStyle(fontSize: 14.sp),
                               ),
                             ),
@@ -507,6 +532,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                                 const InputDecoration(border: InputBorder.none),
                             icon: Icon(Icons.arrow_drop_down_outlined),
                             items: rooms.map((e) {
+                              in_floor = widget.in_floor;
                               return DropdownMenuItem<String>(
                                 onTap: () {},
                                 value: e,
@@ -648,7 +674,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                             hint: Padding(
                               padding: EdgeInsets.only(left: 8.w),
                               child: Text(
-                                "Turlari".tr(),
+                               widget.cost_period == '1' ? "kunlik" : widget.cost_period == '2' ? "oylik" : widget.cost_period == '3' ? "kishi boshiga" : "Turlari".tr(),
                                 style: TextStyle(fontSize: 14.sp),
                               ),
                             ),
@@ -656,6 +682,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                                 const InputDecoration(border: InputBorder.none),
                             icon: Icon(Icons.arrow_drop_down_outlined),
                             items: pricetype.map((e) {
+                              price = widget.cost_period.toString();
                               return DropdownMenuItem<String>(
                                 onTap: () {},
                                 value: e,
@@ -1174,7 +1201,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                           print(
                             '${comfortItems}  texnikalar',
                           );
-                          print('${descriptionController.text} malumot');
+                          print('${descriptionController!.text} malumot');
                           if(cost_type == null){
                             cost_type = '1';
                           }
@@ -1221,7 +1248,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                                     utility_cold_water: utility_cold_water,
                                     utility_trash: utility_trash,
                                     comfort:  comfortItems,
-                                    description: descriptionController.text,
+                                    description: descriptionController!.text,
                                     cost_period: price,
                                       )),
                             );

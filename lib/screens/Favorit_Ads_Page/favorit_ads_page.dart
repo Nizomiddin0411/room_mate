@@ -65,10 +65,9 @@ class _FavoritAdsState extends State<FavoritAds> {
                             children: [
                               InkWell(
                                 onTap: () {
-                                  print(data
-                                                                          .MyAds[
-                                                                              index]
-                                                                          .universityId.toString() + 'aaaaaaaa');
+                                  print(data.MyAds[index].universityId
+                                          .toString() +
+                                      'aaaaaaaa');
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
@@ -368,9 +367,26 @@ class _FavoritAdsState extends State<FavoritAds> {
                                                                               index]
                                                                           .universityId
                                                                           .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .districtId
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .rentType
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .floorsCount
+                                                                          .toString(),
                                                                           data
                                                                           .MyAds[
-                                                                              index].districtId.toString(),
+                                                                              index]
+                                                                          .costPeriod
+                                                                          .toString(),
                                                                     ),
                                                                   )),
                                                           child: Container(

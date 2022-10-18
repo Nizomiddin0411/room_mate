@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:math';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -11,7 +10,7 @@ import 'package:provider/provider.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
 import 'package:talaba_uy/cubit/aut_cubit.dart';
 import 'package:talaba_uy/provider/region_provider.dart';
-import 'package:talaba_uy/screens/Create_ads/Owner_continue_Ads.dart';
+import 'package:talaba_uy/screens/Favorit_Ads_Page/ads_continue_edit.dart';
 import '../../models/get_district_model.dart';
 import '../../provider/favorite_provider.dart';
 import '../Google_map/map_screen.dart';
@@ -22,15 +21,15 @@ class AdsEdit extends StatefulWidget {
   String? houseType; // ads_continue
   String? cost; // ads_continue
   String? costType; // ads_continue
-  String? countRoom; // ads_continue
+  String? countRoom;
   String? countPeople; // ads_continue
   String? liveWithOwner; // ads_continue
-  String? subway; // ads_continue
+  String? subway;  // edit
   String? favorite;
   String? id;
   String? type;
   int? userId;
-  String? phoneNumber; // ads_continue
+  String? phoneNumber;
   String? comfort; // ads_continue
   String? inFloor; // ads_continue
   String? roommate_count; // ads_continue
@@ -40,6 +39,9 @@ class AdsEdit extends StatefulWidget {
   List? Image;
   String? universityId;
   String? region;
+  String? rentType;
+  String? floors_count;
+  String? cost_period;
 
   AdsEdit(
       this.title,
@@ -65,6 +67,9 @@ class AdsEdit extends StatefulWidget {
       this.Image,
       this.universityId,
       this.region,
+      this.rentType,
+      this.floors_count,
+      this.cost_period,
       {Key? key})
       : super(key: key);
 
@@ -115,21 +120,22 @@ class _AdsEditState extends State<AdsEdit> {
   String? university_id_matter;
   GetDistrictModel? dropDown1;
   Color _colorRegion = Colors.grey;
-  bool _RegionOnClick = false;
+  bool _RegionOnClick = true;
   Color _colorDistric = Colors.grey;
-  bool _DiscritOnClick = false;
+  bool _DiscritOnClick = true;
   Color _colorUniver = Colors.grey;
-  bool _UniverOnClick = false;
+  bool _UniverOnClick = true;
   Color _colorGender = Colors.grey;
-  bool _GenderOnClick = false;
+  bool _GenderOnClick = true;
   Color _addressColor = Colors.grey;
-  bool _addressOnClick = false;
+  bool _addressOnClick = true;
   Color _otmColor = Colors.grey;
-  bool _otmOnClick = false;
+  bool _otmOnClick = true;
   bool value5 = false;
   bool value7 = false;
   String? univerName;
   int? index;
+  // String region = '';
 
   var pricetype = [
     "1 ta odam kerak",
@@ -173,11 +179,10 @@ class _AdsEditState extends State<AdsEdit> {
         : widget.roommate_gender == '2'
             ? 'Qiz bolaga'
             : "O'g'il bolaga";
-    university_id = widget.universityId == null || widget.universityId == ''
-        ? ''
-        : widget.universityId;
-      
-    print(widget.universityId.toString() + "------");
+
+    // district_id = widget.region;
+
+    print(district_id.toString() + "------");
     super.initState();
   }
 
@@ -388,6 +393,7 @@ class _AdsEditState extends State<AdsEdit> {
                           .where((element) => element.name == newValue);
                       data.getDistrict(selected.last.id!);
                       setState(() {
+                        print(selected.last.id!);
                         _RegionOnClick = true;
                         _colorRegion = Colors.grey;
                         dropDown = newValue.toString();
@@ -415,15 +421,22 @@ class _AdsEditState extends State<AdsEdit> {
                           isExpanded: true,
                           hint: Padding(
                             padding: EdgeInsets.only(left: 8.w),
-                            child: Text("Tumanni tanlang".tr()),
+                            child: Text(
+                                "Tumanni tanlang".tr()),
                           ),
                           decoration: const InputDecoration(
                             border: InputBorder.none,
                           ),
                           icon: Icon(Icons.arrow_drop_down_outlined),
                           items: data.districts.map((e) {
+                            print(widget.region);
+                            if (widget.region == e.id.toString()) {
+                                  // region = e.name.toString();
+                                  setState(() {});
+                                }
                             return DropdownMenuItem<String>(
                               onTap: () {
+                                
                                 data.districtOwnerId = e.id.toString();
 
                                 district_id = e.id.toString();
@@ -693,20 +706,26 @@ class _AdsEditState extends State<AdsEdit> {
                       child: DropdownSearch<String>(
                         mode: Mode.MENU,
                         items: data.univer.map((e) {
-
-                              univerName = e.name!;
+                          // univerName = e.name!;
+                          // print(e);
                           if (context.read<AutCubit>().selectedLang.index ==
                               1) {
+                            if (widget.universityId == e.id.toString()) {
+                              dropDown2 = e.name.toString();
+
+                              print(dropDown2.toString() + "AAAAA");
+                            }
+
                             if (dropDown2 == e.name) {
                               data.UniverId = e.id.toString();
                               data.isId = e.id;
-                              university_id = e.id.toString();
+                              widget.universityId = e.id.toString();
                             }
                           } else {
                             if (dropDown2 == e.nameRu) {
                               data.UniverId = e.id.toString();
                               data.isId = e.id;
-                              university_id = e.id.toString();
+                              widget.universityId = e.id.toString();
                             }
                           }
 
@@ -728,12 +747,15 @@ class _AdsEditState extends State<AdsEdit> {
                           // data.getFaculty(data.isId!);
                           setState(() {
                             dropDown2 = value.toString();
-                            print(dropDown2);
+                            print(dropDown2.toString() + "--------");
                             _otmOnClick = true;
                             _otmColor = Colors.grey;
                           });
                         },
-                        selectedItem: tr(widget.universityId == null || widget.universityId == '' ? "OTM ni tanlang" : univerName.toString()),
+                        selectedItem: tr(widget.universityId == null ||
+                                widget.universityId == '0'
+                            ? "OTM ni tanlang"
+                            : dropDown2.toString()),
                       ),
                     ),
                     SizedBox(
@@ -787,9 +809,8 @@ class _AdsEditState extends State<AdsEdit> {
                           print('${district_id} distruqt id');
                           print('${addressController!.text} Address');
                           print('${id} metrooo');
-                          print('${value6 ? 0 : university_id} univer id');
+                          print('${value6 ? 0 : widget.universityId} univer id');
                           print('${value6 ? 1 : 2} axamyatsiz univer');
-
                           if (_RegionOnClick &&
                               _DiscritOnClick &&
                               _UniverOnClick &&
@@ -799,12 +820,12 @@ class _AdsEditState extends State<AdsEdit> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => OwnerHouseInfo(
+                                    builder: (context) => AdsContinueEdit(
                                           id: id,
                                           addressController:
                                               addressController!.text,
                                           university_id:
-                                              '${value6 ? 0 : university_id}',
+                                              '${value6 ? 0 : widget.universityId}',
                                           roommate_gender:
                                               '${value5 ? 0 : roommate_gender}',
                                           university_id_matter:
@@ -814,6 +835,15 @@ class _AdsEditState extends State<AdsEdit> {
                                           titleController:
                                               titleController!.text,
                                           location: '${map.forMap}',
+                                          phoneNumber: widget.phoneNumber,
+                                          houseType: widget.houseType,
+                                          rent_type: widget.rentType,
+                                          room_count: widget.countRoom,
+                                          floors_count: widget.floors_count,
+                                          in_floor: widget.inFloor,
+                                          cost: widget.cost,
+                                          cost_period: widget.cost_period,
+                                          description: widget.description,
                                         )));
                           } else {
                             setState(() {

@@ -31,6 +31,9 @@ class AdspageEdit extends StatefulWidget {
   List? Image;
   String university;
   String? region;
+  String? rentType;
+  String? floors_count;
+  String? cost_period;
 
   AdspageEdit(
       this.title,
@@ -56,6 +59,9 @@ class AdspageEdit extends StatefulWidget {
       this.Image,
       this.university,
       this.region,
+      this.rentType,
+      this.floors_count,
+      this.cost_period,
       {Key? key})
       : super(key: key);
 
@@ -120,6 +126,9 @@ class _AdspageEditState extends State<AdspageEdit>
         widget.Image,
         widget.university,
         widget.region,
+        widget.rentType,
+        widget.floors_count,
+        widget.cost_period
       ),
     );
   }
