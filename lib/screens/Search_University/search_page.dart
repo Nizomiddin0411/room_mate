@@ -72,7 +72,7 @@ class _SearchPageState extends State<SearchPage> {
                           onPressed: () {
                           },
                           icon: Icon(
-                            Icons.add_location_alt_outlined,
+                            Icons.clear_outlined,
                             color: AppColors.textColor,
                           ),
                         ),

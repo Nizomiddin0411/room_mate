@@ -153,11 +153,12 @@ class _ElonlarState extends State<Elonlar> {
           children: [
             Consumer<RegionProvider>(
               builder: (_, data, __) {
+                // if(!data.isChanded){
+                //   return Center(child: CircularProgressIndicator(),);
+                // }
                 return ListView.builder(
                     shrinkWrap: true,
-                    itemCount: data.isChanded
-                        ? data.Ads.length
-                        : data.AdsForZero.length,
+                    itemCount: data.Ads.length,
                     itemBuilder: (BuildContext context, int index) {
                       return Padding(
                         padding: const EdgeInsets.all(18.0),
@@ -199,17 +200,17 @@ class _ElonlarState extends State<Elonlar> {
                                   phoneNumberShow: data
                                       .Ads[index].phoneNumberShow
                                       .toString(),
-                                  phoneNumber: data.Ads[index].phoneNumber,
-                                  stay_university: data
-                                      .Ads[index].stayUniversity?.name
-                                      .toString(),
-                                  stay_region: data.Ads[index].stayRegion?.name
-                                      .toString(),
+                                  phoneNumber:
+                                      data.Ads[index].phoneNumber.toString(),
+                                  stay_university:
+                                      data.Ads[index].stayUniversity.toString(),
+                                  stay_region:
+                                      data.Ads[index].stayRegion?.toString(),
                                   roommate_count:
                                       data.Ads[index].roommateCount.toString(),
                                   roommate_gender:
                                       data.Ads[index].roommateGender.toString(),
-                                  address: data.Ads[index].address,
+                                  address: data.Ads[index].address.toString(),
                                   floorsCount:
                                       data.Ads[index].floorsCount.toString(),
                                   inFloor: data.Ads[index].inFloor.toString(),
@@ -218,8 +219,11 @@ class _ElonlarState extends State<Elonlar> {
                                   rentType: data.Ads[index].rentType.toString(),
                                   comfort: '2',
                                   // data.Ads[index].comfort,
-                                  createData: data.Ads[index].createdAt,
-                                  Image: data.Ads[index].images, locations: data.Ads[index].location,
+                                  createData:
+                                      data.Ads[index].createdAt.toString(),
+                                  Image: data.Ads[index].images ?? [],
+                                  locations:
+                                      data.Ads[index].location.toString(),
                                 ),
                               ),
                             );
@@ -237,56 +241,54 @@ class _ElonlarState extends State<Elonlar> {
                               children: [
                                 Stack(
                                   children: [
-
-                                         data.Ads[index].images != null
-                                            ? CachedNetworkImage(
-                                                imageUrl:
-                                                    "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.Ads[index].images?[0].image.toString()}",
-                                                placeholder: (context, url) =>
-                                                    CircularProgressIndicator(),
-                                                errorWidget:
-                                                    (context, url, error) =>
-                                                        Image.asset(
-                                                          'assets/images/notImage.png',
-                                                        ),
-                                                width: 327.w,
-                                                height: 235.h,
-                                                // fit: BoxFit.cover,
-                                                imageBuilder: (context,
-                                                        imageProvider) =>
-                                                    Container(
-                                                        decoration:
-                                                            BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.only(
-                                                              topLeft: Radius
-                                                                  .circular(
-                                                                      6.r),
-                                                              topRight: Radius
-                                                                  .circular(
-                                                                      6.r)),
-                                                      image: DecorationImage(
-                                                        image: imageProvider,
-                                                        fit: BoxFit.cover,
-                                                        // colorFilter:,
-                                                        // ColorFilter.mode(Colors.red, BlendMode.colorBurn)
-                                                      ),
-                                                    )))
-                                            : data.Ads[index].images![0]
-                                                    .isEmpty
-                                                ? Image.asset(
-                                                    'assets/images/notImage.png',
-                                                    width: 324.w,
-                                                    height: 235.h,
+                                    // ... List.generate(data.Ads[index].images!.length, (index1) {
+                                    //   return
+                                    data.Ads[index].images!.isNotEmpty
+                                        ? CachedNetworkImage(
+                                            imageUrl:
+                                                "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.Ads[index].images!.last.image.toString()}",
+                                            placeholder: (context, url) =>
+                                                CircularProgressIndicator(),
+                                            errorWidget:
+                                                (context, url, error) =>
+                                                    Image.asset(
+                                                      'assets/images/notImage.png',
+                                                    ),
+                                            width: 327.w,
+                                            height: 235.h,
+                                            // fit: BoxFit.cover,
+                                            imageBuilder: (context,
+                                                    imageProvider) =>
+                                                Container(
+                                                    decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.only(
+                                                          topLeft:
+                                                              Radius.circular(
+                                                                  6.r),
+                                                          topRight:
+                                                              Radius.circular(
+                                                                  6.r)),
+                                                  image: DecorationImage(
+                                                    image: imageProvider,
                                                     fit: BoxFit.cover,
-                                                  )
-                                                : Image.asset(
-                                                    'assets/images/notImage.png',
-                                                    width: 324.w,
-                                                    height: 235.h,
-                                                    fit: BoxFit.cover,
+                                                    // colorFilter:,
+                                                    // ColorFilter.mode(Colors.red, BlendMode.colorBurn)
                                                   ),
+                                                )))
 
+                                        // ? Image.asset(
+                                        //     'assets/images/notImage.png',
+                                        //     width: 324.w,
+                                        //     height: 235.h,
+                                        //     fit: BoxFit.cover,
+                                        //   )
+                                        : Image.asset(
+                                            'assets/images/notImage.png',
+                                            width: 324.w,
+                                            height: 235.h,
+                                            fit: BoxFit.cover,
+                                          ),
                                     Positioned(
                                       child: Padding(
                                         padding: const EdgeInsets.all(8.0),
@@ -316,7 +318,7 @@ class _ElonlarState extends State<Elonlar> {
                                                               .createdAt!
                                                               .length,
                                                           ''),
-                                                  // '21 Sentabr , 14:01',
+                                                  // '${data.Ads[index].id.toString()}',
                                                   // "${data.Ads[index].createdAt!.split(':').removeAt(2)}",
                                                   style: const TextStyle(
                                                       color: AppColors
@@ -361,6 +363,7 @@ class _ElonlarState extends State<Elonlar> {
                                         ),
                                       ),
                                     ),
+                                    // })
                                   ],
                                 ),
                                 Padding(
@@ -519,9 +522,9 @@ class _ElonlarState extends State<Elonlar> {
                                           district: data.AdsForStudent[index]
                                               .district?.name
                                               .toString(),
-                                          stay_region: data.AdsForStudent[index]
-                                              .stayRegion?.name
-                                              .toString(),
+                                          stay_region: data
+                                              .AdsForStudent[index].stayRegion
+                                              ?.toString(),
                                           stay_university: data
                                               .AdsForStudent[index]
                                               .stayUniversity
@@ -553,7 +556,10 @@ class _ElonlarState extends State<Elonlar> {
                                               .roommateGender
                                               .toString(),
                                           Image:
-                                              data.AdsForStudent[index].images, locations: data.AdsForStudent[index].location,
+                                              data.AdsForStudent[index].images,
+                                          locations: data
+                                              .AdsForStudent[index].location
+                                              .toString(),
                                         )));
                           },
                           child: Container(
@@ -567,57 +573,52 @@ class _ElonlarState extends State<Elonlar> {
                               children: [
                                 Stack(
                                   children: [
-                                         data.AdsForStudent[index]
-                                                    .images !=
-                                                null
-                                            ? CachedNetworkImage(
-                                                imageUrl:
-                                                    "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.AdsForStudent[index].images?[0].image.toString()}",
-                                                placeholder: (context, url) =>
-                                                    CircularProgressIndicator(),
-                                                errorWidget:
-                                                    (context, url, error) =>
-                                                        Image.asset(
-                                                          'assets/images/notImage.png',
-                                                        ),
-                                                width: 327.w,
-                                                height: 235.h,
-                                                // fit: BoxFit.cover,
-                                                imageBuilder: (context,
-                                                        imageProvider) =>
-                                                    Container(
-                                                        decoration:
-                                                            BoxDecoration(
-                                                      borderRadius:
-                                                          BorderRadius.only(
-                                                              topLeft: Radius
-                                                                  .circular(
-                                                                      6.r),
-                                                              topRight: Radius
-                                                                  .circular(
-                                                                      6.r)),
-                                                      image: DecorationImage(
-                                                        image: imageProvider,
-                                                        fit: BoxFit.cover,
-                                                        // colorFilter:,
-                                                        // ColorFilter.mode(Colors.red, BlendMode.colorBurn)
-                                                      ),
-                                                    )))
-                                            : data.AdsForStudent[index]
-                                                    .images![0].isEmpty
-                                                ? Image.asset(
-                                                    'assets/images/notImage.png',
-                                                    width: 324.w,
-                                                    height: 235.h,
+                                    data.AdsForStudent[index].images!.isNotEmpty
+                                        ? CachedNetworkImage(
+                                            imageUrl:
+                                                "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.AdsForStudent[index].images!.first.image.toString()}",
+                                            placeholder: (context, url) =>
+                                                CircularProgressIndicator(),
+                                            errorWidget:
+                                                (context, url, error) =>
+                                                    Image.asset(
+                                                      'assets/images/notImage.png',
+                                                    ),
+                                            width: 327.w,
+                                            height: 235.h,
+                                            // fit: BoxFit.cover,
+                                            imageBuilder: (context,
+                                                    imageProvider) =>
+                                                Container(
+                                                    decoration: BoxDecoration(
+                                                  borderRadius:
+                                                      BorderRadius.only(
+                                                          topLeft:
+                                                              Radius.circular(
+                                                                  6.r),
+                                                          topRight:
+                                                              Radius.circular(
+                                                                  6.r)),
+                                                  image: DecorationImage(
+                                                    image: imageProvider,
                                                     fit: BoxFit.cover,
-                                                  )
-                                                : Image.asset(
-                                                    'assets/images/notImage.png',
-                                                    width: 324.w,
-                                                    height: 235.h,
-                                                    fit: BoxFit.cover,
+                                                    // colorFilter:,
+                                                    // ColorFilter.mode(Colors.red, BlendMode.colorBurn)
                                                   ),
+                                                )))
 
+                                        // Image.asset(
+                                        //    'assets/images/notImage.png',
+                                        //    width: 324.w,
+                                        //    height: 235.h,
+                                        //    fit: BoxFit.cover,
+                                        //  )
+                                        : Image.asset(
+                                            'assets/images/notImage.png',
+                                            width: 324.w,
+                                            height: 235.h,
+                                            fit: BoxFit.cover,
+                                          ),
                                     Positioned(
                                         child: Padding(
                                       padding: const EdgeInsets.all(8.0),
@@ -635,20 +636,20 @@ class _ElonlarState extends State<Elonlar> {
                                             ),
                                             child: Center(
                                                 child: Text(
-                                                  data.AdsForStudent[index].createdAt!
-                                                      .replaceRange(
+                                              data.AdsForStudent[index]
+                                                  .createdAt!
+                                                  .replaceRange(
                                                       data
-                                                          .AdsForStudent[index]
-                                                          .createdAt!
-                                                          .length -
+                                                              .AdsForStudent[
+                                                                  index]
+                                                              .createdAt!
+                                                              .length -
                                                           3,
-                                                      data
-                                                          .AdsForStudent[index]
-                                                          .createdAt!
-                                                          .length,
+                                                      data.AdsForStudent[index]
+                                                          .createdAt!.length,
                                                       ''),
                                               // "21 Sentabr,14:01",
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                   color: AppColors
                                                       .backgroundWhite),
                                             )),
