@@ -153,6 +153,9 @@ class _KunlikIjaraState extends State<KunlikIjara> {
           children: [
             Consumer<DayProvider>(
               builder: (_, data, __) {
+                if(!data.isChanded){
+                  return Center(child: CircularProgressIndicator(),);
+                }
                 return ListView.builder(
                     shrinkWrap: true,
                     itemCount: data.Ads.length,
@@ -436,6 +439,9 @@ class _KunlikIjaraState extends State<KunlikIjara> {
             ),
             Consumer<DayProvider>(
               builder: (_, data, __) {
+                if(!data.isChanded){
+                  return Center(child: CircularProgressIndicator(),);
+                }
                 return ListView.builder(
                     shrinkWrap: true,
                     itemCount: data.AdsForStudent.length,

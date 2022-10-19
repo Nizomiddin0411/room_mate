@@ -154,6 +154,9 @@ class _OylikIjaraState extends State<OylikIjara> {
           children: [
             Consumer<MonthProvider>(
               builder: (_, data, __) {
+                if(!data.isChanded){
+                  return Center(child: CircularProgressIndicator(),);
+                }
                 return ListView.builder(
                     shrinkWrap: true,
                     itemCount: data.Ads.length,
@@ -439,6 +442,9 @@ class _OylikIjaraState extends State<OylikIjara> {
             ),
             Consumer<MonthProvider>(
               builder: (_, data, __) {
+                if(!data.isChanded){
+                  return Center(child: CircularProgressIndicator(),);
+                }
                 return ListView.builder(
                     shrinkWrap: true,
                     itemCount: data.AdsForStudent.length,
