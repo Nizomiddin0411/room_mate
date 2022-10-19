@@ -446,54 +446,54 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
                                 file2: FileExist[1] ? FileList[1] : FileList[4],
                                 file3: FileExist[2] ? FileList[2] : FileList[5],
                               );
-                              // print(load.isLoading);
-                              // load.isload = false;
-                              // if(load.isLoading != true){
-                              //   showAlertDialog(context);
-                              // }
-                              // setState(() {
-                              //   loading =
-                              //       load.isLoading;
-                              // });
+                              print(load.isLoading);
+                              load.isload = false;
+                              if(load.isLoading != true){
+                                showAlertDialog(context);
+                              }
+                              setState(() {
+                                loading =
+                                    load.isLoading;
+                              });
 
-                              // var data = await UserCreateAds().FetchAds(
-                              //   titleController: widget.titleController,
-                              //   roommate_gender: widget.roommate_gender,
-                              //   gender_matter: widget.gender_matter,
-                              //   district_id: widget.district_id,
-                              //   subway: widget.id,
-                              //   addressController: widget.addressController,
-                              //   university_id: widget.university_id,
-                              //   university_id_matter:
-                              //       widget.university_id_matter,
-                              //   phoneController: widget.phoneController,
-                              //   house_type: widget.house_type,
-                              //   rent_type: widget.rent_type,
-                              //   room_count: widget.room_count,
-                              //   floors_count: widget.floors_count,
-                              //   in_floor: widget.in_floor,
-                              //   costController: widget.costController,
-                              //   cost_type: widget.cost_type,
-                              //   live_with_owner: widget.live_with_owner,
-                              //   utility_electricity: widget.utility_electricity,
-                              //   unility_gaz: widget.unility_gaz,
-                              //   utility_hot_water: widget.utility_hot_water,
-                              //   utility_cold_water: widget.utility_cold_water,
-                              //   utility_trash: widget.utility_trash,
-                              //   comfort: widget.comfort,
-                              //   description: widget.description,
-                              //   location: widget.location,
-                              //   file1: FileExist[0] ? FileList[0] : FileList[3],
-                              //   cost_period: widget.cost_period,
-                              //   file2: FileExist[1] ? FileList[1] : FileList[4],
-                              //   file3: FileExist[2] ? FileList[2] : FileList[5],
-                              // );
+                              var data = await UserCreateAds().FetchAds(
+                                titleController: widget.titleController,
+                                roommate_gender: widget.roommate_gender,
+                                gender_matter: widget.gender_matter,
+                                district_id: widget.district_id,
+                                subway: widget.id,
+                                addressController: widget.addressController,
+                                university_id: widget.university_id,
+                                university_id_matter:
+                                    widget.university_id_matter,
+                                phoneController: widget.phoneController,
+                                house_type: widget.house_type,
+                                rent_type: widget.rent_type,
+                                room_count: widget.room_count,
+                                floors_count: widget.floors_count,
+                                in_floor: widget.in_floor,
+                                costController: widget.costController,
+                                cost_type: widget.cost_type,
+                                live_with_owner: widget.live_with_owner,
+                                utility_electricity: widget.utility_electricity,
+                                unility_gaz: widget.unility_gaz,
+                                utility_hot_water: widget.utility_hot_water,
+                                utility_cold_water: widget.utility_cold_water,
+                                utility_trash: widget.utility_trash,
+                                comfort: widget.comfort,
+                                description: widget.description,
+                                location: widget.location,
+                                file1: FileExist[0] ? FileList[0] : FileList[3],
+                                cost_period: widget.cost_period,
+                                file2: FileExist[1] ? FileList[1] : FileList[4],
+                                file3: FileExist[2] ? FileList[2] : FileList[5],
+                              );
 
-                              // Navigator.pushAndRemoveUntil(
-                              //     context,
-                              //     MaterialPageRoute(
-                              //         builder: (context) => CreateSuccedful()),
-                              //     (route) => false);
+                              Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => CreateSuccedful()),
+                                  (route) => false);
                               setState(() {});
                               // if (data['status']) {
                               //
@@ -544,17 +544,15 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
                                   widget.description.toString() + 'qoshimcha');
                               print(widget.location.toString() + 'location');
                               print(widget.cost_period.toString() +
-                                  'cost period');
-                              //   ScaffoldMessenger.of(context).showSnackBar(
-                              //       SnackBar(content: Text(data['error'])));
-                              // }
-                            },
-                            child:
-                            Text(
+                                  'cost perio');
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                    SnackBar(content: Text(data['error'])));
+                              }, child: Text(
                               "Keyingi".tr(),
                               style: TextStyle(
                                   fontSize: 20.sp, fontWeight: FontWeight.w500),
                             ),
+                            
                           )),
                     ),
                   ],
