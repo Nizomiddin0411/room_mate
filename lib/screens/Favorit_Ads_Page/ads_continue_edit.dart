@@ -3,6 +3,7 @@ import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:talaba_uy/screens/Create_ads/owner_photo.dart';
+import 'package:talaba_uy/screens/Favorit_Ads_Page/ads_photo_edit.dart';
 
 import '../../core/const/app_colors.dart';
 
@@ -1219,7 +1220,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => OwnerCreateImage(
+                                  builder: (context) => AdsPhotoEdit(
                                     titleController: widget.titleController,
                                     roommate_gender: widget.roommate_gender,
                                     gender_matter: widget.gender_matter,

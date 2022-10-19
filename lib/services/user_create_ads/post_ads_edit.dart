@@ -9,8 +9,9 @@ import 'dart:convert';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 
-class UserCreateAds {
-  Future FetchAds({
+class EditAdsService {
+  Future FetchAdsEdit({
+    required String? id,
     required String? titleController,
     required String? roommate_gender,
     required String? gender_matter,
@@ -41,10 +42,11 @@ class UserCreateAds {
     required File file3,
     required String? cost_period,
 }) async {
+  print("-------");
     var request = http.MultipartRequest(
       'post',
       Uri.parse(
-        'http://164.68.114.231:8081/roommate/backend/web/api/advertising/user-add-advertising',
+        'http://164.68.114.231:8081/roommate/backend/web/api/advertising/user-update-advertising',
       ),
       // headers: {
       //   HttpHeaders.authorizationHeader: 'Bearer ${Hive.box('token').get('token')}'
@@ -52,6 +54,7 @@ class UserCreateAds {
 
 
     );
+    print("AAAAAA");
     var file_ = await file1.exists();
     var fileSecond = await file2.exists();
     var fileThreeth = await file3.exists();
@@ -101,7 +104,7 @@ class UserCreateAds {
         )
       ]);
     }
-
+    request.fields.addAll({'id': '${id}',});
     request.fields.addAll({'title': '${titleController}',});
     request.fields.addAll({'roommate_gender': '${roommate_gender}',});
     request.fields.addAll({'gender_matter': '${gender_matter}',});
@@ -134,12 +137,10 @@ class UserCreateAds {
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode >= 200 && response.statusCode <= 300) {
-      print(university_id.toString() + "un");
+      print(Hive.box('token').get('token').toString() + "u");
       var data = await response.stream.bytesToString();
       // await Hive.box('token').put('token', jsonDecode(data)["access_token"]);
-      print(Hive.box('token').get('token'));
-      print(Hive.box('type').get('type'));
-      print(file1.toString() + 'filllllllll');
+      print(file1.toString() + 'fillllllllllllllbbbb');
       return jsonDecode(data);
     }else{
       print('ishlamadi');

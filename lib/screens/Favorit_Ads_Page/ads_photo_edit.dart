@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:talaba_uy/screens/Create_ads/create_succed_dart.dart';
+import 'package:talaba_uy/services/user_create_ads/post_ads_edit.dart';
 
 import '../../core/const/app_colors.dart';
 import '../../services/user_create_ads/post_user_create_ads.dart';
@@ -404,7 +405,8 @@ class _AdsPhotoEditState extends State<AdsPhotoEdit> {
                               print(FileList[3]);
                               print(FileList[1]);
                               print(FileList[2]);
-                              var data = await UserCreateAds().FetchAds(
+                              var data = await EditAdsService().FetchAdsEdit(
+                                id: '1',
                                 titleController: widget.titleController,
                                 roommate_gender: widget.roommate_gender,
                                 gender_matter: widget.gender_matter,
@@ -438,6 +440,7 @@ class _AdsPhotoEditState extends State<AdsPhotoEdit> {
                               );
                               setState(() {});
                               if (data['status']) {
+
                                 Navigator.pushAndRemoveUntil(
                                     context,
                                     MaterialPageRoute(
@@ -490,9 +493,9 @@ class _AdsPhotoEditState extends State<AdsPhotoEdit> {
                                     'qoshimcha');
                                 print(widget.location.toString() + 'location');
                                 print(widget.cost_period.toString() +
-                                    'cost period');
+                                    'cost');
                                 ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(content: Text(data['error'])));
+                                    SnackBar(content: Text(data['message'])));
                               }
                             },
                             child: Text(
