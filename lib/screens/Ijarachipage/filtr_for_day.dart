@@ -5,11 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
-import 'package:talaba_uy/screens/All_Ads_Page/all_ads_page.dart';
 import '../../cubit/aut_cubit.dart';
 import '../../models/lang_model.dart';
 import '../../provider/day_provider.dart';
-import '../../provider/region_provider.dart';
 
 class FiltrForDay extends StatefulWidget {
   const FiltrForDay({Key? key}) : super(key: key);
@@ -21,44 +19,25 @@ class FiltrForDay extends StatefulWidget {
 class _FiltrForDayState extends State<FiltrForDay> {
   bool _checkMetro = false;
 
-  TextEditingController? costcontroller;
-  TextEditingController? titlecontroller;
-  TextEditingController? othercontroller;
+
   String dropDown = "";
   String dropDown2 = "";
-  bool _checkHome = false;
-  String? _dropownUsd;
   String _titleTime = "Ijara muddati";
-  String _titleGendor = "";
-  String _titleCount = "Ijarachilar soni";
-  String _titleCourse = "";
-  String DistrictId = '';
+
   String UniverId = '';
-  String Course = '';
-  String FakultetId = '';
-  String RoomOwner = '';
+
+
+
   String TypeHouse = '';
   String TypeOfRent = '';
-  String typeOfPayment = '';
+
   String subwayof = '';
-  String gender = '';
-  String CourseCount = '';
+
   String roomCount = '';
-  var kurs = [
-    '1-kurs',
-    '2-kurs',
-    '3-kurs',
-    '4-kurs',
-    '5-kurs',
-    '6-kurs',
-  ];
+
   var kvartira = [
     'Kvartira',
     'Xovli',
-  ];
-  var genderone = [
-    'Erkak',
-    'Ayol',
   ];
   var kindOfMoment = [
     'kunlik',
@@ -71,13 +50,7 @@ class _FiltrForDayState extends State<FiltrForDay> {
     '4',
     '5-6',
   ];
-  var ijarachi = [
-    '1',
-    '2',
-    '3',
-    '4',
-    '5-6',
-  ];
+
   late TextEditingController fromCost;
   late TextEditingController toCost;
   @override
@@ -86,7 +59,6 @@ class _FiltrForDayState extends State<FiltrForDay> {
     fromCost = TextEditingController();
     toCost = TextEditingController();
     Provider.of<DayProvider>(context, listen: false).getUnivers();
-    // Provider.of<RegionProvider>(context,listen: false).getFiltrApi();
     Provider.of<DayProvider>(context, listen: false).getRegion().asStream();
   }
 
@@ -622,21 +594,7 @@ class _FiltrForDayState extends State<FiltrForDay> {
                               primary: AppColors.buttonLinear),
                           onPressed: () async {
                             // DistrictId
-                            setState(() {
-                              if (_titleCourse == '1-kurs') {
-                                Course = '1';
-                              } else if (_titleCourse == '2-kurs') {
-                                Course = '2';
-                              } else if (_titleCourse == '3-kurs') {
-                                Course = '3';
-                              } else if (_titleCourse == '4-kurs') {
-                                Course = '4';
-                              } else if (_titleCourse == '5-kurs') {
-                                Course = '5';
-                              } else if (_titleCourse == '6-kurs') {
-                                Course = '6';
-                              }
-                            });
+
                             setState(() {
                               if (kvartira == 'Xovli') {
                                 TypeHouse = '2';
@@ -652,24 +610,17 @@ class _FiltrForDayState extends State<FiltrForDay> {
                               }
                             });
                             setState(() {
-                              if (_checkMetro = true) {
+                              if (_checkMetro == true) {
                                 subwayof = '1';
                               } else {
                                 subwayof = '2';
                               }
                             });
-                            setState(() {
-                              if (_titleGendor == 'Ayol') {
-                                gender = '2';
-                              } else {
-                                gender = '1';
-                              }
-                            });
+
                             print('-----------------');
                             print(data.RegionId);
                             print(data.districtId);
                             print(data.UniverId);
-                            print(Course);
                             print(TypeHouse);
                             print(roomCount);
                             print(_titleTime);
