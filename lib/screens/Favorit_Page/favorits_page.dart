@@ -164,11 +164,10 @@ class _FavoritPageState extends State<FavoritPage> {
                                     Stack(
                                       children: [
 
-                                             data.Like[index].images !=
-                                                    null
+                                             data.Like[index].images!.isNotEmpty
                                                 ? CachedNetworkImage(
                                                     imageUrl:
-                                                        "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.Like[index].images?[0].image.toString()}",
+                                                        "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.Like[index].images!.first.image.toString()}",
                                                     placeholder: (context,
                                                             url) =>
                                                         CircularProgressIndicator(),
