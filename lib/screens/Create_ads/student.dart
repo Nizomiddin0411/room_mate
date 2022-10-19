@@ -10,6 +10,7 @@ import 'package:talaba_uy/screens/Create_ads/ads_student_create,dart.dart';
 import '../../cubit/aut_cubit.dart';
 import '../../models/lang_model.dart';
 import '../../provider/region_provider.dart';
+
 class Student extends StatefulWidget {
   const Student({Key? key}) : super(key: key);
 
@@ -158,21 +159,29 @@ class _StudentState extends State<Student> {
                       hintStyle: TextStyle(fontSize: 14.sp, color: Colors.grey),
                     ),
                     cursorColor: Colors.grey.shade800,
-                    cursorWidth: 2.w,
+                    cursorWidth: 1.5.w,
                   ),
                 ),
                 SizedBox(
                   height: 15.w,
                 ),
-                Text(
-                  "Qaysi viloyatlik sherik izlayabsiz ?".tr(),
-                  style: TextStyle(
-                    color: AppColors.textColor,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w500,
-                  ),
+                Row(
+                  children: [
+                    Text(
+                      "Qaysi viloyatlik sherik izlayabsiz ?".tr(),
+                      style: TextStyle(
+                        color: AppColors.textColor,
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 82.w,
+                    ),
+                    Text("Ahamiyatsiz"),
+                  ],
                 ),
-                SizedBox(height: 4.h),
+                SizedBox(height: 10.h),
                 Row(
                   children: [
                     Container(
@@ -217,11 +226,10 @@ class _StudentState extends State<Student> {
                       ),
                     ),
                     SizedBox(
-                      width: 14.w,
+                      width: 15.w,
                     ),
                     Column(
                       children: [
-                        Text("Ahamiyatsiz"),
                         Checkbox(
                           value: this.regionsvalue,
                           onChanged: (bool? value) {
@@ -234,14 +242,22 @@ class _StudentState extends State<Student> {
                     )
                   ],
                 ),
-                SizedBox(height: 12.h),
-                Text(
-                  "Qaysi OTM da o’qiydigan sherik izlayabsiz ?".tr(),
-                  style: TextStyle(
-                    color: AppColors.textColor,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w500,
-                  ),
+                SizedBox(height: 15.h),
+                Row(
+                  children: [
+                    Text(
+                      "Qaysi OTM da o’qiydigan sherik izlayabsiz ?".tr(),
+                      style: TextStyle(
+                        color: AppColors.textColor,
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    SizedBox(
+                      width: 35.w,
+                    ),
+                    Text("Ahamiyatsiz"),
+                  ],
                 ),
                 SizedBox(height: 4.h),
                 Row(
@@ -252,7 +268,7 @@ class _StudentState extends State<Student> {
                           borderRadius: BorderRadius.circular(10.r),
                           border: Border.all(color: _colorUniver)),
                       child: DropdownSearch<String>(
-                        mode: Mode.MENU,
+                        mode: Mode.BOTTOM_SHEET,
                         items: data.univer.map((e) {
                           if (dropDown2 == e.name) {
                             data.UniverId = e.id.toString();
@@ -286,11 +302,10 @@ class _StudentState extends State<Student> {
                       ),
                     ),
                     SizedBox(
-                      width: 14.w,
+                      width: 16.w,
                     ),
                     Column(
                       children: [
-                        Text("Ahamiyatsiz"),
                         Checkbox(
                           value: value6,
                           onChanged: (bool? value) {
@@ -418,13 +433,17 @@ class _StudentState extends State<Student> {
                   ],
                 ),
                 SizedBox(
-                  height: 8.h,
+                  height: 10.h,
                 ),
                 Column(
                   children: [
                     Row(
                       children: [
                         Text("Telefon raqami").tr(),
+                        SizedBox(
+                          width: 170.w,
+                        ),
+                        Text("Ko’rinmasin"),
                       ],
                     ),
                     SizedBox(
@@ -434,10 +453,10 @@ class _StudentState extends State<Student> {
                       children: [
                         Container(
                           padding: EdgeInsets.symmetric(horizontal: 8.w),
-                          height: 60.h,
+                          height: 55.h,
                           width: 250.w,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(6.r),
+                              borderRadius: BorderRadius.circular(8.r),
                               border: Border.all(color: _phoneColor)),
                           child: TextFormField(
                             scrollPadding:
@@ -472,7 +491,6 @@ class _StudentState extends State<Student> {
                         ),
                         Column(
                           children: [
-                            Text("Ko’rinmasin"),
                             SizedBox(
                               height: 10,
                             ),
@@ -595,82 +613,82 @@ class _StudentState extends State<Student> {
                   padding:
                       EdgeInsets.symmetric(vertical: 18.h, horizontal: 31.w),
                   child: Container(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            padding: EdgeInsets.symmetric(vertical: 14.h),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.r)),
-                            primary: AppColors.buttonLinear),
-                        onPressed: () {
-                          if (titlecolor2 &&
-                              univerColor &&
-                              _phoneOnClick &&
-                              _FormOnClick&&_UniverOnClick) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => Student2(
-                                    titlecontroller1: titlecontroller1.text,
-                                    univervalue: '${value6 ? 1 : 2}',
-                                    viloyatidisi: data.viloyatid.toString(),
-                                    viloyatvalue: '${regionsvalue ? 1 : 2}',
-                                    universiteteid: data.UniverId,
-                                    titleGendor:
-                                        '${gender1 ? 0 : _titleGendor}',
-                                    titlecount: '${gender1 ? 0 : _titleCount}',
-                                    phoneController: phoneController.text
-                                        .split(' ')
-                                        .join(''),
-                                    house: house,
-                                    addinformation: addinformation.text,
-                                    numbervalue: '${numbervalue ? 1 : 2}'),
-                              ),
-                            );
-                          } else {
-                            if (!titlecolor2) {
-                              titlecolor = Colors.red;
-                            }
-                            if (!univerColor) {
-                              univerColor1 = Colors.red;
-                            }
-                            if (!_phoneOnClick) {
-                              _phoneColor = Colors.red;
-                            }
-                            if (!_FormOnClick) {
-                              _colorForm = Colors.red;
-                            }if (!_UniverOnClick) {
-                              _colorUniver = Colors.red;
-                            }
-                            setState(() {});
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          padding: EdgeInsets.symmetric(vertical: 14.h),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.r)),
+                          primary: AppColors.buttonLinear),
+                      onPressed: () {
+                        if (titlecolor2 &&
+                            univerColor &&
+                            _phoneOnClick &&
+                            _FormOnClick &&
+                            _UniverOnClick) {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Student2(
+                                  titlecontroller1: titlecontroller1.text,
+                                  univervalue: '${value6 ? 1 : 2}',
+                                  viloyatidisi: data.viloyatid.toString(),
+                                  viloyatvalue: '${regionsvalue ? 1 : 2}',
+                                  universiteteid: data.UniverId,
+                                  titleGendor: '${gender1 ? 0 : _titleGendor}',
+                                  titlecount: '${gender1 ? 0 : _titleCount}',
+                                  phoneController:
+                                      phoneController.text.split(' ').join(''),
+                                  house: house,
+                                  addinformation: addinformation.text,
+                                  numbervalue: '${numbervalue ? 1 : 2}'),
+                            ),
+                          );
+                        } else {
+                          if (!titlecolor2) {
+                            titlecolor = Colors.red;
                           }
-
-                          print(
-                              '${titlecontroller1.text} elonni nomlashhhh yooo+++++++++++');
-                          print(
-                              '${value6 ? '1' : '2'} univervalue shartemas -----');
-                          print('${data.viloyatid} viloyatid +++++++++++');
-                          print(
-                              '${regionsvalue ? '1' : '2'} regionsvalue shart emas ');
-                          print('${data.UniverId} UniverId idisi +++++++++++');
-                          print(
-                              '${_titleGendor.toString() == 'Erkak' ? '1' : '2'} kimlarga++++++');
-                          print(
-                              '${phoneController.text} telefon raqam   +++++++++++');
-                          print(
-                              '${house} telefon raqam  sherik vsdjvnsijvbs +++++++++++');
-                          print(
-                              '${addinformation.text} qoshimcha malumotlar   +++++++++++');
-                          print('${_titleCount} nechta odamga +++');
-                          print(
-                              '${numbervalue ? '1' : '2'}  telefon raqam korinsin  +++++++++++');
-                        },
-                        child: Text(
-                          "Keyingi ".tr(),
-                          style: TextStyle(
-                              fontSize: 20.sp, fontWeight: FontWeight.w500),
-                        ),
-                      )),
+                          if (!univerColor) {
+                            univerColor1 = Colors.red;
+                          }
+                          if (!_phoneOnClick) {
+                            _phoneColor = Colors.red;
+                          }
+                          if (!_FormOnClick) {
+                            _colorForm = Colors.red;
+                          }
+                          if (!_UniverOnClick) {
+                            _colorUniver = Colors.red;
+                          }
+                          setState(() {});
+                        }
+                        print(
+                            '${titlecontroller1.text} elonni nomlashhhh yooo+++++++++++');
+                        print(
+                            '${value6 ? '1' : '2'} univervalue shartemas -----');
+                        print('${data.viloyatid} viloyatid +++++++++++');
+                        print(
+                            '${regionsvalue ? '1' : '2'} regionsvalue shart emas ');
+                        print('${data.UniverId} UniverId idisi +++++++++++');
+                        print(
+                            '${_titleGendor.toString() == 'Erkak' ? '1' : '2'} kimlarga++++++');
+                        print(
+                            '${phoneController.text} telefon raqam   +++++++++++');
+                        print(
+                            '${house} telefon raqam  sherik vsdjvnsijvbs +++++++++++');
+                        print(
+                            '${addinformation.text} qoshimcha malumotlar   +++++++++++');
+                        print('${_titleCount} nechta odamga +++');
+                        print(
+                            '${numbervalue ? '1' : '2'}  telefon raqam korinsin  +++++++++++');
+                      },
+                      child: Text(
+                        "Keyingi ".tr(),
+                        style: TextStyle(
+                            fontSize: 20.sp, fontWeight: FontWeight.w500),
+                      ),
+                    ),
+                  ),
                 )
               ],
             );
