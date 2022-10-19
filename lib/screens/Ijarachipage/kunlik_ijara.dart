@@ -205,7 +205,7 @@ class _KunlikIjaraState extends State<KunlikIjara> {
                                           chatApproved:
                                               data.Ads[index].chatApproved,
                                           phoneNumberShow:
-                                              data.Ads[index].phoneNumberShow,
+                                              data.Ads[index].phoneNumberShow.toString(),
                                           phoneNumber:
                                               data.Ads[index].phoneNumber,
                                           stay_university: data
@@ -249,10 +249,10 @@ class _KunlikIjaraState extends State<KunlikIjara> {
                               children: [
                                 Stack(
                                   children: [
-                                    data.Ads[index].images != null
+                                    data.Ads[index].images!.isNotEmpty
                                             ? CachedNetworkImage(
                                                 imageUrl:
-                                                    "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.Ads[index].images?[0].image.toString()}",
+                                                    "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.Ads[index].images!.first.image.toString()}",
                                                 placeholder: (context, url) =>
                                                     CircularProgressIndicator(),
                                                 errorWidget:
@@ -283,14 +283,13 @@ class _KunlikIjaraState extends State<KunlikIjara> {
                                                         // ColorFilter.mode(Colors.red, BlendMode.colorBurn)
                                                       ),
                                                     )))
-                                            : data.Ads[index].images![0]
-                                                    .isEmpty
-                                                ? Image.asset(
-                                                    'assets/images/notImage.png',
-                                                    width: 324.w,
-                                                    height: 235.h,
-                                                    fit: BoxFit.cover,
-                                                  )
+
+                                                // ? Image.asset(
+                                                //     'assets/images/notImage.png',
+                                                //     width: 324.w,
+                                                //     height: 235.h,
+                                                //     fit: BoxFit.cover,
+                                                //   )
                                                 : Image.asset(
                                                     'assets/images/notImage.png',
                                                     width: 324.w,
@@ -553,12 +552,10 @@ class _KunlikIjaraState extends State<KunlikIjara> {
                               children: [
                                 Stack(
                                   children: [
-                                     data.AdsForStudent[index]
-                                                    .images !=
-                                                null
+                                     data.AdsForStudent[index].images!.isNotEmpty
                                             ? CachedNetworkImage(
                                                 imageUrl:
-                                                    "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.AdsForStudent[index].images?[0].image.toString()}",
+                                                    "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.AdsForStudent[index].images!.first.image.toString()}",
                                                 placeholder: (context, url) =>
                                                     CircularProgressIndicator(),
                                                 errorWidget:
@@ -589,14 +586,13 @@ class _KunlikIjaraState extends State<KunlikIjara> {
                                                         // ColorFilter.mode(Colors.red, BlendMode.colorBurn)
                                                       ),
                                                     )))
-                                            : data.AdsForStudent[index]
-                                                    .images![0].isEmpty
-                                                ? Image.asset(
-                                                    'assets/images/notImage.png',
-                                                    width: 324.w,
-                                                    height: 235.h,
-                                                    fit: BoxFit.cover,
-                                                  )
+
+                                                // ? Image.asset(
+                                                //     'assets/images/notImage.png',
+                                                //     width: 324.w,
+                                                //     height: 235.h,
+                                                //     fit: BoxFit.cover,
+                                                //   )
                                                 : Image.asset(
                                                     'assets/images/notImage.png',
                                                     width: 324.w,
