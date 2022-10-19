@@ -1180,28 +1180,28 @@ class _Student2State extends State<Student2> {
                               ),
                             ),
                           );
-                          // print('${widget.universiteteid} widget.universiteteid  yooo+++++++++++');
-                          // print('${widget.house} widget.house  +++++++++++');
-                          // print('${widget.titleGendor} titleGendor.titleGendor  +++++++++++');
-                          // print('${widget.numbervalue} numbervalue.numbervalue  +++++++++++');
-                          // print('${widget.viloyatvalue} viloyatvalue.viloyatvalue  +++++++++++');
-                          // print('${widget.phoneController} phoneController.phoneController  +++++++++++');
-                          // print('${widget.titlecontroller1} titlecontroller1.titlecontroller1  +++++++++++');
-                          // print('${widget.addinformation} addinformation.addinformation  +++++++++++');
-                          // print('${widget.univervalue} univervalue.univervalue  +++++++++++');
-                          // print('${widget.titlecount} titlecount.titlecount  +++++++++++');
-                          // print('${comfortItems} comfortItems.comfortItems  +++++++++++');
-                          // print('${costcommunal} costcommunal.costcommunal  +++++++++++');
+                          print('${widget.universiteteid} widget.universiteteid  yooo+++++++++++');
+                          print('${widget.house} widget.house  +++++++++++');
+                          print('${widget.titleGendor} titleGendor.titleGendor  +++++++++++');
+                          print('${widget.numbervalue} numbervalue.numbervalue  +++++++++++');
+                          print('${widget.viloyatvalue} viloyatvalue.viloyatvalue  +++++++++++');
+                          print('${widget.phoneController} phoneController.phoneController  +++++++++++');
+                          print('${widget.titlecontroller1} titlecontroller1.titlecontroller1  +++++++++++');
+                          print('${widget.addinformation} addinformation.addinformation  +++++++++++');
+                          print('${widget.univervalue} univervalue.univervalue  +++++++++++');
+                          print('${widget.titlecount} titlecount.titlecount  +++++++++++');
+                          print('${comfortItems} comfortItems.comfortItems  +++++++++++');
+                          print('${costcommunal} costcommunal.costcommunal  +++++++++++');
                           print('${pricerent_type} pricerent_type dollar  +++++++++++');
-                          // print('${housefloorcount} housefloorcount.housefloorcount  +++++++++++');
+                          print('${housefloorcount} housefloorcount.housefloorcount  +++++++++++');
                           print('${housetype== 'kv' ? '1' : '2'} kunlik.housetype  +++++++++++');
-                          // print('${pricerent_type} dropDown.dollar yoki sum  +++++++++++');
-                          // print('${addressController.text} addressController.addressController  +++++++++++');
-                          // print('${housecount} housecount.housecount  +++++++++++');
-                          // print('${ownerlive} ownerlive.ownerlive  +++++++++++');
-                          // print('${price} rent_type.rent_type  +++++++++++');
-                          // print('${price} price.price  +++++++++++');
-                          // print('${costcontroller.text} costcontroller.costcontroller  +++++++++++');
+                          print('${pricerent_type} dropDown.dollar yoki sum  +++++++++++');
+                          print('${addressController.text} addressController.addressController  +++++++++++');
+                          print('${housecount} housecount.housecount  +++++++++++');
+                          print('${ownerlive} ownerlive.ownerlive  +++++++++++');
+                          print('${price} rent_type.rent_type  +++++++++++');
+                          print('${price} price.price  +++++++++++');
+                          print('${costcontroller.text} costcontroller.costcontroller  +++++++++++');
 
                         },
                         child: Text(

@@ -210,7 +210,6 @@ class _AdsEditState extends State<AdsEdit> {
           )),
     );
 
-    print(Hive.box('token').get('token'));
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 12.h),
