@@ -153,9 +153,9 @@ class _ElonlarState extends State<Elonlar> {
           children: [
             Consumer<RegionProvider>(
               builder: (_, data, __) {
-                // if(!data.isChanded){
-                //   return Center(child: CircularProgressIndicator(),);
-                // }
+                if(!data.isChanded){
+                  return Center(child: CircularProgressIndicator(),);
+                }
                 return ListView.builder(
                     shrinkWrap: true,
                     itemCount: data.Ads.length,
@@ -456,6 +456,9 @@ class _ElonlarState extends State<Elonlar> {
             ),
             Consumer<RegionProvider>(
               builder: (_, data, __) {
+                if(!data.isChanded){
+                  return Center(child: CircularProgressIndicator(),);
+                }
                 return ListView.builder(
                     shrinkWrap: true,
                     itemCount: data.AdsForStudent.length,
