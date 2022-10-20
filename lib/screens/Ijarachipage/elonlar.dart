@@ -154,7 +154,7 @@ class _ElonlarState extends State<Elonlar> {
             Consumer<RegionProvider>(
               builder: (_, data, __) {
                 if(!data.isChanded){
-                  return Center(child: CircularProgressIndicator(),);
+                  return const Center(child: CircularProgressIndicator(),);
                 }
                 return ListView.builder(
                     shrinkWrap: true,
@@ -217,7 +217,7 @@ class _ElonlarState extends State<Elonlar> {
                                   utility_bills:
                                       data.Ads[index].utilityBills.toString(),
                                   rentType: data.Ads[index].rentType.toString(),
-                                  comfort: '2',
+                                  comfort: data.Ads[index].comfort.toString(),
                                   // data.Ads[index].comfort,
                                   createData:
                                       data.Ads[index].createdAt.toString(),

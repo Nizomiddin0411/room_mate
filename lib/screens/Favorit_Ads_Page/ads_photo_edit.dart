@@ -407,8 +407,9 @@ class _AdsPhotoEditState extends State<AdsPhotoEdit> {
                               print(FileList[3]);
                               print(FileList[1]);
                               print(FileList[2]);
+
                               var data = await EditAdsService().FetchAdsEdit(
-                                id: '1',
+                                id: int.parse('${widget.id}'),
                                 titleController: widget.titleController,
                                 roommate_gender: widget.roommate_gender,
                                 gender_matter: widget.gender_matter,
