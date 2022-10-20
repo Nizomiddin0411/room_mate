@@ -128,7 +128,7 @@ class _AdspageEditState extends State<AdspageEdit>
         widget.region,
         widget.rentType,
         widget.floors_count,
-        widget.cost_period
+        widget.cost_period,
       ),
     );
   }

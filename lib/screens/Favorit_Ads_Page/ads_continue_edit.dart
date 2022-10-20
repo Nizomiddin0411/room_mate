@@ -8,14 +8,15 @@ import 'package:talaba_uy/screens/Favorit_Ads_Page/ads_photo_edit.dart';
 import '../../core/const/app_colors.dart';
 
 class AdsContinueEdit extends StatefulWidget {
-  String? titleController;
+  String? id;
   String? addressController;
+  String? university_id;
+
   String? roommate_gender;
+  String? university_id_matter;
   String? gender_matter;
   String? district_id;
-  String? university_id;
-  String? university_id_matter;
-  String? id;
+  String? titleController;
   String? location;
   String? phoneNumber;
   String? houseType;
@@ -25,18 +26,18 @@ class AdsContinueEdit extends StatefulWidget {
   String? in_floor;
   String? cost;
   String? cost_period;
-  String?  description;
+  String? description;
 
   AdsContinueEdit({
-    required this.location,
-    required this.titleController,
-    required this.roommate_gender,
-    required this.gender_matter,
-    required this.district_id,
     required this.id,
     required this.addressController,
     required this.university_id,
+    required this.roommate_gender,
     required this.university_id_matter,
+    required this.gender_matter,
+    required this.district_id,
+    required this.titleController,
+    required this.location,
     required this.phoneNumber,
     required this.houseType,
     required this.rent_type,
@@ -103,7 +104,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
   bool _costTypeOnClick = true;
   Color _descriptionColor = Colors.grey;
   bool _descriptionOnClick = true;
-    Color _priceColor = Colors.grey;
+  Color _priceColor = Colors.grey;
   bool _priceOnClick = true;
   Color _colorForm = Colors.grey;
   bool value5 = false;
@@ -296,7 +297,11 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                             hint: Padding(
                               padding: EdgeInsets.only(left: 8.w),
                               child: Text(
-                              widget.houseType == '2' ? 'Hovli' : widget.houseType == '1' ? 'Kvartira' : "Kvartira , Xovli".tr(),
+                                widget.houseType == '2'
+                                    ? 'Hovli'
+                                    : widget.houseType == '1'
+                                        ? 'Kvartira'
+                                        : "Kvartira , Xovli".tr(),
                                 style: TextStyle(fontSize: 14.sp),
                               ),
                             ),
@@ -351,7 +356,13 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                             hint: Padding(
                               padding: EdgeInsets.only(left: 8.w),
                               child: Text(
-                               widget.rent_type == '1' ? 'Kunlik' : widget.rent_type == '2' ? "Oylik" : widget.rent_type == '3' ? "Uzoq muddat" : "Kunlik  / Oylik".tr(),
+                                widget.rent_type == '1'
+                                    ? 'Kunlik'
+                                    : widget.rent_type == '2'
+                                        ? "Oylik"
+                                        : widget.rent_type == '3'
+                                            ? "Uzoq muddat"
+                                            : "Kunlik  / Oylik".tr(),
                                 style: TextStyle(fontSize: 14.sp),
                               ),
                             ),
@@ -675,7 +686,13 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                             hint: Padding(
                               padding: EdgeInsets.only(left: 8.w),
                               child: Text(
-                               widget.cost_period == '1' ? "kunlik" : widget.cost_period == '2' ? "oylik" : widget.cost_period == '3' ? "kishi boshiga" : "Turlari".tr(),
+                                widget.cost_period == '1'
+                                    ? "kunlik"
+                                    : widget.cost_period == '2'
+                                        ? "oylik"
+                                        : widget.cost_period == '3'
+                                            ? "kishi boshiga"
+                                            : "Turlari".tr(),
                                 style: TextStyle(fontSize: 14.sp),
                               ),
                             ),
@@ -696,11 +713,11 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                             onChanged: (newValue) {
                               setState(() {
                                 print(newValue);
-                                if(newValue == 'kunlik'){
+                                if (newValue == 'kunlik') {
                                   price = '1';
-                                }else if(newValue == 'oylik'){
+                                } else if (newValue == 'oylik') {
                                   price = '2';
-                                }else{
+                                } else {
                                   price = '3';
                                 }
                                 _priceOnClick = true;
@@ -1203,11 +1220,9 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                             '${comfortItems}  texnikalar',
                           );
                           print('${descriptionController!.text} malumot');
-                          if(cost_type == null){
+                          if (cost_type == null) {
                             cost_type = '1';
                           }
-
-
 
                           if (_phoneNumberOnClick &&
                               _houseTypeOnClick &&
@@ -1221,36 +1236,41 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => AdsPhotoEdit(
-                                    titleController: widget.titleController,
-                                    roommate_gender: widget.roommate_gender,
-                                    gender_matter: widget.gender_matter,
-                                    district_id: widget.district_id,
-                                    addressController: widget.addressController,
-                                    location: widget.location,
-                                    university_id:  widget.university_id,
-                                    university_id_matter: widget.university_id_matter,
-                                    id: widget.id,
-                                    phoneController:  phoneController!.text
-                                        .split(' ')
-                                        .join(''),
-                                    house_type:  house_type,
-                                    rent_type: rent_type,
-                                    room_count: room_count,
-                                    floors_count: floors_count,
-                                    in_floor: in_floor,
-                                    costController:  costController!.text
+                                        titleController: widget.titleController,
+                                        roommate_gender: widget.roommate_gender,
+                                        gender_matter: widget.gender_matter,
+                                        district_id: widget.district_id,
+                                        addressController:
+                                            widget.addressController,
+                                        location: widget.location,
+                                        university_id: widget.university_id,
+                                        university_id_matter:
+                                            widget.university_id_matter,
+                                        id: widget.id,
+                                        phoneController: phoneController!.text
                                             .split(' ')
                                             .join(''),
-                                    cost_type: cost_type,
-                                    live_with_owner: live_with_owner,
-                                    utility_electricity:utility_electricity,
-                                    unility_gaz: unility_gaz,
-                                    utility_hot_water: utility_hot_water,
-                                    utility_cold_water: utility_cold_water,
-                                    utility_trash: utility_trash,
-                                    comfort:  comfortItems,
-                                    description: descriptionController!.text,
-                                    cost_period: price,
+                                        house_type: house_type,
+                                        rent_type: rent_type,
+                                        room_count: room_count,
+                                        floors_count: floors_count,
+                                        in_floor: in_floor,
+                                        costController: costController!.text
+                                            .split(' ')
+                                            .join(''),
+                                        cost_type: cost_type,
+                                        live_with_owner: live_with_owner,
+                                        utility_electricity:
+                                            utility_electricity,
+                                        unility_gaz: unility_gaz,
+                                        utility_hot_water: utility_hot_water,
+                                        utility_cold_water: utility_cold_water,
+                                        utility_trash: utility_trash,
+                                        comfort: comfortItems,
+                                        description:
+                                            descriptionController!.text,
+                                        cost_period: price,
+                                        subway: '1',
                                       )),
                             );
                           } else {

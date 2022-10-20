@@ -170,6 +170,7 @@ class _FavoritAdsState extends State<FavoritAds> {
                                                 Image: data.MyAds[index].images,
                                                 locations:
                                                     data.MyAds[index].location,
+                                                    
                                               )));
                                 },
                                 child: Container(
@@ -184,10 +185,10 @@ class _FavoritAdsState extends State<FavoritAds> {
                                     children: [
                                       Stack(
                                         children: [
-                                          data.MyAds[index].images != null
+                                          data.MyAds[index].images!.isNotEmpty
                                               ? CachedNetworkImage(
                                                   imageUrl:
-                                                      "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.MyAds[index].images?[0].image.toString()}",
+                                                      "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.MyAds[index].images!.first.image.toString()}",
                                                   placeholder: (context, url) =>
                                                       CircularProgressIndicator(),
                                                   errorWidget:
@@ -199,14 +200,14 @@ class _FavoritAdsState extends State<FavoritAds> {
                                                   height: 235.h,
                                                   fit: BoxFit.cover,
                                                 )
-                                              : data.MyAds[index].images![0]
-                                                      .isEmpty
-                                                  ? Image.asset(
-                                                      'assets/images/notImage.png',
-                                                      width: 324.w,
-                                                      height: 235.h,
-                                                      fit: BoxFit.cover,
-                                                    )
+                                              // : data.MyAds[index].images![0]
+                                                      // .isEmpty
+                                                  // ? Image.asset(
+                                                  //     'assets/images/notImage.png',
+                                                  //     width: 324.w,
+                                                  //     height: 235.h,
+                                                  //     fit: BoxFit.cover,
+                                                  //   )
                                                   : Image.asset(
                                                       'assets/images/notImage.png',
                                                       width: 324.w,
@@ -387,6 +388,8 @@ class _FavoritAdsState extends State<FavoritAds> {
                                                                               index]
                                                                           .costPeriod
                                                                           .toString(),
+                                                                          
+                                                                          
                                                                     ),
                                                                   )),
                                                           child: Container(
