@@ -39,17 +39,17 @@ class AdsPhotoEdit extends StatefulWidget {
   String? description;
   String? location;
   String? cost_period;
+  String? subway;
   AdsPhotoEdit(
-      {required this.cost_period,
-      required this.location,
-      required this.titleController,
+      {required this.titleController,
       required this.roommate_gender,
       required this.gender_matter,
       required this.district_id,
-      required this.id,
       required this.addressController,
+      required this.location,
       required this.university_id,
       required this.university_id_matter,
+      required this.id,
       required this.phoneController,
       required this.house_type,
       required this.rent_type,
@@ -65,7 +65,10 @@ class AdsPhotoEdit extends StatefulWidget {
       required this.utility_cold_water,
       required this.utility_trash,
       required this.comfort,
-      required this.description});
+      required this.description,
+      required this.cost_period,
+      required this.subway
+      });
 
   @override
   State<AdsPhotoEdit> createState() => _AdsPhotoEditState();
@@ -132,9 +135,9 @@ class _AdsPhotoEditState extends State<AdsPhotoEdit> {
                     child: Text("From Camera"),
                     onTap: () async {
                       // getcam();
-                          if(sum<3){
-                            sum+=1;
-                      await _takeFromCamera(sum);
+                      if (sum < 3) {
+                        sum += 1;
+                        await _takeFromCamera(sum);
                       }
                       setState(() {});
 
@@ -308,82 +311,81 @@ class _AdsPhotoEditState extends State<AdsPhotoEdit> {
                                   children:
                                       List.generate(FileList.length, (index) {
                                     return (FileExist[index])
-                                        ? 
-                                            // width: 120.w,
-                                            Container(
-                                              width: 108.w,
-                                              height: 116.h,
-                                              decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.all(
-                                                  Radius.circular(
-                                                    12.r,
-                                                  ),
+                                        ?
+                                        // width: 120.w,
+                                        Container(
+                                            width: 108.w,
+                                            height: 116.h,
+                                            decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.all(
+                                                Radius.circular(
+                                                  12.r,
                                                 ),
                                               ),
-                                              child: Stack(
-                                                children: [
-                                                  Expanded(
-                                                    child: Container(
-                                                      margin:
-                                                          EdgeInsets.symmetric(
-                                                              horizontal: 8.w,
-                                                              vertical: 8.h),
-                                                      decoration: BoxDecoration(
-                                                        // border: Border.all(
-                                                        //     color:
-                                                        //         Colors.),
-                                                        boxShadow: [
-                                                          BoxShadow(
-                                                              offset: Offset(
-                                                                  .1.w, .1.h),
-                                                              color: Colors.grey
-                                                                  .shade400,
-                                                              blurRadius: 6),
-                                                        ],
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(
-                                                          10.r,
-                                                        ),
-                                                        image: DecorationImage(
-                                                          fit: BoxFit.cover,
-                                                          image: FileImage(
-                                                              FileList[index]),
-                                                        ),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Positioned(
-                                                    right: 0,
-                                                    child: GestureDetector(
-                                                      child: Container(
-                                                        width: 18.w,
-                                                        height: 18.h,
-                                                        decoration: BoxDecoration(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        4.r),
+                                            ),
+                                            child: Stack(
+                                              children: [
+                                                Expanded(
+                                                  child: Container(
+                                                    margin:
+                                                        EdgeInsets.symmetric(
+                                                            horizontal: 8.w,
+                                                            vertical: 8.h),
+                                                    decoration: BoxDecoration(
+                                                      // border: Border.all(
+                                                      //     color:
+                                                      //         Colors.),
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                            offset: Offset(
+                                                                .1.w, .1.h),
                                                             color: Colors
-                                                                .red[400]),
-                                                        child: Icon(
-                                                          Icons.remove,
-                                                          size: 15.sp,
-                                                          color: Colors.white,
-                                                        ),
+                                                                .grey.shade400,
+                                                            blurRadius: 6),
+                                                      ],
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                        10.r,
                                                       ),
-                                                      onTap: () async {
-                                                         FileList.removeAt(
-                                                            index);
-                                                            // index -= 4;
-                                                            sum -= 1;
-                                                        setState(() {});
-                                                      },
+                                                      image: DecorationImage(
+                                                        fit: BoxFit.cover,
+                                                        image: FileImage(
+                                                            FileList[index]),
+                                                      ),
                                                     ),
                                                   ),
-                                                ],
-                                              ),
-                                            ): Container();
+                                                ),
+                                                Positioned(
+                                                  right: 0,
+                                                  child: GestureDetector(
+                                                    child: Container(
+                                                      width: 18.w,
+                                                      height: 18.h,
+                                                      decoration: BoxDecoration(
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      4.r),
+                                                          color:
+                                                              Colors.red[400]),
+                                                      child: Icon(
+                                                        Icons.remove,
+                                                        size: 15.sp,
+                                                        color: Colors.white,
+                                                      ),
+                                                    ),
+                                                    onTap: () async {
+                                                      FileList.removeAt(index);
+                                                      // index -= 4;
+                                                      sum -= 1;
+                                                      setState(() {});
+                                                    },
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          )
+                                        : Container();
                                   }),
                                 )
                               : const SizedBox(),
@@ -405,13 +407,14 @@ class _AdsPhotoEditState extends State<AdsPhotoEdit> {
                               print(FileList[3]);
                               print(FileList[1]);
                               print(FileList[2]);
+
                               var data = await EditAdsService().FetchAdsEdit(
-                                id: '1',
+                                id: int.parse('${widget.id}'),
                                 titleController: widget.titleController,
                                 roommate_gender: widget.roommate_gender,
                                 gender_matter: widget.gender_matter,
                                 district_id: widget.district_id,
-                                subway: widget.id,
+                                subway: widget.subway,
                                 addressController: widget.addressController,
                                 university_id: widget.university_id,
                                 university_id_matter:
@@ -433,14 +436,13 @@ class _AdsPhotoEditState extends State<AdsPhotoEdit> {
                                 comfort: widget.comfort,
                                 description: widget.description,
                                 location: widget.location,
-                                file1: FileExist[0] ? FileList[0] : FileList[3],
                                 cost_period: widget.cost_period,
+                                file1: FileExist[0] ? FileList[0] : FileList[3],
                                 file2: FileExist[1] ? FileList[1] : FileList[4],
                                 file3: FileExist[2] ? FileList[2] : FileList[5],
                               );
                               setState(() {});
                               if (data['status']) {
-
                                 Navigator.pushAndRemoveUntil(
                                     context,
                                     MaterialPageRoute(
@@ -448,7 +450,7 @@ class _AdsPhotoEditState extends State<AdsPhotoEdit> {
                                             CreateSuccedful()),
                                     (route) => false);
                               } else {
-                                print(widget.titleController! + 'title');
+                                print(widget.id! + 'title');
                                 print(widget.roommate_gender.toString() +
                                     'gender');
                                 print(widget.gender_matter.toString() +
@@ -492,8 +494,7 @@ class _AdsPhotoEditState extends State<AdsPhotoEdit> {
                                 print(widget.description.toString() +
                                     'qoshimcha');
                                 print(widget.location.toString() + 'location');
-                                print(widget.cost_period.toString() +
-                                    'cost');
+                                print(widget.cost_period.toString() + 'cost');
                                 ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(content: Text(data['message'])));
                               }

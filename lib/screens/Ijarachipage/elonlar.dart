@@ -153,9 +153,9 @@ class _ElonlarState extends State<Elonlar> {
           children: [
             Consumer<RegionProvider>(
               builder: (_, data, __) {
-                // if(!data.isChanded){
-                //   return Center(child: CircularProgressIndicator(),);
-                // }
+                if(!data.isChanded){
+                  return const Center(child: CircularProgressIndicator(),);
+                }
                 return ListView.builder(
                     shrinkWrap: true,
                     itemCount: data.Ads.length,
@@ -217,7 +217,7 @@ class _ElonlarState extends State<Elonlar> {
                                   utility_bills:
                                       data.Ads[index].utilityBills.toString(),
                                   rentType: data.Ads[index].rentType.toString(),
-                                  comfort: '2',
+                                  comfort: data.Ads[index].comfort.toString(),
                                   // data.Ads[index].comfort,
                                   createData:
                                       data.Ads[index].createdAt.toString(),
@@ -248,7 +248,7 @@ class _ElonlarState extends State<Elonlar> {
                                             imageUrl:
                                                 "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.Ads[index].images!.last.image.toString()}",
                                             placeholder: (context, url) =>
-                                                CircularProgressIndicator(),
+                                                Center(child: CircularProgressIndicator()),
                                             errorWidget:
                                                 (context, url, error) =>
                                                     Image.asset(
@@ -456,6 +456,9 @@ class _ElonlarState extends State<Elonlar> {
             ),
             Consumer<RegionProvider>(
               builder: (_, data, __) {
+                if(!data.isChanded){
+                  return Center(child: CircularProgressIndicator(),);
+                }
                 return ListView.builder(
                     shrinkWrap: true,
                     itemCount: data.AdsForStudent.length,
@@ -540,7 +543,7 @@ class _ElonlarState extends State<Elonlar> {
                                               .toString(),
                                           createData: data
                                               .AdsForStudent[index].createdAt,
-                                          comfort: '2',
+                                          comfort: data.AdsForStudent[index].comfort,
                                           // data.AdsForStudent[index].comfort,
                                           inFloor: data
                                               .AdsForStudent[index].inFloor
@@ -578,7 +581,7 @@ class _ElonlarState extends State<Elonlar> {
                                             imageUrl:
                                                 "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.AdsForStudent[index].images!.first.image.toString()}",
                                             placeholder: (context, url) =>
-                                                CircularProgressIndicator(),
+                                                Center(child: CircularProgressIndicator()),
                                             errorWidget:
                                                 (context, url, error) =>
                                                     Image.asset(

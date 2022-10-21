@@ -123,7 +123,7 @@ class _AdsDetailState extends State<AdsDetail> {
     super.initState();
     isHaveComfort(haveInt, comfort);
     comfortList = comfort.reduce((value, element) => value + ', ' + element);
-    print('${widget.Image}');
+
   }
 
   @override

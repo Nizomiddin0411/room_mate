@@ -3,16 +3,16 @@ class GetMyAdsModel {
   int? type;
   int? userId;
   String? title;
-  dynamic stayRegionId;
-  dynamic stayRegionMatter;
-  dynamic stayUniversityId;
-  dynamic stayUniversityMatter;
+  int? stayRegionId;
+  int? stayRegionMatter;
+  int? stayUniversityId;
+  int? stayUniversityMatter;
   int? roommateGender;
   int? genderMatter;
-  dynamic roommateCount;
+  int? roommateCount;
   String? phoneNumber;
-  dynamic phoneNumberShow;
-  dynamic haveLivingHome;
+  int? phoneNumberShow;
+  int? haveLivingHome;
   String? description;
   int? districtId;
   String? address;
@@ -25,7 +25,7 @@ class GetMyAdsModel {
   String? cost;
   int? costType;
   int? liveWithOwner;
-  dynamic utilityBills;
+  int? utilityBills;
   int? utilityElectricity;
   int? unilityGaz;
   int? utilityHotWater;
@@ -41,12 +41,12 @@ class GetMyAdsModel {
   String? userFullName;
   String? favorite;
   int? chatApproved;
-  List<dynamic>? images;
+  List<Images>? images;
   Region? region;
-  dynamic stayRegion;
+  Region? stayRegion;
   District? district;
-  dynamic university;
-  dynamic stayUniversity;
+  University? university;
+  StayUniversity? stayUniversity;
 
   GetMyAdsModel(
       {this.id,
@@ -149,14 +149,18 @@ class GetMyAdsModel {
     }
     region =
     json['region'] != null ? new Region.fromJson(json['region']) : null;
-    stayRegion = json['stay_region'];
+    stayRegion = json['stay_region'] != null
+        ? new Region.fromJson(json['stay_region'])
+        : null;
     district = json['district'] != null
         ? new District.fromJson(json['district'])
         : null;
     university = json['university'] != null
         ? new University.fromJson(json['university'])
         : null;
-    stayUniversity = json['stay_university'];
+    stayUniversity = json['stay_university'] != null
+        ? new StayUniversity.fromJson(json['stay_university'])
+        : null;
   }
 
   Map<String, dynamic> toJson() {
@@ -209,14 +213,18 @@ class GetMyAdsModel {
     if (this.region != null) {
       data['region'] = this.region!.toJson();
     }
-    data['stay_region'] = this.stayRegion;
+    if (this.stayRegion != null) {
+      data['stay_region'] = this.stayRegion!.toJson();
+    }
     if (this.district != null) {
       data['district'] = this.district!.toJson();
     }
     if (this.university != null) {
       data['university'] = this.university!.toJson();
     }
-    data['stay_university'] = this.stayUniversity;
+    if (this.stayUniversity != null) {
+      data['stay_university'] = this.stayUniversity!.toJson();
+    }
     return data;
   }
 }
@@ -295,7 +303,7 @@ class University {
   String? name;
   String? nameRu;
   String? short;
-  dynamic districtId;
+  int? districtId;
   dynamic address;
   String? advertising;
   String? searching;
@@ -311,6 +319,51 @@ class University {
         this.searching});
 
   University.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    name = json['name'];
+    nameRu = json['name_ru'];
+    short = json['short'];
+    districtId = json['district_id'];
+    address = json['address'];
+    advertising = json['advertising'];
+    searching = json['searching'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['name'] = this.name;
+    data['name_ru'] = this.nameRu;
+    data['short'] = this.short;
+    data['district_id'] = this.districtId;
+    data['address'] = this.address;
+    data['advertising'] = this.advertising;
+    data['searching'] = this.searching;
+    return data;
+  }
+}
+
+class StayUniversity {
+  int? id;
+  String? name;
+  String? nameRu;
+  String? short;
+  dynamic districtId;
+  dynamic address;
+  String? advertising;
+  String? searching;
+
+  StayUniversity(
+      {this.id,
+        this.name,
+        this.nameRu,
+        this.short,
+        this.districtId,
+        this.address,
+        this.advertising,
+        this.searching});
+
+  StayUniversity.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     nameRu = json['name_ru'];

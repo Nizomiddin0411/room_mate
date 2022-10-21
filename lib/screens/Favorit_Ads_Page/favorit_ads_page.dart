@@ -3,7 +3,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:talaba_uy/screens/Favorit_Ads_Page/Update_edits.dart';
 import 'package:talaba_uy/screens/Favorit_Ads_Page/ads_edit.dart';
 import 'package:talaba_uy/screens/Favorit_Ads_Page/ads_page_edit.dart';
 import '../../core/const/app_colors.dart';
@@ -70,6 +69,109 @@ class _FavoritAdsState extends State<FavoritAds> {
                                           .toString() +
                                       'aaaaaaaa');
                                   Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => AdsDetail(
+                                                title: data.MyAds[index].title
+                                                    .toString(),
+                                                description: data
+                                                    .MyAds[index].description
+                                                    .toString(),
+                                                houseType: data
+                                                    .MyAds[index].houseType
+                                                    .toString(),
+                                                cost: data.MyAds[index].cost
+                                                    .toString(),
+                                                costTayp: data
+                                                    .MyAds[index].costType
+                                                    .toString(),
+                                                countRoom: data
+                                                    .MyAds[index].roomCount
+                                                    .toString(),
+                                                countPeople: data
+                                                    .MyAds[index].roommateCount
+                                                    .toString(),
+                                                // region: data
+                                                //     .MyAds[index].region?.name
+                                                //     .toString(),
+                                                // district: data
+                                                //     .MyAds[index].district?.name
+                                                //     .toString(),
+                                                // univer: data.MyAds[index]
+                                                //     .university?.name
+                                                //     .toString(),
+                                                // facultet: data
+                                                //     .MyAds[index].faculty?.name
+                                                //     .toString(),
+                                                liveWithOwner: data
+                                                    .MyAds[index].liveWithOwner
+                                                    .toString(),
+                                                subway: data.MyAds[index].subway
+                                                    .toString(),
+                                                favorite: data
+                                                    .MyAds[index].favorite
+                                                    .toString(),
+                                                id: data.MyAds[index].id
+                                                    .toString(),
+                                                type: data.MyAds[index].type
+                                                    .toString(),
+                                                userId:
+                                                    data.MyAds[index].userId,
+                                                userFullName: data
+                                                    .MyAds[index].userFullName
+                                                    .toString(),
+                                                chatApproved: data
+                                                    .MyAds[index].chatApproved,
+                                                phoneNumber: data
+                                                    .MyAds[index].phoneNumber
+                                                    .toString(),
+                                                phoneNumberShow: data
+                                                    .MyAds[index]
+                                                    .phoneNumberShow
+                                                    .toString(),
+                                                floorsCount: data
+                                                    .MyAds[index].floorsCount
+                                                    .toString(),
+                                                district: data
+                                                    .MyAds[index].district?.name
+                                                    .toString(),
+                                                stay_region: data.MyAds[index]
+                                                    .stayRegion?.name
+                                                    .toString(),
+                                                stay_university: data
+                                                    .MyAds[index].stayUniversity
+                                                    .toString(),
+                                                region: data
+                                                    .MyAds[index].region?.name
+                                                    .toString(),
+                                                rentType: data
+                                                    .MyAds[index].rentType
+                                                    .toString(),
+                                                utility_bills: data
+                                                    .MyAds[index].utilityBills
+                                                    .toString(),
+                                                createData: data
+                                                    .MyAds[index].createdAt
+                                                    .toString(),
+                                                comfort: '2',
+                                                // data.MyAds[index].comfort,
+                                                inFloor: data
+                                                    .MyAds[index].inFloor
+                                                    .toString(),
+                                                roommate_count: data
+                                                    .MyAds[index].roommateCount
+                                                    .toString(),
+                                                address: data
+                                                    .MyAds[index].address
+                                                    .toString(),
+                                                roommate_gender: data
+                                                    .MyAds[index].roommateGender
+                                                    .toString(),
+                                                Image: data.MyAds[index].images,
+                                                locations:
+                                                    data.MyAds[index].location,
+
+                                              )));
                                     context,
                                     MaterialPageRoute(
                                       builder: (context) => AdsDetail(
@@ -172,10 +274,10 @@ class _FavoritAdsState extends State<FavoritAds> {
                                     children: [
                                       Stack(
                                         children: [
-                                          data.MyAds[index].images != null
+                                          data.MyAds[index].images!.isNotEmpty
                                               ? CachedNetworkImage(
                                                   imageUrl:
-                                                      "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.MyAds[index].images?[0].image.toString()}",
+                                                      "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.MyAds[index].images!.first.image.toString()}",
                                                   placeholder: (context, url) =>
                                                       CircularProgressIndicator(),
                                                   errorWidget:
@@ -187,14 +289,14 @@ class _FavoritAdsState extends State<FavoritAds> {
                                                   height: 235.h,
                                                   fit: BoxFit.cover,
                                                 )
-                                              : data.MyAds[index].images![0]
-                                                      .isEmpty
-                                                  ? Image.asset(
-                                                      'assets/images/notImage.png',
-                                                      width: 324.w,
-                                                      height: 235.h,
-                                                      fit: BoxFit.cover,
-                                                    )
+                                              // : data.MyAds[index].images![0]
+                                                      // .isEmpty
+                                                  // ? Image.asset(
+                                                  //     'assets/images/notImage.png',
+                                                  //     width: 324.w,
+                                                  //     height: 235.h,
+                                                  //     fit: BoxFit.cover,
+                                                  //   )
                                                   : Image.asset(
                                                       'assets/images/notImage.png',
                                                       width: 324.w,

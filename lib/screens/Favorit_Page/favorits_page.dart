@@ -133,7 +133,7 @@ class _FavoritPageState extends State<FavoritPage> {
                                               createData: data
                                                   .Like[index].createdAt
                                                   .toString(),
-                                              comfort: '2',
+                                              comfort: data.Like[index].comfort.toString(),
                                               // data.Like[index].comfort,
                                               inFloor: data.Like[index].inFloor
                                                   .toString(),
@@ -170,7 +170,7 @@ class _FavoritPageState extends State<FavoritPage> {
                                                         "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.Like[index].images!.first.image.toString()}",
                                                     placeholder: (context,
                                                             url) =>
-                                                        CircularProgressIndicator(),
+                                                        Center(child: CircularProgressIndicator()),
                                                     errorWidget:
                                                         (context, url, error) =>
                                                             Image.asset(
@@ -181,7 +181,7 @@ class _FavoritPageState extends State<FavoritPage> {
                                                     fit: BoxFit.cover,
                                                   )
                                                 : data.Like[index]
-                                                        .images![0].isEmpty
+                                                        .images!.isEmpty
                                                     ? Image.asset(
                                                         'assets/images/notImage.png',
                                                         width: 324.w,

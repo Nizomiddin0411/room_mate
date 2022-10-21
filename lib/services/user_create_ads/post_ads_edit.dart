@@ -11,7 +11,7 @@ import 'package:http/http.dart' as http;
 
 class EditAdsService {
   Future FetchAdsEdit({
-    required String? id,
+    required int id,
     required String? titleController,
     required String? roommate_gender,
     required String? gender_matter,
@@ -37,10 +37,10 @@ class EditAdsService {
     required String? comfort,
     required String? description,
     required String? location,
+    required String? cost_period,
     required File file1,
     required File file2,
     required File file3,
-    required String? cost_period,
 }) async {
   print("-------");
     var request = http.MultipartRequest(
@@ -104,7 +104,7 @@ class EditAdsService {
         )
       ]);
     }
-    request.fields.addAll({'id': '${id}',});
+    request.fields.addAll({'id': '${id}'});
     request.fields.addAll({'title': '${titleController}',});
     request.fields.addAll({'roommate_gender': '${roommate_gender}',});
     request.fields.addAll({'gender_matter': '${gender_matter}',});
