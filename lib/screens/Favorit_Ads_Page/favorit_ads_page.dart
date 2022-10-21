@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:talaba_uy/screens/Favorit_Ads_Page/Update_edits.dart';
 import 'package:talaba_uy/screens/Favorit_Ads_Page/ads_edit.dart';
 import 'package:talaba_uy/screens/Favorit_Ads_Page/ads_page_edit.dart';
 import '../../core/const/app_colors.dart';
@@ -69,108 +70,95 @@ class _FavoritAdsState extends State<FavoritAds> {
                                           .toString() +
                                       'aaaaaaaa');
                                   Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => AdsDetail(
-                                                title: data.MyAds[index].title
-                                                    .toString(),
-                                                description: data
-                                                    .MyAds[index].description
-                                                    .toString(),
-                                                houseType: data
-                                                    .MyAds[index].houseType
-                                                    .toString(),
-                                                cost: data.MyAds[index].cost
-                                                    .toString(),
-                                                costTayp: data
-                                                    .MyAds[index].costType
-                                                    .toString(),
-                                                countRoom: data
-                                                    .MyAds[index].roomCount
-                                                    .toString(),
-                                                countPeople: data
-                                                    .MyAds[index].roommateCount
-                                                    .toString(),
-                                                // region: data
-                                                //     .MyAds[index].region?.name
-                                                //     .toString(),
-                                                // district: data
-                                                //     .MyAds[index].district?.name
-                                                //     .toString(),
-                                                // univer: data.MyAds[index]
-                                                //     .university?.name
-                                                //     .toString(),
-                                                // facultet: data
-                                                //     .MyAds[index].faculty?.name
-                                                //     .toString(),
-                                                liveWithOwner: data
-                                                    .MyAds[index].liveWithOwner
-                                                    .toString(),
-                                                subway: data.MyAds[index].subway
-                                                    .toString(),
-                                                favorite: data
-                                                    .MyAds[index].favorite
-                                                    .toString(),
-                                                id: data.MyAds[index].id
-                                                    .toString(),
-                                                type: data.MyAds[index].type
-                                                    .toString(),
-                                                userId:
-                                                    data.MyAds[index].userId,
-                                                userFullName: data
-                                                    .MyAds[index].userFullName
-                                                    .toString(),
-                                                chatApproved: data
-                                                    .MyAds[index].chatApproved,
-                                                phoneNumber: data
-                                                    .MyAds[index].phoneNumber
-                                                    .toString(),
-                                                phoneNumberShow: data
-                                                    .MyAds[index]
-                                                    .phoneNumberShow
-                                                    .toString(),
-                                                floorsCount: data
-                                                    .MyAds[index].floorsCount
-                                                    .toString(),
-                                                district: data
-                                                    .MyAds[index].district?.name
-                                                    .toString(),
-                                                stay_region: data.MyAds[index]
-                                                    .stayRegion?.name
-                                                    .toString(),
-                                                stay_university: data
-                                                    .MyAds[index].stayUniversity
-                                                    .toString(),
-                                                region: data
-                                                    .MyAds[index].region?.name
-                                                    .toString(),
-                                                rentType: data
-                                                    .MyAds[index].rentType
-                                                    .toString(),
-                                                utility_bills: data
-                                                    .MyAds[index].utilityBills
-                                                    .toString(),
-                                                createData: data
-                                                    .MyAds[index].createdAt
-                                                    .toString(),
-                                                comfort: '2',
-                                                // data.MyAds[index].comfort,
-                                                inFloor: data
-                                                    .MyAds[index].inFloor
-                                                    .toString(),
-                                                roommate_count: data
-                                                    .MyAds[index].roommateCount
-                                                    .toString(),
-                                                address: data
-                                                    .MyAds[index].address
-                                                    .toString(),
-                                                roommate_gender: data
-                                                    .MyAds[index].roommateGender
-                                                    .toString(),
-                                                Image: data.MyAds[index].images,
-                                                locations:
-                                                    data.MyAds[index].location,
-                                              )));
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => AdsDetail(
+                                        title:
+                                            data.MyAds[index].title.toString(),
+                                        description: data
+                                            .MyAds[index].description
+                                            .toString(),
+                                        houseType: data.MyAds[index].houseType
+                                            .toString(),
+                                        cost: data.MyAds[index].cost.toString(),
+                                        costTayp: data.MyAds[index].costType
+                                            .toString(),
+                                        countRoom: data.MyAds[index].roomCount
+                                            .toString(),
+                                        countPeople: data
+                                            .MyAds[index].roommateCount
+                                            .toString(),
+                                        // region: data
+                                        //     .MyAds[index].region?.name
+                                        //     .toString(),
+                                        // district: data
+                                        //     .MyAds[index].district?.name
+                                        //     .toString(),
+                                        // univer: data.MyAds[index]
+                                        //     .university?.name
+                                        //     .toString(),
+                                        // facultet: data
+                                        //     .MyAds[index].faculty?.name
+                                        //     .toString(),
+                                        liveWithOwner: data
+                                            .MyAds[index].liveWithOwner
+                                            .toString(),
+                                        subway:
+                                            data.MyAds[index].subway.toString(),
+                                        favorite: data.MyAds[index].favorite
+                                            .toString(),
+                                        id: data.MyAds[index].id.toString(),
+                                        type: data.MyAds[index].type.toString(),
+                                        userId: data.MyAds[index].userId,
+                                        userFullName: data
+                                            .MyAds[index].userFullName
+                                            .toString(),
+                                        chatApproved:
+                                            data.MyAds[index].chatApproved,
+                                        phoneNumber: data
+                                            .MyAds[index].phoneNumber
+                                            .toString(),
+                                        phoneNumberShow: data
+                                            .MyAds[index].phoneNumberShow
+                                            .toString(),
+                                        floorsCount: data
+                                            .MyAds[index].floorsCount
+                                            .toString(),
+                                        district: data
+                                            .MyAds[index].district?.name
+                                            .toString(),
+                                        stay_region: data
+                                            .MyAds[index].stayRegion?.name
+                                            .toString(),
+                                        stay_university: data
+                                            .MyAds[index].stayUniversity
+                                            .toString(),
+                                        region: data.MyAds[index].region?.name
+                                            .toString(),
+                                        rentType: data.MyAds[index].rentType
+                                            .toString(),
+                                        utility_bills: data
+                                            .MyAds[index].utilityBills
+                                            .toString(),
+                                        createData: data.MyAds[index].createdAt
+                                            .toString(),
+                                        comfort: '2',
+                                        // data.MyAds[index].comfort,
+                                        inFloor: data.MyAds[index].inFloor
+                                            .toString(),
+                                        roommate_count: data
+                                            .MyAds[index].roommateCount
+                                            .toString(),
+                                        address: data.MyAds[index].address
+                                            .toString(),
+                                        roommate_gender: data
+                                            .MyAds[index].roommateGender
+                                            .toString(),
+                                        Image: data.MyAds[index].images,
+                                        locations: data.MyAds[index].location,
+                                      ),
+                                    ),
+                                  );
                                 },
                                 child: Container(
                                   width: 324.w,
@@ -259,11 +247,15 @@ class _FavoritAdsState extends State<FavoritAds> {
                                                         InkWell(
                                                           onTap: () =>
                                                               Navigator.push(
-                                                                  context,
-                                                                  MaterialPageRoute(
-                                                                    builder:
-                                                                        (context) =>
-                                                                            AdspageEdit(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                              builder: (context) =>
+                                                                        data.MyAds[
+                                                                              index]
+                                                                          .type
+                                                                          .toString() ==
+                                                                      '2'
+                                                                  ? AdspageEdit(
                                                                       data
                                                                           .MyAds[
                                                                               index]
@@ -382,13 +374,68 @@ class _FavoritAdsState extends State<FavoritAds> {
                                                                               index]
                                                                           .floorsCount
                                                                           .toString(),
-                                                                          data
+                                                                      data
                                                                           .MyAds[
                                                                               index]
                                                                           .costPeriod
                                                                           .toString(),
+                                                                    )
+                                                              :UpdateStudents(
+                                                                univername: "${data.MyAds[index].stayUniversity}",
+                                                                      cost_type:
+                                                                          '${data.MyAds[index].costType}',
+                                                                      howcountroom:
+                                                                          '${data.MyAds[index].haveLivingHome}',
+                                                                      cost_period:
+                                                                          '${data.MyAds[index].costPeriod}',
+                                                                      phone_number:
+                                                                          '${data.MyAds[index].phoneNumber}',
+                                                                      description:
+                                                                          '${data.MyAds[index].description}',
+                                                                      location:
+                                                                          '${data.MyAds[index].location}',
+                                                                      have_living_home:
+                                                                          '${data.MyAds[index].haveLivingHome}',
+                                                                      stay_region_id:
+                                                                          '${data.MyAds[index].stayRegionId}',
+                                                                      live_with_owner:
+                                                                          '${data.MyAds[index].liveWithOwner}',
+                                                                      room_count:
+                                                                          '${data.MyAds[index].roomCount}',
+                                                                      stay_region_matter:
+                                                                          '${data.MyAds[index].stayRegionMatter}',
+                                                                      stay_university_id:
+                                                                          '${data.MyAds[index].stayUniversityId}',
+                                                                      phone_number_show:
+                                                                          '${data.MyAds[index].phoneNumberShow}',
+                                                                      title: '${data.MyAds[index].title}',
+                                                                      district:
+                                                                          '${data.MyAds[index].district!.name.toString()}',
+                                                                      subway:
+                                                                          '${data.MyAds[index].subway}',
+                                                                      roommate_gender:
+                                                                          '${data.MyAds[index].roommateGender}',
+                                                                      floors_count:
+                                                                          '${data.MyAds[index].floorsCount}',
+                                                                      stay_university_matter:
+                                                                          '${data.MyAds[index].stayRegionMatter}',
+                                                                      address:
+                                                                          '${data.MyAds[index].address}',
+                                                                      roommate_count:
+                                                                          '${data.MyAds[index].roommateCount}',
+                                                                      utility_bills:
+                                                                          '${data.MyAds[index].utilityBills}',
+                                                                      house_type:
+                                                                          '${data.MyAds[index].houseType}',
+                                                                      cost: '${data.MyAds[index].cost}',
+                                                                      comfort:
+                                                                          '${data.MyAds[index].comfort}',
+                                                                      renttype:
+                                                                          '${data.MyAds[index].rentType}',
+                                                                id: '${data.MyAds[index].id}',
                                                                     ),
-                                                                  )),
+                                                            ),
+                                                          ),
                                                           child: Container(
                                                             width: 32.w,
                                                             height: 32.h,
