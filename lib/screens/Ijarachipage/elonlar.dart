@@ -248,7 +248,7 @@ class _ElonlarState extends State<Elonlar> {
                                             imageUrl:
                                                 "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.Ads[index].images!.last.image.toString()}",
                                             placeholder: (context, url) =>
-                                                CircularProgressIndicator(),
+                                                Center(child: CircularProgressIndicator()),
                                             errorWidget:
                                                 (context, url, error) =>
                                                     Image.asset(
@@ -543,7 +543,7 @@ class _ElonlarState extends State<Elonlar> {
                                               .toString(),
                                           createData: data
                                               .AdsForStudent[index].createdAt,
-                                          comfort: '2',
+                                          comfort: data.AdsForStudent[index].comfort,
                                           // data.AdsForStudent[index].comfort,
                                           inFloor: data
                                               .AdsForStudent[index].inFloor
@@ -581,7 +581,7 @@ class _ElonlarState extends State<Elonlar> {
                                             imageUrl:
                                                 "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.AdsForStudent[index].images!.first.image.toString()}",
                                             placeholder: (context, url) =>
-                                                CircularProgressIndicator(),
+                                                Center(child: CircularProgressIndicator()),
                                             errorWidget:
                                                 (context, url, error) =>
                                                     Image.asset(
