@@ -526,15 +526,12 @@ class _ElonlarState extends State<Elonlar> {
                                               .district?.name
                                               .toString(),
                                           stay_region: data
-                                              .AdsForStudent[index].stayRegion
-                                              ?.toString(),
+                                              .AdsForStudent[index].stayRegion?.name.toString(),
                                           stay_university: data
                                               .AdsForStudent[index]
-                                              .stayUniversity
-                                              .toString(),
+                                              .stayUniversity?.name.toString(),
                                           region: data
-                                              .AdsForStudent[index].region
-                                              .toString(),
+                                              .AdsForStudent[index].region?.name.toString(),
                                           rentType: data
                                               .AdsForStudent[index].rentType
                                               .toString(),

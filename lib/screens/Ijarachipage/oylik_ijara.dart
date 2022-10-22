@@ -155,7 +155,7 @@ class _OylikIjaraState extends State<OylikIjara> {
             Consumer<MonthProvider>(
               builder: (_, data, __) {
                 if (!data.isChanded) {
-                  return Center(
+                  return const Center(
                     child: CircularProgressIndicator(),
                   );
                 }
@@ -240,7 +240,7 @@ class _OylikIjaraState extends State<OylikIjara> {
                                               .toString(),
                                           rentType: data.Ads[index].rentType
                                               .toString(),
-                                          comfort: '2',
+                                          comfort: data.Ads[index].comfort.toString(),
                                           // data.Ads[index].comfort,
                                           createData: data.Ads[index].createdAt
                                               .toString(),
@@ -264,7 +264,7 @@ class _OylikIjaraState extends State<OylikIjara> {
                                             imageUrl:
                                                 "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.Ads[index].images!.first.image.toString()}",
                                             placeholder: (context, url) =>
-                                                Center(child: CircularProgressIndicator()),
+                                                const Center(child: CircularProgressIndicator()),
                                             errorWidget:
                                                 (context, url, error) =>
                                                     Image.asset(
@@ -330,7 +330,7 @@ class _OylikIjaraState extends State<OylikIjara> {
                                                       data.Ads[index].createdAt!
                                                           .length,
                                                       ''),
-                                              style: TextStyle(
+                                              style: const TextStyle(
                                                   color: AppColors
                                                       .backgroundWhite),
                                             )),
@@ -438,7 +438,7 @@ class _OylikIjaraState extends State<OylikIjara> {
             Consumer<MonthProvider>(
               builder: (_, data, __) {
                 if (!data.isChanded) {
-                  return Center(
+                  return const Center(
                     child: CircularProgressIndicator(),
                   );
                 }
@@ -526,7 +526,7 @@ class _OylikIjaraState extends State<OylikIjara> {
                                               .toString(),
                                           createData: data
                                               .AdsForStudent[index].createdAt,
-                                          comfort: '2',
+                                          comfort: data.AdsForStudent[index].comfort.toString(),
                                           // data.AdsForStudent[index].comfort,
                                           inFloor: data
                                               .AdsForStudent[index].inFloor

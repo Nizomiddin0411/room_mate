@@ -118,6 +118,7 @@ class _NotificationPageState extends State<NotificationPage> {
                                       onTap:() async{
                                         await ChatApprove().fetchApprov(PermitId: data.permit[index].id.toString(), Approved: '2');
                                         await data.Permit();
+                                        print('rad qildi');
                                         },
                                       child: Container(
                                         width: 133.w,

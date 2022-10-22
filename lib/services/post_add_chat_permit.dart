@@ -4,8 +4,8 @@ import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 class ChatPermit {
   Future fetchApprov({
-    required int Askid,
-    // required int Approvid,
+    required String Askid,
+
   }) async {
     // print(Hive.box('token').get('token'));
     // ignore: unused_local_variable
@@ -17,14 +17,14 @@ class ChatPermit {
 
     );
     request.fields.addAll({'user_asked': '${Askid}',});
-    request.fields.addAll({'user_approved': '${Hive.box('id').get('id')}',});
+    request.fields.addAll({'user_approved': '${Hive.box('id').get('id').toString()}',});
     request.headers.addAll({HttpHeaders.authorizationHeader: 'Bearer ${Hive.box('token').get('token')}'});
     http.StreamedResponse response = await request.send();
     if (response.statusCode >= 200 && response.statusCode <= 300) {
       var data = await response.stream.bytesToString();
-      // await Hive.box('token').put('token', jsonDecode(data)["access_token"]);
-      // print(Hive.box('id').get('id'));
-      print('okokok');
+
+      print(Hive.box('id').get('id'));
+      print('${Askid} other');
       // print(Approvid);
 
       return jsonDecode(data);
