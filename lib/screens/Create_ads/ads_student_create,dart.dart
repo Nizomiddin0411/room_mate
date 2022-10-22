@@ -25,17 +25,17 @@ class Student2 extends StatefulWidget {
 
   Student2(
       {Key? key,
-      required this.titlecontroller1,
-      required this.viloyatidisi,
-      required this.viloyatvalue,
-      required this.universiteteid,
-      required this.univervalue,
-      required this.titlecount,
-      required this.titleGendor,
-      required this.phoneController,
-      required this.house,
-      required this.addinformation,
-      required this.numbervalue})
+        required this.titlecontroller1,
+        required this.viloyatidisi,
+        required this.viloyatvalue,
+        required this.universiteteid,
+        required this.univervalue,
+        required this.titlecount,
+        required this.titleGendor,
+        required this.phoneController,
+        required this.house,
+        required this.addinformation,
+        required this.numbervalue})
       : super(key: key);
 
   @override
@@ -89,7 +89,7 @@ class _Student2State extends State<Student2> {
     "oylik",
     "kishi boshiga"
   ];
-   String ?cost_type;
+  String ?cost_type;
   final TextEditingController _textEditingController = TextEditingController();
   var kurs = [
     '1-kurs',
@@ -263,61 +263,61 @@ class _Student2State extends State<Student2> {
                   ),
                   data.isDistrict
                       ? Container(
-                          width: 324.w,
-                          decoration: BoxDecoration(
-                              border: Border.all(
-                                color: _colorDistric,
-                              ),
-                              borderRadius: BorderRadius.circular(10.r)),
-                          child: DropdownButtonFormField(
-                            hint: Padding(
-                              padding: EdgeInsets.only(left: 8.w),
-                              child: Text("Tumanni tanlang".tr()),
-                            ),
-                            decoration: InputDecoration(
-                              border: InputBorder.none,
-                            ),
-                            icon: Icon(Icons.arrow_drop_down_outlined),
-                            items: data.districts.map((e) {
-                              return DropdownMenuItem<String>(
-                                onTap: () {
-                                  print("${e.name}${e.id}");
-                                  data.districtId = e.id.toString();
-                                },
-                                value: data.isDistrict
-                                    ? e.name.toString()
-                                    : data.defaultvalue,
-                                child: Padding(
-                                  padding: EdgeInsets.only(left: 8.w),
-                                  child: Text(data.isDistrict
-                                      ? e.name.toString()
-                                      : data.defaultvalue),
-                                ),
-                              );
-                            }).toList(),
-                            onChanged: (newValue) {
-                              setState(() {
-                                _colorDistric = Colors.grey;
-                                dropDown = newValue.toString();
-                              });
-                            },
-                          ),
-                        )
-                      : Container(
-                          width: 324.w,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10.r)),
-                          child: DropdownButtonFormField(
-                              isExpanded: true,
-                              hint: Text("Tumanni tanlang".tr()),
-                              decoration: const InputDecoration(
-                                  isDense: true,
-                                  border: OutlineInputBorder(),
-                                  focusColor: Colors.grey),
-                              icon: Icon(Icons.arrow_drop_down_outlined),
-                              items: [],
-                              onChanged: null),
+                    width: 324.w,
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                          color: _colorDistric,
                         ),
+                        borderRadius: BorderRadius.circular(10.r)),
+                    child: DropdownButtonFormField(
+                      hint: Padding(
+                        padding: EdgeInsets.only(left: 8.w),
+                        child: Text("Tumanni tanlang".tr()),
+                      ),
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                      ),
+                      icon: Icon(Icons.arrow_drop_down_outlined),
+                      items: data.districts.map((e) {
+                        return DropdownMenuItem<String>(
+                          onTap: () {
+                            print("${e.name}${e.id}");
+                            data.districtId = e.id.toString();
+                          },
+                          value: data.isDistrict
+                              ? e.name.toString()
+                              : data.defaultvalue,
+                          child: Padding(
+                            padding: EdgeInsets.only(left: 8.w),
+                            child: Text(data.isDistrict
+                                ? e.name.toString()
+                                : data.defaultvalue),
+                          ),
+                        );
+                      }).toList(),
+                      onChanged: (newValue) {
+                        setState(() {
+                          _colorDistric = Colors.grey;
+                          dropDown = newValue.toString();
+                        });
+                      },
+                    ),
+                  )
+                      : Container(
+                    width: 324.w,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10.r)),
+                    child: DropdownButtonFormField(
+                        isExpanded: true,
+                        hint: Text("Tumanni tanlang".tr()),
+                        decoration: const InputDecoration(
+                            isDense: true,
+                            border: OutlineInputBorder(),
+                            focusColor: Colors.grey),
+                        icon: Icon(Icons.arrow_drop_down_outlined),
+                        items: [],
+                        onChanged: null),
+                  ),
                   SizedBox(height: 12.h),
                   Column(
                     children: [
@@ -1136,7 +1136,7 @@ class _Student2State extends State<Student2> {
                   ),
                   Padding(
                     padding:
-                        EdgeInsets.symmetric(vertical: 18.h, horizontal: 31.w),
+                    EdgeInsets.symmetric(vertical: 18.h, horizontal: 31.w),
                     child: Container(
                       width: double.infinity,
                       child: ElevatedButton(
@@ -1221,3 +1221,4 @@ class _Student2State extends State<Student2> {
     );
   }
 }
+

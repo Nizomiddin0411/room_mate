@@ -13,6 +13,7 @@ import '../../provider/region_provider.dart';
 import 'update_students2.dart';
 class StudentsEdist extends StatefulWidget {
   String? title;
+  String? stay_region;
   String? stay_region_id;
   String? stay_region_matter;
   String? stay_university_id;
@@ -39,10 +40,15 @@ class StudentsEdist extends StatefulWidget {
   String? renttype;
   String? cost_period;
   String? universtatenewname;
+  String? images;
+  String? updateid;
 
 
    StudentsEdist({Key? key,
+     required this.updateid,
      required this.stay_university_id,
+     required this.stay_region_id,
+     required this.images,
    required this.title,
    required this.universtatenewname,
 
@@ -56,7 +62,7 @@ class StudentsEdist extends StatefulWidget {
    required this.utility_bills,
    required this.stay_university_matter,
    required this.stay_region_matter,
-   required this.stay_region_id,
+   required this.stay_region,
    required this.renttype,
      required this.phone_number,
      required this.roommate_gender,
@@ -87,7 +93,7 @@ class _StudentsEdistState extends State<StudentsEdist> {
   String? addInfo;
   String? _titleGendor;
   String? _titleCount;
-  String DistrictId = '';
+  String Regionidisi = "";
   String UniverId = '';
   String Univername = '';
   String Univernamenew = '';
@@ -161,10 +167,10 @@ class _StudentsEdistState extends State<StudentsEdist> {
   bool regionsvalue = false;
   bool numbervalue = false;
   String? univervalue;
-  bool value6 = false;
+  bool value6 =false ;
 
-  int house1 = 0;
-  var house = '1';
+
+  var house = '0';
   Color titleColor = Colors.black;
   Color viloyatColor = Colors.black12;
   Color numberColor = Colors.black12;
@@ -181,29 +187,42 @@ class _StudentsEdistState extends State<StudentsEdist> {
   @override
   void initState() {
     titlecontroller1 = TextEditingController(
-        text: widget.address == null ? '' : widget.address);
-    titlecontroller1 =
-        TextEditingController(text: widget.title == null ? '' : widget.title);
+        text: widget.title );
     phoneController = TextEditingController(
-        text: widget.phone_number == null ? '' : widget.phone_number);
-    phoneController =
-        TextEditingController(text: widget.phone_number == null ? '' : widget.phone_number);
-    addinformation = TextEditingController(
-        text: widget.description == null ? '' : widget.description);
+        text: widget.phone_number );
     addinformation =
-        TextEditingController(text: widget.description == null ? '' : widget.description);
-    addinformation = TextEditingController(
-        text: widget.description == null ? '' : widget.description);
+        TextEditingController(text: widget.description);
     roommate_gender = widget.roommate_gender == ''
         ? "O’gil bollarga / Qizlarga"
         : widget.roommate_gender == '2'
         ? 'Qiz '
         : "O'g'il";
+    if( widget.stay_university_matter== '2')
+    {
+      value6= true;
+    }else{
+      value6=false;
+    }
+    if( widget.stay_region_matter== '1'){
+      regionsvalue= true;
+    }else{
+      regionsvalue=false;
+    }
+    if( widget.phone_number_show== '1'){
+      numbervalue= true;
+    }else{
+      numbervalue=false;
+    }
+    if( widget.utility_bills== '1'){
+      house= '1';
+    }else{
+      house='2';
+    }
     super.initState();
   }
 
   Widget build(BuildContext context) {
-
+ Regionidisi=widget.stay_region_id.toString();
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 12.h),
@@ -243,7 +262,7 @@ class _StudentsEdistState extends State<StudentsEdist> {
                       controller: titlecontroller1,
                       decoration: InputDecoration(
                         border: InputBorder.none,
-                        hintText: "E’lonni nomlang".tr(),
+                        hintText: "E'lonni nomlash",
                         hintStyle: TextStyle(fontSize: 14.sp, color: Colors.grey),
                       ),
                       cursorColor: Colors.grey.shade800,
@@ -281,7 +300,7 @@ class _StudentsEdistState extends State<StudentsEdist> {
                       child: DropdownButtonFormField(
                         hint: Padding(
                           padding: EdgeInsets.only(left: 8.w),
-                          child: Text(widget.district.toString().tr()),
+                          child: Text(widget.stay_region.toString().tr()),
                         ),
                         decoration: InputDecoration(border: InputBorder.none),
                         // value: ,
@@ -364,17 +383,10 @@ class _StudentsEdistState extends State<StudentsEdist> {
                       child: DropdownSearch<String>(
                         mode: Mode.BOTTOM_SHEET,
                         items: data.univer.map((e) {
-                          print(e.id.toString() + "777");
-                          // if(widget.stay_university_id == e.id.toString()){
-                          //   setState(() {
-                          //     Univernamenew = e.id.toString();
-                          //
-                          //   });
-                          //   print(Univernamenew+"hhfhfhdjfhjdfhjdfhdjfh");
-                          // }
-                          if (Univername == e.name) {
-                            data.UniverId = e.id.toString();
+                          if (dropDown2 == e.name) {
+                            data.UniversiterId = e.id.toString();
                             data.isId = e.id;
+                            UniverId = e.id.toString();
                           }
 
                           // final selected = data.univer.where((element) => element.name == e.name);
@@ -395,13 +407,12 @@ class _StudentsEdistState extends State<StudentsEdist> {
                           // data.getFaculty(data.isId!);
                           print('${selected}=================');
                           setState(() {
-                            dropDown2 = Univernamenew;
                             dropDown2 = value.toString();
                             _UniverOnClick = true;
                             _colorUniver = Colors.grey;
                           });
                         },
-                        selectedItem: tr(Univername),
+                        selectedItem: tr("OTM ni tanlang"),
                       ),
                     ),
                     SizedBox(
@@ -735,6 +746,33 @@ class _StudentsEdistState extends State<StudentsEdist> {
                             context,
                             MaterialPageRoute(
                               builder: (context) => StudensEdits2(
+                                updateidi: '${widget.updateid}',
+                                images: '${widget.images}',
+                                comfort: '${widget.comfort}',
+                                utility_bills: "${widget.utility_bills}",
+                                live_with_owner: "${widget.live_with_owner}",
+                                cost_period: "${widget.cost_period}",
+                                rent_type: '${widget.renttype}',
+                                costtype: '${widget.cost_type}',
+                                cost: '${widget.cost}',
+                                etaj: '${widget.floors_count}',
+                                qavatlar: '${widget.room_count}',
+                                honasoni: "${widget.roommate_count}",
+                                housetype: '${widget.house_type}',
+                                Subway: '${widget.subway}',
+                                adress: '${widget.address}',
+                                viloyatname: widget.stay_region.toString(),
+                                  titlecontroller1: '${titlecontroller1!.text}',
+                                  univervalue: '${value6 ? 1 : 2 }',
+                                  viloyatidisi: '${data.viloyatid.toString()}',
+                                  viloyatvalue: '${regionsvalue ?1:2}',
+                                  universiteteid: data.UniverId,
+                                  titleGendor: '${gender1 ? 0 : _titleGendor}',
+                                  titlecount: '${gender1 ? 0 : _titleCount}',
+                                  phoneController:phoneController!.text.split(' ').join(''),
+                                  house: house,
+                                  addinformation: '${addinformation!.text}',
+                                  numbervalue: '${numbervalue ? 1 : 2}', tuman: '${widget.district}',
                               ),
                             ),
                           );
@@ -756,25 +794,25 @@ class _StudentsEdistState extends State<StudentsEdist> {
                         //   }
                         //   setState(() {});
                         // }
-                        print(
-                            '${titlecontroller1} elonni nomlashhhh yooo+++++++++++');
-                        print(
-                            '${value6 ? '1' : '2'} univervalue shartemas -----');
-                        print('${data.viloyatid} viloyatid +++++++++++');
-                        print(
-                            '${regionsvalue ? '1' : '2'} regionsvalue shart emas ');
-                        print('${data.UniverId} UniverId idisi +++++++++++');
-                        print(
-                            '${_titleGendor.toString() == 'Erkak' ? '1' : '2'} kimlarga++++++');
-                        print(
-                            '${phoneController} telefon raqam   +++++++++++');
-                        print(
-                            '${house} telefon raqam  sherik vsdjvnsijvbs +++++++++++');
-                        print(
-                            '${addinformation} qoshimcha malumotlar   +++++++++++');
-                        print('${_titleCount} nechta odamga +++');
-                        print(
-                            '${numbervalue ? '1' : '2'}  telefon raqam korinsin  +++++++++++');
+                        // print(
+                        //     '${Regionidisi}  yooo+++++++++++');
+                        // print(
+                        //     '${value6 ? '1' : '2'} univervalue shartemas -----');
+                        // print('${data.viloyatid} viloyatid +++++++++++');
+                        // print(
+                        //     '${regionsvalue ? '1' : '2'} regionsvalue shart emas ');
+                        print('${data.UniverId.toString()} UniverId UniverId +++++++++++');
+                        // print(
+                        //     '${_titleGendor.toString() == 'Erkak' ? '1' : '2'} kimlarga++++++');
+                        // print(
+                        //     '${phoneController} telefon raqam   +++++++++++');
+                        // print(
+                        //     '${house} telefon raqam  sherik vsdjvnsijvbs +++++++++++');
+                        // print(
+                        //     '${addinformation} qoshimcha malumotlar   +++++++++++');
+                        // print('${_titleCount} nechta odamga +++');
+                        // print(
+                        //     '${numbervalue ? '1' : '2'}  telefon raqam korinsin  +++++++++++');
                       },
                       child: Text(
                         "Keyingi ".tr(),

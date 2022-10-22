@@ -140,26 +140,29 @@ class _StudentState extends State<Student> {
                   decoration: BoxDecoration(
                       border: Border.all(color: titleColor),
                       borderRadius: BorderRadius.circular(10.r)),
-                  child: TextFormField(
-                    onChanged: (e) {
-                      setState(() {
-                        if (e.length > 0) {
-                          titleColor = Colors.grey;
-                          titlecolor2 = true;
-                        } else {
-                          titleColor = Colors.red;
-                          titlecolor2 = true;
-                        }
-                      });
-                    },
-                    controller: titlecontroller1,
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: "E’lonni nomlang".tr(),
-                      hintStyle: TextStyle(fontSize: 14.sp, color: Colors.grey),
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                    child: TextFormField(
+                      onChanged: (e) {
+                        setState(() {
+                          if (e.length > 0) {
+                            titleColor = Colors.grey;
+                            titlecolor2 = true;
+                          } else {
+                            titleColor = Colors.red;
+                            titlecolor2 = true;
+                          }
+                        });
+                      },
+                      controller: titlecontroller1,
+                      decoration: InputDecoration(
+                        border: InputBorder.none,
+                        hintText: "E’lonni nomlang".tr(),
+                        hintStyle: TextStyle(fontSize: 14.sp, color: Colors.grey),
+                      ),
+                      cursorColor: Colors.grey.shade800,
+                      cursorWidth: 1.5.w,
                     ),
-                    cursorColor: Colors.grey.shade800,
-                    cursorWidth: 1.5.w,
                   ),
                 ),
                 SizedBox(

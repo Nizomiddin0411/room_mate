@@ -15,6 +15,7 @@ import '../../provider/region_provider.dart';
 
 class UpdateStudents extends StatefulWidget {
   String? title;
+  String? stay_region;
   String? stay_region_id;
   String? stay_region_matter;
   String? stay_university_id;
@@ -42,10 +43,13 @@ class UpdateStudents extends StatefulWidget {
   String? cost_period;
   String? id;
   String? univername;
+  String? images;
 
   UpdateStudents({
     Key? key,
     required this.id,
+    required this.stay_region_id,
+    required this.images,
     required this.univername,
     required this.howcountroom,
     required this.floors_count,
@@ -68,7 +72,7 @@ class UpdateStudents extends StatefulWidget {
     required this.phone_number_show,
     required this.renttype,
     required this.room_count,
-    required this.stay_region_id,
+    required this.stay_region,
     required this.stay_region_matter,
     required this.stay_university_id,
     required this.stay_university_matter,
@@ -102,18 +106,18 @@ class _UpdateStudentsState extends State<UpdateStudents> {
         centerTitle: true,
       ),
       body: StudentsEdist(
-        stay_university_id: widget.stay_university_id.toString(),
+        updateid: '${widget.id}',
+        stay_university_id: widget.univername.toString(),
         stay_university_matter: widget.stay_university_matter.toString(),
         renttype: widget.renttype.toString(),
         cost: widget.cost.toString(),
         subway: widget.subway.toString(),
-        stay_region_id: widget.stay_region_id.toString(),
+        stay_region: widget.stay_region.toString(),
         stay_region_matter: widget.stay_region_matter.toString(),
         description: widget.description.toString(),
         utility_bills: widget.utility_bills.toString(),
         address: widget.address.toString(),
         title: widget.title.toString(),
-
         room_count: widget.room_count.toString(),
         location: widget.location.toString(),
         live_with_owner: '${widget.live_with_owner}',
@@ -128,7 +132,10 @@ class _UpdateStudentsState extends State<UpdateStudents> {
         floors_count: '${widget.floors_count}',
         cost_type: '${widget.cost_type}',
         phone_number: '${widget.phone_number}',
-        howcountroom: '${widget.howcountroom}', universtatenewname: '${widget.univername}',
+        howcountroom: '${widget.howcountroom}',
+        universtatenewname: '${widget.univername}',
+        images: '${widget.images}',
+        stay_region_id: '${widget.stay_region_id}',
       ),
     );
   }

@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -14,18 +15,83 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:talaba_uy/screens/Create_ads/create_succed_dart.dart';
 import 'package:talaba_uy/services/post_student_adds.dart';
+import 'package:talaba_uy/services/update_students%20_Ads.dart';
 
 import '../../core/const/app_colors.dart';
+
 class PostEditStudent extends StatefulWidget {
-  const PostEditStudent({Key? key}) : super(key: key);
+  String metro;
+  String viloyatvalue;
+  String universiteteid;
+  String univervalue;
+  String titleGendor;
+  String titlecount;
+  String phoneController;
+  String house;
+  String addinformation;
+  String numbervalue;
+  String comfort;
+  String costlivekomunal;
+  String countroom;
+  String housetype;
+  String housecount;
+  String howcountroom;
+  String narxnituri;
+  String addressController;
+  String ownerlive;
+  String titlecontroller1;
+  String viloyatidisi;
+  String costController;
+  String rent_type;
+  String cost_period;
+  String location;
+  String images;
+  String updateid;
+  List<dynamic>? Image;
+
+  PostEditStudent({
+    Key? key,
+    required this.updateid,
+    required this.images,
+    required this.howcountroom,
+    required this.comfort,
+    required this.ownerlive,
+    required this.cost_period,
+    required this.narxnituri,
+    required this.rent_type,
+    required this.countroom,
+    required this.housetype,
+    required this.metro,
+    required this.univervalue,
+    required this.titlecontroller1,
+    required this.viloyatvalue,
+    required this.universiteteid,
+    required this.titleGendor,
+    required this.titlecount,
+    required this.phoneController,
+    required this.addinformation,
+    required this.viloyatidisi,
+    required this.house,
+    required this.numbervalue,
+    required this.location,
+    required this.costController,
+    required this.addressController,
+    required this.costlivekomunal,
+    required this.housecount,
+  }) : super(key: key);
 
   @override
   State<PostEditStudent> createState() => _PostEditStudentState();
 }
 
 class _PostEditStudentState extends State<PostEditStudent> {
-
   final ImagePicker imagePicker = ImagePicker();
+
+  List<String> images = [
+    "https://images.wallpapersden.com/image/download/purple-sunrise-4k-vaporwave_bGplZmiUmZqaraWkpJRmbmdlrWZlbWU.jpg",
+    "https://wallpaperaccess.com/full/2637581.jpg",
+    "https://uhdwallpapers.org/uploads/converted/20/01/14/the-mandalorian-5k-1920x1080_477555-mm-90.jpg"
+  ];
 
   List<XFile>? imageFileList = [];
   List<XFile>? pickedFile;
@@ -160,13 +226,13 @@ class _PostEditStudentState extends State<PostEditStudent> {
                                     color: Colors.black12,
                                     child: file == null
                                         ? Icon(
-                                      Icons.camera_alt_sharp,
-                                      size: 50.sp,
-                                    )
+                                            Icons.camera_alt_sharp,
+                                            size: 50.sp,
+                                          )
                                         : Image.file(
-                                      file!,
-                                      fit: BoxFit.cover,
-                                    ),
+                                            file!,
+                                            fit: BoxFit.cover,
+                                          ),
                                   ),
                                 ),
                               ),
@@ -190,147 +256,88 @@ class _PostEditStudentState extends State<PostEditStudent> {
                     // ),
                     Container(
                       height: 240.h,
-                      child: ListView(children:
-                      //     List.generate(imageFileList!.length, (index) {
-                      //   return Column(children: <Widget>[
-                      //     Expanded(
-                      //       child: Stack(
-                      //         children: [
-                      //           Container(
-                      //             width: 200.w,
-                      //             height: 150.h,
-                      //             decoration: BoxDecoration(
-                      //               borderRadius:
-                      //                   BorderRadius.circular(10.r),
-                      //             ),
-                      //             child: ClipRRect(
-                      //               child: Image.file(
-                      //                 File(imageFileList![index].path),
-                      //                 fit: BoxFit.cover,
-                      //               ),
-                      //               borderRadius:
-                      //                   BorderRadius.circular(10.r),
-                      //             ),
-                      //           ),
-                      //           GestureDetector(
-                      //             onTap: () {
-                      //               setState(() {
-                      //                 // imageFileList!.removeAt(index);
-                      //               });
-                      //               print(
-                      //                   "Nizomiddin${imageFileList!.length}");
-                      //             },
-                      //             child: Padding(
-                      //               padding: EdgeInsets.fromLTRB(
-                      //                   60.w, 0, 0, 50.h),
-                      //               child: Align(
-                      //                 alignment: Alignment.topRight,
-                      //                 child: Container(
-                      //                     height: 20.h,
-                      //                     width: 24.w,
-                      //                     decoration: BoxDecoration(
-                      //                         color: Colors.red,
-                      //                         borderRadius:
-                      //                             BorderRadius.circular(
-                      //                                 15.r)),
-                      //                     child: Icon(Icons.remove,
-                      //                         color: Colors.white,
-                      //                         size: 20.sp)),
-                      //               ),
-                      //             ),
-                      //           ),
-                      //         ],
-                      //       ),
-                      //     ),
-                      //   ]);
-                      // }),
-                      [
+                      child: ListView(children: [
                         SizedBox(
                           height: 10.h,
                         ),
                         FileList.isNotEmpty
                             ? Row(
-                          children:
-                          List.generate(FileList.length, (index) {
-                            return (FileExist[index])
-                                ?
-                            // width: 120.w,
-                            Container(
-                              width: 108.w,
-                              height: 116.h,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(
-                                    12.r,
-                                  ),
-                                ),
-                              ),
-                              child: Stack(
-                                children: [
-                                  Expanded(
-                                    child: Container(
-                                      margin:
-                                      EdgeInsets.symmetric(
-                                          horizontal: 8.w,
-                                          vertical: 8.h),
-                                      decoration: BoxDecoration(
-                                        // border: Border.all(
-                                        //     color:
-                                        //         Colors.),
-                                        boxShadow: [
-                                          BoxShadow(
-                                              offset: Offset(
-                                                  .1.w, .1.h),
-                                              color: Colors.grey
-                                                  .shade400,
-                                              blurRadius: 6),
-                                        ],
-                                        borderRadius:
-                                        BorderRadius
-                                            .circular(
-                                          10.r,
-                                        ),
-                                        image: DecorationImage(
-                                          fit: BoxFit.cover,
-                                          image: FileImage(
-                                              FileList[index]),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Positioned(
-                                    right: 0,
-                                    child: GestureDetector(
-                                      child: Container(
-                                        width: 18.w,
-                                        height: 18.h,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                            BorderRadius
-                                                .circular(
-                                                4.r),
-                                            color: Colors
-                                                .red[400]),
-                                        child: Icon(
-                                          Icons.remove,
-                                          size: 15.sp,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                      onTap: () async {
-                                        FileList.removeAt(
-                                            index);
-                                        // index -= 4;
-                                        sum -= 1;
-                                        setState(() {});
-                                      },
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ): Container();
-                          }),
-                        )
+                                children: List.generate(FileExist.length, (index) {
+                                  return (FileExist[index])
+                                      ?
+                                      // width: 120.w,
+                                      Container(
+                                          width: 108.w,
+                                          height: 116.h,
+                                          decoration: BoxDecoration(
+                                            borderRadius: BorderRadius.all(
+                                              Radius.circular(
+                                                12.r,
+                                              ),
+                                            ),
+                                          ),
+                                          child: Stack(
+                                            children: [
+                                              Expanded(
+                                                child: Container(
+                                                  margin: EdgeInsets.symmetric(
+                                                      horizontal: 8.w,
+                                                      vertical: 8.h),
+                                                  decoration: BoxDecoration(
+                                                    // border: Border.all(
+                                                    //     color:
+                                                    //         Colors.),
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                          offset: Offset(
+                                                              .1.w, .1.h),
+                                                          color: Colors
+                                                              .grey.shade400,
+                                                          blurRadius: 6),
+                                                    ],
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                      10.r,
+                                                    ),
+                                                    image: DecorationImage(
+                                                      fit: BoxFit.cover,
+                                                      image: FileImage(
+                                                          FileList[index]),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              Positioned(
+                                                right: 0,
+                                                child: GestureDetector(
+                                                  child: Container(
+                                                    width: 18.w,
+                                                    height: 18.h,
+                                                    decoration: BoxDecoration(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(4.r),
+                                                        color: Colors.red[400]),
+                                                    child: Icon(
+                                                      Icons.remove,
+                                                      size: 15.sp,
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                  onTap: () async {
+                                                    FileList.removeAt(index);
+                                                    // index -= 4;
+                                                    sum -= 1;
+                                                    setState(() {});
+                                                  },
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        )
+                                      : Container();
+                                }),
+                              )
                             : const SizedBox(),
                       ]),
                     ),
@@ -344,36 +351,37 @@ class _PostEditStudentState extends State<PostEditStudent> {
                                 borderRadius: BorderRadius.circular(10.r)),
                             primary: AppColors.buttonLinear),
                         onPressed: () async {
-                          // await CreateStudent().StudentsAdds(
-                          //   title: widget.titlecontroller1,
-                          //   stay_region_id: widget.viloyatidisi,
-                          //   stay_region_matter: widget.viloyatvalue,
-                          //   stay_university_id: widget.universiteteid,
-                          //   stay_university_matter: widget.univervalue,
-                          //   roommate_gender: widget.titleGendor,
-                          //   roommate_count: widget.titlecount,
-                          //   phone_number: widget.phoneController.toString(),
-                          //   phone_number_show: widget.numbervalue,
-                          //   have_living_home: widget.house,
-                          //   description: widget.addinformation.toString(),
-                          //   district_id: widget.viloyatidisi,
-                          //   address: widget.addressController.toString(),
-                          //   location: widget.location,
-                          //   subway: widget.metro,
-                          //   house_type: widget.housetype,
-                          //   room_count: widget.housecount,
-                          //   floors_count: widget.howcountroom,
-                          //   howcountroom: widget.howcountroom,
-                          //   cost: widget.costController,
-                          //   cost_type: widget.narxnituri,
-                          //   live_with_owner: widget.ownerlive,
-                          //   utility_bills: widget.costlivekomunal,
-                          //   comfort: widget.comfort,
-                          //   renttype: widget.rent_type,
-                          //   cost_period: widget.cost_period,
-                          //   file1:  FileExist[0] ? FileList[0] : FileList[3],
-                          //   file2: FileExist[1] ? FileList[1] : FileList[4],
-                          //   file3: FileExist[2] ? FileList[2] : FileList[5],);
+                          await UpdateEditsStudent().StudentsEdits(
+                            idedit: widget.updateid,
+                            title: widget.titlecontroller1,
+                            stay_region_id: widget.viloyatidisi,
+                            stay_region_matter: widget.viloyatvalue,
+                            stay_university_id: widget.universiteteid,
+                            stay_university_matter: widget.univervalue,
+                            roommate_gender: widget.titleGendor,
+                            roommate_count: widget.titlecount,
+                            phone_number: widget.phoneController.toString(),
+                            phone_number_show: widget.numbervalue,
+                            have_living_home: widget.house,
+                            description: widget.addinformation.toString(),
+                            district_id: widget.viloyatidisi,
+                            address: widget.addressController.toString(),
+                            location: widget.location,
+                            subway: widget.metro,
+                            house_type: widget.housetype,
+                            room_count: widget.housecount,
+                            floors_count: widget.howcountroom,
+                            howcountroom: widget.howcountroom,
+                            cost: widget.costController,
+                            cost_type: widget.narxnituri,
+                            live_with_owner: widget.ownerlive,
+                            utility_bills: widget.costlivekomunal,
+                            comfort: widget.comfort,
+                            renttype: widget.rent_type,
+                            cost_period: widget.cost_period,
+                            file1:  FileExist[0] ? FileList[0] : FileList[3],
+                            file2: FileExist[1] ? FileList[1] : FileList[4],
+                            file3: FileExist[2] ? FileList[2] : FileList[5],);
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -393,6 +401,7 @@ class _PostEditStudentState extends State<PostEditStudent> {
           ),
         ));
   }
+
   void openCamera() async {
     var imgCamera = await imgPicker.getImage(source: ImageSource.camera);
     setState(() {
