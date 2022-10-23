@@ -724,7 +724,7 @@ class _OwnerState extends State<Owner> {
                           print('${addressController!.text} Address');
                           print('${id} metrooo');
                           print('${value6 ? 0 : university_id} univer id');
-                          print('${value6 ? 1 : 2} axamyatsiz univer');
+                          print('$gender_matter axamyatsiz univer');
 
                           if (_RegionOnClick &&
                               _DiscritOnClick &&
@@ -745,7 +745,7 @@ class _OwnerState extends State<Owner> {
                                               '${value5 ? 0 : roommate_gender}',
                                           university_id_matter:
                                               '${value6 ? 1 : 2}',
-                                          gender_matter: '${value5 ? 1 : 2}',
+                                          gender_matter: gender_matter,
                                           district_id: district_id,
                                           titleController:
                                               titleController!.text,

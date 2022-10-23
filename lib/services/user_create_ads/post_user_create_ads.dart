@@ -139,7 +139,7 @@ class UserCreateAds {
       // await Hive.box('token').put('token', jsonDecode(data)["access_token"]);
       print(Hive.box('token').get('token'));
       print(Hive.box('type').get('type'));
-      print(file1.toString() + 'filllllllll');
+      print(gender_matter.toString() + 'filllllllll');
       return jsonDecode(data);
     }else{
       print('ishlamadi');

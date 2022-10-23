@@ -173,6 +173,7 @@ class _AdsPhotoEditState extends State<AdsPhotoEdit> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
@@ -404,12 +405,54 @@ class _AdsPhotoEditState extends State<AdsPhotoEdit> {
                                     borderRadius: BorderRadius.circular(10.r)),
                                 primary: AppColors.buttonLinear),
                             onPressed: () async {
-                              print(FileList[3]);
-                              print(FileList[1]);
-                              print(FileList[2]);
+                              // print(widget.titleController! + 'title');
+                                print(widget.id.toString() +
+                                    'iidd');
+                                // print(widget.gender_matter.toString() +
+                                //     'gendermatter');
+                                // print(widget.district_id.toString() +
+                                //     'district id');
+                                // print(widget.id.toString() + 'metro');
+                                // print(widget.addressController.toString() +
+                                //     'address');
+                                // print(widget.university_id.toString() +
+                                //     'univerid');
+                                // print(widget.university_id_matter.toString() +
+                                //     'univer matter');
+                                // print(widget.phoneController.toString() +
+                                //     'phonecontrol');
+                                // print(widget.house_type.toString() +
+                                //     'house type');
+                                // print(
+                                //     widget.rent_type.toString() + 'rent type');
+                                // print(
+                                //     widget.room_count.toString() + 'hona soni');
+                                // print(widget.floors_count.toString() +
+                                //     'etaj soni');
+                                // print(widget.in_floor.toString() + 'etaj');
+                                // print(
+                                //     widget.costController.toString() + 'narxi');
+                                // print(
+                                //     widget.cost_type.toString() + 'cost type');
+                                // print(widget.live_with_owner.toString() +
+                                //     'uyni egasi');
+                                // print(widget.utility_electricity.toString() +
+                                //     'elktor');
+                                // print(widget.unility_gaz.toString() + 'gaz');
+                                // print(widget.utility_hot_water.toString() +
+                                //     'issiq suv');
+                                // print(widget.utility_cold_water.toString() +
+                                //     'sovuq suv');
+                                // print(
+                                //     widget.utility_trash.toString() + 'musor');
+                                // print(widget.comfort.toString() + 'komford');
+                                // print(widget.description.toString() +
+                                //     'qoshimcha');
+                                // print(widget.location.toString() + 'location');
+                                // print(widget.cost_period.toString() + 'cost');
 
                               var data = await EditAdsService().FetchAdsEdit(
-                                id: int.parse('${widget.id}'),
+                                id: widget.id.toString(),
                                 titleController: widget.titleController,
                                 roommate_gender: widget.roommate_gender,
                                 gender_matter: widget.gender_matter,
@@ -450,51 +493,51 @@ class _AdsPhotoEditState extends State<AdsPhotoEdit> {
                                             CreateSuccedful()),
                                     (route) => false);
                               } else {
-                                print(widget.id! + 'title');
-                                print(widget.roommate_gender.toString() +
-                                    'gender');
-                                print(widget.gender_matter.toString() +
-                                    'gendermatter');
-                                print(widget.district_id.toString() +
-                                    'district id');
-                                print(widget.id.toString() + 'metro');
-                                print(widget.addressController.toString() +
-                                    'address');
-                                print(widget.university_id.toString() +
-                                    'univerid');
-                                print(widget.university_id_matter.toString() +
-                                    'univer matter');
-                                print(widget.phoneController.toString() +
-                                    'phonecontrol');
-                                print(widget.house_type.toString() +
-                                    'house type');
-                                print(
-                                    widget.rent_type.toString() + 'rent type');
-                                print(
-                                    widget.room_count.toString() + 'hona soni');
-                                print(widget.floors_count.toString() +
-                                    'etaj soni');
-                                print(widget.in_floor.toString() + 'etaj');
-                                print(
-                                    widget.costController.toString() + 'narxi');
-                                print(
-                                    widget.cost_type.toString() + 'cost type');
-                                print(widget.live_with_owner.toString() +
-                                    'uyni egasi');
-                                print(widget.utility_electricity.toString() +
-                                    'elktor');
-                                print(widget.unility_gaz.toString() + 'gaz');
-                                print(widget.utility_hot_water.toString() +
-                                    'issiq suv');
-                                print(widget.utility_cold_water.toString() +
-                                    'sovuq suv');
-                                print(
-                                    widget.utility_trash.toString() + 'musor');
-                                print(widget.comfort.toString() + 'komford');
-                                print(widget.description.toString() +
-                                    'qoshimcha');
-                                print(widget.location.toString() + 'location');
-                                print(widget.cost_period.toString() + 'cost');
+                                // print(widget.id! + 'title');
+                                // print(widget.roommate_gender.toString() +
+                                //     'gender');
+                                // print(widget.gender_matter.toString() +
+                                //     'gendermatter');
+                                // print(widget.district_id.toString() +
+                                //     'district id');
+                                // print(widget.id.toString() + 'metro');
+                                // print(widget.addressController.toString() +
+                                //     'address');
+                                // print(widget.university_id.toString() +
+                                //     'univerid');
+                                // print(widget.university_id_matter.toString() +
+                                //     'univer matter');
+                                // print(widget.phoneController.toString() +
+                                //     'phonecontrol');
+                                // print(widget.house_type.toString() +
+                                //     'house type');
+                                // print(
+                                //     widget.rent_type.toString() + 'rent type');
+                                // print(
+                                //     widget.room_count.toString() + 'hona soni');
+                                // print(widget.floors_count.toString() +
+                                //     'etaj soni');
+                                // print(widget.in_floor.toString() + 'etaj');
+                                // print(
+                                //     widget.costController.toString() + 'narxi');
+                                // print(
+                                //     widget.cost_type.toString() + 'cost type');
+                                // print(widget.live_with_owner.toString() +
+                                //     'uyni egasi');
+                                // print(widget.utility_electricity.toString() +
+                                //     'elktor');
+                                // print(widget.unility_gaz.toString() + 'gaz');
+                                // print(widget.utility_hot_water.toString() +
+                                //     'issiq suv');
+                                // print(widget.utility_cold_water.toString() +
+                                //     'sovuq suv');
+                                // print(
+                                //     widget.utility_trash.toString() + 'musor');
+                                // print(widget.comfort.toString() + 'komford');
+                                // print(widget.description.toString() +
+                                //     'qoshimcha');
+                                // print(widget.location.toString() + 'location');
+                                // print(widget.cost_period.toString() + 'cost');
                                 ScaffoldMessenger.of(context).showSnackBar(
                                     SnackBar(content: Text(data['message'])));
                               }

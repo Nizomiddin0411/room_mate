@@ -446,7 +446,7 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
                                 file2: FileExist[1] ? FileList[1] : FileList[4],
                                 file3: FileExist[2] ? FileList[2] : FileList[5],
                               );
-                              print(load.isLoading);
+                              print(widget.gender_matter.toString() + "iddd");
                               load.isload = false;
                               if(load.isLoading != true){
                                 showAlertDialog(context);

@@ -57,6 +57,8 @@ class _FavoritAdsState extends State<FavoritAds> {
                     shrinkWrap: true,
                     itemCount: data.MyAds.length,
                     itemBuilder: (context, index) {
+                      print(data.MyAds[index].id.toString() + "qqq");
+
                       return Padding(
                         padding: EdgeInsets.all(18.0.w),
                         child: SingleChildScrollView(
@@ -170,7 +172,6 @@ class _FavoritAdsState extends State<FavoritAds> {
                                                 Image: data.MyAds[index].images,
                                                 locations:
                                                     data.MyAds[index].location,
-                                                    
                                               )));
                                 },
                                 child: Container(
@@ -190,7 +191,7 @@ class _FavoritAdsState extends State<FavoritAds> {
                                                   imageUrl:
                                                       "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.MyAds[index].images!.first.image.toString()}",
                                                   placeholder: (context, url) =>
-                                                      CircularProgressIndicator(),
+                                                      Center(child: CircularProgressIndicator()),
                                                   errorWidget:
                                                       (context, url, error) =>
                                                           Image.asset(
@@ -201,19 +202,19 @@ class _FavoritAdsState extends State<FavoritAds> {
                                                   fit: BoxFit.cover,
                                                 )
                                               // : data.MyAds[index].images![0]
-                                                      // .isEmpty
-                                                  // ? Image.asset(
-                                                  //     'assets/images/notImage.png',
-                                                  //     width: 324.w,
-                                                  //     height: 235.h,
-                                                  //     fit: BoxFit.cover,
-                                                  //   )
-                                                  : Image.asset(
-                                                      'assets/images/notImage.png',
-                                                      width: 324.w,
-                                                      height: 235.h,
-                                                      fit: BoxFit.cover,
-                                                    ),
+                                              // .isEmpty
+                                              // ? Image.asset(
+                                              //     'assets/images/notImage.png',
+                                              //     width: 324.w,
+                                              //     height: 235.h,
+                                              //     fit: BoxFit.cover,
+                                              //   )
+                                              : Image.asset(
+                                                  'assets/images/notImage.png',
+                                                  width: 324.w,
+                                                  height: 235.h,
+                                                  fit: BoxFit.cover,
+                                                ),
                                           Positioned(
                                               child: Padding(
                                             padding: EdgeInsets.all(8.0.w),
@@ -334,7 +335,11 @@ class _FavoritAdsState extends State<FavoritAds> {
                                                                               index]
                                                                           .phoneNumber
                                                                           .toString(),
-                                                                      '2',
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .comfort
+                                                                          .toString(),
                                                                       data
                                                                           .MyAds[
                                                                               index]
@@ -383,13 +388,68 @@ class _FavoritAdsState extends State<FavoritAds> {
                                                                               index]
                                                                           .floorsCount
                                                                           .toString(),
-                                                                          data
+                                                                      data
                                                                           .MyAds[
                                                                               index]
                                                                           .costPeriod
                                                                           .toString(),
-                                                                          
-                                                                          
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .genderMatter
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .universityIdMatter
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .region!
+                                                                          .name
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .district!
+                                                                          .name
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .liveWithOwner
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .utilityElectricity
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .unilityGaz
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .utilityHotWater
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .utilityColdWater
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .utilityTrash
+                                                                          .toString(),
+                                                                          data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .districtId
+                                                                          .toString(),
                                                                     ),
                                                                   )),
                                                           child: Container(

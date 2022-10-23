@@ -11,7 +11,6 @@ class AdsContinueEdit extends StatefulWidget {
   String? id;
   String? addressController;
   String? university_id;
-
   String? roommate_gender;
   String? university_id_matter;
   String? gender_matter;
@@ -27,6 +26,14 @@ class AdsContinueEdit extends StatefulWidget {
   String? cost;
   String? cost_period;
   String? description;
+  String? live_with_owner;
+  String? comfort;
+  String? utility_electricity;
+  String? unility_gaz;
+  String? utility_hot_water;
+  String? utility_cold_water;
+  String? utility_trash;
+  String subway;
 
   AdsContinueEdit({
     required this.id,
@@ -47,6 +54,14 @@ class AdsContinueEdit extends StatefulWidget {
     required this.cost,
     required this.cost_period,
     required this.description,
+    required this.live_with_owner,
+    required this.comfort,
+    required this.utility_electricity,
+    required this.unility_gaz,
+    required this.utility_hot_water,
+    required this.utility_cold_water,
+    required this.utility_trash,
+    required this.subway,
   });
 
   @override
@@ -107,7 +122,19 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
   Color _priceColor = Colors.grey;
   bool _priceOnClick = true;
   Color _colorForm = Colors.grey;
+  String? id;
+  String? id1;
+  String? id2;
+  String? id3;
+  String? id4;
+  String? id5;
+  int idhouse = 6;
+  bool value1 = false;
+  bool value2 = false;
+  bool value3 = false;
+  bool value4 = false;
   bool value5 = false;
+  bool value6 = false;
   var pricetype = [
     "kunlik",
     "oylik",
@@ -168,24 +195,46 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
     inputcontroller = TextEditingController();
     phoneController = TextEditingController(text: widget.phoneNumber);
     descriptionController = TextEditingController(text: widget.description);
+    late List<String> haveComfort = widget.comfort!.split(',');
+    for (String i in haveComfort) {
+      print(i.toString()+"''''''''''");
+      if (i == '1') {
+        value1 = true;
+      }
+      if (i == '2') value2 = true;
+      if (i == '3') value3 = true;
+      if (i == '4') value4 = true;
+      if (i == '5') value5 = true;
+      if (i == '6') value6 = true;
+    }
+    id = widget.live_with_owner;
+    id1 = widget.utility_electricity;
+    id2 = widget.unility_gaz;
+    id3 = widget.utility_hot_water;
+    id4 = widget.utility_cold_water;
+    id5 = widget.utility_trash;
+    // if (widget.live_with_owner == '0') {
+    //   ownerlive = '1';
+    // } else {
+    //   ownerlive = '2';
+    // }
+   
     super.initState();
   }
 
-  int id = 1;
-  int id1 = 1;
-  int id2 = 1;
-  int id3 = 1;
-  int id4 = 1;
-  int id5 = 1;
-  int idhouse = 6;
-  bool value1 = false;
-  bool value2 = false;
-  bool value3 = false;
-  bool value4 = false;
-  bool value6 = false;
+  
+ 
 
   @override
   Widget build(BuildContext context) {
+    print(widget.roommate_gender.toString() + "geee");
+
+    //  print(id1);
+    // print(id2);
+    // print(id3);
+    // print(id4);
+    // print(id5);
+    // print('aa');
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.white,
@@ -746,11 +795,11 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                     Row(
                       children: [
                         Radio(
-                          value: 1,
+                          value: '1',
                           groupValue: id,
                           onChanged: (val) {
                             setState(() {
-                              id = 1;
+                              id = val.toString();
                             });
                           },
                         ),
@@ -762,11 +811,11 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                           width: 35.w,
                         ),
                         Radio(
-                          value: 2,
+                          value: '2',
                           groupValue: id,
                           onChanged: (val) {
                             setState(() {
-                              id = 2;
+                              id = val.toString();
                             });
                           },
                         ),
@@ -820,11 +869,11 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                           child: Text("Elektr energiya"),
                         ),
                         Radio(
-                          value: 1,
+                          value: '1',
                           groupValue: id1,
                           onChanged: (val) {
                             setState(() {
-                              id1 = 1;
+                              id1 = '1';
                             });
                           },
                         ),
@@ -832,11 +881,11 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                           width: 50.w,
                         ),
                         Radio(
-                          value: 2,
+                          value: '2',
                           groupValue: id1,
                           onChanged: (val) {
                             setState(() {
-                              id1 = 2;
+                              id1 = '2';
                             });
                           },
                         ),
@@ -853,11 +902,11 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                           child: Text("Gaz"),
                         ),
                         Radio(
-                          value: 1,
+                          value: '1',
                           groupValue: id2,
                           onChanged: (val) {
                             setState(() {
-                              id2 = 1;
+                              id2 = val.toString();
                             });
                           },
                         ),
@@ -865,11 +914,11 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                           width: 50.w,
                         ),
                         Radio(
-                          value: 2,
+                          value: '2',
                           groupValue: id2,
                           onChanged: (val) {
                             setState(() {
-                              id2 = 2;
+                              id2 = val.toString();
                             });
                           },
                         ),
@@ -884,11 +933,11 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                             ),
                             Container(width: 180.w, child: Text("Sovuq suv")),
                             Radio(
-                              value: 1,
+                              value: '1',
                               groupValue: id3,
                               onChanged: (val) {
                                 setState(() {
-                                  id3 = 1;
+                                  id3 = val.toString();
                                 });
                               },
                             ),
@@ -896,11 +945,11 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                               width: 50.w,
                             ),
                             Radio(
-                              value: 2,
+                              value: '2',
                               groupValue: id3,
                               onChanged: (val) {
                                 setState(() {
-                                  id3 = 2;
+                                  id3 = val.toString();
                                 });
                               },
                             ),
@@ -917,11 +966,11 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                             ),
                             Container(width: 180.w, child: Text("Issiq suv")),
                             Radio(
-                              value: 1,
+                              value: '1',
                               groupValue: id4,
                               onChanged: (val) {
                                 setState(() {
-                                  id4 = 1;
+                                  id4 = val.toString();
                                 });
                               },
                             ),
@@ -929,11 +978,11 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                               width: 50.w,
                             ),
                             Radio(
-                              value: 2,
+                              value: '2',
                               groupValue: id4,
                               onChanged: (val) {
                                 setState(() {
-                                  id4 = 2;
+                                  id4 = val.toString();
                                 });
                               },
                             ),
@@ -950,11 +999,11 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                             ),
                             Container(width: 180.w, child: Text("Chiqindi")),
                             Radio(
-                              value: 1,
+                              value: '1',
                               groupValue: id5,
                               onChanged: (val) {
                                 setState(() {
-                                  id5 = 1;
+                                  id5 = val.toString();
                                 });
                               },
                             ),
@@ -962,11 +1011,11 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                               width: 50.w,
                             ),
                             Radio(
-                              value: 2,
+                              value:'2',
                               groupValue: id5,
                               onChanged: (val) {
                                 setState(() {
-                                  id5 = 2;
+                                  id5 = val.toString();
                                 });
                               },
                             ),
@@ -998,10 +1047,10 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                             children: [
                               Text("Wi - fi "),
                               Checkbox(
-                                value: this.value1,
+                                value: value1,
                                 onChanged: (bool? value) {
                                   setState(() {
-                                    this.value1 = value!;
+                                    value1 = value!;
                                     if (value) {
                                       comfort.add('1');
                                     } else {
@@ -1017,10 +1066,10 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                             children: [
                               Text("TV"),
                               Checkbox(
-                                value: this.value2,
+                                value: value2,
                                 onChanged: (bool? value) {
                                   setState(() {
-                                    this.value2 = value!;
+                                    value2 = value!;
                                     if (value) {
                                       comfort.add('2');
                                     } else {
@@ -1036,10 +1085,10 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                             children: [
                               Text("Muzlatgich"),
                               Checkbox(
-                                value: this.value3,
+                                value: value3,
                                 onChanged: (bool? value) {
                                   setState(() {
-                                    this.value3 = value!;
+                                    value3 = value!;
                                     if (value) {
                                       comfort.add('3');
                                     } else {
@@ -1055,10 +1104,10 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                             children: [
                               Text("Kir yuvish mashinasi"),
                               Checkbox(
-                                value: this.value4,
+                                value: value4,
                                 onChanged: (bool? value) {
                                   setState(() {
-                                    this.value4 = value!;
+                                    value4 = value!;
                                     if (value) {
                                       comfort.add('4');
                                     } else {
@@ -1074,10 +1123,10 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                             children: [
                               Text("Konditsioner"),
                               Checkbox(
-                                value: this.value6,
+                                value: value5,
                                 onChanged: (bool? value) {
                                   setState(() {
-                                    this.value6 = value!;
+                                    value5 = value!;
                                     if (value) {
                                       comfort.add('5');
                                     } else {
@@ -1093,10 +1142,10 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                             children: [
                               Text("Chang yutgich"),
                               Checkbox(
-                                value: this.value5,
+                                value: value6,
                                 onChanged: (bool? value) {
                                   setState(() {
-                                    this.value5 = value!;
+                                    value6 = value!;
                                     if (value) {
                                       comfort.add('6');
                                     } else {
@@ -1270,7 +1319,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                                         description:
                                             descriptionController!.text,
                                         cost_period: price,
-                                        subway: '1',
+                                        subway: comfortItems,
                                       )),
                             );
                           } else {

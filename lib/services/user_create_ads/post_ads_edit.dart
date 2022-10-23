@@ -11,7 +11,7 @@ import 'package:http/http.dart' as http;
 
 class EditAdsService {
   Future FetchAdsEdit({
-    required int id,
+    required String id,
     required String? titleController,
     required String? roommate_gender,
     required String? gender_matter,
@@ -104,9 +104,12 @@ class EditAdsService {
         )
       ]);
     }
+    roommate_gender = roommate_gender == "Qiz bolaga" ? '2' : roommate_gender == "O'g'il bolaga" ? '1' : roommate_gender.toString();
+    print(district_id.toString() + "wwwww");
+
     request.fields.addAll({'id': '${id}'});
     request.fields.addAll({'title': '${titleController}',});
-    request.fields.addAll({'roommate_gender': '${roommate_gender}',});
+    request.fields.addAll({'roommate_gender': roommate_gender == "Qiz bolaga" ? '2' : roommate_gender == "O'g'il bolaga" ? '1' : roommate_gender.toString()});
     request.fields.addAll({'gender_matter': '${gender_matter}',});
     request.fields.addAll({'district_id': '${district_id}',});
     request.fields.addAll({'address': '${addressController}',});
@@ -141,6 +144,7 @@ class EditAdsService {
       var data = await response.stream.bytesToString();
       // await Hive.box('token').put('token', jsonDecode(data)["access_token"]);
       print(file1.toString() + 'fillllllllllllllbbbb');
+
       return jsonDecode(data);
     }else{
       print('ishlamadi');
