@@ -8,6 +8,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
 import 'package:talaba_uy/models/get_all_ads.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../../chat/chat_page.dart';
 import '../../services/post_add_chat_permit.dart';
 import '../../services/post_change_favoritr_service.dart';
@@ -173,12 +174,12 @@ class _AdsDetailState extends State<AdsDetail> {
                             pagination: SwiperPagination(),
                             itemCount: widget.Image!.length,
                             itemBuilder: (BuildContext context, int index1) {
-                              return widget.Image != null
+                              return widget.Image!.isNotEmpty
                                   ? CachedNetworkImage(
                                       imageUrl:
                                           "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${widget.Image![index1].image.toString()}",
                                       placeholder: (context, url) =>
-                                          CircularProgressIndicator(),
+                                          Center(child: CircularProgressIndicator()),
                                       errorWidget: (context, url, error) =>
                                           Image.asset(
                                         'assets/images/notImage.png',
@@ -187,14 +188,14 @@ class _AdsDetailState extends State<AdsDetail> {
                                       height: 219.h,
                                       fit: BoxFit.cover,
                                     )
-                                  : widget.Image![index1].isEmpty
-                                      ? Image.asset(
-                                          'assets/images/notImage.png',
-                                          width: 324.w,
-                                          height: 219.h,
-                                          fit: BoxFit.cover,
-                                        )
-                                      : Image.asset(
+                                  // : widget.Image![index1].isEmpty
+                                  //     ? Image.asset(
+                                  //         'assets/images/notImage.png',
+                                  //         width: 324.w,
+                                  //         height: 219.h,
+                                  //         fit: BoxFit.cover,
+                                  //       )
+                                  : Image.asset(
                                           'assets/images/notImage.png',
                                           width: 324.w,
                                           height: 235.h,
@@ -361,7 +362,7 @@ class _AdsDetailState extends State<AdsDetail> {
                   Row(
                     children: [
                       // widget.chatApproved == 1 ?
-                      Hive.box('type').get('type') != 2
+                      widget.type == '1'
                           ? Padding(
                               padding: EdgeInsets.fromLTRB(12.w, 0, 12.w, 12.h),
                               child: InkWell(
@@ -447,7 +448,11 @@ class _AdsDetailState extends State<AdsDetail> {
                         padding: EdgeInsets.fromLTRB(8.w, 0, 8.w, 12.h),
                         child: InkWell(
                           onTap: () async {
-                            // await ChatPermit().fetchApprov(Askid: widget.userId, Approvid: Hive.box('id').get('id'));
+                            final Uri launchUri = Uri(
+                              scheme: 'tel',
+                              path: widget.phoneNumber,
+                            );
+                            await launchUrl(launchUri);
                           },
                           child: Container(
                             width: 170.w,
@@ -492,7 +497,7 @@ class _AdsDetailState extends State<AdsDetail> {
                 padding: const EdgeInsets.all(10.0),
                 child: Column(
                   children: [
-                    Hive.box('type').get('type') == 2
+                   widget.type == '1'
                         ? Text(
                             'Sherik izlayabmiz',
                             style: TextStyle(
@@ -501,7 +506,7 @@ class _AdsDetailState extends State<AdsDetail> {
                                 color: AppColors.mainColor),
                           ).tr()
                         : Container(),
-                    Hive.box('type').get('type') == 2
+                    widget.type == '1'
                         ? Row(
                             children: [
                               Container(
@@ -527,12 +532,12 @@ class _AdsDetailState extends State<AdsDetail> {
                             ],
                           )
                         : Container(),
-                    Hive.box('type').get('type') == 2
+                    widget.type == '1'
                         ? SizedBox(
                             height: 6.h,
                           )
                         : Container(),
-                    Hive.box('type').get('type') == 2
+                   widget.type == '1'
                         ? Row(
                             children: [
                               Container(
@@ -558,12 +563,12 @@ class _AdsDetailState extends State<AdsDetail> {
                             ],
                           )
                         : Container(),
-                    Hive.box('type').get('type') == 2
+                    widget.type == '1'
                         ? SizedBox(
                             height: 6.h,
                           )
                         : Container(),
-                    Hive.box('type').get('type') == 2
+                    widget.type == '1'
                         ? Row(
                             children: [
                               Container(
@@ -649,13 +654,13 @@ class _AdsDetailState extends State<AdsDetail> {
                     //     )
                     //   ],
                     // ),
-                    Hive.box('type').get('type') == 2
+                    widget == '1'
                         ? SizedBox(
                             height: 6.h,
                           )
                         : Container(),
                     // widget.type == '1' ?
-                    Hive.box('type').get('type') == 2
+                    widget.type == '1'
                         ? Row(
                             children: [
                               Container(
@@ -739,9 +744,12 @@ class _AdsDetailState extends State<AdsDetail> {
                         ),
                         Padding(
                           padding: const EdgeInsets.all(8.0),
-                          child: Text(
-                            "${widget.region} | ${widget.district}",
-                            style: TextStyle(fontSize: 14.sp),
+                          child: SizedBox(
+                            width: MediaQuery.of(context).size.width -150.w,
+                            child: Text(
+                              "${widget.region} | ${widget.district}",
+                              style: TextStyle(fontSize: 14.sp),
+                            ),
                           ),
                         )
                       ],
@@ -1001,7 +1009,9 @@ showAlertDialog(BuildContext context, int askedid) {
     style: ElevatedButton.styleFrom(primary: AppColors.mainColor),
     child: Text("Ruhsat olish").tr(),
     onPressed: () async {
-      ChatPermit().fetchApprov(Askid: askedid);
+      print(askedid);
+     await ChatPermit().fetchApprov(Askid: askedid.toString());
+     Navigator.of(context).pop();
     },
   );
   Widget notButton = ElevatedButton(

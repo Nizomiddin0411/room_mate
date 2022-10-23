@@ -26,6 +26,7 @@ class RegionProvider extends ChangeNotifier {
   String UniverId = '';
   String FacutyId = '';
   String districtOwnerId = '';
+  String UniversiterId = '';
   bool isDistrict = false;
   String defaultvalue = 'Tumanni tanlang';
   bool isFaculty = false;

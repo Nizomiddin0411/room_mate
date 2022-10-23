@@ -91,7 +91,8 @@ class _NotificationPageState extends State<NotificationPage> {
                                   children: [
                                     InkWell(
                                       onTap: () async{
-                                        await ChatApprove().fetchApprov(PermitId: data.permit[index].id.toString(), Approved: '0');
+                                        await ChatApprove().fetchApprov(PermitId: data.permit[index].id.toString(), Approved: '1');
+                                        await data.Permit();
                                       },
                                       child: Container(
                                         width: 133.w,
@@ -116,7 +117,9 @@ class _NotificationPageState extends State<NotificationPage> {
                                     InkWell(
                                       onTap:() async{
                                         await ChatApprove().fetchApprov(PermitId: data.permit[index].id.toString(), Approved: '2');
-                                      },
+                                        await data.Permit();
+                                        print('rad qildi');
+                                        },
                                       child: Container(
                                         width: 133.w,
                                         height: 38.h,
