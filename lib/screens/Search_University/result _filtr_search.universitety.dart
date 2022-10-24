@@ -305,7 +305,7 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                                   (value) => DropdownMenuItem<String?>(
                                     value: value.name,
                                     child: Text(
-                                      "",
+                                      value.name!,
                                       style: TextStyle(
                                         fontSize: 14.sp,
                                       ),
@@ -402,7 +402,9 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                                   borderRadius: BorderRadius.circular(10.r),
                                   side: BorderSide(color: Colors.red)),
                               primary: Colors.white),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
                           child: Text(
                             "Tozalash",
                             style: TextStyle(
@@ -423,7 +425,9 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10.r)),
                               primary: AppColors.buttonLinear),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.pop(context);
+                          },
                           child: Text(
                             "Saqlash",
                             style: TextStyle(

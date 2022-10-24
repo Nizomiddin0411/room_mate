@@ -106,9 +106,11 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                   borderSide: BorderSide(color: Colors.blue)),
                               label: Text("Qidirish "),
                               suffixIcon: IconButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  _controller.clear();
+                                },
                                 icon: Icon(
-                                  Icons.add_location_alt_outlined,
+                                  Icons.cancel_outlined,
                                   color: AppColors.textColor,
                                 ),
                               ),

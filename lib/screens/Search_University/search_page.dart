@@ -72,10 +72,11 @@ class _SearchPageState extends State<SearchPage> {
                         border: OutlineInputBorder(),
                         label: Text("Qidirish "),
                         suffixIcon: IconButton(
-                          onPressed: () {},
+                          onPressed: () {
+                            _controller.clear();
+                          },
                           icon: Icon(
-                            Icons.clear_outlined,
-                            color: AppColors.textColor,
+                            Icons.cancel_outlined,
                           ),
                         ),
                         prefixIcon: IconButton(

@@ -235,7 +235,11 @@ class _UniverFiltrPageState extends State<UniverFiltrPage> {
                                     borderRadius: BorderRadius.circular(10.r),
                                     side: BorderSide(color: Colors.red)),
                                 primary: Colors.white),
-                            onPressed: () {},
+                            onPressed: () {
+                              provider.getSearchUniver(
+                                  '0', '0', '0');
+                              Navigator.pop(context);
+                            },
                             child: Text(
                               "Tozalash",
                               style: TextStyle(
