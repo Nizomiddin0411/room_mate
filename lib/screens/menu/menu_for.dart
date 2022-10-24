@@ -27,8 +27,8 @@ class _MenuForState extends State<MenuFor> {
   @override
   void initState() {
     super.initState();
-    Provider.of<SearchUniversitet>(context, listen: false).getSearchUniver('0');
-    Provider.of<SearchUniversitet>(context, listen: false).getSearchUniver(toStringShort());
+    Provider.of<SearchUniversitet>(context, listen: false).getSearchUniver('0','0','0');
+    Provider.of<SearchUniversitet>(context, listen: false).getSearchUniver(toStringShort(),'0','0');
   }
 
   Widget build(BuildContext context) {

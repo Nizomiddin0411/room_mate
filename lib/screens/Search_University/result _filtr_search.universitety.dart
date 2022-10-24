@@ -5,17 +5,15 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
 import 'package:talaba_uy/models/get_faculty_model.dart';
-import 'package:talaba_uy/screens/Search_University/result_search_universitety.dart';
 import 'package:talaba_uy/services/get_faculty_service.dart';
 import '../../provider/search_universitet_provider.dart';
 import '../../provider/universitet_provider.dart';
-import '../../services/searching_students_service.dart';
+
 
 class ResultFiltrPage extends StatefulWidget {
   final String id;
 
   const ResultFiltrPage({Key? key, required this.id}) : super(key: key);
-
 
   @override
   State<ResultFiltrPage> createState() => _ResultFiltrPageState();
@@ -29,9 +27,9 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
 
     Provider.of<UniversitetProvider>(context, listen: false).getViloyat();
   }
+
   @override
   Widget build(BuildContext context) {
-
     final List<String> kursingizItems = [
       '1 ',
       '2',
@@ -91,7 +89,7 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                     DropdownButtonFormField2<String>(
                       decoration: InputDecoration(
                         enabledBorder:
-                        OutlineInputBorder(borderSide: BorderSide()),
+                            OutlineInputBorder(borderSide: BorderSide()),
                         isDense: true,
                         contentPadding: EdgeInsets.zero,
                         border: OutlineInputBorder(
@@ -99,22 +97,22 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                         ),
                       ),
                       isExpanded: true,
-                      hint: const Text(
+                      hint: Text(
                         'Qaysi viloyatliksiz',
-                        style: TextStyle(fontSize: 14),
+                        style: TextStyle(fontSize: 14.sp),
                       ),
                       icon: const Icon(
                         Icons.arrow_drop_down,
                         color: Colors.black45,
                       ),
                       iconSize: 30,
-                      buttonHeight: 60,
-                      buttonPadding: const EdgeInsets.only(left: 20, right: 10),
+                      buttonHeight: 60.h,
+                      buttonPadding: EdgeInsets.only(left: 20.w, right: 10.w),
                       dropdownDecoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(15),
                       ),
                       items: provider.Viloyat.map(
-                            (e) => DropdownMenuItem<String>(
+                        (e) => DropdownMenuItem<String>(
                           onTap: () {
                             setState(() {
                               Region = e.id.toString();
@@ -123,8 +121,8 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                           value: e.name ?? "",
                           child: Text(
                             e.name.toString(),
-                            style: const TextStyle(
-                              fontSize: 14,
+                            style: TextStyle(
+                              fontSize: 14.sp,
                             ),
                           ),
                         ),
@@ -132,7 +130,7 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                       onChanged: (newValue) async {
                         print("Selected ----------- $newValue");
                         final selected = provider.Viloyat.where(
-                                (element) => element.name == newValue);
+                            (element) => element.name == newValue);
                         provider.getTuman(selected.last.id!);
                         provider.RegionId = newValue.toString();
                         print(provider.RegionId);
@@ -143,7 +141,7 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                   ],
                 ),
                 SizedBox(
-                  height: 15,
+                  height: 15.h,
                 ),
                 Column(
                   children: [
@@ -153,99 +151,99 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                       ],
                     ),
                     SizedBox(
-                      height: 5,
+                      height: 5.h,
                     ),
                     provider.istuman
                         ? Column(
-                      children: [
-                        DropdownButtonFormField2<String>(
-                          decoration: InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide()),
-                            isDense: true,
-                            contentPadding: EdgeInsets.zero,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                          ),
-                          isExpanded: true,
-                          hint: const Text(
-                            ' Qaysi tumanidansiz',
-                            style: TextStyle(fontSize: 14),
-                          ),
-                          icon: const Icon(
-                            Icons.arrow_drop_down,
-                            color: Colors.black45,
-                          ),
-                          iconSize: 30,
-                          buttonHeight: 60,
-                          buttonPadding:
-                          const EdgeInsets.only(left: 20, right: 10),
-                          dropdownDecoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          items: provider.tumanlar
-                              .map(
-                                (e) => DropdownMenuItem<String>(
-                              onTap: () {
-                                setState(() {
-                                  District = e.id.toString();
-                                });
-                              },
-                              value: provider.istuman
-                                  ? e.name.toString()
-                                  : provider.defaultvalue1,
-                              child: Text(
-                                e.name.toString(),
-                                style: const TextStyle(
-                                  fontSize: 14,
+                            children: [
+                              DropdownButtonFormField2<String>(
+                                decoration: InputDecoration(
+                                  enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide()),
+                                  isDense: true,
+                                  contentPadding: EdgeInsets.zero,
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10.r),
+                                  ),
                                 ),
+                                isExpanded: true,
+                                hint: Text(
+                                  ' Qaysi tumanidansiz',
+                                  style: TextStyle(fontSize: 14.sp),
+                                ),
+                                icon: const Icon(
+                                  Icons.arrow_drop_down,
+                                  color: Colors.black45,
+                                ),
+                                iconSize: 30,
+                                buttonHeight: 60.h,
+                                buttonPadding:
+                                    EdgeInsets.only(left: 20.w, right: 10.w),
+                                dropdownDecoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15.r),
+                                ),
+                                items: provider.tumanlar
+                                    .map(
+                                      (e) => DropdownMenuItem<String>(
+                                        onTap: () {
+                                          setState(() {
+                                            District = e.id.toString();
+                                          });
+                                        },
+                                        value: provider.istuman
+                                            ? e.name.toString()
+                                            : provider.defaultvalue1,
+                                        child: Text(
+                                          e.name.toString(),
+                                          style: TextStyle(
+                                            fontSize: 14.sp,
+                                          ),
+                                        ),
+                                      ),
+                                    )
+                                    .toList(),
+                                onChanged: (value) {
+                                  provider.DistrickId = value.toString();
+                                  print(provider.DistrickId);
+                                  setState(() {});
+                                },
                               ),
-                            ),
+                            ],
                           )
-                              .toList(),
-                          onChanged: (value) {
-                            provider.DistrickId = value.toString();
-                            print(provider.DistrickId);
-                            setState(() {});
-                          },
-                        ),
-                      ],
-                    )
                         : Column(
-                      children: [
-                        DropdownButtonFormField2(
-                          decoration: InputDecoration(
-                            enabledBorder: OutlineInputBorder(
-                                borderSide: BorderSide()),
-                            isDense: true,
-                            contentPadding: EdgeInsets.zero,
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
-                            ),
+                            children: [
+                              DropdownButtonFormField2(
+                                decoration: InputDecoration(
+                                  enabledBorder: OutlineInputBorder(
+                                      borderSide: BorderSide()),
+                                  isDense: true,
+                                  contentPadding: EdgeInsets.zero,
+                                  border: OutlineInputBorder(
+                                    borderRadius: BorderRadius.circular(10.r),
+                                  ),
+                                ),
+                                isExpanded: true,
+                                isDense: true,
+                                hint: Text(
+                                  'Tumaningiz',
+                                  style: TextStyle(fontSize: 14.sp),
+                                ),
+                                icon: const Icon(
+                                  Icons.arrow_drop_down,
+                                  color: Colors.black45,
+                                ),
+                                iconSize: 30,
+                                buttonHeight: 60.h,
+                                buttonPadding:
+                                    EdgeInsets.only(left: 20.w, right: 10.w),
+                                dropdownDecoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(15.r),
+                                ),
+                                items: [],
+                                onChanged: null,
+                              ),
+                            ],
                           ),
-                          isExpanded: true,
-                          isDense: true,
-                          hint: const Text(
-                            'Tumaningiz',
-                            style: TextStyle(fontSize: 14),
-                          ),
-                          icon: const Icon(
-                            Icons.arrow_drop_down,
-                            color: Colors.black45,
-                          ),
-                          iconSize: 30,
-                          buttonHeight: 60,
-                          buttonPadding:
-                          const EdgeInsets.only(left: 20, right: 10),
-                          dropdownDecoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          items: [],
-                          onChanged: null,
-                        ),
-                      ],
-                    ),
                   ],
                 ),
                 Text(
@@ -257,7 +255,7 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                   ),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 10.r,
                 ),
                 Text(
                   "Yo’nalish",
@@ -270,7 +268,7 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                 SizedBox(height: 4.h),
                 FutureBuilder<List<GetFacultyModel>?>(
                   future:
-                  GetFacultyService().fetchFaculty(int.parse(widget.id)),
+                      GetFacultyService().fetchFaculty(int.parse(widget.id)),
                   builder: (BuildContext context, snapshot) {
                     if (snapshot.hasData) {
                       return Column(
@@ -278,42 +276,42 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                           DropdownButtonFormField2<String?>(
                             decoration: InputDecoration(
                               enabledBorder:
-                              OutlineInputBorder(borderSide: BorderSide()),
+                                  OutlineInputBorder(borderSide: BorderSide()),
                               isDense: true,
                               contentPadding: EdgeInsets.zero,
                               border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
+                                borderRadius: BorderRadius.circular(10.r),
                               ),
                             ),
                             isExpanded: true,
                             isDense: true,
-                            hint: const Text(
+                            hint: Text(
                               "Yo'nalishingiz",
-                              style: TextStyle(fontSize: 14),
+                              style: TextStyle(fontSize: 14.sp),
                             ),
                             icon: const Icon(
                               Icons.arrow_drop_down,
                               color: Colors.black45,
                             ),
                             iconSize: 30,
-                            buttonHeight: 60,
+                            buttonHeight: 60.h,
                             buttonPadding:
-                            const EdgeInsets.only(left: 20, right: 10),
+                                EdgeInsets.only(left: 20.w, right: 10.w),
                             dropdownDecoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
+                              borderRadius: BorderRadius.circular(15.w),
                             ),
                             items: snapshot.data!
                                 .map(
                                   (value) => DropdownMenuItem<String?>(
-                                value: value.name,
-                                child: Text(
-                                 "",
-                                  style: const TextStyle(
-                                    fontSize: 14,
+                                    value: value.name,
+                                    child: Text(
+                                      "",
+                                      style: TextStyle(
+                                        fontSize: 14.sp,
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ),
-                            )
+                                )
                                 .toList(),
                             onChanged: (value) {
                               setState(() {
@@ -349,39 +347,39 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                             isDense: true,
                             contentPadding: EdgeInsets.zero,
                             border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(10),
+                              borderRadius: BorderRadius.circular(10.r),
                             ),
                           ),
                           isDense: true,
                           buttonElevation: 2,
-                          hint: const Text(
+                          hint: Text(
                             "Kursni tanlang",
-                            style: TextStyle(fontSize: 14),
+                            style: TextStyle(fontSize: 14.sp),
                           ).tr(),
                           icon: const Icon(
                             Icons.arrow_drop_down,
                             color: Colors.black45,
                           ),
                           iconSize: 30,
-                          buttonHeight: 60,
+                          buttonHeight: 60.h,
                           buttonPadding:
-                          const EdgeInsets.only(left: 20, right: 10),
+                              EdgeInsets.only(left: 20.w, right: 10.w),
                           dropdownDecoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
+                            borderRadius: BorderRadius.circular(15.r),
                           ),
                           items: kursingizItems
                               .map((item) => DropdownMenuItem<String>(
-                            value: item,
-                            child: Text(
-                              item,
-                              style: const TextStyle(
-                                fontSize: 14,
-                              ),
-                            ),
-                          ))
+                                    value: item,
+                                    child: Text(
+                                      item,
+                                      style: TextStyle(
+                                        fontSize: 14.sp,
+                                      ),
+                                    ),
+                                  ))
                               .toList(),
                           validator: (value) =>
-                          value == value ? 'Kursni tanlang' : null,
+                              value == value ? 'Kursni tanlang' : null,
                           onChanged: (String? value) {
                             setState(() {});
                           },
@@ -391,50 +389,51 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                   ],
                 ),
                 SizedBox(height: 130.h),
-               Center(
-                 child: Column(
-                   children: [
-                     Container(
-                       width: 220.w,
-                       color: Colors.white,
-                       child: ElevatedButton(
-                         style: ElevatedButton.styleFrom(
-                             padding: EdgeInsets.symmetric(vertical: 14.h),
-                             shape: RoundedRectangleBorder(
-                                 borderRadius: BorderRadius.circular(10.r),
-                             side: BorderSide(color: Colors.red)),
-                            primary: Colors.white
-                             ),
-                         onPressed: () {
-                         },
-                         child: Text(
-                           "Tozalash",
-                           style: TextStyle(color: Colors.red,
-                               fontSize: 20.sp, fontWeight: FontWeight.w500),
-                         ),
-                       ),
-                     ),
-                     SizedBox(height: 20.h,),
-                     Container(
-                       width: 220.w,
-                       child: ElevatedButton(
-                         style: ElevatedButton.styleFrom(
-                             padding: EdgeInsets.symmetric(vertical: 14.h),
-                             shape: RoundedRectangleBorder(
-                                 borderRadius: BorderRadius.circular(10.r)),
-                             primary: AppColors.buttonLinear),
-                         onPressed: () {
-                         },
-                         child: Text(
-                           "Saqlash",
-                           style: TextStyle(
-                               fontSize: 20.sp, fontWeight: FontWeight.w500),
-                         ),
-                       ),
-                     ),
-                   ],
-                 ),
-               )
+                Center(
+                  child: Column(
+                    children: [
+                      Container(
+                        width: 220.w,
+                        color: Colors.white,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              padding: EdgeInsets.symmetric(vertical: 14.h),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.r),
+                                  side: BorderSide(color: Colors.red)),
+                              primary: Colors.white),
+                          onPressed: () {},
+                          child: Text(
+                            "Tozalash",
+                            style: TextStyle(
+                                color: Colors.red,
+                                fontSize: 20.sp,
+                                fontWeight: FontWeight.w500),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20.h,
+                      ),
+                      Container(
+                        width: 220.w,
+                        child: ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                              padding: EdgeInsets.symmetric(vertical: 14.h),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.r)),
+                              primary: AppColors.buttonLinear),
+                          onPressed: () {},
+                          child: Text(
+                            "Saqlash",
+                            style: TextStyle(
+                                fontSize: 20.sp, fontWeight: FontWeight.w500),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ],
             );
           },

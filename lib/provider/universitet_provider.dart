@@ -3,9 +3,11 @@ import 'package:talaba_uy/models/get_district_model.dart';
 import 'package:talaba_uy/models/get_faculty_model.dart';
 import 'package:talaba_uy/models/get_region_model.dart';
 import 'package:talaba_uy/models/get_univer_model.dart';
+import 'package:talaba_uy/models/search_universitety_model.dart';
 import 'package:talaba_uy/models/searching_students_model.dart';
 import 'package:talaba_uy/services/get_faculty_service.dart';
 import 'package:talaba_uy/services/get_univer_service.dart';
+import 'package:talaba_uy/services/search_universitet_filtr.dart';
 import 'package:talaba_uy/services/searching_students_service.dart';
 
 import '../services/get_district_service.dart';
@@ -30,6 +32,12 @@ class UniversitetProvider extends ChangeNotifier{
   String? fakultetid;
   int? isId;
   String? districtid;
+  bool ischanging = false;
+
+  void setChange(bool value) {
+    ischanging = value;
+    notifyListeners();
+  }
   void _setFakultet(bool value){
     isFakultet = value;
     notifyListeners();
