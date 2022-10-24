@@ -290,7 +290,7 @@ class _AdsDetailState extends State<AdsDetail> {
                       Padding(
                         padding: EdgeInsets.fromLTRB(12.w, 12.h, 12.w, 0),
                         child: Text(
-                          '${widget.cost} ${widget.costTayp == '1' ? "so'm" : 'usd'}/${widget.rentType == '1' ? 'kunlik' : 'oylik'}',
+                          '${widget.cost} ${widget.costTayp == '1' ? "So'm" : 'USD'}/${widget.rentType == '1' ? 'kunlik' : 'oylik'}',
                           style: TextStyle(
                               fontSize: 24.sp, color: AppColors.mainColor),
                         ),
@@ -302,7 +302,7 @@ class _AdsDetailState extends State<AdsDetail> {
                     child: SizedBox(
                         width: MediaQuery.of(context).size.width - 150.w,
                         child: Text(
-                          "${widget.description}",
+                          "${widget.title}",
                           style: TextStyle(fontSize: 18.sp),
                         )),
                   ),
@@ -660,35 +660,35 @@ class _AdsDetailState extends State<AdsDetail> {
                           )
                         : Container(),
                     // widget.type == '1' ?
-                    widget.type == '1'
-                        ? Row(
-                            children: [
-                              Container(
-                                width: 40.w,
-                                height: 40.h,
-                                decoration: BoxDecoration(
-                                  color: AppColors.iconBack,
-                                  borderRadius: BorderRadius.circular(8.r),
-                                ),
-                                child: const Center(
-                                    child: Icon(
-                                  Icons.corporate_fare,
-                                  color: AppColors.mainColor,
-                                )),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Container(
-                                    width: MediaQuery.of(context).size.width -
-                                        150.w,
-                                    child: Text(
-                                      "${widget.stay_university}",
-                                      style: TextStyle(fontSize: 14.sp),
-                                    )),
-                              )
-                            ],
-                          )
-                        : Container(),
+                    // widget.type == '1'
+                    //     ? Row(
+                    //         children: [
+                    //           Container(
+                    //             width: 40.w,
+                    //             height: 40.h,
+                    //             decoration: BoxDecoration(
+                    //               color: AppColors.iconBack,
+                    //               borderRadius: BorderRadius.circular(8.r),
+                    //             ),
+                    //             child: const Center(
+                    //                 child: Icon(
+                    //               Icons.corporate_fare,
+                    //               color: AppColors.mainColor,
+                    //             )),
+                    //           ),
+                    //           Padding(
+                    //             padding: const EdgeInsets.all(8.0),
+                    //             child: Container(
+                    //                 width: MediaQuery.of(context).size.width -
+                    //                     150.w,
+                    //                 child: Text(
+                    //                   "${widget.stay_university}",
+                    //                   style: TextStyle(fontSize: 14.sp),
+                    //                 )),
+                    //           )
+                    //         ],
+                    //       )
+                    //     : Container(),
                     // : const SizedBox(),
                     SizedBox(
                       height: 6.h,
@@ -963,6 +963,13 @@ class _AdsDetailState extends State<AdsDetail> {
                     ),
                     SizedBox(
                       height: 6.h,
+                    ),
+                    Text(
+                      tr("Qo'shimcha qulayliklar"),
+                      style: TextStyle(
+                          fontSize: 18.sp,
+                          fontWeight: FontWeight.bold,
+                          color: AppColors.mainColor),
                     ),
                     Row(
                       children: [

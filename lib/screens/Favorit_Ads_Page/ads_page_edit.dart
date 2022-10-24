@@ -34,6 +34,17 @@ class AdspageEdit extends StatefulWidget {
   String? rentType;
   String? floors_count;
   String? cost_period;
+  String? gender_matter;
+  String? university_id_matter;
+  String? regionName;
+  String? tumanName;
+  String? live_with_owner;
+  String? utility_electricity;
+  String? unility_gaz;
+  String? utility_hot_water;
+  String? utility_cold_water;
+  String? utility_trash;
+  String? district_id;
 
   AdspageEdit(
       this.title,
@@ -62,6 +73,17 @@ class AdspageEdit extends StatefulWidget {
       this.rentType,
       this.floors_count,
       this.cost_period,
+      this.gender_matter,
+      this.university_id_matter,
+      this.regionName,
+      this.tumanName,
+      this.live_with_owner,
+      this.utility_electricity,
+      this.unility_gaz,
+      this.utility_hot_water,
+      this.utility_cold_water,
+      this.utility_trash,
+      this.district_id,
       {Key? key})
       : super(key: key);
 
@@ -76,6 +98,7 @@ class _AdspageEditState extends State<AdspageEdit>
   @override
   void initState() {
     _tabController = TabController(vsync: this, length: 2, initialIndex: 0);
+    print(widget.id.toString() + 'sub');
     super.initState();
 
     Provider.of<RegionProvider>(context, listen: false).getUnivers();
@@ -129,6 +152,17 @@ class _AdspageEditState extends State<AdspageEdit>
         widget.rentType,
         widget.floors_count,
         widget.cost_period,
+        widget.gender_matter,
+        widget.university_id_matter,
+        widget.regionName,
+        widget.tumanName,
+        widget.live_with_owner,
+        widget.utility_electricity,
+        widget.unility_gaz,
+        widget.utility_hot_water,
+        widget.utility_cold_water,
+        widget.utility_trash,
+        widget.district_id,
       ),
     );
   }

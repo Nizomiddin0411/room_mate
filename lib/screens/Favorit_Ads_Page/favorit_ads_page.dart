@@ -3,12 +3,10 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:talaba_uy/screens/Favorit_Ads_Page/Update_edits.dart';
 import 'package:talaba_uy/screens/Favorit_Ads_Page/ads_edit.dart';
 import 'package:talaba_uy/screens/Favorit_Ads_Page/ads_page_edit.dart';
 import '../../core/const/app_colors.dart';
 import '../../provider/favorite_provider.dart';
-import '../../provider/region_provider.dart';
 import '../../services/post_my_ads_delete_Service.dart';
 import '../Ads_Detail/ads_detail.dart';
 
@@ -23,8 +21,6 @@ class _FavoritAdsState extends State<FavoritAds> {
   @override
   void initState() {
     Provider.of<FavoriteProvider>(context, listen: false).getMyAds().asStream();
-    Provider.of<RegionProvider>(context,listen: false).getUnivers();
-    Provider.of<RegionProvider>(context, listen: false).getRegion().asStream();
     super.initState();
   }
 
@@ -61,6 +57,8 @@ class _FavoritAdsState extends State<FavoritAds> {
                     shrinkWrap: true,
                     itemCount: data.MyAds.length,
                     itemBuilder: (context, index) {
+                      print(data.MyAds[index].id.toString() + "qqq");
+
                       return Padding(
                         padding: EdgeInsets.all(18.0.w),
                         child: SingleChildScrollView(
@@ -157,7 +155,7 @@ class _FavoritAdsState extends State<FavoritAds> {
                                                 createData: data
                                                     .MyAds[index].createdAt
                                                     .toString(),
-                                                comfort: data.MyAds[index].comfort,
+                                                comfort: '2',
                                                 // data.MyAds[index].comfort,
                                                 inFloor: data
                                                     .MyAds[index].inFloor
@@ -193,7 +191,7 @@ class _FavoritAdsState extends State<FavoritAds> {
                                                   imageUrl:
                                                       "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.MyAds[index].images!.first.image.toString()}",
                                                   placeholder: (context, url) =>
-                                                      CircularProgressIndicator(),
+                                                      Center(child: CircularProgressIndicator()),
                                                   errorWidget:
                                                       (context, url, error) =>
                                                           Image.asset(
@@ -265,97 +263,194 @@ class _FavoritAdsState extends State<FavoritAds> {
                                                               Navigator.push(
                                                                   context,
                                                                   MaterialPageRoute(
-                                                                    builder: (context) => data.MyAds[index].type.toString() ==
-                                                                            '2'
-                                                                        ? AdspageEdit(
-                                                                            data.MyAds[index].title.toString(),
-                                                                            data.MyAds[index].description.toString(),
-                                                                            data.MyAds[index].houseType.toString(),
-                                                                            data.MyAds[index].cost.toString(),
-                                                                            data.MyAds[index].costType.toString(),
-                                                                            data.MyAds[index].roomCount.toString(),
-                                                                            data.MyAds[index].roommateCount.toString(),
-                                                                            data.MyAds[index].liveWithOwner.toString(),
-                                                                            data.MyAds[index].subway.toString(),
-                                                                            data.MyAds[index].favorite.toString(),
-                                                                            data.MyAds[index].id.toString(),
-                                                                            data.MyAds[index].type.toString(),
-                                                                            data.MyAds[index].userId,
-                                                                            data.MyAds[index].phoneNumber.toString(),
-                                                                            '2',
-                                                                            data.MyAds[index].inFloor.toString(),
-                                                                            data.MyAds[index].roommateCount.toString(),
-                                                                            data.MyAds[index].address.toString(),
-                                                                            data.MyAds[index].roommateGender.toString(),
-                                                                            data.MyAds[index].location,
-                                                                            data.MyAds[index].images,
-                                                                            data.MyAds[index].universityId.toString(),
-                                                                            data.MyAds[index].districtId.toString(),
-                                                                            data.MyAds[index].rentType.toString(),
-                                                                            data.MyAds[index].floorsCount.toString(),
-                                                                            data.MyAds[index].costPeriod.toString(),
-                                                                          )
-                                                                        : UpdateStudents(
-                                                                            univername:
-                                                                                "${data.MyAds[index].stayUniversity?.name.toString()}",
-                                                                            cost_type:
-                                                                                '${data.MyAds[index].costType}',
-                                                                            howcountroom:
-                                                                                '${data.MyAds[index].haveLivingHome}',
-                                                                            cost_period:
-                                                                                '${data.MyAds[index].costPeriod}',
-                                                                            phone_number:
-                                                                                '${data.MyAds[index].phoneNumber}',
-                                                                            description:
-                                                                                '${data.MyAds[index].description}',
-                                                                            location:
-                                                                                '${data.MyAds[index].location}',
-                                                                            have_living_home:
-                                                                                '${data.MyAds[index].haveLivingHome}',
-                                                                            stay_region:
-                                                                                '${data.MyAds[index].stayRegion?.name.toString()}',
-                                                                            live_with_owner:
-                                                                                '${data.MyAds[index].liveWithOwner}',
-                                                                            room_count:
-                                                                                '${data.MyAds[index].roomCount}',
-                                                                            stay_region_matter:
-                                                                                '${data.MyAds[index].stayRegionMatter}',
-                                                                            stay_university_id:
-                                                                                '${data.MyAds[index].stayUniversityId}',
-                                                                            phone_number_show:
-                                                                                '${data.MyAds[index].phoneNumberShow}',
-                                                                            title:
-                                                                                '${data.MyAds[index].title}',
-                                                                            district:
-                                                                                '${data.MyAds[index].district?.name.toString()}',
-                                                                            subway:
-                                                                                '${data.MyAds[index].subway}',
-                                                                            roommate_gender:
-                                                                                '${data.MyAds[index].roommateGender}',
-                                                                            floors_count:
-                                                                                '${data.MyAds[index].floorsCount}',
-                                                                            stay_university_matter:
-                                                                                '${data.MyAds[index].stayRegionMatter}',
-                                                                            address:
-                                                                                '${data.MyAds[index].address}',
-                                                                            roommate_count:
-                                                                                '${data.MyAds[index].roommateCount}',
-                                                                            utility_bills:
-                                                                                '${data.MyAds[index].utilityBills}',
-                                                                            house_type:
-                                                                                '${data.MyAds[index].houseType}',
-                                                                            cost:
-                                                                                '${data.MyAds[index].cost}',
-                                                                            comfort:
-                                                                                '${data.MyAds[index].comfort}',
-                                                                            renttype:
-                                                                                '${data.MyAds[index].rentType}',
-                                                                            id: '${data.MyAds[index].id}',
-                                                                            images:
-                                                                                '${data.MyAds[index].images}',
-                                                                            stay_region_id:
-                                                                                '${data.MyAds[index].stayRegionId}',
-                                                                          ),
+                                                                    builder:
+                                                                        (context) =>
+                                                                            AdspageEdit(
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .title
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .description
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .houseType
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .cost
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .costType
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .roomCount
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .roommateCount
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .liveWithOwner
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .subway
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .favorite
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .id
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .type
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .userId,
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .phoneNumber
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .comfort
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .inFloor
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .roommateCount
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .address
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .roommateGender
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .location,
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .images,
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .universityId
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .districtId
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .rentType
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .floorsCount
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .costPeriod
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .genderMatter
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .universityIdMatter
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .region!
+                                                                          .name
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .district!
+                                                                          .name
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .liveWithOwner
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .utilityElectricity
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .unilityGaz
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .utilityHotWater
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .utilityColdWater
+                                                                          .toString(),
+                                                                      data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .utilityTrash
+                                                                          .toString(),
+                                                                          data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .districtId
+                                                                          .toString(),
+                                                                    ),
                                                                   )),
                                                           child: Container(
                                                             width: 32.w,

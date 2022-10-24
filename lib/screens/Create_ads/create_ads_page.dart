@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
 import 'package:talaba_uy/screens/Create_ads/owner.dart';
@@ -49,7 +50,7 @@ class _CreateAdsPageState extends State<CreateAdsPage>
             style: TextStyle(color: AppColors.mainColor)),
         centerTitle: true,
       ),
-      body:  Student(),
+      body:  Hive.box('type').get('type') == '2' ? Student() : Owner(),
 
     );
   }

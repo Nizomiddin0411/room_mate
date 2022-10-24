@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
 import 'package:talaba_uy/cubit/aut_cubit.dart';
@@ -13,35 +12,47 @@ import 'package:talaba_uy/provider/region_provider.dart';
 import 'package:talaba_uy/screens/Favorit_Ads_Page/ads_continue_edit.dart';
 import '../../models/get_district_model.dart';
 import '../../provider/favorite_provider.dart';
+import '../Google_map/map_for_ads_detail.dart';
 import '../Google_map/map_screen.dart';
 
 class AdsEdit extends StatefulWidget {
   String? title;
-  String? description; // ads_continue
-  String? houseType; // ads_continue
-  String? cost; // ads_continue
-  String? costType; // ads_continue
+  String? description; 
+  String? houseType; 
+  String? cost; 
+  String? costType; 
   String? countRoom;
-  String? countPeople; // ads_continue
-  String? liveWithOwner; // ads_continue
-  String? subway;  // edit
+  String? countPeople; 
+  String? liveWithOwner; 
+  String? subway; 
   String? favorite;
   String? id;
   String? type;
   int? userId;
   String? phoneNumber;
-  String? comfort; // ads_continue
-  String? inFloor; // ads_continue
-  String? roommate_count; // ads_continue
+  String? comfort; 
+  String? inFloor; 
+  String? roommate_count; 
   String? address;
   String? roommate_gender;
-  String? locations; // Elyor
+  String? locations; 
   List? Image;
   String? universityId;
   String? region;
   String? rentType;
   String? floors_count;
   String? cost_period;
+  String? gender_matter;
+  String? university_id_matter;
+  String? regionName;
+  String? tumanName;
+  String? live_with_owner;
+  String? utility_electricity;
+  String? unility_gaz;
+  String? utility_hot_water;
+  String? utility_cold_water;
+  String? utility_trash;
+  String? district_id;
 
   AdsEdit(
       this.title,
@@ -70,6 +81,17 @@ class AdsEdit extends StatefulWidget {
       this.rentType,
       this.floors_count,
       this.cost_period,
+      this.gender_matter,
+      this.university_id_matter,
+      this.regionName,
+      this.tumanName,
+      this.live_with_owner,
+      this.utility_electricity,
+      this.unility_gaz,
+      this.utility_hot_water,
+      this.utility_cold_water,
+      this.utility_trash,
+      this.district_id,
       {Key? key})
       : super(key: key);
 
@@ -94,7 +116,6 @@ class _AdsEditState extends State<AdsEdit> {
         .then((value) {})
         .onError((error, stackTrace) async {
       await Geolocator.requestPermission();
-      print("ERROR" + error.toString());
     });
     return await Geolocator.getCurrentPosition();
   }
@@ -131,7 +152,10 @@ class _AdsEditState extends State<AdsEdit> {
   bool _addressOnClick = true;
   Color _otmColor = Colors.grey;
   bool _otmOnClick = true;
-  bool value5 = false;
+  bool? value5;
+  bool? value6;
+  String? id;
+
   bool value7 = false;
   String? univerName;
   int? index;
@@ -170,23 +194,31 @@ class _AdsEditState extends State<AdsEdit> {
 
   @override
   void initState() {
+
+     Provider.of<RegionProvider>(context, listen: false).getUnivers();
+
     addressController = TextEditingController(
         text: widget.address == null ? '' : widget.address);
     titleController =
         TextEditingController(text: widget.title == null ? '' : widget.title);
-    roommate_gender = widget.roommate_gender == ''
-        ? "O’gil bollarga / Qizlarga"
-        : widget.roommate_gender == '2'
-            ? 'Qiz bolaga'
-            : "O'g'il bolaga";
+    roommate_gender = widget.roommate_gender == '1' ? "O'g'il bolaga" : widget.roommate_gender == '2' ? 'Qiz bolaga' : "O’gil bollarga / Qizlarga" ;
+      // print(university_id_matter.toString() + "--++");
+         
+    // university_id_matter == '1' ? value5 = true : value5 = false;
+    value5 = widget.gender_matter == '1' ? true : false;
+    value6 = widget.university_id_matter == '1' ? true : false;
+    id = widget.subway;
+    district_id = widget.district_id;
+    print(id);
+    super.initState();
 
     // district_id = widget.region;
 
-    print(district_id.toString() + "------");
-    super.initState();
+    // print(district_id.toString() + "------");
+
+    
   }
 
-  var id = '1';
   int id2 = 2;
   int id3 = 3;
   int id4 = 4;
@@ -196,10 +228,10 @@ class _AdsEditState extends State<AdsEdit> {
   bool value2 = false;
   bool value3 = false;
   bool value4 = false;
-  bool value6 = false;
 
   @override
   Widget build(BuildContext context) {
+    
     final mapLat = context.read<FavoriteProvider>();
     _markers.add(
       Marker(
@@ -215,6 +247,7 @@ class _AdsEditState extends State<AdsEdit> {
         padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 12.h),
         child: Consumer<RegionProvider>(
           builder: (_, data, __) {
+
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -332,10 +365,10 @@ class _AdsEditState extends State<AdsEdit> {
                           style: TextStyle(fontSize: 13.sp),
                         ),
                         Checkbox(
-                          value: this.value5,
+                          value: value5,
                           onChanged: (bool? value) {
                             setState(() {
-                              this.value5 = value!;
+                              value5 = value!;
                               gender_matter = value ? '1' : '2';
 
                               if (value) {
@@ -371,7 +404,7 @@ class _AdsEditState extends State<AdsEdit> {
                   child: DropdownButtonFormField(
                     hint: Padding(
                       padding: EdgeInsets.only(left: 8.w),
-                      child: Text("Viloyatni tanlang".tr()),
+                      child: Text(widget.regionName.toString().tr()),
                     ),
                     decoration: const InputDecoration(
                       border: InputBorder.none,
@@ -420,8 +453,7 @@ class _AdsEditState extends State<AdsEdit> {
                           isExpanded: true,
                           hint: Padding(
                             padding: EdgeInsets.only(left: 8.w),
-                            child: Text(
-                                "Tumanni tanlang".tr()),
+                            child: Text(widget.tumanName.toString().tr()),
                           ),
                           decoration: const InputDecoration(
                             border: InputBorder.none,
@@ -430,16 +462,13 @@ class _AdsEditState extends State<AdsEdit> {
                           items: data.districts.map((e) {
                             print(widget.region);
                             if (widget.region == e.id.toString()) {
-                                  // region = e.name.toString();
-                                  setState(() {});
-                                }
+                              // region = e.name.toString();
+                            }
                             return DropdownMenuItem<String>(
                               onTap: () {
-                                
                                 data.districtOwnerId = e.id.toString();
 
                                 district_id = e.id.toString();
-                                setState(() {});
                               },
                               value: data.isDistrict
                                   ? e.name.toString()
@@ -532,8 +561,23 @@ class _AdsEditState extends State<AdsEdit> {
                 ),
                 InkWell(
                     onTap: () {
+                      String lat =
+                          widget.locations!.split(',').first.toString();
+                      String long =
+                          widget.locations!.split(',').last.toString();
+                      lat = lat.split('(').last.toString();
+                      long = long.split(')').first.toString();
+                      print(widget.locations);
+                      print(lat);
+                      print(long);
+                      double Lat = double.parse(lat).toDouble();
+                      double Long = double.parse(long).toDouble();
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => MapScreen()));
+                          MaterialPageRoute(builder: (context) => MapDetail(
+                            location: widget.locations,
+                                    long: Long,
+                                    lat: Lat,
+                          )));
                     },
                     child: Container(
                       width: 324.w,
@@ -608,13 +652,12 @@ class _AdsEditState extends State<AdsEdit> {
                               onChanged: (String? val) {
                                 setState(() {
                                   id = val!;
-                                  print(id);
                                 });
                               },
                             ),
                             Text(
                               'Ha',
-                              style: new TextStyle(fontSize: 17.0),
+                              style: new TextStyle(fontSize: 17.0.sp),
                             ),
                             SizedBox(
                               width: 55.w,
@@ -625,7 +668,6 @@ class _AdsEditState extends State<AdsEdit> {
                               onChanged: (String? val) {
                                 setState(() {
                                   id = val!;
-                                  print(id);
                                 });
                               },
                             ),
@@ -744,12 +786,10 @@ class _AdsEditState extends State<AdsEdit> {
                           //     .where((element) => element.name == value);
                           // data.getFaculty(selected.last.id!);
                           // data.getFaculty(data.isId!);
-                          setState(() {
                             dropDown2 = value.toString();
                             print(dropDown2.toString() + "--------");
                             _otmOnClick = true;
                             _otmColor = Colors.grey;
-                          });
                         },
                         selectedItem: tr(widget.universityId == null ||
                                 widget.universityId == '0'
@@ -767,10 +807,10 @@ class _AdsEditState extends State<AdsEdit> {
                           style: TextStyle(fontSize: 14.sp),
                         ),
                         Checkbox(
-                          value: this.value6,
+                          value: value6,
                           onChanged: (bool? value) {
                             setState(() {
-                              this.value6 = value!;
+                              value6 = value!;
                               university_id_matter = value ? '1' : '2';
                               if (value) {
                                 _otmColor = Colors.grey;
@@ -803,13 +843,14 @@ class _AdsEditState extends State<AdsEdit> {
                           print(map.forMap.toString() +
                               'MAPPPPPPPPPPPPPPPPPPPPPPP');
                           print('${titleController!.text}  title');
-                          print('${value5 ? 0 : roommate_gender}' + 'gender');
-                          print('${value5 ? 1 : 2} axamyatsiz gender');
+                          print('${value5! ? 0 : roommate_gender}' + 'gender');
+                          print('${value5! ? 1 : 2} axamyatsiz gender');
                           print('${district_id} distruqt id');
                           print('${addressController!.text} Address');
                           print('${id} metrooo');
-                          print('${value6 ? 0 : widget.universityId} univer id');
-                          print('${value6 ? 1 : 2} axamyatsiz univer');
+                          print(
+                              '${value6! ? 0 : widget.universityId} univer id');
+                          print('${value6! ? 1 : 2} axamyatsiz univer');
                           if (_RegionOnClick &&
                               _DiscritOnClick &&
                               _UniverOnClick &&
@@ -820,16 +861,16 @@ class _AdsEditState extends State<AdsEdit> {
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => AdsContinueEdit(
-                                          id: id,
+                                          id: widget.id,
                                           addressController:
                                               addressController!.text,
                                           university_id:
-                                              '${value6 ? 0 : widget.universityId}',
+                                              '${value6! ? 0 : widget.universityId}',
                                           roommate_gender:
-                                              '${value5 ? 0 : roommate_gender}',
+                                              '${value5! ? 0 : roommate_gender}',
                                           university_id_matter:
-                                              '${value6 ? 1 : 2}',
-                                          gender_matter: '${value5 ? 1 : 2}',
+                                              '${value6! ? 1 : 2}',
+                                          gender_matter: '${value5! ? 1 : 2}',
                                           district_id: district_id,
                                           titleController:
                                               titleController!.text,
@@ -843,6 +884,14 @@ class _AdsEditState extends State<AdsEdit> {
                                           cost: widget.cost,
                                           cost_period: widget.cost_period,
                                           description: widget.description,
+                                          live_with_owner: widget.live_with_owner,
+                                          comfort: widget.comfort,
+                                          utility_electricity: widget.utility_electricity,
+                                          unility_gaz: widget.unility_gaz,
+                                          utility_hot_water: widget.utility_hot_water,
+                                          utility_cold_water: widget.utility_cold_water,
+                                          utility_trash: widget.utility_trash,
+                                          subway: id.toString(),
                                         )));
                           } else {
                             setState(() {
