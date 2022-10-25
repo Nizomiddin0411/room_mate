@@ -860,8 +860,9 @@ class _AdsDetailState extends State<AdsDetail> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
-                            tr("Uy egasi bilan birga yashshga:") +
-                                "${widget.liveWithOwner == '1' ? 'Rozi' : 'Roziemas'}",
+                            tr(widget.type == '1' ? "Uy egasi bilan birga yashshga rozimi:":"Uy egasi birga yashaydimi:") +
+                                "${widget.liveWithOwner == '1' ? ' Ha' : " "
+                                    "Yo'q"}",
                             style: TextStyle(fontSize: 14.sp),
                           ),
                         )
@@ -871,6 +872,7 @@ class _AdsDetailState extends State<AdsDetail> {
                       height: 6.h,
                     ),
                     Row(
+                      
                       children: [
                         Container(
                           width: 40.w,

@@ -13,6 +13,7 @@ import 'package:talaba_uy/screens/Favorit_Ads_Page/ads_continue_edit.dart';
 import '../../models/get_district_model.dart';
 import '../../provider/favorite_provider.dart';
 import '../Google_map/map_for_ads_detail.dart';
+import '../Google_map/map_for_edit.dart';
 import '../Google_map/map_screen.dart';
 
 class AdsEdit extends StatefulWidget {
@@ -561,6 +562,8 @@ class _AdsEditState extends State<AdsEdit> {
                 ),
                 InkWell(
                     onTap: () {
+                      final mapLatitude = context.read<FavoriteProvider>();
+                      mapLatitude.locationFor = true;
                       String lat =
                           widget.locations!.split(',').first.toString();
                       String long =
@@ -573,7 +576,7 @@ class _AdsEditState extends State<AdsEdit> {
                       double Lat = double.parse(lat).toDouble();
                       double Long = double.parse(long).toDouble();
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => MapDetail(
+                          MaterialPageRoute(builder: (context) => MapEdit(
                             location: widget.locations,
                                     long: Long,
                                     lat: Lat,

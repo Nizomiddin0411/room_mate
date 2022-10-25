@@ -246,7 +246,7 @@ class _ElonlarState extends State<Elonlar> {
                                     data.Ads[index].images!.isNotEmpty
                                         ? CachedNetworkImage(
                                             imageUrl:
-                                                "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.Ads[index].images!.last.image.toString()}",
+                                                "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.Ads[index].images!.first.image.toString()}",
                                             placeholder: (context, url) =>
                                                 Center(child: CircularProgressIndicator()),
                                             errorWidget:
@@ -376,7 +376,7 @@ class _ElonlarState extends State<Elonlar> {
                                             padding: EdgeInsets.fromLTRB(
                                                 8.w, 0, 8.w, 0),
                                             child: Text(
-                                              '${data.isChanded ? data.Ads[index].cost.toString() : data.AdsForZero[index].cost.toString()} ${data.isChanded ? (data.Ads[index].costType.toString() == 1 ? "so'm" : 'y.e') : ''}',
+                                              '${data.isChanded ? data.Ads[index].cost.toString() : data.AdsForZero[index].cost.toString()} ${data.isChanded ? (data.Ads[index].costType.toString() == 1 ? "So'm" : 'USD') : ''}',
                                               style: TextStyle(
                                                   color: AppColors.mainColor,
                                                   fontSize: 24.sp),

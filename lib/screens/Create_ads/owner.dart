@@ -632,7 +632,8 @@ class _OwnerState extends State<Owner> {
                         border: Border.all(color: _otmColor),
                       ),
                       child: DropdownSearch<String>(
-                        mode: Mode.MENU,
+                        dropdownSearchBaseStyle: TextStyle(fontSize: 11.sp),
+                        mode: Mode.BOTTOM_SHEET,
                         items: data.univer.map((e) {
                           if (context.read<AutCubit>().selectedLang.index == 1) {
                             if (dropDown2 == e.name) {
