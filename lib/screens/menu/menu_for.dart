@@ -12,6 +12,7 @@ import 'package:talaba_uy/screens/Ijarachipage/kunlik_ijara.dart';
 import 'package:talaba_uy/screens/Search_University/search_page.dart';
 import 'package:talaba_uy/screens/drawer/drawer.dart';
 
+import '../Ijarachipage/ads_for_users.dart';
 import '../Ijarachipage/oylik_ijara.dart';
 
 class MenuFor extends StatefulWidget {
@@ -79,7 +80,7 @@ class _MenuForState extends State<MenuFor> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const Elonlar()));
+                          builder: (context) => const AdsUsers()));
                 },
                 child: Padding(
                   padding:  EdgeInsets.fromLTRB(20.w,20.h,16.w,150.h),
