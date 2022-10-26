@@ -19,6 +19,8 @@ class FavoriteProvider extends ChangeNotifier{
   bool isLoading = false;
   bool isMyAds = false;
   bool isload = false;
+  bool locationFor = false;
+  String Local = '';
   String? imagess;
   String forMap='41.311081';
   void _setFavorite(bool value) {

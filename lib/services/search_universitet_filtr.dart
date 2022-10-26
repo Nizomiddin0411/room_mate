@@ -1,22 +1,16 @@
-import 'dart:io';
-
-import 'package:flutter/material.dart';
-import 'package:hive_flutter/hive_flutter.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:talaba_uy/models/search_universitety_model.dart';
 
-import '../models/get_univer_model.dart';
-
-class GetSearchUniverService {
-  Future<List<SearchUniversitetyModel>> fetchUniverSearch(String query,{
-  required String region,
-  required String district,
-}) async {
+class GetSearchUniverServiceFiltr {
+  Future<List<SearchUniversitetyModel>> fetchUniverSearch1(  String query,{
+    required String region,
+    required String district,
+  }) async {
     try {
       var _response = await http.get(
         Uri.parse(
-            'http://164.68.114.231:8081/roommate/backend/web/api/university/index?term=$query&region_id=$region&district_id=$district'),
+            'http://164.68.114.231:8081/roommate/backend/web/api/university/index?term=$query&region_id=22&district_id=198'),
       );
       if (_response.statusCode == 200) {
         List json = jsonDecode(_response.body);

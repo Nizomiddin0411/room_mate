@@ -3,20 +3,20 @@ class SearchUniversitetyModel {
   String? name;
   String? nameRu;
   String? short;
-  dynamic districtId;
-  dynamic address;
+  int? districtId;
+  Null? address;
   String? advertising;
   String? searching;
 
   SearchUniversitetyModel(
       {this.id,
-      this.name,
-      this.nameRu,
-      this.short,
-      this.districtId,
-      this.address,
-      this.advertising,
-      this.searching});
+        this.name,
+        this.nameRu,
+        this.short,
+        this.districtId,
+        this.address,
+        this.advertising,
+        this.searching});
 
   SearchUniversitetyModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];

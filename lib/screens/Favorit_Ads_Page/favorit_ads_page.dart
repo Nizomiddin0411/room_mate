@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:talaba_uy/screens/Favorit_Ads_Page/Update_edits.dart';
 import 'package:talaba_uy/screens/Favorit_Ads_Page/ads_edit.dart';
 import 'package:talaba_uy/screens/Favorit_Ads_Page/ads_page_edit.dart';
 import '../../core/const/app_colors.dart';
@@ -191,7 +192,9 @@ class _FavoritAdsState extends State<FavoritAds> {
                                                   imageUrl:
                                                       "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.MyAds[index].images!.first.image.toString()}",
                                                   placeholder: (context, url) =>
-                                                      Center(child: CircularProgressIndicator()),
+                                                      Center(
+                                                          child:
+                                                              CircularProgressIndicator()),
                                                   errorWidget:
                                                       (context, url, error) =>
                                                           Image.asset(
@@ -261,11 +264,15 @@ class _FavoritAdsState extends State<FavoritAds> {
                                                         InkWell(
                                                           onTap: () =>
                                                               Navigator.push(
-                                                                  context,
-                                                                  MaterialPageRoute(
-                                                                    builder:
-                                                                        (context) =>
-                                                                            AdspageEdit(
+                                                            context,
+                                                            MaterialPageRoute(
+                                                              builder: (context) => data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .type
+                                                                          .toString() ==
+                                                                      '2'
+                                                                  ? AdspageEdit(
                                                                       data
                                                                           .MyAds[
                                                                               index]
@@ -445,13 +452,75 @@ class _FavoritAdsState extends State<FavoritAds> {
                                                                               index]
                                                                           .utilityTrash
                                                                           .toString(),
-                                                                          data
+                                                                      data
                                                                           .MyAds[
                                                                               index]
                                                                           .districtId
                                                                           .toString(),
+                                                                    )
+                                                                  : UpdateStudents(
+                                                                      univername:
+                                                                          "${data.MyAds[index].stayUniversity?.name.toString()}",
+                                                                      cost_type:
+                                                                          '${data.MyAds[index].costType}',
+                                                                      howcountroom:
+                                                                          '${data.MyAds[index].haveLivingHome}',
+                                                                      cost_period:
+                                                                          '${data.MyAds[index].costPeriod}',
+                                                                      phone_number:
+                                                                          '${data.MyAds[index].phoneNumber}',
+                                                                      description:
+                                                                          '${data.MyAds[index].description}',
+                                                                      location:
+                                                                          '${data.MyAds[index].location}',
+                                                                      have_living_home:
+                                                                          '${data.MyAds[index].haveLivingHome}',
+                                                                      stay_region:
+                                                                          '${data.MyAds[index].stayRegion?.name.toString()}',
+                                                                      live_with_owner:
+                                                                          '${data.MyAds[index].liveWithOwner}',
+                                                                      room_count:
+                                                                          '${data.MyAds[index].roomCount}',
+                                                                      stay_region_matter:
+                                                                          '${data.MyAds[index].stayRegionMatter}',
+                                                                      stay_university_id:
+                                                                          '${data.MyAds[index].stayUniversityId}',
+                                                                      phone_number_show:
+                                                                          '${data.MyAds[index].phoneNumberShow}',
+                                                                      title:
+                                                                          '${data.MyAds[index].title}',
+                                                                      district:
+                                                                          '${data.MyAds[index].district?.name.toString()}',
+                                                                      subway:
+                                                                          '${data.MyAds[index].subway}',
+                                                                      roommate_gender:
+                                                                          '${data.MyAds[index].roommateGender}',
+                                                                      floors_count:
+                                                                          '${data.MyAds[index].floorsCount}',
+                                                                      stay_university_matter:
+                                                                          '${data.MyAds[index].stayRegionMatter}',
+                                                                      address:
+                                                                          '${data.MyAds[index].address}',
+                                                                      roommate_count:
+                                                                          '${data.MyAds[index].roommateCount}',
+                                                                      utility_bills:
+                                                                          '${data.MyAds[index].utilityBills}',
+                                                                      house_type:
+                                                                          '${data.MyAds[index].houseType}',
+                                                                      cost:
+                                                                          '${data.MyAds[index].cost}',
+                                                                      comfort:
+                                                                          '${data.MyAds[index].comfort}',
+                                                                      renttype:
+                                                                          '${data.MyAds[index].rentType}',
+                                                                      id: '${data.MyAds[index].id}',
+                                                                      images:
+                                                                          '${data.MyAds[index].images}',
+                                                                      stay_region_id:
+                                                                          '${data.MyAds[index].stayRegionId}',
                                                                     ),
-                                                                  )),
+                                                            ),
+                                                          ),
                                                           child: Container(
                                                             width: 32.w,
                                                             height: 32.h,

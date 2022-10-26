@@ -30,26 +30,7 @@ class Owner extends StatefulWidget {
 }
 
 class _OwnerState extends State<Owner> {
-  Completer<GoogleMapController> _controller = Completer();
-  // on below line we have specified camera position
-  static final CameraPosition _kGoogle = const CameraPosition(
-    target: LatLng(41.311081, 69.240562),
-    zoom: 14.4746,
-  );
 
-  // on below line we have created the list of markers
-  final List<Marker> _markers = <Marker>[];
-
-  // created method for getting user current location
-  Future<Position> getUserCurrentLocation() async {
-    await Geolocator.requestPermission()
-        .then((value) {})
-        .onError((error, stackTrace) async {
-      await Geolocator.requestPermission();
-      print("ERROR" + error.toString());
-    });
-    return await Geolocator.getCurrentPosition();
-  }
 
   bool _checkHome = false;
   bool _checkMetro = false;
@@ -139,16 +120,8 @@ class _OwnerState extends State<Owner> {
   @override
   Widget build(BuildContext context) {
     final mapLat = context.read<FavoriteProvider>();
-    _markers.add(
-      Marker(
-          markerId: MarkerId('1'),
-          position: LatLng(41.311081, 69.240562),
-          infoWindow: InfoWindow(
-            title: 'My Position',
-          )),
-    );
 
-    print(Hive.box('token').get('token'));
+    // print(Hive.box('token').get('token'));
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 12.h),
@@ -470,8 +443,8 @@ class _OwnerState extends State<Owner> {
                       child: Card(
                         shadowColor: AppColors.buttonLinear,
                         child: ListTile(
-                          title: Text("Geojoylashishni kiriting").tr(),
-                          leading: Icon(
+                          title: const Text("Geojoylashishni kiriting").tr(),
+                          leading: const Icon(
                             Icons.location_on,
                             color: AppColors.mainColor,
                           ),
@@ -632,7 +605,8 @@ class _OwnerState extends State<Owner> {
                         border: Border.all(color: _otmColor),
                       ),
                       child: DropdownSearch<String>(
-                        mode: Mode.MENU,
+                        dropdownSearchBaseStyle: TextStyle(fontSize: 5.sp),
+                        mode: Mode.BOTTOM_SHEET,
                         items: data.univer.map((e) {
                           if (context.read<AutCubit>().selectedLang.index == 1) {
                             if (dropDown2 == e.name) {
