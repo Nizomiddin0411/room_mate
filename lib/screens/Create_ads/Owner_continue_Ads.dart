@@ -89,9 +89,9 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
   Color _colorForm = Colors.grey;
   bool value5 = false;
   var pricetype = [
-    "kunlik",
-    "oylik",
-    "kishi boshiga",
+    "Kuniga",
+    "Oyiga",
+    "Kishi boshiga",
   ];
   var kvartira = [
     'Kvartira',
@@ -137,7 +137,8 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
     '2',
     '3',
     '4',
-    '5-6',
+    '5',
+    '6'
   ];
 
   @override
@@ -189,7 +190,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
               children: [
                 Row(
                   children: [
-                    Text("Telefon raqami").tr(),
+                    Text("Telefon raqami", style: TextStyle(color: AppColors.textColor, fontSize: 14.sp, fontWeight: FontWeight.w500),).tr(),
                   ],
                 ),
                 SizedBox(
@@ -389,7 +390,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                             hint: Padding(
                               padding: EdgeInsets.only(left: 8.w),
                               child: Text(
-                                "Soni".tr(),
+                                "1-6",
                                 style: TextStyle(fontSize: 14.sp),
                               ),
                             ),
@@ -694,7 +695,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                       children: [
                         Text(
                           "Uy egasi ham yashaydimi ?",
-                          style: TextStyle(fontSize: 17.sp),
+                          style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500, color: AppColors.textColor),
                         ),
                       ],
                     ),
@@ -711,7 +712,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                         ),
                         Text(
                           'Ha',
-                          style: new TextStyle(fontSize: 17.0.sp),
+                          style: new TextStyle(fontSize: 14.0.sp),
                         ),
                         SizedBox(
                           width: 35.w,
@@ -728,7 +729,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                         Text(
                           "Yo'q",
                           style: new TextStyle(
-                            fontSize: 17.0.sp,
+                            fontSize: 14.0.sp,
                           ),
                         ),
                       ],
@@ -744,7 +745,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                       children: [
                         Text(
                           "Kommunal to’lovlarni kim to’laydi ?",
-                          style: TextStyle(fontSize: 17.sp),
+                          style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500),
                         ),
                         SizedBox(
                           height: 15.h,
@@ -931,11 +932,12 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                     ),
                   ],
                 ),
+                SizedBox(height: 10.h,),
                 Row(
                   children: [
                     Text(
-                      "Quyidagi qulayliklarga ega",
-                      style: TextStyle(color: Colors.blue, fontSize: 18.sp),
+                      "Quyidagi qulayliklarga ega.",
+                      style: TextStyle( fontSize: 16.sp, color: AppColors.textColor, fontWeight: FontWeight.w500),
                     ),
                   ],
                 ),
@@ -1067,13 +1069,18 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                     ),
                   ],
                 ),
-                Text(
-                  "Qo’shimcha ma’lumotlar".tr(),
-                  style: TextStyle(
-                    color: AppColors.textColor,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w500,
-                  ),
+                SizedBox(height: 12.h,),
+                Row(
+                  children: [
+                    Text(
+                      "Qo’shimcha ma’lumotlar".tr(),
+                      style: TextStyle(
+                        color: AppColors.textColor,
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
                 ),
                 SizedBox(height: 4.h),
                 Container(
@@ -1084,16 +1091,6 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                   child: Container(
                     padding: EdgeInsets.only(left: 16.w),
                     child: TextFormField(
-                      onChanged: (e) {
-                        if (e.length > 0) {
-                          _descriptionOnClick = true;
-                          _descriptionColor = Colors.grey;
-                        } else {
-                          _descriptionOnClick = false;
-                          _descriptionColor = Colors.red;
-                        }
-                        setState(() {});
-                      },
                       controller: descriptionController,
                       maxLines: 6,
                       decoration: InputDecoration(
@@ -1187,8 +1184,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                               _roomCountOnClick &&
                               _floorsCountOnClick &&
                               _inFloorOnClick &&
-                              _costTypeOnClick &&
-                              _descriptionOnClick) {
+                              _costTypeOnClick) {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -1248,9 +1244,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                               if (!_costTypeOnClick) {
                                 _costTypeColor = Colors.red;
                               }
-                              if (!_descriptionOnClick) {
-                                _descriptionColor = Colors.red;
-                              }
+                             
                               if (!_priceOnClick) {
                                 _priceColor = Colors.red;
                               }

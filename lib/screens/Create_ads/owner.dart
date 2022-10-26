@@ -30,8 +30,6 @@ class Owner extends StatefulWidget {
 }
 
 class _OwnerState extends State<Owner> {
-
-
   bool _checkHome = false;
   bool _checkMetro = false;
   String RoomOwner = '';
@@ -66,6 +64,8 @@ class _OwnerState extends State<Owner> {
   bool _otmOnClick = false;
   bool value5 = false;
   bool value7 = false;
+  bool otmEnable = true;
+  bool genderEnable = true;
 
   var pricetype = [
     "1 ta odam kerak",
@@ -201,7 +201,8 @@ class _OwnerState extends State<Owner> {
                               padding: EdgeInsets.only(left: 8.w),
                               child: Text(
                                 "O’gil bollarga / Qizlarga".tr(),
-                                style: TextStyle(fontSize: 14.sp),
+                                style: TextStyle(
+                                    fontSize: 14.sp, color: Colors.grey),
                               ),
                             ),
                             decoration:
@@ -234,12 +235,13 @@ class _OwnerState extends State<Owner> {
                         ),
                       ],
                     ),
-                    SizedBox(width: 15.w),
+                    SizedBox(width: 10.w),
                     Column(
                       children: [
                         Text(
                           "Ahamiyatsiz",
-                          style: TextStyle(fontSize: 13.sp),
+                          style: TextStyle(
+                              fontSize: 14.sp, fontWeight: FontWeight.w500),
                         ),
                         Checkbox(
                           value: this.value5,
@@ -281,7 +283,13 @@ class _OwnerState extends State<Owner> {
                   child: DropdownButtonFormField(
                     hint: Padding(
                       padding: EdgeInsets.only(left: 8.w),
-                      child: Text("Viloyatni tanlang".tr()),
+                      child: Text(
+                        "Viloyatni tanlang".tr(),
+                        style: TextStyle(
+                          color: Colors.grey,
+                          fontSize: 14.sp,
+                        ),
+                      ),
                     ),
                     decoration: const InputDecoration(
                       border: InputBorder.none,
@@ -329,7 +337,13 @@ class _OwnerState extends State<Owner> {
                           isExpanded: true,
                           hint: Padding(
                             padding: EdgeInsets.only(left: 8.w),
-                            child: Text("Tumanni tanlang".tr()),
+                            child: Text(
+                              "Tumanni tanlang".tr(),
+                              style: TextStyle(
+                                color: Colors.grey,
+                                fontSize: 14.sp,
+                              ),
+                            ),
                           ),
                           decoration: const InputDecoration(
                             border: InputBorder.none,
@@ -374,7 +388,13 @@ class _OwnerState extends State<Owner> {
                             isExpanded: true,
                             hint: Padding(
                               padding: EdgeInsets.only(left: 8.w),
-                              child: Text("Tumanni tanlang".tr()),
+                              child: Text(
+                                "Tumanni tanlang".tr(),
+                                style: TextStyle(
+                                  color: Colors.grey,
+                                  fontSize: 14.sp,
+                                ),
+                              ),
                             ),
                             decoration: const InputDecoration(
                               border: InputBorder.none,
@@ -443,7 +463,13 @@ class _OwnerState extends State<Owner> {
                       child: Card(
                         shadowColor: AppColors.buttonLinear,
                         child: ListTile(
-                          title: const Text("Geojoylashishni kiriting").tr(),
+                          title: Text(
+                            "Geojoylashishni kiriting",
+                            style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 14.sp,
+                            ),
+                          ).tr(),
                           leading: const Icon(
                             Icons.location_on,
                             color: AppColors.mainColor,
@@ -495,7 +521,9 @@ class _OwnerState extends State<Owner> {
                         Text(
                           "Metroga yaqinmi ?",
                           style: TextStyle(
-                              fontSize: 18.sp, fontWeight: FontWeight.bold),
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w500,
+                              color: AppColors.textColor),
                         ),
                       ],
                     ),
@@ -600,21 +628,30 @@ class _OwnerState extends State<Owner> {
                   children: [
                     Container(
                       width: 240.w,
+                      padding: EdgeInsets.only(left: 12.w),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.r),
                         border: Border.all(color: _otmColor),
                       ),
                       child: DropdownSearch<String>(
-                        dropdownSearchBaseStyle: TextStyle(fontSize: 5.sp),
+                        enabled: otmEnable,
+                        selectedItem: tr("OTM ni tanlang"),
+                        dropdownSearchDecoration: InputDecoration(
+                            border: InputBorder.none),
+
+                        dropdownSearchBaseStyle:
+                            TextStyle(fontSize: 5.sp, color: Colors.red),
                         mode: Mode.BOTTOM_SHEET,
                         items: data.univer.map((e) {
-                          if (context.read<AutCubit>().selectedLang.index == 1) {
+                          if (context.read<AutCubit>().selectedLang.index ==
+                              1) {
                             if (dropDown2 == e.name) {
-                            data.UniverId = e.id.toString();
-                            data.isId = e.id;
-                            university_id = e.id.toString();
-                          }}else{
-                            if(dropDown2 == e.nameRu){
+                              data.UniverId = e.id.toString();
+                              data.isId = e.id;
+                              university_id = e.id.toString();
+                            }
+                          } else {
+                            if (dropDown2 == e.nameRu) {
                               data.UniverId = e.id.toString();
                               data.isId = e.id;
                               university_id = e.id.toString();
@@ -643,7 +680,6 @@ class _OwnerState extends State<Owner> {
                             _otmColor = Colors.grey;
                           });
                         },
-                        selectedItem: tr("OTM ni tanlang"),
                       ),
                     ),
                     SizedBox(
@@ -653,13 +689,17 @@ class _OwnerState extends State<Owner> {
                       children: [
                         Text(
                           "Ahamiyatsiz",
-                          style: TextStyle(fontSize: 14.sp),
+                          style: TextStyle(
+                              fontSize: 14.sp,
+                              color: AppColors.textColor,
+                              fontWeight: FontWeight.w500),
                         ),
                         Checkbox(
                           value: this.value6,
                           onChanged: (bool? value) {
                             setState(() {
-                              this.value6 = value!;
+                              otmEnable = !value!;
+                              this.value6 = value;
                               university_id_matter = value ? '1' : '2';
                               if (value) {
                                 _otmColor = Colors.grey;

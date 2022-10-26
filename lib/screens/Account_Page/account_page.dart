@@ -25,10 +25,10 @@ class _AccountPageState extends State<AccountPage> {
   @override
   void initState() {
     // TODO: implement initState
-    isSwitched = Hive.box('hide_phone').get('hide_phone') == null || Hive.box('hide_phone').get('hide_phone') == '2'
+    isSwitched = Hive.box('hide_phone').get('hide_phone') == null || Hive.box('hide_phone').get('hide_phone').toString() == '2'
       ?   false
       :  true;
-    isSwitchedSecond = Hive.box('hide_profile').get('hide_profile') == null || Hive.box('hide_profile').get('hide_profile') == '2'
+    isSwitchedSecond = Hive.box('hide_profile').get('hide_profile') == null || Hive.box('hide_profile').get('hide_profile').toString() == '2'
       ? false
       : true;
     super.initState();

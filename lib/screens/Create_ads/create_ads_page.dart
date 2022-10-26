@@ -50,7 +50,7 @@ class _CreateAdsPageState extends State<CreateAdsPage>
             style: TextStyle(color: AppColors.mainColor)),
         centerTitle: true,
       ),
-      body:  Hive.box('type').get('type') == '2' ? Student() : Owner(),
+      body:  Hive.box('type').get('type').toString() == '2' ? Student() : Owner(),
 
     );
   }
