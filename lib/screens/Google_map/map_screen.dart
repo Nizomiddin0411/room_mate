@@ -1,8 +1,11 @@
 import 'dart:async';
 
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
@@ -18,6 +21,7 @@ class MapScreen extends StatefulWidget {
 
 //20.42796133580664, 80.885749655962
 class _MapScreenState extends State<MapScreen> {
+   bool isButton = false;
   Completer<GoogleMapController> _controller = Completer();
   // on below line we have specified camera position
   static final CameraPosition _kGoogle = const CameraPosition(
@@ -70,7 +74,7 @@ class _MapScreenState extends State<MapScreen> {
           // on below line creating google maps
           child: GoogleMap(
             myLocationEnabled: true,
-            myLocationButtonEnabled: true,
+            myLocationButtonEnabled: false,
             onTap: _handlerTap,
             zoomControlsEnabled: false,
 
@@ -96,32 +100,60 @@ class _MapScreenState extends State<MapScreen> {
           ),
         ),
       ),
-      // on pressing floating action button the camera will take to user current location
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () async {
-          final maps = context.read<FavoriteProvider>();
-          Position position = await _determinePosition();
-          final GoogleMapController controller = await _controller.future;
-          controller
-              .animateCamera(CameraUpdate.newCameraPosition(CameraPosition(target: LatLng(position.latitude, position.longitude), zoom: 14)));
-          maps.forMap = LatLng(position.latitude,position.longitude).toString();
-          print(maps.forMap+'helllllllll');
 
-          mymarker.clear();
+      floatingActionButton: Row(
+        children: [
+          isButton == true ? Padding(
+            padding:  EdgeInsets.fromLTRB(25.w,5.h,0.w,10.h),
+            child: FloatingActionButton.extended(
+              onPressed: () async {
+                Fluttertoast.showToast(
+                    msg: tr('Saqlandi'),
+                    toastLength: Toast.LENGTH_SHORT,
+                    gravity: ToastGravity.BOTTOM,
+                    backgroundColor: Colors.grey,
+                    textColor: Colors.white
+                );
+                Navigator.pop(context);
 
-          mymarker.add(Marker(markerId: const MarkerId('currentLocation'),position: LatLng(position.latitude, position.longitude)));
+              },
+              label: const Text(
+                "Saqlash",style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              // icon: const Icon(Icons.location_history),
+              // child: Icon(Icons.local_activity),
+            ),
+          ):SizedBox(),
+          Padding(
+            padding: EdgeInsets.fromLTRB(25.w,5.h,10.w,10.h),
+            child: FloatingActionButton.extended(
+              onPressed: () async {
+                final maps = context.read<FavoriteProvider>();
+                Position position = await _determinePosition();
+                final GoogleMapController controller = await _controller.future;
+                controller
+                    .animateCamera(CameraUpdate.newCameraPosition(CameraPosition(target: LatLng(position.latitude, position.longitude), zoom: 14)));
+                maps.forMap = LatLng(position.latitude,position.longitude).toString();
+                print(maps.forMap+'helllllllll');
 
-            setState(() {
+                mymarker.clear();
 
-            });
+                mymarker.add(Marker(markerId: const MarkerId('currentLocation'),position: LatLng(position.latitude, position.longitude)));
+                isButton = true;
+                  setState(() {
 
-          // Navigator.pop(context);
-        },
-        label: const Text(
-          "Joylashuvni saqlash",
-        ),
-        icon: const Icon(Icons.location_history),
-        // child: Icon(Icons.local_activity),
+                  });
+
+                // Navigator.pop(context);
+              },
+              label: const Text(
+                "Joylashuvni aniqlash",
+              ),
+              icon: const Icon(Icons.location_history),
+              // child: Icon(Icons.local_activity),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -131,7 +163,7 @@ class _MapScreenState extends State<MapScreen> {
     mapLatitude.forMap = (tappadPoint.toString());
     print(tappadPoint);
     print(mapLatitude.forMap);
-
+    isButton = true;
     setState(() {
       mymarker = [];
       mymarker.add(Marker(
