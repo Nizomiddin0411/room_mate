@@ -6,11 +6,12 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
+import 'package:talaba_uy/provider/favorite_provider.dart';
 import 'package:talaba_uy/screens/Create_ads/create_succed_dart.dart';
 import 'package:talaba_uy/services/user_create_ads/post_ads_edit.dart';
 
 import '../../core/const/app_colors.dart';
-import '../../services/user_create_ads/post_user_create_ads.dart';
 
 class AdsPhotoEdit extends StatefulWidget {
   String? titleController;
@@ -67,8 +68,7 @@ class AdsPhotoEdit extends StatefulWidget {
       required this.comfort,
       required this.description,
       required this.cost_period,
-      required this.subway
-      });
+      required this.subway});
 
   @override
   State<AdsPhotoEdit> createState() => _AdsPhotoEditState();
@@ -144,12 +144,13 @@ class _AdsPhotoEditState extends State<AdsPhotoEdit> {
                       Navigator.pop(context);
                     },
                   ),
-                  const Padding(padding: EdgeInsets.all(10)),
+                  Padding(padding: EdgeInsets.all(10.r)),
                   GestureDetector(
                     child: Text(
                       "From Gallery",
                       style: TextStyle(
-                          color: sum < 3 ? Colors.black : Colors.grey.shade300),
+                        color: sum < 3 ? Colors.black : Colors.grey.shade300,
+                      ),
                     ),
                     onTap: () async {
                       if (sum < 3) {
@@ -157,9 +158,9 @@ class _AdsPhotoEditState extends State<AdsPhotoEdit> {
                         // selectImages();
                         await _takeFile(sum);
                         setState(() {});
-                        print(FileList[0]);
-                        print(FileList[1]);
-                        print(FileList[2]);
+                        // print(FileList[0]);
+                        // print(FileList[1]);
+                        // print(FileList[2]);
                         Navigator.pop(context);
                       }
                     },
@@ -173,7 +174,8 @@ class _AdsPhotoEditState extends State<AdsPhotoEdit> {
 
   @override
   Widget build(BuildContext context) {
-
+    final load = context.read<FavoriteProvider>();
+    bool loading = false;
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
@@ -326,33 +328,31 @@ class _AdsPhotoEditState extends State<AdsPhotoEdit> {
                                             ),
                                             child: Stack(
                                               children: [
-                                                Expanded(
-                                                  child: Container(
-                                                    margin:
-                                                        EdgeInsets.symmetric(
-                                                            horizontal: 8.w,
-                                                            vertical: 8.h),
-                                                    decoration: BoxDecoration(
-                                                      // border: Border.all(
-                                                      //     color:
-                                                      //         Colors.),
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                            offset: Offset(
-                                                                .1.w, .1.h),
-                                                            color: Colors
-                                                                .grey.shade400,
-                                                            blurRadius: 6),
-                                                      ],
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                        10.r,
-                                                      ),
-                                                      image: DecorationImage(
-                                                        fit: BoxFit.cover,
-                                                        image: FileImage(
-                                                            FileList[index]),
-                                                      ),
+                                                Container(
+                                                  margin:
+                                                      EdgeInsets.symmetric(
+                                                          horizontal: 8.w,
+                                                          vertical: 8.h,),
+                                                  decoration: BoxDecoration(
+                                                    // border: Border.all(
+                                                    //     color:
+                                                    //         Colors.),
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                          offset: Offset(
+                                                              .1.w, .1.h),
+                                                          color: Colors
+                                                              .grey.shade400,
+                                                          blurRadius: 6),
+                                                    ],
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                      10.r,
+                                                    ),
+                                                    image: DecorationImage(
+                                                      fit: BoxFit.cover,
+                                                      image: FileImage(
+                                                          FileList[index]),
                                                     ),
                                                   ),
                                                 ),
@@ -389,7 +389,7 @@ class _AdsPhotoEditState extends State<AdsPhotoEdit> {
                                         : Container();
                                   }),
                                 )
-                              : const SizedBox(),
+                              : SizedBox(),
                         ]),
                       ),
                     ]),
@@ -406,51 +406,88 @@ class _AdsPhotoEditState extends State<AdsPhotoEdit> {
                                 primary: AppColors.buttonLinear),
                             onPressed: () async {
                               // print(widget.titleController! + 'title');
-                                print(widget.id.toString() +
-                                    'iidd');
-                                // print(widget.gender_matter.toString() +
-                                //     'gendermatter');
-                                // print(widget.district_id.toString() +
-                                //     'district id');
-                                // print(widget.id.toString() + 'metro');
-                                // print(widget.addressController.toString() +
-                                //     'address');
-                                // print(widget.university_id.toString() +
-                                //     'univerid');
-                                // print(widget.university_id_matter.toString() +
-                                //     'univer matter');
-                                // print(widget.phoneController.toString() +
-                                //     'phonecontrol');
-                                // print(widget.house_type.toString() +
-                                //     'house type');
-                                // print(
-                                //     widget.rent_type.toString() + 'rent type');
-                                // print(
-                                //     widget.room_count.toString() + 'hona soni');
-                                // print(widget.floors_count.toString() +
-                                //     'etaj soni');
-                                // print(widget.in_floor.toString() + 'etaj');
-                                // print(
-                                //     widget.costController.toString() + 'narxi');
-                                // print(
-                                //     widget.cost_type.toString() + 'cost type');
-                                // print(widget.live_with_owner.toString() +
-                                //     'uyni egasi');
-                                // print(widget.utility_electricity.toString() +
-                                //     'elktor');
-                                // print(widget.unility_gaz.toString() + 'gaz');
-                                // print(widget.utility_hot_water.toString() +
-                                //     'issiq suv');
-                                // print(widget.utility_cold_water.toString() +
-                                //     'sovuq suv');
-                                // print(
-                                //     widget.utility_trash.toString() + 'musor');
-                                // print(widget.comfort.toString() + 'komford');
-                                // print(widget.description.toString() +
-                                //     'qoshimcha');
-                                // print(widget.location.toString() + 'location');
-                                // print(widget.cost_period.toString() + 'cost');
+                              print(widget.id.toString() + 'iidd');
+                              // print(widget.gender_matter.toString() +
+                              //     'gendermatter');
+                              // print(widget.district_id.toString() +
+                              //     'district id');
+                              // print(widget.id.toString() + 'metro');
+                              // print(widget.addressController.toString() +
+                              //     'address');
+                              // print(widget.university_id.toString() +
+                              //     'univerid');
+                              // print(widget.university_id_matter.toString() +
+                              //     'univer matter');
+                              // print(widget.phoneController.toString() +
+                              //     'phonecontrol');
+                              // print(widget.house_type.toString() +
+                              //     'house type');
+                              // print(
+                              //     widget.rent_type.toString() + 'rent type');
+                              // print(
+                              //     widget.room_count.toString() + 'hona soni');
+                              // print(widget.floors_count.toString() +
+                              //     'etaj soni');
+                              // print(widget.in_floor.toString() + 'etaj');
+                              // print(
+                              //     widget.costController.toString() + 'narxi');
+                              // print(
+                              //     widget.cost_type.toString() + 'cost type');
+                              // print(widget.live_with_owner.toString() +
+                              //     'uyni egasi');
+                              // print(widget.utility_electricity.toString() +
+                              //     'elktor');
+                              // print(widget.unility_gaz.toString() + 'gaz');
+                              // print(widget.utility_hot_water.toString() +
+                              //     'issiq suv');
+                              // print(widget.utility_cold_water.toString() +
+                              //     'sovuq suv');
+                              // print(
+                              //     widget.utility_trash.toString() + 'musor');
+                              // print(widget.comfort.toString() + 'komford');
+                              // print(widget.description.toString() +
+                              //     'qoshimcha');
+                              // print(widget.location.toString() + 'location');
+                              // print(widget.cost_period.toString() + 'cost');
 
+                              load.PostUser(
+                                titleController: widget.titleController,
+                                roommate_gender: widget.roommate_gender,
+                                gender_matter: widget.gender_matter,
+                                district_id: widget.district_id,
+                                subway: widget.subway,
+                                addressController: widget.addressController,
+                                university_id: widget.university_id,
+                                university_id_matter:
+                                    widget.university_id_matter,
+                                phoneController: widget.phoneController,
+                                house_type: widget.house_type,
+                                rent_type: widget.rent_type,
+                                room_count: widget.room_count,
+                                floors_count: widget.floors_count,
+                                in_floor: widget.in_floor,
+                                costController: widget.costController,
+                                cost_type: widget.cost_type,
+                                live_with_owner: widget.live_with_owner,
+                                utility_electricity: widget.utility_electricity,
+                                unility_gaz: widget.unility_gaz,
+                                utility_hot_water: widget.utility_hot_water,
+                                utility_cold_water: widget.utility_cold_water,
+                                utility_trash: widget.utility_trash,
+                                comfort: widget.comfort,
+                                description: widget.description,
+                                location: widget.location,
+                                cost_period: widget.cost_period,
+                                file1: FileExist[0] ? FileList[0] : FileList[3],
+                                file2: FileExist[1] ? FileList[1] : FileList[4],
+                                file3: FileExist[2] ? FileList[2] : FileList[5],
+                              );
+                              if (load.isLoading != true) {
+                                showAlertDialog(context);
+                              }
+                              setState(() {
+                                loading = load.isLoading;
+                              });
                               var data = await EditAdsService().FetchAdsEdit(
                                 id: widget.id.toString(),
                                 titleController: widget.titleController,
@@ -543,7 +580,7 @@ class _AdsPhotoEditState extends State<AdsPhotoEdit> {
                               }
                             },
                             child: Text(
-                              "Keyingi ".tr(),
+                              "Keyi ".tr(),
                               style: TextStyle(
                                   fontSize: 20.sp, fontWeight: FontWeight.w500),
                             ),
@@ -631,5 +668,17 @@ class _AdsPhotoEditState extends State<AdsPhotoEdit> {
     } else {
       return null;
     }
+  }
+
+  showAlertDialog(BuildContext context) {
+    AlertDialog alert = AlertDialog(
+      // title: Text("Akkauntdan chiqish ").tr(),
+      // content: Text("Akkauntdan chiqishga ishonchingiz komilmi?").tr(),
+      actions: const [
+        Center(
+          child: CircularProgressIndicator(),
+        )
+      ],
+    );
   }
 }

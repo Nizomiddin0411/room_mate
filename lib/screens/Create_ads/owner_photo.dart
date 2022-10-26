@@ -142,7 +142,7 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
                       Navigator.pop(context);
                     },
                   ),
-                  const Padding(padding: EdgeInsets.all(10)),
+                   Padding(padding: EdgeInsets.all(10.w)),
                   GestureDetector(
                     child: Text(
                       "From Gallery",
@@ -325,33 +325,31 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
                                             ),
                                             child: Stack(
                                               children: [
-                                                Expanded(
-                                                  child: Container(
-                                                    margin:
-                                                        EdgeInsets.symmetric(
-                                                            horizontal: 8.w,
-                                                            vertical: 8.h),
-                                                    decoration: BoxDecoration(
-                                                      // border: Border.all(
-                                                      //     color:
-                                                      //         Colors.),
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                            offset: Offset(
-                                                                .1.w, .1.h),
-                                                            color: Colors
-                                                                .grey.shade400,
-                                                            blurRadius: 6),
-                                                      ],
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                        10.r,
-                                                      ),
-                                                      image: DecorationImage(
-                                                        fit: BoxFit.cover,
-                                                        image: FileImage(
-                                                            FileList[index]),
-                                                      ),
+                                                Container(
+                                                  margin:
+                                                      EdgeInsets.symmetric(
+                                                          horizontal: 8.w,
+                                                          vertical: 8.h),
+                                                  decoration: BoxDecoration(
+                                                    // border: Border.all(
+                                                    //     color:
+                                                    //         Colors.),
+                                                    boxShadow: [
+                                                      BoxShadow(
+                                                          offset: Offset(
+                                                              .1.w, .1.h),
+                                                          color: Colors
+                                                              .grey.shade400,
+                                                          blurRadius: 6.r),
+                                                    ],
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                      10.r,
+                                                    ),
+                                                    image: DecorationImage(
+                                                      fit: BoxFit.cover,
+                                                      image: FileImage(
+                                                          FileList[index]),
                                                     ),
                                                   ),
                                                 ),

@@ -17,17 +17,26 @@ class AccountPage extends StatefulWidget {
 
 class _AccountPageState extends State<AccountPage> {
   final bool _switchValue = false;
-  bool isSwitched = Hive.box('hide_phone').get('hide_phone') != null && Hive.box('hide_phone').get('hide_phone') == 1
-      ?   true
-      :  false;
-  bool isSwitchedSecond = Hive.box('hide_profile').get('hide_profile') != null
-      ? true
-      : false;
+  bool? isSwitched;
+  bool? isSwitchedSecond;
   String name = Hive.box('fullname').get('fullname').toString();
-  String number = Hive.box('phone').get('phone').toString();
+  String number = Hive.box('phone').get('phone');
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    isSwitched = Hive.box('hide_phone').get('hide_phone') == null || Hive.box('hide_phone').get('hide_phone') == '2'
+      ?   false
+      :  true;
+    isSwitchedSecond = Hive.box('hide_profile').get('hide_profile') == null || Hive.box('hide_profile').get('hide_profile') == '2'
+      ? false
+      : true;
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
+    print(Hive.box('hide_profile').get('hide_profile').toString() + "aa");
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.backgroundWhite,
@@ -136,10 +145,10 @@ class _AccountPageState extends State<AccountPage> {
                 height: 60.h,
                 width: 80.w,
                 child: Switch(
-                  value: isSwitched,
+                  value: isSwitched!,
                   onChanged: (value) {
                     ChangeProfile().ChangeProf(
-                        hidePhone: _switchValue ? '1' : '2', hideProfile: ''
+                        hideProfile: isSwitched! ? '1' : '2', hidePhone: isSwitchedSecond! ? '1' : '2'
                     );
                     setState(() {
                       isSwitched = value;
@@ -149,7 +158,7 @@ class _AccountPageState extends State<AccountPage> {
                 ),
               ),
             ):Container(),
-            Hive.box('type').get('type') == 2 ? ListTile(
+            Hive.box('type').get('type').toString() == '2' ? ListTile(
               leading: Container(
                   width: 40.w,
                   height: 40.h,
@@ -169,13 +178,13 @@ class _AccountPageState extends State<AccountPage> {
                 height: 60.h,
                 width: 80.w,
                 child: Switch(
-                  value: isSwitchedSecond,
+                  value: isSwitchedSecond!,
                   onChanged: (value) {
                     ChangeProfile().ChangeProf(
-                        hideProfile: _switchValue ? '1' : '2', hidePhone: '');
+                        hideProfile: isSwitched! ? '1' : '2', hidePhone: isSwitchedSecond! ? '1' : '2');
                     setState(() {
                       isSwitchedSecond = value;
-                      Hive.box('hide_profile').put('hide_profile',value);
+                      Hive.box('hide_profile').put('hide_profile',value ? '1' : '2');
                     });
                   },
                 ),

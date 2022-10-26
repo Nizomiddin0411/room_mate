@@ -1,12 +1,12 @@
 import 'dart:async';
 
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:sms_autofill/sms_autofill.dart';
 import 'package:talaba_uy/screens/menu/menu.dart';
+import 'package:talaba_uy/screens/menu/menu_for.dart';
 import 'package:talaba_uy/services/login_service.dart';
 import 'package:talaba_uy/services/sms_service.dart';
 
@@ -22,6 +22,7 @@ class SmsConfirmationPage extends StatefulWidget {
 }
 
 class _SmsConfirmationPageState extends State<SmsConfirmationPage> {
+  String? type;
   String? _message;
   TextEditingController? _smsController;
   String _code = "";
@@ -41,7 +42,8 @@ class _SmsConfirmationPageState extends State<SmsConfirmationPage> {
       );
       ScaffoldMessenger.of(context).showSnackBar(snackBar);
     });
-
+    type = Hive.box('type').get('type').toString();
+    setState(() {});
     _timer = Timer.periodic(
       Duration(seconds: 1),
       (timer) {
@@ -77,7 +79,7 @@ class _SmsConfirmationPageState extends State<SmsConfirmationPage> {
         _timeOf = true;
       }
     });
-
+    print(type.toString() + "q");
     return Scaffold(
       backgroundColor: AppColors.backgroundWhite,
       resizeToAvoidBottomInset: false,
@@ -117,7 +119,8 @@ class _SmsConfirmationPageState extends State<SmsConfirmationPage> {
             SizedBox(
               width: MediaQuery.of(context).size.width - 150.w,
               child: Text(
-                "Biz *** $_partPhone raqamga SMS xabar jo’natdik, SMS xabardagi kod bilan tasdiqlang!".tr(),
+                "Biz *** $_partPhone raqamga SMS xabar jo’natdik, SMS xabardagi kod bilan tasdiqlang!"
+                    .tr(),
                 style: TextStyle(fontSize: 16.sp),
                 textAlign: TextAlign.center,
               ),
@@ -139,7 +142,9 @@ class _SmsConfirmationPageState extends State<SmsConfirmationPage> {
                 });
               },
             ),
-            SizedBox(height: 10.h,),
+            SizedBox(
+              height: 10.h,
+            ),
             Text("SMS habardagi kodni kiriting".tr()),
             SizedBox(
               height: 32.h,
@@ -203,15 +208,15 @@ class _SmsConfirmationPageState extends State<SmsConfirmationPage> {
             ),
             ElevatedButton(
               onPressed: () async {
-
-
                 var dataService = await SmsService()
                     .smsService(phone: widget._phone!, sms: _code);
                 if (dataService['status']) {
                   _message = dataService['content'];
                   Navigator.pushAndRemoveUntil(
                       context,
-                      MaterialPageRoute(builder: (context) => MenuPage()),
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              Hive.box('type').get('type').toString() == '2' ? MenuPage() : Hive.box('type').get('type').toString() == '3' ? MenuFor() : Container()),
                       (route) => false);
                 } else {
                   _message = dataService['content'];
