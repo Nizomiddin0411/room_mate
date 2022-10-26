@@ -16,7 +16,7 @@ class StudentsEdist extends StatefulWidget {
   String? stay_region;
   String? stay_region_id;
   String? stay_region_matter;
-  String? stay_university_id;
+  String? stay_universityname;
   String? stay_university_matter;
   String? roommate_gender;
   String? roommate_count;
@@ -42,11 +42,13 @@ class StudentsEdist extends StatefulWidget {
   String? universtatenewname;
   String? images;
   String? updateid;
+  String? stay_univer_id;
 
 
    StudentsEdist({Key? key,
+     required this.stay_univer_id,
      required this.updateid,
-     required this.stay_university_id,
+     required this.stay_universityname,
      required this.stay_region_id,
      required this.images,
    required this.title,
@@ -412,7 +414,7 @@ class _StudentsEdistState extends State<StudentsEdist> {
                             _colorUniver = Colors.grey;
                           });
                         },
-                        selectedItem: tr("OTM ni tanlang"),
+                        selectedItem: tr(widget.universtatenewname.toString()),
                       ),
                     ),
                     SizedBox(
@@ -766,7 +768,7 @@ class _StudentsEdistState extends State<StudentsEdist> {
                                   univervalue: '${value6 ? 1 : 2 }',
                                   viloyatidisi: '${data.viloyatid.toString()}',
                                   viloyatvalue: '${regionsvalue ?1:2}',
-                                  universiteteid: data.UniverId,
+                                  universiteteid: '${data.UniverId}',
                                   titleGendor: '${gender1 ? 0 : _titleGendor}',
                                   titlecount: '${gender1 ? 0 : _titleCount}',
                                   phoneController:phoneController!.text.split(' ').join(''),

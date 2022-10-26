@@ -106,8 +106,9 @@ class _UpdateStudentsState extends State<UpdateStudents> {
         centerTitle: true,
       ),
       body: StudentsEdist(
+        stay_univer_id: '${widget.stay_university_id}',
         updateid: '${widget.id}',
-        stay_university_id: widget.univername.toString(),
+        stay_universityname: widget.univername.toString(),
         stay_university_matter: widget.stay_university_matter.toString(),
         renttype: widget.renttype.toString(),
         cost: widget.cost.toString(),
