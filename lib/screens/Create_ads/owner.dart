@@ -79,6 +79,8 @@ class _OwnerState extends State<Owner> {
     "O'g'il bolaga",
     'Qiz bolaga',
   ];
+  var genderDis = [
+  ];
   var kindOfMoment = [
     'kunlik',
     'oylik',
@@ -202,12 +204,17 @@ class _OwnerState extends State<Owner> {
                               child: Text(
                                 "O’gil bollarga / Qizlarga".tr(),
                                 style: TextStyle(
-                                    fontSize: 14.sp, color: Colors.grey),
+                                  fontSize: 14.sp,
+                                  color: Colors.grey,
+                                ),
                               ),
                             ),
                             decoration:
                                 const InputDecoration(border: InputBorder.none),
-                            icon: const Icon(Icons.arrow_drop_down_outlined),
+                            icon: const Icon(
+                              Icons.arrow_drop_down_outlined,
+                              color: Colors.grey,
+                            ),
                             items: gender.map((e) {
                               return DropdownMenuItem<String>(
                                 onTap: () {
@@ -225,12 +232,12 @@ class _OwnerState extends State<Owner> {
                                 ),
                               );
                             }).toList(),
-                            onChanged: (newValue) {
+                            onChanged: genderEnable ? (newValue) {
                               setState(() {
                                 _GenderOnClick = true;
                                 _colorGender = Colors.grey;
                               });
-                            },
+                            } : null,
                           ),
                         ),
                       ],
@@ -241,7 +248,9 @@ class _OwnerState extends State<Owner> {
                         Text(
                           "Ahamiyatsiz",
                           style: TextStyle(
-                              fontSize: 14.sp, fontWeight: FontWeight.w500),
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                         Checkbox(
                           value: this.value5,
@@ -251,9 +260,10 @@ class _OwnerState extends State<Owner> {
                               gender_matter = value ? '1' : '2';
 
                               if (value) {
-                                _colorGender = Colors.grey;
+                                _colorGender = Colors.grey.shade300;
+                                genderEnable = false;
                               }
-                              if (!value && !_GenderOnClick) {
+                              if (!value) {
                                 _colorGender = Colors.red;
                                 _GenderOnClick = false;
                               }
@@ -295,7 +305,10 @@ class _OwnerState extends State<Owner> {
                       border: InputBorder.none,
                     ),
                     // value: ,
-                    icon: Icon(Icons.arrow_drop_down_outlined),
+                    icon: Icon(
+                      Icons.arrow_drop_down_outlined,
+                      color: Colors.grey,
+                    ),
                     items: data.regions.map((e) {
                       return DropdownMenuItem<String>(
                         value: e.name ?? "",
@@ -544,7 +557,7 @@ class _OwnerState extends State<Owner> {
                             ),
                             Text(
                               'Ha',
-                              style: new TextStyle(fontSize: 17.0),
+                              style: new TextStyle(fontSize: 14.0.sp),
                             ),
                             SizedBox(
                               width: 55.w,
@@ -562,7 +575,7 @@ class _OwnerState extends State<Owner> {
                             Text(
                               "Yo'q",
                               style: new TextStyle(
-                                fontSize: 17.0.sp,
+                                fontSize: 14.0.sp,
                               ),
                             ),
                           ],
@@ -634,13 +647,12 @@ class _OwnerState extends State<Owner> {
                         border: Border.all(color: _otmColor),
                       ),
                       child: DropdownSearch<String>(
+                        dropdownBuilder: _style,
                         enabled: otmEnable,
                         selectedItem: tr("OTM ni tanlang"),
-                        dropdownSearchDecoration: InputDecoration(
-                            border: InputBorder.none),
+                        dropdownSearchDecoration:
+                            InputDecoration(border: InputBorder.none),
 
-                        dropdownSearchBaseStyle:
-                            TextStyle(fontSize: 5.sp, color: Colors.red),
                         mode: Mode.BOTTOM_SHEET,
                         items: data.univer.map((e) {
                           if (context.read<AutCubit>().selectedLang.index ==
@@ -702,7 +714,7 @@ class _OwnerState extends State<Owner> {
                               this.value6 = value;
                               university_id_matter = value ? '1' : '2';
                               if (value) {
-                                _otmColor = Colors.grey;
+                                _otmColor = Colors.grey.shade300;
                               }
                               if (!value && !_otmOnClick) {
                                 _otmColor = Colors.red;
@@ -819,4 +831,14 @@ class _OwnerState extends State<Owner> {
       ));
     });
   }
+
+
+   Widget _style(BuildContext context, String? selectedItem) {
+        return Text(
+          selectedItem!,
+          style: TextStyle(fontSize: 14.sp),
+        );
+      }
+
+      
 }

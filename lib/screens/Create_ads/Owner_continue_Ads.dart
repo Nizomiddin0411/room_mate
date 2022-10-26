@@ -84,7 +84,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
   bool _costTypeOnClick = false;
   Color _descriptionColor = Colors.grey;
   bool _descriptionOnClick = false;
-    Color _priceColor = Colors.grey;
+  Color _priceColor = Colors.grey;
   bool _priceOnClick = false;
   Color _colorForm = Colors.grey;
   bool value5 = false;
@@ -132,14 +132,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
     '8',
     '9',
   ];
-  var ijarachi = [
-    '1',
-    '2',
-    '3',
-    '4',
-    '5',
-    '6'
-  ];
+  var ijarachi = ['1', '2', '3', '4', '5', '6'];
 
   @override
   void initState() {
@@ -190,7 +183,13 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
               children: [
                 Row(
                   children: [
-                    Text("Telefon raqami", style: TextStyle(color: AppColors.textColor, fontSize: 14.sp, fontWeight: FontWeight.w500),).tr(),
+                    Text(
+                      "Telefon raqami",
+                      style: TextStyle(
+                          color: AppColors.textColor,
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w500),
+                    ).tr(),
                   ],
                 ),
                 SizedBox(
@@ -669,11 +668,11 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                             onChanged: (newValue) {
                               setState(() {
                                 print(newValue);
-                                if(newValue == 'kunlik'){
+                                if (newValue == 'kunlik') {
                                   price = '1';
-                                }else if(newValue == 'oylik'){
+                                } else if (newValue == 'oylik') {
                                   price = '2';
-                                }else{
+                                } else {
                                   price = '3';
                                 }
                                 _priceOnClick = true;
@@ -695,7 +694,10 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                       children: [
                         Text(
                           "Uy egasi ham yashaydimi ?",
-                          style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500, color: AppColors.textColor),
+                          style: TextStyle(
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w500,
+                              color: AppColors.textColor),
                         ),
                       ],
                     ),
@@ -745,7 +747,8 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                       children: [
                         Text(
                           "Kommunal to’lovlarni kim to’laydi ?",
-                          style: TextStyle(fontSize: 16.sp, fontWeight: FontWeight.w500),
+                          style: TextStyle(
+                              fontSize: 16.sp, fontWeight: FontWeight.w500),
                         ),
                         SizedBox(
                           height: 15.h,
@@ -755,8 +758,8 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                   ],
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
+                    Container(width: 172.w,),
                     Text("Uy egasi"),
                     SizedBox(
                       width: 50.w,
@@ -904,7 +907,10 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                             SizedBox(
                               height: 1.h,
                             ),
-                            Container(width: 180.w, child: Text("Chiqindi")),
+                            Container(
+                              width: 180.w,
+                              child: Text("Chiqindi"),
+                            ),
                             Radio(
                               value: 1,
                               groupValue: id5,
@@ -932,12 +938,17 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                     ),
                   ],
                 ),
-                SizedBox(height: 10.h,),
+                SizedBox(
+                  height: 10.h,
+                ),
                 Row(
                   children: [
                     Text(
                       "Quyidagi qulayliklarga ega.",
-                      style: TextStyle( fontSize: 16.sp, color: AppColors.textColor, fontWeight: FontWeight.w500),
+                      style: TextStyle(
+                          fontSize: 16.sp,
+                          color: AppColors.textColor,
+                          fontWeight: FontWeight.w500),
                     ),
                   ],
                 ),
@@ -947,7 +958,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                 Row(
                   children: [
                     Container(
-                      width: 190.w,
+                      width: 228.w,
                       child: Column(
                         children: [
                           Row(
@@ -1069,7 +1080,9 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                     ),
                   ],
                 ),
-                SizedBox(height: 12.h,),
+                SizedBox(
+                  height: 12.h,
+                ),
                 Row(
                   children: [
                     Text(
@@ -1172,11 +1185,9 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                             '${comfortItems}  texnikalar',
                           );
                           print('${widget.university_id} malumot');
-                          if(cost_type == null){
+                          if (cost_type == null) {
                             cost_type = '1';
                           }
-
-
 
                           if (_phoneNumberOnClick &&
                               _houseTypeOnClick &&
@@ -1189,36 +1200,39 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                               context,
                               MaterialPageRoute(
                                   builder: (context) => OwnerCreateImage(
-                                    titleController: widget.titleController,
-                                    roommate_gender: widget.roommate_gender,
-                                    gender_matter: widget.gender_matter,
-                                    district_id: widget.district_id,
-                                    addressController: widget.addressController,
-                                    location: widget.location,
-                                    university_id:  widget.university_id,
-                                    university_id_matter: widget.university_id_matter,
-                                    id: widget.id,
-                                    phoneController:  phoneController!.text
-                                        .split(' ')
-                                        .join(''),
-                                    house_type:  house_type,
-                                    rent_type: rent_type,
-                                    room_count: room_count,
-                                    floors_count: floors_count,
-                                    in_floor: in_floor,
-                                    costController:  costController!.text
+                                        titleController: widget.titleController,
+                                        roommate_gender: widget.roommate_gender,
+                                        gender_matter: widget.gender_matter,
+                                        district_id: widget.district_id,
+                                        addressController:
+                                            widget.addressController,
+                                        location: widget.location,
+                                        university_id: widget.university_id,
+                                        university_id_matter:
+                                            widget.university_id_matter,
+                                        id: widget.id,
+                                        phoneController: phoneController!.text
                                             .split(' ')
                                             .join(''),
-                                    cost_type: cost_type,
-                                    live_with_owner: live_with_owner,
-                                    utility_electricity:utility_electricity,
-                                    unility_gaz: unility_gaz,
-                                    utility_hot_water: utility_hot_water,
-                                    utility_cold_water: utility_cold_water,
-                                    utility_trash: utility_trash,
-                                    comfort:  comfortItems,
-                                    description: descriptionController.text,
-                                    cost_period: price,
+                                        house_type: house_type,
+                                        rent_type: rent_type,
+                                        room_count: room_count,
+                                        floors_count: floors_count,
+                                        in_floor: in_floor,
+                                        costController: costController!.text
+                                            .split(' ')
+                                            .join(''),
+                                        cost_type: cost_type,
+                                        live_with_owner: live_with_owner,
+                                        utility_electricity:
+                                            utility_electricity,
+                                        unility_gaz: unility_gaz,
+                                        utility_hot_water: utility_hot_water,
+                                        utility_cold_water: utility_cold_water,
+                                        utility_trash: utility_trash,
+                                        comfort: comfortItems,
+                                        description: descriptionController.text,
+                                        cost_period: price,
                                       )),
                             );
                           } else {
@@ -1244,7 +1258,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                               if (!_costTypeOnClick) {
                                 _costTypeColor = Colors.red;
                               }
-                             
+
                               if (!_priceOnClick) {
                                 _priceColor = Colors.red;
                               }
