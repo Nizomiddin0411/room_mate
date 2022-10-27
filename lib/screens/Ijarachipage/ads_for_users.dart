@@ -103,9 +103,9 @@ class _AdsUsersState extends State<AdsUsers> {
                           InkWell(
                             onTap: () {
                               Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => FiltrPage()))
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => FiltrPage()))
                                   .then((value) => data.isChanded);
                               data.isRegion = false;
                               data.isDistricts = false;
@@ -152,8 +152,10 @@ class _AdsUsersState extends State<AdsUsers> {
           children: [
             Consumer<RegionProvider>(
               builder: (_, data, __) {
-                if(!data.isChanded){
-                  return const Center(child: CircularProgressIndicator(),);
+                if (!data.isChanded) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
                 }
                 return ListView.builder(
                     shrinkWrap: true,
@@ -169,60 +171,60 @@ class _AdsUsersState extends State<AdsUsers> {
                                 builder: (context) => AdsDetail(
                                   title: data.Ads[index].title.toString(),
                                   description:
-                                  data.Ads[index].description.toString(),
+                                      data.Ads[index].description.toString(),
                                   houseType:
-                                  data.Ads[index].houseType.toString(),
+                                      data.Ads[index].houseType.toString(),
                                   cost: data.Ads[index].cost.toString(),
                                   costTayp: data.Ads[index].costType.toString(),
                                   countRoom:
-                                  data.Ads[index].roomCount.toString(),
+                                      data.Ads[index].roomCount.toString(),
                                   countPeople:
-                                  data.Ads[index].roommateCount.toString(),
+                                      data.Ads[index].roommateCount.toString(),
                                   region:
-                                  data.Ads[index].region?.name.toString(),
+                                      data.Ads[index].region?.name.toString(),
                                   district:
-                                  data.Ads[index].district?.name.toString(),
+                                      data.Ads[index].district?.name.toString(),
 
                                   // facultet: data.Ads[index]
                                   //     .faculty?.name
                                   //     .toString(),
                                   liveWithOwner:
-                                  data.Ads[index].liveWithOwner.toString(),
+                                      data.Ads[index].liveWithOwner.toString(),
                                   subway: data.Ads[index].subway.toString(),
                                   favorite: data.Ads[index].favorite.toString(),
                                   id: data.Ads[index].id.toString(),
                                   type: data.Ads[index].type.toString(),
                                   userId: data.Ads[index].userId,
                                   userFullName:
-                                  data.Ads[index].userFullName.toString(),
+                                      data.Ads[index].userFullName.toString(),
                                   chatApproved: data.Ads[index].chatApproved,
                                   phoneNumberShow: data
                                       .Ads[index].phoneNumberShow
                                       .toString(),
                                   phoneNumber:
-                                  data.Ads[index].phoneNumber.toString(),
+                                      data.Ads[index].phoneNumber.toString(),
                                   stay_university:
-                                  data.Ads[index].stayUniversity.toString(),
+                                      data.Ads[index].stayUniversity.toString(),
                                   stay_region:
-                                  data.Ads[index].stayRegion?.toString(),
+                                      data.Ads[index].stayRegion?.toString(),
                                   roommate_count:
-                                  data.Ads[index].roommateCount.toString(),
+                                      data.Ads[index].roommateCount.toString(),
                                   roommate_gender:
-                                  data.Ads[index].roommateGender.toString(),
+                                      data.Ads[index].roommateGender.toString(),
                                   address: data.Ads[index].address.toString(),
                                   floorsCount:
-                                  data.Ads[index].floorsCount.toString(),
+                                      data.Ads[index].floorsCount.toString(),
                                   inFloor: data.Ads[index].inFloor.toString(),
                                   utility_bills:
-                                  data.Ads[index].utilityBills.toString(),
+                                      data.Ads[index].utilityBills.toString(),
                                   rentType: data.Ads[index].rentType.toString(),
                                   comfort: data.Ads[index].comfort.toString(),
                                   // data.Ads[index].comfort,
                                   createData:
-                                  data.Ads[index].createdAt.toString(),
+                                      data.Ads[index].createdAt.toString(),
                                   Image: data.Ads[index].images ?? [],
                                   locations:
-                                  data.Ads[index].location.toString(),
+                                      data.Ads[index].location.toString(),
                                 ),
                               ),
                             );
@@ -231,8 +233,8 @@ class _AdsUsersState extends State<AdsUsers> {
                             width: 324.w,
                             height: 358.h,
                             decoration: BoxDecoration(
-                              // borderRadius: BorderRadius.only(
-                              //     bottomLeft: Radius.circular(6.r), bottomRight: Radius.circular(6.r)),
+                                // borderRadius: BorderRadius.only(
+                                //     bottomLeft: Radius.circular(6.r), bottomRight: Radius.circular(6.r)),
                                 borderRadius: BorderRadius.circular(6.r),
                                 color: AppColors.secondBackgroud),
                             child: Column(
@@ -244,30 +246,31 @@ class _AdsUsersState extends State<AdsUsers> {
                                     //   return
                                     data.Ads[index].images!.isNotEmpty
                                         ? CachedNetworkImage(
-                                        imageUrl:
-                                        "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.Ads[index].images!.first.image.toString()}",
-                                        placeholder: (context, url) =>
-                                            Center(child: CircularProgressIndicator()),
-                                        errorWidget:
-                                            (context, url, error) =>
-                                            Image.asset(
-                                              'assets/images/notImage.png',
-                                            ),
-                                        width: 327.w,
-                                        height: 235.h,
-                                        // fit: BoxFit.cover,
-                                        imageBuilder: (context,
-                                            imageProvider) =>
-                                            Container(
-                                                decoration: BoxDecoration(
+                                            imageUrl:
+                                                "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.Ads[index].images!.first.image.toString()}",
+                                            placeholder: (context, url) => Center(
+                                                child:
+                                                    const CircularProgressIndicator()),
+                                            errorWidget:
+                                                (context, url, error) =>
+                                                    Image.asset(
+                                                      'assets/images/notImage.png',
+                                                    ),
+                                            width: 327.w,
+                                            height: 235.h,
+                                            // fit: BoxFit.cover,
+                                            imageBuilder: (context,
+                                                    imageProvider) =>
+                                                Container(
+                                                    decoration: BoxDecoration(
                                                   borderRadius:
-                                                  BorderRadius.only(
-                                                      topLeft:
-                                                      Radius.circular(
-                                                          6.r),
-                                                      topRight:
-                                                      Radius.circular(
-                                                          6.r)),
+                                                      BorderRadius.only(
+                                                          topLeft:
+                                                              Radius.circular(
+                                                                  6.r),
+                                                          topRight:
+                                                              Radius.circular(
+                                                                  6.r)),
                                                   image: DecorationImage(
                                                     image: imageProvider,
                                                     fit: BoxFit.cover,
@@ -276,47 +279,47 @@ class _AdsUsersState extends State<AdsUsers> {
                                                   ),
                                                 )))
 
-                                    // ? Image.asset(
-                                    //     'assets/images/notImage.png',
-                                    //     width: 324.w,
-                                    //     height: 235.h,
-                                    //     fit: BoxFit.cover,
-                                    //   )
+                                        // ? Image.asset(
+                                        //     'assets/images/notImage.png',
+                                        //     width: 324.w,
+                                        //     height: 235.h,
+                                        //     fit: BoxFit.cover,
+                                        //   )
                                         : Image.asset(
-                                      'assets/images/notImage.png',
-                                      width: 324.w,
-                                      height: 235.h,
-                                      fit: BoxFit.cover,
-                                    ),
+                                            'assets/images/notImage.png',
+                                            width: 324.w,
+                                            height: 235.h,
+                                            fit: BoxFit.cover,
+                                          ),
                                     Positioned(
                                       child: Padding(
                                         padding: const EdgeInsets.all(8.0),
                                         child: Row(
                                           mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
                                             Container(
                                               // width: 80.w,
                                               height: 24.h,
                                               decoration: BoxDecoration(
                                                 borderRadius:
-                                                BorderRadius.circular(2.r),
+                                                    BorderRadius.circular(2.r),
                                                 color: AppColors.iconColor,
                                               ),
                                               child: Center(
                                                 child: Text(
                                                   data.Ads[index].createdAt!
                                                       .replaceRange(
-                                                      data
-                                                          .Ads[index]
-                                                          .createdAt!
-                                                          .length -
-                                                          3,
-                                                      data
-                                                          .Ads[index]
-                                                          .createdAt!
-                                                          .length,
-                                                      ''),
+                                                          data
+                                                                  .Ads[index]
+                                                                  .createdAt!
+                                                                  .length -
+                                                              3,
+                                                          data
+                                                              .Ads[index]
+                                                              .createdAt!
+                                                              .length,
+                                                          ''),
                                                   // '${data.Ads[index].id.toString()}',
                                                   // "${data.Ads[index].createdAt!.split(':').removeAt(2)}",
                                                   style: const TextStyle(
@@ -331,15 +334,15 @@ class _AdsUsersState extends State<AdsUsers> {
                                               child: FavoriteButton(
                                                 isFavorite: data.isChanded
                                                     ? (data.Ads[index]
-                                                    .favorite ==
-                                                    '0'
-                                                    ? false
-                                                    : true)
+                                                                .favorite ==
+                                                            '0'
+                                                        ? false
+                                                        : true)
                                                     : (data.AdsForZero[index]
-                                                    .favorite ==
-                                                    '0'
-                                                    ? false
-                                                    : true),
+                                                                .favorite ==
+                                                            '0'
+                                                        ? false
+                                                        : true),
                                                 iconSize: 35.0,
                                                 valueChanged: (_isFavorite) {
                                                   // print('Is Favorite $_isFavorite)');
@@ -348,11 +351,11 @@ class _AdsUsersState extends State<AdsUsers> {
                                                         .Favoritefetch(
                                                       id: data.isChanded
                                                           ? data.Ads[index].id
-                                                          .toString()
+                                                              .toString()
                                                           : data
-                                                          .AdsForZero[index]
-                                                          .id
-                                                          .toString(),
+                                                              .AdsForZero[index]
+                                                              .id
+                                                              .toString(),
                                                     );
                                                   });
                                                 },
@@ -374,35 +377,45 @@ class _AdsUsersState extends State<AdsUsers> {
                                           Padding(
                                             padding: EdgeInsets.fromLTRB(
                                                 8.w, 0, 8.w, 0),
-                                            child: Text(
-                                              '${data.isChanded ? data.Ads[index].cost.toString() : data.AdsForZero[index].cost.toString()} ${data.isChanded ? (data.Ads[index].costType.toString() == 1 ? "So'm" : 'USD') : ''}',
-                                              style: TextStyle(
-                                                  color: AppColors.mainColor,
-                                                  fontSize: 24.sp),
+                                            child: SizedBox(
+                                              // width:MediaQuery.of(context).size.width -150.w,
+                                              child: Row(
+                                                children: [
+                                                  Text(
+                                                    '${data.Ads[index].cost.toString()} ${data.Ads[index].costType.toString() == 1 ? "So'm" : 'USD'}/',
+                                                    style: TextStyle(
+                                                        color:
+                                                            AppColors.mainColor,
+                                                        fontSize: 24.sp),
+                                                  ),
+                                                  Text(
+                                                      '${data.Ads[index].costPeriod.toString() == '1' ? 'Kuniga' : data.Ads[index].costPeriod.toString() == '2' ? 'Oyiga' : 'Uzoq muddatga'}',style: TextStyle(color: AppColors.mainColor),),
+                                                ],
+                                              ),
                                             ),
                                           ),
                                         ],
                                       ),
                                       Row(
                                         mainAxisAlignment:
-                                        MainAxisAlignment.spaceBetween,
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
                                           Padding(
                                             padding: const EdgeInsets.all(6.0),
                                             child: SizedBox(
                                               width: MediaQuery.of(context)
-                                                  .size
-                                                  .width -
+                                                      .size
+                                                      .width -
                                                   150.w,
                                               child: Text(
                                                 data.isChanded
                                                     ? data.Ads[index].title
-                                                    .toString()
+                                                        .toString()
                                                     : data
-                                                    .AdsForZero[index].title
-                                                    .toString(),
+                                                        .AdsForZero[index].title
+                                                        .toString(),
                                                 style:
-                                                TextStyle(fontSize: 14.sp),
+                                                    TextStyle(fontSize: 14.sp),
                                               ),
                                             ),
                                           ),
@@ -421,19 +434,19 @@ class _AdsUsersState extends State<AdsUsers> {
                                                 8.w, 0, 8.w, 0),
                                             child: SizedBox(
                                               width: MediaQuery.of(context)
-                                                  .size
-                                                  .width -
+                                                      .size
+                                                      .width -
                                                   150.w,
                                               child: Text(
                                                 data.isChanded
                                                     ? data.Ads[index].address
-                                                    .toString()
-                                                    .toString()
+                                                        .toString()
+                                                        .toString()
                                                     : data.AdsForZero[index]
-                                                    .address
-                                                    .toString(),
+                                                        .address
+                                                        .toString(),
                                                 style:
-                                                TextStyle(fontSize: 10.sp),
+                                                    TextStyle(fontSize: 10.sp),
                                               ),
                                             ),
                                           ),

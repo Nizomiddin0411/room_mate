@@ -53,6 +53,11 @@ class _FavoritAdsState extends State<FavoritAds> {
           children: [
             Consumer<FavoriteProvider>(
               builder: (_, data, __) {
+                if(!data.isMyAds){
+                  return const Align(
+                    alignment: Alignment.center,
+                      child: CircularProgressIndicator());
+                }
                 return ListView.builder(
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
@@ -192,7 +197,7 @@ class _FavoritAdsState extends State<FavoritAds> {
                                                   imageUrl:
                                                       "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.MyAds[index].images!.first.image.toString()}",
                                                   placeholder: (context, url) =>
-                                                      Center(
+                                                      const Center(
                                                           child:
                                                               CircularProgressIndicator()),
                                                   errorWidget:
@@ -538,7 +543,7 @@ class _FavoritAdsState extends State<FavoritAds> {
                                                           ),
                                                         ),
                                                         SizedBox(
-                                                          width: 2.w,
+                                                          width: 3.w,
                                                         ),
                                                         Container(
                                                           width: 32.w,
@@ -546,28 +551,26 @@ class _FavoritAdsState extends State<FavoritAds> {
                                                           color: AppColors
                                                               .backgroundWhite
                                                               .withOpacity(0.7),
-                                                          child: Center(
-                                                            child: IconButton(
-                                                              iconSize: 22.0.sp,
-                                                              icon: const Icon(
-                                                                Icons
-                                                                    .delete_outline,
-                                                                color: AppColors
-                                                                    .error,
-                                                              ),
-                                                              // the method which is called
-                                                              // when button is pressed
-                                                              onPressed:
-                                                                  () async {
-                                                                _showDialog(
-                                                                  adsId: data
-                                                                      .MyAds[
-                                                                          index]
-                                                                      .id,
-                                                                );
-                                                                // await data.getMyAds();
-                                                              },
+                                                          child: InkWell(
+                                                            // iconSize: 22.0.sp,
+                                                             child: const Icon(
+                                                              Icons
+                                                                  .delete_outline,
+                                                              color: AppColors
+                                                                  .error,
                                                             ),
+                                                            // the method which is called
+                                                            // when button is pressed
+                                                            onTap:
+                                                                () async {
+                                                              _showDialog(
+                                                                adsId: data
+                                                                    .MyAds[
+                                                                        index]
+                                                                    .id,
+                                                              );
+                                                              // await data.getMyAds();
+                                                            },
                                                           ),
                                                         )
                                                       ],
@@ -594,24 +597,31 @@ class _FavoritAdsState extends State<FavoritAds> {
                                       Padding(
                                         padding:
                                             EdgeInsets.fromLTRB(8.w, 0, 8.w, 0),
-                                        child: Text(
-                                          data.MyAds[index].cost.toString(),
-                                          style: TextStyle(
-                                              color: AppColors.mainColor,
-                                              fontSize: 24.sp),
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              '${data.MyAds[index].cost.toString()} ${data.MyAds[index].costType.toString() == '1'?"So'm":"USD"}/',
+                                              style: TextStyle(
+                                                  color: AppColors.mainColor,
+                                                  fontSize: 24.sp),),
+                                              Text(
+                                                '${data.MyAds[index].costPeriod.toString() == '1' ? 'Kuniga' : data.MyAds[index].costPeriod.toString() == '2' ? 'Oyiga' : 'Uzoq muddatga'}',style: TextStyle(color: AppColors.mainColor),),
+
+                                          ],
                                         ),
                                       ),
                                       Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
+                                        // mainAxisAlignment:
+                                        //     MainAxisAlignment.spaceBetween,
                                         children: [
+                                          Icon(Icons.location_on,color: AppColors.mainColor,),
                                           Padding(
                                             padding: EdgeInsets.fromLTRB(
                                                 8.w, 0, 8.w, 0),
                                             child: Text(
                                               data.MyAds[index].address
                                                   .toString(),
-                                              style: TextStyle(fontSize: 10.sp),
+                                              style: TextStyle(fontSize: 12.sp),
                                             ),
                                           ),
                                         ],
