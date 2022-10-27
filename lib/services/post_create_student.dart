@@ -45,10 +45,10 @@ class RegistratsiyaStudent {
       print("$Course sheri kursi ");
       print("$District  viloyattt idisi  ");
       print("$UniderId  UniderId idissiiiii   ");
-      print("$HideProfile   number hide   ");
-      print("$District  District District   ");
-      print("$Hidenumber  profile hide   ");
-      print("$Hidenumber  profile hide   ");
+      print("$HideProfile  HideProfile HideProfile   ");
+      print("$Hidenumber  Hidenumber Hidenumber   ");
+
+
       return jsonDecode(data);
     }
   }
