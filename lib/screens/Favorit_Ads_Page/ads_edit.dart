@@ -18,25 +18,25 @@ import '../Google_map/map_screen.dart';
 
 class AdsEdit extends StatefulWidget {
   String? title;
-  String? description; 
-  String? houseType; 
-  String? cost; 
-  String? costType; 
+  String? description;
+  String? houseType;
+  String? cost;
+  String? costType;
   String? countRoom;
-  String? countPeople; 
-  String? liveWithOwner; 
-  String? subway; 
+  String? countPeople;
+  String? liveWithOwner;
+  String? subway;
   String? favorite;
   String? id;
   String? type;
   int? userId;
   String? phoneNumber;
-  String? comfort; 
-  String? inFloor; 
-  String? roommate_count; 
+  String? comfort;
+  String? inFloor;
+  String? roommate_count;
   String? address;
   String? roommate_gender;
-  String? locations; 
+  String? locations;
   List? Image;
   String? universityId;
   String? region;
@@ -156,6 +156,8 @@ class _AdsEditState extends State<AdsEdit> {
   bool? value5;
   bool? value6;
   String? id;
+  bool? otmEnable;
+  bool? genderEnable;
 
   bool value7 = false;
   String? univerName;
@@ -195,29 +197,31 @@ class _AdsEditState extends State<AdsEdit> {
 
   @override
   void initState() {
-
-     Provider.of<RegionProvider>(context, listen: false).getUnivers();
+    Provider.of<RegionProvider>(context, listen: false).getUnivers();
 
     addressController = TextEditingController(
         text: widget.address == null ? '' : widget.address);
     titleController =
         TextEditingController(text: widget.title == null ? '' : widget.title);
-    roommate_gender = widget.roommate_gender == '1' ? "O'g'il bolaga" : widget.roommate_gender == '2' ? 'Qiz bolaga' : "O’gil bollarga / Qizlarga" ;
-      // print(university_id_matter.toString() + "--++");
-         
+    roommate_gender = widget.roommate_gender == '1'
+        ? "O'g'il bolaga"
+        : widget.roommate_gender == '2'
+            ? 'Qiz bolaga'
+            : "O’gil bollarga / Qizlarga";
+    // print(university_id_matter.toString() + "--++");
+
     // university_id_matter == '1' ? value5 = true : value5 = false;
+    genderEnable = widget.gender_matter != '1' ? true : false;
+    otmEnable = widget.university_id_matter != '1' ? true : false;
     value5 = widget.gender_matter == '1' ? true : false;
     value6 = widget.university_id_matter == '1' ? true : false;
     id = widget.subway;
     district_id = widget.district_id;
-    print(id);
     super.initState();
 
     // district_id = widget.region;
 
     // print(district_id.toString() + "------");
-
-    
   }
 
   int id2 = 2;
@@ -232,7 +236,7 @@ class _AdsEditState extends State<AdsEdit> {
 
   @override
   Widget build(BuildContext context) {
-    
+    print(widget.subway.toString() + "bbb");
     final mapLat = context.read<FavoriteProvider>();
     _markers.add(
       Marker(
@@ -317,7 +321,10 @@ class _AdsEditState extends State<AdsEdit> {
                           width: 225.w,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.r),
-                              border: Border.all(color: _colorGender)),
+                              border: Border.all(
+                                  color: !genderEnable!
+                                      ? Colors.grey.shade200
+                                      : _colorGender)),
                           child: DropdownButtonFormField(
                             hint: Padding(
                               padding: EdgeInsets.only(left: 8.w),
@@ -325,12 +332,16 @@ class _AdsEditState extends State<AdsEdit> {
                                 widget.roommate_gender == ''
                                     ? "O’gil bollarga / Qizlarga".tr()
                                     : roommate_gender.toString(),
-                                style: TextStyle(fontSize: 14.sp),
+                                style: TextStyle(
+                                    fontSize: 14.sp, color: Colors.grey),
                               ),
                             ),
                             decoration:
                                 const InputDecoration(border: InputBorder.none),
-                            icon: const Icon(Icons.arrow_drop_down_outlined),
+                            icon: const Icon(
+                              Icons.arrow_drop_down_outlined,
+                              color: Colors.grey,
+                            ),
                             items: gender.map((e) {
                               return DropdownMenuItem<String>(
                                 onTap: () {
@@ -348,22 +359,24 @@ class _AdsEditState extends State<AdsEdit> {
                                 ),
                               );
                             }).toList(),
-                            onChanged: (newValue) {
-                              setState(() {
-                                _GenderOnClick = true;
-                                _colorGender = Colors.grey;
-                              });
-                            },
+                            onChanged: genderEnable!
+                                ? (newValue) {
+                                    setState(() {
+                                      _GenderOnClick = true;
+                                      _colorGender = Colors.grey;
+                                    });
+                                  }
+                                : null,
                           ),
                         ),
                       ],
                     ),
-                    SizedBox(width: 15.w),
+                    SizedBox(width: 10.w),
                     Column(
                       children: [
                         Text(
                           "Ahamiyatsiz",
-                          style: TextStyle(fontSize: 13.sp),
+                          style: TextStyle(fontSize: 14.sp),
                         ),
                         Checkbox(
                           value: value5,
@@ -373,11 +386,12 @@ class _AdsEditState extends State<AdsEdit> {
                               gender_matter = value ? '1' : '2';
 
                               if (value) {
-                                _colorGender = Colors.grey;
-                              }
-                              if (!value && !_GenderOnClick) {
+                                _colorGender = Colors.grey.shade200;
+                                genderEnable = false;
+                              } else {
                                 _colorGender = Colors.red;
                                 _GenderOnClick = false;
+                                genderEnable = true;
                               }
                             });
                           },
@@ -405,19 +419,30 @@ class _AdsEditState extends State<AdsEdit> {
                   child: DropdownButtonFormField(
                     hint: Padding(
                       padding: EdgeInsets.only(left: 8.w),
-                      child: Text(widget.regionName.toString().tr()),
+                      child: Text(
+                        widget.regionName.toString().tr(),
+                        style: TextStyle(
+                            fontSize: 16.sp, color: AppColors.textColor),
+                      ),
                     ),
                     decoration: const InputDecoration(
                       border: InputBorder.none,
                     ),
                     // value: ,
-                    icon: Icon(Icons.arrow_drop_down_outlined),
+                    icon: Icon(
+                      Icons.arrow_drop_down_outlined,
+                      color: Colors.grey,
+                    ),
                     items: data.regions.map((e) {
                       return DropdownMenuItem<String>(
                         value: e.name ?? "",
                         child: Padding(
                           padding: EdgeInsets.only(left: 8.w),
-                          child: Text(e.name.toString()),
+                          child: Text(
+                            e.name.toString(),
+                            style: TextStyle(
+                                fontSize: 16.sp, color: AppColors.textColor),
+                          ),
                         ),
                       );
                     }).toList(),
@@ -454,12 +479,19 @@ class _AdsEditState extends State<AdsEdit> {
                           isExpanded: true,
                           hint: Padding(
                             padding: EdgeInsets.only(left: 8.w),
-                            child: Text(widget.tumanName.toString().tr()),
+                            child: Text(
+                              widget.tumanName.toString().tr(),
+                              style: TextStyle(
+                                  color: AppColors.textColor, fontSize: 16.sp),
+                            ),
                           ),
                           decoration: const InputDecoration(
                             border: InputBorder.none,
                           ),
-                          icon: Icon(Icons.arrow_drop_down_outlined),
+                          icon: Icon(
+                            Icons.arrow_drop_down_outlined,
+                            color: Colors.grey,
+                          ),
                           items: data.districts.map((e) {
                             print(widget.region);
                             if (widget.region == e.id.toString()) {
@@ -575,12 +607,14 @@ class _AdsEditState extends State<AdsEdit> {
                       print(long);
                       double Lat = double.parse(lat).toDouble();
                       double Long = double.parse(long).toDouble();
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => MapEdit(
-                            location: widget.locations,
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => MapEdit(
+                                    location: widget.locations,
                                     long: Long,
                                     lat: Lat,
-                          )));
+                                  )));
                     },
                     child: Container(
                       width: 324.w,
@@ -640,7 +674,7 @@ class _AdsEditState extends State<AdsEdit> {
                         Text(
                           "Metroga yaqinmi ?",
                           style: TextStyle(
-                              fontSize: 18.sp, fontWeight: FontWeight.bold),
+                              fontSize: 16.sp, fontWeight: FontWeight.w500),
                         ),
                       ],
                     ),
@@ -660,7 +694,7 @@ class _AdsEditState extends State<AdsEdit> {
                             ),
                             Text(
                               'Ha',
-                              style: new TextStyle(fontSize: 17.0.sp),
+                              style: new TextStyle(fontSize: 14.0.sp),
                             ),
                             SizedBox(
                               width: 55.w,
@@ -677,7 +711,7 @@ class _AdsEditState extends State<AdsEdit> {
                             Text(
                               "Yo'q",
                               style: new TextStyle(
-                                fontSize: 17.0.sp,
+                                fontSize: 14.0.sp,
                               ),
                             ),
                           ],
@@ -686,6 +720,7 @@ class _AdsEditState extends State<AdsEdit> {
                     )
                   ],
                 ),
+                SizedBox(height: 6.h),
                 Text(
                   "OTM ga yaqinmi ?".tr(),
                   style: TextStyle(
@@ -694,7 +729,7 @@ class _AdsEditState extends State<AdsEdit> {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                SizedBox(height: 4.h),
+                SizedBox(height: 1.h),
                 // Container(
                 //   width: 324.w,
                 //   decoration: BoxDecoration(
@@ -743,12 +778,20 @@ class _AdsEditState extends State<AdsEdit> {
                   children: [
                     Container(
                       width: 240.w,
+                      padding: EdgeInsets.only(left: 8.w),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.r),
-                        border: Border.all(color: _otmColor),
+                        border: Border.all(
+                            color:
+                                !otmEnable! ? Colors.grey.shade200 : _otmColor),
                       ),
                       child: DropdownSearch<String>(
-                        mode: Mode.MENU,
+                        dropdownBuilder: _style,
+                        enabled: otmEnable!,
+                        dropdownSearchDecoration:
+                            InputDecoration(border: InputBorder.none),
+
+                        mode: Mode.BOTTOM_SHEET,
                         items: data.univer.map((e) {
                           // univerName = e.name!;
                           // print(e);
@@ -756,8 +799,6 @@ class _AdsEditState extends State<AdsEdit> {
                               1) {
                             if (widget.universityId == e.id.toString()) {
                               dropDown2 = e.name.toString();
-
-                              print(dropDown2.toString() + "AAAAA");
                             }
 
                             if (dropDown2 == e.name) {
@@ -789,10 +830,10 @@ class _AdsEditState extends State<AdsEdit> {
                           //     .where((element) => element.name == value);
                           // data.getFaculty(selected.last.id!);
                           // data.getFaculty(data.isId!);
-                            dropDown2 = value.toString();
-                            print(dropDown2.toString() + "--------");
-                            _otmOnClick = true;
-                            _otmColor = Colors.grey;
+                          dropDown2 = value.toString();
+                          print(dropDown2.toString() + "--------");
+                          _otmOnClick = true;
+                          _otmColor = Colors.grey;
                         },
                         selectedItem: tr(widget.universityId == null ||
                                 widget.universityId == '0'
@@ -801,24 +842,25 @@ class _AdsEditState extends State<AdsEdit> {
                       ),
                     ),
                     SizedBox(
-                      width: 9.w,
+                      width: 10.w,
                     ),
                     Column(
                       children: [
                         Text(
                           "Ahamiyatsiz",
-                          style: TextStyle(fontSize: 14.sp),
+                          style: TextStyle(
+                              fontSize: 14.sp, color: AppColors.textColor),
                         ),
                         Checkbox(
                           value: value6,
                           onChanged: (bool? value) {
                             setState(() {
-                              value6 = value!;
+                              otmEnable = !value!;
+                              value6 = value;
                               university_id_matter = value ? '1' : '2';
                               if (value) {
-                                _otmColor = Colors.grey;
-                              }
-                              if (!value && !_otmOnClick) {
+                                _otmColor = Colors.grey.shade300;
+                              } else {
                                 _otmColor = Colors.red;
                                 _otmOnClick = false;
                               }
@@ -887,12 +929,16 @@ class _AdsEditState extends State<AdsEdit> {
                                           cost: widget.cost,
                                           cost_period: widget.cost_period,
                                           description: widget.description,
-                                          live_with_owner: widget.live_with_owner,
+                                          live_with_owner:
+                                              widget.live_with_owner,
                                           comfort: widget.comfort,
-                                          utility_electricity: widget.utility_electricity,
+                                          utility_electricity:
+                                              widget.utility_electricity,
                                           unility_gaz: widget.unility_gaz,
-                                          utility_hot_water: widget.utility_hot_water,
-                                          utility_cold_water: widget.utility_cold_water,
+                                          utility_hot_water:
+                                              widget.utility_hot_water,
+                                          utility_cold_water:
+                                              widget.utility_cold_water,
                                           utility_trash: widget.utility_trash,
                                           subway: id.toString(),
                                         )));
@@ -949,5 +995,12 @@ class _AdsEditState extends State<AdsEdit> {
         position: tappadPoint,
       ));
     });
+  }
+
+  Widget _style(BuildContext context, String? selectedItem) {
+    return Text(
+      selectedItem!,
+      style: TextStyle(fontSize: 12.sp),
+    );
   }
 }

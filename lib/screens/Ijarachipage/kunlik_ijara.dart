@@ -154,7 +154,7 @@ class _KunlikIjaraState extends State<KunlikIjara> {
             Consumer<DayProvider>(
               builder: (_, data, __) {
                 if (!data.isChanded) {
-                  return Center(
+                  return const Center(
                     child: CircularProgressIndicator(),
                   );
                 }
@@ -366,11 +366,17 @@ class _KunlikIjaraState extends State<KunlikIjara> {
                                           Padding(
                                             padding: EdgeInsets.fromLTRB(
                                                 8.w, 0, 8.w, 0),
-                                            child: Text(
-                                              '${data.Ads[index].cost.toString()} ${data.Ads[index].costType.toString() == "1" ? "so'm" : "y.e"}',
-                                              style: TextStyle(
-                                                  color: AppColors.mainColor,
-                                                  fontSize: 24.sp),
+                                            child: Row(
+                                              children: [
+                                                Text(
+                                                  '${data.Ads[index].cost.toString()} ${data.Ads[index].costType.toString() == "1" ? "So'm" : "USD"}/',
+                                                  style: TextStyle(
+                                                      color: AppColors.mainColor,
+                                                      fontSize: 24.sp),
+                                                ),
+                                                Text(
+                                                  '${data.Ads[index].costPeriod.toString() == '1' ? 'Kuniga' : data.Ads[index].costPeriod.toString() == '2' ? 'Oyiga' : 'Uzoq muddatga'}',style: TextStyle(color: AppColors.mainColor),),
+                                              ],
                                             ),
                                           ),
                                         ],
@@ -436,7 +442,7 @@ class _KunlikIjaraState extends State<KunlikIjara> {
             Consumer<DayProvider>(
               builder: (_, data, __) {
                 if (!data.isChanded) {
-                  return Center(
+                  return const Center(
                     child: CircularProgressIndicator(),
                   );
                 }
@@ -672,11 +678,17 @@ class _KunlikIjaraState extends State<KunlikIjara> {
                                           Padding(
                                             padding: EdgeInsets.fromLTRB(
                                                 8.w, 0, 8.w, 0),
-                                            child: Text(
-                                              '${data.AdsForStudent[index].cost.toString()}   ${data.AdsForStudent[index].costType.toString() == "1" ? "so'm" : "y.e"}',
-                                              style: TextStyle(
-                                                  color: AppColors.mainColor,
-                                                  fontSize: 24.sp),
+                                            child: Row(
+                                              children: [
+                                                Text(
+                                                  '${data.AdsForStudent[index].cost.toString()}   ${data.AdsForStudent[index].costType.toString() == "1" ? "So'm" : "USD"}/',
+                                                  style: TextStyle(
+                                                      color: AppColors.mainColor,
+                                                      fontSize: 24.sp),
+                                                ),
+                                                Text(
+                                                  '${data.AdsForStudent[index].costPeriod.toString() == '1' ? 'Kuniga' : data.AdsForStudent[index].costPeriod.toString() == '2' ? 'Oyiga' : 'Uzoq muddatga'}',style: TextStyle(color: AppColors.mainColor),),
+                                              ],
                                             ),
                                           ),
                                         ],

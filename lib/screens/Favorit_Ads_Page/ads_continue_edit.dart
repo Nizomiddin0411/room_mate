@@ -122,6 +122,8 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
   Color _priceColor = Colors.grey;
   bool _priceOnClick = true;
   Color _colorForm = Colors.grey;
+  Color costColor = Colors.black54;
+  Color phoneColor = Colors.black54;
   String? id;
   String? id1;
   String? id2;
@@ -195,9 +197,9 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
     inputcontroller = TextEditingController();
     phoneController = TextEditingController(text: widget.phoneNumber);
     descriptionController = TextEditingController(text: widget.description);
+
     late List<String> haveComfort = widget.comfort!.split(',');
     for (String i in haveComfort) {
-      print(i.toString()+"''''''''''");
       if (i == '1') {
         value1 = true;
       }
@@ -207,6 +209,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
       if (i == '5') value5 = true;
       if (i == '6') value6 = true;
     }
+
     id = widget.live_with_owner;
     id1 = widget.utility_electricity;
     id2 = widget.unility_gaz;
@@ -218,16 +221,13 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
     // } else {
     //   ownerlive = '2';
     // }
-   
+
     super.initState();
   }
 
-  
- 
-
   @override
   Widget build(BuildContext context) {
-    print(widget.roommate_gender.toString() + "geee");
+    print(widget.subway.toString() + "idddda+++");
 
     //  print(id1);
     // print(id2);
@@ -276,6 +276,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                           border: Border.all(color: _phoneNumberColor),
                           borderRadius: BorderRadius.circular(6.r)),
                       child: TextFormField(
+                        style: TextStyle(color: phoneColor, fontSize: 16.sp),
                         inputFormatters: [
                           TextInputMask(
                             mask: '\\+ 999 99 999 99 99',
@@ -292,7 +293,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                         ),
                         onChanged: (e) {
                           setState(() {
-                            print(e.length);
+                            phoneColor = Colors.black87;
                             if (e.length == 18) {
                               _phoneNumberOnClick = true;
                               _phoneNumberColor = Colors.grey;
@@ -643,6 +644,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                       keyboardType: TextInputType.phone,
                       onChanged: (e) {
                         setState(() {
+                          costColor = Colors.black87;
                           if (e.length > 0) {
                             _costTypeOnClick = true;
                             _costTypeColor = Colors.grey;
@@ -653,6 +655,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                         });
                       },
                       controller: costController,
+                      style: TextStyle(color: costColor, fontSize: 16.sp),
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         hintText: "Xonadonni narxini kiriting".tr(),
@@ -788,7 +791,10 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                       children: [
                         Text(
                           "Uy egasi ham yashaydimi ?",
-                          style: TextStyle(fontSize: 17.sp),
+                          style: TextStyle(
+                              color: AppColors.textColor,
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w500),
                         ),
                       ],
                     ),
@@ -805,7 +811,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                         ),
                         Text(
                           'Ha',
-                          style: new TextStyle(fontSize: 17.0.sp),
+                          style: new TextStyle(fontSize: 14.0.sp),
                         ),
                         SizedBox(
                           width: 35.w,
@@ -822,7 +828,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                         Text(
                           "Yo'q",
                           style: new TextStyle(
-                            fontSize: 17.0.sp,
+                            fontSize: 14.0.sp,
                           ),
                         ),
                       ],
@@ -838,7 +844,10 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                       children: [
                         Text(
                           "Kommunal to’lovlarni kim to’laydi ?",
-                          style: TextStyle(fontSize: 17.sp),
+                          style: TextStyle(
+                              color: AppColors.textColor,
+                              fontSize: 16.sp,
+                              fontWeight: FontWeight.w500),
                         ),
                         SizedBox(
                           height: 15.h,
@@ -848,8 +857,10 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                   ],
                 ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
+                    Container(
+                      width: 172.w,
+                    ),
                     Text("Uy egasi"),
                     SizedBox(
                       width: 50.w,
@@ -1011,7 +1022,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                               width: 50.w,
                             ),
                             Radio(
-                              value:'2',
+                              value: '2',
                               groupValue: id5,
                               onChanged: (val) {
                                 setState(() {
@@ -1028,8 +1039,11 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                 Row(
                   children: [
                     Text(
-                      "Quyidagi qulayliklarga ega",
-                      style: TextStyle(color: Colors.blue, fontSize: 18.sp),
+                      "Quyidagi qulayliklarga ega.",
+                      style: TextStyle(
+                          color: AppColors.textColor,
+                          fontSize: 16.sp,
+                          fontWeight: FontWeight.w500),
                     ),
                   ],
                 ),
@@ -1039,7 +1053,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                 Row(
                   children: [
                     Container(
-                      width: 190.w,
+                      width: 228.w,
                       child: Column(
                         children: [
                           Row(
@@ -1161,33 +1175,30 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                     ),
                   ],
                 ),
-                Text(
-                  "Qo’shimcha ma’lumotlar".tr(),
-                  style: TextStyle(
-                    color: AppColors.textColor,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w500,
-                  ),
+                SizedBox(
+                  height: 8.h,
                 ),
-                SizedBox(height: 4.h),
+                Row(
+                  children: [
+                    Text(
+                      "Qo’shimcha ma’lumotlar".tr(),
+                      style: TextStyle(
+                        color: AppColors.textColor,
+                        fontSize: 14.sp,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
+                SizedBox(height: 6.h),
                 Container(
                   width: double.infinity,
                   decoration: BoxDecoration(
-                      border: Border.all(color: _descriptionColor),
+                      border: Border.all(color: Colors.grey),
                       borderRadius: BorderRadius.circular(4.r)),
                   child: Container(
                     padding: EdgeInsets.only(left: 16.w),
                     child: TextFormField(
-                      onChanged: (e) {
-                        if (e.length > 0) {
-                          _descriptionOnClick = true;
-                          _descriptionColor = Colors.grey;
-                        } else {
-                          _descriptionOnClick = false;
-                          _descriptionColor = Colors.red;
-                        }
-                        setState(() {});
-                      },
                       controller: descriptionController,
                       maxLines: 6,
                       decoration: InputDecoration(
@@ -1268,7 +1279,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                           print(
                             '${comfortItems}  texnikalar',
                           );
-                          print('${descriptionController!.text} malumot');
+                          print('${widget.subway} malumot subway');
                           if (cost_type == null) {
                             cost_type = '1';
                           }
@@ -1279,8 +1290,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                               _roomCountOnClick &&
                               _floorsCountOnClick &&
                               _inFloorOnClick &&
-                              _costTypeOnClick &&
-                              _descriptionOnClick) {
+                              _costTypeOnClick) {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
@@ -1319,7 +1329,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                                         description:
                                             descriptionController!.text,
                                         cost_period: price,
-                                        subway: comfortItems,
+                                        subway: widget.subway,
                                       )),
                             );
                           } else {
@@ -1345,9 +1355,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                               if (!_costTypeOnClick) {
                                 _costTypeColor = Colors.red;
                               }
-                              if (!_descriptionOnClick) {
-                                _descriptionColor = Colors.red;
-                              }
+
                               if (!_priceOnClick) {
                                 _priceColor = Colors.red;
                               }

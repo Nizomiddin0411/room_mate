@@ -47,6 +47,11 @@ class _FavoritPageState extends State<FavoritPage> {
           ),
         ),
         body: Consumer<FavoriteProvider>(builder: (_, data, __) {
+          if(!data.isFavorite){
+            return const Align(
+                alignment: Alignment.center,
+                child: CircularProgressIndicator());
+          }
           return SingleChildScrollView(
             child: Column(children: [
               ListView.builder(
@@ -170,7 +175,7 @@ class _FavoritPageState extends State<FavoritPage> {
                                                         "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.Like[index].images!.first.image.toString()}",
                                                     placeholder: (context,
                                                             url) =>
-                                                        Center(child: CircularProgressIndicator()),
+                                                        const Center(child: CircularProgressIndicator()),
                                                     errorWidget:
                                                         (context, url, error) =>
                                                             Image.asset(
@@ -264,7 +269,7 @@ class _FavoritPageState extends State<FavoritPage> {
                                         Padding(
                                           padding: const EdgeInsets.all(6.0),
                                           child: Text(
-                                            '${data.Like[index].title} !!!',
+                                            '${data.Like[index].title.toString()}',
                                             style: TextStyle(fontSize: 18.sp),
                                           ),
                                         ),
@@ -273,11 +278,17 @@ class _FavoritPageState extends State<FavoritPage> {
                                     Padding(
                                       padding:
                                           EdgeInsets.fromLTRB(8.w, 0, 8.w, 0),
-                                      child: Text(
-                                        '${data.Like[index].cost}',
-                                        style: TextStyle(
-                                            color: AppColors.mainColor,
-                                            fontSize: 24.sp),
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            '${data.Like[index].cost} ${data.Like[index].costType.toString()=='1'?"So'm":"USD"}/',
+                                            style: TextStyle(
+                                                color: AppColors.mainColor,
+                                                fontSize: 24.sp),
+                                          ),
+                                          Text(
+                                            '${data.Like[index].costPeriod.toString() == '1' ? 'Kuniga' : data.Like[index].costPeriod.toString() == '2' ? 'Oyiga' : 'Uzoq muddatga'}',style: TextStyle(color: AppColors.mainColor),),
+                                        ],
                                       ),
                                     ),
                                     Row(
@@ -287,9 +298,14 @@ class _FavoritPageState extends State<FavoritPage> {
                                         Padding(
                                           padding: EdgeInsets.fromLTRB(
                                               8.w, 0, 8.w, 0),
-                                          child: Text(
-                                            "${data.Like[index].address}",
-                                            style: TextStyle(fontSize: 10.sp),
+                                          child: Row(
+                                            children: [
+                                              const Icon(Icons.location_on,color: AppColors.mainColor,),
+                                              Text(
+                                                "${data.Like[index].address}",
+                                                style: TextStyle(fontSize: 12.sp),
+                                              ),
+                                            ],
                                           ),
                                         ),
                                       ],
