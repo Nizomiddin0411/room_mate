@@ -329,9 +329,9 @@ class _AdsDetailState extends State<AdsDetail> {
                           widget.locations!.split(',').last.toString();
                       lat = lat.split('(').last.toString();
                       long = long.split(')').first.toString();
-                      print(widget.locations);
-                      print(lat);
-                      print(long);
+                      // print(widget.locations);
+                      // print(lat);
+                      // print(long);
                       double Lat = double.parse(lat).toDouble();
                       double Long = double.parse(long).toDouble();
                       Navigator.push(
@@ -352,10 +352,10 @@ class _AdsDetailState extends State<AdsDetail> {
                         SizedBox(
                           width: 10.w,
                         ),
-                        const Text(
+                         const Text(
                           "Joylashuvni ko'rish",
                           style: TextStyle(color: AppColors.mainColor),
-                        )
+                        ).tr()
                       ],
                     ),
                   ),
@@ -802,7 +802,7 @@ class _AdsDetailState extends State<AdsDetail> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
-                            tr("Metroga yaqinmi?") +
+                            tr("Metroga yaqinmi") +
                                 " ${widget.subway == '1' ? tr('Ha') : tr("Yo'q")}",
                             style: TextStyle(fontSize: 14.sp),
                           ),
@@ -831,7 +831,7 @@ class _AdsDetailState extends State<AdsDetail> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
-                            tr("${widget.houseType == '1' ? 'Kvartira' : 'Xonadon'}") +
+                            tr(widget.houseType == '1' ? 'Kvartira' : 'Xonadon') +
                                 " | ${widget.countRoom} xonali" +
                                 " | ${widget.inFloor}/${widget.floorsCount} etajda",
                             style: TextStyle(fontSize: 14.sp),
@@ -861,8 +861,8 @@ class _AdsDetailState extends State<AdsDetail> {
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
                             tr(widget.type == '1' ? "Uy egasi bilan birga yashshga rozimi:":"Uy egasi birga yashaydimi:") +
-                                "${widget.liveWithOwner == '1' ? ' Ha' : " "
-                                    "Yo'q"}",
+                                (widget.liveWithOwner == '1' ? ' Ha' : " "
+                                    "Yo'q"),
                             style: TextStyle(fontSize: 14.sp),
                           ),
                         )
@@ -928,7 +928,7 @@ class _AdsDetailState extends State<AdsDetail> {
                           child: SizedBox(
                               width: MediaQuery.of(context).size.width - 130.w,
                               child: Text(
-                                "Kommunal to’lovlarni to’laydi  : ${widget.utility_bills == '1' ? 'Uy egasi' : 'Ijarachi'}",
+                                tr("Kommunal to’lovlarni to’laydi")+" : "+"${widget.utility_bills == '1' ? tr('Uy egasi') : tr('Ijarachi')}",
                                 style: TextStyle(fontSize: 14.sp),
                               )),
                         )
@@ -957,7 +957,7 @@ class _AdsDetailState extends State<AdsDetail> {
                           child: SizedBox(
                               width: MediaQuery.of(context).size.width - 130.w,
                               child: Text(
-                                "${widget.cost}/${widget.rentType == '1' ? 'kunlik' : 'oylik'}",
+                                "${widget.cost}/${widget.rentType == '1' ? tr('Kunlik') : tr('Oylik')}",
                                 style: TextStyle(fontSize: 14.sp),
                               )),
                         )

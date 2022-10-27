@@ -248,9 +248,9 @@ class _AdsUsersState extends State<AdsUsers> {
                                         ? CachedNetworkImage(
                                             imageUrl:
                                                 "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.Ads[index].images!.first.image.toString()}",
-                                            placeholder: (context, url) => Center(
+                                            placeholder: (context, url) => const Center(
                                                 child:
-                                                    const CircularProgressIndicator()),
+                                                    CircularProgressIndicator()),
                                             errorWidget:
                                                 (context, url, error) =>
                                                     Image.asset(

@@ -138,10 +138,10 @@ class _ElonlarState extends State<Elonlar> {
               onTap: (String) {},
               tabs: [
                 Tab(
-                  text: tr("Ijarachi kerak"),
+                  child:Text("Ijarachi kerak").tr(),
                 ),
                 Tab(
-                  text: tr("Ijaraga sherik kerak"),
+                  child:Text("Ijaraga sherik kerak").tr(),
                 )
               ],
             ),
@@ -153,8 +153,10 @@ class _ElonlarState extends State<Elonlar> {
           children: [
             Consumer<RegionProvider>(
               builder: (_, data, __) {
-                if(!data.isChanded){
-                  return const Center(child: CircularProgressIndicator(),);
+                if (!data.isChanded) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
                 }
                 return ListView.builder(
                     shrinkWrap: true,
@@ -183,10 +185,6 @@ class _ElonlarState extends State<Elonlar> {
                                       data.Ads[index].region?.name.toString(),
                                   district:
                                       data.Ads[index].district?.name.toString(),
-
-                                  // facultet: data.Ads[index]
-                                  //     .faculty?.name
-                                  //     .toString(),
                                   liveWithOwner:
                                       data.Ads[index].liveWithOwner.toString(),
                                   subway: data.Ads[index].subway.toString(),
@@ -247,8 +245,9 @@ class _ElonlarState extends State<Elonlar> {
                                         ? CachedNetworkImage(
                                             imageUrl:
                                                 "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.Ads[index].images!.first.image.toString()}",
-                                            placeholder: (context, url) =>
-                                                Center(child: CircularProgressIndicator()),
+                                            placeholder: (context, url) => const Center(
+                                                child:
+                                                    CircularProgressIndicator()),
                                             errorWidget:
                                                 (context, url, error) =>
                                                     Image.asset(
@@ -276,13 +275,6 @@ class _ElonlarState extends State<Elonlar> {
                                                     // ColorFilter.mode(Colors.red, BlendMode.colorBurn)
                                                   ),
                                                 )))
-
-                                        // ? Image.asset(
-                                        //     'assets/images/notImage.png',
-                                        //     width: 324.w,
-                                        //     height: 235.h,
-                                        //     fit: BoxFit.cover,
-                                        //   )
                                         : Image.asset(
                                             'assets/images/notImage.png',
                                             width: 324.w,
@@ -378,13 +370,18 @@ class _ElonlarState extends State<Elonlar> {
                                             child: Row(
                                               children: [
                                                 Text(
-                                                  '${ data.Ads[index].cost.toString()} ${ data.Ads[index].costType.toString() == '1' ? "So'm" : 'USD'}/',
+                                                  '${data.Ads[index].cost.toString()} ${data.Ads[index].costType.toString() == '1' ? "So'm" : 'USD'}/',
                                                   style: TextStyle(
-                                                      color: AppColors.mainColor,
+                                                      color:
+                                                          AppColors.mainColor,
                                                       fontSize: 24.sp),
                                                 ),
                                                 Text(
-                                                  '${data.Ads[index].costPeriod.toString() == '1' ? 'Kuniga' : data.Ads[index].costPeriod.toString() == '2' ? 'Oyiga' : 'Uzoq muddatga'}',style: TextStyle(color: AppColors.mainColor),),
+                                                  data.Ads[index].costPeriod.toString() == '1' ? 'Kuniga' : data.Ads[index].costPeriod.toString() == '2' ? 'Oyiga' : 'Uzoq muddatga',
+                                                  style: const TextStyle(
+                                                      color:
+                                                          AppColors.mainColor),
+                                                ),
                                               ],
                                             ),
                                           ),
@@ -462,8 +459,10 @@ class _ElonlarState extends State<Elonlar> {
             ),
             Consumer<RegionProvider>(
               builder: (_, data, __) {
-                if(!data.isChanded){
-                  return Center(child: CircularProgressIndicator(),);
+                if (!data.isChanded) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
                 }
                 return ListView.builder(
                     shrinkWrap: true,
@@ -531,13 +530,17 @@ class _ElonlarState extends State<Elonlar> {
                                           district: data.AdsForStudent[index]
                                               .district?.name
                                               .toString(),
-                                          stay_region: data
-                                              .AdsForStudent[index].stayRegion?.name.toString(),
+                                          stay_region: data.AdsForStudent[index]
+                                              .stayRegion?.name
+                                              .toString(),
                                           stay_university: data
                                               .AdsForStudent[index]
-                                              .stayUniversity?.name.toString(),
+                                              .stayUniversity
+                                              ?.name
+                                              .toString(),
                                           region: data
-                                              .AdsForStudent[index].region?.name.toString(),
+                                              .AdsForStudent[index].region?.name
+                                              .toString(),
                                           rentType: data
                                               .AdsForStudent[index].rentType
                                               .toString(),
@@ -546,7 +549,8 @@ class _ElonlarState extends State<Elonlar> {
                                               .toString(),
                                           createData: data
                                               .AdsForStudent[index].createdAt,
-                                          comfort: data.AdsForStudent[index].comfort,
+                                          comfort:
+                                              data.AdsForStudent[index].comfort,
                                           // data.AdsForStudent[index].comfort,
                                           inFloor: data
                                               .AdsForStudent[index].inFloor
@@ -583,8 +587,9 @@ class _ElonlarState extends State<Elonlar> {
                                         ? CachedNetworkImage(
                                             imageUrl:
                                                 "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.AdsForStudent[index].images!.first.image.toString()}",
-                                            placeholder: (context, url) =>
-                                                Center(child: const CircularProgressIndicator()),
+                                            placeholder: (context, url) => const Center(
+                                                child:
+                                                    CircularProgressIndicator()),
                                             errorWidget:
                                                 (context, url, error) =>
                                                     Image.asset(
@@ -613,12 +618,6 @@ class _ElonlarState extends State<Elonlar> {
                                                   ),
                                                 )))
 
-                                        // Image.asset(
-                                        //    'assets/images/notImage.png',
-                                        //    width: 324.w,
-                                        //    height: 235.h,
-                                        //    fit: BoxFit.cover,
-                                        //  )
                                         : Image.asset(
                                             'assets/images/notImage.png',
                                             width: 324.w,
@@ -703,11 +702,16 @@ class _ElonlarState extends State<Elonlar> {
                                                 Text(
                                                   '${data.AdsForStudent[index].cost.toString()} ${data.AdsForStudent[index].costType.toString() == 1 ? "So'm" : 'USD'}/',
                                                   style: TextStyle(
-                                                      color: AppColors.mainColor,
+                                                      color:
+                                                          AppColors.mainColor,
                                                       fontSize: 24.sp),
                                                 ),
                                                 Text(
-                                                  '${data.AdsForStudent[index].costPeriod.toString() == '1' ? 'Kuniga' : data.AdsForStudent[index].costPeriod.toString() == '2' ? 'Oyiga' : 'Uzoq muddatga'}',style: TextStyle(color: AppColors.mainColor),),
+                                                  data.AdsForStudent[index].costPeriod.toString() == '1' ? 'Kuniga' : data.AdsForStudent[index].costPeriod.toString() == '2' ? 'Oyiga' : 'Uzoq muddatga',
+                                                  style: const TextStyle(
+                                                      color:
+                                                          AppColors.mainColor),
+                                                ),
                                               ],
                                             ),
                                           ),
