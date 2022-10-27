@@ -365,19 +365,22 @@ class _OylikIjaraState extends State<OylikIjara> {
                                   padding: const EdgeInsets.all(8.0),
                                   child: Column(
                                     children: [
-                                      Row(
-                                        children: [
-                                          Padding(
-                                            padding: const EdgeInsets.fromLTRB(
-                                                8, 0, 8, 0),
-                                            child: Text(
-                                              '${data.Ads[index].cost.toString()} ${data.Ads[index].costType.toString() == "1" ? "so'm" : "y.e"}',
+                                      Padding(
+                                        padding:  EdgeInsets.fromLTRB(
+                                            8.w, 0, 8.w, 0),
+                                        child: Row(
+                                          children: [
+                                            Text(
+                                              '${data.Ads[index].cost.toString()} ${data.Ads[index].costType.toString() == "1" ? "So'm" : "USD"}/',
                                               style: TextStyle(
                                                   color: AppColors.mainColor,
                                                   fontSize: 24.sp),
                                             ),
-                                          ),
-                                        ],
+                                            Text(
+                                              '${data.Ads[index].costPeriod.toString() == '1' ? 'Kuniga' : data.Ads[index].costPeriod.toString() == '2' ? 'Oyiga' : 'Uzoq muddatga'}',style: TextStyle(color: AppColors.mainColor),),
+                                          ],
+                                        ),
+
                                       ),
                                       Row(
                                         mainAxisAlignment:
@@ -676,11 +679,17 @@ class _OylikIjaraState extends State<OylikIjara> {
                                           Padding(
                                             padding: EdgeInsets.fromLTRB(
                                                 8.w, 0, 8.w, 0),
-                                            child: Text(
-                                              '${data.AdsForStudent[index].cost.toString()} ${data.AdsForStudent[index].costType.toString() == "1" ? "so'm" : "y.e"}',
-                                              style: TextStyle(
-                                                  color: AppColors.mainColor,
-                                                  fontSize: 24.sp),
+                                            child: Row(
+                                              children: [
+                                                Text(
+                                                  '${data.AdsForStudent[index].cost.toString()} ${data.AdsForStudent[index].costType.toString() == "1" ? "So'm" : "USD"}/',
+                                                  style: TextStyle(
+                                                      color: AppColors.mainColor,
+                                                      fontSize: 24.sp),
+                                                ),
+                                                Text(
+                                                  '${data.AdsForStudent[index].costPeriod.toString() == '1' ? 'Kuniga' : data.AdsForStudent[index].costPeriod.toString() == '2' ? 'Oyiga' : 'Uzoq muddatga'}',style: TextStyle(color: AppColors.mainColor),),
+                                              ],
                                             ),
                                           ),
                                         ],

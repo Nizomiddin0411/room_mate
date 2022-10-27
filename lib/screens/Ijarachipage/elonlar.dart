@@ -375,11 +375,17 @@ class _ElonlarState extends State<Elonlar> {
                                           Padding(
                                             padding: EdgeInsets.fromLTRB(
                                                 8.w, 0, 8.w, 0),
-                                            child: Text(
-                                              '${data.isChanded ? data.Ads[index].cost.toString() : data.AdsForZero[index].cost.toString()} ${data.isChanded ? (data.Ads[index].costType.toString() == 1 ? "So'm" : 'USD') : ''}',
-                                              style: TextStyle(
-                                                  color: AppColors.mainColor,
-                                                  fontSize: 24.sp),
+                                            child: Row(
+                                              children: [
+                                                Text(
+                                                  '${ data.Ads[index].cost.toString()} ${ data.Ads[index].costType.toString() == '1' ? "So'm" : 'USD'}/',
+                                                  style: TextStyle(
+                                                      color: AppColors.mainColor,
+                                                      fontSize: 24.sp),
+                                                ),
+                                                Text(
+                                                  '${data.Ads[index].costPeriod.toString() == '1' ? 'Kuniga' : data.Ads[index].costPeriod.toString() == '2' ? 'Oyiga' : 'Uzoq muddatga'}',style: TextStyle(color: AppColors.mainColor),),
+                                              ],
                                             ),
                                           ),
                                         ],
@@ -578,7 +584,7 @@ class _ElonlarState extends State<Elonlar> {
                                             imageUrl:
                                                 "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.AdsForStudent[index].images!.first.image.toString()}",
                                             placeholder: (context, url) =>
-                                                Center(child: CircularProgressIndicator()),
+                                                Center(child: const CircularProgressIndicator()),
                                             errorWidget:
                                                 (context, url, error) =>
                                                     Image.asset(
@@ -692,11 +698,17 @@ class _ElonlarState extends State<Elonlar> {
                                           Padding(
                                             padding: EdgeInsets.fromLTRB(
                                                 8.w, 0, 8.w, 0),
-                                            child: Text(
-                                              '${data.AdsForStudent[index].cost.toString()} ${data.AdsForStudent[index].costType.toString() == 1 ? "so'm" : 'y.e'}',
-                                              style: TextStyle(
-                                                  color: AppColors.mainColor,
-                                                  fontSize: 24.sp),
+                                            child: Row(
+                                              children: [
+                                                Text(
+                                                  '${data.AdsForStudent[index].cost.toString()} ${data.AdsForStudent[index].costType.toString() == 1 ? "So'm" : 'USD'}/',
+                                                  style: TextStyle(
+                                                      color: AppColors.mainColor,
+                                                      fontSize: 24.sp),
+                                                ),
+                                                Text(
+                                                  '${data.AdsForStudent[index].costPeriod.toString() == '1' ? 'Kuniga' : data.AdsForStudent[index].costPeriod.toString() == '2' ? 'Oyiga' : 'Uzoq muddatga'}',style: TextStyle(color: AppColors.mainColor),),
+                                              ],
                                             ),
                                           ),
                                         ],
