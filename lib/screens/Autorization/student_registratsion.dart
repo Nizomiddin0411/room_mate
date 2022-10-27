@@ -168,10 +168,10 @@ class _StudentUserState extends State<StudentUser> {
                             height: 10,
                           ),
                           Checkbox(
-                            value: this.hidenumber,
+                            value: hidenumber,
                             onChanged: (bool? value) {
                               setState(() {
-                                this.hidenumber = value!;
+                                hidenumber = value!;
                               });
                             },
                           ),
@@ -812,10 +812,10 @@ class _StudentUserState extends State<StudentUser> {
                       Course: Course.toString(),
                       HideProfile: isSwitched.toString() == 'Ha' ? '1' : '2',
                       District: data.districtid.toString(),
-                      Phonenumber: '${hidenumber ? 0 :nameController.text}',
+                      Phonenumber: nameController.text,
                       gender: dropdownvalue.toString() == 'Erkak' ? '1' : '2',
                       UniderId: university_id.toString(),
-                      Hidenumber: hidenumber.toString() == 'Ha' ? '1' : '2',
+                      Hidenumber: '${hidenumber ? 1 : 2}',
                     );
                     Navigator.push(
                         context,

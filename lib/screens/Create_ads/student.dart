@@ -76,6 +76,7 @@ class _StudentState extends State<Student> {
     '5',
   ];
   bool otmEnable = true;
+  bool region = true;
   final List<String> genderItems = ["O'g'il bola ", "Qiz bola"];
   var kindOfMoment = [
     'kunlik',
@@ -208,8 +209,8 @@ class _StudentState extends State<Student> {
                         icon: Icon(Icons.arrow_drop_down_outlined),
                         items: data.regions.map((e) {
                           return DropdownMenuItem<String>(
-                            enabled: otmEnable,
                             onTap: () {
+                              region = false;
                               data.viloyatid = e.id.toString();
                             },
                             value: e.name ?? "",
@@ -244,7 +245,7 @@ class _StudentState extends State<Student> {
                           value: regionsvalue,
                           onChanged: (bool? value) {
                             setState(() {
-
+                              region=regionsvalue.toString() as bool;
                               regionsvalue = value!;
                             });
                           },
@@ -332,7 +333,7 @@ class _StudentState extends State<Student> {
                           value: value6,
                           onChanged: (bool? value) {
                             setState(() {
-                              otmEnable = value6!;
+                              otmEnable = value6.toString() as bool;
                               value6 = value!;
                               univervalue = value ? '1' : '2';
                               if (value) {
