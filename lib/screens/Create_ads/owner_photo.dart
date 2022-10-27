@@ -98,6 +98,8 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
   int sum = 0;
   @override
   void initState() {
+    print(widget.comfort);
+
     // TODO: implement initState
     super.initState();
     FileList.insert(0, File(''));

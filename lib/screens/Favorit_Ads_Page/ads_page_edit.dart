@@ -121,7 +121,7 @@ class _AdspageEditState extends State<AdspageEdit>
           ),
         ),
         elevation: 0,
-        title: Text("E’lon yaratish".tr(),
+        title: Text("E’lonni o'zgartirish".tr(),
             style: TextStyle(color: AppColors.mainColor)),
         centerTitle: true,
       ),

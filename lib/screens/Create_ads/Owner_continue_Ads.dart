@@ -18,12 +18,12 @@ class OwnerHouseInfo extends StatefulWidget {
   String? location;
 
   OwnerHouseInfo({
+    required this.id,
     required this.location,
     required this.titleController,
     required this.roommate_gender,
     required this.gender_matter,
     required this.district_id,
-    required this.id,
     required this.addressController,
     required this.university_id,
     required this.university_id_matter,

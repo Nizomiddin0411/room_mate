@@ -101,7 +101,7 @@ class UserCreateAds {
         )
       ]);
     }
-
+print(subway.toString() + "subway.....");
     request.fields.addAll({'title': '${titleController}',});
     request.fields.addAll({'roommate_gender': '${roommate_gender}',});
     request.fields.addAll({'gender_matter': '${gender_matter}',});

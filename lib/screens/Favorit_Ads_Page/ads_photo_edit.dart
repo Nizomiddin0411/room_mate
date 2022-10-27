@@ -580,7 +580,7 @@ class _AdsPhotoEditState extends State<AdsPhotoEdit> {
                               }
                             },
                             child: Text(
-                              "Keyi ".tr(),
+                              "Keyingi".tr(),
                               style: TextStyle(
                                   fontSize: 20.sp, fontWeight: FontWeight.w500),
                             ),

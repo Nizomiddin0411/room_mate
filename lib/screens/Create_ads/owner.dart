@@ -707,11 +707,11 @@ class _OwnerState extends State<Owner> {
                               fontWeight: FontWeight.w500),
                         ),
                         Checkbox(
-                          value: this.value6,
+                          value: value6,
                           onChanged: (bool? value) {
                             setState(() {
                               otmEnable = !value!;
-                              this.value6 = value;
+                              value6 = value;
                               university_id_matter = value ? '1' : '2';
                               if (value) {
                                 _otmColor = Colors.grey.shade300;
@@ -836,7 +836,7 @@ class _OwnerState extends State<Owner> {
    Widget _style(BuildContext context, String? selectedItem) {
         return Text(
           selectedItem!,
-          style: TextStyle(fontSize: 14.sp),
+          style: TextStyle(fontSize: 12.sp),
         );
       }
 
