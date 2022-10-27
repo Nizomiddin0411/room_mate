@@ -63,4 +63,19 @@ Future<void>  getTuman(int id)async{
     fakultet = await GetFacultyService().fetchFaculty(id);
     _setFakultet(true);
   }
+  Future<void> getAds(
+      String course,
+      String Fakultetid,
+      String Regionid,
+      String Districtid,
+      ) async {
+    _settuman(false);
+    ads = await SearchingStudentsService().fetchSearchingStudents(
+      course: course,
+      faculty_id: Fakultetid,
+      birth_region_id: Regionid,
+      birth_district_id: Districtid,
+    );
+    _settuman(true);
+  }
 }

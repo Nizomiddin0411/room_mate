@@ -39,6 +39,7 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
     String? Region;
     String? District;
     String? Fakultet;
+    String Course = '';
     return Scaffold(
       backgroundColor: AppColors.backgroundWhite,
       appBar: AppBar(
@@ -381,6 +382,7 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                           validator: (value) =>
                               value == value ? 'Kursni tanlang' : null,
                           onChanged: (String? value) {
+                            Course = value.toString();
                             setState(() {});
                           },
                         ),
@@ -403,6 +405,8 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                                   side: BorderSide(color: Colors.red)),
                               primary: Colors.white),
                           onPressed: () {
+                            provider.getAds('1', '1','1','1');
+                            Navigator.pop(context);
                             Navigator.pop(context);
                           },
                           child: Text(
@@ -426,6 +430,7 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                                   borderRadius: BorderRadius.circular(10.r)),
                               primary: AppColors.buttonLinear),
                           onPressed: () {
+                            provider.getAds(Course, widget.id, provider.RegionId, provider.DistrickId);
                             Navigator.pop(context);
                           },
                           child: Text(

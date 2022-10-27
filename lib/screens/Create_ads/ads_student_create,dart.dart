@@ -85,9 +85,9 @@ class _Student2State extends State<Student2> {
   int ownerlive = 0;
   int costcommunal = 0;
   var pricetype = [
-    "kunlik",
-    "oylik",
-    "kishi boshiga"
+    "Kuniga",
+    "Oyiga",
+    "Kishi boshiga"
   ];
   String ?cost_type;
   final TextEditingController _textEditingController = TextEditingController();
@@ -99,7 +99,7 @@ class _Student2State extends State<Student2> {
     '5-kurs',
     '6-kurs',
   ];
-  var housecost = ["oylik", "kunlik", "uzoq muddatga"];
+  var housecost = ["Oylik", "Kunlik", "Uzoq muddatga"];
   final List<String> genderItems = ["O'g'il bola ", "Qiz bola"];
   var kvartira = [
     'Kvartira',
@@ -177,6 +177,7 @@ class _Student2State extends State<Student2> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: Colors.white,
         leading: IconButton(
           icon: Icon(
@@ -187,11 +188,9 @@ class _Student2State extends State<Student2> {
             Navigator.pop(context);
           },
         ),
-        title: Center(
-          child: Text(
-            "Elon yaratish",
-            style: TextStyle(color: AppColors.mainColor),
-          ),
+        title: Text(
+          "Elon yaratish",
+          style: TextStyle(color: AppColors.mainColor),
         ),
       ),
       body: SingleChildScrollView(
@@ -219,7 +218,8 @@ class _Student2State extends State<Student2> {
                     child: DropdownButtonFormField(
                       hint: Padding(
                         padding: EdgeInsets.only(left: 8.w),
-                        child: Text("Viloyatni  / Shaharni tanlang".tr()),
+                        child: Text("Viloyatni  / Shaharni tanlang", style:
+                        TextStyle(fontSize: 14.sp, color: Colors.grey),),
                       ),
                       decoration: InputDecoration(border: InputBorder.none),
                       // value: ,
@@ -254,7 +254,11 @@ class _Student2State extends State<Student2> {
                   Column(
                     children: [
                       Row(
-                        children: [Text("Tuman")],
+                        children: [Text("Tuman",  style: TextStyle(
+                          color: AppColors.textColor,
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w500,
+                        ) ,)],
                       )
                     ],
                   ),
@@ -309,7 +313,8 @@ class _Student2State extends State<Student2> {
                         borderRadius: BorderRadius.circular(10.r)),
                     child: DropdownButtonFormField(
                         isExpanded: true,
-                        hint: Text("Tumanni tanlang".tr()),
+                        hint: Text("Tumanni tanlang", style:
+                        TextStyle(fontSize: 14.sp, color: Colors.grey),),
                         decoration: const InputDecoration(
                             isDense: true,
                             border: OutlineInputBorder(),
@@ -323,7 +328,11 @@ class _Student2State extends State<Student2> {
                     children: [
                       Row(
                         children: [
-                          Text("Manzil").tr(),
+                          Text("Manzil", style: TextStyle(
+                            color: AppColors.textColor,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w500,
+                          ),).tr(),
                         ],
                       ),
                       SizedBox(
@@ -333,13 +342,17 @@ class _Student2State extends State<Student2> {
                         children: [
                           Container(
                             height: 55.h,
-                            width: 324.w,
+                            width: 322.w,
                             child: TextFormField(
                               keyboardType: TextInputType.text,
                               controller: addressController,
                               decoration: InputDecoration(
-                                border: OutlineInputBorder(),
-                                labelText: "Kvartal , Uy , Xonadon ".tr(),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(10.r)
+                                ),
+                                labelText: "Kvartal , Uy , Xonadon ",
+                                hintStyle:
+                                TextStyle(fontSize: 14.sp, color: Colors.grey),
                               ),
                             ),
                           ),
@@ -361,7 +374,11 @@ class _Student2State extends State<Student2> {
                         child: Card(
                           shadowColor: AppColors.buttonLinear,
                           child: ListTile(
-                            title: Text("Geojoylashishni kiriting").tr(),
+                            title: Text("Geojoylashishni kiriting", style: TextStyle(
+                              color: AppColors.textColor,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w500,
+                            ),).tr(),
                             leading: Icon(
                               Icons.location_on,
                               color: AppColors.mainColor,
@@ -412,7 +429,11 @@ class _Student2State extends State<Student2> {
                         children: [
                           Text(
                             "Metroga yaqinmi ?",
-                            style: TextStyle(fontSize: 15.sp),
+                            style: TextStyle(
+                              color: AppColors.textColor,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
                         ],
                       ),
@@ -488,7 +509,11 @@ class _Student2State extends State<Student2> {
                                 padding: EdgeInsets.only(left: 8.w),
                                 child: Text(
                                   "Kvartira , Xovli".tr(),
-                                  style: TextStyle(fontSize: 14.sp),
+                                  style: TextStyle(
+                                    color: AppColors.textColor,
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 ),
                               ),
                               decoration: const InputDecoration(
@@ -540,7 +565,11 @@ class _Student2State extends State<Student2> {
                                 padding: EdgeInsets.only(left: 8.w),
                                 child: Text(
                                   "Xonalar soni".tr(),
-                                  style: TextStyle(fontSize: 14.sp),
+                                  style: TextStyle(
+                                    color: AppColors.textColor,
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 ),
                               ),
                               decoration: const InputDecoration(
@@ -595,7 +624,11 @@ class _Student2State extends State<Student2> {
                                 padding: EdgeInsets.only(left: 8.w),
                                 child: Text(
                                   "Qavatlar soni ".tr(),
-                                  style: TextStyle(fontSize: 14.sp),
+                                    style: TextStyle(
+                                      color: AppColors.textColor,
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeight.w500,
+                                    )
                                 ),
                               ),
                               decoration: const InputDecoration(
@@ -646,7 +679,11 @@ class _Student2State extends State<Student2> {
                                 padding: EdgeInsets.only(left: 8.w),
                                 child: Text(
                                   "Nechinchi qavatda".tr(),
-                                  style: TextStyle(fontSize: 14.sp),
+                                  style: TextStyle(
+                                    color: AppColors.textColor,
+                                    fontSize: 14.sp,
+                                    fontWeight: FontWeight.w500,
+                                  ),
                                 ),
                               ),
                               decoration: const InputDecoration(
@@ -792,7 +829,11 @@ class _Student2State extends State<Student2> {
                                 padding: EdgeInsets.only(left: 8.w),
                                 child: Text(
                                   "Turlari".tr(),
-                                  style: TextStyle(fontSize: 14.sp),
+                                    style: TextStyle(
+                                      color: AppColors.textColor,
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeight.w500,
+                                    )
                                 ),
                               ),
                               decoration:
@@ -835,7 +876,7 @@ class _Student2State extends State<Student2> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Narxning turlanishi".tr(),
+                            "Ijara muddatini turi".tr(),
                             style: TextStyle(
                               color: AppColors.textColor,
                               fontSize: 14.sp,
@@ -852,8 +893,12 @@ class _Student2State extends State<Student2> {
                               hint: Padding(
                                 padding: EdgeInsets.only(left: 8.w),
                                 child: Text(
-                                  "Turlari".tr(),
-                                  style: TextStyle(fontSize: 14.sp),
+                                  "Kunlik / Oylik ".tr(),
+                                    style: TextStyle(
+                                      color: AppColors.textColor,
+                                      fontSize: 14.sp,
+                                      fontWeight: FontWeight.w500,
+                                    )
                                 ),
                               ),
                               decoration: const InputDecoration(
@@ -895,7 +940,11 @@ class _Student2State extends State<Student2> {
                         children: [
                           Text(
                             "Uy egasi ham yashaydimi ?",
-                            style: TextStyle(fontSize: 15.sp),
+                              style: TextStyle(
+                                color: AppColors.textColor,
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w500,
+                              )
                           ),
                         ],
                       ),
@@ -950,7 +999,11 @@ class _Student2State extends State<Student2> {
                         children: [
                           Text(
                             "Kommunal to’lovlarini kim to’laydi ?",
-                            style: TextStyle(fontSize: 15.sp),
+                              style: TextStyle(
+                                color: AppColors.textColor,
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w500,
+                              )
                           ),
                         ],
                       ),
@@ -1002,8 +1055,13 @@ class _Student2State extends State<Student2> {
                   Row(
                     children: [
                       Text(
-                        "Quyidagi qulayliklarga ega",
-                        style: TextStyle(color: Colors.blue, fontSize: 18.sp),
+                        "Quyidagi qulayliklarga ega.",
+                          style: TextStyle
+                            (
+                            color: AppColors.textColor,
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w500,
+                          )
                       ),
                     ],
                   ),
@@ -1017,7 +1075,11 @@ class _Student2State extends State<Student2> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text("Wi - fi "),
+                            Text("Wi - fi ",style: TextStyle(
+                              color: AppColors.textColor,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w500,
+                            )),
                             Checkbox(
                               value: this.value1,
                               onChanged: (bool? value) {
@@ -1036,7 +1098,11 @@ class _Student2State extends State<Student2> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text("TV"),
+                            Text("TV",style: TextStyle(
+                              color: AppColors.textColor,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w500,
+                            )),
                             Checkbox(
                               value: this.value2,
                               onChanged: (bool? value) {
@@ -1055,7 +1121,11 @@ class _Student2State extends State<Student2> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text("Muzlatgich"),
+                            Text("Muzlatgich",style: TextStyle(
+                              color: AppColors.textColor,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w500,
+                            )),
                             Checkbox(
                               value: this.value3,
                               onChanged: (bool? value) {
@@ -1074,7 +1144,11 @@ class _Student2State extends State<Student2> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text("Kir yuvish mashinasi"),
+                            Text("Kir yuvish mashinasi",style: TextStyle(
+                              color: AppColors.textColor,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w500,
+                            )),
                             Checkbox(
                               value: value4,
                               onChanged: (bool? value) {
@@ -1093,7 +1167,11 @@ class _Student2State extends State<Student2> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text("Konditsioner"),
+                            Text("Konditsioner",style: TextStyle(
+                              color: AppColors.textColor,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w500,
+                            )),
                             Checkbox(
                               value: value5,
                               onChanged: (bool? value) {
@@ -1112,7 +1190,11 @@ class _Student2State extends State<Student2> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text("Chang yutgich"),
+                            Text("Chang yutgich",style: TextStyle(
+                              color: AppColors.textColor,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w500,
+                            )),
                             Checkbox(
                               value: value6,
                               onChanged: (bool? value) {

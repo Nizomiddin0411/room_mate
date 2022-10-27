@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import 'package:talaba_uy/chat/chat_page.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
 import 'package:talaba_uy/provider/search_universitet_provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../provider/universitet_provider.dart';
 import 'result _filtr_search.universitety.dart';
@@ -28,8 +29,8 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
   void initState() {
     super.initState();
     Provider.of<UniversitetProvider>(context, listen: false).getViloyat();
-    Provider.of<SearchUniversitet>(context, listen: false)
-        .getAds(widget.name, "0", "0", "0");
+    Provider.of<UniversitetProvider>(context, listen: false)
+        .getAds('0', "0", "0", "0");
   }
 
   @override
@@ -52,12 +53,12 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
           },
         ),
       ),
-      body: SingleChildScrollView(child: Consumer<SearchUniversitet>(
+      body: SingleChildScrollView(child: Consumer<UniversitetProvider>(
         builder: (_, provider, __) {
           return Column(
             children: [
               Padding(
-                padding:  EdgeInsets.fromLTRB(15.w, 15.h, 15.w, 0.h),
+                padding: EdgeInsets.fromLTRB(15.w, 15.h, 15.w, 0.h),
                 child: Column(
                   children: [
                     Row(
@@ -138,7 +139,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                     ),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.start,
-                      children:  [
+                      children: [
                         Text(
                           "Sherik izlayotgan",
                           style: TextStyle(
@@ -158,37 +159,38 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                   shrinkWrap: true,
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: provider.ads.length,
-                  itemBuilder: (BuildContext context, int index) {
+                  itemBuilder: (context, index) {
                     return Padding(
                       padding: const EdgeInsets.all(12.0),
-                      child: SingleChildScrollView(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Container(
-                              width: 324.w,
-                              height: 170.h,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(6.r),
-                                  color: AppColors.secondBackgroud),
-                              child: Padding(
-                                padding: const EdgeInsets.all(5.0),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Container(
+                            width: 324.w,
+                            height: 195.h,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(6.r),
+                                color: AppColors.secondBackgroud),
+                            child: Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: SingleChildScrollView(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text("${provider.ads[index].fullName}"),
+                                    Text(
+                                        "${provider.ads[index].fullName.toString()}"),
                                     SizedBox(
                                       height: 10.h,
                                     ),
                                     Text(
-                                        "Axbarot xavfsizligi ta’lim yo’nalishi"),
+                                        "${provider.ads[index].faculty?.name.toString()}"),
                                     SizedBox(
                                       height: 10.h,
                                     ),
                                     Row(
                                       children: [
                                         Text(
-                                          "Talaba : ${provider.ads[index].gender.toString() == '1' ? tr("jinsi") + ":" + tr("Erkak") : tr("jinsi") + ":" + tr("Ayol")}",
+                                          "Talaba : ${provider.ads[index].gender.toString() == '1' ?  tr("jinsi") + ":" + tr("Erkak") : tr("jinsi") + ":" + tr("Ayol")}",
                                           style: TextStyle(fontSize: 15.sp),
                                         ),
                                         SizedBox(
@@ -201,16 +203,21 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                     SizedBox(
                                       height: 10.h,
                                     ),
-                                    Row(
+                                    Column(
                                       children: [
                                         Text(
-                                          "${provider.ads[index].birthRegionId} / Shahar: Xorazm ",
+                                          " Viloyat:${provider.ads[index].birthRegion?.name.toString()} ",
                                           style: TextStyle(fontSize: 15.sp),
                                         ),
-                                        SizedBox(
-                                          width: 45.w,
-                                        ),
-                                        Text("Tuman : Xonqo"),
+                                      ],
+                                    ),
+                                    SizedBox(
+                                      height: 10,
+                                    ),
+                                    Column(
+                                      children: [
+                                        Text(
+                                            "Tuman :${provider.ads[index].birthDistrict?.name.toString()}"),
                                       ],
                                     ),
                                     SizedBox(
@@ -232,7 +239,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                                 child: Row(
                                                   children: [
                                                     const Icon(
-                                                      Icons.email,
+                                                      Icons.email_outlined,
                                                       color: Colors.blue,
                                                     ),
                                                     SizedBox(
@@ -280,11 +287,24 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                                       SizedBox(
                                                         width: 10.w,
                                                       ),
-                                                      Text(
-                                                        "${provider.ads[index].phone}",
-                                                        style: const TextStyle(
-                                                            color:
-                                                                Colors.black),
+                                                      InkWell(
+                                                        onTap: () async {
+                                                          final Uri launchUri =
+                                                              Uri(
+                                                            scheme: 'tel',
+                                                            path:
+                                                                "+${provider.ads[index].phone.toString()}",
+                                                          );
+                                                          await launchUrl(
+                                                              launchUri);
+                                                        },
+                                                        child: Text(
+                                                          "+${provider.ads[index].phone.toString()}",
+                                                          style:
+                                                              const TextStyle(
+                                                                  color: Colors
+                                                                      .black),
+                                                        ),
                                                       )
                                                     ],
                                                   ),
@@ -305,8 +325,8 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                 ),
                               ),
                             ),
-                          ],
-                        ),
+                          ),
+                        ],
                       ),
                     );
                   })

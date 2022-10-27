@@ -41,31 +41,31 @@ class Createimage extends StatefulWidget {
 
   Createimage(
       {Key? key,
-        required this.numbervalue,
-        required this.house,
-        required this.phoneController,
-        required this.addinformation,
-        required this.univervalue,
-        required this.universiteteid,
-        required this.viloyatvalue,
-        required this.viloyatidisi,
-        required this.titlecontroller1,
-        required this.titlecount,
-        required this.titleGendor,
-        required this.comfort,
-        required this.metro,
-        required this.costlivekomunal,
-        required this.countroom,
-        required this.housetype,
-        required this.howcountroom,
-        required this.narxnituri,
-        required this.addressController,
-        required this.housecount,
-        required this.ownerlive,
-        required this.costController,
-        required this.rent_type,
-        required this.cost_period,
-        required this.location})
+      required this.numbervalue,
+      required this.house,
+      required this.phoneController,
+      required this.addinformation,
+      required this.univervalue,
+      required this.universiteteid,
+      required this.viloyatvalue,
+      required this.viloyatidisi,
+      required this.titlecontroller1,
+      required this.titlecount,
+      required this.titleGendor,
+      required this.comfort,
+      required this.metro,
+      required this.costlivekomunal,
+      required this.countroom,
+      required this.housetype,
+      required this.howcountroom,
+      required this.narxnituri,
+      required this.addressController,
+      required this.housecount,
+      required this.ownerlive,
+      required this.costController,
+      required this.rent_type,
+      required this.cost_period,
+      required this.location})
       : super(key: key);
 
   @override
@@ -208,13 +208,13 @@ class _CreateimageState extends State<Createimage> {
                                     color: Colors.black12,
                                     child: file == null
                                         ? Icon(
-                                      Icons.camera_alt_sharp,
-                                      size: 50.sp,
-                                    )
+                                            Icons.camera_alt_sharp,
+                                            size: 50.sp,
+                                          )
                                         : Image.file(
-                                      file!,
-                                      fit: BoxFit.cover,
-                                    ),
+                                            file!,
+                                            fit: BoxFit.cover,
+                                          ),
                                   ),
                                 ),
                               ),
@@ -236,151 +236,155 @@ class _CreateimageState extends State<Createimage> {
                     // SizedBox(
                     //   height: 20.h,
                     // ),
-                    Container(
-                      height: 240.h,
-                      child: ListView(children:
-                      //     List.generate(imageFileList!.length, (index) {
-                      //   return Column(children: <Widget>[
-                      //     Expanded(
-                      //       child: Stack(
-                      //         children: [
-                      //           Container(
-                      //             width: 200.w,
-                      //             height: 150.h,
-                      //             decoration: BoxDecoration(
-                      //               borderRadius:
-                      //                   BorderRadius.circular(10.r),
-                      //             ),
-                      //             child: ClipRRect(
-                      //               child: Image.file(
-                      //                 File(imageFileList![index].path),
-                      //                 fit: BoxFit.cover,
-                      //               ),
-                      //               borderRadius:
-                      //                   BorderRadius.circular(10.r),
-                      //             ),
-                      //           ),
-                      //           GestureDetector(
-                      //             onTap: () {
-                      //               setState(() {
-                      //                 // imageFileList!.removeAt(index);
-                      //               });
-                      //               print(
-                      //                   "Nizomiddin${imageFileList!.length}");
-                      //             },
-                      //             child: Padding(
-                      //               padding: EdgeInsets.fromLTRB(
-                      //                   60.w, 0, 0, 50.h),
-                      //               child: Align(
-                      //                 alignment: Alignment.topRight,
-                      //                 child: Container(
-                      //                     height: 20.h,
-                      //                     width: 24.w,
-                      //                     decoration: BoxDecoration(
-                      //                         color: Colors.red,
-                      //                         borderRadius:
-                      //                             BorderRadius.circular(
-                      //                                 15.r)),
-                      //                     child: Icon(Icons.remove,
-                      //                         color: Colors.white,
-                      //                         size: 20.sp)),
-                      //               ),
-                      //             ),
-                      //           ),
-                      //         ],
-                      //       ),
-                      //     ),
-                      //   ]);
-                      // }),
-                      [
-                        SizedBox(
-                          height: 10.h,
-                        ),
-                        FileList.isNotEmpty
-                            ? Row(
+                    ConstrainedBox(
+                      constraints: BoxConstraints(maxHeight: 50, maxWidth: 400),
+                      child: Container(
+                        height: 240.h,
+                        child: ListView(
                           children:
-                          List.generate(FileList.length, (index) {
-                            return (FileExist[index])
-                                ?
-                            // width: 120.w,
-                            Container(
-                              width: 108.w,
-                              height: 116.h,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.all(
-                                  Radius.circular(
-                                    12.r,
-                                  ),
-                                ),
-                              ),
-                              child: Stack(
-                                children: [
-                                  Expanded(
-                                    child: Container(
-                                      margin:
-                                      EdgeInsets.symmetric(
-                                          horizontal: 8.w,
-                                          vertical: 8.h),
-                                      decoration: BoxDecoration(
-                                        // border: Border.all(
-                                        //     color:
-                                        //         Colors.),
-                                        boxShadow: [
-                                          BoxShadow(
-                                              offset: Offset(
-                                                  .1.w, .1.h),
-                                              color: Colors.grey
-                                                  .shade400,
-                                              blurRadius: 6),
-                                        ],
-                                        borderRadius:
-                                        BorderRadius
-                                            .circular(
-                                          10.r,
-                                        ),
-                                        image: DecorationImage(
-                                          fit: BoxFit.cover,
-                                          image: FileImage(
-                                              FileList[index]),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  Positioned(
-                                    right: 0,
-                                    child: GestureDetector(
-                                      child: Container(
-                                        width: 18.w,
-                                        height: 18.h,
-                                        decoration: BoxDecoration(
-                                            borderRadius:
-                                            BorderRadius
-                                                .circular(
-                                                4.r),
-                                            color: Colors
-                                                .red[400]),
-                                        child: Icon(
-                                          Icons.remove,
-                                          size: 15.sp,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                      onTap: () async {
-                                        FileList.removeAt(
-                                            index);
-                                        // index -= 4;
-                                        sum -= 1;
-                                        setState(() {});
-                                      },
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ): Container();
-                          }),
-                        )
-                            : const SizedBox(),
-                      ]),
+                              //     List.generate(imageFileList!.length, (index) {
+                              //   return Column(children: <Widget>[
+                              //     Expanded(
+                              //       child: Stack(
+                              //         children: [
+                              //           Container(
+                              //             width: 200.w,
+                              //             height: 150.h,
+                              //             decoration: BoxDecoration(
+                              //               borderRadius:
+                              //                   BorderRadius.circular(10.r),
+                              //             ),
+                              //             child: ClipRRect(
+                              //               child: Image.file(
+                              //                 File(imageFileList![index].path),
+                              //                 fit: BoxFit.cover,
+                              //               ),
+                              //               borderRadius:
+                              //                   BorderRadius.circular(10.r),
+                              //             ),
+                              //           ),
+                              //           GestureDetector(
+                              //             onTap: () {
+                              //               setState(() {
+                              //                 // imageFileList!.removeAt(index);
+                              //               });
+                              //               print(
+                              //                   "Nizomiddin${imageFileList!.length}");
+                              //             },
+                              //             child: Padding(
+                              //               padding: EdgeInsets.fromLTRB(
+                              //                   60.w, 0, 0, 50.h),
+                              //               child: Align(
+                              //                 alignment: Alignment.topRight,
+                              //                 child: Container(
+                              //                     height: 20.h,
+                              //                     width: 24.w,
+                              //                     decoration: BoxDecoration(
+                              //                         color: Colors.red,
+                              //                         borderRadius:
+                              //                             BorderRadius.circular(
+                              //                                 15.r)),
+                              //                     child: Icon(Icons.remove,
+                              //                         color: Colors.white,
+                              //                         size: 20.sp)),
+                              //               ),
+                              //             ),
+                              //           ),
+                              //         ],
+                              //       ),
+                              //     ),
+                              //   ]);
+                              // }),
+                              [
+                            SizedBox(
+                              height: 10.h,
+                            ),
+                            FileList.isNotEmpty
+                                ? Row(
+                                    children:
+                                        List.generate(FileList.length, (index) {
+                                      return (FileExist[index])
+                                          ?
+                                          // width: 120.w,
+                                          Container(
+                                              width: 108.w,
+                                              height: 116.h,
+                                              decoration: BoxDecoration(
+                                                borderRadius: BorderRadius.all(
+                                                  Radius.circular(
+                                                    12.r,
+                                                  ),
+                                                ),
+                                              ),
+                                              child: Stack(
+                                                children: [
+                                                  Container(
+                                                    margin:
+                                                        EdgeInsets.symmetric(
+                                                            horizontal: 8.w,
+                                                            vertical: 8.h),
+                                                    decoration: BoxDecoration(
+                                                      // border: Border.all(
+                                                      //     color:
+                                                      //         Colors.),
+                                                      boxShadow: [
+                                                        BoxShadow(
+                                                            offset: Offset(
+                                                                .1.w, .1.h),
+                                                            color: Colors.grey
+                                                                .shade400,
+                                                            blurRadius: 6),
+                                                      ],
+                                                      borderRadius:
+                                                          BorderRadius
+                                                              .circular(
+                                                        10.r,
+                                                      ),
+                                                      image: DecorationImage(
+                                                        fit: BoxFit.cover,
+                                                        image: FileImage(
+                                                            FileList[index]),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  Positioned(
+                                                    right: 0,
+                                                    child: GestureDetector(
+                                                      child: Container(
+                                                        width: 18.w,
+                                                        height: 18.h,
+                                                        decoration: BoxDecoration(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        4.r),
+                                                            color: Colors
+                                                                .red[400]),
+                                                        child: Icon(
+                                                          Icons.remove,
+                                                          size: 15.sp,
+                                                          color: Colors.white,
+                                                        ),
+                                                      ),
+                                                      onTap: () async {
+                                                        FileList.removeAt(
+                                                            index);
+                                                        // index -= 4;
+                                                        sum -= 1;
+                                                        setState(() {});
+                                                      },
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            )
+                                          : Container();
+                                    }),
+                                  )
+                                : const SizedBox(),
+                          ],
+                        ),
+                      ),
                     ),
                   ]),
                   Container(
@@ -419,9 +423,10 @@ class _CreateimageState extends State<Createimage> {
                             comfort: widget.comfort,
                             renttype: widget.rent_type,
                             cost_period: widget.cost_period,
-                            file1:  FileExist[0] ? FileList[0] : FileList[3],
+                            file1: FileExist[0] ? FileList[0] : FileList[3],
                             file2: FileExist[1] ? FileList[1] : FileList[4],
-                            file3: FileExist[2] ? FileList[2] : FileList[5],);
+                            file3: FileExist[2] ? FileList[2] : FileList[5],
+                          );
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -516,4 +521,3 @@ class _CreateimageState extends State<Createimage> {
     });
   }
 }
-

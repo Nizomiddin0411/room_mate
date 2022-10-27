@@ -21,7 +21,7 @@ class SearchUniversitet extends ChangeNotifier {
   List<GetRegionModel> Viloyat = [];
   List<GetDistrictModel> tumanlar = [];
 
-  List<SearchingStudents> ads = [];
+
   String defaultvalue1 = 'Tumanni tanlang';
   String RegionId = '';
   String query = '0';
@@ -66,21 +66,21 @@ class SearchUniversitet extends ChangeNotifier {
     setChange(true);
   }
 
-  Future<void> getAds(
-    String id,
-    String Fakultetid,
-    String Regionid,
-    String Districtid,
-  ) async {
-    _settuman(false);
-    ads = await SearchingStudentsService().fetchSearchingStudents(
-      univerid: id,
-      faculty_id: Fakultetid,
-      birth_region_id: Regionid,
-      birth_district_id: Districtid,
-    );
-    _settuman(true);
-  }
+  // Future<void> getAds(
+  //   String course,
+  //   String Fakultetid,
+  //   String Regionid,
+  //   String Districtid,
+  // ) async {
+  //   _settuman(false);
+  //   ads = await SearchingStudentsService().fetchSearchingStudents(
+  //     course: course,
+  //     faculty_id: Fakultetid,
+  //     birth_region_id: Regionid,
+  //     birth_district_id: Districtid,
+  //   );
+  //   _settuman(true);
+  // }
 
   Future<void> getFakultet(int id) async {
     searchfakultet = await GetFacultyService().fetchFaculty(id);

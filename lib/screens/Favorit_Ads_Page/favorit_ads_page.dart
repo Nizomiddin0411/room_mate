@@ -219,43 +219,45 @@ class _FavoritAdsState extends State<FavoritAds> {
                                                   fit: BoxFit.cover,
                                                 ),
                                           Positioned(
-                                              child: Padding(
-                                            padding: EdgeInsets.all(8.0.w),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                Container(
-                                                  width: 112.w,
-                                                  height: 24.h,
-                                                  decoration: BoxDecoration(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            2.r),
-                                                    color: AppColors.iconColor,
+                                            child: Padding(
+                                              padding: EdgeInsets.all(8.0.w),
+                                              child: Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Container(
+                                                    width: 112.w,
+                                                    height: 24.h,
+                                                    decoration: BoxDecoration(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              2.r),
+                                                      color:
+                                                          AppColors.iconColor,
+                                                    ),
+                                                    child: Center(
+                                                        child: Text(
+                                                      data.MyAds[index]
+                                                          .createdAt!
+                                                          .replaceRange(
+                                                              data
+                                                                      .MyAds[
+                                                                          index]
+                                                                      .createdAt!
+                                                                      .length -
+                                                                  3,
+                                                              data
+                                                                  .MyAds[index]
+                                                                  .createdAt!
+                                                                  .length,
+                                                              ''),
+                                                      style: const TextStyle(
+                                                          color: AppColors
+                                                              .backgroundWhite),
+                                                    )),
                                                   ),
-                                                  child: Center(
-                                                      child: Text(
-                                                    data.MyAds[index].createdAt!
-                                                        .replaceRange(
-                                                            data
-                                                                    .MyAds[
-                                                                        index]
-                                                                    .createdAt!
-                                                                    .length -
-                                                                3,
-                                                            data
-                                                                .MyAds[index]
-                                                                .createdAt!
-                                                                .length,
-                                                            ''),
-                                                    style: const TextStyle(
-                                                        color: AppColors
-                                                            .backgroundWhite),
-                                                  )),
-                                                ),
-                                                Padding(
+                                                  Padding(
                                                     padding:
                                                         EdgeInsets.fromLTRB(
                                                             1.w, 0, 8.w, 0),
@@ -569,12 +571,14 @@ class _FavoritAdsState extends State<FavoritAds> {
                                                               },
                                                             ),
                                                           ),
-                                                        )
+                                                        ),
                                                       ],
-                                                    ))
-                                              ],
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
                                             ),
-                                          ))
+                                          ),
                                         ],
                                       ),
                                       Row(
