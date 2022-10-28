@@ -158,6 +158,9 @@ class _ElonlarState extends State<Elonlar> {
                     child: CircularProgressIndicator(),
                   );
                 }
+                if(data.Ads.isEmpty){
+                  return Center(child: Text("Ma'lumot yo'q"),);
+                }
                 return ListView.builder(
                     shrinkWrap: true,
                     itemCount: data.Ads.length,
@@ -463,6 +466,9 @@ class _ElonlarState extends State<Elonlar> {
                   return const Center(
                     child: CircularProgressIndicator(),
                   );
+                }
+                if(data.AdsForStudent.isEmpty){
+                  return Center(child: Text("Ma'lumot yo'q"),);
                 }
                 return ListView.builder(
                     shrinkWrap: true,
