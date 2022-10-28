@@ -290,7 +290,7 @@ class _AdsDetailState extends State<AdsDetail> {
                       Padding(
                         padding: EdgeInsets.fromLTRB(12.w, 12.h, 12.w, 0),
                         child: Text(
-                          '${widget.cost} ${widget.costTayp == '1' ? "So'm" : 'USD'}/${widget.rentType == '1' ? 'kunlik' : 'oylik'}',
+                          '${widget.cost} ${widget.costTayp == '1' ? "So'm" : 'USD'}/${widget.rentType == '1' ? tr('Kunlik') : tr('Oylik')}',
                           style: TextStyle(
                               fontSize: 24.sp, color: AppColors.mainColor),
                         ),
@@ -861,8 +861,8 @@ class _AdsDetailState extends State<AdsDetail> {
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
                             tr(widget.type == '1' ? "Uy egasi bilan birga yashshga rozimi:":"Uy egasi birga yashaydimi:") +
-                                (widget.liveWithOwner == '1' ? ' Ha' : " "
-                                    "Yo'q"),
+                                (widget.liveWithOwner == '1' ? tr('Ha') :
+                                    tr("Yo'q")),
                             style: TextStyle(fontSize: 14.sp),
                           ),
                         )

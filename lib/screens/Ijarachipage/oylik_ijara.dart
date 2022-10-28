@@ -378,12 +378,12 @@ class _OylikIjaraState extends State<OylikIjara> {
                                               data.Ads[index].costPeriod
                                                           .toString() ==
                                                       '1'
-                                                  ? 'Kuniga'
+                                                  ? tr('Kunlik')
                                                   : data.Ads[index].costPeriod
                                                               .toString() ==
                                                           '2'
-                                                      ? 'Oyiga'
-                                                      : 'Uzoq muddatga',
+                                                      ? tr('Oylik')
+                                                      : tr('Uzoq muddatga'),
                                               style: const TextStyle(
                                                   color: AppColors.mainColor),
                                             ),
@@ -703,14 +703,14 @@ class _OylikIjaraState extends State<OylikIjara> {
                                                               .costPeriod
                                                               .toString() ==
                                                           '1'
-                                                      ? 'Kuniga'
+                                                      ? tr('Kunlik')
                                                       : data.AdsForStudent[index]
                                                                   .costPeriod
                                                                   .toString() ==
                                                               '2'
-                                                          ? 'Oyiga'
-                                                          : 'Uzoq muddatga',
-                                                  style: TextStyle(
+                                                          ? tr('Oylik')
+                                                          : tr('Uzoq muddatga'),
+                                                  style: const TextStyle(
                                                       color:
                                                           AppColors.mainColor),
                                                 ),

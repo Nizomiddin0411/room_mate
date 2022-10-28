@@ -380,7 +380,7 @@ class _ElonlarState extends State<Elonlar> {
                                                       fontSize: 24.sp),
                                                 ),
                                                 Text(
-                                                  data.Ads[index].costPeriod.toString() == '1' ? 'Kuniga' : data.Ads[index].costPeriod.toString() == '2' ? 'Oyiga' : 'Uzoq muddatga',
+                                                  data.Ads[index].costPeriod.toString() == '1' ? tr('Kunlik') : data.Ads[index].costPeriod.toString() == '2' ? tr('Oylik') : tr('Uzoq muddatga'),
                                                   style: const TextStyle(
                                                       color:
                                                           AppColors.mainColor),
@@ -713,7 +713,7 @@ class _ElonlarState extends State<Elonlar> {
                                                       fontSize: 24.sp),
                                                 ),
                                                 Text(
-                                                  data.AdsForStudent[index].costPeriod.toString() == '1' ? 'Kuniga' : data.AdsForStudent[index].costPeriod.toString() == '2' ? 'Oyiga' : 'Uzoq muddatga',
+                                                  data.AdsForStudent[index].costPeriod.toString() == '1' ? tr('Kunlik') : data.AdsForStudent[index].costPeriod.toString() == '2' ? tr('Oylik') : tr('Uzoq muddatga'),
                                                   style: const TextStyle(
                                                       color:
                                                           AppColors.mainColor),
