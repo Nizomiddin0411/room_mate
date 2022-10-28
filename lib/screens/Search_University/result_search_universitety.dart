@@ -33,6 +33,8 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
         .getAds('0', "0", "0", "0");
   }
 
+   String? checknumber;
+   String? checkhidenumber;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -160,6 +162,8 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: provider.ads.length,
                   itemBuilder: (context, index) {
+                    checknumber=provider.ads[index].phone;
+                    checkhidenumber=provider.ads[index].hidePhone.toString();
                     return Padding(
                       padding: const EdgeInsets.all(12.0),
                       child: Column(
@@ -265,7 +269,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                           ),
                                         ),
                                         SizedBox(
-                                          width: 20.w,
+                                          width: 35 .w,
                                         ),
                                         InkWell(
                                             onTap: () {},
@@ -274,7 +278,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                                   0, 0, 7.w, 0),
                                               child: Container(
                                                 height: 42.h,
-                                                width: 187.w,
+                                                width: 150.w,
                                                 child: Padding(
                                                   padding: EdgeInsets.fromLTRB(
                                                       5.w, 0, 5.w, 0),
@@ -299,7 +303,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                                               launchUri);
                                                         },
                                                         child: Text(
-                                                          "+${provider.ads[index].phone.toString()}",
+                                                          checkhidenumber == '2' ? checknumber.toString() : '***********',
                                                           style:
                                                               const TextStyle(
                                                                   color: Colors

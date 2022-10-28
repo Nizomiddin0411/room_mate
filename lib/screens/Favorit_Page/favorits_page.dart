@@ -47,7 +47,7 @@ class _FavoritPageState extends State<FavoritPage> {
           ),
         ),
         body: Consumer<FavoriteProvider>(builder: (_, data, __) {
-          if(!data.isFavorite){
+          if (!data.isFavorite) {
             return const Align(
                 alignment: Alignment.center,
                 child: CircularProgressIndicator());
@@ -138,7 +138,8 @@ class _FavoritPageState extends State<FavoritPage> {
                                               createData: data
                                                   .Like[index].createdAt
                                                   .toString(),
-                                              comfort: data.Like[index].comfort.toString(),
+                                              comfort: data.Like[index].comfort
+                                                  .toString(),
                                               // data.Like[index].comfort,
                                               inFloor: data.Like[index].inFloor
                                                   .toString(),
@@ -151,7 +152,8 @@ class _FavoritPageState extends State<FavoritPage> {
                                                   .Like[index].roommateGender
                                                   .toString(),
                                               Image: data.Like[index].images,
-                                              locations: data.Like[index].location,
+                                              locations:
+                                                  data.Like[index].location,
                                             )));
 
                                 print(data.Like[index].id.toString() +
@@ -168,37 +170,36 @@ class _FavoritPageState extends State<FavoritPage> {
                                   children: [
                                     Stack(
                                       children: [
-
-                                             data.Like[index].images!.isNotEmpty
-                                                ? CachedNetworkImage(
-                                                    imageUrl:
-                                                        "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.Like[index].images!.first.image.toString()}",
-                                                    placeholder: (context,
-                                                            url) =>
-                                                        const Center(child: CircularProgressIndicator()),
-                                                    errorWidget:
-                                                        (context, url, error) =>
-                                                            Image.asset(
-                                                      'assets/images/notImage.png',
-                                                    ),
+                                        data.Like[index].images!.isNotEmpty
+                                            ? CachedNetworkImage(
+                                                imageUrl:
+                                                    "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.Like[index].images!.first.image.toString()}",
+                                                placeholder: (context, url) =>
+                                                    const Center(
+                                                        child:
+                                                            CircularProgressIndicator()),
+                                                errorWidget:
+                                                    (context, url, error) =>
+                                                        Image.asset(
+                                                  'assets/images/notImage.png',
+                                                ),
+                                                width: 324.w,
+                                                height: 235.h,
+                                                fit: BoxFit.cover,
+                                              )
+                                            : data.Like[index].images!.isEmpty
+                                                ? Image.asset(
+                                                    'assets/images/notImage.png',
                                                     width: 324.w,
                                                     height: 235.h,
                                                     fit: BoxFit.cover,
                                                   )
-                                                : data.Like[index]
-                                                        .images!.isEmpty
-                                                    ? Image.asset(
-                                                        'assets/images/notImage.png',
-                                                        width: 324.w,
-                                                        height: 235.h,
-                                                        fit: BoxFit.cover,
-                                                      )
-                                                    : Image.asset(
-                                                        'assets/images/notImage.png',
-                                                        width: 324.w,
-                                                        height: 235.h,
-                                                        fit: BoxFit.cover,
-                                                      ),
+                                                : Image.asset(
+                                                    'assets/images/notImage.png',
+                                                    width: 324.w,
+                                                    height: 235.h,
+                                                    fit: BoxFit.cover,
+                                                  ),
                                         Positioned(
                                             child: Padding(
                                           padding: const EdgeInsets.all(8.0),
@@ -215,14 +216,14 @@ class _FavoritPageState extends State<FavoritPage> {
                                                           2.r),
                                                   color: AppColors.iconColor,
                                                 ),
-                                                child:  Center(
+                                                child: Center(
                                                     child: Text(
-                                                      data.Like[index].createdAt!
-                                                          .replaceRange(
+                                                  data.Like[index].createdAt!
+                                                      .replaceRange(
                                                           data
-                                                              .Like[index]
-                                                              .createdAt!
-                                                              .length -
+                                                                  .Like[index]
+                                                                  .createdAt!
+                                                                  .length -
                                                               3,
                                                           data
                                                               .Like[index]
@@ -281,13 +282,16 @@ class _FavoritPageState extends State<FavoritPage> {
                                       child: Row(
                                         children: [
                                           Text(
-                                            '${data.Like[index].cost} ${data.Like[index].costType.toString()=='1'?"So'm":"USD"}/',
+                                            '${data.Like[index].cost} ${data.Like[index].costType.toString() == '1' ? "So'm" : "USD"}/',
                                             style: TextStyle(
                                                 color: AppColors.mainColor,
                                                 fontSize: 24.sp),
                                           ),
                                           Text(
-                                            '${data.Like[index].costPeriod.toString() == '1' ? 'Kuniga' : data.Like[index].costPeriod.toString() == '2' ? 'Oyiga' : 'Uzoq muddatga'}',style: TextStyle(color: AppColors.mainColor),),
+                                            '${data.Like[index].costPeriod.toString() == '1' ? 'Kuniga' : data.Like[index].costPeriod.toString() == '2' ? 'Oyiga' : 'Uzoq muddatga'}',
+                                            style: TextStyle(
+                                                color: AppColors.mainColor),
+                                          ),
                                         ],
                                       ),
                                     ),
@@ -300,10 +304,14 @@ class _FavoritPageState extends State<FavoritPage> {
                                               8.w, 0, 8.w, 0),
                                           child: Row(
                                             children: [
-                                              const Icon(Icons.location_on,color: AppColors.mainColor,),
+                                              const Icon(
+                                                Icons.location_on,
+                                                color: AppColors.mainColor,
+                                              ),
                                               Text(
                                                 "${data.Like[index].address}",
-                                                style: TextStyle(fontSize: 12.sp),
+                                                style:
+                                                    TextStyle(fontSize: 12.sp),
                                               ),
                                             ],
                                           ),
