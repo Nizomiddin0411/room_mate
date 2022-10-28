@@ -33,7 +33,6 @@ class _OylikIjaraState extends State<OylikIjara> {
           '0',
           '0',
           '0',
-          // '0',
         )
         .asStream();
     Provider.of<MonthProvider>(context, listen: false)
@@ -159,6 +158,9 @@ class _OylikIjaraState extends State<OylikIjara> {
                     child: CircularProgressIndicator(),
                   );
                 }
+                if(data.Ads.isEmpty){
+                  return const Center(child: Text("Ma'lumot yo'q"),);
+                }
                 return ListView.builder(
                     shrinkWrap: true,
                     itemCount: data.Ads.length,
@@ -240,7 +242,8 @@ class _OylikIjaraState extends State<OylikIjara> {
                                               .toString(),
                                           rentType: data.Ads[index].rentType
                                               .toString(),
-                                          comfort: data.Ads[index].comfort.toString(),
+                                          comfort: data.Ads[index].comfort
+                                              .toString(),
                                           // data.Ads[index].comfort,
                                           createData: data.Ads[index].createdAt
                                               .toString(),
@@ -264,7 +267,9 @@ class _OylikIjaraState extends State<OylikIjara> {
                                             imageUrl:
                                                 "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.Ads[index].images!.first.image.toString()}",
                                             placeholder: (context, url) =>
-                                                const Center(child: CircularProgressIndicator()),
+                                                const Center(
+                                                    child:
+                                                        CircularProgressIndicator()),
                                             errorWidget:
                                                 (context, url, error) =>
                                                     Image.asset(
@@ -292,13 +297,6 @@ class _OylikIjaraState extends State<OylikIjara> {
                                                     // ColorFilter.mode(Colors.red, BlendMode.colorBurn)
                                                   ),
                                                 )))
-
-                                        // ? Image.asset(
-                                        //     'assets/images/notImage.png',
-                                        //     width: 324.w,
-                                        //     height: 235.h,
-                                        //     fit: BoxFit.cover,
-                                        //   )
                                         : Image.asset(
                                             'assets/images/notImage.png',
                                             width: 324.w,
@@ -366,8 +364,8 @@ class _OylikIjaraState extends State<OylikIjara> {
                                   child: Column(
                                     children: [
                                       Padding(
-                                        padding:  EdgeInsets.fromLTRB(
-                                            8.w, 0, 8.w, 0),
+                                        padding:
+                                            EdgeInsets.fromLTRB(8.w, 0, 8.w, 0),
                                         child: Row(
                                           children: [
                                             Text(
@@ -377,10 +375,20 @@ class _OylikIjaraState extends State<OylikIjara> {
                                                   fontSize: 24.sp),
                                             ),
                                             Text(
-                                              '${data.Ads[index].costPeriod.toString() == '1' ? 'Kuniga' : data.Ads[index].costPeriod.toString() == '2' ? 'Oyiga' : 'Uzoq muddatga'}',style: TextStyle(color: AppColors.mainColor),),
+                                              data.Ads[index].costPeriod
+                                                          .toString() ==
+                                                      '1'
+                                                  ? 'Kuniga'
+                                                  : data.Ads[index].costPeriod
+                                                              .toString() ==
+                                                          '2'
+                                                      ? 'Oyiga'
+                                                      : 'Uzoq muddatga',
+                                              style: const TextStyle(
+                                                  color: AppColors.mainColor),
+                                            ),
                                           ],
                                         ),
-
                                       ),
                                       Row(
                                         mainAxisAlignment:
@@ -443,6 +451,11 @@ class _OylikIjaraState extends State<OylikIjara> {
                 if (!data.isChanded) {
                   return const Center(
                     child: CircularProgressIndicator(),
+                  );
+                }
+                if (data.AdsForStudent.isEmpty) {
+                  return const Center(
+                    child: Text("Ma'lumot yo'q"),
                   );
                 }
                 return ListView.builder(
@@ -529,7 +542,9 @@ class _OylikIjaraState extends State<OylikIjara> {
                                               .toString(),
                                           createData: data
                                               .AdsForStudent[index].createdAt,
-                                          comfort: data.AdsForStudent[index].comfort.toString(),
+                                          comfort: data
+                                              .AdsForStudent[index].comfort
+                                              .toString(),
                                           // data.AdsForStudent[index].comfort,
                                           inFloor: data
                                               .AdsForStudent[index].inFloor
@@ -566,7 +581,9 @@ class _OylikIjaraState extends State<OylikIjara> {
                                             imageUrl:
                                                 "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.AdsForStudent[index].images!.first.image.toString()}",
                                             placeholder: (context, url) =>
-                                                Center(child: CircularProgressIndicator()),
+                                                const Center(
+                                                    child:
+                                                        CircularProgressIndicator()),
                                             errorWidget:
                                                 (context, url, error) =>
                                                     Image.asset(
@@ -594,13 +611,6 @@ class _OylikIjaraState extends State<OylikIjara> {
                                                     // ColorFilter.mode(Colors.red, BlendMode.colorBurn)
                                                   ),
                                                 )))
-                                        //
-                                        // ? Image.asset(
-                                        //     'assets/images/notImage.png',
-                                        //     width: 324.w,
-                                        //     height: 235.h,
-                                        //     fit: BoxFit.cover,
-                                        //   )
                                         : Image.asset(
                                             'assets/images/notImage.png',
                                             width: 324.w,
@@ -684,11 +694,26 @@ class _OylikIjaraState extends State<OylikIjara> {
                                                 Text(
                                                   '${data.AdsForStudent[index].cost.toString()} ${data.AdsForStudent[index].costType.toString() == "1" ? "So'm" : "USD"}/',
                                                   style: TextStyle(
-                                                      color: AppColors.mainColor,
+                                                      color:
+                                                          AppColors.mainColor,
                                                       fontSize: 24.sp),
                                                 ),
                                                 Text(
-                                                  '${data.AdsForStudent[index].costPeriod.toString() == '1' ? 'Kuniga' : data.AdsForStudent[index].costPeriod.toString() == '2' ? 'Oyiga' : 'Uzoq muddatga'}',style: TextStyle(color: AppColors.mainColor),),
+                                                  data.AdsForStudent[index]
+                                                              .costPeriod
+                                                              .toString() ==
+                                                          '1'
+                                                      ? 'Kuniga'
+                                                      : data.AdsForStudent[index]
+                                                                  .costPeriod
+                                                                  .toString() ==
+                                                              '2'
+                                                          ? 'Oyiga'
+                                                          : 'Uzoq muddatga',
+                                                  style: TextStyle(
+                                                      color:
+                                                          AppColors.mainColor),
+                                                ),
                                               ],
                                             ),
                                           ),

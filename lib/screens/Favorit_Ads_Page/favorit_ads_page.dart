@@ -48,17 +48,20 @@ class _FavoritAdsState extends State<FavoritAds> {
           ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Consumer<FavoriteProvider>(
-              builder: (_, data, __) {
-                if(!data.isMyAds){
-                  return const Align(
-                    alignment: Alignment.center,
-                      child: CircularProgressIndicator());
-                }
-                return ListView.builder(
+      body: Consumer<FavoriteProvider>(
+        builder: (_, data, __) {
+          if(!data.isMyAds){
+            return const Align(
+              alignment: Alignment.center,
+                child: CircularProgressIndicator());
+          }
+          if(data.MyAds.isEmpty){
+            return Center(child: Text("Ma'lumot yo'q"),);
+          }
+          return SingleChildScrollView(
+            child: Column(
+              children: [
+                ListView.builder(
                     physics: NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: data.MyAds.length,
@@ -641,11 +644,11 @@ class _FavoritAdsState extends State<FavoritAds> {
                           ),
                         ),
                       );
-                    });
-              },
+                    }),
+              ],
             ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }

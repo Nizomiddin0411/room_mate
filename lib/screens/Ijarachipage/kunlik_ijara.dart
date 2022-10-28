@@ -158,6 +158,9 @@ class _KunlikIjaraState extends State<KunlikIjara> {
                     child: CircularProgressIndicator(),
                   );
                 }
+                if(data.Ads.isEmpty){
+                  return const Center(child: Text("Ma'lumot yo'q"),);
+                }
                 return ListView.builder(
                     shrinkWrap: true,
                     itemCount: data.Ads.length,
@@ -237,7 +240,8 @@ class _KunlikIjaraState extends State<KunlikIjara> {
                                               .toString(),
                                           rentType: data.Ads[index].rentType
                                               .toString(),
-                                          comfort: data.Ads[index].comfort.toString(),
+                                          comfort: data.Ads[index].comfort
+                                              .toString(),
                                           // data.Ads[index].comfort,
                                           createData: data.Ads[index].createdAt,
                                           Image: data.Ads[index].images,
@@ -260,7 +264,9 @@ class _KunlikIjaraState extends State<KunlikIjara> {
                                             imageUrl:
                                                 "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.Ads[index].images!.first.image.toString()}",
                                             placeholder: (context, url) =>
-                                                const Center(child: CircularProgressIndicator()),
+                                                const Center(
+                                                    child:
+                                                        CircularProgressIndicator()),
                                             errorWidget:
                                                 (context, url, error) =>
                                                     Image.asset(
@@ -289,12 +295,6 @@ class _KunlikIjaraState extends State<KunlikIjara> {
                                                   ),
                                                 )))
 
-                                        // ? Image.asset(
-                                        //     'assets/images/notImage.png',
-                                        //     width: 324.w,
-                                        //     height: 235.h,
-                                        //     fit: BoxFit.cover,
-                                        //   )
                                         : Image.asset(
                                             'assets/images/notImage.png',
                                             width: 324.w,
@@ -371,11 +371,16 @@ class _KunlikIjaraState extends State<KunlikIjara> {
                                                 Text(
                                                   '${data.Ads[index].cost.toString()} ${data.Ads[index].costType.toString() == "1" ? "So'm" : "USD"}/',
                                                   style: TextStyle(
-                                                      color: AppColors.mainColor,
+                                                      color:
+                                                          AppColors.mainColor,
                                                       fontSize: 24.sp),
                                                 ),
                                                 Text(
-                                                  '${data.Ads[index].costPeriod.toString() == '1' ? 'Kuniga' : data.Ads[index].costPeriod.toString() == '2' ? 'Oyiga' : 'Uzoq muddatga'}',style: TextStyle(color: AppColors.mainColor),),
+                                                  data.Ads[index].costPeriod.toString() == '1' ? 'Kuniga' : data.Ads[index].costPeriod.toString() == '2' ? 'Oyiga' : 'Uzoq muddatga',
+                                                  style: const TextStyle(
+                                                      color:
+                                                          AppColors.mainColor),
+                                                ),
                                               ],
                                             ),
                                           ),
@@ -445,6 +450,9 @@ class _KunlikIjaraState extends State<KunlikIjara> {
                   return const Center(
                     child: CircularProgressIndicator(),
                   );
+                }
+                if(data.AdsForStudent.isEmpty){
+                  return const Center(child: Text("Ma'lumot yo'q"),);
                 }
                 return ListView.builder(
                     shrinkWrap: true,
@@ -531,7 +539,9 @@ class _KunlikIjaraState extends State<KunlikIjara> {
                                               .toString(),
                                           createData: data
                                               .AdsForStudent[index].createdAt,
-                                          comfort: data.AdsForStudent[index].comfort.toString(),
+                                          comfort: data
+                                              .AdsForStudent[index].comfort
+                                              .toString(),
                                           // data.AdsForStudent[index].comfort,
                                           inFloor: data
                                               .AdsForStudent[index].inFloor
@@ -568,8 +578,9 @@ class _KunlikIjaraState extends State<KunlikIjara> {
                                         ? CachedNetworkImage(
                                             imageUrl:
                                                 "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.AdsForStudent[index].images!.first.image.toString()}",
-                                            placeholder: (context, url) =>
-                                                Center(child: CircularProgressIndicator()),
+                                            placeholder: (context, url) => const Center(
+                                                child:
+                                                    CircularProgressIndicator()),
                                             errorWidget:
                                                 (context, url, error) =>
                                                     Image.asset(
@@ -597,13 +608,6 @@ class _KunlikIjaraState extends State<KunlikIjara> {
                                                     // ColorFilter.mode(Colors.red, BlendMode.colorBurn)
                                                   ),
                                                 )))
-
-                                        // ? Image.asset(
-                                        //     'assets/images/notImage.png',
-                                        //     width: 324.w,
-                                        //     height: 235.h,
-                                        //     fit: BoxFit.cover,
-                                        //   )
                                         : Image.asset(
                                             'assets/images/notImage.png',
                                             width: 324.w,
@@ -683,11 +687,16 @@ class _KunlikIjaraState extends State<KunlikIjara> {
                                                 Text(
                                                   '${data.AdsForStudent[index].cost.toString()}   ${data.AdsForStudent[index].costType.toString() == "1" ? "So'm" : "USD"}/',
                                                   style: TextStyle(
-                                                      color: AppColors.mainColor,
+                                                      color:
+                                                          AppColors.mainColor,
                                                       fontSize: 24.sp),
                                                 ),
                                                 Text(
-                                                  '${data.AdsForStudent[index].costPeriod.toString() == '1' ? 'Kuniga' : data.AdsForStudent[index].costPeriod.toString() == '2' ? 'Oyiga' : 'Uzoq muddatga'}',style: TextStyle(color: AppColors.mainColor),),
+                                                  data.AdsForStudent[index].costPeriod.toString() == '1' ? 'Kuniga' : data.AdsForStudent[index].costPeriod.toString() == '2' ? 'Oyiga' : 'Uzoq muddatga',
+                                                  style: const TextStyle(
+                                                      color:
+                                                          AppColors.mainColor),
+                                                ),
                                               ],
                                             ),
                                           ),

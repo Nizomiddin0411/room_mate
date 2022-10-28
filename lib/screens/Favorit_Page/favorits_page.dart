@@ -52,6 +52,9 @@ class _FavoritPageState extends State<FavoritPage> {
                 alignment: Alignment.center,
                 child: CircularProgressIndicator());
           }
+          if(data.Like.isEmpty){
+            return Center(child: Text("Ma'lumot yo'q"),);
+          }
           return SingleChildScrollView(
             child: Column(children: [
               ListView.builder(
