@@ -6,9 +6,11 @@ class SearchingStudents {
   int? universityId;
   int? facultyId;
   int? course;
-  dynamic roommate;
+  dynamic  roommate;
   int? birthRegionId;
   int? birthDistrictId;
+  int? hideProfile;
+  int? hidePhone;
   BirthRegion? birthRegion;
   BirthDistrict? birthDistrict;
   University? university;
@@ -25,6 +27,8 @@ class SearchingStudents {
         this.roommate,
         this.birthRegionId,
         this.birthDistrictId,
+        this.hideProfile,
+        this.hidePhone,
         this.birthRegion,
         this.birthDistrict,
         this.university,
@@ -41,6 +45,8 @@ class SearchingStudents {
     roommate = json['roommate'];
     birthRegionId = json['birth_region_id'];
     birthDistrictId = json['birth_district_id'];
+    hideProfile = json['hide_profile'];
+    hidePhone = json['hide_phone'];
     birthRegion = json['birth_region'] != null
         ? new BirthRegion.fromJson(json['birth_region'])
         : null;
@@ -66,6 +72,8 @@ class SearchingStudents {
     data['roommate'] = this.roommate;
     data['birth_region_id'] = this.birthRegionId;
     data['birth_district_id'] = this.birthDistrictId;
+    data['hide_profile'] = this.hideProfile;
+    data['hide_phone'] = this.hidePhone;
     if (this.birthRegion != null) {
       data['birth_region'] = this.birthRegion!.toJson();
     }
@@ -134,7 +142,7 @@ class University {
   String? name;
   String? nameRu;
   String? short;
-  int? districtId;
+  dynamic districtId;
   dynamic address;
   String? advertising;
   String? searching;

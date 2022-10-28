@@ -288,7 +288,11 @@ class _StudentsEdistState extends State<StudentsEdist> {
                     SizedBox(
                       width: 82.w,
                     ),
-                    Text("Ahamiyatsiz"),
+                    Text("Ahamiyatsiz", style: TextStyle(
+                      color: AppColors.textColor,
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w500,
+                    ),),
                   ],
                 ),
                 SizedBox(height: 10.h),
@@ -371,7 +375,11 @@ class _StudentsEdistState extends State<StudentsEdist> {
                     SizedBox(
                       width: 35.w,
                     ),
-                    Text("Ahamiyatsiz"),
+                    Text("Ahamiyatsiz", style: TextStyle(
+                      color: AppColors.textColor,
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w500,
+                    ),),
                   ],
                 ),
                 SizedBox(height: 4.h),
@@ -551,28 +559,36 @@ class _StudentsEdistState extends State<StudentsEdist> {
                   ],
                 ),
                 SizedBox(
-                  height: 10.h,
+                  height: 12.h,
                 ),
                 Column(
                   children: [
                     Row(
                       children: [
-                        Text("Telefon raqami").tr(),
+                        Text("Telefon raqami", style: TextStyle(
+                          color: AppColors.textColor,
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w500,
+                        ),).tr(),
                         SizedBox(
                           width: 170.w,
                         ),
-                        Text("Ko’rinmasin"),
+                        Text("Ko’rinmasin", style: TextStyle(
+                          color: AppColors.textColor,
+                          fontSize: 14.sp,
+                          fontWeight: FontWeight.w500,
+                        ),),
                       ],
                     ),
                     SizedBox(
-                      height: 5.h,
+                      height: 7.h,
                     ),
                     Row(
                       children: [
                         Container(
                           padding: EdgeInsets.symmetric(horizontal: 8.w),
                           height: 55.h,
-                          width: 250.w,
+                          width: 247.w,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(8.r),
                               border: Border.all(color: _phoneColor)),
@@ -601,6 +617,11 @@ class _StudentsEdistState extends State<StudentsEdist> {
                             decoration: InputDecoration(
                               border: InputBorder.none,
                               hintText: "Telefon raqamini kiriting".tr(),
+                              hintStyle: TextStyle(
+                                color: AppColors.textColor,
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
                           ),
                         ),
@@ -636,7 +657,10 @@ class _StudentsEdistState extends State<StudentsEdist> {
                         Text(
                           "Ijaraga turishga joyingiz bormi ?",
                           style: TextStyle(
-                              fontSize: 18.sp, fontWeight: FontWeight.bold),
+                            color: AppColors.textColor,
+                            fontSize: 16.sp,
+                            fontWeight: FontWeight.w500,
+                          ),
                         ),
                       ],
                     ),
@@ -660,7 +684,7 @@ class _StudentsEdistState extends State<StudentsEdist> {
                               style: new TextStyle(fontSize: 17.0),
                             ),
                             SizedBox(
-                              width: 55.w,
+                              width: 35.w,
                             ),
                             Radio(
                               value: '2',
