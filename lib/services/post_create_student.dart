@@ -43,7 +43,7 @@ class RegistratsiyaStudent {
       print("$gender    jinsi ");
       print("$fakultetId fakulted id si  ");
       print("$Course sheri kursi ");
-      print("$District  viloyattt idisi  ");
+      print("$District  defaultvalue1 idisi  ");
       print("$UniderId  UniderId idissiiiii   ");
       print("$HideProfile  HideProfile HideProfile   ");
       print("$Hidenumber  Hidenumber Hidenumber   ");
