@@ -406,7 +406,6 @@ class _AdsPhotoEditState extends State<AdsPhotoEdit> {
                                 primary: AppColors.buttonLinear),
                             onPressed: () async {
                               // print(widget.titleController! + 'title');
-                              print(widget.id.toString() + 'iidd');
                               // print(widget.gender_matter.toString() +
                               //     'gendermatter');
                               // print(widget.district_id.toString() +
