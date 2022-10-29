@@ -33,8 +33,8 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
         .getAds('0', "0", "0", "0");
   }
 
-   String? checknumber;
-   String? checkhidenumber;
+  String? checknumber;
+  String? checkhidenumber;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -162,8 +162,8 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                   physics: const NeverScrollableScrollPhysics(),
                   itemCount: provider.ads.length,
                   itemBuilder: (context, index) {
-                    checknumber=provider.ads[index].phone;
-                    checkhidenumber=provider.ads[index].hidePhone.toString();
+                    checknumber = '+' + provider.ads[index].phone.toString();
+                    checkhidenumber = provider.ads[index].hidePhone.toString();
                     return Padding(
                       padding: const EdgeInsets.all(12.0),
                       child: Column(
@@ -194,7 +194,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                     Row(
                                       children: [
                                         Text(
-                                          "Talaba : ${provider.ads[index].gender.toString() == '1' ?  tr("jinsi") + ":" + tr("Erkak") : tr("jinsi") + ":" + tr("Ayol")}",
+                                          "Talaba : ${provider.ads[index].gender.toString() == '1' ? tr("jinsi") + ":" + tr("Erkak") : tr("jinsi") + ":" + tr("Ayol")}",
                                           style: TextStyle(fontSize: 15.sp),
                                         ),
                                         SizedBox(
@@ -269,7 +269,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                           ),
                                         ),
                                         SizedBox(
-                                          width: 35 .w,
+                                          width: 35.w,
                                         ),
                                         InkWell(
                                             onTap: () {},
@@ -296,14 +296,17 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                                           final Uri launchUri =
                                                               Uri(
                                                             scheme: 'tel',
-                                                            path:
-                                                                "+${provider.ads[index].phone.toString()}",
+                                                            path: checkhidenumber == '2' ?
+                                                                "+${provider.ads[index].phone.toString()}" :null
                                                           );
                                                           await launchUrl(
                                                               launchUri);
                                                         },
                                                         child: Text(
-                                                          checkhidenumber == '2' ? checknumber.toString() : '***********',
+                                                          checkhidenumber == '2'
+                                                              ? checknumber
+                                                                  .toString()
+                                                              : '***********',
                                                           style:
                                                               const TextStyle(
                                                                   color: Colors

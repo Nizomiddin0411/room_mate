@@ -24,6 +24,7 @@ class UniversitetProvider extends ChangeNotifier{
   String RegionId = '';
   String UniversiterId = '';
   String DistrickId = '';
+  String districtId = '';
   String FacultyID = '';
   String defaultvalue = 'Fakultetni tanlang';
   String defaultvalue1 = 'Tumanni tanlang';

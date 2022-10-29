@@ -17,7 +17,6 @@ import 'package:talaba_uy/services/post_create_student.dart';
 
 import '../../cubit/aut_cubit.dart';
 
-
 class StudentUser extends StatefulWidget {
   const StudentUser({Key? key}) : super(key: key);
 
@@ -327,14 +326,13 @@ class _StudentUserState extends State<StudentUser> {
                       DropdownSearch<String>(
                         mode: Mode.BOTTOM_SHEET,
                         items: data.universitet.map((e) {
-
                           if (drowdown2 == e.name) {
                             data.UniversiterId = e.id.toString();
                             data.isId = e.id;
                             university_id = e.id.toString();
                           }
                           return context.read<AutCubit>().selectedLang.index ==
-                              1
+                                  1
                               ? e.name.toString()
                               : e.nameRu.toString();
                         }).toList(),
@@ -350,7 +348,7 @@ class _StudentUserState extends State<StudentUser> {
                             univer = true;
                             univerColor = Colors.black12;
                           });
-                          print(drowdown2+"LLLKLKLJJJHHHGGGGGGGGGGGGG");
+                          print(drowdown2 + "LLLKLKLJJJHHHGGGGGGGGGGGGG");
                         },
                         selectedItem: tr("Oliy o’quv yurtini tanlang"),
                       ),
@@ -599,6 +597,7 @@ class _StudentUserState extends State<StudentUser> {
                         },
                         onSaved: (value) {
                           dropdownvalue = value.toString();
+                          print("${dropdownvalue}KJJJJJJGGGGGGGGGGGGGGGGGGGG");
                         },
                       ),
                     ],
@@ -650,6 +649,10 @@ class _StudentUserState extends State<StudentUser> {
                               items: data.tumanlar
                                   .map(
                                     (e) => DropdownMenuItem<String>(
+                                      onTap:(){
+                                         print("${e.name}${e.id}");
+                            data.districtId = e.id.toString();
+                                      },
                                       value: data.istuman
                                           ? e.name.toString()
                                           : data.defaultvalue1,
@@ -797,10 +800,10 @@ class _StudentUserState extends State<StudentUser> {
                   //         title: Text("Ro’yxatdan muvaffaqiyatli o’tdingiz"),
                   //       );
                   //     });
-                  if(!checkBox)
-                    _showToast(context, checkBox);
+                  if (!checkBox) _showToast(context, checkBox);
                   if (kurs &&
-                      viloyat &&fakultet&&
+                      viloyat &&
+                      fakultet &&
                       univer &&
                       ktuman &&
                       myController.text != '' &&
@@ -811,7 +814,7 @@ class _StudentUserState extends State<StudentUser> {
                       fakultetId: data.fakultetid.toString(),
                       Course: Course.toString(),
                       HideProfile: isSwitched.toString() == 'Ha' ? '1' : '2',
-                      District: data.districtid.toString(),
+                      District: data.districtId.toString(),
                       Phonenumber: nameController.text,
                       gender: dropdownvalue.toString() == 'Erkak' ? '1' : '2',
                       UniderId: university_id.toString(),
@@ -865,18 +868,24 @@ class _StudentUserState extends State<StudentUser> {
       ),
     );
   }
+
   void _showToast(BuildContext context, bool isCheck) {
     final scaffold = ScaffoldMessenger.of(context);
     scaffold.showSnackBar(
       SnackBar(
         backgroundColor: Colors.white,
-        content: const Text('Foydalanish shartini bajarmadingiz !!!', style: TextStyle(
-            color: Colors.red, fontWeight: FontWeight.bold, fontSize: 15),),
-        action: SnackBarAction(label: '', onPressed: (){
-          scaffold.hideCurrentSnackBar();
-          isCheck = true;
-          print(isCheck);
-        }),
+        content: const Text(
+          'Foydalanish shartini bajarmadingiz !!!',
+          style: TextStyle(
+              color: Colors.red, fontWeight: FontWeight.bold, fontSize: 15),
+        ),
+        action: SnackBarAction(
+            label: '',
+            onPressed: () {
+              scaffold.hideCurrentSnackBar();
+              isCheck = true;
+              print(isCheck);
+            }),
       ),
     );
   }
