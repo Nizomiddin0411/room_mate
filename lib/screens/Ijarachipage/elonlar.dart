@@ -325,14 +325,9 @@ class _ElonlarState extends State<Elonlar> {
                                               padding: EdgeInsets.fromLTRB(
                                                   1.w, 0, 8.w, 0),
                                               child: FavoriteButton(
-                                                isFavorite: data.isChanded
-                                                    ? (data.Ads[index]
-                                                                .favorite ==
-                                                            '0'
-                                                        ? false
-                                                        : true)
-                                                    : (data.AdsForZero[index]
-                                                                .favorite ==
+                                                isFavorite:
+                                                     (data.Ads[index]
+                                                                .favorite.toString() ==
                                                             '0'
                                                         ? false
                                                         : true),
@@ -342,12 +337,8 @@ class _ElonlarState extends State<Elonlar> {
                                                   setState(() {
                                                     FavoriteChange()
                                                         .Favoritefetch(
-                                                      id: data.isChanded
-                                                          ? data.Ads[index].id
-                                                              .toString()
-                                                          : data
-                                                              .AdsForZero[index]
-                                                              .id
+                                                      id:
+                                                          data.Ads[index].id
                                                               .toString(),
                                                     );
                                                   });

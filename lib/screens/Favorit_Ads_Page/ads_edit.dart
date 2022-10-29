@@ -885,8 +885,9 @@ class _AdsEditState extends State<AdsEdit> {
                             primary: AppColors.buttonLinear),
                         onPressed: () {
                           final map = context.read<FavoriteProvider>();
-                          print(map.forMap.toString() +
+                          print(map.isTapMap == false ?'${widget.locations}':map.forMap +
                               'MAPPPPPPPPPPPPPPPPPPPPPPP');
+                          print('map');
                           print('${titleController!.text}  title');
                           print('${value5! ? 0 : roommate_gender}' + 'gender');
                           print('${value5! ? 1 : 2} axamyatsiz gender');
@@ -919,7 +920,7 @@ class _AdsEditState extends State<AdsEdit> {
                                           district_id: district_id,
                                           titleController:
                                               titleController!.text,
-                                          location: '${map.forMap}',
+                                          location: map.isTapMap == false ?'${widget.locations}':map.forMap,
                                           phoneNumber: widget.phoneNumber,
                                           houseType: widget.houseType,
                                           rent_type: widget.rentType,
