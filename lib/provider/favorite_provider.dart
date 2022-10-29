@@ -3,6 +3,7 @@
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
+import 'package:talaba_uy/services/post_student_adds.dart';
 
 import '../models/get_favorite_model.dart';
 import '../models/get_my_ads_model.dart';
@@ -36,7 +37,10 @@ class FavoriteProvider extends ChangeNotifier{
   isLoading = value;
   notifyListeners();
   }
-
+  void _sendstudents(bool value){
+    isLoading = value;
+    notifyListeners();
+  }
   Future<void> getLike() async{
     _setFavorite(false);
     Like = await FavoriteService().fetchFavorite();
@@ -141,5 +145,71 @@ class FavoriteProvider extends ChangeNotifier{
     _setPostAds(true);
     // isload = false;
 
+  }
+  Future<void> StudentsAdds({
+    required String title,
+    required String stay_region_id,
+    required String stay_region_matter,
+    required String stay_university_id,
+    //live
+    required String stay_university_matter,
+    required String roommate_gender,
+    required String roommate_count,
+    required String phone_number,
+    required String phone_number_show,
+    required String have_living_home,
+    required String description,
+    required String district_id,
+    required String address,
+    required String location,
+    required String subway,
+    required String house_type,
+    required String room_count,
+    required String floors_count,
+    required String howcountroom,
+    required String cost,
+    required String cost_type,
+    required String live_with_owner,
+    required String utility_bills,
+    required String comfort,
+    required String renttype,
+    required String cost_period,
+    required File file1,
+    required File file2,
+    required File file3,
+  })async{
+    _sendstudents(false);
+    await CreateStudent().StudentsAdds(
+        title:title,
+        stay_region_id:stay_region_id,
+        stay_region_matter:stay_region_matter,
+        stay_university_id:stay_university_id,
+      //live
+        stay_university_matter:stay_university_matter,
+        roommate_gender:roommate_gender,
+        roommate_count:roommate_count,
+        phone_number:phone_number,
+        phone_number_show:phone_number_show,
+        have_living_home:have_living_home,
+        description:description,
+        district_id:district_id,
+        address:address,
+        location:location,
+        subway:subway,
+        house_type:house_type,
+        room_count:roommate_count,
+        floors_count:floors_count,
+        howcountroom:howcountroom,
+        cost:cost,
+        cost_type:cost_type,
+        live_with_owner:live_with_owner,
+        utility_bills:utility_bills,
+        comfort:comfort,
+        renttype:renttype,
+        cost_period:cost_period,
+        file1:file1,
+        file2:file2,
+        file3:file3,
+    );
   }
 }
