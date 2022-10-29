@@ -330,8 +330,8 @@ class _AdsEditState extends State<AdsEdit> {
                               padding: EdgeInsets.only(left: 8.w),
                               child: Text(
                                 widget.roommate_gender == ''
-                                    ? "O’gil bollarga / Qizlarga".tr()
-                                    : roommate_gender.toString(),
+                                    ? "O’g'il bollarga / Qizlarga".tr()
+                                    : roommate_gender.toString().tr(),
                                 style: TextStyle(
                                     fontSize: 14.sp, color: Colors.grey),
                               ),
@@ -348,11 +348,11 @@ class _AdsEditState extends State<AdsEdit> {
                                   setState(() {
                                     if (value5 == false) {
                                       roommate_gender =
-                                          e == "Qiz bolaga" ? '2' : '1';
+                                          e == "Qiz bolaga".tr() ? '2' : '1';
                                     }
                                   });
                                 },
-                                value: e,
+                                value: e.tr(),
                                 child: Padding(
                                   padding: EdgeInsets.only(left: 8.w),
                                   child: Text(e.tr()),
@@ -375,7 +375,7 @@ class _AdsEditState extends State<AdsEdit> {
                     Column(
                       children: [
                         Text(
-                          "Ahamiyatsiz",
+                          "Ahamiyatsiz".tr(),
                           style: TextStyle(fontSize: 14.sp),
                         ),
                         Checkbox(
@@ -672,7 +672,7 @@ class _AdsEditState extends State<AdsEdit> {
                     Row(
                       children: [
                         Text(
-                          "Metroga yaqinmi ?",
+                          "Metroga yaqinmi ?".tr(),
                           style: TextStyle(
                               fontSize: 16.sp, fontWeight: FontWeight.w500),
                         ),
@@ -693,7 +693,7 @@ class _AdsEditState extends State<AdsEdit> {
                               },
                             ),
                             Text(
-                              'Ha',
+                              'Ha'.tr(),
                               style: new TextStyle(fontSize: 14.0.sp),
                             ),
                             SizedBox(
@@ -709,7 +709,7 @@ class _AdsEditState extends State<AdsEdit> {
                               },
                             ),
                             Text(
-                              "Yo'q",
+                              "Yo'q".tr(),
                               style: new TextStyle(
                                 fontSize: 14.0.sp,
                               ),
@@ -847,7 +847,7 @@ class _AdsEditState extends State<AdsEdit> {
                     Column(
                       children: [
                         Text(
-                          "Ahamiyatsiz",
+                          "Ahamiyatsiz".tr(),
                           style: TextStyle(
                               fontSize: 14.sp, color: AppColors.textColor),
                         ),
@@ -967,7 +967,7 @@ class _AdsEditState extends State<AdsEdit> {
                           }
                         },
                         child: Text(
-                          "Keyingi ".tr(),
+                          "Keyingi".tr(),
                           style: TextStyle(
                               fontSize: 20.sp, fontWeight: FontWeight.w500),
                         ),
