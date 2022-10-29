@@ -141,6 +141,7 @@ class _MapEditState extends State<MapEdit> {
   }
   _handlerTap(LatLng tappadPoint){
     final mapLatitude = context.read<FavoriteProvider>();
+    mapLatitude.isTapMap = true;
     mapLatitude.locationFor = false;
     mapLatitude.forMap =(tappadPoint.toString());
     print(tappadPoint);

@@ -221,7 +221,7 @@ class _OwnerState extends State<Owner> {
                                   setState(() {
                                     if (value5 == false) {
                                       roommate_gender =
-                                          e == "Qiz bolaga" ? '2' : '1';
+                                          e == "Qiz bolaga".tr() ? '2' : '1';
                                     }
                                   });
                                 },
@@ -246,17 +246,17 @@ class _OwnerState extends State<Owner> {
                     Column(
                       children: [
                         Text(
-                          "Ahamiyatsiz",
+                          "Ahamiyatsiz".tr(),
                           style: TextStyle(
                             fontSize: 14.sp,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
                         Checkbox(
-                          value: this.value5,
+                          value: value5,
                           onChanged: (bool? value) {
                             setState(() {
-                              this.value5 = value!;
+                              value5 = value!;
                               gender_matter = value ? '1' : '2';
 
                               if (value) {
@@ -477,7 +477,7 @@ class _OwnerState extends State<Owner> {
                         shadowColor: AppColors.buttonLinear,
                         child: ListTile(
                           title: Text(
-                            "Geojoylashishni kiriting",
+                            "Geojoylashishni kiriting".tr(),
                             style: TextStyle(
                               color: Colors.grey,
                               fontSize: 14.sp,
@@ -532,7 +532,7 @@ class _OwnerState extends State<Owner> {
                     Row(
                       children: [
                         Text(
-                          "Metroga yaqinmi ?",
+                          "Metroga yaqinmi ?".tr(),
                           style: TextStyle(
                               fontSize: 14.sp,
                               fontWeight: FontWeight.w500,
@@ -556,7 +556,7 @@ class _OwnerState extends State<Owner> {
                               },
                             ),
                             Text(
-                              'Ha',
+                              'Ha'.tr(),
                               style: new TextStyle(fontSize: 14.0.sp),
                             ),
                             SizedBox(
@@ -573,7 +573,7 @@ class _OwnerState extends State<Owner> {
                               },
                             ),
                             Text(
-                              "Yo'q",
+                              "Yo'q".tr(),
                               style: new TextStyle(
                                 fontSize: 14.0.sp,
                               ),
@@ -700,7 +700,7 @@ class _OwnerState extends State<Owner> {
                     Column(
                       children: [
                         Text(
-                          "Ahamiyatsiz",
+                          "Ahamiyatsiz".tr(),
                           style: TextStyle(
                               fontSize: 14.sp,
                               color: AppColors.textColor,
@@ -802,7 +802,7 @@ class _OwnerState extends State<Owner> {
                           }
                         },
                         child: Text(
-                          "Keyingi ".tr(),
+                          "Keyingi".tr(),
                           style: TextStyle(
                               fontSize: 20.sp, fontWeight: FontWeight.w500),
                         ),

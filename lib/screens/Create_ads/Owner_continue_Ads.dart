@@ -257,7 +257,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Uy turi ".tr(),
+                          "Uy turi".tr(),
                           style: TextStyle(
                             color: AppColors.textColor,
                             fontSize: 14.sp,
@@ -294,7 +294,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                             }).toList(),
                             onChanged: (newValue) {
                               setState(() {
-                                house_type = newValue == 'Hovli' ? '2' : '1';
+                                house_type = newValue == 'Hovli'.tr() ? '2' : '1';
                                 _houseTypeOnClick = true;
                                 _houseTypeColor = Colors.grey;
                               });
@@ -347,9 +347,9 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                             }).toList(),
                             onChanged: (newValue) {
                               setState(() {
-                                rent_type = newValue == 'Kunlik'
+                                rent_type = newValue == 'Kunlik'.tr()
                                     ? '1'
-                                    : newValue == 'Oylik'
+                                    : newValue == 'Oylik'.tr()
                                         ? '2'
                                         : '3';
                                 _rentTypeOnClick = true;
@@ -428,7 +428,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Qavatlar soni ".tr(),
+                          "Qavatlar soni".tr(),
                           style: TextStyle(
                             color: AppColors.textColor,
                             fontSize: 14.sp,
@@ -668,9 +668,9 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                             onChanged: (newValue) {
                               setState(() {
                                 print(newValue);
-                                if (newValue == 'kunlik') {
+                                if (newValue == 'kunlik'.tr()) {
                                   price = '1';
-                                } else if (newValue == 'oylik') {
+                                } else if (newValue == 'oylik'.tr()) {
                                   price = '2';
                                 } else {
                                   price = '3';
@@ -693,7 +693,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                     Row(
                       children: [
                         Text(
-                          "Uy egasi ham yashaydimi ?",
+                          "Uy egasi ham yashaydimi ?".tr(),
                           style: TextStyle(
                               fontSize: 16.sp,
                               fontWeight: FontWeight.w500,
@@ -713,7 +713,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                           },
                         ),
                         Text(
-                          'Ha',
+                          'Ha'.tr(),
                           style: new TextStyle(fontSize: 14.0.sp),
                         ),
                         SizedBox(
@@ -729,7 +729,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                           },
                         ),
                         Text(
-                          "Yo'q",
+                          "Yo'q".tr(),
                           style: new TextStyle(
                             fontSize: 14.0.sp,
                           ),
@@ -746,7 +746,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                     Column(
                       children: [
                         Text(
-                          "Kommunal to’lovlarni kim to’laydi ?",
+                          "Kommunal to’lovlarni kim to’laydi ?".tr(),
                           style: TextStyle(
                               fontSize: 16.sp, fontWeight: FontWeight.w500),
                         ),
@@ -760,11 +760,11 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                 Row(
                   children: [
                     Container(width: 172.w,),
-                    Text("Uy egasi"),
+                    Text("Uy egasi".tr()),
                     SizedBox(
                       width: 50.w,
                     ),
-                    Text("Ijarachi")
+                    Text("Ijarachi".tr())
                   ],
                 ),
                 Row(
@@ -776,7 +776,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                         ),
                         Container(
                           width: 180.w,
-                          child: Text("Elektr energiya"),
+                          child: Text("Elektr energiya".tr()),
                         ),
                         Radio(
                           value: 1,
@@ -809,7 +809,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                       children: [
                         Container(
                           width: 180.w,
-                          child: Text("Gaz"),
+                          child: Text("Gaz".tr()),
                         ),
                         Radio(
                           value: 1,
@@ -841,7 +841,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                             SizedBox(
                               height: 1.h,
                             ),
-                            Container(width: 180.w, child: Text("Sovuq suv")),
+                            Container(width: 180.w, child: Text("Sovuq suv".tr())),
                             Radio(
                               value: 1,
                               groupValue: id3,
@@ -874,7 +874,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                             SizedBox(
                               height: 1.h,
                             ),
-                            Container(width: 180.w, child: Text("Issiq suv")),
+                            Container(width: 180.w, child: Text("Issiq suv".tr())),
                             Radio(
                               value: 1,
                               groupValue: id4,
@@ -909,7 +909,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                             ),
                             Container(
                               width: 180.w,
-                              child: Text("Chiqindi"),
+                              child: Text("Chiqindi".tr()),
                             ),
                             Radio(
                               value: 1,
@@ -944,7 +944,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                 Row(
                   children: [
                     Text(
-                      "Quyidagi qulayliklarga ega.",
+                      "Quyidagi qulayliklarga ega.".tr(),
                       style: TextStyle(
                           fontSize: 16.sp,
                           color: AppColors.textColor,
@@ -964,7 +964,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("Wi - fi "),
+                              Text("Wi - fi".tr()),
                               Checkbox(
                                 value: this.value1,
                                 onChanged: (bool? value) {
@@ -983,7 +983,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("TV"),
+                              Text("TV".tr()),
                               Checkbox(
                                 value: this.value2,
                                 onChanged: (bool? value) {
@@ -1002,7 +1002,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("Muzlatgich"),
+                              Text("Muzlatgich".tr()),
                               Checkbox(
                                 value: this.value3,
                                 onChanged: (bool? value) {
@@ -1021,7 +1021,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("Kir yuvish mashinasi"),
+                              Text("Kir yuvish mashinasi".tr()),
                               Checkbox(
                                 value: this.value4,
                                 onChanged: (bool? value) {
@@ -1040,7 +1040,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("Konditsioner"),
+                              Text("Konditsioner".tr()),
                               Checkbox(
                                 value: this.value6,
                                 onChanged: (bool? value) {
@@ -1059,7 +1059,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("Chang yutgich"),
+                              Text("Chang yutgich".tr()),
                               Checkbox(
                                 value: this.value5,
                                 onChanged: (bool? value) {
@@ -1266,7 +1266,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                           }
                         },
                         child: Text(
-                          "Keyingi ".tr(),
+                          "Keyingi".tr(),
                           style: TextStyle(
                               fontSize: 20.sp, fontWeight: FontWeight.w500),
                         ),

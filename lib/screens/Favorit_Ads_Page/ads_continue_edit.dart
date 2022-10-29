@@ -329,7 +329,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Uy turi ".tr(),
+                          "Uy turi".tr(),
                           style: TextStyle(
                             color: AppColors.textColor,
                             fontSize: 14.sp,
@@ -348,9 +348,9 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                               padding: EdgeInsets.only(left: 8.w),
                               child: Text(
                                 widget.houseType == '2'
-                                    ? 'Hovli'
+                                    ? 'Hovli'.tr()
                                     : widget.houseType == '1'
-                                        ? 'Kvartira'
+                                        ? 'Kvartira'.tr()
                                         : "Kvartira , Xovli".tr(),
                                 style: TextStyle(fontSize: 14.sp),
                               ),
@@ -363,7 +363,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                               print(widget.houseType);
                               return DropdownMenuItem<String>(
                                 onTap: () {},
-                                value: e,
+                                value: e.tr(),
                                 child: Padding(
                                   padding: EdgeInsets.only(left: 8.w),
                                   child: Text(e.tr()),
@@ -372,7 +372,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                             }).toList(),
                             onChanged: (newValue) {
                               setState(() {
-                                house_type = newValue == 'Hovli' ? '2' : '1';
+                                house_type = newValue == 'Hovli'.tr() ? '2' : '1';
                                 _houseTypeOnClick = true;
                                 _houseTypeColor = Colors.grey;
                               });
@@ -432,13 +432,13 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                             }).toList(),
                             onChanged: (newValue) {
                               setState(() {
-                                rent_type = newValue == 'Kunlik'
+                                rent_type = newValue == 'Kunlik'.tr()
                                     ? '1'
-                                    : newValue == 'Oylik'
+                                    : newValue == 'Oylik'.tr()
                                         ? '2'
                                         : '3';
                                 _rentTypeOnClick = true;
-                                _rentTypeColor = Colors.grey;
+                                _rentTypeColor = Colors.grey; 
                               });
                             },
                           ),

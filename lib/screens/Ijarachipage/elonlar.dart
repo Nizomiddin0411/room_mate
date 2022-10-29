@@ -325,14 +325,9 @@ class _ElonlarState extends State<Elonlar> {
                                               padding: EdgeInsets.fromLTRB(
                                                   1.w, 0, 8.w, 0),
                                               child: FavoriteButton(
-                                                isFavorite: data.isChanded
-                                                    ? (data.Ads[index]
-                                                                .favorite ==
-                                                            '0'
-                                                        ? false
-                                                        : true)
-                                                    : (data.AdsForZero[index]
-                                                                .favorite ==
+                                                isFavorite:
+                                                     (data.Ads[index]
+                                                                .favorite.toString() ==
                                                             '0'
                                                         ? false
                                                         : true),
@@ -342,12 +337,8 @@ class _ElonlarState extends State<Elonlar> {
                                                   setState(() {
                                                     FavoriteChange()
                                                         .Favoritefetch(
-                                                      id: data.isChanded
-                                                          ? data.Ads[index].id
-                                                              .toString()
-                                                          : data
-                                                              .AdsForZero[index]
-                                                              .id
+                                                      id:
+                                                          data.Ads[index].id
                                                               .toString(),
                                                     );
                                                   });
@@ -380,7 +371,7 @@ class _ElonlarState extends State<Elonlar> {
                                                       fontSize: 24.sp),
                                                 ),
                                                 Text(
-                                                  data.Ads[index].costPeriod.toString() == '1' ? tr('Kunlik') : data.Ads[index].costPeriod.toString() == '2' ? tr('Oylik') : tr('Uzoq muddatga'),
+                                                  data.Ads[index].rentType.toString() == '1' ? tr('Kuniga') : tr('Oyiga'),
                                                   style: const TextStyle(
                                                       color:
                                                           AppColors.mainColor),
@@ -713,7 +704,7 @@ class _ElonlarState extends State<Elonlar> {
                                                       fontSize: 24.sp),
                                                 ),
                                                 Text(
-                                                  data.AdsForStudent[index].costPeriod.toString() == '1' ? tr('Kunlik') : data.AdsForStudent[index].costPeriod.toString() == '2' ? tr('Oylik') : tr('Uzoq muddatga'),
+                                                  data.AdsForStudent[index].rentType.toString() == '1' ? tr('Kuniga') :  tr('Oyiga') ,
                                                   style: const TextStyle(
                                                       color:
                                                           AppColors.mainColor),

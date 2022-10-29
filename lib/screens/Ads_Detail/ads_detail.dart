@@ -255,7 +255,7 @@ class _AdsDetailState extends State<AdsDetail> {
                           Padding(
                             padding: EdgeInsets.fromLTRB(1.w, 0, 8.w, 0),
                             child: FavoriteButton(
-                              isFavorite: widget.favorite == '0' ? false : true,
+                              isFavorite: widget.favorite.toString() == '0' ? false : true,
                               iconSize: 35.0,
                               valueChanged: (_isFavorite) {
                                 // print('Is Favorite $_isFavorite)');

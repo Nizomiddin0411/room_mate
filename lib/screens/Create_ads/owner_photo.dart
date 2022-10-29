@@ -127,12 +127,12 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Center(child: Text("Rasm yuklash")),
+            title: Center(child: Text("Rasm yuklash".tr())),
             content: SingleChildScrollView(
               child: ListBody(
                 children: [
                   GestureDetector(
-                    child: Text("From Camera"),
+                    child: Text("From Camera".tr()),
                     onTap: () async {
                       // getcam();
                       if (sum < 3) {
@@ -147,7 +147,7 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
                    Padding(padding: EdgeInsets.all(10.w)),
                   GestureDetector(
                     child: Text(
-                      "From Gallery",
+                      "From Gallery".tr(),
                       style: TextStyle(
                           color: sum < 3 ? Colors.black : Colors.grey.shade300),
                     ),
@@ -187,9 +187,9 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
             },
             color: Colors.black,
           ),
-          title: const Center(
+          title:  Center(
               child: Text(
-            "E’lon yaratish",
+            "E’lon yaratish".tr(),
             style: TextStyle(color: Colors.blue),
           )),
         ),
@@ -238,7 +238,7 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
                           SizedBox(
                             height: 15.h,
                           ),
-                          Text("Asosiy rasm"),
+                          Text("Asosiy rasm".tr()),
                           Divider(
                             height: 20.0.h,
                             color: Colors.black,
