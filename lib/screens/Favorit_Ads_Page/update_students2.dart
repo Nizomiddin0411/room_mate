@@ -8,6 +8,7 @@ import 'package:talaba_uy/screens/Google_map/map_screen.dart';
 
 import '../../core/const/app_colors.dart';
 import '../../provider/region_provider.dart';
+import '../Google_map/map_for_edit.dart';
 
 class StudensEdits2 extends StatefulWidget {
   String titlecontroller1;
@@ -38,7 +39,7 @@ class StudensEdits2 extends StatefulWidget {
   String comfort;
   String images;
   String updateidi;
-
+  String? locations;
   StudensEdits2({
     Key? key,
     required this.updateidi,
@@ -69,6 +70,7 @@ class StudensEdits2 extends StatefulWidget {
     required this.titleGendor,
     required this.universiteteid,
     required this.viloyatvalue,
+    required this.locations
   }) : super(key: key);
 
   @override
@@ -440,10 +442,27 @@ class _StudensEdits2State extends State<StudensEdits2> {
                   ),
                   InkWell(
                       onTap: () {
+                        final mapLatitude = context.read<FavoriteProvider>();
+                        mapLatitude.locationFor = true;
+                        String lat =
+                        widget.locations!.split(',').first.toString();
+                        String long =
+                        widget.locations!.split(',').last.toString();
+                        lat = lat.split('(').last.toString();
+                        long = long.split(')').first.toString();
+                        print(widget.locations);
+                        print(lat);
+                        print(long);
+                        double Lat = double.parse(lat).toDouble();
+                        double Long = double.parse(long).toDouble();
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => MapScreen()));
+                                builder: (context) => MapEdit(
+                                  location: widget.locations,
+                                  long: Long,
+                                  lat: Lat,
+                                )));
                       },
                       child: Container(
                         width: 324.w,
@@ -1241,7 +1260,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
                                   costController:costcontroller!.text,
                                   rent_type: price,
                                   cost_period: price,
-                                  location:'${map.forMap}',
+                                  location:map.isTapMap == false ?'${widget.locations}':map.forMap,
                                   ),
                             ),
                           );
