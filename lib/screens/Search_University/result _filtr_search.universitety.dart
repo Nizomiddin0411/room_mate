@@ -69,13 +69,7 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  "Joylashuv",
-                  style: TextStyle(
-                      color: AppColors.mainColor,
-                      fontSize: 20.sp,
-                      fontWeight: FontWeight.w500),
-                ),
+               
                 SizedBox(height: 12.h),
                 Text(
                   "Viloyat",
@@ -85,6 +79,7 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
+                SizedBox(height: 4.h,),
                 Column(
                   children: [
                     DropdownButtonFormField2<String>(
@@ -106,7 +101,7 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                         Icons.arrow_drop_down,
                         color: Colors.black45,
                       ),
-                      iconSize: 30,
+                      iconSize: 30.sp,
                       buttonHeight: 60.h,
                       buttonPadding: EdgeInsets.only(left: 20.w, right: 10.w),
                       dropdownDecoration: BoxDecoration(
@@ -148,7 +143,11 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                   children: [
                     Row(
                       children: [
-                        Text(" Qaysi tumanidansiz"),
+                        Text("Tuman",   style: TextStyle(
+                    color: AppColors.textColor,
+                    fontSize: 14.sp,
+                    fontWeight: FontWeight.w500,
+                  ),),
                       ],
                     ),
                     SizedBox(
@@ -329,11 +328,16 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                     );
                   },
                 ),
+                SizedBox(height: 4.h,),
                 Column(
                   children: [
                     Row(
                       children: [
-                        const Text("Kurs ").tr(),
+                        const Text("Kurs ",   style: TextStyle(
+                    color: AppColors.textColor,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  ),).tr(),
                       ],
                     ),
                     SizedBox(
@@ -406,7 +410,6 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                               primary: Colors.white),
                           onPressed: () {
                             provider.getAds('1', '1','1','1');
-                            Navigator.pop(context);
                             Navigator.pop(context);
                           },
                           child: Text(

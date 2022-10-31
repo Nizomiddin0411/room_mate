@@ -99,39 +99,34 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                     ),
                     Row(
                       children: [
-                        Container(
-                          width: 330.w,
-                          height: 50.h,
-                          child: TextField(
-                            controller: _controller,
-                            decoration: InputDecoration(
-                              border: OutlineInputBorder(
-                                  borderSide: BorderSide(color: Colors.blue)),
-                              label: Text("Qidirish "),
-                              suffixIcon: IconButton(
-                                onPressed: () {
-                                  _controller.clear();
-                                },
-                                icon: Icon(
-                                  Icons.cancel_outlined,
-                                  color: AppColors.textColor,
+                        InkWell(
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => ResultFiltrPage(
+                                          id: widget.id,
+                                        )));
+                          },
+                          child: Container(
+                            width: 330.w,
+                            height: 50.h,
+                            child: Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(children: [
+                                Icon(Icons.tune),
+                                SizedBox(
+                                  width: 10.w,
                                 ),
-                              ),
-                              prefixIcon: IconButton(
-                                icon: Icon(
-                                  Icons.tune,
-                                  color: AppColors.textColor,
+                                Text(
+                                  "Filtr",
+                                  style: TextStyle(fontSize: 16.sp),
                                 ),
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => ResultFiltrPage(
-                                                id: widget.id,
-                                              )));
-                                },
-                              ),
+                              ]),
                             ),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                border: Border.all(color: Colors.blueGrey)),
                           ),
                         )
                       ],
@@ -171,7 +166,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                         children: [
                           Container(
                             width: 324.w,
-                            height: 195.h,
+                            height: 210.h,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(6.r),
                                 color: AppColors.secondBackgroud),
@@ -210,7 +205,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                     Column(
                                       children: [
                                         Text(
-                                          " Viloyat:${provider.ads[index].birthRegion?.name.toString()} ",
+                                          "Viloyat:${provider.ads[index].birthRegion?.name.toString()} ",
                                           style: TextStyle(fontSize: 15.sp),
                                         ),
                                       ],
@@ -296,8 +291,13 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                                           final Uri launchUri =
                                                               Uri(
                                                             scheme: 'tel',
-                                                            path: checkhidenumber == '2' ?
-                                                                "+${provider.ads[index].phone.toString()}" :null
+                                                            path: checknumber ==
+                                                                    '1'
+                                                                ? null
+                                                                : provider
+                                                                    .ads[index]
+                                                                    .phone
+                                                                    .toString(),
                                                           );
                                                           await launchUrl(
                                                               launchUri);
@@ -306,7 +306,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                                           checkhidenumber == '2'
                                                               ? checknumber
                                                                   .toString()
-                                                              : '***********',
+                                                              : '*************',
                                                           style:
                                                               const TextStyle(
                                                                   color: Colors

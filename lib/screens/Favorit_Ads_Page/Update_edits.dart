@@ -101,7 +101,7 @@ class _UpdateStudentsState extends State<UpdateStudents> {
           ),
         ),
         elevation: 0,
-        title: Text("E’lon yaratish".tr(),
+        title: Text("E’lonni o'zgartirish".tr(),
             style: TextStyle(color: AppColors.mainColor)),
         centerTitle: true,
       ),

@@ -105,15 +105,12 @@ class _CreateimageState extends State<Createimage> {
     FileList.insert(0, File(''));
     FileList.insert(1, File(''));
     FileList.insert(2, File(''));
-    FileList.insert(3, File(''));
-    FileList.insert(4, File(''));
-    FileList.insert(3, File(''));
+ 
+
     FileExist.insert(0, false);
     FileExist.insert(1, false);
     FileExist.insert(2, false);
-    FileExist.insert(3, false);
-    FileExist.insert(4, false);
-    FileExist.insert(5, false);
+  
   }
 
   Future<void> showOptionsDialog(BuildContext context) {
@@ -152,9 +149,7 @@ class _CreateimageState extends State<Createimage> {
                         // selectImages();
                         await _takeFile(sum);
                         setState(() {});
-                        print(FileList[0]);
-                        print(FileList[1]);
-                        print(FileList[2]);
+                     
                         Navigator.pop(context);
                       }
                     },
@@ -210,13 +205,13 @@ class _CreateimageState extends State<Createimage> {
                                     height: 250.h,
                                     width: 250.w,
                                     color: Colors.black12,
-                                    child: file == null
+                                    child: imgFile == null
                                         ? Icon(
                                       Icons.camera_alt_sharp,
                                       size: 50.sp,
                                     )
                                         : Image.file(
-                                      file!,
+                                      imgFile!,
                                       fit: BoxFit.cover,
                                     ),
                                   ),
@@ -372,11 +367,13 @@ class _CreateimageState extends State<Createimage> {
                                             ),
                                           ),
                                           onTap: () async {
-                                            FileList.removeAt(
-                                                index);
+                                       
                                             // index -= 4;
                                             sum -= 1;
-                                            setState(() {});
+                                            setState(() {
+                                                   FileList.removeAt(
+                                                index);
+                                            });
                                           },
                                         ),
                                       ),

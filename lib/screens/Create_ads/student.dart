@@ -640,9 +640,7 @@ class _StudentState extends State<Student> {
                     padding: EdgeInsets.only(left: 16.w),
                     child: TextField(
                       onChanged: (e) {
-                        setState(() {
-                       
-                        });
+                        setState(() {});
                       },
                       key: _keyAddInfo,
                       controller: addinformation,
@@ -670,10 +668,7 @@ class _StudentState extends State<Student> {
                               borderRadius: BorderRadius.circular(10.r)),
                           primary: AppColors.buttonLinear),
                       onPressed: () {
-                        if (titlecolor2 &&
-                            univerColor &&
-                            _phoneOnClick &&
-                            _UniverOnClick) {
+                        if (titlecolor2 &&  _phoneOnClick) {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -688,24 +683,24 @@ class _StudentState extends State<Student> {
                                   phoneController:
                                       phoneController.text.split(' ').join(''),
                                   house: house,
-                                  addinformation: addinformation.text,
+                                  addinformation: '${addinformation.text}',
                                   numbervalue: '${numbervalue ? 1 : 2}'),
                             ),
                           );
                         } else {
-                          if (!titlecolor2) {
-                            titlecolor = Colors.red;
-                          }
-                          if (!univerColor) {
-                            univerColor1 = Colors.red;
-                          }
-                          if (!_phoneOnClick) {
-                            _phoneColor = Colors.red;
-                          }
-                          
-                          if (!_UniverOnClick) {
-                            _colorUniver = Colors.red;
-                          }
+                          // if (!titlecolor2) {
+                          //   titlecolor = Colors.red;
+                          // // }
+                          // if (!univerColor) {
+                          //   univerColor1 = Colors.red;
+                          // }
+                          // if (!_phoneOnClick) {
+                          //   _phoneColor = Colors.red;
+                          // }
+
+                          // if (!_UniverOnClick) {
+                          //   _colorUniver = Colors.red;
+                          // }
                           setState(() {});
                         }
                         print(

@@ -133,7 +133,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
     '5-kurs',
     '6-kurs',
   ];
-  var housecost = ["oylik", "kunlik", "uzoq muddatga"];
+  var housecost = ["Oylik", "Kunlik", "Uzoq muddatga"];
   final List<String> genderItems = ["O'g'il bola ", "Qiz bola"];
   var kvartira = [
     'Kvartira',
@@ -165,8 +165,8 @@ class _StudensEdits2State extends State<StudensEdits2> {
     "11",
   ];
   var kindOfMoment = [
-    'kunlik',
-    'oylik',
+    'Kunlik',
+    'Oylik',
   ];
   var rooms = [
     '1',
@@ -344,7 +344,11 @@ class _StudensEdits2State extends State<StudensEdits2> {
                   Column(
                     children: [
                       Row(
-                        children: [Text("Tuman")],
+                        children: [Text("Tuman",   style: TextStyle(
+                      color: AppColors.textColor,
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w500,
+                    ),)],
                       )
                     ],
                   ),
@@ -413,7 +417,11 @@ class _StudensEdits2State extends State<StudensEdits2> {
                     children: [
                       Row(
                         children: [
-                          Text("Manzil").tr(),
+                          Text("Manzil",   style: TextStyle(
+                      color: AppColors.textColor,
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w500,
+                    ),).tr(),
                         ],
                       ),
                       SizedBox(
@@ -487,8 +495,11 @@ class _StudensEdits2State extends State<StudensEdits2> {
                         children: [
                           Text(
                             "Metroga yaqinmi ?",
-                            style: TextStyle(
-                                fontSize: 18.sp, fontWeight: FontWeight.bold),
+                             style: TextStyle(
+                      color: AppColors.textColor,
+                      fontSize: 16.sp,
+                      fontWeight: FontWeight.w500,
+                    ),
                           ),
                         ],
                       ),
@@ -615,6 +626,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
                                 borderRadius: BorderRadius.circular(10.r),
                                 border: Border.all(color: _colorGender)),
                             child: DropdownButtonFormField(
+                               menuMaxHeight:150,
                               hint: Padding(
                                 padding: EdgeInsets.only(left: 8.w),
                                 child: Text(
@@ -670,6 +682,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
                                 borderRadius: BorderRadius.circular(10.r),
                                 border: Border.all(color: _colorGender)),
                             child: DropdownButtonFormField(
+                               menuMaxHeight:150,
                               hint: Padding(
                                 padding: EdgeInsets.only(left: 8.w),
                                 child: Text(
@@ -721,6 +734,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
                                 borderRadius: BorderRadius.circular(10.r),
                                 border: Border.all(color: _colorGender)),
                             child: DropdownButtonFormField(
+                               menuMaxHeight:150,
                               hint: Padding(
                                 padding: EdgeInsets.only(left: 8.w),
                                 child: Text(
@@ -914,7 +928,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Narxning turlanishi".tr(),
+                            "Ijara muddatini turi".tr(),
                             style: TextStyle(
                               color: AppColors.textColor,
                               fontSize: 14.sp,
