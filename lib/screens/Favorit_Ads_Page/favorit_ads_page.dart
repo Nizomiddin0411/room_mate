@@ -181,6 +181,24 @@ class _FavoritAdsState extends State<FavoritAds> {
                                                 Image: data.MyAds[index].images,
                                                 locations:
                                                     data.MyAds[index].location,
+                                            utileTrash: data
+                                                .MyAds[index].utilityTrash
+                                                .toString(),
+                                            utileColdWater: data
+                                                .MyAds[index]
+                                                .utilityColdWater
+                                                .toString(),
+                                            utileElictricity: data
+                                                .MyAds[index]
+                                                .utilityElectricity
+                                                .toString(),
+                                            utileGaz: data
+                                                .MyAds[index].unilityGaz
+                                                .toString(),
+                                            utileHotWater: data
+                                                .MyAds[index]
+                                                .utilityHotWater
+                                                .toString(),
                                               )));
                                 },
                                 child: Container(

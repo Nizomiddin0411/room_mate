@@ -169,6 +169,11 @@ class _AdsUsersState extends State<AdsUsers> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => AdsDetail(
+                                  utileHotWater: data.Ads[index].utilityHotWater.toString(),
+                                  utileElictricity: data.Ads[index].utilityElectricity.toString(),
+                                  utileGaz: data.Ads[index].unilityGaz.toString(),
+                                  utileTrash: data.Ads[index].utilityTrash.toString(),
+                                  utileColdWater: data.Ads[index].utilityColdWater.toString(),
                                   title: data.Ads[index].title.toString(),
                                   description:
                                       data.Ads[index].description.toString(),

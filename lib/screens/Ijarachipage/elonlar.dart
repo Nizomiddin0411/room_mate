@@ -138,10 +138,10 @@ class _ElonlarState extends State<Elonlar> {
               onTap: (String) {},
               tabs: [
                 Tab(
-                  child:Text("Ijarachi kerak").tr(),
+                  child: Text("Ijarachi kerak").tr(),
                 ),
                 Tab(
-                  child:Text("Ijaraga sherik kerak").tr(),
+                  child: Text("Ijaraga sherik kerak").tr(),
                 )
               ],
             ),
@@ -158,8 +158,10 @@ class _ElonlarState extends State<Elonlar> {
                     child: CircularProgressIndicator(),
                   );
                 }
-                if(data.Ads.isEmpty){
-                  return Center(child: Text("Ma'lumot yo'q"),);
+                if (data.Ads.isEmpty) {
+                  return Center(
+                    child: Text("Ma'lumot yo'q"),
+                  );
                 }
                 return ListView.builder(
                     shrinkWrap: true,
@@ -225,6 +227,11 @@ class _ElonlarState extends State<Elonlar> {
                                   Image: data.Ads[index].images ?? [],
                                   locations:
                                       data.Ads[index].location.toString(),
+                                  utileHotWater: data.Ads[index].utilityHotWater.toString(),
+                                  utileElictricity: data.Ads[index].utilityElectricity.toString(),
+                                  utileGaz: data.Ads[index].unilityGaz.toString(),
+                                  utileTrash: data.Ads[index].utilityTrash.toString(),
+                                  utileColdWater: data.Ads[index].utilityColdWater.toString(),
                                 ),
                               ),
                             );
@@ -248,9 +255,10 @@ class _ElonlarState extends State<Elonlar> {
                                         ? CachedNetworkImage(
                                             imageUrl:
                                                 "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.Ads[index].images!.first.image.toString()}",
-                                            placeholder: (context, url) => const Center(
-                                                child:
-                                                    CircularProgressIndicator()),
+                                            placeholder: (context, url) =>
+                                                const Center(
+                                                    child:
+                                                        CircularProgressIndicator()),
                                             errorWidget:
                                                 (context, url, error) =>
                                                     Image.asset(
@@ -325,21 +333,20 @@ class _ElonlarState extends State<Elonlar> {
                                               padding: EdgeInsets.fromLTRB(
                                                   1.w, 0, 8.w, 0),
                                               child: FavoriteButton(
-                                                isFavorite:
-                                                     (data.Ads[index]
-                                                                .favorite.toString() ==
-                                                            '0'
-                                                        ? false
-                                                        : true),
+                                                isFavorite: (data
+                                                            .Ads[index].favorite
+                                                            .toString() ==
+                                                        '0'
+                                                    ? false
+                                                    : true),
                                                 iconSize: 35.0,
                                                 valueChanged: (_isFavorite) {
                                                   // print('Is Favorite $_isFavorite)');
                                                   setState(() {
                                                     FavoriteChange()
                                                         .Favoritefetch(
-                                                      id:
-                                                          data.Ads[index].id
-                                                              .toString(),
+                                                      id: data.Ads[index].id
+                                                          .toString(),
                                                     );
                                                   });
                                                 },
@@ -371,7 +378,11 @@ class _ElonlarState extends State<Elonlar> {
                                                       fontSize: 24.sp),
                                                 ),
                                                 Text(
-                                                  data.Ads[index].rentType.toString() == '1' ? tr('Kuniga') : tr('Oyiga'),
+                                                  data.Ads[index].rentType
+                                                              .toString() ==
+                                                          '1'
+                                                      ? tr('Kuniga')
+                                                      : tr('Oyiga'),
                                                   style: const TextStyle(
                                                       color:
                                                           AppColors.mainColor),
@@ -458,8 +469,10 @@ class _ElonlarState extends State<Elonlar> {
                     child: CircularProgressIndicator(),
                   );
                 }
-                if(data.AdsForStudent.isEmpty){
-                  return Center(child: Text("Ma'lumot yo'q"),);
+                if (data.AdsForStudent.isEmpty) {
+                  return Center(
+                    child: Text("Ma'lumot yo'q"),
+                  );
                 }
                 return ListView.builder(
                     shrinkWrap: true,
@@ -567,6 +580,24 @@ class _ElonlarState extends State<Elonlar> {
                                           locations: data
                                               .AdsForStudent[index].location
                                               .toString(),
+                                          utileTrash: data
+                                              .AdsForStudent[index].utilityTrash
+                                              .toString(),
+                                          utileColdWater: data
+                                              .AdsForStudent[index]
+                                              .utilityColdWater
+                                              .toString(),
+                                          utileElictricity: data
+                                              .AdsForStudent[index]
+                                              .utilityElectricity
+                                              .toString(),
+                                          utileGaz: data
+                                              .AdsForStudent[index].unilityGaz
+                                              .toString(),
+                                          utileHotWater: data
+                                              .AdsForStudent[index]
+                                              .utilityHotWater
+                                              .toString(),
                                         )));
                           },
                           child: Container(
@@ -584,9 +615,10 @@ class _ElonlarState extends State<Elonlar> {
                                         ? CachedNetworkImage(
                                             imageUrl:
                                                 "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.AdsForStudent[index].images!.first.image.toString()}",
-                                            placeholder: (context, url) => const Center(
-                                                child:
-                                                    CircularProgressIndicator()),
+                                            placeholder: (context, url) =>
+                                                const Center(
+                                                    child:
+                                                        CircularProgressIndicator()),
                                             errorWidget:
                                                 (context, url, error) =>
                                                     Image.asset(
@@ -614,7 +646,6 @@ class _ElonlarState extends State<Elonlar> {
                                                     // ColorFilter.mode(Colors.red, BlendMode.colorBurn)
                                                   ),
                                                 )))
-
                                         : Image.asset(
                                             'assets/images/notImage.png',
                                             width: 324.w,
@@ -704,7 +735,12 @@ class _ElonlarState extends State<Elonlar> {
                                                       fontSize: 24.sp),
                                                 ),
                                                 Text(
-                                                  data.AdsForStudent[index].rentType.toString() == '1' ? tr('Kuniga') :  tr('Oyiga') ,
+                                                  data.AdsForStudent[index]
+                                                              .rentType
+                                                              .toString() ==
+                                                          '1'
+                                                      ? tr('Kuniga')
+                                                      : tr('Oyiga'),
                                                   style: const TextStyle(
                                                       color:
                                                           AppColors.mainColor),

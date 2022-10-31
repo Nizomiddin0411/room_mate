@@ -45,10 +45,21 @@ class AdsDetail extends StatefulWidget {
   String? inFloor;
   String? district;
   String? utility_bills;
+  String? utileElictricity;
+  String? utileGaz;
+  String? utileColdWater;
+  String? utileHotWater;
+  String? utileTrash;
   String? createData;
+  String? hidePhone;
   List<dynamic>? Image;
   AdsDetail({
     Key? key,
+    required this.utileElictricity,
+    required this.utileGaz,
+    required this.utileColdWater,
+    required this.utileHotWater,
+    required this.utileTrash,
     required this.locations,
     required this.Image,
     required this.roommate_count,
@@ -92,8 +103,12 @@ class _AdsDetailState extends State<AdsDetail> {
   late List<String> haveComfort = widget.comfort.toString().split(',');
   late List<int> haveInt = haveComfort.map(int.parse).toList();
   late List<String> comfort = [];
-  String comfortList = '';
 
+  String comfortList = '';
+  String forUser = '';
+  String forStudent = '';
+  late List<String> user = [];
+  late List<String> student = [];
   void isHaveComfort(List haveInt, listE) {
     for (int i in haveInt) {
       if (i == 1) {
@@ -125,6 +140,35 @@ class _AdsDetailState extends State<AdsDetail> {
     isHaveComfort(haveInt, comfort);
     comfortList = comfort.reduce((value, element) => value + ', ' + element);
 
+
+    // usermap.map((key, value) => null)
+    if (widget.utileElictricity.toString() == '1') {
+      user.add("elekto'r");
+    }if(widget.utileGaz.toString() == '1'){
+      user.add("gaz");
+    }if(widget.utileColdWater.toString() == '1'){
+      user.add("sovuq suv");
+    }if(widget.utileHotWater.toString() == '1'){
+      user.add("issiq suv");
+    }if( widget.utileTrash.toString() == '1'){
+      user.add("axlat");
+    }if(widget.utileElictricity.toString() == '2'){
+      student.add("elekto'r");
+    }if(widget.utileGaz.toString() == '2'){
+      student.add('gaz');
+    }if(widget.utileHotWater.toString() == '2'){
+      student.add('issiq suv');
+    }if(widget.utileColdWater.toString() == '2'){
+      student.add('sovuq suv');
+    }if(widget.utileTrash.toString() == '2'){
+      student.add('axlat');
+    }
+    if(user.isNotEmpty) {
+      forUser = user.reduce((value, element) => value + ', ' + element);
+    }
+    if(student.isNotEmpty) {
+      forStudent = student.reduce((value, element) => value + ', ' + element);
+    }
   }
 
   @override
@@ -178,8 +222,8 @@ class _AdsDetailState extends State<AdsDetail> {
                                   ? CachedNetworkImage(
                                       imageUrl:
                                           "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${widget.Image![index1].image.toString()}",
-                                      placeholder: (context, url) =>
-                                          Center(child: CircularProgressIndicator()),
+                                      placeholder: (context, url) => Center(
+                                          child: CircularProgressIndicator()),
                                       errorWidget: (context, url, error) =>
                                           Image.asset(
                                         'assets/images/notImage.png',
@@ -196,11 +240,11 @@ class _AdsDetailState extends State<AdsDetail> {
                                   //         fit: BoxFit.cover,
                                   //       )
                                   : Image.asset(
-                                          'assets/images/notImage.png',
-                                          width: 324.w,
-                                          height: 235.h,
-                                          fit: BoxFit.cover,
-                                        );
+                                      'assets/images/notImage.png',
+                                      width: 324.w,
+                                      height: 235.h,
+                                      fit: BoxFit.cover,
+                                    );
                             },
                           ),
                         );
@@ -255,7 +299,9 @@ class _AdsDetailState extends State<AdsDetail> {
                           Padding(
                             padding: EdgeInsets.fromLTRB(1.w, 0, 8.w, 0),
                             child: FavoriteButton(
-                              isFavorite: widget.favorite.toString() == '0' ? false : true,
+                              isFavorite: widget.favorite.toString() == '0'
+                                  ? false
+                                  : true,
                               iconSize: 35.0,
                               valueChanged: (_isFavorite) {
                                 // print('Is Favorite $_isFavorite)');
@@ -352,7 +398,7 @@ class _AdsDetailState extends State<AdsDetail> {
                         SizedBox(
                           width: 10.w,
                         ),
-                         const Text(
+                        const Text(
                           "Joylashuvni ko'rish",
                           style: TextStyle(color: AppColors.mainColor),
                         ).tr()
@@ -392,17 +438,17 @@ class _AdsDetailState extends State<AdsDetail> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      const Padding(
-                                        padding: EdgeInsets.all(7.0),
-                                        child: Icon(
-                                          Icons.mail_outline,
-                                          color: AppColors.mainColor,
-                                        ),
+                                      SizedBox(
+                                        width: 2.w,
                                       ),
-                                      Padding(
-                                        padding: EdgeInsets.all(10.0),
-                                        child: const Text('Aloqa').tr(),
-                                      )
+                                      const Icon(
+                                        Icons.mail_outline,
+                                        color: AppColors.mainColor,
+                                      ),
+                                      const Text('Aloqa').tr(),
+                                      SizedBox(
+                                        width: 2.w,
+                                      ),
                                     ],
                                   ),
                                 ),
@@ -444,45 +490,94 @@ class _AdsDetailState extends State<AdsDetail> {
                           //   ),
                           // )
                           : Container(),
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(8.w, 0, 8.w, 12.h),
-                        child: InkWell(
-                          onTap: () async {
-                            final Uri launchUri = Uri(
-                              scheme: 'tel',
-                              path: widget.phoneNumber,
-                            );
-                            await launchUrl(launchUri);
-                          },
-                          child: Container(
-                            width: 170.w,
-                            height: 42.h,
-                            decoration: BoxDecoration(
-                              border: Border.all(color: AppColors.mainColor),
-                              borderRadius: BorderRadius.circular(10.r),
-                            ),
-                            child: Row(
-                              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                const Padding(
-                                  padding: EdgeInsets.all(5.0),
-                                  child: Icon(
-                                    Icons.phone,
-                                    color: AppColors.mainColor,
+                      widget.phoneNumberShow.toString() == '2' &&
+                              widget.type == '1'
+                          ? Padding(
+                              padding: EdgeInsets.fromLTRB(8.w, 0, 8.w, 12.h),
+                              child: InkWell(
+                                onTap: () async {
+                                  print(
+                                      "${widget.phoneNumberShow}____________");
+                                  final Uri launchUri = Uri(
+                                    scheme: 'tel',
+                                    path: widget.phoneNumber,
+                                  );
+                                  await launchUrl(launchUri);
+                                },
+                                child: Container(
+                                  width: 170.w,
+                                  height: 42.h,
+                                  decoration: BoxDecoration(
+                                    border:
+                                        Border.all(color: AppColors.mainColor),
+                                    borderRadius: BorderRadius.circular(10.r),
+                                  ),
+                                  child: Row(
+                                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      const Padding(
+                                        padding: EdgeInsets.all(5.0),
+                                        child: Icon(
+                                          Icons.phone,
+                                          color: AppColors.mainColor,
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.all(5.0),
+                                        child: Text(
+                                          "${widget.phoneNumber}",
+                                          style: TextStyle(fontSize: 14.sp),
+                                        ).tr(),
+                                      )
+                                    ],
                                   ),
                                 ),
-                                Padding(
-                                  padding: const EdgeInsets.all(5.0),
-                                  child: Text(
-                                    "${widget.phoneNumber}",
-                                    style: TextStyle(fontSize: 14.sp),
-                                  ).tr(),
+                              ),
+                            )
+                          : widget.type == '2'
+                              ? Padding(
+                                  padding:
+                                      EdgeInsets.fromLTRB(8.w, 0, 8.w, 12.h),
+                                  child: InkWell(
+                                    onTap: () async {
+                                      final Uri launchUri = Uri(
+                                        scheme: 'tel',
+                                        path: widget.phoneNumber,
+                                      );
+                                      await launchUrl(launchUri);
+                                    },
+                                    child: Container(
+                                      width: 170.w,
+                                      height: 42.h,
+                                      decoration: BoxDecoration(
+                                        border: Border.all(
+                                            color: AppColors.mainColor),
+                                        borderRadius:
+                                            BorderRadius.circular(10.r),
+                                      ),
+                                      child: Row(
+                                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          const Padding(
+                                            padding: EdgeInsets.all(5.0),
+                                            child: Icon(
+                                              Icons.phone,
+                                              color: AppColors.mainColor,
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.all(5.0),
+                                            child: Text(
+                                              "${widget.phoneNumber}",
+                                              style: TextStyle(fontSize: 14.sp),
+                                            ).tr(),
+                                          )
+                                        ],
+                                      ),
+                                    ),
+                                  ),
                                 )
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
+                              : SizedBox()
                     ],
                   )
                 ],
@@ -497,7 +592,7 @@ class _AdsDetailState extends State<AdsDetail> {
                 padding: const EdgeInsets.all(10.0),
                 child: Column(
                   children: [
-                   widget.type == '1'
+                    widget.type == '1'
                         ? Text(
                             'Sherik izlayabmiz',
                             style: TextStyle(
@@ -537,7 +632,7 @@ class _AdsDetailState extends State<AdsDetail> {
                             height: 6.h,
                           )
                         : Container(),
-                   widget.type == '1'
+                    widget.type == '1'
                         ? Row(
                             children: [
                               Container(
@@ -745,7 +840,7 @@ class _AdsDetailState extends State<AdsDetail> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: SizedBox(
-                            width: MediaQuery.of(context).size.width -150.w,
+                            width: MediaQuery.of(context).size.width - 150.w,
                             child: Text(
                               "${widget.region} | ${widget.district}",
                               style: TextStyle(fontSize: 14.sp),
@@ -803,7 +898,7 @@ class _AdsDetailState extends State<AdsDetail> {
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
                             tr("Metroga yaqinmi") +
-                                " ${widget.subway == '1' ? tr('Ha') : tr("Yo'q")}",
+                                ":  ${widget.subway == '1' ? tr('Ha') : tr("Yo'q")}",
                             style: TextStyle(fontSize: 14.sp),
                           ),
                         )
@@ -831,7 +926,9 @@ class _AdsDetailState extends State<AdsDetail> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
-                            tr(widget.houseType == '1' ? 'Kvartira' : 'Xonadon') +
+                            tr(widget.houseType == '1'
+                                    ? 'Kvartira'
+                                    : 'Xonadon') +
                                 " | ${widget.countRoom} xonali" +
                                 " | ${widget.inFloor}/${widget.floorsCount} etajda",
                             style: TextStyle(fontSize: 14.sp),
@@ -860,9 +957,12 @@ class _AdsDetailState extends State<AdsDetail> {
                         Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
-                            tr(widget.type == '1' ? "Uy egasi bilan birga yashshga rozimi:":"Uy egasi birga yashaydimi:") +
-                                (widget.liveWithOwner == '1' ? tr('Ha') :
-                                    tr("Yo'q")),
+                            tr(widget.type == '1'
+                                    ? "Uy egasi bilan birga yashshga rozimi:"
+                                    : "Uy egasi birga yashaydimi:") +
+                                (widget.liveWithOwner == '1'
+                                    ? tr('Ha')
+                                    : tr("Yo'q")),
                             style: TextStyle(fontSize: 14.sp),
                           ),
                         )
@@ -872,7 +972,6 @@ class _AdsDetailState extends State<AdsDetail> {
                       height: 6.h,
                     ),
                     Row(
-                      
                       children: [
                         Container(
                           width: 40.w,
@@ -928,12 +1027,77 @@ class _AdsDetailState extends State<AdsDetail> {
                           child: SizedBox(
                               width: MediaQuery.of(context).size.width - 130.w,
                               child: Text(
-                                tr("Kommunal to’lovlarni to’laydi")+" : "+"${widget.utility_bills == '1' ? tr('Uy egasi') : tr('Ijarachi')}",
+                                tr("Kommunal to’lovlarni to’laydi") +
+                                    " : " +
+                                    "${widget.utility_bills == '1' ? tr('Uy egasi') : tr('Ijarachi')}",
                                 style: TextStyle(fontSize: 14.sp),
                               )),
                         )
                       ],
                     ),
+                    SizedBox(
+                      height: 6.h,
+                    ),
+                    user.isNotEmpty? Row(
+                      children: [
+                        Container(
+                          width: 40.w,
+                          height: 40.h,
+                          decoration: BoxDecoration(
+                            color: AppColors.colorBack2,
+                            borderRadius: BorderRadius.circular(8.r),
+                          ),
+                          child: const Center(
+                              child: Icon(
+                            Icons.countertops,
+                            color: AppColors.error,
+                          )),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: SizedBox(
+                              width: MediaQuery.of(context).size.width - 130.w,
+                              child: Text(
+                                user.isNotEmpty?
+                                "uy egasi to'laydi: ${forUser}"
+                                :'',
+                                style: TextStyle(fontSize: 14.sp),
+                              )),
+                        )
+                      ],
+                    ) : SizedBox(),
+                    SizedBox(
+                      height: 6.h,
+                    ),
+                    student.isNotEmpty? Row(
+                      children: [
+                        Container(
+                          width: 40.w,
+                          height: 40.h,
+                          decoration: BoxDecoration(
+                            color: AppColors.colorBack2,
+                            borderRadius: BorderRadius.circular(8.r),
+                          ),
+                          child: const Center(
+                              child: Icon(
+                                Icons.countertops,
+                                color: AppColors.error,
+                              )),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: SizedBox(
+                              width: MediaQuery.of(context).size.width - 130.w,
+                              child: Text(
+                                student.isNotEmpty?
+                                "ijarachi to'laydi: ${forStudent}"
+                                    :''
+                                ,
+                                style: TextStyle(fontSize: 14.sp),
+                              )),
+                        )
+                      ],
+                    ) : SizedBox(),
                     SizedBox(
                       height: 6.h,
                     ),
@@ -957,7 +1121,7 @@ class _AdsDetailState extends State<AdsDetail> {
                           child: SizedBox(
                               width: MediaQuery.of(context).size.width - 130.w,
                               child: Text(
-                                "${widget.cost}/${widget.rentType == '1' ? tr('Kunlik') : tr('Oylik')}",
+                                "${widget.cost} ${widget.costTayp.toString() == '1' ? "So'm" : "USD"}/${widget.rentType == '1' ? tr('Kuniga') : tr('Oyiga')}",
                                 style: TextStyle(fontSize: 14.sp),
                               )),
                         )
@@ -967,7 +1131,7 @@ class _AdsDetailState extends State<AdsDetail> {
                       height: 6.h,
                     ),
                     Text(
-                      tr("Qo'shimcha qulayliklar"),
+                      tr("Kuydagi qo'shimcha qulayliklar"),
                       style: TextStyle(
                           fontSize: 18.sp,
                           fontWeight: FontWeight.bold,
@@ -1019,8 +1183,8 @@ showAlertDialog(BuildContext context, int askedid) {
     child: Text("Ruhsat olish").tr(),
     onPressed: () async {
       print(askedid);
-     await ChatPermit().fetchApprov(Askid: askedid.toString());
-     Navigator.of(context).pop();
+      await ChatPermit().fetchApprov(Askid: askedid.toString());
+      Navigator.of(context).pop();
     },
   );
   Widget notButton = ElevatedButton(

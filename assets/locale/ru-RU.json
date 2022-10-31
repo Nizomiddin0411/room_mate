@@ -106,7 +106,7 @@
   "Metroga yaqin bo'lsin": "Рядом с метро",
   "Kvartira": "Квартира",
   "xona": "комната",
-  "Metroga yaqinmi": "Рядом с метро?",
+  "Metroga yaqinmi": "Рядом с метро",
   "Ha": "Да",
   "Yo'q": "Нет",
   "Rozi": "Согласен",
@@ -191,5 +191,6 @@
   "Rasm yuklash": "Загрузить изображение",
   "Muvaffaqiyatli e'lon yaratildi !!!": "Успешное объявление создано !!!",
   "Siz muvaffaqiyatli ro’yxatdan o’tdingiz !!!": "Вы успешно зарегистрировались !!!",
-  "Asosiyga qaytish": "Вернуться к основному"
+  "Asosiyga qaytish": "Вернуться к основному",
+  "Bildirishnoma": "Уведомление"
 }
