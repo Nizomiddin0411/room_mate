@@ -1195,7 +1195,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                               _roomCountOnClick &&
                               _floorsCountOnClick &&
                               _inFloorOnClick &&
-                              _costTypeOnClick) {
+                              _costTypeOnClick && _priceOnClick) {
                             Navigator.push(
                               context,
                               MaterialPageRoute(

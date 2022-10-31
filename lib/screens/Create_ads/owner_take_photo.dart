@@ -1,13 +1,10 @@
 import 'dart:io';
-
 import 'package:dotted_border/dotted_border.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:steps_indicator/steps_indicator.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
-import 'package:talaba_uy/screens/Create_ads/owner_photo.dart';
 class OwnerPhotoAdds extends StatefulWidget {
   const OwnerPhotoAdds({Key? key}) : super(key: key);
 

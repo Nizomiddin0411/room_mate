@@ -103,17 +103,11 @@ class _AdsPhotoEditState extends State<AdsPhotoEdit> {
     // TODO: implement initState
     super.initState();
     FileList.insert(0, File(''));
-    FileList.insert(1, File(''));
-    FileList.insert(2, File(''));
-    FileList.insert(3, File(''));
-    FileList.insert(4, File(''));
-    FileList.insert(3, File(''));
+
     FileExist.insert(0, false);
     FileExist.insert(1, false);
     FileExist.insert(2, false);
-    FileExist.insert(3, false);
-    FileExist.insert(4, false);
-    FileExist.insert(5, false);
+
   }
 
   @override
@@ -375,8 +369,9 @@ class _AdsPhotoEditState extends State<AdsPhotoEdit> {
                                                         color: Colors.white,
                                                       ),
                                                     ),
-                                                    onTap: () async {
+                                                    onTap: ()  {
                                                       FileList.removeAt(index);
+                                                      print("aaa");
                                                       // index -= 4;
                                                       sum -= 1;
                                                       setState(() {});
@@ -449,7 +444,8 @@ class _AdsPhotoEditState extends State<AdsPhotoEdit> {
                               // print(widget.location.toString() + 'location');
                               // print(widget.cost_period.toString() + 'cost');
 
-                              load.PostUser(
+                            var data =  load.PostUserEdit(
+                                id: widget.id,
                                 titleController: widget.titleController,
                                 roommate_gender: widget.roommate_gender,
                                 gender_matter: widget.gender_matter,
@@ -487,48 +483,48 @@ class _AdsPhotoEditState extends State<AdsPhotoEdit> {
                               setState(() {
                                 loading = load.isLoading;
                               });
-                              var data = await EditAdsService().FetchAdsEdit(
-                                id: widget.id.toString(),
-                                titleController: widget.titleController,
-                                roommate_gender: widget.roommate_gender,
-                                gender_matter: widget.gender_matter,
-                                district_id: widget.district_id,
-                                subway: widget.subway,
-                                addressController: widget.addressController,
-                                university_id: widget.university_id,
-                                university_id_matter:
-                                    widget.university_id_matter,
-                                phoneController: widget.phoneController,
-                                house_type: widget.house_type,
-                                rent_type: widget.rent_type,
-                                room_count: widget.room_count,
-                                floors_count: widget.floors_count,
-                                in_floor: widget.in_floor,
-                                costController: widget.costController,
-                                cost_type: widget.cost_type,
-                                live_with_owner: widget.live_with_owner,
-                                utility_electricity: widget.utility_electricity,
-                                unility_gaz: widget.unility_gaz,
-                                utility_hot_water: widget.utility_hot_water,
-                                utility_cold_water: widget.utility_cold_water,
-                                utility_trash: widget.utility_trash,
-                                comfort: widget.comfort,
-                                description: widget.description,
-                                location: widget.location,
-                                cost_period: widget.cost_period,
-                                file1: FileExist[0] ? FileList[0] : FileList[3],
-                                file2: FileExist[1] ? FileList[1] : FileList[4],
-                                file3: FileExist[2] ? FileList[2] : FileList[5],
-                              );
+                              // var data = await EditAdsService().FetchAdsEdit(
+                              //   id: widget.id.toString(),
+                              //   titleController: widget.titleController,
+                              //   roommate_gender: widget.roommate_gender,
+                              //   gender_matter: widget.gender_matter,
+                              //   district_id: widget.district_id,
+                              //   subway: widget.subway,
+                              //   addressController: widget.addressController,
+                              //   university_id: widget.university_id,
+                              //   university_id_matter:
+                              //       widget.university_id_matter,
+                              //   phoneController: widget.phoneController,
+                              //   house_type: widget.house_type,
+                              //   rent_type: widget.rent_type,
+                              //   room_count: widget.room_count,
+                              //   floors_count: widget.floors_count,
+                              //   in_floor: widget.in_floor,
+                              //   costController: widget.costController,
+                              //   cost_type: widget.cost_type,
+                              //   live_with_owner: widget.live_with_owner,
+                              //   utility_electricity: widget.utility_electricity,
+                              //   unility_gaz: widget.unility_gaz,
+                              //   utility_hot_water: widget.utility_hot_water,
+                              //   utility_cold_water: widget.utility_cold_water,
+                              //   utility_trash: widget.utility_trash,
+                              //   comfort: widget.comfort,
+                              //   description: widget.description,
+                              //   location: widget.location,
+                              //   cost_period: widget.cost_period,
+                              //   file1: FileExist[0] ? FileList[0] : FileList[3],
+                              //   file2: FileExist[1] ? FileList[1] : FileList[4],
+                              //   file3: FileExist[2] ? FileList[2] : FileList[5],
+                              // );
                               setState(() {});
-                              if (data['status']) {
+                             
                                 Navigator.pushAndRemoveUntil(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
                                             CreateSuccedful()),
                                     (route) => false);
-                              } else {
+                              
                                 // print(widget.id! + 'title');
                                 // print(widget.roommate_gender.toString() +
                                 //     'gender');
@@ -574,10 +570,8 @@ class _AdsPhotoEditState extends State<AdsPhotoEdit> {
                                 //     'qoshimcha');
                                 // print(widget.location.toString() + 'location');
                                 // print(widget.cost_period.toString() + 'cost');
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                    SnackBar(content: Text(data['message'])));
-                              }
-                            },
+                                
+                              },
                             child: Text(
                               "Keyingi".tr(),
                               style: TextStyle(

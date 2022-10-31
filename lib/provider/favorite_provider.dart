@@ -3,6 +3,7 @@
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
+import 'package:talaba_uy/services/user_create_ads/post_ads_edit.dart';
 
 import '../models/get_favorite_model.dart';
 import '../models/get_my_ads_model.dart';
@@ -143,4 +144,80 @@ class FavoriteProvider extends ChangeNotifier{
     // isload = false;
 
   }
+
+  Future<void> PostUserEdit({
+    required String? id,
+    required String? titleController,
+    required String? roommate_gender,
+    required String? gender_matter,
+    required String? district_id,
+    required String? subway,
+    required String? addressController,
+    required String? university_id,
+    required String? university_id_matter,
+    required String? phoneController,
+    required String? house_type,
+    required String? rent_type,
+    required String? room_count,
+    required String? floors_count,
+    required String? in_floor,
+    required String? costController,
+    required String? cost_type,
+    required String? live_with_owner,
+    required String? utility_electricity,
+    required String? unility_gaz,
+    required String? utility_hot_water,
+    required String? utility_cold_water,
+    required String? utility_trash,
+    required String? comfort,
+    required String? description,
+    required String? location,
+    required File file1,
+    required File file2,
+    required File file3,
+    required String? cost_period,
+
+  }) async{
+    _setPostAds(false);
+    // isload = true;
+   await EditAdsService().FetchAdsEdit(
+    id: id.toString(),
+      titleController: titleController,
+      roommate_gender: roommate_gender,
+      gender_matter: gender_matter,
+      district_id: district_id,
+      subway: subway,
+      addressController: addressController,
+      university_id: university_id,
+      university_id_matter:university_id_matter,
+      phoneController: phoneController,
+      house_type: house_type,
+      rent_type: rent_type,
+      room_count: room_count,
+      floors_count: floors_count,
+      in_floor: in_floor,
+      costController: costController,
+      cost_type: cost_type,
+      live_with_owner: live_with_owner,
+      utility_electricity: utility_electricity,
+      unility_gaz: unility_gaz,
+      utility_hot_water: utility_hot_water,
+      utility_cold_water: utility_cold_water,
+      utility_trash: utility_trash,
+      comfort: comfort,
+      description: description,
+      location: location,
+      file1: file1,
+      // FileExist[0] ? FileList[0] : FileList[3],
+      cost_period: cost_period,
+      file2: file2,
+      // FileExist[1] ? FileList[1] : FileList[4],
+      file3: file3,
+      // FileExist[2] ? FileList[2] : FileList[5],
+    );
+    _setPostAds(true);
+    // isload = false;
+
+  }
 }
+
