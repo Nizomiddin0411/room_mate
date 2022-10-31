@@ -5,6 +5,7 @@ import 'package:talaba_uy/screens/Autorization/LoginPage.dart';
 
 import '../../core/const/app_colors.dart';
 class SuccedfulPage extends StatefulWidget {
+
   const SuccedfulPage({Key? key}) : super(key: key);
 
   @override
@@ -16,7 +17,7 @@ class _SuccedfulPageState extends State<SuccedfulPage> {
   Widget build(BuildContext context) {
     return  Scaffold(
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(25, 115, 25, 100),
+        padding:  EdgeInsets.fromLTRB(25.w, 115.h, 25.w, 100.h),
         child: Column(
           children: [
             SizedBox(
@@ -25,8 +26,8 @@ class _SuccedfulPageState extends State<SuccedfulPage> {
             Center(
                 child:Image.asset('assets/images/illustration.png')
             ),
-            SizedBox(height: 50,),
-            Text("Siz muvaffaqiyatli ro’yxatdan o’tdingiz !!! \n",style: TextStyle(fontSize: 18),),
+            SizedBox(height: 50.h,),
+            Text("Siz muvaffaqiyatli ro’yxatdan o’tdingiz !!!",style:  TextStyle(fontSize: 18.sp),).tr(),
             SizedBox(height: 100.h,),
             ElevatedButton(
               onPressed: () {

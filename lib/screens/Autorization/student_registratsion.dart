@@ -54,8 +54,8 @@ class _StudentUserState extends State<StudentUser> {
   String drowdown2 = '';
 
   final List<String> genderItems = [
-    'Ayol',
-    'Erkak',
+    "O'g'il",
+    'Qiz',
   ];
   final List<String> kursingizItems = [
     '1 ',
@@ -123,6 +123,11 @@ class _StudentUserState extends State<StudentUser> {
                   Row(
                     children: [
                       Text("Telefon raqami").tr(),
+                      SizedBox(width: 165.w,),
+                           Text(
+                            "Ko’rinmasin",
+                            style: TextStyle(fontSize: 14.sp),
+                          ),
                     ],
                   ),
                   SizedBox(
@@ -132,7 +137,7 @@ class _StudentUserState extends State<StudentUser> {
                     children: [
                       Container(
                         height: 80.h,
-                        width: 250.w,
+                        width: 240.w,
                         child: TextFormField(
                           inputFormatters: [
                             TextInputMask(
@@ -146,7 +151,7 @@ class _StudentUserState extends State<StudentUser> {
                             if (e!.length > 12) {
                               return null;
                             } else {
-                              return '12 ta raqam kiriting';
+                              return '9 ta raqam kiriting';
                             }
                           },
                           keyboardType: TextInputType.phone,
@@ -162,9 +167,9 @@ class _StudentUserState extends State<StudentUser> {
                       ),
                       Column(
                         children: [
-                          Text("Ko’rinmasin"),
+                     
                           SizedBox(
-                            height: 10,
+                            height: 10.h,
                           ),
                           Checkbox(
                             value: hidenumber,
@@ -191,7 +196,7 @@ class _StudentUserState extends State<StudentUser> {
                     ],
                   ),
                   SizedBox(
-                    height: 5,
+                    height: 5.h,
                   ),
                   Column(
                     children: [
@@ -201,34 +206,33 @@ class _StudentUserState extends State<StudentUser> {
                           contentPadding: EdgeInsets.zero,
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: jinsiColor),
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(10.r),
                           ),
                         ),
                         isExpanded: true,
-                        hint: const Text(
+                        hint: Text(
                           "Jinsni tanlang",
-                          style: TextStyle(fontSize: 14),
+                          style: TextStyle(fontSize: 14.sp),
                         ).tr(),
                         icon: const Icon(
                           Icons.arrow_drop_down,
                           color: Colors.black45,
                         ),
-                        itemPadding: EdgeInsets.only(left: 10, right: 15),
-                        itemHeight: 30,
-                        iconSize: 30,
-                        buttonHeight: 60,
-                        buttonPadding:
-                            const EdgeInsets.only(left: 20, right: 10),
+                        itemPadding: EdgeInsets.only(left: 10.w, right: 15.w),
+                        itemHeight: 30.h,
+                        iconSize: 30.sp,
+                        buttonHeight: 60.h,
+                        buttonPadding: EdgeInsets.only(left: 20.w, right: 10.w),
                         dropdownDecoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
+                          borderRadius: BorderRadius.circular(15.r),
                         ),
                         items: genderItems
                             .map((item) => DropdownMenuItem<String>(
                                   value: item,
                                   child: Text(
                                     item,
-                                    style: const TextStyle(
-                                      fontSize: 14,
+                                    style: TextStyle(
+                                      fontSize: 14.sp,
                                     ),
                                   ),
                                 ))
@@ -256,7 +260,7 @@ class _StudentUserState extends State<StudentUser> {
                 ],
               ),
               SizedBox(
-                height: 10,
+                height: 10.h,
               ),
               Column(
                 children: [
@@ -266,7 +270,7 @@ class _StudentUserState extends State<StudentUser> {
                     ],
                   ),
                   SizedBox(
-                    height: 5,
+                    height: 5.h,
                   ),
                   Column(
                     children: [
@@ -355,7 +359,7 @@ class _StudentUserState extends State<StudentUser> {
                     ],
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 10.h,
                   ),
                 ],
               ),
@@ -379,25 +383,25 @@ class _StudentUserState extends State<StudentUser> {
                                 isDense: true,
                                 contentPadding: EdgeInsets.zero,
                                 border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
+                                  borderRadius: BorderRadius.circular(10.r),
                                 ),
                               ),
                               isExpanded: true,
                               isDense: true,
-                              hint: const Text(
+                              hint: Text(
                                 "Yo'nalishni tanlang",
-                                style: TextStyle(fontSize: 14),
+                                style: TextStyle(fontSize: 14.sp),
                               ).tr(),
                               icon: const Icon(
                                 Icons.arrow_drop_down,
                                 color: Colors.black45,
                               ),
-                              iconSize: 30,
-                              buttonHeight: 60,
+                              iconSize: 30.sp,
+                              buttonHeight: 60.h,
                               buttonPadding:
-                                  const EdgeInsets.only(left: 20, right: 10),
+                                  EdgeInsets.only(left: 20.w, right: 10.w),
                               dropdownDecoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
+                                borderRadius: BorderRadius.circular(15.r),
                               ),
                               items: data.fakultet
                                   .map(
@@ -434,23 +438,23 @@ class _StudentUserState extends State<StudentUser> {
                                 isDense: true,
                                 contentPadding: EdgeInsets.zero,
                                 border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
+                                  borderRadius: BorderRadius.circular(10.r),
                                 ),
                               ),
                               isExpanded: true,
                               isDense: true,
-                              hint: const Text(
+                              hint: Text(
                                 "Yo'nalishni tanlang ",
-                                style: TextStyle(fontSize: 14),
+                                style: TextStyle(fontSize: 14.sp),
                               ).tr(),
                               icon: const Icon(
                                 Icons.arrow_drop_down,
                                 color: Colors.black45,
                               ),
-                              iconSize: 30,
-                              buttonHeight: 60,
+                              iconSize: 30.sp,
+                              buttonHeight: 60.h,
                               buttonPadding:
-                                  const EdgeInsets.only(left: 20, right: 10),
+                                  EdgeInsets.only(left: 20.w, right: 10.w),
                               dropdownDecoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(15),
                               ),
@@ -462,7 +466,7 @@ class _StudentUserState extends State<StudentUser> {
                 ],
               ),
               SizedBox(
-                height: 10,
+                height: 10.r,
               ),
               Column(
                 children: [
@@ -472,7 +476,7 @@ class _StudentUserState extends State<StudentUser> {
                     ],
                   ),
                   SizedBox(
-                    height: 5,
+                    height: 5.r,
                   ),
                   Column(
                     children: [
@@ -483,33 +487,32 @@ class _StudentUserState extends State<StudentUser> {
                           isDense: true,
                           contentPadding: EdgeInsets.zero,
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(10.r),
                           ),
                         ),
                         isDense: true,
                         buttonElevation: 2,
-                        hint: const Text(
+                        hint: Text(
                           "Kursni tanlang",
-                          style: TextStyle(fontSize: 14),
+                          style: TextStyle(fontSize: 14.sp),
                         ).tr(),
                         icon: const Icon(
                           Icons.arrow_drop_down,
                           color: Colors.black45,
                         ),
-                        iconSize: 30,
-                        buttonHeight: 60,
-                        buttonPadding:
-                            const EdgeInsets.only(left: 20, right: 10),
+                        iconSize: 30.sp,
+                        buttonHeight: 60.h,
+                        buttonPadding: EdgeInsets.only(left: 20.w, right: 10.w),
                         dropdownDecoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(15),
+                          borderRadius: BorderRadius.circular(15.r),
                         ),
                         items: kursingizItems
                             .map((item) => DropdownMenuItem<String>(
                                   value: item,
                                   child: Text(
                                     item,
-                                    style: const TextStyle(
-                                      fontSize: 14,
+                                    style: TextStyle(
+                                      fontSize: 14.sp,
                                     ),
                                   ),
                                 ))
@@ -527,9 +530,7 @@ class _StudentUserState extends State<StudentUser> {
                   ),
                 ],
               ),
-              SizedBox(
-                height: 10,
-              ),
+              SizedBox(height: 10.h),
               Column(
                 children: [
                   Row(
@@ -538,7 +539,7 @@ class _StudentUserState extends State<StudentUser> {
                     ],
                   ),
                   SizedBox(
-                    height: 5,
+                    height: 5.h,
                   ),
                   Column(
                     children: [
@@ -549,22 +550,21 @@ class _StudentUserState extends State<StudentUser> {
                           isDense: true,
                           contentPadding: EdgeInsets.zero,
                           border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(10),
+                            borderRadius: BorderRadius.circular(10.r),
                           ),
                         ),
                         isExpanded: true,
-                        hint: const Text(
+                        hint: Text(
                           "Viloyatni tanlang",
-                          style: TextStyle(fontSize: 14),
+                          style: TextStyle(fontSize: 14.sp),
                         ).tr(),
                         icon: const Icon(
                           Icons.arrow_drop_down,
                           color: Colors.black45,
                         ),
-                        iconSize: 30,
-                        buttonHeight: 60,
-                        buttonPadding:
-                            const EdgeInsets.only(left: 20, right: 10),
+                        iconSize: 30.sp,
+                        buttonHeight: 60.h,
+                        buttonPadding: EdgeInsets.only(left: 20.w, right: 10.w),
                         dropdownDecoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
                         ),
@@ -577,8 +577,8 @@ class _StudentUserState extends State<StudentUser> {
                             value: e.name ?? "",
                             child: Text(
                               e.name.toString(),
-                              style: const TextStyle(
-                                fontSize: 14,
+                              style: TextStyle(
+                                fontSize: 14.sp,
                               ),
                             ),
                           ),
@@ -605,7 +605,7 @@ class _StudentUserState extends State<StudentUser> {
                 ],
               ),
               SizedBox(
-                height: 10,
+                height: 10.h,
               ),
               Column(
                 children: [
@@ -615,7 +615,7 @@ class _StudentUserState extends State<StudentUser> {
                     ],
                   ),
                   SizedBox(
-                    height: 5,
+                    height: 5.h,
                   ),
                   data.istuman
                       ? Column(
@@ -631,35 +631,35 @@ class _StudentUserState extends State<StudentUser> {
                                 ),
                               ),
                               isExpanded: true,
-                              hint: const Text(
+                              hint: Text(
                                 "Tumanni tanlang",
-                                style: TextStyle(fontSize: 14),
+                                style: TextStyle(fontSize: 14.sp),
                               ).tr(),
                               icon: const Icon(
                                 Icons.arrow_drop_down,
                                 color: Colors.black45,
                               ),
-                              iconSize: 30,
-                              buttonHeight: 60,
+                              iconSize: 30.sp,
+                              buttonHeight: 60.h,
                               buttonPadding:
-                                  const EdgeInsets.only(left: 20, right: 10),
+                                  EdgeInsets.only(left: 20.w, right: 10.w),
                               dropdownDecoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(15),
                               ),
                               items: data.tumanlar
                                   .map(
                                     (e) => DropdownMenuItem<String>(
-                                      onTap:(){
-                                         print("${e.name}${e.id}");
-                            data.districtId = e.id.toString();
+                                      onTap: () {
+                                        print("${e.name}${e.id}");
+                                        data.districtId = e.id.toString();
                                       },
                                       value: data.istuman
                                           ? e.name.toString()
                                           : data.defaultvalue1,
                                       child: Text(
                                         e.name.toString(),
-                                        style: const TextStyle(
-                                          fontSize: 14,
+                                        style: TextStyle(
+                                          fontSize: 14.sp,
                                         ),
                                       ),
                                     ),
@@ -684,25 +684,25 @@ class _StudentUserState extends State<StudentUser> {
                                 isDense: true,
                                 contentPadding: EdgeInsets.zero,
                                 border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10),
+                                  borderRadius: BorderRadius.circular(10.r),
                                 ),
                               ),
                               isExpanded: true,
                               isDense: true,
-                              hint: const Text(
+                              hint: Text(
                                 'Tumanni tanlang',
-                                style: TextStyle(fontSize: 14),
+                                style: TextStyle(fontSize: 14.sp),
                               ).tr(),
                               icon: const Icon(
                                 Icons.arrow_drop_down,
                                 color: Colors.black45,
                               ),
-                              iconSize: 30,
-                              buttonHeight: 60,
+                              iconSize: 30.sp,
+                              buttonHeight: 60.h,
                               buttonPadding:
-                                  const EdgeInsets.only(left: 20, right: 10),
+                                  EdgeInsets.only(left: 20.w, right: 10.w),
                               dropdownDecoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(15),
+                                borderRadius: BorderRadius.circular(15.r),
                               ),
                               items: [],
                               onChanged: null,
@@ -712,7 +712,7 @@ class _StudentUserState extends State<StudentUser> {
                 ],
               ),
               SizedBox(
-                height: 10,
+                height: 10.h,
               ),
               Column(
                 children: [
@@ -724,10 +724,11 @@ class _StudentUserState extends State<StudentUser> {
                         style: TextStyle(
                             color: AppColors.textColor,
                             fontWeight: FontWeight.bold,
-                            fontSize: 18),
+                            fontSize: 15.sp),
                       ),
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: EdgeInsets.symmetric(
+                            horizontal: 8.0.w, vertical: 8.0.h),
                         child: Container(
                           height: 40.h,
                           width: 70.w,

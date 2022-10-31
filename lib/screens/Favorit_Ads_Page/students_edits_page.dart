@@ -391,6 +391,7 @@ class _StudentsEdistState extends State<StudentsEdist> {
                           borderRadius: BorderRadius.circular(10.r),
                           border: Border.all(color: _colorUniver)),
                       child: DropdownSearch<String>(
+                               dropdownBuilder: _style,
                         mode: Mode.BOTTOM_SHEET,
                         items: data.univer.map((e) {
                           if (dropDown2 == e.name) {
@@ -528,6 +529,7 @@ class _StudentsEdistState extends State<StudentsEdist> {
                               borderRadius: BorderRadius.circular(10.r),
                               border: Border.all(color: _colorGender)),
                           child: DropdownButtonFormField(
+                             menuMaxHeight: 100,
                             hint: Padding(
                               padding: EdgeInsets.only(left: 8.w),
                               child: Text(
@@ -595,7 +597,7 @@ class _StudentsEdistState extends State<StudentsEdist> {
                         Container(
                           padding: EdgeInsets.symmetric(horizontal: 8.w),
                           height: 55.h,
-                          width: 247.w,
+                          width: 240.w,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(8.r),
                               border: Border.all(color: _phoneColor)),
@@ -864,6 +866,12 @@ class _StudentsEdistState extends State<StudentsEdist> {
           },
         ),
       ),
+    );
+  }
+   Widget _style(BuildContext context, String? selectedItem) {
+    return Text(
+      selectedItem!,
+      style: TextStyle(fontSize: 14.sp),
     );
   }
 }

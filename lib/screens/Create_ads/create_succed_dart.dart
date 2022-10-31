@@ -27,7 +27,7 @@ class _CreateSuccedfulState extends State<CreateSuccedful> {
                 child:Image.asset('assets/images/illustration.png')
             ),
             SizedBox(height: 50.h,),
-            Center(child: Text("Siz muvaffaqiyatli ro’yxatdan o’tdingiz !!!",style: TextStyle(fontSize: 18.sp),)),
+            Center(child: Text("Muvaffaqiyatli e'lon yaratildi !!!",style: TextStyle(fontSize: 18.sp),).tr()),
             SizedBox(height: 236.h,),
             ElevatedButton(
               onPressed: () {

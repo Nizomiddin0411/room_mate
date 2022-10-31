@@ -76,6 +76,7 @@ class _StudentState extends State<Student> {
     '5',
   ];
   bool otmEnable = true;
+  bool otmEnable1 = false;
   bool region = true;
   final List<String> genderItems = ["O'g'il bola ", "Qiz bola"];
   var kindOfMoment = [
@@ -144,7 +145,7 @@ class _StudentState extends State<Student> {
                       border: Border.all(color: titleColor),
                       borderRadius: BorderRadius.circular(10.r)),
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                    padding: EdgeInsets.symmetric(horizontal: 8.w),
                     child: TextFormField(
                       onChanged: (e) {
                         setState(() {
@@ -161,7 +162,8 @@ class _StudentState extends State<Student> {
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         hintText: "E’lonni nomlang".tr(),
-                        hintStyle: TextStyle(fontSize: 14.sp, color: Colors.grey),
+                        hintStyle:
+                            TextStyle(fontSize: 14.sp, color: Colors.grey),
                       ),
                       cursorColor: Colors.grey,
                       cursorWidth: 1.w,
@@ -181,17 +183,9 @@ class _StudentState extends State<Student> {
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    SizedBox(
-                      width: 82.w,
-                    ),
-                    Text("Ahamiyatsiz", style: TextStyle(
-                      color: AppColors.textColor,
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w500,
-                    ),),
                   ],
                 ),
-                SizedBox(height: 10.h),
+                SizedBox(height: 5.h),
                 Row(
                   children: [
                     Container(
@@ -199,53 +193,64 @@ class _StudentState extends State<Student> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10.r),
                           border: Border.all(color: titlecolor)),
-                      child: DropdownButtonFormField(
-                        hint: Padding(
-                          padding: EdgeInsets.only(left: 8.w),
-                          child: Text("Viloyat/Shaharni tanlang",style: TextStyle(fontSize: 14.sp, color: Colors.grey),),
-                        ),
-                        decoration: InputDecoration(border: InputBorder.none),
-                        // value: ,
-                        icon: Icon(Icons.arrow_drop_down_outlined),
-                        items: data.regions.map((e) {
-                          return DropdownMenuItem<String>(
-                            onTap: () {
-                              region = false;
-                              data.viloyatid = e.id.toString();
-                            },
-                            value: e.name ?? "",
-                            child: Padding(
-                              padding: EdgeInsets.only(left: 8.w),
-                              child: Text(e.name.toString()),
+                      child: IgnorePointer(
+                        ignoring: otmEnable1,
+                        child: DropdownButtonFormField(
+                          hint: Padding(
+                            padding: EdgeInsets.symmetric(horizontal: 8.w),
+                            child: Text(
+                              "Viloyat/Shaharni tanlang",
+                              style: TextStyle(
+                                  fontSize: 12.sp, color: Colors.grey),
                             ),
-                          );
-                        }).toList(),
-                        onChanged: (newValue) async {
-                          setState(() {
-                            univerColor = true;
-                            univerColor1 = Colors.grey;
-                          });
+                          ),
+                          decoration: InputDecoration(border: InputBorder.none),
+                          // value: ,
+                          icon: Icon(Icons.arrow_drop_down_outlined),
+                          items: data.regions.map((e) {
+                            return DropdownMenuItem<String>(
+                              onTap: () {
+                                data.viloyatid = e.id.toString();
+                              },
+                              value: e.name ?? "",
+                              child: Text(e.name.toString()),
+                            );
+                          }).toList(),
+                          onChanged: (newValue) async {
+                            setState(() {
+                              univerColor = true;
+                              univerColor1 = Colors.grey;
+                            });
 
-                          final selected = data.regions
-                              .where((element) => element.name == newValue);
-                          data.getDistrict(selected.last.id!);
-                          setState(() {
-                            dropDown = newValue.toString();
-                          });
-                          print(dropDown + "viloyat adiii");
-                        },
+                            final selected = data.regions
+                                .where((element) => element.name == newValue);
+                            data.getDistrict(selected.last.id!);
+                            setState(() {
+                              dropDown = newValue.toString();
+                            });
+                            print(dropDown + "viloyat adiii");
+                          },
+                        ),
                       ),
                     ),
                     SizedBox(
-                      width: 15.w,
+                      width: 9.w,
                     ),
                     Column(
                       children: [
+                        Text(
+                          "Ahamiyatsiz",
+                          style: TextStyle(
+                            color: AppColors.textColor,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
                         Checkbox(
                           value: regionsvalue,
                           onChanged: (bool? value) {
                             setState(() {
-                              region=regionsvalue.toString() as bool;
+                              otmEnable1 = value!;
                               regionsvalue = value!;
                             });
                           },
@@ -261,18 +266,13 @@ class _StudentState extends State<Student> {
                       "Qaysi OTM da o’qiydigan sherik izlayabsiz ?".tr(),
                       style: TextStyle(
                         color: AppColors.textColor,
-                        fontSize: 14.sp,
+                        fontSize: 12.sp,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
                     SizedBox(
-                      width: 35.w,
+                      width: 70.w,
                     ),
-                    Text("Ahamiyatsiz", style: TextStyle(
-                      color: AppColors.textColor,
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w500,
-                    ),),
                   ],
                 ),
                 SizedBox(height: 4.h),
@@ -289,10 +289,9 @@ class _StudentState extends State<Student> {
                         mode: Mode.BOTTOM_SHEET,
                         enabled: otmEnable,
                         dropdownSearchDecoration:
-                        InputDecoration(border: InputBorder.none),
+                            InputDecoration(border: InputBorder.none),
 
                         items: data.univer.map((e) {
-
                           if (dropDown2 == e.name) {
                             data.UniverId = e.id.toString();
                             data.isId = e.id;
@@ -325,17 +324,28 @@ class _StudentState extends State<Student> {
                       ),
                     ),
                     SizedBox(
-                      width: 16.w,
+                      width: 9.w,
                     ),
                     Column(
                       children: [
+                        Text(
+                          "Ahamiyatsiz",
+                          style: TextStyle(
+                            color: AppColors.textColor,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
                         Checkbox(
                           value: value6,
                           onChanged: (bool? value) {
                             setState(() {
-                              otmEnable = value6.toString() as bool;
+                              otmEnable = value6!;
                               value6 = value!;
                               univervalue = value ? '1' : '2';
+                              if (value) {
+                                _otmColor = Colors.grey.shade900;
+                              }
                               if (value) {
                                 univerColor1 = Colors.grey;
                               }
@@ -372,13 +382,13 @@ class _StudentState extends State<Student> {
                         ),
                         SizedBox(height: 8.h),
                         Container(
-                          width: 150.w,
+                          width: 110.w,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.r),
                               border: Border.all(color: _colorGender)),
                           child: DropdownButtonFormField(
                             hint: Padding(
-                              padding: EdgeInsets.only(left: 8.w),
+                              padding: EdgeInsets.symmetric(horizontal: 8.w),
                               child: Text(
                                 "Qiz,O'g'il".tr(),
                                 style: TextStyle(fontSize: 14.sp),
@@ -392,7 +402,8 @@ class _StudentState extends State<Student> {
                                 onTap: () {},
                                 value: e,
                                 child: Padding(
-                                  padding: EdgeInsets.only(left: 8.w),
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 8.w),
                                   child: Text(e.tr()),
                                 ),
                               );
@@ -424,13 +435,14 @@ class _StudentState extends State<Student> {
                         ),
                         SizedBox(height: 4.h),
                         Container(
-                          width: 150.w,
+                          width: 110.w,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.r),
                               border: Border.all(color: _colorGender)),
                           child: DropdownButtonFormField(
+                            menuMaxHeight: 100,
                             hint: Padding(
-                              padding: EdgeInsets.only(left: 8.w),
+                              padding: EdgeInsets.symmetric(horizontal: 8.w),
                               child: Text(
                                 "1 - 5".tr(),
                                 style: TextStyle(fontSize: 14.sp),
@@ -444,7 +456,8 @@ class _StudentState extends State<Student> {
                                 onTap: () {},
                                 value: e,
                                 child: Padding(
-                                  padding: EdgeInsets.only(left: 8.w),
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 8.w),
                                   child: Text(e.tr()),
                                 ),
                               );
@@ -467,19 +480,17 @@ class _StudentState extends State<Student> {
                   children: [
                     Row(
                       children: [
-                        Text("Telefon raqami", style: TextStyle(
-                          color: AppColors.textColor,
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w500,
-                        ),).tr(),
+                        Text(
+                          "Telefon raqami",
+                          style: TextStyle(
+                            color: AppColors.textColor,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ).tr(),
                         SizedBox(
-                          width: 175.w,
+                          width: 180.w,
                         ),
-                        Text("Ko’rinmasin", style: TextStyle(
-                          color: AppColors.textColor,
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w500,
-                        ),),
                       ],
                     ),
                     SizedBox(
@@ -488,9 +499,9 @@ class _StudentState extends State<Student> {
                     Row(
                       children: [
                         Container(
-                          padding: EdgeInsets.symmetric(horizontal: 8.w),
+                          padding: EdgeInsets.symmetric(horizontal: 12.w),
                           height: 55.h,
-                          width: 245.w,
+                          width: 240.w,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(8.r),
                               border: Border.all(color: _phoneColor)),
@@ -523,12 +534,17 @@ class _StudentState extends State<Student> {
                           ),
                         ),
                         SizedBox(
-                          width: 12.w,
+                          width: 9.w,
                         ),
                         Column(
                           children: [
-                            SizedBox(
-                              height: 9.h,
+                            Text(
+                              "Ko’rinmasin",
+                              style: TextStyle(
+                                color: AppColors.textColor,
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w500,
+                              ),
                             ),
                             Checkbox(
                               value: numbervalue,
@@ -624,15 +640,7 @@ class _StudentState extends State<Student> {
                     padding: EdgeInsets.only(left: 16.w),
                     child: TextField(
                       onChanged: (e) {
-                        setState(() {
-                          if (e.length > 0) {
-                            _colorForm = Colors.grey;
-                            _FormOnClick = true;
-                          } else {
-                            _colorForm = Colors.red;
-                            _FormOnClick = false;
-                          }
-                        });
+                        setState(() {});
                       },
                       key: _keyAddInfo,
                       controller: addinformation,
@@ -660,11 +668,7 @@ class _StudentState extends State<Student> {
                               borderRadius: BorderRadius.circular(10.r)),
                           primary: AppColors.buttonLinear),
                       onPressed: () {
-                        if (titlecolor2 &&
-                            univerColor &&
-                            _phoneOnClick &&
-                            _FormOnClick &&
-                            _UniverOnClick) {
+                        if (titlecolor2 &&  _phoneOnClick) {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -679,26 +683,24 @@ class _StudentState extends State<Student> {
                                   phoneController:
                                       phoneController.text.split(' ').join(''),
                                   house: house,
-                                  addinformation: addinformation.text,
+                                  addinformation: '${addinformation.text}',
                                   numbervalue: '${numbervalue ? 1 : 2}'),
                             ),
                           );
                         } else {
-                          if (!titlecolor2) {
-                            titlecolor = Colors.red;
-                          }
-                          if (!univerColor) {
-                            univerColor1 = Colors.red;
-                          }
-                          if (!_phoneOnClick) {
-                            _phoneColor = Colors.red;
-                          }
-                          if (!_FormOnClick) {
-                            _colorForm = Colors.red;
-                          }
-                          if (!_UniverOnClick) {
-                            _colorUniver = Colors.red;
-                          }
+                          // if (!titlecolor2) {
+                          //   titlecolor = Colors.red;
+                          // // }
+                          // if (!univerColor) {
+                          //   univerColor1 = Colors.red;
+                          // }
+                          // if (!_phoneOnClick) {
+                          //   _phoneColor = Colors.red;
+                          // }
+
+                          // if (!_UniverOnClick) {
+                          //   _colorUniver = Colors.red;
+                          // }
                           setState(() {});
                         }
                         print(
@@ -736,11 +738,11 @@ class _StudentState extends State<Student> {
       ),
     );
   }
+
   Widget _style(BuildContext context, String? selectedItem) {
     return Text(
       selectedItem!,
       style: TextStyle(fontSize: 14.sp),
     );
   }
-
 }

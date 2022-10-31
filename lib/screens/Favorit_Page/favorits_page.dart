@@ -157,6 +157,24 @@ class _FavoritPageState extends State<FavoritPage> {
                                               Image: data.Like[index].images,
                                               locations:
                                                   data.Like[index].location,
+                                          utileTrash: data
+                                              .Like[index].utilityTrash
+                                              .toString(),
+                                          utileColdWater: data
+                                              .Like[index]
+                                              .utilityColdWater
+                                              .toString(),
+                                          utileElictricity: data
+                                              .Like[index]
+                                              .utilityElectricity
+                                              .toString(),
+                                          utileGaz: data
+                                              .Like[index].unilityGaz
+                                              .toString(),
+                                          utileHotWater: data
+                                              .Like[index]
+                                              .utilityHotWater
+                                              .toString(),
                                             )));
 
                                 print(data.Like[index].id.toString() +
