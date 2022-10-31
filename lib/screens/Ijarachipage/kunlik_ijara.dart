@@ -246,6 +246,11 @@ class _KunlikIjaraState extends State<KunlikIjara> {
                                           createData: data.Ads[index].createdAt,
                                           Image: data.Ads[index].images,
                                           locations: data.Ads[index].location,
+                                      utileHotWater: data.Ads[index].utilityHotWater.toString(),
+                                      utileElictricity: data.Ads[index].utilityElectricity.toString(),
+                                      utileGaz: data.Ads[index].unilityGaz.toString(),
+                                      utileTrash: data.Ads[index].utilityTrash.toString(),
+                                      utileColdWater: data.Ads[index].utilityColdWater.toString(),
                                         )));
                           },
                           child: Container(
@@ -561,6 +566,24 @@ class _KunlikIjaraState extends State<KunlikIjara> {
                                               data.AdsForStudent[index].images,
                                           locations: data
                                               .AdsForStudent[index].location,
+                                      utileTrash: data
+                                          .AdsForStudent[index].utilityTrash
+                                          .toString(),
+                                      utileColdWater: data
+                                          .AdsForStudent[index]
+                                          .utilityColdWater
+                                          .toString(),
+                                      utileElictricity: data
+                                          .AdsForStudent[index]
+                                          .utilityElectricity
+                                          .toString(),
+                                      utileGaz: data
+                                          .AdsForStudent[index].unilityGaz
+                                          .toString(),
+                                      utileHotWater: data
+                                          .AdsForStudent[index]
+                                          .utilityHotWater
+                                          .toString(),
                                         )));
                           },
                           child: Container(
