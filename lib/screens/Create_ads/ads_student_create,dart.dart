@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
 import 'package:talaba_uy/provider/favorite_provider.dart';
@@ -561,6 +562,8 @@ class _Student2State extends State<Student2> {
                                 borderRadius: BorderRadius.circular(10.r),
                                 border: Border.all(color: _colorGender)),
                             child: DropdownButtonFormField(
+                              alignment: Alignment.bottomRight,
+                               menuMaxHeight:150,
                               hint: Padding(
                                 padding: EdgeInsets.only(left: 8.w),
                                 child: Text(
@@ -620,6 +623,8 @@ class _Student2State extends State<Student2> {
                                 borderRadius: BorderRadius.circular(10.r),
                                 border: Border.all(color: _colorGender)),
                             child: DropdownButtonFormField(
+                               menuMaxHeight:150,
+                               itemHeight: 50,
                               hint: Padding(
                                 padding: EdgeInsets.only(left: 8.w),
                                 child: Text(
@@ -636,6 +641,7 @@ class _Student2State extends State<Student2> {
                               icon: Icon(Icons.arrow_drop_down_outlined),
                               items: floors_count.map((e) {
                                 return DropdownMenuItem<String>(
+                                  
                                   onTap: () {},
                                   value: e,
                                   child: Padding(
@@ -675,6 +681,9 @@ class _Student2State extends State<Student2> {
                                 borderRadius: BorderRadius.circular(10.r),
                                 border: Border.all(color: _colorGender)),
                             child: DropdownButtonFormField(
+                              menuMaxHeight:150,
+                          
+                              elevation: 6,
                               hint: Padding(
                                 padding: EdgeInsets.only(left: 8.w),
                                 child: Text(
@@ -691,10 +700,11 @@ class _Student2State extends State<Student2> {
                               icon: Icon(Icons.arrow_drop_down_outlined),
                               items: in_floor.map((e) {
                                 return DropdownMenuItem<String>(
+                          
                                   onTap: () {},
                                   value: e,
                                   child: Padding(
-                                    padding: EdgeInsets.only(left: 8.w),
+                                    padding: EdgeInsets.only(left: 18.w),
                                     child: Text(e.tr()),
                                   ),
                                 );
@@ -1146,7 +1156,7 @@ class _Student2State extends State<Student2> {
                           children: [
                             Text("Kir yuvish mashinasi",style: TextStyle(
                               color: AppColors.textColor,
-                              fontSize: 14.sp,
+                              fontSize: 13.5.sp,
                               fontWeight: FontWeight.w500,
                             )),
                             Checkbox(
@@ -1262,28 +1272,28 @@ class _Student2State extends State<Student2> {
                               ),
                             ),
                           );
-                          print('${widget.universiteteid} widget.universiteteid  yooo+++++++++++');
-                          print('${widget.house} widget.house  +++++++++++');
-                          print('${widget.titleGendor} titleGendor.titleGendor  +++++++++++');
-                          print('${widget.numbervalue} numbervalue.numbervalue  +++++++++++');
-                          print('${widget.viloyatvalue} viloyatvalue.viloyatvalue  +++++++++++');
-                          print('${widget.phoneController} phoneController.phoneController  +++++++++++');
-                          print('${widget.titlecontroller1} titlecontroller1.titlecontroller1  +++++++++++');
-                          print('${widget.addinformation} addinformation.addinformation  +++++++++++');
-                          print('${widget.univervalue} univervalue.univervalue  +++++++++++');
-                          print('${widget.titlecount} titlecount.titlecount  +++++++++++');
-                          print('${comfortItems} comfortItems.comfortItems  +++++++++++');
-                          print('${costcommunal} costcommunal.costcommunal  +++++++++++');
-                          print('${pricerent_type} pricerent_type dollar  +++++++++++');
+                          // print('${widget.universiteteid} widget.universiteteid  yooo+++++++++++');
+                          // print('${widget.house} widget.house  +++++++++++');
+                          // print('${widget.titleGendor} titleGendor.titleGendor  +++++++++++');
+                          // print('${widget.numbervalue} numbervalue.numbervalue  +++++++++++');
+                          // print('${widget.viloyatvalue} viloyatvalue.viloyatvalue  +++++++++++');
+                          // print('${widget.phoneController} phoneController.phoneController  +++++++++++');
+                          // print('${widget.titlecontroller1} titlecontroller1.titlecontroller1  +++++++++++');
+                          // print('${widget.addinformation} addinformation.addinformation  +++++++++++');
+                          // print('${widget.univervalue} univervalue.univervalue  +++++++++++');
+                          // print('${widget.titlecount} titlecount.titlecount  +++++++++++');
+                          // print('${comfortItems} comfortItems.comfortItems  +++++++++++');
+                          // print('${costcommunal} costcommunal.costcommunal  +++++++++++');
+                          // print('${pricerent_type} pricerent_type dollar  +++++++++++');
                           print('${housefloorcount} housefloorcount.housefloorcount  +++++++++++');
-                          print('${housetype== 'kv' ? '1' : '2'} kunlik.housetype  +++++++++++');
-                          print('${pricerent_type} dropDown.dollar yoki sum  +++++++++++');
-                          print('${addressController.text} addressController.addressController  +++++++++++');
-                          print('${housecount} housecount.housecount  +++++++++++');
-                          print('${ownerlive} ownerlive.ownerlive  +++++++++++');
-                          print('${price} rent_type.rent_type  +++++++++++');
-                          print('${price} price.price  +++++++++++');
-                          print('${costcontroller.text} costcontroller.costcontroller  +++++++++++');
+                          // print('${housetype== 'kv' ? '1' : '2'} kunlik.housetype  +++++++++++');
+                          // print('${pricerent_type} dropDown.dollar yoki sum  +++++++++++');
+                          // print('${addressController.text} addressController.addressController  +++++++++++');
+                          // print('${housecount} housecount.housecount  +++++++++++');
+                          // print('${ownerlive} ownerlive.ownerlive  +++++++++++');
+                          // print('${price} rent_type.rent_type  +++++++++++');
+                          // print('${price} price.price  +++++++++++');
+                          // print('${costcontroller.text} costcontroller.costcontroller  +++++++++++');
 
                         },
                         child: Text(
@@ -1301,6 +1311,21 @@ class _Student2State extends State<Student2> {
         ),
       ),
     );
+  }
+  List<Marker> mymarker = [];
+  _handlerTap(LatLng tappadPoint) {
+    final mapLatitude = context.read<FavoriteProvider>();
+    mapLatitude.forMap = (tappadPoint.toString());
+    print(tappadPoint);
+    print(mapLatitude.forMap);
+
+    setState(() {
+      mymarker = [];
+      mymarker.add(Marker(
+        markerId: MarkerId(tappadPoint.toString()),
+        position: tappadPoint,
+      ));
+    });
   }
 }
 

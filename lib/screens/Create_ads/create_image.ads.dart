@@ -6,6 +6,8 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:provider/provider.dart';
+import 'package:talaba_uy/provider/favorite_provider.dart';
 import 'package:talaba_uy/screens/Create_ads/create_succed_dart.dart';
 import 'package:talaba_uy/services/post_student_adds.dart';
 
@@ -39,33 +41,32 @@ class Createimage extends StatefulWidget {
   String cost_period;
   String location;
 
-  Createimage(
-      {Key? key,
-      required this.numbervalue,
-      required this.house,
-      required this.phoneController,
-      required this.addinformation,
-      required this.univervalue,
-      required this.universiteteid,
-      required this.viloyatvalue,
-      required this.viloyatidisi,
-      required this.titlecontroller1,
-      required this.titlecount,
-      required this.titleGendor,
-      required this.comfort,
-      required this.metro,
-      required this.costlivekomunal,
-      required this.countroom,
-      required this.housetype,
-      required this.howcountroom,
-      required this.narxnituri,
-      required this.addressController,
-      required this.housecount,
-      required this.ownerlive,
-      required this.costController,
-      required this.rent_type,
-      required this.cost_period,
-      required this.location})
+  Createimage({Key? key,
+    required this.numbervalue,
+    required this.house,
+    required this.phoneController,
+    required this.addinformation,
+    required this.univervalue,
+    required this.universiteteid,
+    required this.viloyatvalue,
+    required this.viloyatidisi,
+    required this.titlecontroller1,
+    required this.titlecount,
+    required this.titleGendor,
+    required this.comfort,
+    required this.metro,
+    required this.costlivekomunal,
+    required this.countroom,
+    required this.housetype,
+    required this.howcountroom,
+    required this.narxnituri,
+    required this.addressController,
+    required this.housecount,
+    required this.ownerlive,
+    required this.costController,
+    required this.rent_type,
+    required this.cost_period,
+    required this.location})
       : super(key: key);
 
   @override
@@ -144,6 +145,7 @@ class _CreateimageState extends State<Createimage> {
                       style: TextStyle(
                           color: sum < 3 ? Colors.black : Colors.grey.shade300),
                     ),
+
                     onTap: () async {
                       if (sum < 3) {
                         sum += 1;
@@ -166,6 +168,8 @@ class _CreateimageState extends State<Createimage> {
 
   @override
   Widget build(BuildContext context) {
+    final load = context.read<FavoriteProvider>();
+    bool loading = false;
     return Scaffold(
         appBar: AppBar(
           backgroundColor: AppColors.backgroundWhite,
@@ -208,13 +212,13 @@ class _CreateimageState extends State<Createimage> {
                                     color: Colors.black12,
                                     child: file == null
                                         ? Icon(
-                                            Icons.camera_alt_sharp,
-                                            size: 50.sp,
-                                          )
+                                      Icons.camera_alt_sharp,
+                                      size: 50.sp,
+                                    )
                                         : Image.file(
-                                            file!,
-                                            fit: BoxFit.cover,
-                                          ),
+                                      file!,
+                                      fit: BoxFit.cover,
+                                    ),
                                   ),
                                 ),
                               ),
@@ -237,156 +241,158 @@ class _CreateimageState extends State<Createimage> {
                     //   height: 20.h,
                     // ),
                     ConstrainedBox(
-                      constraints: BoxConstraints(maxHeight: 50, maxWidth: 400),
+                      constraints: BoxConstraints(
+                          maxHeight: 150, maxWidth: 400),
                       child: Container(
                         height: 240.h,
                         child: ListView(
                           children:
-                              //     List.generate(imageFileList!.length, (index) {
-                              //   return Column(children: <Widget>[
-                              //     Expanded(
-                              //       child: Stack(
-                              //         children: [
-                              //           Container(
-                              //             width: 200.w,
-                              //             height: 150.h,
-                              //             decoration: BoxDecoration(
-                              //               borderRadius:
-                              //                   BorderRadius.circular(10.r),
-                              //             ),
-                              //             child: ClipRRect(
-                              //               child: Image.file(
-                              //                 File(imageFileList![index].path),
-                              //                 fit: BoxFit.cover,
-                              //               ),
-                              //               borderRadius:
-                              //                   BorderRadius.circular(10.r),
-                              //             ),
-                              //           ),
-                              //           GestureDetector(
-                              //             onTap: () {
-                              //               setState(() {
-                              //                 // imageFileList!.removeAt(index);
-                              //               });
-                              //               print(
-                              //                   "Nizomiddin${imageFileList!.length}");
-                              //             },
-                              //             child: Padding(
-                              //               padding: EdgeInsets.fromLTRB(
-                              //                   60.w, 0, 0, 50.h),
-                              //               child: Align(
-                              //                 alignment: Alignment.topRight,
-                              //                 child: Container(
-                              //                     height: 20.h,
-                              //                     width: 24.w,
-                              //                     decoration: BoxDecoration(
-                              //                         color: Colors.red,
-                              //                         borderRadius:
-                              //                             BorderRadius.circular(
-                              //                                 15.r)),
-                              //                     child: Icon(Icons.remove,
-                              //                         color: Colors.white,
-                              //                         size: 20.sp)),
-                              //               ),
-                              //             ),
-                              //           ),
-                              //         ],
-                              //       ),
-                              //     ),
-                              //   ]);
-                              // }),
-                              [
+                          //     List.generate(imageFileList!.length, (index) {
+                          //   return Column(children: <Widget>[
+                          //     Expanded(
+                          //       child: Stack(
+                          //         children: [
+                          //           Container(
+                          //             width: 200.w,
+                          //             height: 150.h,
+                          //             decoration: BoxDecoration(
+                          //               borderRadius:
+                          //                   BorderRadius.circular(10.r),
+                          //             ),
+                          //             child: ClipRRect(
+                          //               child: Image.file(
+                          //                 File(imageFileList![index].path),
+                          //                 fit: BoxFit.cover,
+                          //               ),
+                          //               borderRadius:
+                          //                   BorderRadius.circular(10.r),
+                          //             ),
+                          //           ),
+                          //           GestureDetector(
+                          //             onTap: () {
+                          //               setState(() {
+                          //                 // imageFileList!.removeAt(index);
+                          //               });
+                          //               print(
+                          //                   "Nizomiddin${imageFileList!.length}");
+                          //             },
+                          //             child: Padding(
+                          //               padding: EdgeInsets.fromLTRB(
+                          //                   60.w, 0, 0, 50.h),
+                          //               child: Align(
+                          //                 alignment: Alignment.topRight,
+                          //                 child: Container(
+                          //                     height: 20.h,
+                          //                     width: 24.w,
+                          //                     decoration: BoxDecoration(
+                          //                         color: Colors.red,
+                          //                         borderRadius:
+                          //                             BorderRadius.circular(
+                          //                                 15.r)),
+                          //                     child: Icon(Icons.remove,
+                          //                         color: Colors.white,
+                          //                         size: 20.sp)),
+                          //               ),
+                          //             ),
+                          //           ),
+                          //         ],
+                          //       ),
+                          //     ),
+                          //   ]);
+                          // }),
+                          [
                             SizedBox(
                               height: 10.h,
                             ),
                             FileList.isNotEmpty
                                 ? Row(
-                                    children:
-                                        List.generate(FileList.length, (index) {
-                                      return (FileExist[index])
-                                          ?
-                                          // width: 120.w,
-                                          Container(
-                                              width: 108.w,
-                                              height: 116.h,
-                                              decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.all(
-                                                  Radius.circular(
-                                                    12.r,
-                                                  ),
-                                                ),
-                                              ),
-                                              child: Stack(
-                                                children: [
-                                                  Container(
-                                                    margin:
-                                                        EdgeInsets.symmetric(
-                                                            horizontal: 8.w,
-                                                            vertical: 8.h),
-                                                    decoration: BoxDecoration(
-                                                      // border: Border.all(
-                                                      //     color:
-                                                      //         Colors.),
-                                                      boxShadow: [
-                                                        BoxShadow(
-                                                            offset: Offset(
-                                                                .1.w, .1.h),
-                                                            color: Colors.grey
-                                                                .shade400,
-                                                            blurRadius: 6),
-                                                      ],
-                                                      borderRadius:
-                                                          BorderRadius
-                                                              .circular(
-                                                        10.r,
-                                                      ),
-                                                      image: DecorationImage(
-                                                        fit: BoxFit.cover,
-                                                        image: FileImage(
-                                                            FileList[index]),
-                                                      ),
-                                                    ),
-                                                  ),
-                                                  Positioned(
-                                                    right: 0,
-                                                    child: GestureDetector(
-                                                      child: Container(
-                                                        width: 18.w,
-                                                        height: 18.h,
-                                                        decoration: BoxDecoration(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        4.r),
-                                                            color: Colors
-                                                                .red[400]),
-                                                        child: Icon(
-                                                          Icons.remove,
-                                                          size: 15.sp,
-                                                          color: Colors.white,
-                                                        ),
-                                                      ),
-                                                      onTap: () async {
-                                                        FileList.removeAt(
-                                                            index);
-                                                        // index -= 4;
-                                                        sum -= 1;
-                                                        setState(() {});
-                                                      },
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            )
-                                          : Container();
-                                    }),
-                                  )
+                              children:
+                              List.generate(FileList.length, (index) {
+                                return (FileExist[index])
+                                    ?
+                                // width: 120.w,
+                                Container(
+                                  width: 108.w,
+                                  height: 116.h,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.all(
+                                      Radius.circular(
+                                        12.r,
+                                      ),
+                                    ),
+                                  ),
+                                  child: Stack(
+                                    children: [
+                                      Container(
+                                        margin:
+                                        EdgeInsets.symmetric(
+                                            horizontal: 8.w,
+                                            vertical: 8.h),
+                                        decoration: BoxDecoration(
+                                          // border: Border.all(
+                                          //     color:
+                                          //         Colors.),
+                                          boxShadow: [
+                                            BoxShadow(
+                                                offset: Offset(
+                                                    .1.w, .1.h),
+                                                color: Colors.grey
+                                                    .shade400,
+                                                blurRadius: 6),
+                                          ],
+                                          borderRadius:
+                                          BorderRadius
+                                              .circular(
+                                            10.r,
+                                          ),
+                                          image: DecorationImage(
+                                            fit: BoxFit.cover,
+                                            image: FileImage(
+                                                FileList[index]),
+                                          ),
+                                        ),
+                                      ),
+                                      Positioned(
+                                        right: 0,
+                                        child: GestureDetector(
+                                          child: Container(
+                                            width: 18.w,
+                                            height: 18.h,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                BorderRadius
+                                                    .circular(
+                                                    4.r),
+                                                color: Colors
+                                                    .red[400]),
+                                            child: Icon(
+                                              Icons.remove,
+                                              size: 15.sp,
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                          onTap: () async {
+                                            FileList.removeAt(
+                                                index);
+                                            // index -= 4;
+                                            sum -= 1;
+                                            setState(() {});
+                                          },
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                                    : Container();
+                              }),
+                            )
                                 : const SizedBox(),
                           ],
                         ),
                       ),
                     ),
                   ]),
+                  SizedBox(height: 170.h,),
                   Container(
                       width: double.infinity,
                       child: ElevatedButton(
@@ -396,6 +402,46 @@ class _CreateimageState extends State<Createimage> {
                                 borderRadius: BorderRadius.circular(10.r)),
                             primary: AppColors.buttonLinear),
                         onPressed: () async {
+                          load.StudentsAdds(
+                            title: widget.titlecontroller1,
+                            stay_region_id: widget.viloyatidisi,
+                            stay_region_matter: widget.viloyatvalue,
+                            stay_university_id: widget.universiteteid,
+                            stay_university_matter: widget.univervalue,
+                            roommate_gender: widget.titleGendor,
+                            roommate_count: widget.titlecount,
+                            phone_number: widget.phoneController.toString(),
+                            phone_number_show: widget.numbervalue,
+                            have_living_home: widget.house,
+                            description: widget.addinformation.toString(),
+                            district_id: widget.viloyatidisi,
+                            address: widget.addressController.toString(),
+                            location: widget.location,
+                            subway: widget.metro,
+                            house_type: widget.housetype,
+                            room_count: widget.housecount,
+                            floors_count: widget.howcountroom,
+                            howcountroom: widget.howcountroom,
+                            cost: widget.costController,
+                            cost_type: widget.narxnituri,
+                            live_with_owner: widget.ownerlive,
+                            utility_bills: widget.costlivekomunal,
+                            comfort: widget.comfort,
+                            renttype: widget.rent_type,
+                            cost_period: widget.cost_period,
+                            file1: FileExist[0] ? FileList[0] : FileList[3],
+                            file2: FileExist[1] ? FileList[1] : FileList[4],
+                            file3: FileExist[2] ? FileList[2] : FileList[5],
+                          );
+                          load.isload = false;
+                          if(load.isLoading != true){
+                            showAlertDialog(context);
+                          }
+                          setState(() {
+                            loading =
+                                load.isLoading;
+                          });
+
                           await CreateStudent().StudentsAdds(
                             title: widget.titlecontroller1,
                             stay_region_id: widget.viloyatidisi,
@@ -519,5 +565,22 @@ class _CreateimageState extends State<Createimage> {
     setState(() {
       file = File(img!.path);
     });
+  }
+  showAlertDialog(BuildContext context) {
+    AlertDialog alert = AlertDialog(
+      // title: Text("Akkauntdan chiqish ").tr(),
+      // content: Text("Akkauntdan chiqishga ishonchingiz komilmi?").tr(),
+      actions: const [
+        Center(child: CircularProgressIndicator(),)
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
   }
 }
