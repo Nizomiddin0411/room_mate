@@ -16,8 +16,8 @@ class ChatPermit {
       ),
 
     );
-    request.fields.addAll({'user_asked': '${Askid}',});
-    request.fields.addAll({'user_approved': '${Hive.box('id').get('id').toString()}',});
+    request.fields.addAll({'user_asked': '${Hive.box('id').get('id').toString()}',});
+    request.fields.addAll({'user_approved': '${Askid}',});
     request.headers.addAll({HttpHeaders.authorizationHeader: 'Bearer ${Hive.box('token').get('token')}'});
     http.StreamedResponse response = await request.send();
     if (response.statusCode >= 200 && response.statusCode <= 300) {

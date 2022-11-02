@@ -26,17 +26,17 @@ class Student2 extends StatefulWidget {
 
   Student2(
       {Key? key,
-        required this.titlecontroller1,
-        required this.viloyatidisi,
-        required this.viloyatvalue,
-        required this.universiteteid,
-        required this.univervalue,
-        required this.titlecount,
-        required this.titleGendor,
-        required this.phoneController,
-        required this.house,
-        required this.addinformation,
-        required this.numbervalue})
+      required this.titlecontroller1,
+      required this.viloyatidisi,
+      required this.viloyatvalue,
+      required this.universiteteid,
+      required this.univervalue,
+      required this.titlecount,
+      required this.titleGendor,
+      required this.phoneController,
+      required this.house,
+      required this.addinformation,
+      required this.numbervalue})
       : super(key: key);
 
   @override
@@ -85,12 +85,8 @@ class _Student2State extends State<Student2> {
   int metro = 0;
   int ownerlive = 0;
   int costcommunal = 0;
-  var pricetype = [
-    "Kuniga",
-    "Oyiga",
-    "Kishi boshiga"
-  ];
-  String ?cost_type;
+  var pricetype = ["Kuniga", "Oyiga", "Kishi boshiga"];
+  String? cost_type;
   final TextEditingController _textEditingController = TextEditingController();
   var kurs = [
     '1-kurs',
@@ -154,7 +150,7 @@ class _Student2State extends State<Student2> {
     "2",
     "3",
     "4",
-    "5 ",
+    "5",
   ];
   Color _costTypeColor = Colors.grey;
   final addressController = TextEditingController();
@@ -189,7 +185,7 @@ class _Student2State extends State<Student2> {
             Navigator.pop(context);
           },
         ),
-        title: Text(
+        title: const Text(
           "Elon yaratish",
           style: TextStyle(color: AppColors.mainColor),
         ),
@@ -219,8 +215,10 @@ class _Student2State extends State<Student2> {
                     child: DropdownButtonFormField(
                       hint: Padding(
                         padding: EdgeInsets.only(left: 8.w),
-                        child: Text("Viloyatni  / Shaharni tanlang", style:
-                        TextStyle(fontSize: 14.sp, color: Colors.grey),),
+                        child: Text(
+                          "Viloyatni  / Shaharni tanlang",
+                          style: TextStyle(fontSize: 14.sp, color: Colors.grey),
+                        ),
                       ),
                       decoration: InputDecoration(border: InputBorder.none),
                       // value: ,
@@ -255,11 +253,16 @@ class _Student2State extends State<Student2> {
                   Column(
                     children: [
                       Row(
-                        children: [Text("Tuman",  style: TextStyle(
-                          color: AppColors.textColor,
-                          fontSize: 14.sp,
-                          fontWeight: FontWeight.w500,
-                        ) ,)],
+                        children: [
+                          Text(
+                            "Tuman",
+                            style: TextStyle(
+                              color: AppColors.textColor,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          )
+                        ],
                       )
                     ],
                   ),
@@ -268,72 +271,78 @@ class _Student2State extends State<Student2> {
                   ),
                   data.isDistrict
                       ? Container(
-                    width: 324.w,
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                          color: _colorDistric,
-                        ),
-                        borderRadius: BorderRadius.circular(10.r)),
-                    child: DropdownButtonFormField(
-                      hint: Padding(
-                        padding: EdgeInsets.only(left: 8.w),
-                        child: Text("Tumanni tanlang".tr()),
-                      ),
-                      decoration: InputDecoration(
-                        border: InputBorder.none,
-                      ),
-                      icon: Icon(Icons.arrow_drop_down_outlined),
-                      items: data.districts.map((e) {
-                        return DropdownMenuItem<String>(
-                          onTap: () {
-                            print("${e.name}${e.id}");
-                            data.districtId = e.id.toString();
-                          },
-                          value: data.isDistrict
-                              ? e.name.toString()
-                              : data.defaultvalue,
-                          child: Padding(
-                            padding: EdgeInsets.only(left: 8.w),
-                            child: Text(data.isDistrict
-                                ? e.name.toString()
-                                : data.defaultvalue),
+                          width: 324.w,
+                          decoration: BoxDecoration(
+                              border: Border.all(
+                                color: _colorDistric,
+                              ),
+                              borderRadius: BorderRadius.circular(10.r)),
+                          child: DropdownButtonFormField(
+                            hint: Padding(
+                              padding: EdgeInsets.only(left: 8.w),
+                              child: Text("Tumanni tanlang".tr()),
+                            ),
+                            decoration: InputDecoration(
+                              border: InputBorder.none,
+                            ),
+                            icon: Icon(Icons.arrow_drop_down_outlined),
+                            items: data.districts.map((e) {
+                              return DropdownMenuItem<String>(
+                                onTap: () {
+                                  print("${e.name}${e.id}");
+                                  data.districtId = e.id.toString();
+                                },
+                                value: data.isDistrict
+                                    ? e.name.toString()
+                                    : data.defaultvalue,
+                                child: Padding(
+                                  padding: EdgeInsets.only(left: 8.w),
+                                  child: Text(data.isDistrict
+                                      ? e.name.toString()
+                                      : data.defaultvalue),
+                                ),
+                              );
+                            }).toList(),
+                            onChanged: (newValue) {
+                              setState(() {
+                                _colorDistric = Colors.grey;
+                                dropDown = newValue.toString();
+                              });
+                            },
                           ),
-                        );
-                      }).toList(),
-                      onChanged: (newValue) {
-                        setState(() {
-                          _colorDistric = Colors.grey;
-                          dropDown = newValue.toString();
-                        });
-                      },
-                    ),
-                  )
+                        )
                       : Container(
-                    width: 324.w,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10.r)),
-                    child: DropdownButtonFormField(
-                        isExpanded: true,
-                        hint: Text("Tumanni tanlang", style:
-                        TextStyle(fontSize: 14.sp, color: Colors.grey),),
-                        decoration: const InputDecoration(
-                            isDense: true,
-                            border: OutlineInputBorder(),
-                            focusColor: Colors.grey),
-                        icon: Icon(Icons.arrow_drop_down_outlined),
-                        items: [],
-                        onChanged: null),
-                  ),
+                          width: 324.w,
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10.r)),
+                          child: DropdownButtonFormField(
+                              isExpanded: true,
+                              hint: Text(
+                                "Tumanni tanlang",
+                                style: TextStyle(
+                                    fontSize: 14.sp, color: Colors.grey),
+                              ),
+                              decoration: const InputDecoration(
+                                  isDense: true,
+                                  border: OutlineInputBorder(),
+                                  focusColor: Colors.grey),
+                              icon: const Icon(Icons.arrow_drop_down_outlined),
+                              items: const [],
+                              onChanged: null),
+                        ),
                   SizedBox(height: 12.h),
                   Column(
                     children: [
                       Row(
                         children: [
-                          Text("Manzil", style: TextStyle(
-                            color: AppColors.textColor,
-                            fontSize: 14.sp,
-                            fontWeight: FontWeight.w500,
-                          ),).tr(),
+                          Text(
+                            "Manzil",
+                            style: TextStyle(
+                              color: AppColors.textColor,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ).tr(),
                         ],
                       ),
                       SizedBox(
@@ -341,7 +350,7 @@ class _Student2State extends State<Student2> {
                       ),
                       Row(
                         children: [
-                          Container(
+                          SizedBox(
                             height: 55.h,
                             width: 322.w,
                             child: TextFormField(
@@ -349,11 +358,10 @@ class _Student2State extends State<Student2> {
                               controller: addressController,
                               decoration: InputDecoration(
                                 border: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10.r)
-                                ),
+                                    borderRadius: BorderRadius.circular(10.r)),
                                 labelText: "Kvartal , Uy , Xonadon ",
-                                hintStyle:
-                                TextStyle(fontSize: 14.sp, color: Colors.grey),
+                                hintStyle: TextStyle(
+                                    fontSize: 14.sp, color: Colors.grey),
                               ),
                             ),
                           ),
@@ -366,61 +374,66 @@ class _Student2State extends State<Student2> {
                   ),
                   InkWell(
                       onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) => MapScreen()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const MapScreen()));
                       },
-                      child: Container(
+                      child: SizedBox(
                         width: 324.w,
                         height: 60.h,
                         child: Card(
                           shadowColor: AppColors.buttonLinear,
                           child: ListTile(
-                            title: Text("Geojoylashishni kiriting", style: TextStyle(
-                              color: AppColors.textColor,
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w500,
-                            ),).tr(),
-                            leading: Icon(
+                            title: Text(
+                              "Geojoylashishni kiriting",
+                              style: TextStyle(
+                                color: AppColors.textColor,
+                                fontSize: 14.sp,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ).tr(),
+                            leading: const Icon(
                               Icons.location_on,
                               color: AppColors.mainColor,
                             ),
                           ),
                         ),
                       )
-                    // Container(
-                    //   width: 324.w,
-                    //   height: 210.h,
-                    //   child: SafeArea(
-                    //     // on below line creating google maps
-                    //     child: GoogleMap(
-                    //       onTap: _handlerTap,
-                    //       zoomControlsEnabled: false,
-                    //
-                    //       myLocationButtonEnabled: false,
-                    //       // on below line setting camera position
-                    //       // initialCameraPosition: _kGoogle,
-                    //       initialCameraPosition: const CameraPosition(
-                    //         target: LatLng(41.311081,69.240562),
-                    //         zoom: 14,
-                    //
-                    //       ),
-                    //       markers: Set.from(mymarker),
-                    //       // on below line we are setting markers on the map
-                    //       // markers: Set<Marker>.of(_markers),
-                    //       // on below line specifying map type.
-                    //       mapType: MapType.normal,
-                    //       // on below line setting user location enabled.
-                    //       myLocationEnabled: true,
-                    //       // on below line setting compass enabled.
-                    //       compassEnabled: true,
-                    //       // on below line specifying controller on map complete.
-                    //       onMapCreated: (GoogleMapController controller){
-                    //         _controller.complete(controller);
-                    //       },
-                    //     ),
-                    //   ),
-                    // ),
-                  ),
+                      // Container(
+                      //   width: 324.w,
+                      //   height: 210.h,
+                      //   child: SafeArea(
+                      //     // on below line creating google maps
+                      //     child: GoogleMap(
+                      //       onTap: _handlerTap,
+                      //       zoomControlsEnabled: false,
+                      //
+                      //       myLocationButtonEnabled: false,
+                      //       // on below line setting camera position
+                      //       // initialCameraPosition: _kGoogle,
+                      //       initialCameraPosition: const CameraPosition(
+                      //         target: LatLng(41.311081,69.240562),
+                      //         zoom: 14,
+                      //
+                      //       ),
+                      //       markers: Set.from(mymarker),
+                      //       // on below line we are setting markers on the map
+                      //       // markers: Set<Marker>.of(_markers),
+                      //       // on below line specifying map type.
+                      //       mapType: MapType.normal,
+                      //       // on below line setting user location enabled.
+                      //       myLocationEnabled: true,
+                      //       // on below line setting compass enabled.
+                      //       compassEnabled: true,
+                      //       // on below line specifying controller on map complete.
+                      //       onMapCreated: (GoogleMapController controller){
+                      //         _controller.complete(controller);
+                      //       },
+                      //     ),
+                      //   ),
+                      // ),
+                      ),
                   SizedBox(
                     height: 10.h,
                   ),
@@ -470,7 +483,7 @@ class _Student2State extends State<Student2> {
                               ),
                               Text(
                                 "Yo'q",
-                                style: new TextStyle(
+                                style: TextStyle(
                                   fontSize: 17.sp,
                                 ),
                               ),
@@ -519,7 +532,7 @@ class _Student2State extends State<Student2> {
                               ),
                               decoration: const InputDecoration(
                                   border: InputBorder.none),
-                              icon: Icon(Icons.arrow_drop_down_outlined),
+                              icon: const Icon(Icons.arrow_drop_down_outlined),
                               items: kvartira.map((e) {
                                 return DropdownMenuItem<String>(
                                   onTap: () {},
@@ -535,7 +548,7 @@ class _Student2State extends State<Student2> {
                                   housetype = newValue.toString();
                                   _colorGender = Colors.grey;
                                 });
-                                print(housetype+"1 kunlik 2 kvartira");
+                                print(housetype + "1 kunlik 2 kvartira");
                               },
                             ),
                           ),
@@ -563,7 +576,7 @@ class _Student2State extends State<Student2> {
                                 border: Border.all(color: _colorGender)),
                             child: DropdownButtonFormField(
                               alignment: Alignment.bottomRight,
-                               menuMaxHeight:150,
+                              menuMaxHeight: 150,
                               hint: Padding(
                                 padding: EdgeInsets.only(left: 8.w),
                                 child: Text(
@@ -577,7 +590,7 @@ class _Student2State extends State<Student2> {
                               ),
                               decoration: const InputDecoration(
                                   border: InputBorder.none),
-                              icon: Icon(Icons.arrow_drop_down_outlined),
+                              icon: const Icon(Icons.arrow_drop_down_outlined),
                               items: countroums.map((e) {
                                 return DropdownMenuItem<String>(
                                   onTap: () {},
@@ -623,25 +636,22 @@ class _Student2State extends State<Student2> {
                                 borderRadius: BorderRadius.circular(10.r),
                                 border: Border.all(color: _colorGender)),
                             child: DropdownButtonFormField(
-                               menuMaxHeight:150,
-                               itemHeight: 50,
+                              menuMaxHeight: 150,
+                              itemHeight: 50,
                               hint: Padding(
                                 padding: EdgeInsets.only(left: 8.w),
-                                child: Text(
-                                  "Qavatlar soni ".tr(),
+                                child: Text("Qavatlar soni ".tr(),
                                     style: TextStyle(
                                       color: AppColors.textColor,
                                       fontSize: 14.sp,
                                       fontWeight: FontWeight.w500,
-                                    )
-                                ),
+                                    )),
                               ),
                               decoration: const InputDecoration(
                                   border: InputBorder.none),
-                              icon: Icon(Icons.arrow_drop_down_outlined),
+                              icon: const Icon(Icons.arrow_drop_down_outlined),
                               items: floors_count.map((e) {
                                 return DropdownMenuItem<String>(
-                                  
                                   onTap: () {},
                                   value: e,
                                   child: Padding(
@@ -681,8 +691,7 @@ class _Student2State extends State<Student2> {
                                 borderRadius: BorderRadius.circular(10.r),
                                 border: Border.all(color: _colorGender)),
                             child: DropdownButtonFormField(
-                              menuMaxHeight:150,
-                          
+                              menuMaxHeight: 150,
                               elevation: 6,
                               hint: Padding(
                                 padding: EdgeInsets.only(left: 8.w),
@@ -697,10 +706,9 @@ class _Student2State extends State<Student2> {
                               ),
                               decoration: const InputDecoration(
                                   border: InputBorder.none),
-                              icon: Icon(Icons.arrow_drop_down_outlined),
+                              icon: const Icon(Icons.arrow_drop_down_outlined),
                               items: in_floor.map((e) {
                                 return DropdownMenuItem<String>(
-                          
                                   onTap: () {},
                                   value: e,
                                   child: Padding(
@@ -748,7 +756,6 @@ class _Student2State extends State<Student2> {
                         onChanged: (e) {
                           setState(() {
                             if (e.length > 0) {
-
                               _costTypeColor = Colors.grey;
                             } else {
                               _costTypeColor = Colors.red;
@@ -760,12 +767,12 @@ class _Student2State extends State<Student2> {
                           border: InputBorder.none,
                           hintText: "Xonadonni narxini kiriting".tr(),
                           hintStyle:
-                          TextStyle(fontSize: 14.sp, color: Colors.grey),
+                              TextStyle(fontSize: 14.sp, color: Colors.grey),
                           suffixIcon: Container(
                             decoration: BoxDecoration(
                                 border: Border(
-                                    left:
-                                    BorderSide(color: Colors.grey.shade300))),
+                                    left: BorderSide(
+                                        color: Colors.grey.shade300))),
                             padding: EdgeInsets.only(left: 8.w, top: 0),
                             width: 70.w,
                             height: 0.h,
@@ -781,7 +788,8 @@ class _Student2State extends State<Student2> {
                               hint: Text(
                                 "SO'M".tr(),
                                 style: TextStyle(
-                                    fontSize: 14.sp, color: AppColors.textColor),
+                                    fontSize: 14.sp,
+                                    color: AppColors.textColor),
                               ),
                               items: [
                                 DropdownMenuItem(
@@ -837,17 +845,15 @@ class _Student2State extends State<Student2> {
                             child: DropdownButtonFormField(
                               hint: Padding(
                                 padding: EdgeInsets.only(left: 8.w),
-                                child: Text(
-                                  "Turlari".tr(),
+                                child: Text("Turlari".tr(),
                                     style: TextStyle(
                                       color: AppColors.textColor,
                                       fontSize: 14.sp,
                                       fontWeight: FontWeight.w500,
-                                    )
-                                ),
+                                    )),
                               ),
-                              decoration:
-                              const InputDecoration(border: InputBorder.none),
+                              decoration: const InputDecoration(
+                                  border: InputBorder.none),
                               icon: Icon(Icons.arrow_drop_down_outlined),
                               items: pricetype.map((e) {
                                 return DropdownMenuItem<String>(
@@ -862,9 +868,9 @@ class _Student2State extends State<Student2> {
                               onChanged: (newValue) {
                                 setState(() {
                                   print(newValue);
-                                  if(newValue == 'sum'){
+                                  if (newValue == 'sum') {
                                     pricerent_type = '1';
-                                  }else if(newValue == 'dollar'){
+                                  } else if (newValue == 'dollar') {
                                     pricerent_type = '2';
                                   }
 
@@ -902,14 +908,12 @@ class _Student2State extends State<Student2> {
                             child: DropdownButtonFormField(
                               hint: Padding(
                                 padding: EdgeInsets.only(left: 8.w),
-                                child: Text(
-                                  "Kunlik / Oylik ".tr(),
+                                child: Text("Kunlik / Oylik ".tr(),
                                     style: TextStyle(
                                       color: AppColors.textColor,
                                       fontSize: 14.sp,
                                       fontWeight: FontWeight.w500,
-                                    )
-                                ),
+                                    )),
                               ),
                               decoration: const InputDecoration(
                                   border: InputBorder.none),
@@ -928,9 +932,9 @@ class _Student2State extends State<Student2> {
                                 setState(() {
                                   rent_type = newValue.toString();
                                   _colorGender = Colors.grey;
-                                  if(newValue == 'kunlik'){
+                                  if (newValue == 'kunlik') {
                                     price = '1';
-                                  }else if(newValue == 'oylik'){
+                                  } else if (newValue == 'oylik') {
                                     price = '2';
                                   }
                                 });
@@ -948,14 +952,12 @@ class _Student2State extends State<Student2> {
                     children: [
                       Row(
                         children: [
-                          Text(
-                            "Uy egasi ham yashaydimi ?",
+                          Text("Uy egasi ham yashaydimi ?",
                               style: TextStyle(
                                 color: AppColors.textColor,
                                 fontSize: 14.sp,
                                 fontWeight: FontWeight.w500,
-                              )
-                          ),
+                              )),
                         ],
                       ),
                       Row(
@@ -1007,14 +1009,12 @@ class _Student2State extends State<Student2> {
                     children: [
                       Row(
                         children: [
-                          Text(
-                            "Kommunal to’lovlarini kim to’laydi ?",
+                          Text("Kommunal to’lovlarini kim to’laydi ?",
                               style: TextStyle(
                                 color: AppColors.textColor,
                                 fontSize: 14.sp,
                                 fontWeight: FontWeight.w500,
-                              )
-                          ),
+                              )),
                         ],
                       ),
                       Row(
@@ -1064,15 +1064,12 @@ class _Student2State extends State<Student2> {
                   ),
                   Row(
                     children: [
-                      Text(
-                        "Quyidagi qulayliklarga ega.",
-                          style: TextStyle
-                            (
+                      Text("Quyidagi qulayliklarga ega.",
+                          style: TextStyle(
                             color: AppColors.textColor,
                             fontSize: 16.sp,
                             fontWeight: FontWeight.w500,
-                          )
-                      ),
+                          )),
                     ],
                   ),
                   SizedBox(
@@ -1085,11 +1082,12 @@ class _Student2State extends State<Student2> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text("Wi - fi ",style: TextStyle(
-                              color: AppColors.textColor,
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w500,
-                            )),
+                            Text("Wi - fi ",
+                                style: TextStyle(
+                                  color: AppColors.textColor,
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w500,
+                                )),
                             Checkbox(
                               value: this.value1,
                               onChanged: (bool? value) {
@@ -1108,11 +1106,12 @@ class _Student2State extends State<Student2> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text("TV",style: TextStyle(
-                              color: AppColors.textColor,
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w500,
-                            )),
+                            Text("TV",
+                                style: TextStyle(
+                                  color: AppColors.textColor,
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w500,
+                                )),
                             Checkbox(
                               value: this.value2,
                               onChanged: (bool? value) {
@@ -1131,11 +1130,12 @@ class _Student2State extends State<Student2> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text("Muzlatgich",style: TextStyle(
-                              color: AppColors.textColor,
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w500,
-                            )),
+                            Text("Muzlatgich",
+                                style: TextStyle(
+                                  color: AppColors.textColor,
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w500,
+                                )),
                             Checkbox(
                               value: this.value3,
                               onChanged: (bool? value) {
@@ -1154,11 +1154,12 @@ class _Student2State extends State<Student2> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text("Kir yuvish mashinasi",style: TextStyle(
-                              color: AppColors.textColor,
-                              fontSize: 13.5.sp,
-                              fontWeight: FontWeight.w500,
-                            )),
+                            Text("Kir yuvish mashinasi",
+                                style: TextStyle(
+                                  color: AppColors.textColor,
+                                  fontSize: 13.5.sp,
+                                  fontWeight: FontWeight.w500,
+                                )),
                             Checkbox(
                               value: value4,
                               onChanged: (bool? value) {
@@ -1177,11 +1178,12 @@ class _Student2State extends State<Student2> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text("Konditsioner",style: TextStyle(
-                              color: AppColors.textColor,
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w500,
-                            )),
+                            Text("Konditsioner",
+                                style: TextStyle(
+                                  color: AppColors.textColor,
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w500,
+                                )),
                             Checkbox(
                               value: value5,
                               onChanged: (bool? value) {
@@ -1200,11 +1202,12 @@ class _Student2State extends State<Student2> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text("Chang yutgich",style: TextStyle(
-                              color: AppColors.textColor,
-                              fontSize: 14.sp,
-                              fontWeight: FontWeight.w500,
-                            )),
+                            Text("Chang yutgich",
+                                style: TextStyle(
+                                  color: AppColors.textColor,
+                                  fontSize: 14.sp,
+                                  fontWeight: FontWeight.w500,
+                                )),
                             Checkbox(
                               value: value6,
                               onChanged: (bool? value) {
@@ -1228,7 +1231,7 @@ class _Student2State extends State<Student2> {
                   ),
                   Padding(
                     padding:
-                    EdgeInsets.symmetric(vertical: 18.h, horizontal: 31.w),
+                        EdgeInsets.symmetric(vertical: 18.h, horizontal: 31.w),
                     child: Container(
                       width: double.infinity,
                       child: ElevatedButton(
@@ -1256,19 +1259,20 @@ class _Student2State extends State<Student2> {
                                 titlecount: widget.titlecount,
                                 viloyatidisi: widget.viloyatidisi,
                                 comfort: comfortItems,
-                                costlivekomunal: costcommunal.toString() == 'ha' ? '1' : '2',
+                                costlivekomunal:
+                                    costcommunal.toString() == 'ha' ? '1' : '2',
                                 metro: metro.toString() == 'ha' ? '1' : '2',
                                 countroom: housefloorcount.toString(),
-                                housetype: housetype== 'kv' ? '1' : '2',
+                                housetype: housetype == 'kv' ? '1' : '2',
                                 howcountroom: howcountroom.toString(),
                                 narxnituri: pricerent_type,
                                 addressController: addressController.text,
                                 housecount: housecount.toString(),
                                 ownerlive: ownerlive.toString(),
-                                costController:costcontroller.text,
+                                costController: costcontroller.text,
                                 rent_type: price,
                                 cost_period: price,
-                                location:'${map.forMap}',
+                                location: '${map.forMap}',
                               ),
                             ),
                           );
@@ -1285,7 +1289,8 @@ class _Student2State extends State<Student2> {
                           // print('${comfortItems} comfortItems.comfortItems  +++++++++++');
                           // print('${costcommunal} costcommunal.costcommunal  +++++++++++');
                           // print('${pricerent_type} pricerent_type dollar  +++++++++++');
-                          print('${housefloorcount} housefloorcount.housefloorcount  +++++++++++');
+                          print(
+                              '${housefloorcount} housefloorcount.housefloorcount  +++++++++++');
                           // print('${housetype== 'kv' ? '1' : '2'} kunlik.housetype  +++++++++++');
                           // print('${pricerent_type} dropDown.dollar yoki sum  +++++++++++');
                           // print('${addressController.text} addressController.addressController  +++++++++++');
@@ -1294,7 +1299,6 @@ class _Student2State extends State<Student2> {
                           // print('${price} rent_type.rent_type  +++++++++++');
                           // print('${price} price.price  +++++++++++');
                           // print('${costcontroller.text} costcontroller.costcontroller  +++++++++++');
-
                         },
                         child: Text(
                           "Keyingi ".tr(),
@@ -1312,6 +1316,7 @@ class _Student2State extends State<Student2> {
       ),
     );
   }
+
   List<Marker> mymarker = [];
   _handlerTap(LatLng tappadPoint) {
     final mapLatitude = context.read<FavoriteProvider>();
@@ -1328,4 +1333,3 @@ class _Student2State extends State<Student2> {
     });
   }
 }
-

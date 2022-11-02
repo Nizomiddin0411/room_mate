@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
-import 'package:talaba_uy/screens/Create_ads/ads_student_create,dart.dart';
 import '../../cubit/aut_cubit.dart';
 import '../../models/lang_model.dart';
 import '../../provider/region_provider.dart';
@@ -154,7 +153,7 @@ class _StudentState extends State<Student> {
                             titlecolor2 = true;
                           } else {
                             titleColor = Colors.red;
-                            titlecolor2 = true;
+                            titlecolor2 = false;
                           }
                         });
                       },
@@ -251,7 +250,7 @@ class _StudentState extends State<Student> {
                           onChanged: (bool? value) {
                             setState(() {
                               otmEnable1 = value!;
-                              regionsvalue = value!;
+                              regionsvalue = value;
                             });
                           },
                         ),
@@ -340,7 +339,7 @@ class _StudentState extends State<Student> {
                           value: value6,
                           onChanged: (bool? value) {
                             setState(() {
-                              otmEnable = value6!;
+                              otmEnable = value6;
                               value6 = value!;
                               univervalue = value ? '1' : '2';
                               if (value) {
@@ -611,7 +610,7 @@ class _StudentState extends State<Student> {
                             ),
                             Text(
                               "Yo'q",
-                              style: new TextStyle(
+                              style:  TextStyle(
                                 fontSize: 17.0.sp,
                               ),
                             ),
@@ -668,25 +667,37 @@ class _StudentState extends State<Student> {
                               borderRadius: BorderRadius.circular(10.r)),
                           primary: AppColors.buttonLinear),
                       onPressed: () {
+                        print(titlecontroller1.text+'_______________________');
+                        print('${value6 ? 1 : 2}');
+                        print( data.viloyatid.toString());
+                        print('${regionsvalue ? 1 : 2}');
+                        print( data.UniverId);
+                        print('${gender1 ? 0 : _titleGendor}');
+                        print('${gender1 ? 0 : _titleCount}');
+                        print(phoneController.text.split(' ').join(''));
+                        print(house);
+                        print('${addinformation.text}');
+                        print('${numbervalue ? 1 : 2}==========');
                         if (titlecolor2 &&  _phoneOnClick) {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Student2(
-                                  titlecontroller1: titlecontroller1.text,
-                                  univervalue: '${value6 ? 1 : 2}',
-                                  viloyatidisi: data.viloyatid.toString(),
-                                  viloyatvalue: '${regionsvalue ? 1 : 2}',
-                                  universiteteid: data.UniverId,
-                                  titleGendor: '${gender1 ? 0 : _titleGendor}',
-                                  titlecount: '${gender1 ? 0 : _titleCount}',
-                                  phoneController:
-                                      phoneController.text.split(' ').join(''),
-                                  house: house,
-                                  addinformation: '${addinformation.text}',
-                                  numbervalue: '${numbervalue ? 1 : 2}'),
-                            ),
-                          );
+
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //     builder: (context) => Student2(
+                          //         titlecontroller1: titlecontroller1.text,
+                          //         univervalue: '${value6 ? 1 : 2}',
+                          //         viloyatidisi: data.viloyatid.toString(),
+                          //         viloyatvalue: '${regionsvalue ? 1 : 2}',
+                          //         universiteteid: data.UniverId,
+                          //         titleGendor: '${gender1 ? 0 : _titleGendor}',
+                          //         titlecount: '${gender1 ? 0 : _titleCount}',
+                          //         phoneController:
+                          //             phoneController.text.split(' ').join(''),
+                          //         house: house,
+                          //         addinformation: '${addinformation.text}',
+                          //         numbervalue: '${numbervalue ? 1 : 2}'),
+                          //   ),
+                          // );
                         } else {
                           // if (!titlecolor2) {
                           //   titlecolor = Colors.red;

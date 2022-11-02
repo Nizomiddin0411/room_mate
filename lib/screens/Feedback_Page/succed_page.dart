@@ -26,7 +26,7 @@ class _SuccedPageState extends State<SuccedPage> {
                 child:Image.asset('assets/images/illustration.png')
             ),
             SizedBox(height: 50.h,),
-            Center(child: Text("Siz muvaffaqiyatli jo'natildi",style: TextStyle(fontSize: 18.sp),)),
+            Center(child: Text("Muvaffaqiyatli jo'natildi",style: TextStyle(fontSize: 18.sp),)),
             SizedBox(height: 236.h,),
             ElevatedButton(
               onPressed: () {

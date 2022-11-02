@@ -112,17 +112,17 @@ class _AdsDetailState extends State<AdsDetail> {
   void isHaveComfort(List haveInt, listE) {
     for (int i in haveInt) {
       if (i == 1) {
-        listE.add('Wi-fi');
+        listE.add(tr('Wi - fi'));
       } else if (i == 2) {
-        listE.add('TV');
+        listE.add(tr('TV'));
       } else if (i == 3) {
-        listE.add('Muzlatgich');
+        listE.add(tr('Muzlatgich'));
       } else if (i == 4) {
-        listE.add('Kir yuvish mashinasi');
+        listE.add(tr("Kir yuvish mashinasi"));
       } else if (i == 5) {
-        listE.add('Konditsioner');
+        listE.add(tr('Konditsioner'));
       } else if (i == 6) {
-        listE.add('Chang yutgich');
+        listE.add(tr("Chang yutgich"));
       }
     }
   }
@@ -143,25 +143,25 @@ class _AdsDetailState extends State<AdsDetail> {
 
     // usermap.map((key, value) => null)
     if (widget.utileElictricity.toString() == '1') {
-      user.add("elekto'r");
+      user.add(tr("Elektr energiya"));
     }if(widget.utileGaz.toString() == '1'){
-      user.add("gaz");
+      user.add(tr("Gaz"));
     }if(widget.utileColdWater.toString() == '1'){
-      user.add("sovuq suv");
+      user.add(tr("Sovuq suv"));
     }if(widget.utileHotWater.toString() == '1'){
-      user.add("issiq suv");
+      user.add(tr("Issiq suv"));
     }if( widget.utileTrash.toString() == '1'){
-      user.add("axlat");
+      user.add(tr("Chiqindi"));
     }if(widget.utileElictricity.toString() == '2'){
-      student.add("elekto'r");
+      student.add(tr("Elektr energiya"));
     }if(widget.utileGaz.toString() == '2'){
-      student.add('gaz');
+      student.add(tr('Gaz'));
     }if(widget.utileHotWater.toString() == '2'){
-      student.add('issiq suv');
+      student.add(tr('Issiq suv'));
     }if(widget.utileColdWater.toString() == '2'){
-      student.add('sovuq suv');
+      student.add(tr('Sovuq suv'));
     }if(widget.utileTrash.toString() == '2'){
-      student.add('axlat');
+      student.add(tr('Chiqindi'));
     }
     if(user.isNotEmpty) {
       forUser = user.reduce((value, element) => value + ', ' + element);
