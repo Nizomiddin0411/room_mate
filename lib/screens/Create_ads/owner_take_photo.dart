@@ -62,7 +62,7 @@ class _OwnerPhotoAddsState extends State<OwnerPhotoAdds> {
           },
           color: Colors.black,
         ),
-        title: Center(
+        title: const Center(
             child: Text(
               "E’lon yaratish",
               style: TextStyle(color: Colors.blue),
@@ -73,7 +73,7 @@ class _OwnerPhotoAddsState extends State<OwnerPhotoAdds> {
         child: Column(
           children: [
             SizedBox(
-              height: 15,
+              height: 15.h,
             ),
             Center(
               child: Container(
@@ -89,12 +89,12 @@ class _OwnerPhotoAddsState extends State<OwnerPhotoAdds> {
                             onPressed: () {
                               showOptionsDialog(context);
                             },
-                            icon: Icon(
+                            icon: const Icon(
                               Icons.camera_alt,
                               size: 40,
                             )),
                         SizedBox(
-                          height: 10,
+                          height: 10.h,
                         ),
                         Text("Rasm yuklang",style: TextStyle(fontSize: 15),)
                       ],

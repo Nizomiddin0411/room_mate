@@ -31,7 +31,7 @@ class _CreateSuccedfulState extends State<CreateSuccedful> {
             SizedBox(height: 236.h,),
             ElevatedButton(
               onPressed: () {
-                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>MenuFor()), (route) => false);
+                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>MenuPage()), (route) => false);
               },
               style: ElevatedButton.styleFrom(
                 primary: AppColors.mainColor,

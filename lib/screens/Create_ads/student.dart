@@ -9,6 +9,7 @@ import 'package:talaba_uy/core/const/app_colors.dart';
 import '../../cubit/aut_cubit.dart';
 import '../../models/lang_model.dart';
 import '../../provider/region_provider.dart';
+import 'ads_student_create,dart.dart';
 
 class Student extends StatefulWidget {
   const Student({Key? key}) : super(key: key);
@@ -205,7 +206,7 @@ class _StudentState extends State<Student> {
                           ),
                           decoration: InputDecoration(border: InputBorder.none),
                           // value: ,
-                          icon: Icon(Icons.arrow_drop_down_outlined),
+                          icon: const Icon(Icons.arrow_drop_down_outlined),
                           items: data.regions.map((e) {
                             return DropdownMenuItem<String>(
                               onTap: () {
@@ -288,7 +289,7 @@ class _StudentState extends State<Student> {
                         mode: Mode.BOTTOM_SHEET,
                         enabled: otmEnable,
                         dropdownSearchDecoration:
-                            InputDecoration(border: InputBorder.none),
+                            const InputDecoration(border: InputBorder.none),
 
                         items: data.univer.map((e) {
                           if (dropDown2 == e.name) {
@@ -550,6 +551,7 @@ class _StudentState extends State<Student> {
                               onChanged: (bool? value) {
                                 setState(() {
                                   numbervalue = value!;
+                                  // _phoneOnClick = true;
                                 });
                               },
                             ),
@@ -668,36 +670,35 @@ class _StudentState extends State<Student> {
                           primary: AppColors.buttonLinear),
                       onPressed: () {
                         print(titlecontroller1.text+'_______________________');
-                        print('${value6 ? 1 : 2}');
-                        print( data.viloyatid.toString());
-                        print('${regionsvalue ? 1 : 2}');
-                        print( data.UniverId);
-                        print('${gender1 ? 0 : _titleGendor}');
-                        print('${gender1 ? 0 : _titleCount}');
-                        print(phoneController.text.split(' ').join(''));
-                        print(house);
-                        print('${addinformation.text}');
-                        print('${numbervalue ? 1 : 2}==========');
+                        print('${value6 ? 1 : 2}'+ 'univer matter');
+                        print( data.viloyatid.toString() + 'distrik id');
+                        print('${regionsvalue ? 1 : 2}'+'region matter');
+                        print( data.UniverId.toString() + 'univer id' );
+                        print('${gender1 ? 0 : _titleGendor}' + 'gendr');
+                        print('${gender1 ? 0 : _titleCount}' + 'xonadoshlar soni');
+                        print(phoneController.text.split(' ').join('').toString() + 'telefon');
+                        print(house.toString() + 'have living home');
+                        print('${addinformation.text}' + 'discription');
+                        print('${numbervalue ? 1 : 2}========== phone matter');
                         if (titlecolor2 &&  _phoneOnClick) {
-
-                          // Navigator.push(
-                          //   context,
-                          //   MaterialPageRoute(
-                          //     builder: (context) => Student2(
-                          //         titlecontroller1: titlecontroller1.text,
-                          //         univervalue: '${value6 ? 1 : 2}',
-                          //         viloyatidisi: data.viloyatid.toString(),
-                          //         viloyatvalue: '${regionsvalue ? 1 : 2}',
-                          //         universiteteid: data.UniverId,
-                          //         titleGendor: '${gender1 ? 0 : _titleGendor}',
-                          //         titlecount: '${gender1 ? 0 : _titleCount}',
-                          //         phoneController:
-                          //             phoneController.text.split(' ').join(''),
-                          //         house: house,
-                          //         addinformation: '${addinformation.text}',
-                          //         numbervalue: '${numbervalue ? 1 : 2}'),
-                          //   ),
-                          // );
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => Student2(
+                                  titlecontroller1: titlecontroller1.text,
+                                  univervalue: '${value6 ? 1 : 2}',
+                                  viloyatidisi: data.viloyatid.toString(),
+                                  viloyatvalue: '${regionsvalue ? 1 : 2}',
+                                  universiteteid: data.UniverId,
+                                  titleGendor: '${gender1 ? 0 : _titleGendor}',
+                                  titlecount: '${gender1 ? 0 : _titleCount}',
+                                  phoneController:
+                                      phoneController.text.split(' ').join(''),
+                                  house: house,
+                                  addinformation: '${addinformation.text}',
+                                  numbervalue: '${numbervalue ? 1 : 2}'),
+                            ),
+                          );
                         } else {
                           // if (!titlecolor2) {
                           //   titlecolor = Colors.red;

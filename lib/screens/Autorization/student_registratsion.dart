@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -168,16 +166,20 @@ class _StudentUserState extends State<StudentUser> {
                       Column(
                         children: [
                      
-                          SizedBox(
-                            height: 10.h,
-                          ),
-                          Checkbox(
-                            value: hidenumber,
-                            onChanged: (bool? value) {
-                              setState(() {
-                                hidenumber = value!;
-                              });
-                            },
+                          // SizedBox(
+                          //   height: 10.h,
+                          // ),
+                          Padding(
+                            padding: EdgeInsets.fromLTRB(10.w,10.h,5.w,25.h),
+                            child: Checkbox(
+                              value: hidenumber,
+                              onChanged: (bool? value) {
+                                setState(() {
+                                  hidenumber = value!;
+                                  print(hidenumber);
+                                });
+                              },
+                            ),
                           ),
                         ],
                       )
@@ -466,7 +468,7 @@ class _StudentUserState extends State<StudentUser> {
                 ],
               ),
               SizedBox(
-                height: 10.r,
+                height: 10.h,
               ),
               Column(
                 children: [
@@ -737,6 +739,7 @@ class _StudentUserState extends State<StudentUser> {
                             onChanged: (value) {
                               setState(() {
                                 isSwitched = value;
+
                               });
                             },
                           ),
@@ -749,10 +752,10 @@ class _StudentUserState extends State<StudentUser> {
               Row(
                 children: [
                   Checkbox(
-                    value: this.checkBox,
+                    value: checkBox,
                     onChanged: (bool? value) {
                       setState(() {
-                        this.checkBox = value!;
+                        checkBox = value!;
                       });
                     },
                   ),
@@ -762,7 +765,7 @@ class _StudentUserState extends State<StudentUser> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => OffertoPage()));
+                                builder: (context) => const OffertoPage()));
                       },
                       child: Row(
                         children: [
@@ -779,7 +782,7 @@ class _StudentUserState extends State<StudentUser> {
                             style: TextStyle(
                                 color: AppColors.mainColor, fontSize: 15.sp),
                           ),
-                          Divider(
+                          const Divider(
                             color: Colors.red,
                             thickness: 2,
                           )
@@ -790,7 +793,7 @@ class _StudentUserState extends State<StudentUser> {
                 ],
               ),
               SizedBox(
-                height: 15,
+                height: 15.h,
               ),
               ElevatedButton(
                 onPressed: () async {
@@ -810,21 +813,33 @@ class _StudentUserState extends State<StudentUser> {
                       myController.text != '' &&
                       jinsi &&
                       checkBox) {
+                    // print("${myController.text}" +'full name' );
+                    // print("${nameController.text}" + ' telefon');
+                    // print("${hidenumber ? '1' : '2'}" + 'hide phone');
+                    // print("${dropdownvalue.toString() == 'Erkak' ? '1' : '2'}" + 'Gendor');
+                    // print("${university_id.toString()}" + 'universitet id');
+                    // print("${data.fakultetid.toString()}" + 'facultet');
+                    // print("${Course.toString()}" + 'course');
+                    // print("${isSwitched.toString() == 'Ha' ? '1' : '2'}" + 'hide profile');
+                    // print("${data.districtId.toString()}" + 'tuman');
+
+
+
                     await RegistratsiyaStudent().CreateAdsStudent(
                       FullName: myController.text,
                       fakultetId: data.fakultetid.toString(),
                       Course: Course.toString(),
-                      HideProfile: isSwitched.toString() == 'Ha' ? '1' : '2',
+                      HideProfile: isSwitched ? '1' : '2',
                       District: data.districtId.toString(),
                       Phonenumber: nameController.text,
                       gender: dropdownvalue.toString() == 'Erkak' ? '1' : '2',
                       UniderId: university_id.toString(),
-                      Hidenumber: '${hidenumber ? 1 : 2}',
+                      Hidenumber: '${hidenumber ? '1' : '2'}',
                     );
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => SuccedfulPage()));
+                            builder: (context) => const SuccedfulPage()));
                   } else {
                     kursColor = Colors.red;
                     univerColor = Colors.red;

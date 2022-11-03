@@ -222,7 +222,7 @@ class _AdsDetailState extends State<AdsDetail> {
                                   ? CachedNetworkImage(
                                       imageUrl:
                                           "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${widget.Image![index1].image.toString()}",
-                                      placeholder: (context, url) => Center(
+                                      placeholder: (context, url) => const Center(
                                           child: CircularProgressIndicator()),
                                       errorWidget: (context, url, error) =>
                                           Image.asset(

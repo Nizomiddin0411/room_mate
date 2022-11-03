@@ -16,6 +16,7 @@ import '../../services/post_create_ads_student.dart';
 
 class Createimage extends StatefulWidget {
   String metro;
+  String districId;
   String viloyatvalue;
   String universiteteid;
   String univervalue;
@@ -42,6 +43,7 @@ class Createimage extends StatefulWidget {
   String location;
 
   Createimage({Key? key,
+    required this.districId,
     required this.numbervalue,
     required this.house,
     required this.phoneController,
@@ -225,7 +227,7 @@ class _CreateimageState extends State<Createimage> {
                         SizedBox(
                           height: 15.h,
                         ),
-                        Text("Asosiy rasm"),
+                        const Text("Asosiy rasm"),
                         Divider(
                           height: 20.0.h,
                           color: Colors.black,
@@ -236,8 +238,8 @@ class _CreateimageState extends State<Createimage> {
                     //   height: 20.h,
                     // ),
                     ConstrainedBox(
-                      constraints: BoxConstraints(
-                          maxHeight: 150, maxWidth: 400),
+                      constraints:  BoxConstraints(
+                          maxHeight: 150.h, maxWidth: 400.w),
                       child: Container(
                         height: 240.h,
                         child: ListView(
@@ -390,7 +392,7 @@ class _CreateimageState extends State<Createimage> {
                     ),
                   ]),
                   SizedBox(height: 170.h,),
-                  Container(
+                  SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
@@ -411,7 +413,7 @@ class _CreateimageState extends State<Createimage> {
                             phone_number_show: widget.numbervalue,
                             have_living_home: widget.house,
                             description: widget.addinformation.toString(),
-                            district_id: widget.viloyatidisi,
+                            district_id: widget.districId,
                             address: widget.addressController.toString(),
                             location: widget.location,
                             subway: widget.metro,
@@ -439,37 +441,37 @@ class _CreateimageState extends State<Createimage> {
                                 load.isLoading;
                           });
 
-                          await CreateStudent().StudentsAdds(
-                            title: widget.titlecontroller1,
-                            stay_region_id: widget.viloyatidisi,
-                            stay_region_matter: widget.viloyatvalue,
-                            stay_university_id: widget.universiteteid,
-                            stay_university_matter: widget.univervalue,
-                            roommate_gender: widget.titleGendor,
-                            roommate_count: widget.titlecount,
-                            phone_number: widget.phoneController.toString(),
-                            phone_number_show: widget.numbervalue,
-                            have_living_home: widget.house,
-                            description: widget.addinformation.toString(),
-                            district_id: widget.viloyatidisi,
-                            address: widget.addressController.toString(),
-                            location: widget.location,
-                            subway: widget.metro,
-                            house_type: widget.housetype,
-                            room_count: widget.housecount,
-                            floors_count: widget.howcountroom,
-                            howcountroom: widget.howcountroom,
-                            cost: widget.costController,
-                            cost_type: widget.narxnituri,
-                            live_with_owner: widget.ownerlive,
-                            utility_bills: widget.costlivekomunal,
-                            comfort: widget.comfort,
-                            renttype: widget.rent_type,
-                            cost_period: widget.cost_period,
-                            file1: FileExist[0] ? FileList[0] : FileList[3],
-                            file2: FileExist[1] ? FileList[1] : FileList[4],
-                            file3: FileExist[2] ? FileList[2] : FileList[5],
-                          );
+                          // await CreateStudent().StudentsAdds(
+                          //   title: widget.titlecontroller1,
+                          //   stay_region_id: widget.viloyatidisi,
+                          //   stay_region_matter: widget.viloyatvalue,
+                          //   stay_university_id: widget.universiteteid,
+                          //   stay_university_matter: widget.univervalue,
+                          //   roommate_gender: widget.titleGendor,
+                          //   roommate_count: widget.titlecount,
+                          //   phone_number: widget.phoneController.toString(),
+                          //   phone_number_show: widget.numbervalue,
+                          //   have_living_home: widget.house,
+                          //   description: widget.addinformation.toString(),
+                          //   district_id: widget.viloyatidisi,
+                          //   address: widget.addressController.toString(),
+                          //   location: widget.location,
+                          //   subway: widget.metro,
+                          //   house_type: widget.housetype,
+                          //   room_count: widget.housecount,
+                          //   floors_count: widget.countroom,
+                          //   howcountroom: widget.howcountroom,//blla
+                          //   cost: widget.costController,
+                          //   cost_type: widget.narxnituri,
+                          //   live_with_owner: widget.ownerlive,
+                          //   utility_bills: widget.costlivekomunal,
+                          //   comfort: widget.comfort,
+                          //   renttype: widget.rent_type,
+                          //   cost_period: widget.cost_period,
+                          //   file1: FileExist[0] ? FileList[0] : FileList[3],
+                          //   file2: FileExist[1] ? FileList[1] : FileList[4],
+                          //   file3: FileExist[2] ? FileList[2] : FileList[5],
+                          // );
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -478,7 +480,7 @@ class _CreateimageState extends State<Createimage> {
                           );
                         },
                         child: Text(
-                          "Keyingi ".tr(),
+                          "Keyingi".tr(),
                           style: TextStyle(
                               fontSize: 20.sp, fontWeight: FontWeight.w500),
                         ),

@@ -85,7 +85,7 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
               ],
             ),
             SizedBox(
-              height: 10,
+              height: 10.h,
             ),
             Column(
               children: [
@@ -115,7 +115,7 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
                           if (e!.length > 12) {
                             return null;
                           } else {
-                            return '12 ta raqam kiriting';
+                            return '9 ta raqam kiriting';
                           }
                         },
                         keyboardType: TextInputType.phone,
@@ -131,7 +131,7 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
               ],
             ),
             SizedBox(
-              height: 10,
+              height: 10.h,
             ),
             // Column(
             //   children: [
@@ -208,7 +208,7 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
             //   ],
             // ),
             SizedBox(
-              height: 10,
+              height: 10.w,
             ),
             Column(
               children: [
@@ -221,10 +221,10 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
             Row(
               children: [
                 Checkbox(
-                  value: this.checkBox,
+                  value: checkBox,
                   onChanged: (bool? value) {
                     setState(() {
-                      this.checkBox = value!;
+                      checkBox = value!;
                     });
                   },
                 ),
@@ -233,7 +233,7 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => OffertoPage())),
+                                  builder: (context) => const OffertoPage())),
                         },
                     child: Row(
                       children: [
