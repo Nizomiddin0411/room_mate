@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
-import 'package:talaba_uy/models/get_all_ads.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../chat/chat_page.dart';
 import '../../services/post_add_chat_permit.dart';
@@ -15,6 +14,7 @@ import '../../services/post_change_favoritr_service.dart';
 import '../Google_map/map_for_ads_detail.dart';
 
 class AdsDetail extends StatefulWidget {
+  String? costPeriod;
   String? phoneNumber;
   String? comfort;
   String? phoneNumberShow;
@@ -92,6 +92,7 @@ class AdsDetail extends StatefulWidget {
     required this.chatApproved,
     required this.address,
     required this.comfort,
+    required this.costPeriod,
   }) : super(key: key);
 
   @override
@@ -99,7 +100,7 @@ class AdsDetail extends StatefulWidget {
 }
 
 class _AdsDetailState extends State<AdsDetail> {
-  int _correntPage = 0;
+
   late List<String> haveComfort = widget.comfort.toString().split(',');
   late List<int> haveInt = haveComfort.map(int.parse).toList();
   late List<String> comfort = [];
@@ -137,36 +138,45 @@ class _AdsDetailState extends State<AdsDetail> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    isHaveComfort(haveInt, comfort);
-    comfortList = comfort.reduce((value, element) => value + ', ' + element);
-
-
+    if(widget.comfort!.isNotEmpty ) {
+      isHaveComfort(haveInt, comfort);
+      comfortList = comfort.reduce((value, element) => value + ', ' + element);
+    }
     // usermap.map((key, value) => null)
     if (widget.utileElictricity.toString() == '1') {
       user.add(tr("Elektr energiya"));
-    }if(widget.utileGaz.toString() == '1'){
+    }
+    if (widget.utileGaz.toString() == '1') {
       user.add(tr("Gaz"));
-    }if(widget.utileColdWater.toString() == '1'){
+    }
+    if (widget.utileColdWater.toString() == '1') {
       user.add(tr("Sovuq suv"));
-    }if(widget.utileHotWater.toString() == '1'){
+    }
+    if (widget.utileHotWater.toString() == '1') {
       user.add(tr("Issiq suv"));
-    }if( widget.utileTrash.toString() == '1'){
+    }
+    if (widget.utileTrash.toString() == '1') {
       user.add(tr("Chiqindi"));
-    }if(widget.utileElictricity.toString() == '2'){
+    }
+    if (widget.utileElictricity.toString() == '2') {
       student.add(tr("Elektr energiya"));
-    }if(widget.utileGaz.toString() == '2'){
+    }
+    if (widget.utileGaz.toString() == '2') {
       student.add(tr('Gaz'));
-    }if(widget.utileHotWater.toString() == '2'){
+    }
+    if (widget.utileHotWater.toString() == '2') {
       student.add(tr('Issiq suv'));
-    }if(widget.utileColdWater.toString() == '2'){
+    }
+    if (widget.utileColdWater.toString() == '2') {
       student.add(tr('Sovuq suv'));
-    }if(widget.utileTrash.toString() == '2'){
+    }
+    if (widget.utileTrash.toString() == '2') {
       student.add(tr('Chiqindi'));
     }
-    if(user.isNotEmpty) {
+    if (user.isNotEmpty) {
       forUser = user.reduce((value, element) => value + ', ' + element);
     }
-    if(student.isNotEmpty) {
+    if (student.isNotEmpty) {
       forStudent = student.reduce((value, element) => value + ', ' + element);
     }
   }
@@ -207,7 +217,6 @@ class _AdsDetailState extends State<AdsDetail> {
                       // controller: _pageController,
                       onPageChanged: (int index) {
                         setState(() {
-                          _correntPage = index % images.length;
                         });
                       },
                       itemBuilder: (context, pagePosition) {
@@ -222,8 +231,10 @@ class _AdsDetailState extends State<AdsDetail> {
                                   ? CachedNetworkImage(
                                       imageUrl:
                                           "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${widget.Image![index1].image.toString()}",
-                                      placeholder: (context, url) => const Center(
-                                          child: CircularProgressIndicator()),
+                                      placeholder: (context, url) =>
+                                          const Center(
+                                              child:
+                                                  CircularProgressIndicator()),
                                       errorWidget: (context, url, error) =>
                                           Image.asset(
                                         'assets/images/notImage.png',
@@ -336,7 +347,7 @@ class _AdsDetailState extends State<AdsDetail> {
                       Padding(
                         padding: EdgeInsets.fromLTRB(12.w, 12.h, 12.w, 0),
                         child: Text(
-                          '${widget.cost} ${widget.costTayp == '1' ? "So'm" : 'USD'}/${widget.rentType == '1' ? tr('Kunlik') : tr('Oylik')}',
+                          '${widget.cost} ${widget.costTayp == '1' ? "So'm" : 'USD'}/${widget.costPeriod == '1' ? tr('Kuniga') : widget.costPeriod == '2' ? tr('Oyiga') : tr('Kishi boshiga')}',
                           style: TextStyle(
                               fontSize: 24.sp, color: AppColors.mainColor),
                         ),
@@ -971,6 +982,7 @@ class _AdsDetailState extends State<AdsDetail> {
                     SizedBox(
                       height: 6.h,
                     ),
+                    widget.description.toString() != 'null' ?
                     Row(
                       children: [
                         Container(
@@ -996,7 +1008,8 @@ class _AdsDetailState extends State<AdsDetail> {
                               )),
                         )
                       ],
-                    ),
+                    )
+                        : SizedBox(),
                     SizedBox(
                       height: 6.h,
                     ),
@@ -1007,7 +1020,7 @@ class _AdsDetailState extends State<AdsDetail> {
                           fontWeight: FontWeight.bold,
                           color: AppColors.mainColor),
                     ),
-                    Row(
+                    widget.type == '1' ? Row(
                       children: [
                         Container(
                           width: 40.w,
@@ -1034,70 +1047,75 @@ class _AdsDetailState extends State<AdsDetail> {
                               )),
                         )
                       ],
-                    ),
-                    SizedBox(
-                      height: 6.h,
-                    ),
-                    user.isNotEmpty? Row(
-                      children: [
-                        Container(
-                          width: 40.w,
-                          height: 40.h,
-                          decoration: BoxDecoration(
-                            color: AppColors.colorBack2,
-                            borderRadius: BorderRadius.circular(8.r),
-                          ),
-                          child: const Center(
-                              child: Icon(
-                            Icons.countertops,
-                            color: AppColors.error,
-                          )),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: SizedBox(
-                              width: MediaQuery.of(context).size.width - 130.w,
-                              child: Text(
-                                user.isNotEmpty?
-                                "uy egasi to'laydi: ${forUser}"
-                                :'',
-                                style: TextStyle(fontSize: 14.sp),
-                              )),
-                        )
-                      ],
                     ) : SizedBox(),
                     SizedBox(
                       height: 6.h,
                     ),
-                    student.isNotEmpty? Row(
-                      children: [
-                        Container(
-                          width: 40.w,
-                          height: 40.h,
-                          decoration: BoxDecoration(
-                            color: AppColors.colorBack2,
-                            borderRadius: BorderRadius.circular(8.r),
-                          ),
-                          child: const Center(
-                              child: Icon(
-                                Icons.countertops,
-                                color: AppColors.error,
-                              )),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: SizedBox(
-                              width: MediaQuery.of(context).size.width - 130.w,
-                              child: Text(
-                                student.isNotEmpty?
-                                "ijarachi to'laydi: ${forStudent}"
-                                    :''
-                                ,
-                                style: TextStyle(fontSize: 14.sp),
-                              )),
-                        )
-                      ],
-                    ) : SizedBox(),
+                    user.isNotEmpty
+                        ? Row(
+                            children: [
+                              Container(
+                                width: 40.w,
+                                height: 40.h,
+                                decoration: BoxDecoration(
+                                  color: AppColors.colorBack2,
+                                  borderRadius: BorderRadius.circular(8.r),
+                                ),
+                                child: const Center(
+                                    child: Icon(
+                                  Icons.countertops,
+                                  color: AppColors.error,
+                                )),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: SizedBox(
+                                    width: MediaQuery.of(context).size.width -
+                                        130.w,
+                                    child: Text(
+                                      user.isNotEmpty
+                                          ? "uy egasi to'laydi: ${forUser}"
+                                          : '',
+                                      style: TextStyle(fontSize: 14.sp),
+                                    )),
+                              )
+                            ],
+                          )
+                        : SizedBox(),
+                    SizedBox(
+                      height: 6.h,
+                    ),
+                    student.isNotEmpty
+                        ? Row(
+                            children: [
+                              Container(
+                                width: 40.w,
+                                height: 40.h,
+                                decoration: BoxDecoration(
+                                  color: AppColors.colorBack2,
+                                  borderRadius: BorderRadius.circular(8.r),
+                                ),
+                                child: const Center(
+                                    child: Icon(
+                                  Icons.countertops,
+                                  color: AppColors.error,
+                                )),
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.all(8.0),
+                                child: SizedBox(
+                                    width: MediaQuery.of(context).size.width -
+                                        130.w,
+                                    child: Text(
+                                      student.isNotEmpty
+                                          ? "ijarachi to'laydi: ${forStudent}"
+                                          : '',
+                                      style: TextStyle(fontSize: 14.sp),
+                                    )),
+                              )
+                            ],
+                          )
+                        : SizedBox(),
                     SizedBox(
                       height: 6.h,
                     ),
@@ -1121,7 +1139,7 @@ class _AdsDetailState extends State<AdsDetail> {
                           child: SizedBox(
                               width: MediaQuery.of(context).size.width - 130.w,
                               child: Text(
-                                "${widget.cost} ${widget.costTayp.toString() == '1' ? "So'm" : "USD"}/${widget.rentType == '1' ? tr('Kuniga') : tr('Oyiga')}",
+                                "${widget.cost} ${widget.costTayp.toString() == '1' ? "So'm" : "USD"}/${widget.costPeriod == '1' ? tr('Kuniga') :widget.costPeriod == '2'?tr('Oyiga'):tr('Kishi boshiga')}",
                                 style: TextStyle(fontSize: 14.sp),
                               )),
                         )
@@ -1130,14 +1148,14 @@ class _AdsDetailState extends State<AdsDetail> {
                     SizedBox(
                       height: 6.h,
                     ),
-                    Text(
-                      tr("Kuydagi qo'shimcha qulayliklar"),
+                    widget.comfort!.isNotEmpty ? Text(
+                      tr("Quydagi qo'shimcha qulayliklar"),
                       style: TextStyle(
                           fontSize: 18.sp,
                           fontWeight: FontWeight.bold,
                           color: AppColors.mainColor),
-                    ),
-                    Row(
+                    ):SizedBox(),
+                    widget.comfort!.isNotEmpty ? Row(
                       children: [
                         Container(
                           width: 40.w,
@@ -1164,7 +1182,7 @@ class _AdsDetailState extends State<AdsDetail> {
                           ),
                         ),
                       ],
-                    ),
+                    ):const SizedBox(),
                   ],
                 ),
               ),

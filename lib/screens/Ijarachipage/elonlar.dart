@@ -232,6 +232,7 @@ class _ElonlarState extends State<Elonlar> {
                                   utileGaz: data.Ads[index].unilityGaz.toString(),
                                   utileTrash: data.Ads[index].utilityTrash.toString(),
                                   utileColdWater: data.Ads[index].utilityColdWater.toString(),
+                                  costPeriod: data.Ads[index].costPeriod.toString(),
                                 ),
                               ),
                             );
@@ -378,11 +379,13 @@ class _ElonlarState extends State<Elonlar> {
                                                       fontSize: 24.sp),
                                                 ),
                                                 Text(
-                                                  data.Ads[index].rentType
+                                                  data.Ads[index].costPeriod
                                                               .toString() ==
                                                           '1'
                                                       ? tr('Kuniga')
-                                                      : tr('Oyiga'),
+                                                      :data.Ads[index].costPeriod
+                                                      .toString() ==
+                                                      '2' ?tr('Oyiga'):tr('Kishi boshiga'),
                                                   style: const TextStyle(
                                                       color:
                                                           AppColors.mainColor),
@@ -597,7 +600,8 @@ class _ElonlarState extends State<Elonlar> {
                                           utileHotWater: data
                                               .AdsForStudent[index]
                                               .utilityHotWater
-                                              .toString(),
+                                              .toString(), costPeriod: data
+                                        .AdsForStudent[index].costPeriod.toString(),
                                         )));
                           },
                           child: Container(
@@ -736,11 +740,14 @@ class _ElonlarState extends State<Elonlar> {
                                                 ),
                                                 Text(
                                                   data.AdsForStudent[index]
-                                                              .rentType
+                                                              .costPeriod
                                                               .toString() ==
                                                           '1'
                                                       ? tr('Kuniga')
-                                                      : tr('Oyiga'),
+                                                      :data.AdsForStudent[index]
+                                                      .costPeriod
+                                                      .toString() ==
+                                                      '2' ?tr('Oyiga'):tr('Kishi boshiga'),
                                                   style: const TextStyle(
                                                       color:
                                                           AppColors.mainColor),

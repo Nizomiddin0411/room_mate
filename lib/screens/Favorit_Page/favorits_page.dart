@@ -52,8 +52,10 @@ class _FavoritPageState extends State<FavoritPage> {
                 alignment: Alignment.center,
                 child: CircularProgressIndicator());
           }
-          if(data.Like.isEmpty){
-            return Center(child: Text("Ma'lumot yo'q"),);
+          if (data.Like.isEmpty) {
+            return Center(
+              child: const Text("Ma'lumot yo'q"),
+            );
           }
           return SingleChildScrollView(
             child: Column(children: [
@@ -157,28 +159,25 @@ class _FavoritPageState extends State<FavoritPage> {
                                               Image: data.Like[index].images,
                                               locations:
                                                   data.Like[index].location,
-                                          utileTrash: data
-                                              .Like[index].utilityTrash
-                                              .toString(),
-                                          utileColdWater: data
-                                              .Like[index]
-                                              .utilityColdWater
-                                              .toString(),
-                                          utileElictricity: data
-                                              .Like[index]
-                                              .utilityElectricity
-                                              .toString(),
-                                          utileGaz: data
-                                              .Like[index].unilityGaz
-                                              .toString(),
-                                          utileHotWater: data
-                                              .Like[index]
-                                              .utilityHotWater
-                                              .toString(),
+                                              utileTrash: data
+                                                  .Like[index].utilityTrash
+                                                  .toString(),
+                                              utileColdWater: data
+                                                  .Like[index].utilityColdWater
+                                                  .toString(),
+                                              utileElictricity: data.Like[index]
+                                                  .utilityElectricity
+                                                  .toString(),
+                                              utileGaz: data
+                                                  .Like[index].unilityGaz
+                                                  .toString(),
+                                              utileHotWater: data
+                                                  .Like[index].utilityHotWater
+                                                  .toString(),
+                                              costPeriod: data
+                                                  .Like[index].costPeriod
+                                                  .toString(),
                                             )));
-
-                                print(data.Like[index].id.toString() +
-                                    '+++++++++++++++++++++++++++++++++++++++++++++++');
                               },
                               child: Container(
                                 width: 324.w,
@@ -291,7 +290,7 @@ class _FavoritPageState extends State<FavoritPage> {
                                         Padding(
                                           padding: const EdgeInsets.all(6.0),
                                           child: Text(
-                                            '${data.Like[index].title.toString()}',
+                                            data.Like[index].title.toString(),
                                             style: TextStyle(fontSize: 18.sp),
                                           ),
                                         ),
@@ -309,8 +308,16 @@ class _FavoritPageState extends State<FavoritPage> {
                                                 fontSize: 24.sp),
                                           ),
                                           Text(
-                                            '${data.Like[index].costPeriod.toString() == '1' ? 'Kuniga' : data.Like[index].costPeriod.toString() == '2' ? 'Oyiga' : 'Uzoq muddatga'}',
-                                            style: TextStyle(
+                                            data.Like[index].costPeriod
+                                                        .toString() ==
+                                                    '1'
+                                                ? 'Kuniga'
+                                                : data.Like[index].costPeriod
+                                                            .toString() ==
+                                                        '2'
+                                                    ? 'Oyiga'
+                                                    : 'Uzoq muddatga',
+                                            style: const TextStyle(
                                                 color: AppColors.mainColor),
                                           ),
                                         ],

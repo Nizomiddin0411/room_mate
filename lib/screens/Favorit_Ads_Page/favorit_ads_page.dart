@@ -50,13 +50,15 @@ class _FavoritAdsState extends State<FavoritAds> {
       ),
       body: Consumer<FavoriteProvider>(
         builder: (_, data, __) {
-          if(!data.isMyAds){
+          if (!data.isMyAds) {
             return const Align(
-              alignment: Alignment.center,
+                alignment: Alignment.center,
                 child: CircularProgressIndicator());
           }
-          if(data.MyAds.isEmpty){
-            return Center(child: Text("Ma'lumot yo'q"),);
+          if (data.MyAds.isEmpty) {
+            return Center(
+              child: Text("Ma'lumot yo'q"),
+            );
           }
           return SingleChildScrollView(
             child: Column(
@@ -181,24 +183,26 @@ class _FavoritAdsState extends State<FavoritAds> {
                                                 Image: data.MyAds[index].images,
                                                 locations:
                                                     data.MyAds[index].location,
-                                            utileTrash: data
-                                                .MyAds[index].utilityTrash
-                                                .toString(),
-                                            utileColdWater: data
-                                                .MyAds[index]
-                                                .utilityColdWater
-                                                .toString(),
-                                            utileElictricity: data
-                                                .MyAds[index]
-                                                .utilityElectricity
-                                                .toString(),
-                                            utileGaz: data
-                                                .MyAds[index].unilityGaz
-                                                .toString(),
-                                            utileHotWater: data
-                                                .MyAds[index]
-                                                .utilityHotWater
-                                                .toString(),
+                                                utileTrash: data
+                                                    .MyAds[index].utilityTrash
+                                                    .toString(),
+                                                utileColdWater: data
+                                                    .MyAds[index]
+                                                    .utilityColdWater
+                                                    .toString(),
+                                                utileElictricity: data
+                                                    .MyAds[index]
+                                                    .utilityElectricity
+                                                    .toString(),
+                                                utileGaz: data
+                                                    .MyAds[index].unilityGaz
+                                                    .toString(),
+                                                utileHotWater: data.MyAds[index]
+                                                    .utilityHotWater
+                                                    .toString(),
+                                                costPeriod: data
+                                                    .MyAds[index].costPeriod
+                                                    .toString(),
                                               )));
                                 },
                                 child: Container(
@@ -576,7 +580,7 @@ class _FavoritAdsState extends State<FavoritAds> {
                                                               .withOpacity(0.7),
                                                           child: InkWell(
                                                             // iconSize: 22.0.sp,
-                                                             child: const Icon(
+                                                            child: const Icon(
                                                               Icons
                                                                   .delete_outline,
                                                               color: AppColors
@@ -584,8 +588,7 @@ class _FavoritAdsState extends State<FavoritAds> {
                                                             ),
                                                             // the method which is called
                                                             // when button is pressed
-                                                            onTap:
-                                                                () async {
+                                                            onTap: () async {
                                                               _showDialog(
                                                                 adsId: data
                                                                     .MyAds[
@@ -625,13 +628,16 @@ class _FavoritAdsState extends State<FavoritAds> {
                                         child: Row(
                                           children: [
                                             Text(
-                                              '${data.MyAds[index].cost.toString()} ${data.MyAds[index].costType.toString() == '1'?"So'm":"USD"}/',
+                                              '${data.MyAds[index].cost.toString()} ${data.MyAds[index].costType.toString() == '1' ? "So'm" : "USD"}/',
                                               style: TextStyle(
                                                   color: AppColors.mainColor,
-                                                  fontSize: 24.sp),),
-                                              Text(
-                                                '${data.MyAds[index].costPeriod.toString() == '1' ? 'Kuniga' : data.MyAds[index].costPeriod.toString() == '2' ? 'Oyiga' : 'Uzoq muddatga'}',style: TextStyle(color: AppColors.mainColor),),
-
+                                                  fontSize: 24.sp),
+                                            ),
+                                            Text(
+                                              '${data.MyAds[index].costPeriod.toString() == '1' ? 'Kuniga' : data.MyAds[index].costPeriod.toString() == '2' ? 'Oyiga' : 'Uzoq muddatga'}',
+                                              style: TextStyle(
+                                                  color: AppColors.mainColor),
+                                            ),
                                           ],
                                         ),
                                       ),
@@ -639,7 +645,10 @@ class _FavoritAdsState extends State<FavoritAds> {
                                         // mainAxisAlignment:
                                         //     MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Icon(Icons.location_on,color: AppColors.mainColor,),
+                                          Icon(
+                                            Icons.location_on,
+                                            color: AppColors.mainColor,
+                                          ),
                                           Padding(
                                             padding: EdgeInsets.fromLTRB(
                                                 8.w, 0, 8.w, 0),

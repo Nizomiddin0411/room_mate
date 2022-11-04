@@ -250,7 +250,7 @@ class _KunlikIjaraState extends State<KunlikIjara> {
                                       utileElictricity: data.Ads[index].utilityElectricity.toString(),
                                       utileGaz: data.Ads[index].unilityGaz.toString(),
                                       utileTrash: data.Ads[index].utilityTrash.toString(),
-                                      utileColdWater: data.Ads[index].utilityColdWater.toString(),
+                                      utileColdWater: data.Ads[index].utilityColdWater.toString(), costPeriod: data.Ads[index].costPeriod.toString(),
                                         )));
                           },
                           child: Container(
@@ -381,7 +381,13 @@ class _KunlikIjaraState extends State<KunlikIjara> {
                                                       fontSize: 24.sp),
                                                 ),
                                                 Text(
-                                                  data.Ads[index].rentType.toString() == '1' ? tr('Kuniga') :  tr('Oyiga') ,
+                                                  data.Ads[index].costPeriod
+                                                      .toString() ==
+                                                      '1'
+                                                      ? tr('Kuniga')
+                                                      :data.Ads[index].costPeriod
+                                                      .toString() ==
+                                                      '2' ?tr('Oyiga'):tr('Kishi boshiga'),
                                                   style: const TextStyle(
                                                       color:
                                                           AppColors.mainColor),
@@ -583,7 +589,7 @@ class _KunlikIjaraState extends State<KunlikIjara> {
                                       utileHotWater: data
                                           .AdsForStudent[index]
                                           .utilityHotWater
-                                          .toString(),
+                                          .toString(), costPeriod: data.AdsForStudent[index].costPeriod.toString(),
                                         )));
                           },
                           child: Container(
@@ -715,7 +721,15 @@ class _KunlikIjaraState extends State<KunlikIjara> {
                                                       fontSize: 24.sp),
                                                 ),
                                                 Text(
-                                                  data.AdsForStudent[index].rentType.toString() == '1' ? tr('Kuniga') :  tr('Oyiga'),
+                                                  data.AdsForStudent[index]
+                                                      .costPeriod
+                                                      .toString() ==
+                                                      '1'
+                                                      ? tr('Kuniga')
+                                                      :data.AdsForStudent[index]
+                                                      .costPeriod
+                                                      .toString() ==
+                                                      '2' ?tr('Oyiga'):tr('Kishi boshiga'),
                                                   style: const TextStyle(
                                                       color:
                                                           AppColors.mainColor),

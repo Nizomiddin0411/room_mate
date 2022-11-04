@@ -169,11 +169,18 @@ class _AdsUsersState extends State<AdsUsers> {
                               context,
                               MaterialPageRoute(
                                 builder: (context) => AdsDetail(
-                                  utileHotWater: data.Ads[index].utilityHotWater.toString(),
-                                  utileElictricity: data.Ads[index].utilityElectricity.toString(),
-                                  utileGaz: data.Ads[index].unilityGaz.toString(),
-                                  utileTrash: data.Ads[index].utilityTrash.toString(),
-                                  utileColdWater: data.Ads[index].utilityColdWater.toString(),
+                                  utileHotWater: data.Ads[index].utilityHotWater
+                                      .toString(),
+                                  utileElictricity: data
+                                      .Ads[index].utilityElectricity
+                                      .toString(),
+                                  utileGaz:
+                                      data.Ads[index].unilityGaz.toString(),
+                                  utileTrash:
+                                      data.Ads[index].utilityTrash.toString(),
+                                  utileColdWater: data
+                                      .Ads[index].utilityColdWater
+                                      .toString(),
                                   title: data.Ads[index].title.toString(),
                                   description:
                                       data.Ads[index].description.toString(),
@@ -230,6 +237,8 @@ class _AdsUsersState extends State<AdsUsers> {
                                   Image: data.Ads[index].images ?? [],
                                   locations:
                                       data.Ads[index].location.toString(),
+                                  costPeriod:
+                                      data.Ads[index].costPeriod.toString(),
                                 ),
                               ),
                             );
@@ -253,9 +262,10 @@ class _AdsUsersState extends State<AdsUsers> {
                                         ? CachedNetworkImage(
                                             imageUrl:
                                                 "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.Ads[index].images!.first.image.toString()}",
-                                            placeholder: (context, url) => const Center(
-                                                child:
-                                                    CircularProgressIndicator()),
+                                            placeholder: (context, url) =>
+                                                const Center(
+                                                    child:
+                                                        CircularProgressIndicator()),
                                             errorWidget:
                                                 (context, url, error) =>
                                                     Image.asset(
@@ -394,7 +404,11 @@ class _AdsUsersState extends State<AdsUsers> {
                                                         fontSize: 24.sp),
                                                   ),
                                                   Text(
-                                                      '${data.Ads[index].costPeriod.toString() == '1' ? 'Kuniga' : data.Ads[index].costPeriod.toString() == '2' ? 'Oyiga' : 'Uzoq muddatga'}',style: TextStyle(color: AppColors.mainColor),),
+                                                    data.Ads[index].costPeriod.toString() == '1' ? 'Kuniga' : data.Ads[index].costPeriod.toString() == '2' ? 'Oyiga' : 'Uzoq muddatga',
+                                                    style: const TextStyle(
+                                                        color: AppColors
+                                                            .mainColor),
+                                                  ),
                                                 ],
                                               ),
                                             ),
