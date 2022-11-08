@@ -19,6 +19,7 @@ class FavoriteProvider extends ChangeNotifier{
   List<GetMyAdsModel> MyAds = [];
   bool isFavorite = false;
   bool isLoading = false;
+  bool isLoadingStudent = false;
   bool isMyAds = false;
   bool isload = false;
   bool locationFor = false;
@@ -40,7 +41,7 @@ class FavoriteProvider extends ChangeNotifier{
   notifyListeners();
   }
   void _sendstudents(bool value){
-    isLoading = value;
+    isLoadingStudent = value;
     notifyListeners();
   }
   Future<void> getLike() async{
@@ -79,7 +80,7 @@ class FavoriteProvider extends ChangeNotifier{
 
     required String? titleController,
     required String? roommate_gender,
-    required String? gender_matter,
+    required int gender_matter,
     required String? district_id,
     required String? subway,
     required String? addressController,
@@ -105,6 +106,7 @@ class FavoriteProvider extends ChangeNotifier{
     required File file1,
     required File file2,
     required File file3,
+    required File file4,
     required String? cost_period,
 
   }) async{
@@ -137,12 +139,9 @@ class FavoriteProvider extends ChangeNotifier{
       description: description,
       location: location,
       file1: file1,
-      // FileExist[0] ? FileList[0] : FileList[3],
       cost_period: cost_period,
       file2: file2,
-      // FileExist[1] ? FileList[1] : FileList[4],
-      file3: file3,
-      // FileExist[2] ? FileList[2] : FileList[5],
+      file3: file3, file4: file4,
     );
     _setPostAds(true);
     // isload = false;
@@ -223,12 +222,17 @@ class FavoriteProvider extends ChangeNotifier{
     // isload = false;
 
   }
-  Future<void> StudentsAdds({
+  Future<void> StudentsAdds(
+
+      {
+       required File file1,
+       required File file2,
+       required File file3,
+       required File file4,
     required String title,
     required String stay_region_id,
     required String stay_region_matter,
     required String stay_university_id,
-    //live
     required String stay_university_matter,
     required String roommate_gender,
     required String roommate_count,
@@ -243,7 +247,7 @@ class FavoriteProvider extends ChangeNotifier{
     required String house_type,
     required String room_count,
     required String floors_count,
-    required String howcountroom,
+    required int howcountroom,
     required String cost,
     required String cost_type,
     required String live_with_owner,
@@ -251,17 +255,20 @@ class FavoriteProvider extends ChangeNotifier{
     required String comfort,
     required String renttype,
     required String cost_period,
-    required File file1,
-    required File file2,
-    required File file3,
-  })async{
+
+  }
+
+  )async{
     _sendstudents(false);
     await CreateStudent().StudentsAdds(
+      file1:file1,
+      file2:file2,
+      file3:file3,
+        file4:file4,
         title:title,
         stay_region_id:stay_region_id,
         stay_region_matter:stay_region_matter,
         stay_university_id:stay_university_id,
-      //live
         stay_university_matter:stay_university_matter,
         roommate_gender:roommate_gender,
         roommate_count:roommate_count,
@@ -284,10 +291,8 @@ class FavoriteProvider extends ChangeNotifier{
         comfort:comfort,
         renttype:renttype,
         cost_period:cost_period,
-        file1:file1,
-        file2:file2,
-        file3:file3,
     );
+    _sendstudents(true);
   }
 }
 

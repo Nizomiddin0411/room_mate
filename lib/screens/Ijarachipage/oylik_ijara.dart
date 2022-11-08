@@ -266,7 +266,7 @@ class _OylikIjaraState extends State<OylikIjara> {
                                               .Ads[index].utilityColdWater
                                               .toString(),
                                           costPeriod: data.Ads[index].costPeriod
-                                              .toString(),
+                                              .toString(), haveHome: data.Ads[index].haveLivingHome.toString(),
                                         )));
                           },
                           child: Container(
@@ -601,7 +601,7 @@ class _OylikIjaraState extends State<OylikIjara> {
                                               .toString(),
                                           costPeriod: data
                                               .AdsForStudent[index].costPeriod
-                                              .toString(),
+                                              .toString(), haveHome: data.AdsForStudent[index].haveLivingHome.toString(),
                                         )));
                           },
                           child: Container(

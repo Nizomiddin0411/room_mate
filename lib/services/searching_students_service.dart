@@ -10,12 +10,13 @@ class SearchingStudentsService {
     required String faculty_id,
     required String birth_region_id,
     required String birth_district_id,
+    required String univerId,
   }) async {
     try {
       // String token = Hive.box('token').get('token');
       var _response = await http.get(
         Uri.parse(
-            'http://164.68.114.231:8081/roommate/backend/web/api/university/get-searching-students?faculty_id=$faculty_id&birth_region_id=$birth_region_id&birth_district_id=$birth_district_id&university_id=0&course=$course'),
+            'http://164.68.114.231:8081/roommate/backend/web/api/university/get-searching-students?faculty_id=$faculty_id&birth_region_id=$birth_region_id&birth_district_id=$birth_district_id&university_id=$univerId&course=$course'),
         // headers: {
         //   HttpHeaders.authorizationHeader: 'Bearer $token',
         // },

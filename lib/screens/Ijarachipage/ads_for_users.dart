@@ -238,7 +238,7 @@ class _AdsUsersState extends State<AdsUsers> {
                                   locations:
                                       data.Ads[index].location.toString(),
                                   costPeriod:
-                                      data.Ads[index].costPeriod.toString(),
+                                      data.Ads[index].costPeriod.toString(), haveHome: data.Ads[index].haveLivingHome.toString(),
                                 ),
                               ),
                             );

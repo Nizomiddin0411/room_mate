@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hive/hive.dart';
 import 'package:talaba_uy/screens/menu/menu.dart';
 import 'package:talaba_uy/screens/menu/menu_for.dart';
 
@@ -31,7 +32,7 @@ class _CreateSuccedfulState extends State<CreateSuccedful> {
             SizedBox(height: 236.h,),
             ElevatedButton(
               onPressed: () {
-                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>MenuPage()), (route) => false);
+                Navigator.pushAndRemoveUntil(context, MaterialPageRoute(builder: (context)=>Hive.box('type').get('type').toString() == '2' ? MenuPage() :MenuFor()), (route) => false);
               },
               style: ElevatedButton.styleFrom(
                 primary: AppColors.mainColor,

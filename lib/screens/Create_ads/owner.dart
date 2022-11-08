@@ -45,7 +45,7 @@ class _OwnerState extends State<Owner> {
   TextEditingController? titleController;
   TextEditingController? addressController;
   String? roommate_gender;
-  String? gender_matter;
+  String? gender_matter = '2';
   String? district_id;
   String? university_id;
   String? university_id_matter;

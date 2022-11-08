@@ -13,7 +13,7 @@ class UserCreateAds {
   Future FetchAds({
     required String? titleController,
     required String? roommate_gender,
-    required String? gender_matter,
+    required int gender_matter,
     required String? district_id,
     required String? subway,
     required String? addressController,
@@ -39,6 +39,7 @@ class UserCreateAds {
     required File file1,
     required File file2,
     required File file3,
+    required File file4,
     required String? cost_period,
 }) async {
     var request = http.MultipartRequest(
@@ -55,7 +56,8 @@ class UserCreateAds {
     var file_ = await file1.exists();
     var fileSecond = await file2.exists();
     var fileThreeth = await file3.exists();
-    if(!file_){
+    var four = await file4.exists();
+    if(file_ == true){
       request.files.addAll([
         await http.MultipartFile.fromPath(
           'file1',
@@ -63,14 +65,14 @@ class UserCreateAds {
         )
       ]);
     }else{
-      request.files.addAll([
-        await http.MultipartFile.fromPath(
-          'file1',
-          file1.path,
-        )
-      ]);
+      // request.files.addAll([
+      //   await http.MultipartFile.fromPath(
+      //     'file1',
+      //     file1.path,
+      //   )
+      // ]);
     }
-    if(!fileSecond){
+    if(fileSecond == true){
       request.files.addAll([
         await http.MultipartFile.fromPath(
           'file2',
@@ -78,15 +80,15 @@ class UserCreateAds {
         )
       ]);
     }else{
-      request.files.addAll([
-        await http.MultipartFile.fromPath(
-          'file2',
-          file2.path,
-        )
-      ]);
+      // request.files.addAll([
+      //   await http.MultipartFile.fromPath(
+      //     'file2',
+      //     file2.path,
+      //   )
+      // ]);
     }
 
-    if(!fileThreeth){
+    if(fileThreeth == true){
       request.files.addAll([
         await http.MultipartFile.fromPath(
           'file3',
@@ -94,13 +96,30 @@ class UserCreateAds {
         )
       ]);
     }else{
+      // request.files.addAll([
+      //   await http.MultipartFile.fromPath(
+      //     'file3',
+      //     file3.path,
+      //   )
+      // ]);
+    }
+
+    if(four == true){
       request.files.addAll([
         await http.MultipartFile.fromPath(
-          'file3',
-          file3.path,
+          'file4',
+          file4.path,
         )
       ]);
+    }else{
+      // request.files.addAll([
+      //   await http.MultipartFile.fromPath(
+      //     'file1',
+      //     file1.path,
+      //   )
+      // ]);
     }
+
 print(subway.toString() + "subway.....");
     request.fields.addAll({'title': '${titleController}',});
     request.fields.addAll({'roommate_gender': '${roommate_gender}',});
@@ -139,7 +158,7 @@ print(subway.toString() + "subway.....");
       // await Hive.box('token').put('token', jsonDecode(data)["access_token"]);
       print(Hive.box('token').get('token'));
       print(Hive.box('type').get('type'));
-      print(gender_matter.toString() + 'filllllllll');
+      print(data.toString() + 'filllllllll');
       return jsonDecode(data);
     }else{
       print('ishlamadi');

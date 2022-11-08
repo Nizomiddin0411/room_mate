@@ -232,7 +232,7 @@ class _ElonlarState extends State<Elonlar> {
                                   utileGaz: data.Ads[index].unilityGaz.toString(),
                                   utileTrash: data.Ads[index].utilityTrash.toString(),
                                   utileColdWater: data.Ads[index].utilityColdWater.toString(),
-                                  costPeriod: data.Ads[index].costPeriod.toString(),
+                                  costPeriod: data.Ads[index].costPeriod.toString(), haveHome: data.Ads[index].haveLivingHome.toString(),
                                 ),
                               ),
                             );
@@ -601,7 +601,7 @@ class _ElonlarState extends State<Elonlar> {
                                               .AdsForStudent[index]
                                               .utilityHotWater
                                               .toString(), costPeriod: data
-                                        .AdsForStudent[index].costPeriod.toString(),
+                                        .AdsForStudent[index].costPeriod.toString(), haveHome: data.AdsForStudent[index].haveLivingHome.toString(),
                                         )));
                           },
                           child: Container(

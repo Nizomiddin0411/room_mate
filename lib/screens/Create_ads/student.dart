@@ -1,15 +1,20 @@
+import 'dart:io';
 import 'dart:math';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_mask/easy_mask.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
 import '../../cubit/aut_cubit.dart';
 import '../../models/lang_model.dart';
+import '../../provider/favorite_provider.dart';
 import '../../provider/region_provider.dart';
+import '../../services/post_student_not_apartment.dart';
 import 'ads_student_create,dart.dart';
+import 'create_succed_dart.dart';
 
 class Student extends StatefulWidget {
   const Student({Key? key}) : super(key: key);
@@ -19,6 +24,7 @@ class Student extends StatefulWidget {
 }
 
 class _StudentState extends State<Student> {
+
   GlobalKey _keyAddInfo = GlobalKey();
   String dropDown = "";
   String dropDown2 = "";
@@ -79,25 +85,8 @@ class _StudentState extends State<Student> {
   bool otmEnable1 = false;
   bool region = true;
   final List<String> genderItems = ["O'g'il bola ", "Qiz bola"];
-  var kindOfMoment = [
-    'kunlik',
-    'oylik',
-  ];
-  var rooms = [
-    '1',
-    '2',
-    '3',
-    '4',
-    '5-6',
-  ];
-  var ijarachi = [
-    '1',
-    '2',
-    '3',
-    '4',
-    '5-6',
-  ];
-  final phoneController = TextEditingController(text: "+9989");
+
+  final phoneController = TextEditingController(text: "+998");
   final titlecontroller1 = TextEditingController();
   final addinformation = TextEditingController();
   bool regionsvalue = false;
@@ -117,8 +106,12 @@ class _StudentState extends State<Student> {
   Color descriction = Colors.black12;
   Color univerColor1 = Colors.black12;
 
+
   @override
   Widget build(BuildContext context) {
+
+    final load = context.read<FavoriteProvider>();
+
     context.read<AutCubit>().selectSettingLan(
         LangData.languageList.singleWhere((e) => e.locale == context.locale),
         context);
@@ -134,7 +127,7 @@ class _StudentState extends State<Student> {
                   "E’lonni nomlash".tr(),
                   style: TextStyle(
                     color: AppColors.textColor,
-                    fontSize: 14.sp,
+                    fontSize: 12.sp,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -163,7 +156,7 @@ class _StudentState extends State<Student> {
                         border: InputBorder.none,
                         hintText: "E’lonni nomlang".tr(),
                         hintStyle:
-                            TextStyle(fontSize: 14.sp, color: Colors.grey),
+                            TextStyle(fontSize: 12.sp, color: Colors.grey),
                       ),
                       cursorColor: Colors.grey,
                       cursorWidth: 1.w,
@@ -171,7 +164,7 @@ class _StudentState extends State<Student> {
                   ),
                 ),
                 SizedBox(
-                  height: 15.w,
+                  height: 15.h,
                 ),
                 Row(
                   children: [
@@ -179,7 +172,7 @@ class _StudentState extends State<Student> {
                       "Qaysi viloyatlik sherik izlayabsiz ?".tr(),
                       style: TextStyle(
                         color: AppColors.textColor,
-                        fontSize: 14.sp,
+                        fontSize: 12.sp,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -204,7 +197,8 @@ class _StudentState extends State<Student> {
                                   fontSize: 12.sp, color: Colors.grey),
                             ),
                           ),
-                          decoration: InputDecoration(border: InputBorder.none),
+                          decoration:
+                              const InputDecoration(border: InputBorder.none),
                           // value: ,
                           icon: const Icon(Icons.arrow_drop_down_outlined),
                           items: data.regions.map((e) {
@@ -242,7 +236,7 @@ class _StudentState extends State<Student> {
                           "Ahamiyatsiz",
                           style: TextStyle(
                             color: AppColors.textColor,
-                            fontSize: 14.sp,
+                            fontSize: 12.sp,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -285,7 +279,6 @@ class _StudentState extends State<Student> {
                           border: Border.all(color: _colorUniver)),
                       child: DropdownSearch<String>(
                         dropdownBuilder: _style,
-
                         mode: Mode.BOTTOM_SHEET,
                         enabled: otmEnable,
                         dropdownSearchDecoration:
@@ -332,7 +325,7 @@ class _StudentState extends State<Student> {
                           "Ahamiyatsiz",
                           style: TextStyle(
                             color: AppColors.textColor,
-                            fontSize: 14.sp,
+                            fontSize: 12.sp,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -376,7 +369,7 @@ class _StudentState extends State<Student> {
                           "Sherik izlayabmiz".tr(),
                           style: TextStyle(
                             color: AppColors.textColor,
-                            fontSize: 14.sp,
+                            fontSize: 12.sp,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -391,7 +384,7 @@ class _StudentState extends State<Student> {
                               padding: EdgeInsets.symmetric(horizontal: 8.w),
                               child: Text(
                                 "Qiz,O'g'il".tr(),
-                                style: TextStyle(fontSize: 14.sp),
+                                style: TextStyle(fontSize: 12.sp),
                               ),
                             ),
                             decoration:
@@ -429,7 +422,7 @@ class _StudentState extends State<Student> {
                           "Nechta sherik izlayabsiz ?".tr(),
                           style: TextStyle(
                             color: AppColors.textColor,
-                            fontSize: 14.sp,
+                            fontSize: 12.sp,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -445,7 +438,7 @@ class _StudentState extends State<Student> {
                               padding: EdgeInsets.symmetric(horizontal: 8.w),
                               child: Text(
                                 "1 - 5".tr(),
-                                style: TextStyle(fontSize: 14.sp),
+                                style: TextStyle(fontSize: 12.sp),
                               ),
                             ),
                             decoration:
@@ -484,7 +477,7 @@ class _StudentState extends State<Student> {
                           "Telefon raqami",
                           style: TextStyle(
                             color: AppColors.textColor,
-                            fontSize: 14.sp,
+                            fontSize: 12.sp,
                             fontWeight: FontWeight.w500,
                           ),
                         ).tr(),
@@ -542,10 +535,10 @@ class _StudentState extends State<Student> {
                               "Ko’rinmasin",
                               style: TextStyle(
                                 color: AppColors.textColor,
-                                fontSize: 14.sp,
+                                fontSize: 12.sp,
                                 fontWeight: FontWeight.w500,
                               ),
-                            ),
+                            ).tr(),
                             Checkbox(
                               value: numbervalue,
                               onChanged: (bool? value) {
@@ -572,7 +565,7 @@ class _StudentState extends State<Student> {
                           "Ijaraga turishga joyingiz bormi ?",
                           style: TextStyle(
                             color: AppColors.textColor,
-                            fontSize: 14.sp,
+                            fontSize: 12.sp,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -612,7 +605,7 @@ class _StudentState extends State<Student> {
                             ),
                             Text(
                               "Yo'q",
-                              style:  TextStyle(
+                              style: TextStyle(
                                 fontSize: 17.0.sp,
                               ),
                             ),
@@ -627,7 +620,7 @@ class _StudentState extends State<Student> {
                   "Qo’shimcha xususiyatlarni kiriting ".tr(),
                   style: TextStyle(
                     color: AppColors.textColor,
-                    fontSize: 14.sp,
+                    fontSize: 12.sp,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -650,7 +643,7 @@ class _StudentState extends State<Student> {
                         hintText: 'Message...'.tr(),
                         border: InputBorder.none,
                         hintStyle:
-                            TextStyle(fontSize: 14.sp, color: Colors.grey),
+                            TextStyle(fontSize: 12.sp, color: Colors.grey),
                       ),
                       cursorColor: Colors.grey.shade800,
                       cursorWidth: 1.5.w,
@@ -668,37 +661,81 @@ class _StudentState extends State<Student> {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10.r)),
                           primary: AppColors.buttonLinear),
-                      onPressed: () {
-                        print(titlecontroller1.text+'_______________________');
-                        print('${value6 ? 1 : 2}'+ 'univer matter');
-                        print( data.viloyatid.toString() + 'distrik id');
-                        print('${regionsvalue ? 1 : 2}'+'region matter');
-                        print( data.UniverId.toString() + 'univer id' );
+                      onPressed: () async{
+
+                        print(
+                            titlecontroller1.text + '_______________________');
+                        print('${value6 ? 1 : 2}' + 'univer matter');
+                        print(data.viloyatid.toString() + 'distrik id');
+                        print('${regionsvalue ? 1 : 2}' + 'region matter');
+                        print(data.UniverId.toString() + 'univer id');
                         print('${gender1 ? 0 : _titleGendor}' + 'gendr');
-                        print('${gender1 ? 0 : _titleCount}' + 'xonadoshlar soni');
-                        print(phoneController.text.split(' ').join('').toString() + 'telefon');
+                        print('${gender1 ? 0 : _titleCount}' +
+                            'xonadoshlar soni');
+                        print(phoneController.text
+                                .split(' ')
+                                .join('')
+                                .toString() +
+                            'telefon');
                         print(house.toString() + 'have living home');
                         print('${addinformation.text}' + 'discription');
                         print('${numbervalue ? 1 : 2}========== phone matter');
-                        if (titlecolor2 &&  _phoneOnClick) {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => Student2(
-                                  titlecontroller1: titlecontroller1.text,
-                                  univervalue: '${value6 ? 1 : 2}',
-                                  viloyatidisi: data.viloyatid.toString(),
-                                  viloyatvalue: '${regionsvalue ? 1 : 2}',
-                                  universiteteid: data.UniverId,
-                                  titleGendor: '${gender1 ? 0 : _titleGendor}',
-                                  titlecount: '${gender1 ? 0 : _titleCount}',
-                                  phoneController:
-                                      phoneController.text.split(' ').join(''),
-                                  house: house,
-                                  addinformation: '${addinformation.text}',
-                                  numbervalue: '${numbervalue ? 1 : 2}'),
-                            ),
-                          );
+                        if (titlecolor2 && _phoneOnClick) {
+                          if (house == '1') {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Student2(
+                                    titlecontroller1: titlecontroller1.text,
+                                    univervalue: '${value6 ? 1 : 2}',
+                                    viloyatidisi: data.viloyatid.toString(),
+                                    viloyatvalue: '${regionsvalue ? 1 : 2}',
+                                    universiteteid: data.UniverId,
+                                    titleGendor:
+                                        '${gender1 ? 0 : _titleGendor}',
+                                    titlecount: '${_titleCount}',
+                                    phoneController: phoneController.text
+                                        .split(' ')
+                                        .join(''),
+                                    house: house,
+                                    addinformation: addinformation.text,
+                                    numbervalue: '${numbervalue ? 1 : 2}'),
+                              ),
+                            );
+                          } else {
+                           await CreateStudentHouse().StudentsCreateAds(
+                             title: titlecontroller1.text,
+                             stay_region_id: data.viloyatid.toString(),
+                             stay_region_matter: '${regionsvalue ? 1 : 2}',
+                             stay_university_id: data.UniverId,
+                             stay_university_matter: '${value6 ? 1 : 2}',
+                             roommate_gender: '${gender1 ? 0 : _titleGendor}',
+                             roommate_count: _titleCount.toString(),
+                             phone_number:
+                             phoneController.text.split(' ').join(''),
+                             phone_number_show: '${numbervalue ? 1 : 2}',
+                             have_living_home: house,
+                             description: '${addinformation.text}',
+                                district_id: '19',
+                               address: '',
+                               location: '',
+                               subway: '',
+                               house_type: '',
+                               room_count: '',
+                               floors_count: '',
+                               howcountroom: 1,
+                               cost: '',
+                               cost_type: '',
+                               live_with_owner: '',
+                               utility_bills: '',
+                               comfort: '',
+                               renttype: '',
+                               cost_period: '',
+
+                           );
+
+                            Navigator.push(context, MaterialPageRoute(builder: (context) => CreateSuccedful()));
+                          }
                         } else {
                           // if (!titlecolor2) {
                           //   titlecolor = Colors.red;
@@ -752,9 +789,12 @@ class _StudentState extends State<Student> {
   }
 
   Widget _style(BuildContext context, String? selectedItem) {
-    return Text(
-      selectedItem!,
-      style: TextStyle(fontSize: 14.sp),
+    return Padding(
+      padding: EdgeInsets.fromLTRB(6.w, 2.h, 0, 0),
+      child: Text(
+        selectedItem!,
+        style: TextStyle(fontSize: 12.sp, color: Colors.grey),
+      ),
     );
   }
 }

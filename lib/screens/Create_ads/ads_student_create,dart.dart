@@ -1,6 +1,4 @@
-import 'package:dropdown_search/dropdown_search.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -265,7 +263,7 @@ class _Student2State extends State<Student2> {
                           child: DropdownButtonFormField(
                             hint: Padding(
                               padding: EdgeInsets.only(left: 8.w),
-                              child: Text("Tumanni tanlang".tr()),
+                              child: Text("Tumanni tanlang".tr(),style: TextStyle(fontSize: 14.sp),),
                             ),
                             decoration: const InputDecoration(
                               border: InputBorder.none,
@@ -453,7 +451,7 @@ class _Student2State extends State<Student2> {
                               ),
                               Text(
                                 'Ha',
-                                style: new TextStyle(fontSize: 17.sp),
+                                style:  TextStyle(fontSize: 17.sp),
                               ),
                               SizedBox(
                                 width: 55.w,
@@ -510,7 +508,7 @@ class _Student2State extends State<Student2> {
                                 child: Text(
                                   "Kvartira , Xovli".tr(),
                                   style: TextStyle(
-                                    color: AppColors.textColor,
+                                    color: AppColors.iconColor,
                                     fontSize: 14.sp,
                                     fontWeight: FontWeight.w500,
                                   ),
@@ -561,14 +559,14 @@ class _Student2State extends State<Student2> {
                                 borderRadius: BorderRadius.circular(10.r),
                                 border: Border.all(color: _colorGender)),
                             child: DropdownButtonFormField(
-                              alignment: Alignment.bottomRight,
+                              // alignment: Alignment.bottomRight,
                               menuMaxHeight: 150,
                               hint: Padding(
                                 padding: EdgeInsets.only(left: 8.w),
                                 child: Text(
                                   "Xonalar soni".tr(),
                                   style: TextStyle(
-                                    color: AppColors.textColor,
+                                    color: AppColors.iconColor,
                                     fontSize: 14.sp,
                                     fontWeight: FontWeight.w500,
                                   ),
@@ -628,7 +626,7 @@ class _Student2State extends State<Student2> {
                                 padding: EdgeInsets.only(left: 8.w),
                                 child: Text("Qavatlar soni ".tr(),
                                     style: TextStyle(
-                                      color: AppColors.textColor,
+                                      color: AppColors.iconColor,
                                       fontSize: 14.sp,
                                       fontWeight: FontWeight.w500,
                                     )),
@@ -684,7 +682,7 @@ class _Student2State extends State<Student2> {
                                 child: Text(
                                   "Nechinchi qavatda".tr(),
                                   style: TextStyle(
-                                    color: AppColors.textColor,
+                                    color: AppColors.iconColor,
                                     fontSize: 14.sp,
                                     fontWeight: FontWeight.w500,
                                   ),
@@ -710,6 +708,7 @@ class _Student2State extends State<Student2> {
                                   howcountroom = newValue.toString();
                                   _colorGender = Colors.grey;
                                 });
+                                print(howcountroom.toString() + 'qavatttttt');
                               },
                             ),
                           ),
@@ -836,7 +835,7 @@ class _Student2State extends State<Student2> {
                                 padding: EdgeInsets.only(left: 8.w),
                                 child: Text("Turlari".tr(),
                                     style: TextStyle(
-                                      color: AppColors.textColor,
+                                      color: AppColors.iconColor,
                                       fontSize: 14.sp,
                                       fontWeight: FontWeight.w500,
                                     )),
@@ -904,7 +903,7 @@ class _Student2State extends State<Student2> {
                                 padding: EdgeInsets.only(left: 8.w),
                                 child: Text("Kunlik / Oylik ".tr(),
                                     style: TextStyle(
-                                      color: AppColors.textColor,
+                                      color: AppColors.iconColor,
                                       fontSize: 14.sp,
                                       fontWeight: FontWeight.w500,
                                     )),
@@ -976,7 +975,7 @@ class _Student2State extends State<Student2> {
                               ),
                               Text(
                                 'Ha',
-                                style: new TextStyle(fontSize: 17.0.sp),
+                                style:  TextStyle(fontSize: 17.0.sp),
                               ),
                               SizedBox(
                                 width: 86.w,
@@ -1036,7 +1035,7 @@ class _Student2State extends State<Student2> {
                                 style:  TextStyle(fontSize: 17.sp),
                               ),
                               SizedBox(
-                                width: 55.w,
+                                width: 48.w,
                               ),
                               Radio(
                                 value: 2,
@@ -1067,7 +1066,7 @@ class _Student2State extends State<Student2> {
                       Text("Quyidagi qulayliklarga ega.",
                           style: TextStyle(
                             color: AppColors.textColor,
-                            fontSize: 16.sp,
+                            fontSize: 14.sp,
                             fontWeight: FontWeight.w500,
                           )),
                     ],
@@ -1075,8 +1074,8 @@ class _Student2State extends State<Student2> {
                   SizedBox(
                     height: 10.h,
                   ),
-                  Container(
-                    width: 170.w,
+                  SizedBox(
+                    width: 197.w,
                     child: Column(
                       children: [
                         Row(
@@ -1337,4 +1336,5 @@ class _Student2State extends State<Student2> {
       ));
     });
   }
+
 }

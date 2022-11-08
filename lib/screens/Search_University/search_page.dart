@@ -46,7 +46,7 @@ class _SearchPageState extends State<SearchPage> {
           appBar: AppBar(
             centerTitle: true,
             backgroundColor: AppColors.backgroundWhite,
-            title: Text(
+            title: const Text(
               "Oliy o’quv yurtlari",
               style: TextStyle(color: AppColors.mainColor),
             ).tr(),
@@ -70,17 +70,17 @@ class _SearchPageState extends State<SearchPage> {
                       controller: _controller,
                       decoration: InputDecoration(
                         border: OutlineInputBorder(),
-                        label: Text("Qidirish "),
+                        label: const Text("Qidirish "),
                         suffixIcon: IconButton(
                           onPressed: () {
                             _controller.clear();
                           },
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.cancel_outlined,
                           ),
                         ),
                         prefixIcon: IconButton(
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.tune,
                             color: AppColors.textColor,
                           ),
@@ -88,7 +88,7 @@ class _SearchPageState extends State<SearchPage> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => UniverFiltrPage()));
+                                    builder: (context) => const UniverFiltrPage()));
 
                             Provider.of<SearchUniversitet>(context,
                                     listen: false)
@@ -109,7 +109,7 @@ class _SearchPageState extends State<SearchPage> {
                     return BlocBuilder<AutCubit, AutState>(
                       builder: (context, state) {
                         return ListView.builder(
-                            physics: NeverScrollableScrollPhysics(),
+                            physics: const NeverScrollableScrollPhysics(),
                             shrinkWrap: true,
                             itemCount: data.searchuniversitet.length,
                             itemBuilder: (context, int index) {

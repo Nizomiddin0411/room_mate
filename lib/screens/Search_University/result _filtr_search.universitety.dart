@@ -409,7 +409,7 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                                   side: BorderSide(color: Colors.red)),
                               primary: Colors.white),
                           onPressed: () {
-                            provider.getAds('1', '1','1','1');
+                            provider.getAds('1', '1','1','1', UniverId: widget.id);
                             Navigator.pop(context);
                           },
                           child: Text(
@@ -433,7 +433,7 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                                   borderRadius: BorderRadius.circular(10.r)),
                               primary: AppColors.buttonLinear),
                           onPressed: () {
-                            provider.getAds(Course, widget.id, provider.RegionId, provider.DistrickId);
+                            provider.getAds(Course, widget.id, provider.RegionId, provider.DistrickId, UniverId: widget.id);
                             Navigator.pop(context);
                           },
                           child: Text(

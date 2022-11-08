@@ -203,6 +203,9 @@ class _FavoritAdsState extends State<FavoritAds> {
                                                 costPeriod: data
                                                     .MyAds[index].costPeriod
                                                     .toString(),
+                                                haveHome: data
+                                                    .MyAds[index].haveLivingHome
+                                                    .toString(),
                                               )));
                                 },
                                 child: Container(

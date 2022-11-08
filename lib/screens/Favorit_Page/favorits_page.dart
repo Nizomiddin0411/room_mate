@@ -177,6 +177,9 @@ class _FavoritPageState extends State<FavoritPage> {
                                               costPeriod: data
                                                   .Like[index].costPeriod
                                                   .toString(),
+                                              haveHome: data
+                                                  .Like[index].haveLivingHome
+                                                  .toString(),
                                             )));
                               },
                               child: Container(

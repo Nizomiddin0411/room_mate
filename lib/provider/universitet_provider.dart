@@ -69,13 +69,14 @@ Future<void>  getTuman(int id)async{
       String Fakultetid,
       String Regionid,
       String Districtid,
+  {required String UniverId,}
       ) async {
     _settuman(false);
     ads = await SearchingStudentsService().fetchSearchingStudents(
       course: course,
       faculty_id: Fakultetid,
       birth_region_id: Regionid,
-      birth_district_id: Districtid,
+      birth_district_id: Districtid, univerId: UniverId,
     );
     _settuman(true);
   }

@@ -30,7 +30,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
     super.initState();
     Provider.of<UniversitetProvider>(context, listen: false).getViloyat();
     Provider.of<UniversitetProvider>(context, listen: false)
-        .getAds('0', "0", "0", "0");
+        .getAds('0', "0", "0", "0", UniverId: widget.id);
   }
 
   String? checknumber;
@@ -41,12 +41,12 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: AppColors.backgroundWhite,
-        title: Text(
+        title: const Text(
           "Oliy o’quv yurti",
           style: TextStyle(color: AppColors.mainColor),
         ),
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back_outlined,
             color: Colors.black,
           ),
@@ -114,7 +114,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                             child: Padding(
                               padding: const EdgeInsets.all(8.0),
                               child: Row(children: [
-                                Icon(Icons.tune),
+                                const Icon(Icons.tune),
                                 SizedBox(
                                   width: 10.w,
                                 ),
@@ -146,7 +146,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                         ),
                       ],
                     ),
-                    Divider(
+                    const Divider(
                       thickness: 2,
                     ),
                   ],
@@ -176,8 +176,8 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(
-                                        "${provider.ads[index].fullName.toString()}"),
+                                    Text(provider.ads[index].fullName
+                                        .toString()),
                                     SizedBox(
                                       height: 10.h,
                                     ),
@@ -189,7 +189,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                     Row(
                                       children: [
                                         Text(
-                                          "Talaba : ${provider.ads[index].gender.toString() == '1' ? tr("jinsi") + ":" + tr("Erkak") : tr("jinsi") + ":" + tr("Ayol")}",
+                                          provider.ads[index].gender.toString() == '1' ? tr("jinsi") + ":" + tr("Erkak") : tr("jinsi") + ":" + tr("Ayol"),
                                           style: TextStyle(fontSize: 15.sp),
                                         ),
                                         SizedBox(
@@ -211,7 +211,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                       ],
                                     ),
                                     SizedBox(
-                                      height: 10,
+                                      height: 10.h,
                                     ),
                                     Column(
                                       children: [
@@ -225,7 +225,14 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                     Row(
                                       children: [
                                         InkWell(
-                                          onTap: () {},
+                                          onTap: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) => ChatPage(
+                                                        provider.ads[index].fullName.toString(),
+                                                        provider.ads[index].id!)));
+                                          },
                                           child: Padding(
                                             padding: EdgeInsets.fromLTRB(
                                                 0, 0, 7.w, 0),
@@ -287,7 +294,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                                         width: 10.w,
                                                       ),
                                                       InkWell(
-                                                        onTap: () async {
+                                                        onTap: checkhidenumber == '2' ?() async {
                                                           final Uri launchUri =
                                                               Uri(
                                                             scheme: 'tel',
@@ -299,9 +306,10 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                                                     .phone
                                                                     .toString(),
                                                           );
-                                                          await launchUrl(
-                                                              launchUri);
-                                                        },
+
+                                                               await launchUrl(
+                                                                  launchUri);
+                                                        }:(){},
                                                         child: Text(
                                                           checkhidenumber == '2'
                                                               ? checknumber
