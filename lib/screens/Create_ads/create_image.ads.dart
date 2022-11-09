@@ -474,49 +474,17 @@ class _CreateimageState extends State<Createimage> {
                           // }
                           // load.isload = false;
                           // print(load.isLoadingStudent.toString() + '_________________________');
-                          if(load.isLoading == false){
+                          if(load.isLoadingStudent == false){
                             showAlertDialog(context);
                           }
                           // setState(() {
                           //   loading =
                           //       load.isLoading;
                           // });
-
-                          // await CreateStudent().StudentsAdds(
-                          //   title: widget.titlecontroller1,
-                          //   stay_region_id: widget.viloyatidisi,
-                          //   stay_region_matter: widget.viloyatvalue,
-                          //   stay_university_id: widget.universiteteid,
-                          //   stay_university_matter: widget.univervalue,
-                          //   roommate_gender: widget.titleGendor,
-                          //   roommate_count: widget.titlecount,
-                          //   phone_number: widget.phoneController.toString(),
-                          //   phone_number_show: widget.numbervalue,
-                          //   have_living_home: widget.house,
-                          //   description: widget.addinformation.toString(),
-                          //   district_id: widget.viloyatidisi,
-                          //   address: widget.addressController.toString(),
-                          //   location: widget.location,
-                          //   subway: widget.metro,
-                          //   house_type: widget.housetype,
-                          //   room_count: widget.housecount,
-                          //   floors_count: widget.countroom,
-                          //   howcountroom: widget.howcountroom,//blla
-                          //   cost: widget.costController,
-                          //   cost_type: widget.narxnituri,
-                          //   live_with_owner: widget.ownerlive,
-                          //   utility_bills: widget.costlivekomunal,
-                          //   comfort: widget.comfort,
-                          //   renttype: widget.rent_type,
-                          //   cost_period: widget.cost_period,
-                          //   file1: FileExist[0] ? FileList[0] : FileList[3],
-                          //   file2: FileExist[1] ? FileList[1] : FileList[4],
-                          //   file3: FileExist[2] ? FileList[2] : FileList[5],
-                          // );
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                              builder: (context) => CreateSuccedful(),
+                              builder: (context) => const CreateSuccedful(),
                             ),
                           );
                         },

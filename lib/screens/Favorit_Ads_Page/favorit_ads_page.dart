@@ -166,7 +166,7 @@ class _FavoritAdsState extends State<FavoritAds> {
                                                 createData: data
                                                     .MyAds[index].createdAt
                                                     .toString(),
-                                                comfort: '2',
+                                                comfort: data.MyAds[index].comfort,
                                                 // data.MyAds[index].comfort,
                                                 inFloor: data
                                                     .MyAds[index].inFloor
@@ -406,10 +406,7 @@ class _FavoritAdsState extends State<FavoritAds> {
                                                                           .MyAds[
                                                                               index]
                                                                           .location,
-                                                                      data
-                                                                          .MyAds[
-                                                                              index]
-                                                                          .images,
+
                                                                       data
                                                                           .MyAds[
                                                                               index]
@@ -492,6 +489,10 @@ class _FavoritAdsState extends State<FavoritAds> {
                                                                               index]
                                                                           .districtId
                                                                           .toString(),
+                                                                  Image:   data
+                                                                  .MyAds[
+                                                              index]
+                                                                  .images,
                                                                     )
                                                                   : UpdateStudents(
                                                                       univername:

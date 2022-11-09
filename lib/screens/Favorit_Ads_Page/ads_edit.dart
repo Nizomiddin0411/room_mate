@@ -12,9 +12,7 @@ import 'package:talaba_uy/provider/region_provider.dart';
 import 'package:talaba_uy/screens/Favorit_Ads_Page/ads_continue_edit.dart';
 import '../../models/get_district_model.dart';
 import '../../provider/favorite_provider.dart';
-import '../Google_map/map_for_ads_detail.dart';
 import '../Google_map/map_for_edit.dart';
-import '../Google_map/map_screen.dart';
 
 class AdsEdit extends StatefulWidget {
   String? title;
@@ -37,7 +35,7 @@ class AdsEdit extends StatefulWidget {
   String? address;
   String? roommate_gender;
   String? locations;
-  List? Image;
+  List<dynamic>? Image;
   String? universityId;
   String? region;
   String? rentType;
@@ -76,7 +74,7 @@ class AdsEdit extends StatefulWidget {
       this.address,
       this.roommate_gender,
       this.locations,
-      this.Image,
+
       this.universityId,
       this.region,
       this.rentType,
@@ -93,7 +91,7 @@ class AdsEdit extends StatefulWidget {
       this.utility_cold_water,
       this.utility_trash,
       this.district_id,
-      {Key? key})
+      {Key? key,required this.Image,})
       : super(key: key);
 
   @override
@@ -121,12 +119,9 @@ class _AdsEditState extends State<AdsEdit> {
     return await Geolocator.getCurrentPosition();
   }
 
-  bool _checkHome = false;
-  bool _checkMetro = false;
   String RoomOwner = '';
   String RentOf = '';
   String Subway = '';
-  String? _dropownUsd;
   String dropDown = "";
   String TypeHouse = '';
   String CountRoom = '';
@@ -239,7 +234,7 @@ class _AdsEditState extends State<AdsEdit> {
     print(widget.subway.toString() + "bbb");
     final mapLat = context.read<FavoriteProvider>();
     _markers.add(
-      Marker(
+      const Marker(
           markerId: MarkerId('1'),
           position: LatLng(41.311081, 69.240562),
           infoWindow: InfoWindow(
@@ -429,7 +424,7 @@ class _AdsEditState extends State<AdsEdit> {
                       border: InputBorder.none,
                     ),
                     // value: ,
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.arrow_drop_down_outlined,
                       color: Colors.grey,
                     ),
@@ -488,7 +483,7 @@ class _AdsEditState extends State<AdsEdit> {
                           decoration: const InputDecoration(
                             border: InputBorder.none,
                           ),
-                          icon: Icon(
+                          icon: const Icon(
                             Icons.arrow_drop_down_outlined,
                             color: Colors.grey,
                           ),
@@ -539,8 +534,8 @@ class _AdsEditState extends State<AdsEdit> {
                             decoration: const InputDecoration(
                               border: InputBorder.none,
                             ),
-                            icon: Icon(Icons.arrow_drop_down_outlined),
-                            items: [],
+                            icon: const Icon(Icons.arrow_drop_down_outlined),
+                            items: const [],
                             onChanged: null),
                       ),
                 SizedBox(height: 12.h),
@@ -622,8 +617,8 @@ class _AdsEditState extends State<AdsEdit> {
                       child: Card(
                         shadowColor: AppColors.buttonLinear,
                         child: ListTile(
-                          title: Text("Geojoylashishni kiriting").tr(),
-                          leading: Icon(
+                          title: const Text("Geojoylashishni kiriting").tr(),
+                          leading: const Icon(
                             Icons.location_on,
                             color: AppColors.mainColor,
                           ),
@@ -694,7 +689,7 @@ class _AdsEditState extends State<AdsEdit> {
                             ),
                             Text(
                               'Ha'.tr(),
-                              style: new TextStyle(fontSize: 14.0.sp),
+                              style:  TextStyle(fontSize: 14.0.sp),
                             ),
                             SizedBox(
                               width: 55.w,
@@ -710,7 +705,7 @@ class _AdsEditState extends State<AdsEdit> {
                             ),
                             Text(
                               "Yo'q".tr(),
-                              style: new TextStyle(
+                              style:  TextStyle(
                                 fontSize: 14.0.sp,
                               ),
                             ),
@@ -789,7 +784,7 @@ class _AdsEditState extends State<AdsEdit> {
                         dropdownBuilder: _style,
                         enabled: otmEnable!,
                         dropdownSearchDecoration:
-                            InputDecoration(border: InputBorder.none),
+                            const InputDecoration(border: InputBorder.none),
 
                         mode: Mode.BOTTOM_SHEET,
                         items: data.univer.map((e) {
@@ -941,7 +936,7 @@ class _AdsEditState extends State<AdsEdit> {
                                           utility_cold_water:
                                               widget.utility_cold_water,
                                           utility_trash: widget.utility_trash,
-                                          subway: id.toString(),
+                                          subway: id.toString(), Image: widget.Image,
                                         )));
                           } else {
                             setState(() {

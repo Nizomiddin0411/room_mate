@@ -1,5 +1,3 @@
-
-
 import 'dart:io';
 
 import 'package:flutter/cupertino.dart';
@@ -12,7 +10,7 @@ import '../services/get_favorite_service.dart';
 import '../services/get_my_ads_service.dart';
 import '../services/user_create_ads/post_user_create_ads.dart';
 
-class FavoriteProvider extends ChangeNotifier{
+class FavoriteProvider extends ChangeNotifier {
   List<FavoritemModel> Like = [];
   List<FavoritemModel> Image = [];
   FavoritemModel Image2 = FavoritemModel();
@@ -26,7 +24,7 @@ class FavoriteProvider extends ChangeNotifier{
   bool isTapMap = false;
   String Local = '';
   String? imagess;
-  String forMap='41.311081';
+  String forMap = '41.311081';
   void _setFavorite(bool value) {
     isFavorite = value;
     notifyListeners();
@@ -36,15 +34,18 @@ class FavoriteProvider extends ChangeNotifier{
     isMyAds = value;
     notifyListeners();
   }
- void _setPostAds(bool value){
-  isLoading = value;
-  notifyListeners();
+
+  void _setPostAds(bool value) {
+    isLoading = value;
+    notifyListeners();
   }
-  void _sendstudents(bool value){
+
+  void _sendstudents(bool value) {
     isLoadingStudent = value;
     notifyListeners();
   }
-  Future<void> getLike() async{
+
+  Future<void> getLike() async {
     _setFavorite(false);
     Like = await FavoriteService().fetchFavorite();
     // List.generate(Like.length, (index)
@@ -67,17 +68,14 @@ class FavoriteProvider extends ChangeNotifier{
   //   );
   //   _setFavorite(true);
   // }
-  
-  
-  
-  Future<void> getMyAds() async{
+
+  Future<void> getMyAds() async {
     _setMyAds(false);
     MyAds = await GetMyAdsService().fetchADS();
     _setMyAds(true);
   }
 
   Future<void> PostUser({
-
     required String? titleController,
     required String? roommate_gender,
     required int gender_matter,
@@ -108,11 +106,10 @@ class FavoriteProvider extends ChangeNotifier{
     required File file3,
     required File file4,
     required String? cost_period,
-
-  }) async{
+  }) async {
     _setPostAds(false);
     // isload = true;
-   await UserCreateAds().FetchAds(
+    await UserCreateAds().FetchAds(
       titleController: titleController,
       roommate_gender: roommate_gender,
       gender_matter: gender_matter,
@@ -120,7 +117,7 @@ class FavoriteProvider extends ChangeNotifier{
       subway: subway,
       addressController: addressController,
       university_id: university_id,
-      university_id_matter:university_id_matter,
+      university_id_matter: university_id_matter,
       phoneController: phoneController,
       house_type: house_type,
       rent_type: rent_type,
@@ -141,11 +138,11 @@ class FavoriteProvider extends ChangeNotifier{
       file1: file1,
       cost_period: cost_period,
       file2: file2,
-      file3: file3, file4: file4,
+      file3: file3,
+      file4: file4,
     );
     _setPostAds(true);
     // isload = false;
-
   }
 
   Future<void> PostUserEdit({
@@ -178,13 +175,13 @@ class FavoriteProvider extends ChangeNotifier{
     required File file1,
     required File file2,
     required File file3,
+    required File file4,
     required String? cost_period,
-
-  }) async{
+  }) async {
     _setPostAds(false);
     // isload = true;
-   await EditAdsService().FetchAdsEdit(
-    id: id.toString(),
+    await EditAdsService().FetchAdsEdit(
+      id: id.toString(),
       titleController: titleController,
       roommate_gender: roommate_gender,
       gender_matter: gender_matter,
@@ -192,7 +189,7 @@ class FavoriteProvider extends ChangeNotifier{
       subway: subway,
       addressController: addressController,
       university_id: university_id,
-      university_id_matter:university_id_matter,
+      university_id_matter: university_id_matter,
       phoneController: phoneController,
       house_type: house_type,
       rent_type: rent_type,
@@ -215,20 +212,18 @@ class FavoriteProvider extends ChangeNotifier{
       cost_period: cost_period,
       file2: file2,
       // FileExist[1] ? FileList[1] : FileList[4],
-      file3: file3,
+      file3: file3, file4: file4,
       // FileExist[2] ? FileList[2] : FileList[5],
     );
     _setPostAds(true);
     // isload = false;
-
   }
-  Future<void> StudentsAdds(
 
-      {
-       required File file1,
-       required File file2,
-       required File file3,
-       required File file4,
+  Future<void> StudentsAdds({
+    required File file1,
+    required File file2,
+    required File file3,
+    required File file4,
     required String title,
     required String stay_region_id,
     required String stay_region_matter,
@@ -255,44 +250,40 @@ class FavoriteProvider extends ChangeNotifier{
     required String comfort,
     required String renttype,
     required String cost_period,
-
-  }
-
-  )async{
+  }) async {
     _sendstudents(false);
     await CreateStudent().StudentsAdds(
-      file1:file1,
-      file2:file2,
-      file3:file3,
-        file4:file4,
-        title:title,
-        stay_region_id:stay_region_id,
-        stay_region_matter:stay_region_matter,
-        stay_university_id:stay_university_id,
-        stay_university_matter:stay_university_matter,
-        roommate_gender:roommate_gender,
-        roommate_count:roommate_count,
-        phone_number:phone_number,
-        phone_number_show:phone_number_show,
-        have_living_home:have_living_home,
-        description:description,
-        district_id:district_id,
-        address:address,
-        location:location,
-        subway:subway,
-        house_type:house_type,
-        room_count:roommate_count,
-        floors_count:floors_count,
-        howcountroom:howcountroom,
-        cost:cost,
-        cost_type:cost_type,
-        live_with_owner:live_with_owner,
-        utility_bills:utility_bills,
-        comfort:comfort,
-        renttype:renttype,
-        cost_period:cost_period,
+      file1: file1,
+      file2: file2,
+      file3: file3,
+      file4: file4,
+      title: title,
+      stay_region_id: stay_region_id,
+      stay_region_matter: stay_region_matter,
+      stay_university_id: stay_university_id,
+      stay_university_matter: stay_university_matter,
+      roommate_gender: roommate_gender,
+      roommate_count: roommate_count,
+      phone_number: phone_number,
+      phone_number_show: phone_number_show,
+      have_living_home: have_living_home,
+      description: description,
+      district_id: district_id,
+      address: address,
+      location: location,
+      subway: subway,
+      house_type: house_type,
+      room_count: roommate_count,
+      floors_count: floors_count,
+      howcountroom: howcountroom,
+      cost: cost,
+      cost_type: cost_type,
+      live_with_owner: live_with_owner,
+      utility_bills: utility_bills,
+      comfort: comfort,
+      renttype: renttype,
+      cost_period: cost_period,
     );
     _sendstudents(true);
   }
 }
-

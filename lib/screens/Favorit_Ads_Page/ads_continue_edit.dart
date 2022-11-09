@@ -34,6 +34,7 @@ class AdsContinueEdit extends StatefulWidget {
   String? utility_cold_water;
   String? utility_trash;
   String subway;
+  List<dynamic>? Image;
 
   AdsContinueEdit({
     required this.id,
@@ -62,6 +63,7 @@ class AdsContinueEdit extends StatefulWidget {
     required this.utility_cold_water,
     required this.utility_trash,
     required this.subway,
+    required this.Image,
   });
 
   @override
@@ -480,7 +482,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                             ),
                             decoration:
                                 const InputDecoration(border: InputBorder.none),
-                            icon: Icon(Icons.arrow_drop_down_outlined),
+                            icon: const Icon(Icons.arrow_drop_down_outlined),
                             items: ijarachi.map((e) {
                               room_count = widget.room_count;
                               return DropdownMenuItem<String>(
@@ -538,7 +540,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                             ),
                             decoration:
                                 const InputDecoration(border: InputBorder.none),
-                            icon: Icon(Icons.arrow_drop_down_outlined),
+                            icon: const Icon(Icons.arrow_drop_down_outlined),
                             items: houseroom.map((e) {
                               floors_count = widget.floors_count;
                               return DropdownMenuItem<String>(
@@ -592,7 +594,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                             ),
                             decoration:
                                 const InputDecoration(border: InputBorder.none),
-                            icon: Icon(Icons.arrow_drop_down_outlined),
+                            icon: const Icon(Icons.arrow_drop_down_outlined),
                             items: rooms.map((e) {
                               in_floor = widget.in_floor;
                               return DropdownMenuItem<String>(
@@ -750,7 +752,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                             ),
                             decoration:
                                 const InputDecoration(border: InputBorder.none),
-                            icon: Icon(Icons.arrow_drop_down_outlined),
+                            icon: const Icon(Icons.arrow_drop_down_outlined),
                             items: pricetype.map((e) {
                               price = widget.cost_period.toString();
                               return DropdownMenuItem<String>(
@@ -811,7 +813,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                         ),
                         Text(
                           'Ha',
-                          style: new TextStyle(fontSize: 14.0.sp),
+                          style:  TextStyle(fontSize: 14.0.sp),
                         ),
                         SizedBox(
                           width: 35.w,
@@ -827,7 +829,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                         ),
                         Text(
                           "Yo'q",
-                          style: new TextStyle(
+                          style:  TextStyle(
                             fontSize: 14.0.sp,
                           ),
                         ),
@@ -877,7 +879,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                         ),
                         Container(
                           width: 180.w,
-                          child: Text("Elektr energiya"),
+                          child:  Text("Elektr energiya"),
                         ),
                         Radio(
                           value: '1',
@@ -908,7 +910,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                   children: [
                     Row(
                       children: [
-                        Container(
+                        SizedBox(
                           width: 180.w,
                           child: Text("Gaz"),
                         ),
@@ -942,7 +944,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                             SizedBox(
                               height: 1.h,
                             ),
-                            Container(width: 180.w, child: Text("Sovuq suv")),
+                            SizedBox(width: 180.w, child: Text("Sovuq suv")),
                             Radio(
                               value: '1',
                               groupValue: id3,
@@ -975,7 +977,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                             SizedBox(
                               height: 1.h,
                             ),
-                            Container(width: 180.w, child: Text("Issiq suv")),
+                            SizedBox(width: 180.w, child: const Text("Issiq suv")),
                             Radio(
                               value: '1',
                               groupValue: id4,
@@ -1008,7 +1010,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                             SizedBox(
                               height: 1.h,
                             ),
-                            Container(width: 180.w, child: Text("Chiqindi")),
+                            SizedBox(width: 180.w, child: const Text("Chiqindi")),
                             Radio(
                               value: '1',
                               groupValue: id5,
@@ -1052,14 +1054,14 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                 ),
                 Row(
                   children: [
-                    Container(
+                    SizedBox(
                       width: 228.w,
                       child: Column(
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("Wi - fi "),
+                              const Text("Wi - fi "),
                               Checkbox(
                                 value: value1,
                                 onChanged: (bool? value) {
@@ -1078,7 +1080,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("TV"),
+                              const Text("TV"),
                               Checkbox(
                                 value: value2,
                                 onChanged: (bool? value) {
@@ -1097,7 +1099,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("Muzlatgich"),
+                              const Text("Muzlatgich"),
                               Checkbox(
                                 value: value3,
                                 onChanged: (bool? value) {
@@ -1116,7 +1118,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("Kir yuvish mashinasi"),
+                              const Text("Kir yuvish mashinasi"),
                               Checkbox(
                                 value: value4,
                                 onChanged: (bool? value) {
@@ -1135,7 +1137,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("Konditsioner"),
+                              const Text("Konditsioner"),
                               Checkbox(
                                 value: value5,
                                 onChanged: (bool? value) {
@@ -1154,7 +1156,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              Text("Chang yutgich"),
+                              const Text("Chang yutgich"),
                               Checkbox(
                                 value: value6,
                                 onChanged: (bool? value) {
@@ -1215,7 +1217,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                 Padding(
                   padding:
                       EdgeInsets.symmetric(vertical: 18.h, horizontal: 31.w),
-                  child: Container(
+                  child: SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
@@ -1329,7 +1331,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                                         description:
                                             descriptionController!.text,
                                         cost_period: price,
-                                        subway: widget.subway,
+                                        subway: widget.subway, Image: widget.Image,
                                       )),
                             );
                           } else {

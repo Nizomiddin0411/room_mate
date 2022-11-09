@@ -334,8 +334,8 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
                                                   //         Colors.),
                                                   boxShadow: [
                                                     BoxShadow(
-                                                        offset: Offset(
-                                                            .1.w, .1.h),
+                                                        offset:
+                                                            Offset(.1.w, .1.h),
                                                         color: Colors
                                                             .grey.shade400,
                                                         blurRadius: 6.r),
@@ -360,10 +360,8 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
                                                     decoration: BoxDecoration(
                                                         borderRadius:
                                                             BorderRadius
-                                                                .circular(
-                                                                    4.r),
-                                                        color:
-                                                            Colors.red[400]),
+                                                                .circular(4.r),
+                                                        color: Colors.red[400]),
                                                     child: Icon(
                                                       Icons.remove,
                                                       size: 15.sp,
@@ -389,8 +387,8 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
                     ),
                   ]),
                   Padding(
-                    padding: EdgeInsets.symmetric(
-                        vertical: 18.h, horizontal: 31.w),
+                    padding:
+                        EdgeInsets.symmetric(vertical: 18.h, horizontal: 31.w),
                     child: Container(
                         width: double.infinity,
                         child: ElevatedButton(
@@ -419,8 +417,7 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
                               subway: widget.id,
                               addressController: widget.addressController,
                               university_id: widget.university_id,
-                              university_id_matter:
-                                  widget.university_id_matter,
+                              university_id_matter: widget.university_id_matter,
                               phoneController: widget.phoneController,
                               house_type: widget.house_type,
                               rent_type: widget.rent_type,
@@ -444,14 +441,14 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
                               file3: FileExist[2] ? FileList[2] : FileList[4],
                               file4: FileExist[3] ? FileList[3] : FileList[4],
                             );
-                            print(widget.gender_matter.toString() + "iddd");
-                            load.isload = false;
+                            // print(widget.gender_matter.toString() + "iddd");
+                            // load.isload = false;
                             if (load.isLoading != true) {
                               showAlertDialog(context);
                             }
-                            setState(() {
-                              loading = load.isLoading;
-                            });
+                            // setState(() {
+                            //   loading = load.isLoading;
+                            // });
 
                             // var data = await UserCreateAds().FetchAds(
                             //   titleController: widget.titleController,
@@ -486,7 +483,11 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
                             //   file3: FileExist[2] ? FileList[2] : FileList[5],
                             // );
 
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => CreateSuccedful()));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const CreateSuccedful()));
                             // Navigator.pushAndRemoveUntil(
                             //     context,
                             //     MaterialPageRoute(
@@ -503,27 +504,23 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
                             //     (route) => false);
                             // } else {
                             print(widget.titleController! + 'title');
-                            print(
-                                widget.roommate_gender.toString() + 'gender');
+                            print(widget.roommate_gender.toString() + 'gender');
                             print(widget.gender_matter.toString() +
                                 'gendermatter');
-                            print(widget.district_id.toString() +
-                                'district id');
+                            print(
+                                widget.district_id.toString() + 'district id');
                             print(widget.id.toString() + 'metro');
                             print(widget.addressController.toString() +
                                 'address');
-                            print(
-                                widget.university_id.toString() + 'univerid');
+                            print(widget.university_id.toString() + 'univerid');
                             print(widget.university_id_matter.toString() +
                                 'univer matter');
                             print(widget.phoneController.toString() +
                                 'phonecontrol');
-                            print(
-                                widget.house_type.toString() + 'house type');
+                            print(widget.house_type.toString() + 'house type');
                             print(widget.rent_type.toString() + 'rent type');
                             print(widget.room_count.toString() + 'hona soni');
-                            print(
-                                widget.floors_count.toString() + 'etaj soni');
+                            print(widget.floors_count.toString() + 'etaj soni');
                             print(widget.in_floor.toString() + 'etaj');
                             print(widget.costController.toString() + 'narxi');
                             print(widget.cost_type.toString() + 'cost type');
@@ -538,11 +535,9 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
                                 'sovuq suv');
                             print(widget.utility_trash.toString() + 'musor');
                             print(widget.comfort.toString() + 'komford');
-                            print(
-                                widget.description.toString() + 'qoshimcha');
+                            print(widget.description.toString() + 'qoshimcha');
                             print(widget.location.toString() + 'location');
-                            print(
-                                widget.cost_period.toString() + 'cost perio');
+                            print(widget.cost_period.toString() + 'cost perio');
                             // ScaffoldMessenger.of(context).showSnackBar(
                             //     SnackBar(content: Text(data['error'])));
                           },
@@ -635,17 +630,17 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
       return null;
     }
   }
+}
 
-  Circular(BuildContext context) {
-    return CircularProgressIndicator();
-  }
+Circular(BuildContext context) {
+  return const CircularProgressIndicator();
 }
 
 showAlertDialog(BuildContext context) {
-  AlertDialog alert = AlertDialog(
+  AlertDialog alert = const AlertDialog(
     // title: Text("Akkauntdan chiqish ").tr(),
     // content: Text("Akkauntdan chiqishga ishonchingiz komilmi?").tr(),
-    actions: const [
+    actions: [
       Center(
         child: CircularProgressIndicator(),
       )

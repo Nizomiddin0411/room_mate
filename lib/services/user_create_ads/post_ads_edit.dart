@@ -1,8 +1,3 @@
-
-
-
-
-
 import 'dart:io';
 import 'dart:convert';
 
@@ -41,8 +36,9 @@ class EditAdsService {
     required File file1,
     required File file2,
     required File file3,
-}) async {
-  print("-------");
+    required File file4,
+  }) async {
+    print("-------");
     var request = http.MultipartRequest(
       'post',
       Uri.parse(
@@ -51,92 +47,169 @@ class EditAdsService {
       // headers: {
       //   HttpHeaders.authorizationHeader: 'Bearer ${Hive.box('token').get('token')}'
       // }
-
-
     );
     print("AAAAAA");
     var file_ = await file1.exists();
     var fileSecond = await file2.exists();
     var fileThreeth = await file3.exists();
-    if(!file_){
+    var fore = await file3.exists();
+    if (file_ == true) {
       request.files.addAll([
         await http.MultipartFile.fromPath(
           'file1',
           file1.path,
         )
       ]);
-    }else{
-      request.files.addAll([
-        await http.MultipartFile.fromPath(
-          'file1',
-          file1.path,
-        )
-      ]);
+    } else {
+      // request.files.addAll([
+      //   await http.MultipartFile.fromPath(
+      //     'file1',
+      //     file1.path,
+      //   )
+      // ]);
     }
-    if(!fileSecond){
+    if (fileSecond == true) {
       request.files.addAll([
         await http.MultipartFile.fromPath(
           'file2',
           file2.path,
         )
       ]);
-    }else{
-      request.files.addAll([
-        await http.MultipartFile.fromPath(
-          'file2',
-          file2.path,
-        )
-      ]);
+    } else {
+      // request.files.addAll([
+      //   await http.MultipartFile.fromPath(
+      //     'file2',
+      //     file2.path,
+      //   )
+      // ]);
     }
 
-    if(!fileThreeth){
+    if (fileThreeth == true) {
       request.files.addAll([
         await http.MultipartFile.fromPath(
           'file3',
           file3.path,
         )
       ]);
-    }else{
-      request.files.addAll([
-        await http.MultipartFile.fromPath(
-          'file3',
-          file3.path,
-        )
-      ]);
+    } else {
+      // request.files.addAll([
+      //   await http.MultipartFile.fromPath(
+      //     'file3',
+      //     file3.path,
+      //   )
+      // ]);
     }
-    roommate_gender = roommate_gender == "Qiz bolaga" ? '2' : roommate_gender == "O'g'il bolaga" ? '1' : roommate_gender.toString();
+    if (fore == true) {
+      request.files.addAll([
+        await http.MultipartFile.fromPath(
+          'file4',
+          file4.path,
+        )
+      ]);
+    } else {
+      // request.files.addAll([
+      //   await http.MultipartFile.fromPath(
+      //     'file1',
+      //     file1.path,
+      //   )
+      // ]);
+    }
+    roommate_gender = roommate_gender == "Qiz bolaga"
+        ? '2'
+        : roommate_gender == "O'g'il bolaga"
+            ? '1'
+            : roommate_gender.toString();
     print(district_id.toString() + "wwwww");
 
     request.fields.addAll({'id': '${id}'});
-    request.fields.addAll({'title': '${titleController}',});
-    request.fields.addAll({'roommate_gender': roommate_gender == "Qiz bolaga" ? '2' : roommate_gender == "O'g'il bolaga" ? '1' : roommate_gender.toString()});
-    request.fields.addAll({'gender_matter': '${gender_matter}',});
-    request.fields.addAll({'district_id': '${district_id}',});
-    request.fields.addAll({'address': '${addressController}',});
-    request.fields.addAll({'location': '${location}',});
-    request.fields.addAll({'subway': '${subway}',});
-    request.fields.addAll({'university_id': '${university_id}',});
-    request.fields.addAll({'university_id_matter': '${university_id_matter}',});
-    request.fields.addAll({'phone_number': '${phoneController}',});
-    request.fields.addAll({'house_type': '${house_type}',});
-    request.fields.addAll({'rent_type': '${rent_type}',});
-    request.fields.addAll({'room_count': '${room_count}',});
-    request.fields.addAll({'floors_count': '${floors_count}',});
-    request.fields.addAll({'in_floor': '${in_floor}',});
-    request.fields.addAll({'cost': '${costController}',});
-    request.fields.addAll({'cost_type': '${cost_type}',});
-    request.fields.addAll({'live_with_owner': '${live_with_owner}',});
-    request.fields.addAll({'utility_electricity': '${utility_electricity}',});
-    request.fields.addAll({'unility_gaz': '${unility_gaz}',});
-    request.fields.addAll({'utility_hot_water': '${utility_hot_water}',});
-    request.fields.addAll({'utility_cold_water': '${utility_cold_water}',});
-    request.fields.addAll({'utility_trash': '${utility_trash}',});
-    request.fields.addAll({'comfort': '${comfort}',});
-    request.fields.addAll({'description': '${description}',});
+    request.fields.addAll({
+      'title': '${titleController}',
+    });
+    request.fields.addAll({
+      'roommate_gender': roommate_gender == "Qiz bolaga"
+          ? '2'
+          : roommate_gender == "O'g'il bolaga"
+              ? '1'
+              : roommate_gender.toString()
+    });
+    request.fields.addAll({
+      'gender_matter': '${gender_matter}',
+    });
+    request.fields.addAll({
+      'district_id': '${district_id}',
+    });
+    request.fields.addAll({
+      'address': '${addressController}',
+    });
+    request.fields.addAll({
+      'location': '${location}',
+    });
+    request.fields.addAll({
+      'subway': '${subway}',
+    });
+    request.fields.addAll({
+      'university_id': '${university_id}',
+    });
+    request.fields.addAll({
+      'university_id_matter': '${university_id_matter}',
+    });
+    request.fields.addAll({
+      'phone_number': '${phoneController}',
+    });
+    request.fields.addAll({
+      'house_type': '${house_type}',
+    });
+    request.fields.addAll({
+      'rent_type': '${rent_type}',
+    });
+    request.fields.addAll({
+      'room_count': '${room_count}',
+    });
+    request.fields.addAll({
+      'floors_count': '${floors_count}',
+    });
+    request.fields.addAll({
+      'in_floor': '${in_floor}',
+    });
+    request.fields.addAll({
+      'cost': '${costController}',
+    });
+    request.fields.addAll({
+      'cost_type': '${cost_type}',
+    });
+    request.fields.addAll({
+      'live_with_owner': '${live_with_owner}',
+    });
+    request.fields.addAll({
+      'utility_electricity': '${utility_electricity}',
+    });
+    request.fields.addAll({
+      'unility_gaz': '${unility_gaz}',
+    });
+    request.fields.addAll({
+      'utility_hot_water': '${utility_hot_water}',
+    });
+    request.fields.addAll({
+      'utility_cold_water': '${utility_cold_water}',
+    });
+    request.fields.addAll({
+      'utility_trash': '${utility_trash}',
+    });
+    request.fields.addAll({
+      'comfort': '${comfort}',
+    });
+    request.fields.addAll({
+      'description': '${description}',
+    });
     // request.fields.addAll({'file1': '${file1}',});
-    request.fields.addAll({'cost_period': '${cost_period}',});
+    request.fields.addAll({
+      'cost_period': '${cost_period}',
+    });
     // request.fields['advertising_id']='$id';
-    request.headers.addAll({HttpHeaders.authorizationHeader: 'Bearer ${Hive.box('token').get('token')}'});
+    request.headers.addAll({
+      HttpHeaders.authorizationHeader:
+          'Bearer ${Hive.box('token').get('token')}'
+    });
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode >= 200 && response.statusCode <= 300) {
@@ -146,7 +219,7 @@ class EditAdsService {
       print(file1.toString() + 'fillllllllllllllbbbb');
 
       return jsonDecode(data);
-    }else{
+    } else {
       print('ishlamadi');
     }
   }

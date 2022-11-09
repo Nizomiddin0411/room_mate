@@ -28,7 +28,7 @@ class AdspageEdit extends StatefulWidget {
   String? address;
   String? roommate_gender;
   String? locations;
-  List? Image;
+  List<dynamic>? Image;
   String university;
   String? region;
   String? rentType;
@@ -67,7 +67,7 @@ class AdspageEdit extends StatefulWidget {
       this.address,
       this.roommate_gender,
       this.locations,
-      this.Image,
+      // this.Image,
       this.university,
       this.region,
       this.rentType,
@@ -84,7 +84,8 @@ class AdspageEdit extends StatefulWidget {
       this.utility_cold_water,
       this.utility_trash,
       this.district_id,
-      {Key? key})
+
+      {Key? key,required this.Image})
       : super(key: key);
 
   @override
@@ -122,7 +123,7 @@ class _AdspageEditState extends State<AdspageEdit>
         ),
         elevation: 0,
         title: Text("E’lonni o'zgartirish".tr(),
-            style: TextStyle(color: AppColors.mainColor)),
+            style: const TextStyle(color: AppColors.mainColor)),
         centerTitle: true,
       ),
       body: AdsEdit(
@@ -146,7 +147,7 @@ class _AdspageEditState extends State<AdspageEdit>
         widget.address,
         widget.roommate_gender,
         widget.locations,
-        widget.Image,
+
         widget.university,
         widget.region,
         widget.rentType,
@@ -162,7 +163,7 @@ class _AdspageEditState extends State<AdspageEdit>
         widget.utility_hot_water,
         widget.utility_cold_water,
         widget.utility_trash,
-        widget.district_id,
+        widget.district_id, Image: widget.Image,
       ),
     );
   }
