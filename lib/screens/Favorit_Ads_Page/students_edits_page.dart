@@ -41,7 +41,7 @@ class StudentsEdist extends StatefulWidget {
   String? renttype;
   String? cost_period;
   String? universtatenewname;
-  String? images;
+  List<dynamic>? images;
   String? updateid;
   String? stay_univer_id;
 
@@ -144,24 +144,7 @@ class _StudentsEdistState extends State<StudentsEdist> {
     '5',
   ];
   final List<String> genderItems = ["O'g'il bola ", "Qiz bola"];
-  var kindOfMoment = [
-    'kunlik',
-    'oylik',
-  ];
-  var rooms = [
-    '1',
-    '2',
-    '3',
-    '4',
-    '5-6',
-  ];
-  var ijarachi = [
-    '1',
-    '2',
-    '3',
-    '4',
-    '5-6',
-  ];
+
 
   bool regionsvalue = false;
   bool numbervalue = false;
@@ -240,7 +223,7 @@ class _StudentsEdistState extends State<StudentsEdist> {
                       border: Border.all(color: titleColor),
                       borderRadius: BorderRadius.circular(10.r)),
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(10, 0, 0, 0),
+                    padding:  EdgeInsets.fromLTRB(10.w, 0, 0, 0),
                     child: TextFormField(
                       onChanged: (e) {
                         setState(() {
@@ -258,7 +241,7 @@ class _StudentsEdistState extends State<StudentsEdist> {
                         border: InputBorder.none,
                         hintText: "E'lonni nomlash",
                         hintStyle:
-                            TextStyle(fontSize: 14.sp, color: Colors.grey),
+                            TextStyle(fontSize: 12.sp, color: Colors.grey),
                       ),
                       cursorColor: Colors.grey.shade800,
                       cursorWidth: 1.5.w,
@@ -266,7 +249,7 @@ class _StudentsEdistState extends State<StudentsEdist> {
                   ),
                 ),
                 SizedBox(
-                  height: 15.w,
+                  height: 15.h,
                 ),
                 Row(
                   children: [
@@ -274,18 +257,18 @@ class _StudentsEdistState extends State<StudentsEdist> {
                       "Qaysi viloyatlik sherik izlayabsiz ?".tr(),
                       style: TextStyle(
                         color: AppColors.textColor,
-                        fontSize: 14.sp,
+                        fontSize: 12.sp,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
                     SizedBox(
-                      width: 82.w,
+                      width: 76.w,
                     ),
                     Text(
                       "Ahamiyatsiz",
                       style: TextStyle(
                         color: AppColors.textColor,
-                        fontSize: 14.sp,
+                        fontSize: 12.sp,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -304,9 +287,9 @@ class _StudentsEdistState extends State<StudentsEdist> {
                           padding: EdgeInsets.only(left: 8.w),
                           child: Text(widget.stay_region.toString().tr()),
                         ),
-                        decoration: InputDecoration(border: InputBorder.none),
+                        decoration: const InputDecoration(border: InputBorder.none),
                         // value: ,
-                        icon: Icon(Icons.arrow_drop_down_outlined),
+                        icon: const Icon(Icons.arrow_drop_down_outlined),
                         items: data.regions.map((e) {
                           if (widget.district == e.id.toString()) {
                             // region = e.name.toString();
@@ -365,18 +348,18 @@ class _StudentsEdistState extends State<StudentsEdist> {
                       "Qaysi OTM da o’qiydigan sherik izlayabsiz ?".tr(),
                       style: TextStyle(
                         color: AppColors.textColor,
-                        fontSize: 14.sp,
+                        fontSize: 12.sp,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
                     SizedBox(
-                      width: 35.w,
+                      width: 27.w,
                     ),
                     Text(
                       "Ahamiyatsiz",
                       style: TextStyle(
                         color: AppColors.textColor,
-                        fontSize: 14.sp,
+                        fontSize: 12.sp,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -435,7 +418,7 @@ class _StudentsEdistState extends State<StudentsEdist> {
                           value: value6,
                           onChanged: (bool? value) {
                             setState(() {
-                              this.value6 = value!;
+                              value6 = value!;
                               univervalue = value ? '1' : '2';
                               if (value) {
                                 univerColor1 = Colors.grey;
@@ -480,12 +463,12 @@ class _StudentsEdistState extends State<StudentsEdist> {
                                 widget.roommate_gender == ''
                                     ? "O’gil  / Qiz".tr()
                                     : roommate_gender.toString(),
-                                style: TextStyle(fontSize: 14.sp),
+                                style: TextStyle(fontSize: 12.sp),
                               ),
                             ),
                             decoration:
                                 const InputDecoration(border: InputBorder.none),
-                            icon: Icon(Icons.arrow_drop_down_outlined),
+                            icon: const Icon(Icons.arrow_drop_down_outlined),
                             items: genderone.map((e) {
                               return DropdownMenuItem<String>(
                                 onTap: () {},
@@ -518,11 +501,11 @@ class _StudentsEdistState extends State<StudentsEdist> {
                           "Nechta sherik izlayabsiz ?".tr(),
                           style: TextStyle(
                             color: AppColors.textColor,
-                            fontSize: 14.sp,
+                            fontSize: 12.sp,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        SizedBox(height: 4.h),
+                        SizedBox(height: 2.h),
                         Container(
                           width: 152.w,
                           decoration: BoxDecoration(
@@ -539,7 +522,7 @@ class _StudentsEdistState extends State<StudentsEdist> {
                             ),
                             decoration:
                                 const InputDecoration(border: InputBorder.none),
-                            icon: Icon(Icons.arrow_drop_down_outlined),
+                            icon: const Icon(Icons.arrow_drop_down_outlined),
                             items: kvsherik.map((e) {
                               return DropdownMenuItem<String>(
                                 onTap: () {},
@@ -572,18 +555,18 @@ class _StudentsEdistState extends State<StudentsEdist> {
                           "Telefon raqami",
                           style: TextStyle(
                             color: AppColors.textColor,
-                            fontSize: 14.sp,
+                            fontSize: 12.sp,
                             fontWeight: FontWeight.w500,
                           ),
                         ).tr(),
                         SizedBox(
-                          width: 170.w,
+                          width: 162.w,
                         ),
                         Text(
                           "Ko’rinmasin",
                           style: TextStyle(
                             color: AppColors.textColor,
-                            fontSize: 14.sp,
+                            fontSize: 12.sp,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -639,8 +622,8 @@ class _StudentsEdistState extends State<StudentsEdist> {
                         ),
                         Column(
                           children: [
-                            SizedBox(
-                              height: 10,
+                             SizedBox(
+                              height: 10.h,
                             ),
                             Checkbox(
                               value: numbervalue,
@@ -657,7 +640,7 @@ class _StudentsEdistState extends State<StudentsEdist> {
                   ],
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 10.h,
                 ),
                 Column(
                   children: [
@@ -667,7 +650,7 @@ class _StudentsEdistState extends State<StudentsEdist> {
                           "Ijaraga turishga joyingiz bormi ?",
                           style: TextStyle(
                             color: AppColors.textColor,
-                            fontSize: 16.sp,
+                            fontSize: 14.sp,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -707,7 +690,7 @@ class _StudentsEdistState extends State<StudentsEdist> {
                             ),
                             Text(
                               "Yo'q",
-                              style: new TextStyle(
+                              style:  TextStyle(
                                 fontSize: 17.0.sp,
                               ),
                             ),
@@ -722,7 +705,7 @@ class _StudentsEdistState extends State<StudentsEdist> {
                   "Qo’shimcha xususiyatlarni kiriting ".tr(),
                   style: TextStyle(
                     color: AppColors.textColor,
-                    fontSize: 14.sp,
+                    fontSize: 12.sp,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -753,7 +736,7 @@ class _StudentsEdistState extends State<StudentsEdist> {
                         hintText: 'Message...'.tr(),
                         border: InputBorder.none,
                         hintStyle:
-                            TextStyle(fontSize: 14.sp, color: Colors.grey),
+                            TextStyle(fontSize: 12.sp, color: Colors.grey),
                       ),
                       cursorColor: Colors.grey.shade800,
                       cursorWidth: 1.5.w,
@@ -763,7 +746,7 @@ class _StudentsEdistState extends State<StudentsEdist> {
                 Padding(
                   padding:
                       EdgeInsets.symmetric(vertical: 18.h, horizontal: 31.w),
-                  child: Container(
+                  child: SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
@@ -772,6 +755,35 @@ class _StudentsEdistState extends State<StudentsEdist> {
                               borderRadius: BorderRadius.circular(10.r)),
                           primary: AppColors.buttonLinear),
                       onPressed: () {
+                     // print('${widget.updateid} id ');
+                     //    print('${widget.comfort} comford');
+                     //    print("${widget.utility_bills}  utility bills");
+                     //    print("${widget.live_with_owner} have live");
+                     //    print("${widget.cost_period} cost period");
+                     //    print('${widget.renttype} rent type');
+                     //    print('${widget.cost_type} cost type');
+                     //    print('${widget.cost} cost');
+                     //    print('${widget.floors_count} floor count');
+                     //    print('${widget.room_count} in floor');
+                     //    print("${widget.roommate_count} count of room");
+                     //    print('${widget.house_type} house type');
+                     //    print('${widget.subway} subway');
+                     //    print('${widget.address} address');
+                     //    print(widget.stay_region.toString() + 'region');
+                     //    print( titlecontroller1!.text + 'title');
+                     //    print('${value6 ? 1 : 2} ');
+                     //    // viloyatidisi: data.viloyatid.toString(),
+                        // viloyatvalue: '${regionsvalue ? 1 : 2}',
+                        // universiteteid: data.UniverId,
+                        // titleGendor: '${gender1 ? 0 : _titleGendor}',
+                        // titlecount: '${gender1 ? 0 : _titleCount}',
+                        // phoneController:
+                        // phoneController!.text.split(' ').join(''),
+                        // house: house,
+                        // addinformation: addinformation!.text,
+                        // numbervalue: '${numbervalue ? 1 : 2}',
+                        // tuman: '${widget.district}',
+                        // locations: '${widget.location}',
                         // if (titlecolor2 &&
                         //     univerColor &&
                         //     _phoneOnClick &&
@@ -782,7 +794,7 @@ class _StudentsEdistState extends State<StudentsEdist> {
                           MaterialPageRoute(
                             builder: (context) => StudensEdits2(
                               updateidi: '${widget.updateid}',
-                              images: '${widget.images}',
+                              images: widget.images,
                               comfort: '${widget.comfort}',
                               utility_bills: "${widget.utility_bills}",
                               live_with_owner: "${widget.live_with_owner}",
@@ -797,17 +809,17 @@ class _StudentsEdistState extends State<StudentsEdist> {
                               Subway: '${widget.subway}',
                               adress: '${widget.address}',
                               viloyatname: widget.stay_region.toString(),
-                              titlecontroller1: '${titlecontroller1!.text}',
+                              titlecontroller1: titlecontroller1!.text,
                               univervalue: '${value6 ? 1 : 2}',
-                              viloyatidisi: '${data.viloyatid.toString()}',
+                              viloyatidisi: data.viloyatid.toString(),
                               viloyatvalue: '${regionsvalue ? 1 : 2}',
-                              universiteteid: '${data.UniverId}',
+                              universiteteid: data.UniverId,
                               titleGendor: '${gender1 ? 0 : _titleGendor}',
                               titlecount: '${gender1 ? 0 : _titleCount}',
                               phoneController:
                                   phoneController!.text.split(' ').join(''),
                               house: house,
-                              addinformation: '${addinformation!.text}',
+                              addinformation: addinformation!.text,
                               numbervalue: '${numbervalue ? 1 : 2}',
                               tuman: '${widget.district}',
                               locations: '${widget.location}',
@@ -871,7 +883,7 @@ class _StudentsEdistState extends State<StudentsEdist> {
    Widget _style(BuildContext context, String? selectedItem) {
     return Text(
       selectedItem!,
-      style: TextStyle(fontSize: 14.sp),
+      style: TextStyle(fontSize: 12.sp),
     );
   }
 }

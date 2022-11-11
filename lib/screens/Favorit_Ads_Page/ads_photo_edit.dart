@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:dotted_border/dotted_border.dart';
 import 'package:easy_localization/easy_localization.dart';
@@ -11,7 +10,6 @@ import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 import 'package:talaba_uy/provider/favorite_provider.dart';
 import 'package:talaba_uy/screens/Create_ads/create_succed_dart.dart';
-
 import '../../core/const/app_colors.dart';
 
 class AdsPhotoEdit extends StatefulWidget {
@@ -160,9 +158,6 @@ class _AdsPhotoEditState extends State<AdsPhotoEdit> {
                         // selectImages();
                         await _takeFile(sum);
                         setState(() {});
-                        // print(FileList[0]);
-                        // print(FileList[1]);
-                        // print(FileList[2]);
                         Navigator.pop(context);
                       }
                     },
@@ -206,10 +201,10 @@ class _AdsPhotoEditState extends State<AdsPhotoEdit> {
                     children: [
                       Column(
                         children: [
-                          Container(
+                          SizedBox(
                             height: 100.h,
                             width: double.infinity,
-                            color: AppColors.iconBack,
+                            // color: AppColors.iconBack,
                             child: ListView.builder(
                               shrinkWrap: true,
                               scrollDirection: Axis.horizontal,
@@ -221,6 +216,11 @@ class _AdsPhotoEditState extends State<AdsPhotoEdit> {
                                   child: CachedNetworkImage(
                                     imageUrl:
                                         'http://164.68.114.231:8081/roommate/backend/web/uploads/image/${widget.Image![index].image.toString()}',
+
+                                    placeholder: (context, url) =>
+                                    const Center(
+                                        child:
+                                        CircularProgressIndicator()),
                                   ),
                                 );
                               },
@@ -397,8 +397,6 @@ class _AdsPhotoEditState extends State<AdsPhotoEdit> {
                                                 ),
                                                 onTap: () {
                                                   FileList.removeAt(index);
-                                                  print("aaa");
-                                                  // index -= 4;
                                                   sum -= 1;
                                                   setState(() {});
                                                 },
@@ -470,7 +468,7 @@ class _AdsPhotoEditState extends State<AdsPhotoEdit> {
                           // print(widget.location.toString() + 'location');
                           // print(widget.cost_period.toString() + 'cost');
 
-                          var data = load.PostUserEdit(
+                          var  data = load.PostUserEdit(
                             id: widget.id,
                             titleController: widget.titleController,
                             roommate_gender: widget.roommate_gender,
@@ -503,46 +501,11 @@ class _AdsPhotoEditState extends State<AdsPhotoEdit> {
                             file3: FileExist[2] ? FileList[2] : FileList[4],
                             file4: FileExist[3] ? FileList[3] : FileList[4],
                           );
-                          if (load.isLoading != true) {
+                          print(load.isLoading);
+                          if (load.isLoading == false) {
                             showAlertDialog(context);
                           }
-                          // setState(() {
-                          //   loading = load.isLoading;
-                          // });
-                          // var data = await EditAdsService().FetchAdsEdit(
-                          //   id: widget.id.toString(),
-                          //   titleController: widget.titleController,
-                          //   roommate_gender: widget.roommate_gender,
-                          //   gender_matter: widget.gender_matter,
-                          //   district_id: widget.district_id,
-                          //   subway: widget.subway,
-                          //   addressController: widget.addressController,
-                          //   university_id: widget.university_id,
-                          //   university_id_matter:
-                          //       widget.university_id_matter,
-                          //   phoneController: widget.phoneController,
-                          //   house_type: widget.house_type,
-                          //   rent_type: widget.rent_type,
-                          //   room_count: widget.room_count,
-                          //   floors_count: widget.floors_count,
-                          //   in_floor: widget.in_floor,
-                          //   costController: widget.costController,
-                          //   cost_type: widget.cost_type,
-                          //   live_with_owner: widget.live_with_owner,
-                          //   utility_electricity: widget.utility_electricity,
-                          //   unility_gaz: widget.unility_gaz,
-                          //   utility_hot_water: widget.utility_hot_water,
-                          //   utility_cold_water: widget.utility_cold_water,
-                          //   utility_trash: widget.utility_trash,
-                          //   comfort: widget.comfort,
-                          //   description: widget.description,
-                          //   location: widget.location,
-                          //   cost_period: widget.cost_period,
-                          //   file1: FileExist[0] ? FileList[0] : FileList[3],
-                          //   file2: FileExist[1] ? FileList[1] : FileList[4],
-                          //   file3: FileExist[2] ? FileList[2] : FileList[5],
-                          // );
-                          setState(() {});
+                          // setState(() {});
 
                           Navigator.pushAndRemoveUntil(
                               context,
@@ -686,10 +649,8 @@ class _AdsPhotoEditState extends State<AdsPhotoEdit> {
     }
   }
 
-  showAlertDialog(BuildContext context) {
-    AlertDialog alert = const AlertDialog(
-      // title: Text("Akkauntdan chiqish ").tr(),
-      // content: Text("Akkauntdan chiqishga ishonchingiz komilmi?").tr(),
+  showAlertDialog(BuildContext context) async{
+    AlertDialog alert = await AlertDialog(
       actions: [
         Center(
           child: CircularProgressIndicator(),

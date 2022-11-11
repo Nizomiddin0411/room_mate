@@ -216,7 +216,7 @@ class EditAdsService {
       print(Hive.box('token').get('token').toString() + "u");
       var data = await response.stream.bytesToString();
       // await Hive.box('token').put('token', jsonDecode(data)["access_token"]);
-      print(file1.toString() + 'fillllllllllllllbbbb');
+      print(data + 'fillllllllllllllbbbb');
 
       return jsonDecode(data);
     } else {

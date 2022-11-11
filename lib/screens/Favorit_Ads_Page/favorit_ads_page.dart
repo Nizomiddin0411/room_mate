@@ -551,7 +551,7 @@ class _FavoritAdsState extends State<FavoritAds> {
                                                                           '${data.MyAds[index].rentType}',
                                                                       id: '${data.MyAds[index].id}',
                                                                       images:
-                                                                          '${data.MyAds[index].images}',
+                                                                          data.MyAds[index].images,
                                                                       stay_region_id:
                                                                           '${data.MyAds[index].stayRegionId}',
                                                                     ),

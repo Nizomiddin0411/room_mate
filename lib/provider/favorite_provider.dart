@@ -135,8 +135,8 @@ class FavoriteProvider extends ChangeNotifier {
       comfort: comfort,
       description: description,
       location: location,
-      file1: file1,
       cost_period: cost_period,
+      file1: file1,
       file2: file2,
       file3: file3,
       file4: file4,
@@ -178,7 +178,7 @@ class FavoriteProvider extends ChangeNotifier {
     required File file4,
     required String? cost_period,
   }) async {
-    _setPostAds(false);
+     _setPostAds(false);
     // isload = true;
     await EditAdsService().FetchAdsEdit(
       id: id.toString(),

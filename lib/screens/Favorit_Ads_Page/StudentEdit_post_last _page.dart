@@ -45,14 +45,13 @@ class PostEditStudent extends StatefulWidget {
   String rent_type;
   String cost_period;
   String location;
-  String images;
   String updateid;
-  List<dynamic>? Image;
+  List<dynamic>? rasm;
 
   PostEditStudent({
     Key? key,
     required this.updateid,
-    required this.images,
+    required this.rasm,
     required this.howcountroom,
     required this.comfort,
     required this.ownerlive,
@@ -87,11 +86,7 @@ class PostEditStudent extends StatefulWidget {
 class _PostEditStudentState extends State<PostEditStudent> {
   final ImagePicker imagePicker = ImagePicker();
 
-  List<String> images = [
-    "https://images.wallpapersden.com/image/download/purple-sunrise-4k-vaporwave_bGplZmiUmZqaraWkpJRmbmdlrWZlbWU.jpg",
-    "https://wallpaperaccess.com/full/2637581.jpg",
-    "https://uhdwallpapers.org/uploads/converted/20/01/14/the-mandalorian-5k-1920x1080_477555-mm-90.jpg"
-  ];
+
 
   List<XFile>? imageFileList = [];
   List<XFile>? pickedFile;
@@ -116,6 +111,7 @@ class _PostEditStudentState extends State<PostEditStudent> {
   ImagePicker image = ImagePicker();
   int sum = 0;
 
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
@@ -124,13 +120,13 @@ class _PostEditStudentState extends State<PostEditStudent> {
     FileList.insert(2, File(''));
     FileList.insert(3, File(''));
     FileList.insert(4, File(''));
-    FileList.insert(3, File(''));
+
+
     FileExist.insert(0, false);
     FileExist.insert(1, false);
     FileExist.insert(2, false);
     FileExist.insert(3, false);
     FileExist.insert(4, false);
-    FileExist.insert(5, false);
   }
 
   Future<void> showOptionsDialog(BuildContext context) {
@@ -138,7 +134,7 @@ class _PostEditStudentState extends State<PostEditStudent> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Center(child: Text("Rasm yuklash")),
+            title: const Center(child: Text("Rasm yuklash")),
             content: SingleChildScrollView(
               child: ListBody(
                 children: [
@@ -196,208 +192,235 @@ class _PostEditStudentState extends State<PostEditStudent> {
               color: AppColors.textColor,
             ),
           ),
-          title: Text("E’lon yaratish".tr(),
-              style: TextStyle(color: AppColors.mainColor)),
+          title: Text("E’lon o'zgartirish".tr(),
+              style: const TextStyle(color: AppColors.mainColor)),
           centerTitle: true,
         ),
-        body: Center(
-          child: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 12.h),
-            child: Container(
-              child: SingleChildScrollView(
-                child: Column(children: [
-                  Column(children: [
+        body: Padding(
+          padding:EdgeInsets.fromLTRB(15.w, 15.h, 15.w, 0),
+          child: SingleChildScrollView(
+            child: Column(children: [
+              Column(children: [
+                Column(
+                  children: [
                     Column(
                       children: [
-                        Column(
-                          children: [
-                            Container(
-                              child: DottedBorder(
-                                dashPattern: [6, 3],
-                                color: Colors.black,
-                                strokeWidth: 0.5.w,
-                                child: InkWell(
-                                  onTap: () async {
-                                    showOptionsDialog(context);
-                                  },
-                                  child: Container(
-                                    height: 250.h,
-                                    width: 250.w,
-                                    color: Colors.black12,
-                                    child: file == null
-                                        ? Icon(
-                                            Icons.camera_alt_sharp,
-                                            size: 50.sp,
-                                          )
-                                        : Image.file(
-                                            file!,
-                                            fit: BoxFit.cover,
-                                          ),
-                                  ),
-                                ),
-                              ),
-                              width: 250.w,
-                              height: 250.h,
-                            ),
-                          ],
-                        ),
                         SizedBox(
-                          height: 15.h,
+                          height: 100.h,
+                          width: double.infinity,
+                          // color: AppColors.iconBack,
+                          child: ListView.builder(
+                            shrinkWrap: true,
+                            scrollDirection: Axis.horizontal,
+                            itemCount: widget.rasm!.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return SizedBox(
+                                width: 100.w,
+                                height: 50.h,
+                                child: CachedNetworkImage(
+                                  imageUrl:
+                                  'http://164.68.114.231:8081/roommate/backend/web/uploads/image/${widget.rasm![index].image.toString()}',
+
+                                  placeholder: (context, url) =>
+                                  const Center(
+                                      child:
+                                      CircularProgressIndicator()),
+                                ),
+                              );
+                            },
+                          ),
                         ),
-                        Text("Asosiy rasm"),
-                        Divider(
-                          height: 20.0.h,
-                          color: Colors.black,
-                        ),
-                      ],
-                    ),
-                    // SizedBox(
-                    //   height: 20.h,
-                    // ),
-                    Container(
-                      height: 240.h,
-                      child: ListView(children: [
                         SizedBox(
                           height: 10.h,
                         ),
-                        FileList.isNotEmpty
-                            ? Row(
-                                children: List.generate(FileExist.length, (index) {
-                                  return (FileExist[index])
-                                      ?
-                                      // width: 120.w,
-                                      Container(
-                                          width: 108.w,
-                                          height: 116.h,
-                                          decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.all(
-                                              Radius.circular(
-                                                12.r,
+                        SizedBox(
+                          child: DottedBorder(
+                            dashPattern: [6, 3],
+                            color: Colors.black,
+                            strokeWidth: 0.5.w,
+                            child: InkWell(
+                              onTap: () async {
+                                showOptionsDialog(context);
+                              },
+                              child: Container(
+                                height: 100.h,
+                                width: 100.w,
+                                color: Colors.black12,
+                                child: file == null
+                                    ? Icon(
+                                        Icons.camera_alt_sharp,
+                                        size: 50.sp,
+                                      )
+                                    : Image.file(
+                                        file!,
+                                        fit: BoxFit.cover,
+                                      ),
+                              ),
+                            ),
+                          ),
+                          width: 100.w,
+                          height: 100.h,
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 15.h,
+                    ),
+                    // const Text("Asosiy rasm"),
+                    Divider(
+                      height: 20.0.h,
+                      color: Colors.black,
+                    ),
+                  ],
+                ),
+                // SizedBox(
+                //   height: 20.h,
+                // ),
+                SizedBox(
+                  height: 240.h,
+                  child: ListView(children: [
+                    SizedBox(
+                      height: 10.h,
+                    ),
+                    FileList.isNotEmpty
+                        ? Wrap(
+                            children: List.generate(FileExist.length, (index) {
+                              return (FileExist[index])
+                                  ?
+                                  // width: 120.w,
+                                  Container(
+                                      width: 108.w,
+                                      height: 116.h,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.all(
+                                          Radius.circular(
+                                            12.r,
+                                          ),
+                                        ),
+                                      ),
+                                      child: Stack(
+                                        children: [
+                                          Expanded(
+                                            child: Container(
+                                              margin: EdgeInsets.symmetric(
+                                                  horizontal: 8.w,
+                                                  vertical: 8.h),
+                                              decoration: BoxDecoration(
+                                                // border: Border.all(
+                                                //     color:
+                                                //         Colors.),
+                                                boxShadow: [
+                                                  BoxShadow(
+                                                      offset: Offset(
+                                                          .1.w, .1.h),
+                                                      color: Colors
+                                                          .grey.shade400,
+                                                      blurRadius: 6),
+                                                ],
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                  10.r,
+                                                ),
+                                                image: DecorationImage(
+                                                  fit: BoxFit.cover,
+                                                  image: FileImage(
+                                                      FileList[index]),
+                                                ),
                                               ),
                                             ),
                                           ),
-                                          child: Stack(
-                                            children: [
-                                              Expanded(
-                                                child: Container(
-                                                  margin: EdgeInsets.symmetric(
-                                                      horizontal: 8.w,
-                                                      vertical: 8.h),
-                                                  decoration: BoxDecoration(
-                                                    // border: Border.all(
-                                                    //     color:
-                                                    //         Colors.),
-                                                    boxShadow: [
-                                                      BoxShadow(
-                                                          offset: Offset(
-                                                              .1.w, .1.h),
-                                                          color: Colors
-                                                              .grey.shade400,
-                                                          blurRadius: 6),
-                                                    ],
+                                          Positioned(
+                                            right: 0,
+                                            child: GestureDetector(
+                                              child: Container(
+                                                width: 18.w,
+                                                height: 18.h,
+                                                decoration: BoxDecoration(
                                                     borderRadius:
-                                                        BorderRadius.circular(
-                                                      10.r,
-                                                    ),
-                                                    image: DecorationImage(
-                                                      fit: BoxFit.cover,
-                                                      image: FileImage(
-                                                          FileList[index]),
-                                                    ),
-                                                  ),
+                                                        BorderRadius
+                                                            .circular(4.r),
+                                                    color: Colors.red[400]),
+                                                child: Icon(
+                                                  Icons.remove,
+                                                  size: 15.sp,
+                                                  color: Colors.white,
                                                 ),
                                               ),
-                                              Positioned(
-                                                right: 0,
-                                                child: GestureDetector(
-                                                  child: Container(
-                                                    width: 18.w,
-                                                    height: 18.h,
-                                                    decoration: BoxDecoration(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(4.r),
-                                                        color: Colors.red[400]),
-                                                    child: Icon(
-                                                      Icons.remove,
-                                                      size: 15.sp,
-                                                      color: Colors.white,
-                                                    ),
-                                                  ),
-                                                  onTap: () async {
-                                                    FileList.removeAt(index);
-                                                    // index -= 4;
-                                                    sum -= 1;
-                                                    setState(() {});
-                                                  },
-                                                ),
-                                              ),
-                                            ],
+                                              onTap: () async {
+                                                FileList.removeAt(index);
+                                                // index -= 4;
+                                                sum -= 1;
+                                                setState(() {});
+                                              },
+                                            ),
                                           ),
-                                        )
-                                      : Container();
-                                }),
-                              )
-                            : const SizedBox(),
-                      ]),
-                    ),
+                                        ],
+                                      ),
+                                    )
+                                  : Container();
+                            }),
+                          )
+                        : const SizedBox(),
                   ]),
-                  Container(
-                      width: double.infinity,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            padding: EdgeInsets.symmetric(vertical: 14.h),
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(10.r)),
-                            primary: AppColors.buttonLinear),
-                        onPressed: () async {
-                          await UpdateEditsStudent().StudentsEdits(
-                            idedit: widget.updateid,
-                            title: widget.titlecontroller1,
-                            stay_region_id: widget.viloyatidisi,
-                            stay_region_matter: widget.viloyatvalue,
-                            stay_university_id: widget.universiteteid,
-                            stay_university_matter: widget.univervalue,
-                            roommate_gender: widget.titleGendor,
-                            roommate_count: widget.titlecount,
-                            phone_number: widget.phoneController.toString(),
-                            phone_number_show: widget.numbervalue,
-                            have_living_home: widget.house,
-                            description: widget.addinformation.toString(),
-                            district_id: widget.viloyatidisi,
-                            address: widget.addressController.toString(),
-                            location: widget.location,
-                            subway: widget.metro,
-                            house_type: widget.housetype,
-                            room_count: widget.housecount,
-                            floors_count: widget.howcountroom,
-                            howcountroom: widget.howcountroom,
-                            cost: widget.costController,
-                            cost_type: widget.narxnituri,
-                            live_with_owner: widget.ownerlive,
-                            utility_bills: widget.costlivekomunal,
-                            comfort: widget.comfort,
-                            renttype: widget.rent_type,
-                            cost_period: widget.cost_period,
-                            file1:  FileExist[0] ? FileList[0] : FileList[3],
-                            file2: FileExist[1] ? FileList[1] : FileList[4],
-                            file3: FileExist[2] ? FileList[2] : FileList[5],);
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => CreateSuccedful(),
-                            ),
-                          );
-                        },
-                        child: Text(
-                          "Keyingi ".tr(),
-                          style: TextStyle(
-                              fontSize: 20.sp, fontWeight: FontWeight.w500),
-                        ),
-                      ))
-                ]),
+                ),
+              ]),
+              SizedBox(
+                height: 15.h,
               ),
-            ),
+              SizedBox(
+                  width: 250.w,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        padding: EdgeInsets.symmetric(vertical: 14.h),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(10.r)),
+                        primary: AppColors.buttonLinear),
+                    onPressed: () async {
+                      await UpdateEditsStudent().StudentsEdits(
+                        idedit: widget.updateid,
+                        title: widget.titlecontroller1,
+                        stay_region_id: widget.viloyatidisi,
+                        stay_region_matter: widget.viloyatvalue,
+                        stay_university_id: widget.universiteteid,
+                        stay_university_matter: widget.univervalue,
+                        roommate_gender: widget.titleGendor,
+                        roommate_count: widget.titlecount,
+                        phone_number: widget.phoneController.toString(),
+                        phone_number_show: widget.numbervalue,
+                        have_living_home: widget.house,
+                        description: widget.addinformation.toString(),
+                        district_id: widget.viloyatidisi,
+                        address: widget.addressController.toString(),
+                        location: widget.location,
+                        subway: widget.metro,
+                        house_type: widget.housetype,
+                        room_count: widget.housecount,
+                        floors_count: widget.howcountroom,
+                        howcountroom: widget.howcountroom,
+                        cost: widget.costController,
+                        cost_type: widget.narxnituri,
+                        live_with_owner: widget.ownerlive,
+                        utility_bills: widget.costlivekomunal,
+                        comfort: widget.comfort,
+                        renttype: widget.rent_type,
+                        cost_period: widget.cost_period,
+                        file1:  FileExist[0] ? FileList[0] : FileList[4],
+                        file2: FileExist[1] ? FileList[1] : FileList[4],
+                        file3: FileExist[2] ? FileList[2] : FileList[4], file4: FileExist[3] ? FileList[3] : FileList[4],);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CreateSuccedful(),
+                        ),
+                      );
+                    },
+                    child: Text(
+                      "Keyingi".tr(),
+                      style: TextStyle(
+                          fontSize: 20.sp, fontWeight: FontWeight.w500),
+                    ),
+                  ))
+            ]),
           ),
         ));
   }
@@ -420,8 +443,8 @@ class _PostEditStudentState extends State<PostEditStudent> {
       final image = File(photo.path);
       // MockData.homeworkFile = image;
       // for(int i = 1;i<=3;i++) {
-      FileList.insert(1, image);
-      FileExist.insert(1, true);
+      FileList.insert(sum, image);
+      FileExist.insert(sum, true);
       print(image.toString());
       // }
     }

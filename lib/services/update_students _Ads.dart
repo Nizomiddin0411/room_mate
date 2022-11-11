@@ -37,6 +37,7 @@ class UpdateEditsStudent {
     required File file1,
     required File file2,
     required File file3,
+    required File file4,
   }) async {
     var request = http.MultipartRequest(
       'post',
@@ -47,7 +48,8 @@ class UpdateEditsStudent {
     var file_ = await file1.exists();
     var fileSecond = await file2.exists();
     var fileThreeth = await file3.exists();
-    if(!file_){
+    var four = await file4.exists();
+    if(file_ == true){
       request.files.addAll([
         await http.MultipartFile.fromPath(
           'file1',
@@ -55,14 +57,9 @@ class UpdateEditsStudent {
         )
       ]);
     }else{
-      request.files.addAll([
-        await http.MultipartFile.fromPath(
-          'file1',
-          file1.path,
-        )
-      ]);
+
     }
-    if(!fileSecond){
+    if(fileSecond == true){
       request.files.addAll([
         await http.MultipartFile.fromPath(
           'file2',
@@ -70,28 +67,29 @@ class UpdateEditsStudent {
         )
       ]);
     }else{
-      request.files.addAll([
-        await http.MultipartFile.fromPath(
-          'file2',
-          file2.path,
-        )
-      ]);
+
     }
 
-    if(!fileThreeth){
+    if(fileThreeth == true){
       request.files.addAll([
         await http.MultipartFile.fromPath(
           'file3',
           file3.path,
         )
       ]);
-    }else{
-      request.files.addAll([
-        await http.MultipartFile.fromPath(
-          'file3',
-          file3.path,
-        )
-      ]);
+    }else {
+
+    }
+      if(four == true){
+        request.files.addAll([
+          await http.MultipartFile.fromPath(
+            'file4',
+            file4.path,
+          )
+        ]);
+      }else{
+
+      }
 
       request.fields.addAll({
         'id':idedit,
@@ -121,8 +119,6 @@ class UpdateEditsStudent {
         'comfort': comfort,
         'rent_type':renttype,
         'cost_period':cost_period,
-        'file1': "",
-
       });
       print('${idedit} idedit idisiiiiii +++++++++++');
       print('${title} titletitle nomi +++++++++++');
@@ -162,4 +158,4 @@ class UpdateEditsStudent {
         print("nizomiddin");
         return jsonDecode(data);
       }
-    }}}
+    }}

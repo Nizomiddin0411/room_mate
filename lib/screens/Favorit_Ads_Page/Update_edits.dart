@@ -43,7 +43,7 @@ class UpdateStudents extends StatefulWidget {
   String? cost_period;
   String? id;
   String? univername;
-  String? images;
+  List<dynamic>? images;
 
   UpdateStudents({
     Key? key,
@@ -102,7 +102,7 @@ class _UpdateStudentsState extends State<UpdateStudents> {
         ),
         elevation: 0,
         title: Text("E’lonni o'zgartirish".tr(),
-            style: TextStyle(color: AppColors.mainColor)),
+            style: const TextStyle(color: AppColors.mainColor)),
         centerTitle: true,
       ),
       body: StudentsEdist(
@@ -135,7 +135,7 @@ class _UpdateStudentsState extends State<UpdateStudents> {
         phone_number: '${widget.phone_number}',
         howcountroom: '${widget.howcountroom}',
         universtatenewname: '${widget.univername}',
-        images: '${widget.images}',
+        images: widget.images,
         stay_region_id: '${widget.stay_region_id}',
       ),
     );
