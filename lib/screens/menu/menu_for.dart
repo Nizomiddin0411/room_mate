@@ -12,6 +12,7 @@ import 'package:talaba_uy/screens/Ijarachipage/kunlik_ijara.dart';
 import 'package:talaba_uy/screens/Search_University/search_page.dart';
 import 'package:talaba_uy/screens/drawer/drawer.dart';
 
+import '../Feedback_Page/feedback_page.dart';
 import '../Ijarachipage/ads_for_users.dart';
 import '../Ijarachipage/oylik_ijara.dart';
 
@@ -97,7 +98,7 @@ class _MenuForState extends State<MenuFor> {
                         SizedBox(
                           height: 15.h,
                         ),
-                        Text(
+                        const Text(
                           "E’lonlar",
                           style: TextStyle(color: AppColors.textColor),
                         ).tr()
@@ -110,13 +111,36 @@ class _MenuForState extends State<MenuFor> {
                 ),
               ),
               SizedBox(
-                height: 170.h,
+                height: 30.h,
+              ),
+              InkWell(
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const FeedbackPage()));
+                },
+                child: Container(
+                  height: 80.h,
+                  width: 320.w,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20.r),
+                    color: AppColors.secondBackgroud,
+                  ),
+                  child: const Center(
+                      child: Text(
+                        "Talab va Takliflar bildirish",
+                        style: TextStyle(
+                          color: AppColors.textColor,
+                        ),
+                      )),
+                ),
+              ),
+              SizedBox(
+                height: 60.h,
               ),
               SizedBox(
                 height: 48.h,
                 width: 250.w,
                 child: ElevatedButton(
-                  child:  Text("E’lon yaratish").tr(),
+                  child:  const Text("E’lon yaratish").tr(),
                   onPressed: () {
                     Navigator.push(
                         context,

@@ -127,7 +127,7 @@ class _FiltrPageState extends State<FiltrPage> {
                           border: OutlineInputBorder(),
                           focusColor: Colors.grey),
                       // value: ,
-                      icon: Icon(Icons.arrow_drop_down_outlined),
+                      icon: const Icon(Icons.arrow_drop_down_outlined),
                       items: data.regions.map((e) {
                         return DropdownMenuItem<String>(
                           onTap: () {
@@ -167,12 +167,12 @@ class _FiltrPageState extends State<FiltrPage> {
                               borderRadius: BorderRadius.circular(10.r)),
                           child: DropdownButtonFormField(
                             isExpanded: true,
-                            hint: Text("Tumanni tanlang").tr(),
+                            hint: const Text("Tumanni tanlang").tr(),
                             decoration: const InputDecoration(
                                 isDense: true,
                                 border: OutlineInputBorder(),
                                 focusColor: Colors.grey),
-                            icon: Icon(Icons.arrow_drop_down_outlined),
+                            icon: const Icon(Icons.arrow_drop_down_outlined),
                             items: data.districts.map((e) {
                               return DropdownMenuItem<String>(
                                 onTap: () {
@@ -203,13 +203,13 @@ class _FiltrPageState extends State<FiltrPage> {
                               borderRadius: BorderRadius.circular(10.r)),
                           child: DropdownButtonFormField(
                               isExpanded: true,
-                              hint: Text("Tumanni tanlang").tr(),
+                              hint: const Text("Tumanni tanlang").tr(),
                               decoration: const InputDecoration(
                                   isDense: true,
                                   border: OutlineInputBorder(),
                                   focusColor: Colors.grey),
-                              icon: Icon(Icons.arrow_drop_down_outlined),
-                              items: [],
+                              icon: const Icon(Icons.arrow_drop_down_outlined),
+                              items: const [],
                               onChanged: null),
                         ),
                   SizedBox(height: 12.h),
@@ -336,11 +336,11 @@ class _FiltrPageState extends State<FiltrPage> {
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10.r)),
                             child: DropdownButtonFormField(
-                              hint: Text("Kv yoki xovli").tr(),
+                              hint: const Text("Kv yoki xovli").tr(),
                               decoration: const InputDecoration(
                                   border: OutlineInputBorder(),
                                   focusColor: Colors.grey),
-                              icon: Icon(Icons.arrow_drop_down_outlined),
+                              icon: const Icon(Icons.arrow_drop_down_outlined),
                               items: kvartira.map((e) {
                                 return DropdownMenuItem<String>(
                                   onTap: () {},
@@ -375,11 +375,11 @@ class _FiltrPageState extends State<FiltrPage> {
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10.r)),
                             child: DropdownButtonFormField(
-                              hint: Text("Soni").tr(),
+                              hint: const Text("Soni").tr(),
                               decoration: const InputDecoration(
                                   border: OutlineInputBorder(),
                                   focusColor: Colors.grey),
-                              icon: Icon(Icons.arrow_drop_down_outlined),
+                              icon: const Icon(Icons.arrow_drop_down_outlined),
                               items: rooms.map((e) {
                                 return DropdownMenuItem<String>(
                                   onTap: () {},
@@ -418,11 +418,11 @@ class _FiltrPageState extends State<FiltrPage> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10.r)),
                       child: DropdownButtonFormField(
-                        hint: Text("Ijara muddati").tr(),
+                        hint: const Text("Ijara muddati").tr(),
                         decoration: const InputDecoration(
                             border: OutlineInputBorder(),
                             focusColor: Colors.grey),
-                        icon: Icon(Icons.arrow_drop_down_outlined),
+                        icon: const Icon(Icons.arrow_drop_down_outlined),
                         items: kindOfMoment.map((e) {
                           return DropdownMenuItem<String>(
                             onTap: () {},

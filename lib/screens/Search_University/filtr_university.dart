@@ -66,7 +66,7 @@ class _UniverFiltrPageState extends State<UniverFiltrPage> {
                       DropdownButtonFormField2<String>(
                         decoration: InputDecoration(
                           enabledBorder:
-                              OutlineInputBorder(borderSide: BorderSide()),
+                              const OutlineInputBorder(borderSide: BorderSide()),
                           isDense: true,
                           contentPadding: EdgeInsets.zero,
                           border: OutlineInputBorder(
@@ -119,7 +119,7 @@ class _UniverFiltrPageState extends State<UniverFiltrPage> {
                   Column(
                     children: [
                       Row(
-                        children: [
+                        children: const [
                           Text(" Qaysi tumanidansiz"),
                         ],
                       ),
@@ -131,7 +131,7 @@ class _UniverFiltrPageState extends State<UniverFiltrPage> {
                               children: [
                                 DropdownButtonFormField2<String>(
                                   decoration: InputDecoration(
-                                    enabledBorder: OutlineInputBorder(
+                                    enabledBorder: const OutlineInputBorder(
                                         borderSide: BorderSide()),
                                     isDense: true,
                                     contentPadding: EdgeInsets.zero,
@@ -186,7 +186,7 @@ class _UniverFiltrPageState extends State<UniverFiltrPage> {
                               children: [
                                 DropdownButtonFormField2(
                                   decoration: InputDecoration(
-                                    enabledBorder: OutlineInputBorder(
+                                    enabledBorder: const OutlineInputBorder(
                                         borderSide: BorderSide()),
                                     isDense: true,
                                     contentPadding: EdgeInsets.zero,
@@ -233,7 +233,7 @@ class _UniverFiltrPageState extends State<UniverFiltrPage> {
                                 padding: EdgeInsets.symmetric(vertical: 14.h),
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(10.r),
-                                    side: BorderSide(color: Colors.red)),
+                                    side: const BorderSide(color: Colors.red)),
                                 primary: Colors.white),
                             onPressed: () {
                               provider.getSearchUniver(

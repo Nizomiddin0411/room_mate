@@ -1,4 +1,3 @@
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,13 +11,13 @@ import 'package:talaba_uy/screens/Ijarachipage/kunlik_ijara.dart';
 import 'package:talaba_uy/screens/Search_University/search_page.dart';
 import 'package:talaba_uy/screens/drawer/drawer.dart';
 
+import '../Feedback_Page/feedback_page.dart';
 import '../Ijarachipage/oylik_ijara.dart';
 
 class MenuPage extends StatefulWidget {
   const MenuPage({Key? key}) : super(key: key);
 
   @override
-
   State<MenuPage> createState() => _MenuPageState();
 }
 
@@ -27,19 +26,22 @@ class _MenuPageState extends State<MenuPage> {
   @override
   void initState() {
     super.initState();
-    Provider.of<SearchUniversitet>(context, listen: false).getFilter(toStringShort(),'0','0',);
+    Provider.of<SearchUniversitet>(context, listen: false).getFilter(
+      toStringShort(),
+      '0',
+      '0',
+    );
     // Provider.of<SearchUniversitet>(context, listen: false).getSearchUniver(toStringShort());
   }
 
   Widget build(BuildContext context) {
-
     return Scaffold(
       key: _scaffoldKey,
-      drawer:  DrawerPage(),
+      drawer: DrawerPage(),
       appBar: AppBar(
         backgroundColor: AppColors.backgroundWhite,
         leading: InkWell(
-          onTap: ()=>_scaffoldKey.currentState!.openDrawer(),
+          onTap: () => _scaffoldKey.currentState!.openDrawer(),
           child: const Icon(
             Icons.menu,
             color: AppColors.iconColor,
@@ -49,10 +51,13 @@ class _MenuPageState extends State<MenuPage> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: InkWell(
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>const AccountPage()));
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const AccountPage()));
               },
-              child:  CircleAvatar(
+              child: CircleAvatar(
                 backgroundImage: AssetImage('assets/images/accountImage.png'),
                 radius: 25.r,
                 // child:
@@ -60,164 +65,194 @@ class _MenuPageState extends State<MenuPage> {
             ),
           )
         ],
-        title:  Center(
+        title: Center(
             child: Text(
           "Roommate",
           style: TextStyle(color: AppColors.buttonLinear, fontSize: 24.sp),
         )),
         // flexibleSpace:
       ),
-    body:  SingleChildScrollView(
-      child: Container(
-        color: AppColors.backgroundWhite,
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            GridView(
-              padding:  EdgeInsets.fromLTRB(18.w, 40.h, 18.w, 0),
-              shrinkWrap: true,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisSpacing: 18.w,
-                  mainAxisSpacing: 18.h,
-                  crossAxisCount: 2,
-                  mainAxisExtent: 180.h),
-              children: [
-                InkWell(
-                  onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>const SearchPage()));
-                  },
-                  child: Container(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children:  [
-                        const Image(
-                          image: AssetImage(
-                              "assets/images/building-mid-2 (1).png"),
-                        ),
-                         SizedBox(
-                          height: 15.h
-                        ),
-                        const Text(
-                          "Oliy o’quv yurti",
-                          style: TextStyle(color: AppColors.textColor),
-                        ).tr()
-                      ],
+      body: SingleChildScrollView(
+        child: Container(
+          color: AppColors.backgroundWhite,
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              GridView(
+                padding: EdgeInsets.fromLTRB(18.w, 40.h, 18.w, 0),
+                shrinkWrap: true,
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisSpacing: 18.w,
+                    mainAxisSpacing: 18.h,
+                    crossAxisCount: 2,
+                    mainAxisExtent: 180.h),
+                children: [
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const SearchPage()));
+                    },
+                    child: Container(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Image(
+                            image: AssetImage(
+                                "assets/images/building-mid-2 (1).png"),
+                          ),
+                          SizedBox(height: 15.h),
+                          const Text(
+                            "Oliy o’quv yurti",
+                            style: TextStyle(color: AppColors.textColor),
+                          ).tr()
+                        ],
+                      ),
+                      decoration: BoxDecoration(
+                          color: AppColors.secondBackgroud,
+                          borderRadius: BorderRadius.circular(20)),
                     ),
-                    decoration: BoxDecoration(
-                        color: AppColors.secondBackgroud,
-                        borderRadius: BorderRadius.circular(20)),
                   ),
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Elonlar()));
+                    },
+                    child: Container(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Image(
+                            image:
+                                AssetImage("assets/images/building-mid-1.png"),
+                          ),
+                          SizedBox(
+                            height: 15.h,
+                          ),
+                          const Text(
+                            "E’lonlar",
+                            style: TextStyle(color: AppColors.textColor),
+                          ).tr()
+                        ],
+                      ),
+                      decoration: BoxDecoration(
+                          color: AppColors.secondBackgroud,
+                          borderRadius: BorderRadius.circular(20)),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const KunlikIjara()));
+                    },
+                    child: Container(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Image(
+                            image: AssetImage("assets/images/shop-1.png"),
+                          ),
+                          SizedBox(
+                            height: 15.h,
+                          ),
+                          const Text(
+                            "Kunlik kvartira",
+                            style: TextStyle(color: AppColors.textColor),
+                          ).tr()
+                        ],
+                      ),
+                      decoration: BoxDecoration(
+                          color: AppColors.secondBackgroud,
+                          borderRadius: BorderRadius.circular(20.r)),
+                    ),
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const OylikIjara()));
+                    },
+                    child: Container(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          const Image(
+                            image: AssetImage("assets/images/shop-2.png"),
+                          ),
+                          SizedBox(
+                            height: 15.h,
+                          ),
+                          const Text(
+                            "Oylik kvartira",
+                            style: TextStyle(color: AppColors.textColor),
+                          ).tr()
+                        ],
+                      ),
+                      decoration: BoxDecoration(
+                          color: AppColors.secondBackgroud,
+                          borderRadius: BorderRadius.circular(20)),
+                    ),
+                  ),
+                ],
+                physics: const NeverScrollableScrollPhysics(),
+              ),
+              SizedBox(
+                height: 30.h,
+              ),
+              InkWell(
+                onTap: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const FeedbackPage()));
+                },
+                child: Container(
+                  height: 80.h,
+                  width: 320.w,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20.r),
+                    color: AppColors.secondBackgroud,
+                  ),
+                  child: const Center(
+                      child: Text(
+                    "Talab va Takliflar bildirish",
+                    style: TextStyle(
+                      color: AppColors.textColor,
+                    ),
+                  )),
                 ),
-                InkWell(
-                  onTap: (){
+              ),
+              SizedBox(
+                height: 60.h,
+              ),
+              SizedBox(
+                height: 48.h,
+                width: 250.w,
+                child: ElevatedButton(
+                  child: const Text("E’lon yaratish").tr(),
+                  onPressed: () {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const Elonlar()));
+                            builder: (context) => const CreateAdsPage()));
                   },
-                  child: Container(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children:  [
-                        const Image(
-                          image: AssetImage(
-                              "assets/images/building-mid-1.png"),
-                        ),
-                        SizedBox(
-                          height: 15.h,
-                        ),
-                         Text(
-                          "E’lonlar",
-                          style: TextStyle(color: AppColors.textColor),
-                        ).tr()
-                      ],
-                    ),
-                    decoration: BoxDecoration(
-                        color: AppColors.secondBackgroud,
-                        borderRadius: BorderRadius.circular(20)),
-                  ),
+                  style: ElevatedButton.styleFrom(
+                      primary: AppColors.buttonLinear,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      textStyle: const TextStyle(
+                          fontSize: 15, fontWeight: FontWeight.bold)),
                 ),
-                InkWell(
-                  onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>const KunlikIjara()));
-                  },
-                  child: Container(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children:  [
-                        const Image(
-                          image: AssetImage("assets/images/shop-1.png"),
-                        ),
-                        SizedBox(
-                          height: 15.h,
-                        ),
-                         Text(
-                          "Kunlik kvartira",
-                          style: TextStyle(color: AppColors.textColor),
-                        ).tr()
-                      ],
-                    ),
-                    decoration: BoxDecoration(
-                        color: AppColors.secondBackgroud,
-                        borderRadius: BorderRadius.circular(20.r)),
-                  ),
-                ),
-                InkWell(
-                  onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=>const OylikIjara()));
-                  },
-                  child: Container(
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children:  [
-                        const Image(
-                          image: AssetImage("assets/images/shop-2.png"),
-                        ),
-                        SizedBox(
-                          height: 15.h,
-                        ),
-                         Text(
-                          "Oylik kvartira",
-                          style: TextStyle(color: AppColors.textColor),
-                        ).tr()
-                      ],
-                    ),
-                    decoration: BoxDecoration(
-                        color: AppColors.secondBackgroud,
-                        borderRadius: BorderRadius.circular(20)),
-                  ),
-                ),
-              ],
-              physics: const NeverScrollableScrollPhysics(),
-            ),
-             SizedBox(
-              height: 170.h,
-            ),
-            SizedBox(
-              height: 48.h,
-              width: 250.w,
-              child: ElevatedButton(
-                child:  Text("E’lon yaratish").tr(),
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const CreateAdsPage()));
-                },
-                style: ElevatedButton.styleFrom(
-                    primary: AppColors.buttonLinear,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    textStyle: const TextStyle(
-                        fontSize: 15, fontWeight: FontWeight.bold)),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
-    ),
     );
   }
 }

@@ -189,6 +189,7 @@ class _StudentState extends State<Student> {
                       child: IgnorePointer(
                         ignoring: otmEnable1,
                         child: DropdownButtonFormField(
+                          menuMaxHeight: 100.h,
                           hint: Padding(
                             padding: EdgeInsets.symmetric(horizontal: 8.w),
                             child: Text(
@@ -203,11 +204,15 @@ class _StudentState extends State<Student> {
                           icon: const Icon(Icons.arrow_drop_down_outlined),
                           items: data.regions.map((e) {
                             return DropdownMenuItem<String>(
+
                               onTap: () {
                                 data.viloyatid = e.id.toString();
                               },
                               value: e.name ?? "",
-                              child: Text(e.name.toString()),
+                              child: Padding(
+                                padding:  EdgeInsets.fromLTRB(8.w,0,0,0),
+                                child: Text(e.name.toString()),
+                              ),
                             );
                           }).toList(),
                           onChanged: (newValue) async {
@@ -443,7 +448,7 @@ class _StudentState extends State<Student> {
                             ),
                             decoration:
                                 const InputDecoration(border: InputBorder.none),
-                            icon: Icon(Icons.arrow_drop_down_outlined),
+                            icon: const Icon(Icons.arrow_drop_down_outlined),
                             items: kvsherik.map((e) {
                               return DropdownMenuItem<String>(
                                 onTap: () {},
@@ -793,7 +798,7 @@ class _StudentState extends State<Student> {
       padding: EdgeInsets.fromLTRB(6.w, 2.h, 0, 0),
       child: Text(
         selectedItem!,
-        style: TextStyle(fontSize: 12.sp, color: Colors.grey),
+        style: TextStyle(fontSize: 12.sp, color: Colors.black),
       ),
     );
   }

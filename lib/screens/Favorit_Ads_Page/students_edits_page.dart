@@ -106,19 +106,17 @@ class _StudentsEdistState extends State<StudentsEdist> {
   String gender = '';
   String CourseCount = '';
   String roomCount = '';
+  bool regionStay = false;
   Color titlecolor = Colors.grey;
   bool univerColor = false;
   bool _otmOnClick = false;
   bool titlecolor1 = false;
   bool titlecolor2 = false;
   Color _colorUniver = Colors.grey;
-  bool _UniverOnClick = false;
   Color _colorGender = Colors.grey;
   Color _colorForm = Colors.grey;
   Color titlecolort = Colors.grey;
-  bool _FormOnClick = false;
   bool gender1 = false;
-  bool _phoneOnClick = false;
   Color _phoneColor = Colors.grey;
   var kurs = [
     '1-kurs',
@@ -291,11 +289,11 @@ class _StudentsEdistState extends State<StudentsEdist> {
                         // value: ,
                         icon: const Icon(Icons.arrow_drop_down_outlined),
                         items: data.regions.map((e) {
-                          if (widget.district == e.id.toString()) {
-                            // region = e.name.toString();
-
-                            setState(() {});
-                          }
+                          // if (widget.district == e.id.toString()) {
+                          // //   region = e.name.toString();
+                          //
+                          //   setState(() {});
+                          // }
                           print(widget.district);
                           return DropdownMenuItem<String>(
                             onTap: () {
@@ -314,9 +312,9 @@ class _StudentsEdistState extends State<StudentsEdist> {
                             univerColor1 = Colors.grey;
                           });
 
-                          final selected = data.regions
-                              .where((element) => element.name == newValue);
-                          data.getDistrict(selected.last.id!);
+                          // final selected = data.regions
+                          //     .where((element) => element.name == newValue);
+                          // data.getDistrict(selected.last.id!);
                           setState(() {
                             dropDown = newValue.toString();
                           });
@@ -402,7 +400,6 @@ class _StudentsEdistState extends State<StudentsEdist> {
                           print('${selected}=================');
                           setState(() {
                             dropDown2 = value.toString();
-                            _UniverOnClick = true;
                             _colorUniver = Colors.grey;
                           });
                         },
@@ -469,7 +466,7 @@ class _StudentsEdistState extends State<StudentsEdist> {
                             decoration:
                                 const InputDecoration(border: InputBorder.none),
                             icon: const Icon(Icons.arrow_drop_down_outlined),
-                            items: genderone.map((e) {
+                            items: genderItems.map((e) {
                               return DropdownMenuItem<String>(
                                 onTap: () {},
                                 value: e,
@@ -483,7 +480,7 @@ class _StudentsEdistState extends State<StudentsEdist> {
                               setState(() {
                                 widget.roommate_gender.toString();
                                 if (gender1 == false) {
-                                  _titleGendor = e == "Qiz bolaga" ? '2' : '1';
+                                  _titleGendor = e == "Qiz bola" ? '2' : '1';
                                 }
                               });
                             },
@@ -591,10 +588,8 @@ class _StudentsEdistState extends State<StudentsEdist> {
                               setState(() {
                                 if (e.length > 12) {
                                   _phoneColor = Colors.grey;
-                                  _phoneOnClick = true;
                                 } else {
                                   _phoneColor = Colors.red;
-                                  _phoneOnClick = false;
                                 }
                               });
                             },
@@ -722,10 +717,8 @@ class _StudentsEdistState extends State<StudentsEdist> {
                         setState(() {
                           if (e.length > 0) {
                             _colorForm = Colors.grey;
-                            _FormOnClick = true;
                           } else {
                             _colorForm = Colors.red;
-                            _FormOnClick = false;
                           }
                         });
                       },
@@ -755,35 +748,36 @@ class _StudentsEdistState extends State<StudentsEdist> {
                               borderRadius: BorderRadius.circular(10.r)),
                           primary: AppColors.buttonLinear),
                       onPressed: () {
-                     // print('${widget.updateid} id ');
-                     //    print('${widget.comfort} comford');
-                     //    print("${widget.utility_bills}  utility bills");
-                     //    print("${widget.live_with_owner} have live");
-                     //    print("${widget.cost_period} cost period");
-                     //    print('${widget.renttype} rent type');
-                     //    print('${widget.cost_type} cost type');
-                     //    print('${widget.cost} cost');
-                     //    print('${widget.floors_count} floor count');
-                     //    print('${widget.room_count} in floor');
-                     //    print("${widget.roommate_count} count of room");
-                     //    print('${widget.house_type} house type');
-                     //    print('${widget.subway} subway');
-                     //    print('${widget.address} address');
-                     //    print(widget.stay_region.toString() + 'region');
-                     //    print( titlecontroller1!.text + 'title');
-                     //    print('${value6 ? 1 : 2} ');
-                     //    // viloyatidisi: data.viloyatid.toString(),
-                        // viloyatvalue: '${regionsvalue ? 1 : 2}',
-                        // universiteteid: data.UniverId,
-                        // titleGendor: '${gender1 ? 0 : _titleGendor}',
-                        // titlecount: '${gender1 ? 0 : _titleCount}',
-                        // phoneController:
-                        // phoneController!.text.split(' ').join(''),
-                        // house: house,
-                        // addinformation: addinformation!.text,
-                        // numbervalue: '${numbervalue ? 1 : 2}',
-                        // tuman: '${widget.district}',
-                        // locations: '${widget.location}',
+                        print('${widget.updateid} id =====');
+                        print('${widget.comfort} comford');
+                        print("${widget.utility_bills}  utility bills");
+                        print("${widget.live_with_owner} have live");
+                        print("${widget.cost_period} cost period");
+                        print('${widget.renttype} rent type');
+                        print('${widget.cost_type} cost type');
+                        print('${widget.cost} cost');
+                        print('${widget.floors_count} floor count');
+                        print('${widget.room_count} in floor');
+                        print("${widget.roommate_count} count of room");
+                        print('${widget.house_type} house type');
+                        print('${widget.subway} subway');
+                        print('${widget.address} address');
+                        print(widget.stay_region.toString() + 'region');
+                        print( titlecontroller1!.text + 'title');
+                        print('${value6 ? 1 : 2} gender');
+                        print(data.viloyatid.toString() + 'viloyat idsi');
+                        print('${regionsvalue ? 1 : 2} region matter');
+                        print(data.UniverId + 'univer id');
+                        print('${gender1 ? 0 : _titleGendor} gender title');
+                        print( '${gender1 ? 0 : _titleCount}  count of roomates');
+                        print(phoneController!.text.split(' ').join('') + "phone number");
+                        print(house + 'have a home?');
+                        print(addinformation!.text + 'other information');
+                        print('${numbervalue ? 1 : 2} number matter');
+                        print('${widget.district} district id');
+                        print('${widget.location} locations ');
+
+
                         // if (titlecolor2 &&
                         //     univerColor &&
                         //     _phoneOnClick &&

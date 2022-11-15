@@ -291,6 +291,7 @@ class _OwnerState extends State<Owner> {
                     border: Border.all(color: _colorRegion),
                   ),
                   child: DropdownButtonFormField(
+                    menuMaxHeight: 100.h,
                     hint: Padding(
                       padding: EdgeInsets.only(left: 8.w),
                       child: Text(
@@ -305,7 +306,7 @@ class _OwnerState extends State<Owner> {
                       border: InputBorder.none,
                     ),
                     // value: ,
-                    icon: Icon(
+                    icon: const Icon(
                       Icons.arrow_drop_down_outlined,
                       color: Colors.grey,
                     ),

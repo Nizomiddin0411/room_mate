@@ -1015,8 +1015,8 @@ class _AdsDetailState extends State<AdsDetail> {
                           height: 6.h,
                         ),
                       ],
-                    ) : SizedBox(),
-                    widget.description.toString() != 'null' ?
+                    ) : const SizedBox(),
+                    widget.description.toString() != 'null' && widget.description.toString() != '' ?
                     Row(
                       children: [
                         Container(

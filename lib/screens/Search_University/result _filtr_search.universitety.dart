@@ -158,7 +158,7 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                             children: [
                               DropdownButtonFormField2<String>(
                                 decoration: InputDecoration(
-                                  enabledBorder: OutlineInputBorder(
+                                  enabledBorder: const OutlineInputBorder(
                                       borderSide: BorderSide()),
                                   isDense: true,
                                   contentPadding: EdgeInsets.zero,
@@ -214,7 +214,7 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                             children: [
                               DropdownButtonFormField2(
                                 decoration: InputDecoration(
-                                  enabledBorder: OutlineInputBorder(
+                                  enabledBorder: const OutlineInputBorder(
                                       borderSide: BorderSide()),
                                   isDense: true,
                                   contentPadding: EdgeInsets.zero,
@@ -276,7 +276,7 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                           DropdownButtonFormField2<String?>(
                             decoration: InputDecoration(
                               enabledBorder:
-                                  OutlineInputBorder(borderSide: BorderSide()),
+                                  const OutlineInputBorder(borderSide: BorderSide()),
                               isDense: true,
                               contentPadding: EdgeInsets.zero,
                               border: OutlineInputBorder(
@@ -318,7 +318,7 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                                 Fakultet = value.toString();
                               });
                             },
-                            onSaved: (value) {},
+                            // onSaved: (value) {},
                           ),
                         ],
                       );
@@ -406,7 +406,7 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                               padding: EdgeInsets.symmetric(vertical: 14.h),
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10.r),
-                                  side: BorderSide(color: Colors.red)),
+                                  side: const BorderSide(color: Colors.red)),
                               primary: Colors.white),
                           onPressed: () {
                             provider.getAds('1', '1','1','1', UniverId: widget.id);
@@ -424,7 +424,7 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                       SizedBox(
                         height: 20.h,
                       ),
-                      Container(
+                      SizedBox(
                         width: 220.w,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
