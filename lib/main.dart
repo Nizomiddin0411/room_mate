@@ -5,7 +5,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:provider/provider.dart';
-import 'package:talaba_uy/bloc/bloc_region/region_bloc.dart';
 import 'package:talaba_uy/cubit/aut_cubit.dart';
 import 'package:talaba_uy/provider/chat_permit_provider.dart';
 import 'package:talaba_uy/provider/day_provider.dart';
@@ -16,14 +15,7 @@ import 'package:talaba_uy/provider/region_provider.dart';
 import 'package:talaba_uy/provider/search_universitet_provider.dart';
 import 'package:talaba_uy/provider/universitet_provider.dart';
 import 'package:talaba_uy/repository/region_repository.dart';
-import 'package:talaba_uy/screens/Account_Page/account_page.dart';
-import 'package:talaba_uy/screens/All_Ads_Page/all_ads_page.dart';
 import 'package:talaba_uy/screens/Autorization/language_dart.dart';
-import 'package:talaba_uy/screens/Create_ads/create_ads_page.dart';
-import 'package:talaba_uy/screens/Settings/setting.dart';
-import 'package:talaba_uy/screens/Autorization/StartPage.dart';
-import 'package:talaba_uy/screens/Search_University/search_page.dart';
-import 'package:talaba_uy/screens/drawer/drawer.dart';
 import 'package:talaba_uy/screens/menu/menu.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:talaba_uy/screens/menu/menu_for.dart';
@@ -55,11 +47,11 @@ void main() async {
 
   runApp(EasyLocalization(
     path: 'assets/locale',
-    supportedLocales: [
+    supportedLocales: const [
       Locale('ru', 'RU'),
       Locale('uz', 'UZ'),
     ],
-    fallbackLocale: Locale('uz', 'UZ'),
+    fallbackLocale: const Locale('uz', 'UZ'),
     saveLocale: true,
     child: MyApp(),
   ));
@@ -99,7 +91,7 @@ class MyApp extends StatelessWidget {
                 theme: ThemeData(
                   primarySwatch: Colors.blue,
                 ),
-                home: MyHomePage(
+                home: const MyHomePage(
                   title: '',
                 ),
               ),
@@ -124,7 +116,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       body: Hive
           .box('token')
-          .isEmpty ? LanguagePage() : Hive.box('type').get('type').toString() == '2' ? MenuPage() :MenuFor() ,
+          .isEmpty ? const LanguagePage() : Hive.box('type').get('type').toString() == '2' ? const MenuPage() :const MenuFor() ,
       // This trailing comma makes auto-formatting nicer for build methods.
     );
 

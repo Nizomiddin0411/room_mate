@@ -41,13 +41,13 @@ class _LanguagePageState extends State<LanguagePage> {
                   child: Image.asset('assets/images/Vector (3).png'),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 10.h,
                 ),
-                Text('Пожалуйста, выберите язык !!!'),
+                const Text('Пожалуйста, выберите язык !!!'),
                 SizedBox(
-                  height: 15,
+                  height: 15.h,
                 ),
-                Text("Iltimos tilni tanlang !!!"),
+                const Text("Iltimos tilni tanlang !!!"),
                 SizedBox(
                   height: 66.h,
                 ),
@@ -57,7 +57,7 @@ class _LanguagePageState extends State<LanguagePage> {
                       border: Border.all(color: AppColors.iconBack)),
                   child: InkWell(
                     onTap: () {
-                      context.locale = Locale('uz', 'UZ');
+                      context.locale = const Locale('uz', 'UZ');
                       setState(() {
                         lang = true;
                         _language = 'uz';
@@ -83,7 +83,7 @@ class _LanguagePageState extends State<LanguagePage> {
                             )
                           : Container(
                               decoration: BoxDecoration(
-                                  color: Color.fromRGBO(149, 149, 149, 1),
+                                  color: const Color.fromRGBO(149, 149, 149, 1),
                                   shape: BoxShape.circle,
                                   border: Border.all(width: 1.w)),
                               child: CircleAvatar(
@@ -101,7 +101,7 @@ class _LanguagePageState extends State<LanguagePage> {
                       border: Border.all(color: AppColors.iconBack)),
                   child: InkWell(
                     onTap: () {
-                      context.locale = Locale('ru', 'RU');
+                      context.locale = const Locale('ru', 'RU');
                       setState(() {
                         lang = true;
                         _language = 'rus';
@@ -127,7 +127,7 @@ class _LanguagePageState extends State<LanguagePage> {
                             )
                           : Container(
                               decoration: BoxDecoration(
-                                  color: Color.fromRGBO(149, 149, 149, 1),
+                                  color: const Color.fromRGBO(149, 149, 149, 1),
                                   shape: BoxShape.circle,
                                   border: Border.all(width: 1.w)),
                               child: CircleAvatar(
@@ -145,12 +145,12 @@ class _LanguagePageState extends State<LanguagePage> {
                   onPressed: () {
                     if (lang) {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => StartPage()));
+                          MaterialPageRoute(builder: (context) => const StartPage()));
                     } else {
                       showDialog(
                           context: context,
                           builder: (context) {
-                            return AlertDialog(
+                            return const AlertDialog(
                               title: Text("Tilni tanglang !!!  "),
                             );
                           });

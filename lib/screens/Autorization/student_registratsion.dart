@@ -85,7 +85,7 @@ class _StudentUserState extends State<StudentUser> {
                 children: [
                   Row(
                     children: [
-                      Text("Ism va familiya ").tr(),
+                      const Text("Ism va familiya ").tr(),
                     ],
                   ),
                   SizedBox(
@@ -120,7 +120,7 @@ class _StudentUserState extends State<StudentUser> {
                 children: [
                   Row(
                     children: [
-                      Text("Telefon raqami").tr(),
+                      const Text("Telefon raqami").tr(),
                       SizedBox(width: 165.w,),
                            Text(
                             "Ko’rinmasin",
@@ -268,7 +268,7 @@ class _StudentUserState extends State<StudentUser> {
                 children: [
                   Row(
                     children: [
-                      Text("Oliy o’quv yurti").tr(),
+                      const Text("Oliy o’quv yurti").tr(),
                     ],
                   ),
                   SizedBox(
@@ -474,7 +474,7 @@ class _StudentUserState extends State<StudentUser> {
                 children: [
                   Row(
                     children: [
-                      Text("Kurs ").tr(),
+                      const Text("Kurs ").tr(),
                     ],
                   ),
                   SizedBox(
@@ -537,7 +537,7 @@ class _StudentUserState extends State<StudentUser> {
                 children: [
                   Row(
                     children: [
-                      Text("Viloyat").tr(),
+                      const Text("Viloyat").tr(),
                     ],
                   ),
                   SizedBox(
@@ -731,7 +731,7 @@ class _StudentUserState extends State<StudentUser> {
                       Padding(
                         padding: EdgeInsets.symmetric(
                             horizontal: 8.0.w, vertical: 8.0.h),
-                        child: Container(
+                        child: SizedBox(
                           height: 40.h,
                           width: 70.w,
                           child: Switch(
@@ -816,7 +816,7 @@ class _StudentUserState extends State<StudentUser> {
                     // print("${myController.text}" +'full name' );
                     // print("${nameController.text}" + ' telefon');
                     // print("${hidenumber ? '1' : '2'}" + 'hide phone');
-                    // print("${dropdownvalue.toString() == 'Erkak' ? '1' : '2'}" + 'Gendor');
+                    // print("${dropdownvalue.toString() == "O'g'il" ? '1' : '2'}" + 'Gendor');
                     // print("${university_id.toString()}" + 'universitet id');
                     // print("${data.fakultetid.toString()}" + 'facultet');
                     // print("${Course.toString()}" + 'course');
@@ -832,9 +832,9 @@ class _StudentUserState extends State<StudentUser> {
                       HideProfile: isSwitched ? '1' : '2',
                       District: data.districtId.toString(),
                       Phonenumber: nameController.text,
-                      gender: dropdownvalue.toString() == 'Erkak' ? '1' : '2',
+                      gender: dropdownvalue.toString() == "O'g'il" ? '1' : '2',
                       UniderId: university_id.toString(),
-                      Hidenumber: '${hidenumber ? '1' : '2'}',
+                      Hidenumber: hidenumber ? '1' : '2',
                     );
                     Navigator.push(
                         context,

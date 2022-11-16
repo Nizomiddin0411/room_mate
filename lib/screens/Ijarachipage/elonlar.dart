@@ -106,12 +106,11 @@ class _ElonlarState extends State<Elonlar> {
                               Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => FiltrPage()))
+                                          builder: (context) => const FiltrPage()))
                                   .then((value) => data.isChanded);
                               data.isRegion = false;
                               data.isDistricts = false;
                               data.isUniver = false;
-                              // data.isCourse = false;
                               data.isTypeHouse = false;
                               data.isCount = false;
                               data.isRent = false;
@@ -138,10 +137,10 @@ class _ElonlarState extends State<Elonlar> {
               onTap: (String) {},
               tabs: [
                 Tab(
-                  child: Text("Ijarachi kerak").tr(),
+                  child: const Text("Ijarachi kerak").tr(),
                 ),
                 Tab(
-                  child: Text("Ijaraga sherik kerak").tr(),
+                  child: const Text("Ijaraga sherik kerak").tr(),
                 )
               ],
             ),
@@ -159,7 +158,7 @@ class _ElonlarState extends State<Elonlar> {
                   );
                 }
                 if (data.Ads.isEmpty) {
-                  return Center(
+                  return const Center(
                     child: Text("Ma'lumot yo'q"),
                   );
                 }
@@ -473,7 +472,7 @@ class _ElonlarState extends State<Elonlar> {
                   );
                 }
                 if (data.AdsForStudent.isEmpty) {
-                  return Center(
+                  return const Center(
                     child: Text("Ma'lumot yo'q"),
                   );
                 }

@@ -51,14 +51,14 @@ class _RegistratsiyaState extends State<Registratsiya> {
       child: Scaffold(
         backgroundColor: AppColors.backgroundWhite,
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(155),
+          preferredSize: const Size.fromHeight(155),
           child: AppBar(
             backgroundColor: AppColors.backgroundWhite,
             leading: IconButton(
               onPressed: () {
                 Navigator.pop(context);
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.arrow_back,
                 color: AppColors.textColor,
               ),
@@ -69,23 +69,21 @@ class _RegistratsiyaState extends State<Registratsiya> {
                 children: [],
               ),
             ),
-            flexibleSpace: Container(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(0, 60, 0, 0),
-                child: Column(
-                  children: [
-                    Text("Ro’yxatdan o’tish".tr(),
-                        style: TextStyle(
-                            color: AppColors.mainColor,
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold)),
-                    SizedBox(
-                      height: 10,
-                    ),
-                    Text(
-                        "Ro’yxatdan o’tish uchun shaxsiy ma’lumotlaringizni  kiriting".tr(),),
-                  ],
-                ),
+            flexibleSpace: Padding(
+              padding:  EdgeInsets.fromLTRB(0, 60.h, 0, 0),
+              child: Column(
+                children: [
+                  Text("Ro’yxatdan o’tish".tr(),
+                      style:  TextStyle(
+                          color: AppColors.mainColor,
+                          fontSize: 25.sp,
+                          fontWeight: FontWeight.bold)),
+                  SizedBox(
+                    height: 10.h,
+                  ),
+                  Text(
+                      "Ro’yxatdan o’tish uchun shaxsiy ma’lumotlaringizni  kiriting".tr(),),
+                ],
               ),
             ),
             centerTitle: true,
@@ -99,10 +97,10 @@ class _RegistratsiyaState extends State<Registratsiya> {
                   padding: EdgeInsets.symmetric(vertical: 8.h),
                   child: Text(
                     "Talabaman".tr(),
-                    style: TextStyle(fontWeight: FontWeight.w500),
+                    style: const TextStyle(fontWeight: FontWeight.w500),
                   ),
                 ),
-                Text(
+                const Text(
                   "Uy beruvchiman",
                   style: TextStyle(fontWeight: FontWeight.w500),
                 ).tr(),
@@ -112,7 +110,7 @@ class _RegistratsiyaState extends State<Registratsiya> {
         ),
         body: TabBarView(
           controller: _tabController,
-          children: [
+          children: const [
           StudentUser(),
             UserRegistratsion()
           ],

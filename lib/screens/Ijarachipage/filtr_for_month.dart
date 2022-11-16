@@ -573,6 +573,15 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                     EdgeInsets.symmetric(vertical: 18.h, horizontal: 31.w),
                     child: InkWell(
                       onTap: () {
+                        data.isRegion = false;
+                        data.isDistricts = false;
+                        data.isUniver = false;
+                        data.isTypeHouse = false;
+                        data.isCount = false;
+                        data.isRent = false;
+                        data.isSubway = false;
+                        data.isFromCost = false;
+                        data.isToCost = false;
                         Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
@@ -599,7 +608,7 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                   Padding(
                     padding:
                         EdgeInsets.symmetric(vertical: 8.h, horizontal: 31.w),
-                    child: Container(
+                    child: SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(

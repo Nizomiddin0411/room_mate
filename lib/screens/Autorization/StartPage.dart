@@ -42,7 +42,7 @@ class _StartPageState extends State<StartPage> {
                 shape: RoundedRectangleBorder(
 
                   borderRadius: BorderRadius.circular(10.r),
-                  side: BorderSide(color: Colors.blue)
+                  side: const BorderSide(color: Colors.blue)
 
                 ),
               ),
@@ -66,7 +66,7 @@ class _StartPageState extends State<StartPage> {
            SizedBox(height: 18.h,),
             ElevatedButton(
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>Registratsiya()));
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>const Registratsiya()));
               },
               style: ElevatedButton.styleFrom(
                 primary: AppColors.mainColor,

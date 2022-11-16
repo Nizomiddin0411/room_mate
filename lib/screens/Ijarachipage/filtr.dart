@@ -446,7 +446,7 @@ class _FiltrPageState extends State<FiltrPage> {
                   ),
                   Row(
                     children: [
-                      Container(
+                      SizedBox(
                         width: 20.w,
                         height: 20.h,
                         child: Checkbox(
@@ -462,7 +462,7 @@ class _FiltrPageState extends State<FiltrPage> {
                       SizedBox(
                         width: 12.w,
                       ),
-                      Text("Metroga yaqin").tr()
+                      const Text("Metroga yaqin").tr()
                     ],
                   ),
                   SizedBox(height: 22.h),
@@ -474,7 +474,7 @@ class _FiltrPageState extends State<FiltrPage> {
                         fontWeight: FontWeight.w500),
                   ).tr(),
                   SizedBox(height: 12.h),
-                  Text("Dan").tr(),
+                  const Text("Dan").tr(),
                   SizedBox(height: 6.h),
                   Row(
                     children: [
@@ -541,6 +541,16 @@ class _FiltrPageState extends State<FiltrPage> {
                         EdgeInsets.symmetric(vertical: 18.h, horizontal: 31.w),
                     child: InkWell(
                       onTap: () {
+                        data.isRegion = false;
+                        data.isDistricts = false;
+                        data.isUniver = false;
+                        // data.isCourse = false;
+                        data.isTypeHouse = false;
+                        data.isCount = false;
+                        data.isRent = false;
+                        data.isSubway = false;
+                        data.isFromCost = false;
+                        data.isToCost = false;
                         Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
