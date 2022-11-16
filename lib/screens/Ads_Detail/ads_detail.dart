@@ -455,16 +455,16 @@ class _AdsDetailState extends State<AdsDetail> {
                                 onTap: () {
                                   print('${Hive.box('id').get('id')}');
                                   print(widget.userId);
-                                  if (widget.chatApproved == '1') {
+                                  // if (widget.chatApproved.toString() == '1') {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) => ChatPage(
                                                 widget.userFullName!,
                                                 widget.userId!)));
-                                  } else {
-                                    showAlertDialog(context, widget.userId!);
-                                  }
+                                  // } else {
+                                  //   showAlertDialog(context, widget.userId!);
+                                  // }
                                 },
                                 child: Container(
                                   width: 95.w,

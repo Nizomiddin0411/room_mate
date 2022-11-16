@@ -1,12 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:talaba_uy/chat/add_image.dart';
 import 'message.dart';
 import 'dart:io';
 
@@ -29,7 +25,7 @@ class _ChatPageState extends State<ChatPage> {
   int myId = Hive.box('id').get('id');
 
   final fs = FirebaseFirestore.instance;
-  final TextEditingController message = new TextEditingController();
+  final TextEditingController message = TextEditingController();
   bool _isEmpty = true;
   bool uploading = false;
   double val = 0;
@@ -60,12 +56,12 @@ class _ChatPageState extends State<ChatPage> {
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Color.fromRGBO(60, 104, 255, 1),
+        backgroundColor: const Color.fromRGBO(60, 104, 255, 1),
         title: Row(
           children: [
             Padding(
               padding: EdgeInsets.only(right: 10.w, left: 0),
-              child: CircleAvatar(
+              child: const CircleAvatar(
                 backgroundImage: NetworkImage(
                     "https://ahvalnews.com/sites/default/files/styles/is_home_content_second_440x440_2/public/2020-01/Polat-Alemdar.jpg?h=885b497d&itok=LkqYqDwp"),
               ),
@@ -81,15 +77,13 @@ class _ChatPageState extends State<ChatPage> {
           ],
         ),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            Container(
+      body: Column(
+        children: [
+          Expanded(
+            child: SizedBox(
               height: MediaQuery.of(context).size.height * 0.85.h,
               child: Container(
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                     image: DecorationImage(
                   image: AssetImage("assets/images/bgimg.png"),
                   fit: BoxFit.fill,
@@ -98,8 +92,8 @@ class _ChatPageState extends State<ChatPage> {
                   controller: _scrollController,
                   child: Column(
                     children: [
-                      Container(
-                        width: 100,
+                      SizedBox(
+                        width: 100.w,
                         height: topMsg,
                       ),
                       Messages(
@@ -107,7 +101,7 @@ class _ChatPageState extends State<ChatPage> {
                         id: widget.id,
                         scrollController: _scrollController,
                       ),
-                      Container(
+                      SizedBox(
                         width: 56.w,
                         height: 56.h,
                       )
@@ -116,108 +110,111 @@ class _ChatPageState extends State<ChatPage> {
                 ),
               ),
             ),
-            Container(
-              child: Padding(
-                padding: EdgeInsets.only(
-                    left: 6.w, top: 6.h, right: 8.w, bottom: 8.h),
-                child: Row(
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(right: 6.w),
-                      child: InkWell(
-                        onTap: () {
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //         builder: (context) => AddImage()),);
-                        },
-                        child: Icon(
-                          Icons.folder,
-                          color: Color.fromRGBO(151, 151, 151, 1),
-                          size: 28.sp,
-                        ),
+          ),
+          Container(
+            color: Colors.white,
+            height: 90.h,
+            width: double.infinity,
+            child: Padding(
+              padding: EdgeInsets.only(
+                  left: 30.w, top: 6.h, right: 8.w, bottom: 0.h),
+              child: Row(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.only(right: 6.w),
+                    child: InkWell(
+                      onTap: () {
+                        // Navigator.push(
+                        //     context,
+                        //     MaterialPageRoute(
+                        //         builder: (context) => AddImage()),);
+                      },
+                      child: Icon(
+                        Icons.folder,
+                        color: const Color.fromRGBO(151, 151, 151, 1),
+                        size: 28.sp,
                       ),
                     ),
-                    Expanded(
-                      child: InkWell(
-                        onTap: () {
-                          scrollList();
-                        },
-                        child: TextFormField(
-                          controller: message,
-                          cursorColor: Colors.black87,
-                          decoration: InputDecoration(
-                            filled: true,
-                            fillColor: Colors.white,
-                            hintText: 'message',
-                            helperStyle: TextStyle(
-                                color: Color.fromRGBO(174, 174, 178, 1)),
-                            enabled: true,
-                            contentPadding: EdgeInsets.only(
-                                left: 12.0.w, bottom: 8.0.h, top: 8.0.h),
-                            focusedBorder: OutlineInputBorder(
-                              borderSide: new BorderSide(
-                                  color: Color.fromRGBO(209, 209, 214, 1)),
-                              borderRadius: new BorderRadius.circular(18.r),
-                            ),
-                            border: OutlineInputBorder(
-                              borderSide: new BorderSide(
-                                  color: Color.fromRGBO(209, 209, 214, 1)),
-                              borderRadius: new BorderRadius.circular(18.r),
-                            ),
+                  ),
+                  Expanded(
+                    child: InkWell(
+                      onTap: () {
+                        scrollList();
+                      },
+                      child: TextFormField(
+                        controller: message,
+                        cursorColor: Colors.black87,
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.white,
+                          hintText: 'message',
+                          helperStyle: const TextStyle(
+                              color: Color.fromRGBO(174, 174, 178, 1)),
+                          enabled: true,
+                          contentPadding: EdgeInsets.only(
+                              left: 12.0.w, bottom: 8.0.h, top: 8.0.h),
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                                color: Color.fromRGBO(209, 209, 214, 1)),
+                            borderRadius: BorderRadius.circular(18.r),
                           ),
-                          onSaved: (value) {
-                            message.text = value!;
-                          },
+                          border: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                                color: Color.fromRGBO(209, 209, 214, 1)),
+                            borderRadius: BorderRadius.circular(18.r),
+                          ),
                         ),
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(left: 6.w),
-                      child: InkWell(
-                        child: Icon(
-                          Icons.send_sharp,
-                          color: !_isEmpty
-                              ? Colors.green.shade700
-                              : Color.fromRGBO(151, 151, 151, 1),
-                        ),
-                        onTap: () {
-                          if (message.text.isNotEmpty) {
-                            // Messages page qismi uchun (all_chats.dart)
-                            fs.doc('Messages/$_lichId').set({
-                              'message':
-                                  FieldValue.arrayUnion([message.text.trim()]),
-                              'time': FieldValue.arrayUnion([DateTime.now()]),
-                              'name': widget.name,
-                              'myId': myId,
-                              'id': widget.id
-                            });
-                            // Lichkaga kirib yozish uchun  (message.dart)
-                            fs
-                                .doc('Messages/$_lichId')
-                                .collection('msg')
-                                .doc()
-                                .set({
-                              'message': message.text.trim(),
-                              'time': DateTime.now(),
-                              'name': widget.name,
-                              'myId': myId,
-                              'id': widget.id
-                            });
-                            Hive.box('Id').put('Id', widget.id);
-                            message.clear();
-
-                            scrollList();
-                          }
+                        onSaved: (value) {
+                          message.text = value!;
                         },
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(left: 6.w),
+                    child: InkWell(
+                      child: Icon(
+                        Icons.send_sharp,
+                        color: !_isEmpty
+                            ? Colors.green.shade700
+                            : const Color.fromRGBO(151, 151, 151, 1),
+                      ),
+                      onTap: () {
+                        if (message.text.isNotEmpty) {
+                          // Messages page qismi uchun (all_chats.dart)
+                          fs.doc('Messages/$_lichId').set({
+                            'message':
+                                FieldValue.arrayUnion([message.text.trim()]),
+                            'time': FieldValue.arrayUnion([DateTime.now()]),
+                            'name': widget.name,
+                            'myId': myId,
+                            'id': widget.id
+                          });
+                          // Lichkaga kirib yozish uchun  (message.dart)
+                          fs
+                              .doc('Messages/$_lichId')
+                              .collection('msg')
+                              .doc()
+                              .set({
+                            'message': message.text.trim(),
+                            'time': DateTime.now(),
+                            'name': widget.name,
+                            'myId': myId,
+                            'id': widget.id
+                          });
+                          Hive.box('Id').put('Id', widget.id);
+                          message.clear();
+
+                          scrollList();
+                        }
+                      },
+                    ),
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

@@ -1,9 +1,7 @@
-import 'dart:io';
 import 'dart:math';
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_mask/easy_mask.dart';
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -24,7 +22,6 @@ class Student extends StatefulWidget {
 }
 
 class _StudentState extends State<Student> {
-
   GlobalKey _keyAddInfo = GlobalKey();
   String dropDown = "";
   String dropDown2 = "";
@@ -106,10 +103,8 @@ class _StudentState extends State<Student> {
   Color descriction = Colors.black12;
   Color univerColor1 = Colors.black12;
 
-
   @override
   Widget build(BuildContext context) {
-
     final load = context.read<FavoriteProvider>();
 
     context.read<AutCubit>().selectSettingLan(
@@ -181,57 +176,84 @@ class _StudentState extends State<Student> {
                 SizedBox(height: 5.h),
                 Row(
                   children: [
-                    Container(
-                      width: 240.w,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10.r),
-                          border: Border.all(color: titlecolor)),
-                      child: IgnorePointer(
-                        ignoring: otmEnable1,
-                        child: DropdownButtonFormField(
-                          menuMaxHeight: 100.h,
-                          hint: Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 8.w),
-                            child: Text(
-                              "Viloyat/Shaharni tanlang",
-                              style: TextStyle(
-                                  fontSize: 12.sp, color: Colors.grey),
-                            ),
-                          ),
-                          decoration:
-                              const InputDecoration(border: InputBorder.none),
-                          // value: ,
-                          icon: const Icon(Icons.arrow_drop_down_outlined),
-                          items: data.regions.map((e) {
-                            return DropdownMenuItem<String>(
+                    otmEnable1 == false
+                        ? Container(
+                            width: 240.w,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.r),
+                                border: Border.all(color: titlecolor)),
+                            child: IgnorePointer(
+                              ignoring: otmEnable1,
+                              child: DropdownButtonFormField(
+                                menuMaxHeight: 100.h,
+                                hint: Padding(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 8.w),
+                                  child: Text(
+                                    "Viloyat/Shaharni tanlang",
+                                    style: TextStyle(
+                                        fontSize: 12.sp, color: Colors.grey),
+                                  ),
+                                ),
+                                decoration: const InputDecoration(
+                                    border: InputBorder.none),
+                                // value: ,
+                                icon:
+                                    const Icon(Icons.arrow_drop_down_outlined),
+                                items: data.regions.map((e) {
+                                  return DropdownMenuItem<String>(
+                                    onTap: () {
+                                      data.viloyatid = e.id.toString();
+                                    },
+                                    value: e.name ?? "",
+                                    child: Padding(
+                                      padding:
+                                          EdgeInsets.fromLTRB(8.w, 0, 0, 0),
+                                      child: Text(e.name.toString()),
+                                    ),
+                                  );
+                                }).toList(),
+                                onChanged: (newValue) async {
+                                  setState(() {
+                                    univerColor = true;
+                                    univerColor1 = Colors.grey;
+                                  });
 
-                              onTap: () {
-                                data.viloyatid = e.id.toString();
-                              },
-                              value: e.name ?? "",
-                              child: Padding(
-                                padding:  EdgeInsets.fromLTRB(8.w,0,0,0),
-                                child: Text(e.name.toString()),
+                                  final selected = data.regions.where(
+                                      (element) => element.name == newValue);
+                                  data.getDistrict(selected.last.id!);
+                                  setState(() {
+                                    dropDown = newValue.toString();
+                                  });
+                                  print(dropDown + "viloyat adiii");
+                                },
                               ),
-                            );
-                          }).toList(),
-                          onChanged: (newValue) async {
-                            setState(() {
-                              univerColor = true;
-                              univerColor1 = Colors.grey;
-                            });
-
-                            final selected = data.regions
-                                .where((element) => element.name == newValue);
-                            data.getDistrict(selected.last.id!);
-                            setState(() {
-                              dropDown = newValue.toString();
-                            });
-                            print(dropDown + "viloyat adiii");
-                          },
-                        ),
-                      ),
-                    ),
+                            ),
+                          )
+                        : Container(
+                            width: 240.w,
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Colors.grey),
+                                borderRadius: BorderRadius.circular(8.r)),
+                            child: DropdownButtonFormField(
+                                isExpanded: true,
+                                hint: Padding(
+                                  padding: EdgeInsets.only(left: 8.w),
+                                  child: Text(
+                                    "Viloyat/Shaharni tanlang".tr(),
+                                    style: TextStyle(
+                                      color: Colors.grey,
+                                      fontSize: 12.sp,
+                                    ),
+                                  ),
+                                ),
+                                decoration: const InputDecoration(
+                                  border: InputBorder.none,
+                                ),
+                                icon: Icon(Icons.arrow_drop_down_outlined),
+                                items: [],
+                                onChanged: null),
+                          ),
                     SizedBox(
                       width: 9.w,
                     ),
@@ -252,6 +274,7 @@ class _StudentState extends State<Student> {
                               otmEnable1 = value!;
                               regionsvalue = value;
                             });
+                            print(otmEnable1);
                           },
                         ),
                       ],
@@ -277,50 +300,78 @@ class _StudentState extends State<Student> {
                 SizedBox(height: 4.h),
                 Row(
                   children: [
-                    Container(
-                      width: 240.w,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(10.r),
-                          border: Border.all(color: _colorUniver)),
-                      child: DropdownSearch<String>(
-                        dropdownBuilder: _style,
-                        mode: Mode.BOTTOM_SHEET,
-                        enabled: otmEnable,
-                        dropdownSearchDecoration:
-                            const InputDecoration(border: InputBorder.none),
+                    otmEnable == true
+                        ? Container(
+                            width: 240.w,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10.r),
+                                border: Border.all(color: _colorUniver)),
+                            child: DropdownSearch<String>(
+                              dropdownBuilder: _style,
+                              mode: Mode.BOTTOM_SHEET,
+                              enabled: otmEnable,
+                              dropdownSearchDecoration: const InputDecoration(
+                                  border: InputBorder.none),
 
-                        items: data.univer.map((e) {
-                          if (dropDown2 == e.name) {
-                            data.UniverId = e.id.toString();
-                            data.isId = e.id;
-                          }
+                              items: data.univer.map((e) {
+                                if (dropDown2 == e.name) {
+                                  data.UniverId = e.id.toString();
+                                  data.isId = e.id;
+                                }
 
-                          // final selected = data.univer.where((element) => element.name == e.name);
-                          // data.getFaculty(selected.last.id!);
-                          return context.read<AutCubit>().selectedLang.index ==
-                                  1
-                              ? e.name.toString()
-                              : e.nameRu.toString();
-                        }).toList(),
-                        showSearchBox: true,
-                        // label: "Menu mode",
-                        // hint: "country in menu mode",
-                        onChanged: (value) async {
-                          data.isUniver = true;
-                          final selected = data.univer
-                              .where((element) => element.name == value);
-                          data.getFaculty(selected.last.id!);
-                          // data.getFaculty(data.isId!);
-                          print('${selected}=================');
-                          setState(() {
-                            dropDown2 = value.toString();
-                            _UniverOnClick = true;
-                            _colorUniver = Colors.grey;
-                          });
-                        },
-                        selectedItem: tr("OTM ni tanlang"),
-                      ),
-                    ),
+                                // final selected = data.univer.where((element) => element.name == e.name);
+                                // data.getFaculty(selected.last.id!);
+                                return context
+                                            .read<AutCubit>()
+                                            .selectedLang
+                                            .index ==
+                                        1
+                                    ? e.name.toString()
+                                    : e.nameRu.toString();
+                              }).toList(),
+                              showSearchBox: true,
+                              // label: "Menu mode",
+                              // hint: "country in menu mode",
+                              onChanged: (value) async {
+                                data.isUniver = true;
+                                final selected = data.univer
+                                    .where((element) => element.name == value);
+                                data.getFaculty(selected.last.id!);
+                                // data.getFaculty(data.isId!);
+                                print('${selected}=================');
+                                setState(() {
+                                  dropDown2 = value.toString();
+                                  _UniverOnClick = true;
+                                  _colorUniver = Colors.grey;
+                                });
+                              },
+                              selectedItem: tr("OTM ni tanlang"),
+                            ),
+                          )
+                        : Container(
+                            width: 240.w,
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Colors.grey),
+                                borderRadius: BorderRadius.circular(10.r)),
+                            child: DropdownButtonFormField(
+                                isExpanded: true,
+                                hint: Padding(
+                                  padding: EdgeInsets.fromLTRB(6.w, 2.h, 0, 0),
+                                  child: Text(
+                                    "OTM ni tanlang".tr(),
+                                    style: TextStyle(
+                                      color: Colors.grey,
+                                      fontSize: 12.sp,
+                                    ),
+                                  ),
+                                ),
+                                decoration: const InputDecoration(
+                                  border: InputBorder.none,
+                                ),
+                                icon: const Icon(Icons.arrow_drop_down_outlined),
+                                items: const [],
+                                onChanged: null),
+                          ),
                     SizedBox(
                       width: 9.w,
                     ),
@@ -666,8 +717,7 @@ class _StudentState extends State<Student> {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(10.r)),
                           primary: AppColors.buttonLinear),
-                      onPressed: () async{
-
+                      onPressed: () async {
                         print(
                             titlecontroller1.text + '_______________________');
                         print('${value6 ? 1 : 2}' + 'univer matter');
@@ -708,38 +758,40 @@ class _StudentState extends State<Student> {
                               ),
                             );
                           } else {
-                           await CreateStudentHouse().StudentsCreateAds(
-                             title: titlecontroller1.text,
-                             stay_region_id: data.viloyatid.toString(),
-                             stay_region_matter: '${regionsvalue ? 1 : 2}',
-                             stay_university_id: data.UniverId,
-                             stay_university_matter: '${value6 ? 1 : 2}',
-                             roommate_gender: '${gender1 ? 0 : _titleGendor}',
-                             roommate_count: _titleCount.toString(),
-                             phone_number:
-                             phoneController.text.split(' ').join(''),
-                             phone_number_show: '${numbervalue ? 1 : 2}',
-                             have_living_home: house,
-                             description: '${addinformation.text}',
-                                district_id: '19',
-                               address: '',
-                               location: '',
-                               subway: '',
-                               house_type: '',
-                               room_count: '',
-                               floors_count: '',
-                               howcountroom: 1,
-                               cost: '',
-                               cost_type: '',
-                               live_with_owner: '',
-                               utility_bills: '',
-                               comfort: '',
-                               renttype: '',
-                               cost_period: '',
+                            await CreateStudentHouse().StudentsCreateAds(
+                              title: titlecontroller1.text,
+                              stay_region_id: data.viloyatid.toString(),
+                              stay_region_matter: '${regionsvalue ? 1 : 2}',
+                              stay_university_id: data.UniverId,
+                              stay_university_matter: '${value6 ? 1 : 2}',
+                              roommate_gender: '${gender1 ? 0 : _titleGendor}',
+                              roommate_count: _titleCount.toString(),
+                              phone_number:
+                                  phoneController.text.split(' ').join(''),
+                              phone_number_show: '${numbervalue ? 1 : 2}',
+                              have_living_home: house,
+                              description: '${addinformation.text}',
+                              district_id: '19',
+                              address: '',
+                              location: '',
+                              subway: '',
+                              house_type: '',
+                              room_count: '',
+                              floors_count: '',
+                              howcountroom: 1,
+                              cost: '',
+                              cost_type: '',
+                              live_with_owner: '',
+                              utility_bills: '',
+                              comfort: '',
+                              renttype: '',
+                              cost_period: '',
+                            );
 
-                           );
-
-                            Navigator.push(context, MaterialPageRoute(builder: (context) => CreateSuccedful()));
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => CreateSuccedful()));
                           }
                         } else {
                           // if (!titlecolor2) {

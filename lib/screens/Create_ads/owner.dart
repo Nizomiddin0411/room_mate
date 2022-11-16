@@ -362,7 +362,7 @@ class _OwnerState extends State<Owner> {
                           decoration: const InputDecoration(
                             border: InputBorder.none,
                           ),
-                          icon: Icon(Icons.arrow_drop_down_outlined),
+                          icon: const Icon(Icons.arrow_drop_down_outlined),
                           items: data.districts.map((e) {
                             return DropdownMenuItem<String>(
                               onTap: () {

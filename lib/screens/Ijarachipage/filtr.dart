@@ -1,4 +1,3 @@
-
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -49,7 +48,7 @@ class _FiltrPageState extends State<FiltrPage> {
     '2',
     '3',
     '4',
-    '5-6',
+    '5',
   ];
 
   late TextEditingController fromCost;
@@ -122,6 +121,7 @@ class _FiltrPageState extends State<FiltrPage> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.r)),
                     child: DropdownButtonFormField(
+                      menuMaxHeight: 100.h,
                       hint: const Text("Viloyatni tanlang").tr(),
                       decoration: const InputDecoration(
                           border: OutlineInputBorder(),
@@ -166,6 +166,7 @@ class _FiltrPageState extends State<FiltrPage> {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.r)),
                           child: DropdownButtonFormField(
+                            menuMaxHeight: 100.h,
                             isExpanded: true,
                             hint: const Text("Tumanni tanlang").tr(),
                             decoration: const InputDecoration(
@@ -538,6 +539,35 @@ class _FiltrPageState extends State<FiltrPage> {
                   Padding(
                     padding:
                         EdgeInsets.symmetric(vertical: 18.h, horizontal: 31.w),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) => super.widget));
+                      },
+                      child: Container(
+                        width: 280.w,
+                        height: 50.h,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: AppColors.error),
+                          borderRadius: BorderRadius.circular(10.r),
+                        ),
+                        child: Center(
+                            child: Text(
+                          "Tozalash",
+                          style: TextStyle(
+                              color: AppColors.error,
+                              fontSize: 20.sp,
+                              fontWeight: FontWeight.w500),
+                        )),
+                      ),
+                    ),
+                  ),
+
+                  Padding(
+                    padding:
+                        EdgeInsets.symmetric(vertical: 8.h, horizontal: 31.w),
                     child: Container(
                         width: double.infinity,
                         child: ElevatedButton(
@@ -582,9 +612,9 @@ class _FiltrPageState extends State<FiltrPage> {
                             print(data.UniverId + 'Univer id');
                             print('++++++++++++++++');
                             print(TypeHouse + 'Uy turi');
-                            print(roomCount +' hona soni');
+                            print(roomCount + ' hona soni');
                             print(_titleTime + 'ijara vaqti');
-                            print(subwayof +'metro');
+                            print(subwayof + 'metro');
                             print(fromCost.text + 'Cost from');
                             print(toCost.text + 'cost to');
                             print('-----------------');
@@ -618,7 +648,7 @@ class _FiltrPageState extends State<FiltrPage> {
                               // '0',
                             );
 
-                          await  data.getFiltrForStudent(
+                            await data.getFiltrForStudent(
                               data.isRegion ? data.RegionId : '0',
                               data.isDistrict ? data.districtId : '0',
                               data.isUniver ? data.UniverId : '0',

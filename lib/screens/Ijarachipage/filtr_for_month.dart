@@ -570,7 +570,35 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                   ),
                   Padding(
                     padding:
-                        EdgeInsets.symmetric(vertical: 18.h, horizontal: 31.w),
+                    EdgeInsets.symmetric(vertical: 18.h, horizontal: 31.w),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                                builder: (BuildContext context) => super.widget));
+                      },
+                      child: Container(
+                        width: 280.w,
+                        height: 50.h,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: AppColors.error),
+                          borderRadius: BorderRadius.circular(10.r),
+                        ),
+                        child: Center(
+                            child: Text(
+                              "Tozalash",
+                              style: TextStyle(
+                                  color: AppColors.error,
+                                  fontSize: 20.sp,
+                                  fontWeight: FontWeight.w500),
+                            )),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding:
+                        EdgeInsets.symmetric(vertical: 8.h, horizontal: 31.w),
                     child: Container(
                         width: double.infinity,
                         child: ElevatedButton(
