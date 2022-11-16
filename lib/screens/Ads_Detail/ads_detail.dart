@@ -130,12 +130,6 @@ class _AdsDetailState extends State<AdsDetail> {
     }
   }
 
-  List<String> images = [
-    "https://images.wallpapersden.com/image/download/purple-sunrise-4k-vaporwave_bGplZmiUmZqaraWkpJRmbmdlrWZlbWU.jpg",
-    "https://wallpaperaccess.com/full/2637581.jpg",
-    "https://uhdwallpapers.org/uploads/converted/20/01/14/the-mandalorian-5k-1920x1080_477555-mm-90.jpg"
-  ];
-
   @override
   void initState() {
     // TODO: implement initState
@@ -185,7 +179,6 @@ class _AdsDetailState extends State<AdsDetail> {
 
   @override
   Widget build(BuildContext context) {
-    String date = widget.createData!.split(':')[2];
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
@@ -214,7 +207,7 @@ class _AdsDetailState extends State<AdsDetail> {
                 SizedBox(
                   height: 254.h,
                   child: PageView.builder(
-                      itemCount: images.length,
+                      itemCount: widget.Image!.length,
 
                       // controller: _pageController,
                       onPageChanged: (int index) {
@@ -226,7 +219,7 @@ class _AdsDetailState extends State<AdsDetail> {
                           padding: const EdgeInsets.all(18.0),
                           child: Swiper(
                             // indicatorLayout: PageIndicatorLayout.,
-                            pagination: SwiperPagination(),
+                            pagination: const SwiperPagination(),
                             itemCount: widget.Image!.length,
                             itemBuilder: (BuildContext context, int index1) {
                               return widget.Image!.isNotEmpty
@@ -362,7 +355,7 @@ class _AdsDetailState extends State<AdsDetail> {
                         height: 6.h,
                       ),
                     ],
-                  ) : SizedBox(),
+                  ) : const SizedBox(),
 
                   Padding(
                     padding: const EdgeInsets.all(8.0),
@@ -1083,7 +1076,7 @@ class _AdsDetailState extends State<AdsDetail> {
                                  )),
                            )
                          ],
-                       ) : SizedBox(),
+                       ) : const SizedBox(),
                        SizedBox(
                          height: 6.h,
                        ),
@@ -1117,7 +1110,7 @@ class _AdsDetailState extends State<AdsDetail> {
                            )
                          ],
                        )
-                           : SizedBox(),
+                           : const SizedBox(),
                        SizedBox(
                          height: 6.h,
                        ),
@@ -1151,7 +1144,7 @@ class _AdsDetailState extends State<AdsDetail> {
                            )
                          ],
                        )
-                           : SizedBox(),
+                           : const SizedBox(),
                        SizedBox(
                          height: 6.h,
                        ),
@@ -1236,7 +1229,7 @@ showAlertDialog(BuildContext context, int askedid) {
   // Create button
   Widget okButton = ElevatedButton(
     style: ElevatedButton.styleFrom(primary: AppColors.mainColor),
-    child: Text("Ruhsat olish").tr(),
+    child: const Text("Ruhsat olish").tr(),
     onPressed: () async {
       print(askedid);
       await ChatPermit().fetchApprov(Askid: askedid.toString());
@@ -1245,7 +1238,7 @@ showAlertDialog(BuildContext context, int askedid) {
   );
   Widget notButton = ElevatedButton(
     style: ElevatedButton.styleFrom(primary: AppColors.error),
-    child: Text("Bekor qilish").tr(),
+    child: const Text("Bekor qilish").tr(),
     onPressed: () {
       Navigator.of(context).pop();
     },
@@ -1253,7 +1246,7 @@ showAlertDialog(BuildContext context, int askedid) {
   // Create AlertDialog
   AlertDialog alert = AlertDialog(
     // title: Text("Akkauntdan chiqish ").tr(),
-    content: Text("Sms yozish uchun ruhsat so'rash ").tr(),
+    content: const Text("Sms yozish uchun ruhsat so'rash ").tr(),
     actions: [
       notButton,
       okButton,

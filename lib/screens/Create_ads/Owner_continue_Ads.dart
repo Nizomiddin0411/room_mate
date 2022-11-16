@@ -50,9 +50,6 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
   String? utility_trash;
   List comfort = [];
   String? description;
-
-  bool _checkHome = false;
-  bool _checkMetro = false;
   String RoomOwner = '';
   String RentOf = '';
   String Subway = '';
@@ -334,7 +331,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                             ),
                             decoration:
                                 const InputDecoration(border: InputBorder.none),
-                            icon: Icon(Icons.arrow_drop_down_outlined),
+                            icon: const Icon(Icons.arrow_drop_down_outlined),
                             items: ijaramuddat.map((e) {
                               return DropdownMenuItem<String>(
                                 onTap: () {},
@@ -386,6 +383,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                               borderRadius: BorderRadius.circular(10.r),
                               border: Border.all(color: _roomCountColor)),
                           child: DropdownButtonFormField(
+                            menuMaxHeight: 100.h,
                             hint: Padding(
                               padding: EdgeInsets.only(left: 8.w),
                               child: Text(
@@ -395,7 +393,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                             ),
                             decoration:
                                 const InputDecoration(border: InputBorder.none),
-                            icon: Icon(Icons.arrow_drop_down_outlined),
+                            icon: const Icon(Icons.arrow_drop_down_outlined),
                             items: ijarachi.map((e) {
                               return DropdownMenuItem<String>(
                                 onTap: () {},
@@ -443,6 +441,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                               borderRadius: BorderRadius.circular(10.r),
                               border: Border.all(color: _floorsCountColor)),
                           child: DropdownButtonFormField(
+                            menuMaxHeight: 100.h,
                             hint: Padding(
                               padding: EdgeInsets.only(left: 8.w),
                               child: Text(
@@ -452,7 +451,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                             ),
                             decoration:
                                 const InputDecoration(border: InputBorder.none),
-                            icon: Icon(Icons.arrow_drop_down_outlined),
+                            icon: const Icon(Icons.arrow_drop_down_outlined),
                             items: houseroom.map((e) {
                               return DropdownMenuItem<String>(
                                 onTap: () {},
@@ -496,6 +495,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                               borderRadius: BorderRadius.circular(10.r),
                               border: Border.all(color: _inFloorColor)),
                           child: DropdownButtonFormField(
+                            menuMaxHeight: 100.h,
                             hint: Padding(
                               padding: EdgeInsets.only(left: 8.w),
                               child: Text(
@@ -505,7 +505,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                             ),
                             decoration:
                                 const InputDecoration(border: InputBorder.none),
-                            icon: Icon(Icons.arrow_drop_down_outlined),
+                            icon: const Icon(Icons.arrow_drop_down_outlined),
                             items: rooms.map((e) {
                               return DropdownMenuItem<String>(
                                 onTap: () {},

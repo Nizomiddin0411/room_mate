@@ -1,23 +1,12 @@
-import 'dart:async';
-
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:hive/hive.dart';
-
 import 'package:provider/provider.dart';
-
 import 'package:talaba_uy/core/const/app_colors.dart';
 import 'package:talaba_uy/cubit/aut_cubit.dart';
-
 import 'package:talaba_uy/provider/region_provider.dart';
 import 'package:talaba_uy/screens/Create_ads/Owner_continue_Ads.dart';
-import 'package:talaba_uy/screens/Create_ads/owner_take_photo.dart';
 import '../../models/get_district_model.dart';
 import '../../provider/favorite_provider.dart';
 import '../Google_map/map_screen.dart';
@@ -30,12 +19,9 @@ class Owner extends StatefulWidget {
 }
 
 class _OwnerState extends State<Owner> {
-  bool _checkHome = false;
-  bool _checkMetro = false;
   String RoomOwner = '';
   String RentOf = '';
   String Subway = '';
-  String? _dropownUsd;
   String dropDown = "";
   String TypeHouse = '';
   String CountRoom = '';
@@ -67,37 +53,9 @@ class _OwnerState extends State<Owner> {
   bool otmEnable = true;
   bool genderEnable = true;
 
-  var pricetype = [
-    "1 ta odam kerak",
-    "kishi boshiga 500",
-  ];
-  var kvartira = [
-    'Kvartira',
-    'Xovli',
-  ];
   var gender = [
     "O'g'il bolaga",
     'Qiz bolaga',
-  ];
-  var genderDis = [
-  ];
-  var kindOfMoment = [
-    'kunlik',
-    'oylik',
-  ];
-  var rooms = [
-    '1',
-    '2',
-    '3',
-    '4',
-    '5-6',
-  ];
-  var ijarachi = [
-    '1',
-    '2',
-    '3',
-    '4',
-    '5-6',
   ];
 
   @override
@@ -121,9 +79,6 @@ class _OwnerState extends State<Owner> {
 
   @override
   Widget build(BuildContext context) {
-    final mapLat = context.read<FavoriteProvider>();
-
-    // print(Hive.box('token').get('token'));
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 12.h),
@@ -177,7 +132,7 @@ class _OwnerState extends State<Owner> {
                   ),
                 ),
                 SizedBox(
-                  height: 15.w,
+                  height: 15.h,
                 ),
                 Row(
                   children: [
@@ -232,12 +187,14 @@ class _OwnerState extends State<Owner> {
                                 ),
                               );
                             }).toList(),
-                            onChanged: genderEnable ? (newValue) {
-                              setState(() {
-                                _GenderOnClick = true;
-                                _colorGender = Colors.grey;
-                              });
-                            } : null,
+                            onChanged: genderEnable
+                                ? (newValue) {
+                                    setState(() {
+                                      _GenderOnClick = true;
+                                      _colorGender = Colors.grey;
+                                    });
+                                  }
+                                : null,
                           ),
                         ),
                       ],
@@ -264,6 +221,8 @@ class _OwnerState extends State<Owner> {
                                 genderEnable = false;
                               }
                               if (!value) {
+                                value5 = false;
+                                genderEnable = true;
                                 _colorGender = Colors.red;
                                 _GenderOnClick = false;
                               }
@@ -558,7 +517,7 @@ class _OwnerState extends State<Owner> {
                             ),
                             Text(
                               'Ha'.tr(),
-                              style: new TextStyle(fontSize: 14.0.sp),
+                              style: TextStyle(fontSize: 14.0.sp),
                             ),
                             SizedBox(
                               width: 55.w,
@@ -575,7 +534,7 @@ class _OwnerState extends State<Owner> {
                             ),
                             Text(
                               "Yo'q".tr(),
-                              style: new TextStyle(
+                              style: TextStyle(
                                 fontSize: 14.0.sp,
                               ),
                             ),
@@ -640,61 +599,93 @@ class _OwnerState extends State<Owner> {
                 // ),
                 Row(
                   children: [
-                    Container(
-                      width: 240.w,
-                      padding: EdgeInsets.only(left: 12.w),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10.r),
-                        border: Border.all(color: _otmColor),
-                      ),
-                      child: DropdownSearch<String>(
-                        dropdownBuilder: _style,
-                        enabled: otmEnable,
-                        selectedItem: tr("OTM ni tanlang"),
-                        dropdownSearchDecoration:
-                            InputDecoration(border: InputBorder.none),
+                    otmEnable == true
+                        ? Container(
+                            width: 240.w,
+                            padding: EdgeInsets.only(left: 12.w),
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(10.r),
+                              border: Border.all(color: _otmColor),
+                            ),
+                            child: DropdownSearch<String>(
+                              dropdownBuilder: _style,
+                              enabled: otmEnable,
+                              selectedItem: tr("OTM ni tanlang"),
+                              dropdownSearchDecoration: const InputDecoration(
+                                  border: InputBorder.none),
 
-                        mode: Mode.BOTTOM_SHEET,
-                        items: data.univer.map((e) {
-                          if (context.read<AutCubit>().selectedLang.index ==
-                              1) {
-                            if (dropDown2 == e.name) {
-                              data.UniverId = e.id.toString();
-                              data.isId = e.id;
-                              university_id = e.id.toString();
-                            }
-                          } else {
-                            if (dropDown2 == e.nameRu) {
-                              data.UniverId = e.id.toString();
-                              data.isId = e.id;
-                              university_id = e.id.toString();
-                            }
-                          }
+                              mode: Mode.BOTTOM_SHEET,
+                              items: data.univer.map((e) {
+                                if (context
+                                        .read<AutCubit>()
+                                        .selectedLang
+                                        .index ==
+                                    1) {
+                                  if (dropDown2 == e.name) {
+                                    data.UniverId = e.id.toString();
+                                    data.isId = e.id;
+                                    university_id = e.id.toString();
+                                  }
+                                } else {
+                                  if (dropDown2 == e.nameRu) {
+                                    data.UniverId = e.id.toString();
+                                    data.isId = e.id;
+                                    university_id = e.id.toString();
+                                  }
+                                }
 
-                          // final selected = data.univer.where((element) => element.name == e.name);
-                          // data.getFaculty(selected.last.id!);
-                          return context.read<AutCubit>().selectedLang.index ==
-                                  1
-                              ? e.name.toString()
-                              : e.nameRu.toString();
-                        }).toList(),
-                        showSearchBox: true,
-                        // label: "Menu mode",
-                        // hint: "country in menu mode",
-                        onChanged: (value) async {
-                          // data.isUniver = true;
-                          // final selected = data.univer
-                          //     .where((element) => element.name == value);
-                          // data.getFaculty(selected.last.id!);
-                          // data.getFaculty(data.isId!);
-                          setState(() {
-                            dropDown2 = value.toString();
-                            _otmOnClick = true;
-                            _otmColor = Colors.grey;
-                          });
-                        },
-                      ),
-                    ),
+                                // final selected = data.univer.where((element) => element.name == e.name);
+                                // data.getFaculty(selected.last.id!);
+                                return context
+                                            .read<AutCubit>()
+                                            .selectedLang
+                                            .index ==
+                                        1
+                                    ? e.name.toString()
+                                    : e.nameRu.toString();
+                              }).toList(),
+                              showSearchBox: true,
+                              // label: "Menu mode",
+                              // hint: "country in menu mode",
+                              onChanged: (value) async {
+                                // data.isUniver = true;
+                                // final selected = data.univer
+                                //     .where((element) => element.name == value);
+                                // data.getFaculty(selected.last.id!);
+                                // data.getFaculty(data.isId!);
+                                setState(() {
+                                  dropDown2 = value.toString();
+                                  _otmOnClick = true;
+                                  _otmColor = Colors.grey;
+                                });
+                              },
+                            ),
+                          )
+                        : Container(
+                            width: 240.w,
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Colors.grey),
+                                borderRadius: BorderRadius.circular(10.r)),
+                            child: DropdownButtonFormField(
+                                isExpanded: true,
+                                hint: Padding(
+                                  padding: EdgeInsets.fromLTRB(6.w, 2.h, 0, 0),
+                                  child: Text(
+                                    "OTM ni tanlang".tr(),
+                                    style: TextStyle(
+                                      color: Colors.grey,
+                                      fontSize: 12.sp,
+                                    ),
+                                  ),
+                                ),
+                                decoration: const InputDecoration(
+                                  border: InputBorder.none,
+                                ),
+                                icon:
+                                    const Icon(Icons.arrow_drop_down_outlined),
+                                items: const [],
+                                onChanged: null),
+                          ),
                     SizedBox(
                       width: 9.w,
                     ),
@@ -732,7 +723,7 @@ class _OwnerState extends State<Owner> {
                 Padding(
                   padding:
                       EdgeInsets.symmetric(vertical: 18.h, horizontal: 31.w),
-                  child: Container(
+                  child: SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
@@ -817,29 +808,13 @@ class _OwnerState extends State<Owner> {
     );
   }
 
-  List<Marker> mymarker = [];
-  _handlerTap(LatLng tappadPoint) {
-    final mapLatitude = context.read<FavoriteProvider>();
-    mapLatitude.forMap = (tappadPoint.toString());
-    print(tappadPoint);
-    print(mapLatitude.forMap);
-
-    setState(() {
-      mymarker = [];
-      mymarker.add(Marker(
-        markerId: MarkerId(tappadPoint.toString()),
-        position: tappadPoint,
-      ));
-    });
+  Widget _style(BuildContext context, String? selectedItem) {
+    return Padding(
+      padding: const EdgeInsets.all(4.0),
+      child: Text(
+        selectedItem!,
+        style: TextStyle(fontSize: 12.sp),
+      ),
+    );
   }
-
-
-   Widget _style(BuildContext context, String? selectedItem) {
-        return Text(
-          selectedItem!,
-          style: TextStyle(fontSize: 12.sp),
-        );
-      }
-
-      
 }

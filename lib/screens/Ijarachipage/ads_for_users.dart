@@ -105,7 +105,8 @@ class _AdsUsersState extends State<AdsUsers> {
                               Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => FiltrPage()))
+                                          builder: (context) =>
+                                              const FiltrPage()))
                                   .then((value) => data.isChanded);
                               data.isRegion = false;
                               data.isDistricts = false;
@@ -196,10 +197,6 @@ class _AdsUsersState extends State<AdsUsers> {
                                       data.Ads[index].region?.name.toString(),
                                   district:
                                       data.Ads[index].district?.name.toString(),
-
-                                  // facultet: data.Ads[index]
-                                  //     .faculty?.name
-                                  //     .toString(),
                                   liveWithOwner:
                                       data.Ads[index].liveWithOwner.toString(),
                                   subway: data.Ads[index].subway.toString(),
@@ -238,7 +235,9 @@ class _AdsUsersState extends State<AdsUsers> {
                                   locations:
                                       data.Ads[index].location.toString(),
                                   costPeriod:
-                                      data.Ads[index].costPeriod.toString(), haveHome: data.Ads[index].haveLivingHome.toString(),
+                                      data.Ads[index].costPeriod.toString(),
+                                  haveHome:
+                                      data.Ads[index].haveLivingHome.toString(),
                                 ),
                               ),
                             );
@@ -404,7 +403,16 @@ class _AdsUsersState extends State<AdsUsers> {
                                                         fontSize: 24.sp),
                                                   ),
                                                   Text(
-                                                    data.Ads[index].costPeriod.toString() == '1' ? 'Kuniga' : data.Ads[index].costPeriod.toString() == '2' ? 'Oyiga' : 'Uzoq muddatga',
+                                                    data.Ads[index].costPeriod
+                                                                .toString() ==
+                                                            '1'
+                                                        ? 'Kuniga'
+                                                        : data.Ads[index]
+                                                                    .costPeriod
+                                                                    .toString() ==
+                                                                '2'
+                                                            ? 'Oyiga'
+                                                            : 'Uzoq muddatga',
                                                     style: const TextStyle(
                                                         color: AppColors
                                                             .mainColor),

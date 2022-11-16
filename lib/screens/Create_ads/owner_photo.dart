@@ -245,7 +245,7 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
                     // SizedBox(
                     //   height: 20.h,
                     // ),
-                    Container(
+                    SizedBox(
                       height: 240.h,
                       child: ListView(children:
                           //     List.generate(imageFileList!.length, (index) {
@@ -389,7 +389,7 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
                   Padding(
                     padding:
                         EdgeInsets.symmetric(vertical: 18.h, horizontal: 31.w),
-                    child: Container(
+                    child: SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(
