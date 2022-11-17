@@ -1232,7 +1232,7 @@ showAlertDialog(BuildContext context, int askedid) {
     child: const Text("Ruhsat olish").tr(),
     onPressed: () async {
       print(askedid);
-      await ChatPermit().fetchApprov(Askid: askedid.toString());
+      await PostChatPermit().fetchApprov(Askid: askedid.toString());
       Navigator.of(context).pop();
     },
   );

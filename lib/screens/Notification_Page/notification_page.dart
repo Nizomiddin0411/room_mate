@@ -90,8 +90,11 @@ class _NotificationPageState extends State<NotificationPage> {
                                 Row(
                                   children: [
                                     InkWell(
-                                      onTap: () async{
-                                        await ChatApprove().fetchApprov(PermitId: data.permit[index].id.toString(), Approved: '1');
+                                      onTap: () async {
+                                        await ChatApprove().fetchApprov(
+                                            PermitId: data.permit[index].id
+                                                .toString(),
+                                            Approved: '1');
                                         await data.Permit();
                                       },
                                       child: Container(
@@ -115,11 +118,14 @@ class _NotificationPageState extends State<NotificationPage> {
                                       width: 18.w,
                                     ),
                                     InkWell(
-                                      onTap:() async{
-                                        await ChatApprove().fetchApprov(PermitId: data.permit[index].id.toString(), Approved: '2');
+                                      onTap: () async {
+                                        await ChatApprove().fetchApprov(
+                                            PermitId: data.permit[index].id
+                                                .toString(),
+                                            Approved: '2');
                                         await data.Permit();
                                         print('rad qildi');
-                                        },
+                                      },
                                       child: Container(
                                         width: 133.w,
                                         height: 38.h,
@@ -131,7 +137,8 @@ class _NotificationPageState extends State<NotificationPage> {
                                           child: Text(
                                             "Rad etish ",
                                             style: TextStyle(
-                                                color: AppColors.backgroundWhite),
+                                                color:
+                                                    AppColors.backgroundWhite),
                                           ),
                                         ),
                                       ),

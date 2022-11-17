@@ -9,7 +9,9 @@ import 'package:talaba_uy/core/const/app_colors.dart';
 import 'package:talaba_uy/provider/search_universitet_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
+import '../../provider/chat_permit_provider.dart';
 import '../../provider/universitet_provider.dart';
+import '../../services/post_add_chat_permit.dart';
 import 'result _filtr_search.universitety.dart';
 
 class ResultUniversitetPage extends StatefulWidget {
@@ -164,6 +166,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
+                         provider.ads[index].hideProfile == 2 ?
                           Container(
                             width: 324.w,
                             height: 210.h,
@@ -226,12 +229,17 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                       children: [
                                         InkWell(
                                           onTap: () {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) => ChatPage(
-                                                        provider.ads[index].fullName.toString(),
-                                                        provider.ads[index].id!)));
+                                            if (provider.ads[index].chatApproved.toString() == '1') {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) => ChatPage(
+                                                          provider.ads[index].fullName.toString(),
+                                                          provider.ads[index].id!)));
+                                            } else {
+                                              showAlertDialog(context, provider.ads[index].id!);
+                                            }
+
                                           },
                                           child: Padding(
                                             padding: EdgeInsets.fromLTRB(
@@ -340,7 +348,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                 ),
                               ),
                             ),
-                          ),
+                          ):const SizedBox(),
                         ],
                       ),
                     );
@@ -351,4 +359,41 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
       )),
     );
   }
+}
+
+showAlertDialog(BuildContext context, int askedid) {
+  // Create button
+  Widget okButton = ElevatedButton(
+    style: ElevatedButton.styleFrom(primary: AppColors.mainColor),
+    child: const Text("Ruhsat olish").tr(),
+    onPressed: () async {
+      print(askedid);
+      await PostChatPermit().fetchApprov(Askid: askedid.toString());
+      Navigator.of(context).pop();
+    },
+  );
+  Widget notButton = ElevatedButton(
+    style: ElevatedButton.styleFrom(primary: AppColors.error),
+    child: const Text("Bekor qilish").tr(),
+    onPressed: () {
+      Navigator.of(context).pop();
+    },
+  );
+  // Create AlertDialog
+  AlertDialog alert = AlertDialog(
+    // title: Text("Akkauntdan chiqish ").tr(),
+    content: const Text("Sms yozish uchun ruhsat so'rash ").tr(),
+    actions: [
+      notButton,
+      okButton,
+    ],
+  );
+
+  // show the dialog
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return alert;
+    },
+  );
 }

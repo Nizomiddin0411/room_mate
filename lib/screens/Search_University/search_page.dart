@@ -69,7 +69,7 @@ class _SearchPageState extends State<SearchPage> {
                     child: TextField(
                       controller: _controller,
                       decoration: InputDecoration(
-                        border: OutlineInputBorder(),
+                        border: const OutlineInputBorder(),
                         label: const Text("Qidirish "),
                         suffixIcon: IconButton(
                           onPressed: () {

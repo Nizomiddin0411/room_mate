@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_mask/easy_mask.dart';
@@ -10,7 +8,6 @@ import 'package:provider/provider.dart';
 import '../../core/const/app_colors.dart';
 import '../../cubit/aut_cubit.dart';
 import '../../provider/region_provider.dart';
-import 'update_students2.dart';
 
 class StudentsEdist extends StatefulWidget {
   String? title;
@@ -86,54 +83,21 @@ class StudentsEdist extends StatefulWidget {
 
 class _StudentsEdistState extends State<StudentsEdist> {
   GlobalKey _keyAddInfo = GlobalKey();
+  String? partner;
   String dropDown = "";
   String dropDown2 = "";
-  String? phonenumber;
-  String? addInfo;
   String? _titleGendor;
-  String? _titleCount;
   String Regionidisi = "";
   String UniverId = '';
-  String Univername = '';
-  String Univernamenew = '';
-  String Course = '';
-  String FakultetId = '';
-  String RoomOwner = '';
-  String TypeHouse = '';
-  String TypeOfRent = '';
-  String typeOfPayment = '';
-  String subwayof = '';
-  String gender = '';
-  String CourseCount = '';
-  String roomCount = '';
-  bool regionStay = false;
   Color titlecolor = Colors.grey;
-  bool univerColor = false;
   bool _otmOnClick = false;
-  bool titlecolor1 = false;
   bool titlecolor2 = false;
   Color _colorUniver = Colors.grey;
   Color _colorGender = Colors.grey;
   Color _colorForm = Colors.grey;
-  Color titlecolort = Colors.grey;
   bool gender1 = false;
   Color _phoneColor = Colors.grey;
-  var kurs = [
-    '1-kurs',
-    '2-kurs',
-    '3-kurs',
-    '4-kurs',
-    '5-kurs',
-    '6-kurs',
-  ];
-  var kvartira = [
-    'Kvartira',
-    'Xovli',
-  ];
-  var genderone = [
-    "O'g'il",
-    "Qiz",
-  ];
+
   var kvsherik = [
     '1',
     '2',
@@ -141,8 +105,7 @@ class _StudentsEdistState extends State<StudentsEdist> {
     '4',
     '5',
   ];
-  final List<String> genderItems = ["O'g'il bola ", "Qiz bola"];
-
+  final List<String> genderItems = ["O'g'il bola", "Qiz bola"];
 
   bool regionsvalue = false;
   bool numbervalue = false;
@@ -165,9 +128,17 @@ class _StudentsEdistState extends State<StudentsEdist> {
 
   @override
   void initState() {
+    super.initState();
     titlecontroller1 = TextEditingController(text: widget.title);
     phoneController = TextEditingController(text: widget.phone_number);
     addinformation = TextEditingController(text: widget.description);
+    // dropDown = widget.stay_region.toString();
+    if (widget.roommate_gender.toString() == '2') {
+      _titleGendor = "2";
+    } else {
+      _titleGendor = "1";
+    }
+    partner = widget.roommate_count;
     roommate_gender = widget.roommate_gender == ''
         ? "O’gil bollarga / Qizlarga"
         : widget.roommate_gender == '2'
@@ -175,8 +146,10 @@ class _StudentsEdistState extends State<StudentsEdist> {
             : "O'g'il";
     if (widget.stay_university_matter == '2') {
       value6 = true;
+      univervalue = '2';
     } else {
       value6 = false;
+      univervalue = '1';
     }
     if (widget.stay_region_matter == '1') {
       regionsvalue = true;
@@ -193,9 +166,9 @@ class _StudentsEdistState extends State<StudentsEdist> {
     } else {
       house = '2';
     }
-    super.initState();
   }
 
+  @override
   Widget build(BuildContext context) {
     Regionidisi = widget.stay_region_id.toString();
     return SingleChildScrollView(
@@ -221,11 +194,11 @@ class _StudentsEdistState extends State<StudentsEdist> {
                       border: Border.all(color: titleColor),
                       borderRadius: BorderRadius.circular(10.r)),
                   child: Padding(
-                    padding:  EdgeInsets.fromLTRB(10.w, 0, 0, 0),
+                    padding: EdgeInsets.fromLTRB(10.w, 0, 0, 0),
                     child: TextFormField(
                       onChanged: (e) {
                         setState(() {
-                          if (e.length > 0) {
+                          if (e.isNotEmpty) {
                             titleColor = Colors.grey;
                             titlecolor2 = true;
                           } else {
@@ -281,44 +254,39 @@ class _StudentsEdistState extends State<StudentsEdist> {
                           borderRadius: BorderRadius.circular(10.r),
                           border: Border.all(color: titlecolor)),
                       child: DropdownButtonFormField(
+                        menuMaxHeight: 100.h,
                         hint: Padding(
-                          padding: EdgeInsets.only(left: 8.w),
-                          child: Text(widget.stay_region.toString().tr()),
+                          padding: EdgeInsets.symmetric(horizontal: 8.w),
+                          child: Text(
+                            "${widget.stay_region}",
+                            style:
+                                TextStyle(fontSize: 12.sp, color: Colors.black),
+                          ),
                         ),
-                        decoration: const InputDecoration(border: InputBorder.none),
-                        // value: ,
+                        decoration:
+                            const InputDecoration(border: InputBorder.none),
+
                         icon: const Icon(Icons.arrow_drop_down_outlined),
                         items: data.regions.map((e) {
-                          // if (widget.district == e.id.toString()) {
-                          // //   region = e.name.toString();
-                          //
-                          //   setState(() {});
-                          // }
-                          print(widget.district);
                           return DropdownMenuItem<String>(
                             onTap: () {
-                              data.viloyatid = e.id.toString();
+                              // data.RegionId = e.id.toString();
+                              dropDown = e.id.toString();
                             },
                             value: e.name ?? "",
-                            child: Padding(
-                              padding: EdgeInsets.only(left: 8.w),
-                              child: Text(e.name.toString()),
-                            ),
+                            child: Text(e.name.toString()),
                           );
                         }).toList(),
                         onChanged: (newValue) async {
-                          setState(() {
-                            univerColor = true;
-                            univerColor1 = Colors.grey;
-                          });
-
+                          // print("Selected ----------- $newValue");
+                          // data.isRegion = true;
+                          // print(data.isRegion);
                           // final selected = data.regions
                           //     .where((element) => element.name == newValue);
                           // data.getDistrict(selected.last.id!);
                           setState(() {
                             dropDown = newValue.toString();
                           });
-                          print(dropDown + "viloyat adiii");
                         },
                       ),
                     ),
@@ -372,7 +340,8 @@ class _StudentsEdistState extends State<StudentsEdist> {
                           borderRadius: BorderRadius.circular(10.r),
                           border: Border.all(color: _colorUniver)),
                       child: DropdownSearch<String>(
-                               dropdownBuilder: _style,
+                        enabled: !value6,
+                        dropdownBuilder: _style,
                         mode: Mode.BOTTOM_SHEET,
                         items: data.univer.map((e) {
                           if (dropDown2 == e.name) {
@@ -393,17 +362,19 @@ class _StudentsEdistState extends State<StudentsEdist> {
                         // hint: "country in menu mode",
                         onChanged: (value) async {
                           data.isUniver = true;
-                          final selected = data.univer
-                              .where((element) => element.name == value);
-                          data.getFaculty(selected.last.id!);
+                          // final selected = data.univer
+                          //     .where((element) => element.name == value);
+                          // data.getFaculty(selected.last.id!);
                           // data.getFaculty(data.isId!);
-                          print('${selected}=================');
+                          // print('${selected}=================');
+
                           setState(() {
                             dropDown2 = value.toString();
                             _colorUniver = Colors.grey;
                           });
+                          print(dropDown2);
                         },
-                        selectedItem: tr(widget.universtatenewname.toString()),
+                        selectedItem: tr(value6 == false ?  widget.universtatenewname.toString():''),
                       ),
                     ),
                     SizedBox(
@@ -432,7 +403,7 @@ class _StudentsEdistState extends State<StudentsEdist> {
                   ],
                 ),
                 SizedBox(
-                  height: 8.h,
+                  height: 7.h,
                 ),
                 Row(
                   children: [
@@ -447,7 +418,7 @@ class _StudentsEdistState extends State<StudentsEdist> {
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        SizedBox(height: 8.h),
+                        SizedBox(height: 7.h),
                         Container(
                           width: 152.w,
                           decoration: BoxDecoration(
@@ -468,7 +439,9 @@ class _StudentsEdistState extends State<StudentsEdist> {
                             icon: const Icon(Icons.arrow_drop_down_outlined),
                             items: genderItems.map((e) {
                               return DropdownMenuItem<String>(
-                                onTap: () {},
+                                onTap: () {
+                                  e == "Qiz bola" ? _titleGendor = '2' : '1';
+                                },
                                 value: e,
                                 child: Padding(
                                   padding: EdgeInsets.only(left: 8.w),
@@ -479,9 +452,6 @@ class _StudentsEdistState extends State<StudentsEdist> {
                             onChanged: (gender) {
                               setState(() {
                                 widget.roommate_gender.toString();
-                                if (gender1 == false) {
-                                  _titleGendor = e == "Qiz bola" ? '2' : '1';
-                                }
                               });
                             },
                           ),
@@ -489,7 +459,7 @@ class _StudentsEdistState extends State<StudentsEdist> {
                       ],
                     ),
                     SizedBox(
-                      width: 20.w,
+                      width: 18.w,
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -509,7 +479,7 @@ class _StudentsEdistState extends State<StudentsEdist> {
                               borderRadius: BorderRadius.circular(10.r),
                               border: Border.all(color: _colorGender)),
                           child: DropdownButtonFormField(
-                             menuMaxHeight: 100,
+                            menuMaxHeight: 100,
                             hint: Padding(
                               padding: EdgeInsets.only(left: 8.w),
                               child: Text(
@@ -522,7 +492,9 @@ class _StudentsEdistState extends State<StudentsEdist> {
                             icon: const Icon(Icons.arrow_drop_down_outlined),
                             items: kvsherik.map((e) {
                               return DropdownMenuItem<String>(
-                                onTap: () {},
+                                onTap: () {
+                                  partner = e;
+                                },
                                 value: e,
                                 child: Padding(
                                   padding: EdgeInsets.only(left: 8.w),
@@ -531,9 +503,7 @@ class _StudentsEdistState extends State<StudentsEdist> {
                               );
                             }).toList(),
                             onChanged: (newValue) {
-                              setState(() {
-                                _titleCount = newValue.toString();
-                              });
+                              setState(() {});
                             },
                           ),
                         ),
@@ -617,8 +587,8 @@ class _StudentsEdistState extends State<StudentsEdist> {
                         ),
                         Column(
                           children: [
-                             SizedBox(
-                              height: 10.h,
+                            SizedBox(
+                              height: 3.h,
                             ),
                             Checkbox(
                               value: numbervalue,
@@ -668,7 +638,7 @@ class _StudentsEdistState extends State<StudentsEdist> {
                             ),
                             Text(
                               'Ha',
-                              style: new TextStyle(fontSize: 17.0),
+                              style: TextStyle(fontSize: 17.sp),
                             ),
                             SizedBox(
                               width: 35.w,
@@ -679,13 +649,12 @@ class _StudentsEdistState extends State<StudentsEdist> {
                               onChanged: (String? val) {
                                 setState(() {
                                   house = val!;
-                                  print(house);
                                 });
                               },
                             ),
                             Text(
                               "Yo'q",
-                              style:  TextStyle(
+                              style: TextStyle(
                                 fontSize: 17.0.sp,
                               ),
                             ),
@@ -748,78 +717,93 @@ class _StudentsEdistState extends State<StudentsEdist> {
                               borderRadius: BorderRadius.circular(10.r)),
                           primary: AppColors.buttonLinear),
                       onPressed: () {
-                        print('${widget.updateid} id =====');
-                        print('${widget.comfort} comford');
-                        print("${widget.utility_bills}  utility bills");
-                        print("${widget.live_with_owner} have live");
-                        print("${widget.cost_period} cost period");
-                        print('${widget.renttype} rent type');
-                        print('${widget.cost_type} cost type');
-                        print('${widget.cost} cost');
-                        print('${widget.floors_count} floor count');
-                        print('${widget.room_count} in floor');
-                        print("${widget.roommate_count} count of room");
-                        print('${widget.house_type} house type');
-                        print('${widget.subway} subway');
-                        print('${widget.address} address');
-                        print(widget.stay_region.toString() + 'region');
-                        print( titlecontroller1!.text + 'title');
-                        print('${value6 ? 1 : 2} gender');
-                        print(data.viloyatid.toString() + 'viloyat idsi');
-                        print('${regionsvalue ? 1 : 2} region matter');
-                        print(data.UniverId + 'univer id');
-                        print('${gender1 ? 0 : _titleGendor} gender title');
-                        print( '${gender1 ? 0 : _titleCount}  count of roomates');
-                        print(phoneController!.text.split(' ').join('') + "phone number");
-                        print(house + 'have a home?');
-                        print(addinformation!.text + 'other information');
-                        print('${numbervalue ? 1 : 2} number matter');
-                        print('${widget.district} district id');
-                        print('${widget.location} locations ');
+                        print(titlecontroller1!.text + 'title');
+                        print(dropDown.toString() + 'region');
+                        print(regionsvalue == true ? '1':'2' +' region matter');
+                        print(data.UniversiterId + 'univer id');
+                        print(univervalue.toString() + 'uniever matter');
+                        print(_titleGendor.toString() + 'gender');
+                        print(partner.toString() + 'count of roomates');
+                        print(phoneController!.text + 'phone number');
+                        print(numbervalue == true ? '1':'2' +' hint phone');
+                        print(house + 'have live');
+                        print(addinformation!.text + 'description');
 
+                        // print('${widget.updateid} id =====');
+                        // print('${widget.comfort} comford');
+                        // print("${widget.utility_bills}  utility bills");
+                        // print(titlecontroller1!.text + 'title');
+                        // print(widget.stay_region.toString() + 'region');
+                        // print(data.UniverId + 'univer id');
+                        // print("${widget.live_with_owner} have live");
+                        // print("${widget.cost_period} cost period");
+                        // print('${widget.renttype} rent type');
+                        // print('${widget.cost_type} cost type');
+                        // print('${widget.cost} cost');
+                        // print('${widget.floors_count} floor count');
+                        // print('${widget.room_count} in floor');
+                        // print("${widget.roommate_count} count of room");
+                        // print('${widget.house_type} house type');
+                        // print('${widget.subway} subway');
+                        // print('${widget.address} address');
+                        // print('${value6 ? 1 : 2} gender');
+                        // print(data.viloyatid.toString() + 'viloyat idsi');
+                        // print('${regionsvalue ? 1 : 2} region matter');
+                        //
+                        // print('${gender1 ? 0 : _titleGendor} gender title');
+                        // print( '${gender1 ? 0 : _titleCount}  count of roomates');
+                        // print(phoneController!.text.split(' ').join('') + "phone number");
+                        // print(house + 'have a home?');
+                        // print(addinformation!.text + 'other information');
+                        // print('${numbervalue ? 1 : 2} number matter');
+                        // print('${widget.district} district id');
+                        // print('${widget.location} locations ');
 
                         // if (titlecolor2 &&
                         //     univerColor &&
                         //     _phoneOnClick &&
                         //     _FormOnClick &&
                         //     _UniverOnClick) {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => StudensEdits2(
-                              updateidi: '${widget.updateid}',
-                              images: widget.images,
-                              comfort: '${widget.comfort}',
-                              utility_bills: "${widget.utility_bills}",
-                              live_with_owner: "${widget.live_with_owner}",
-                              cost_period: "${widget.cost_period}",
-                              rent_type: '${widget.renttype}',
-                              costtype: '${widget.cost_type}',
-                              cost: '${widget.cost}',
-                              etaj: '${widget.floors_count}',
-                              qavatlar: '${widget.room_count}',
-                              honasoni: "${widget.roommate_count}",
-                              housetype: '${widget.house_type}',
-                              Subway: '${widget.subway}',
-                              adress: '${widget.address}',
-                              viloyatname: widget.stay_region.toString(),
-                              titlecontroller1: titlecontroller1!.text,
-                              univervalue: '${value6 ? 1 : 2}',
-                              viloyatidisi: data.viloyatid.toString(),
-                              viloyatvalue: '${regionsvalue ? 1 : 2}',
-                              universiteteid: data.UniverId,
-                              titleGendor: '${gender1 ? 0 : _titleGendor}',
-                              titlecount: '${gender1 ? 0 : _titleCount}',
-                              phoneController:
-                                  phoneController!.text.split(' ').join(''),
-                              house: house,
-                              addinformation: addinformation!.text,
-                              numbervalue: '${numbervalue ? 1 : 2}',
-                              tuman: '${widget.district}',
-                              locations: '${widget.location}',
-                            ),
-                          ),
-                        );
+                        //=====
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (context) => StudensEdits2(
+                        //       updateidi: '${widget.updateid}',
+                        //       images: widget.images,
+                        //       comfort: '${widget.comfort}',
+                        //       utility_bills: "${widget.utility_bills}",
+                        //       live_with_owner: "${widget.live_with_owner}",
+                        //       cost_period: "${widget.cost_period}",
+                        //       rent_type: '${widget.renttype}',
+                        //       costtype: '${widget.cost_type}',
+                        //       cost: '${widget.cost}',
+                        //       etaj: '${widget.floors_count}',
+                        //       qavatlar: '${widget.room_count}',
+                        //       honasoni: "${widget.roommate_count}",
+                        //       housetype: '${widget.house_type}',
+                        //       Subway: '${widget.subway}',
+                        //       adress: '${widget.address}',
+                        //       viloyatname: widget.stay_region.toString(),
+                        //       titlecontroller1: titlecontroller1!.text,
+                        //       univervalue: '${value6 ? 1 : 2}',
+                        //       viloyatidisi: data.viloyatid.toString(),
+                        //       viloyatvalue: '${regionsvalue ? 1 : 2}',
+                        //       universiteteid: data.UniverId,
+                        //       titleGendor: '${gender1 ? 0 : _titleGendor}',
+                        //       titlecount: '${gender1 ? 0 : _titleCount}',
+                        //       phoneController:
+                        //           phoneController!.text.split(' ').join(''),
+                        //       house: house,
+                        //       addinformation: addinformation!.text,
+                        //       numbervalue: '${numbervalue ? 1 : 2}',
+                        //       tuman: '${widget.district}',
+                        //       locations: '${widget.location}',
+                        //     ),
+                        //   ),
+                        // );
+
+                        //===
                         // } else {
                         //   if (!titlecolor2) {
                         //     titlecolor = Colors.red;
@@ -874,7 +858,8 @@ class _StudentsEdistState extends State<StudentsEdist> {
       ),
     );
   }
-   Widget _style(BuildContext context, String? selectedItem) {
+
+  Widget _style(BuildContext context, String? selectedItem) {
     return Text(
       selectedItem!,
       style: TextStyle(fontSize: 12.sp),

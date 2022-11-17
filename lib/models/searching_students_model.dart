@@ -6,7 +6,7 @@ class SearchingStudents {
   int? universityId;
   int? facultyId;
   int? course;
-  dynamic  roommate;
+  dynamic roommate;
   int? birthRegionId;
   int? birthDistrictId;
   int? hideProfile;
@@ -15,6 +15,7 @@ class SearchingStudents {
   BirthDistrict? birthDistrict;
   University? university;
   Faculty? faculty;
+  int? chatApproved;
 
   SearchingStudents(
       {this.id,
@@ -32,7 +33,8 @@ class SearchingStudents {
         this.birthRegion,
         this.birthDistrict,
         this.university,
-        this.faculty});
+        this.faculty,
+        this.chatApproved});
 
   SearchingStudents.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -58,6 +60,7 @@ class SearchingStudents {
         : null;
     faculty =
     json['faculty'] != null ? new Faculty.fromJson(json['faculty']) : null;
+    chatApproved = json['chat_approved'];
   }
 
   Map<String, dynamic> toJson() {
@@ -86,6 +89,7 @@ class SearchingStudents {
     if (this.faculty != null) {
       data['faculty'] = this.faculty!.toJson();
     }
+    data['chat_approved'] = this.chatApproved;
     return data;
   }
 }

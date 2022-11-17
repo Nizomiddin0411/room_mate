@@ -105,7 +105,6 @@ class _StudentState extends State<Student> {
 
   @override
   Widget build(BuildContext context) {
-    final load = context.read<FavoriteProvider>();
 
     context.read<AutCubit>().selectSettingLan(
         LangData.languageList.singleWhere((e) => e.locale == context.locale),
@@ -250,8 +249,8 @@ class _StudentState extends State<Student> {
                                 decoration: const InputDecoration(
                                   border: InputBorder.none,
                                 ),
-                                icon: Icon(Icons.arrow_drop_down_outlined),
-                                items: [],
+                                icon: const Icon(Icons.arrow_drop_down_outlined),
+                                items: const [],
                                 onChanged: null),
                           ),
                     SizedBox(
