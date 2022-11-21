@@ -4,6 +4,8 @@ import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 import 'package:talaba_uy/models/searching_students_model.dart';
 
+import '../core/const/consts.dart';
+
 class SearchingStudentsService {
   Future<List<SearchingStudents>> fetchSearchingStudents({
     required String course,
@@ -16,7 +18,7 @@ class SearchingStudentsService {
       // String token = Hive.box('token').get('token');
       var _response = await http.get(
         Uri.parse(
-            'http://164.68.114.231:8081/roommate/backend/web/api/university/get-searching-students?faculty_id=$faculty_id&birth_region_id=$birth_region_id&birth_district_id=$birth_district_id&university_id=$univerId&course=$course'),
+            '${Const.baseUrl}api/university/get-searching-students?faculty_id=$faculty_id&birth_region_id=$birth_region_id&birth_district_id=$birth_district_id&university_id=$univerId&course=$course'),
         // headers: {
         //   HttpHeaders.authorizationHeader: 'Bearer $token',
         // },

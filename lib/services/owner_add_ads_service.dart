@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:hive/hive.dart';
 
+import '../core/const/consts.dart';
+
 class RegistrationService {
   Future Registor({
     required String title,
@@ -33,7 +35,7 @@ class RegistrationService {
     var request = http.MultipartRequest(
       'post',
       Uri.parse(
-          'http://164.68.114.231:8081/roommate/backend/web/api/advertising/user-add-advertising'),
+          '${Const.baseUrl}api/advertising/user-add-advertising'),
     );
     request.fields.addAll({
       'title': title,

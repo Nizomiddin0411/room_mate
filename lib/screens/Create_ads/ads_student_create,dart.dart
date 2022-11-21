@@ -196,6 +196,7 @@ class _Student2State extends State<Student2> {
                         borderRadius: BorderRadius.circular(10.r),
                         border: Border.all(color: _colorRegion)),
                     child: DropdownButtonFormField(
+                      menuMaxHeight: 100.h,
                       hint: Padding(
                         padding: EdgeInsets.only(left: 8.w),
                         child: Text(
@@ -261,6 +262,7 @@ class _Student2State extends State<Student2> {
                               ),
                               borderRadius: BorderRadius.circular(10.r)),
                           child: DropdownButtonFormField(
+                            menuMaxHeight: 100.h,
                             hint: Padding(
                               padding: EdgeInsets.only(left: 8.w),
                               child: Text("Tumanni tanlang".tr(),style: TextStyle(fontSize: 14.sp),),

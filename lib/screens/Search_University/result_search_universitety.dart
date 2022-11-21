@@ -26,13 +26,12 @@ class ResultUniversitetPage extends StatefulWidget {
 }
 
 class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
-  final _controller = TextEditingController();
 
   void initState() {
     super.initState();
     Provider.of<UniversitetProvider>(context, listen: false).getViloyat();
     Provider.of<UniversitetProvider>(context, listen: false)
-        .getAds('0', "0", "0", "0", UniverId: widget.id);
+        .getAds( UniverId: widget.id, Fakultetid: '0', Districtid: '0', course: '0', Regionid: '0');
   }
 
   String? checknumber;
@@ -103,6 +102,10 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                       children: [
                         InkWell(
                           onTap: () {
+                            provider.isRegion = false;
+                            provider.isDistrict = false;
+                            provider.isFacultet = false;
+                            provider.isCourse = false;
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(

@@ -13,13 +13,22 @@ import 'package:talaba_uy/services/searching_students_service.dart';
 import '../services/get_district_service.dart';
 import '../services/get_region_service.dart';
 
-class UniversitetProvider extends ChangeNotifier{
+class UniversitetProvider extends ChangeNotifier {
   List<GetUniverModel> universitet = [];
   List<GetFacultyModel> fakultet = [];
   List<GetRegionModel> Viloyat = [];
   List<GetDistrictModel> tumanlar = [];
   List<SearchingStudents> ads = [];
   bool isFakultet = false;
+  String? FakultetId;
+
+  bool isRegion = false;
+  String? RegionOf;
+  bool isDistrict = false;
+  String? DistrictOf;
+  bool isFacultet = false;
+  bool isCourse = false;
+  String? CourseOf;
 
   String RegionId = '';
   String UniversiterId = '';
@@ -28,7 +37,7 @@ class UniversitetProvider extends ChangeNotifier{
   String FacultyID = '';
   String defaultvalue = 'Fakultetni tanlang';
   String defaultvalue1 = 'Tumanni tanlang';
-  bool istuman=false;
+  bool istuman = false;
   bool isUniver = false;
   String? fakultetid;
   int? isId;
@@ -39,44 +48,51 @@ class UniversitetProvider extends ChangeNotifier{
     ischanging = value;
     notifyListeners();
   }
-  void _setFakultet(bool value){
+
+  void _setFakultet(bool value) {
     isFakultet = value;
     notifyListeners();
   }
-void _settuman(bool value){
-    istuman=value;
+
+  void _settuman(bool value) {
+    istuman = value;
     notifyListeners();
-}
-Future<void> getViloyat() async{
-  Viloyat=await GetRegionService().fetchRegion();
-}
-Future<void>  getTuman(int id)async{
-  _settuman(false);
-  tumanlar=await GetDistrictService().fetchDistrict(id);
-  _settuman(true);
-}
-  Future<void> getUniver() async{
+  }
+
+  Future<void> getViloyat() async {
+    Viloyat = await GetRegionService().fetchRegion();
+  }
+
+  Future<void> getTuman(int id) async {
+    _settuman(false);
+    tumanlar = await GetDistrictService().fetchDistrict(id);
+    _settuman(true);
+  }
+
+  Future<void> getUniver() async {
     universitet = await GetUniverService().fetchUniver();
   }
 
-  Future<void> getFakultet(int id) async{
+  Future<void> getFakultet(int id) async {
     _setFakultet(false);
     fakultet = await GetFacultyService().fetchFaculty(id);
     _setFakultet(true);
   }
-  Future<void> getAds(
-      String course,
-      String Fakultetid,
-      String Regionid,
-      String Districtid,
-  {required String UniverId,}
-      ) async {
+
+  Future<void> getAds({
+    required String UniverId,
+    required String course,
+    required String Fakultetid,
+    required String Regionid,
+    required String Districtid,
+  }) async {
     _settuman(false);
     ads = await SearchingStudentsService().fetchSearchingStudents(
       course: course,
       faculty_id: Fakultetid,
       birth_region_id: Regionid,
-      birth_district_id: Districtid, univerId: UniverId,
+      birth_district_id: Districtid,
+      univerId: UniverId,
     );
     _settuman(true);
   }

@@ -58,7 +58,7 @@ class _MenuPageState extends State<MenuPage> {
                         builder: (context) => const AccountPage()));
               },
               child: CircleAvatar(
-                backgroundImage: AssetImage('assets/images/accountImage.png'),
+                backgroundImage: const AssetImage('assets/images/accountImage.png'),
                 radius: 25.r,
                 // child:
               ),

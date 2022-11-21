@@ -18,6 +18,7 @@ import 'package:talaba_uy/services/post_student_adds.dart';
 import 'package:talaba_uy/services/update_students%20_Ads.dart';
 
 import '../../core/const/app_colors.dart';
+import '../../core/const/consts.dart';
 
 class PostEditStudent extends StatefulWidget {
   String metro;
@@ -46,10 +47,12 @@ class PostEditStudent extends StatefulWidget {
   String cost_period;
   String location;
   String updateid;
+  String districtId;
   List<dynamic>? rasm;
 
   PostEditStudent({
     Key? key,
+    required this.districtId,
     required this.updateid,
     required this.rasm,
     required this.howcountroom,
@@ -86,8 +89,6 @@ class PostEditStudent extends StatefulWidget {
 class _PostEditStudentState extends State<PostEditStudent> {
   final ImagePicker imagePicker = ImagePicker();
 
-
-
   List<XFile>? imageFileList = [];
   List<XFile>? pickedFile;
   List<File> FileList = [];
@@ -121,7 +122,6 @@ class _PostEditStudentState extends State<PostEditStudent> {
     FileList.insert(3, File(''));
     FileList.insert(4, File(''));
 
-
     FileExist.insert(0, false);
     FileExist.insert(1, false);
     FileExist.insert(2, false);
@@ -139,7 +139,7 @@ class _PostEditStudentState extends State<PostEditStudent> {
               child: ListBody(
                 children: [
                   GestureDetector(
-                    child: Text("From Camera"),
+                    child: const Text("From Camera"),
                     onTap: () async {
                       // getcam();
                       if (sum < 3) {
@@ -197,7 +197,7 @@ class _PostEditStudentState extends State<PostEditStudent> {
           centerTitle: true,
         ),
         body: Padding(
-          padding:EdgeInsets.fromLTRB(15.w, 15.h, 15.w, 0),
+          padding: EdgeInsets.fromLTRB(15.w, 15.h, 15.w, 0),
           child: SingleChildScrollView(
             child: Column(children: [
               Column(children: [
@@ -219,12 +219,9 @@ class _PostEditStudentState extends State<PostEditStudent> {
                                 height: 50.h,
                                 child: CachedNetworkImage(
                                   imageUrl:
-                                  'http://164.68.114.231:8081/roommate/backend/web/uploads/image/${widget.rasm![index].image.toString()}',
-
-                                  placeholder: (context, url) =>
-                                  const Center(
-                                      child:
-                                      CircularProgressIndicator()),
+                                      '${Const.baseUrl}uploads/image/${widget.rasm![index].image.toString()}',
+                                  placeholder: (context, url) => const Center(
+                                      child: CircularProgressIndicator()),
                                 ),
                               );
                             },
@@ -235,7 +232,7 @@ class _PostEditStudentState extends State<PostEditStudent> {
                         ),
                         SizedBox(
                           child: DottedBorder(
-                            dashPattern: [6, 3],
+                            dashPattern: const [6, 3],
                             color: Colors.black,
                             strokeWidth: 0.5.w,
                             child: InkWell(
@@ -311,10 +308,10 @@ class _PostEditStudentState extends State<PostEditStudent> {
                                                 //         Colors.),
                                                 boxShadow: [
                                                   BoxShadow(
-                                                      offset: Offset(
-                                                          .1.w, .1.h),
-                                                      color: Colors
-                                                          .grey.shade400,
+                                                      offset:
+                                                          Offset(.1.w, .1.h),
+                                                      color:
+                                                          Colors.grey.shade400,
                                                       blurRadius: 6),
                                                 ],
                                                 borderRadius:
@@ -337,8 +334,8 @@ class _PostEditStudentState extends State<PostEditStudent> {
                                                 height: 18.h,
                                                 decoration: BoxDecoration(
                                                     borderRadius:
-                                                        BorderRadius
-                                                            .circular(4.r),
+                                                        BorderRadius.circular(
+                                                            4.r),
                                                     color: Colors.red[400]),
                                                 child: Icon(
                                                   Icons.remove,
@@ -389,7 +386,7 @@ class _PostEditStudentState extends State<PostEditStudent> {
                         phone_number_show: widget.numbervalue,
                         have_living_home: widget.house,
                         description: widget.addinformation.toString(),
-                        district_id: widget.viloyatidisi,
+                        district_id: widget.districtId,
                         address: widget.addressController.toString(),
                         location: widget.location,
                         subway: widget.metro,
@@ -404,9 +401,11 @@ class _PostEditStudentState extends State<PostEditStudent> {
                         comfort: widget.comfort,
                         renttype: widget.rent_type,
                         cost_period: widget.cost_period,
-                        file1:  FileExist[0] ? FileList[0] : FileList[4],
+                        file1: FileExist[0] ? FileList[0] : FileList[4],
                         file2: FileExist[1] ? FileList[1] : FileList[4],
-                        file3: FileExist[2] ? FileList[2] : FileList[4], file4: FileExist[3] ? FileList[3] : FileList[4],);
+                        file3: FileExist[2] ? FileList[2] : FileList[4],
+                        file4: FileExist[3] ? FileList[3] : FileList[4],
+                      );
                       Navigator.push(
                         context,
                         MaterialPageRoute(

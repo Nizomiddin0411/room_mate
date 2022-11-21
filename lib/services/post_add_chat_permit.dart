@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
+
+import '../core/const/consts.dart';
 class PostChatPermit {
   Future fetchApprov({
     required String Askid,
@@ -12,7 +14,7 @@ class PostChatPermit {
     var request = http.MultipartRequest(
       'post',
       Uri.parse(
-        'http://164.68.114.231:8081/roommate/backend/web/api/user/add-chat-permit',
+        '${Const.baseUrl}api/user/add-chat-permit',
       ),
 
     );

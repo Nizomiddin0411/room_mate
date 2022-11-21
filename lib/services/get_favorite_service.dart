@@ -5,11 +5,13 @@ import 'package:hive/hive.dart';
 import 'package:talaba_uy/models/get_favorite_model.dart';
 import 'package:http/http.dart' as http;
 
+import '../core/const/consts.dart';
+
 class FavoriteService {
   Future<List<FavoritemModel>> fetchFavorite() async {
     try {
       var response = await http.get(Uri.parse(
-          'http://164.68.114.231:8081/roommate/backend/web/api/favorite/get-favorite'),
+          '${Const.baseUrl}api/favorite/get-favorite'),
           headers: {
           HttpHeaders.authorizationHeader: 'Bearer ${Hive.box('token').get('token')}'
           }

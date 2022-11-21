@@ -4,13 +4,14 @@ import 'dart:convert';
 
 import 'package:hive/hive.dart';
 
+import '../core/const/consts.dart';
 import '../models/get_permit_model.dart';
 import 'package:http/http.dart'as http;
 class GetPermitSevice {
   Future<List<chatPermitModel>> fetchPermit() async {
     try {
       var response = await http.get(Uri.parse(
-        'http://164.68.114.231:8081/roommate/backend/web/api/user/chat-permit-list',
+        '${Const.baseUrl}api/user/chat-permit-list',
       ),
           headers: {
             HttpHeaders.authorizationHeader: 'Bearer ${Hive.box('token').get('token')}'

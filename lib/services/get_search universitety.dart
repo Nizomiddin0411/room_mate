@@ -6,6 +6,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:talaba_uy/models/search_universitety_model.dart';
 
+import '../core/const/consts.dart';
 import '../models/get_univer_model.dart';
 
 class GetSearchUniverService {
@@ -16,7 +17,7 @@ class GetSearchUniverService {
     try {
       var _response = await http.get(
         Uri.parse(
-            'http://164.68.114.231:8081/roommate/backend/web/api/university/index?term=$query&region_id=$region&district_id=$district'),
+            '${Const.baseUrl}api/university/index?term=$query&region_id=$region&district_id=$district'),
       );
       if (_response.statusCode == 200) {
         List json = jsonDecode(_response.body);

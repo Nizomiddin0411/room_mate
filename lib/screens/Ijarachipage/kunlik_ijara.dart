@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
+import '../../core/const/consts.dart';
 import '../../provider/day_provider.dart';
 import '../../services/post_change_favoritr_service.dart';
 import '../Ads_Detail/ads_detail.dart';
@@ -283,7 +284,7 @@ class _KunlikIjaraState extends State<KunlikIjara> {
                                     data.Ads[index].images!.isNotEmpty
                                         ? CachedNetworkImage(
                                             imageUrl:
-                                                "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.Ads[index].images!.first.image.toString()}",
+                                                "${Const.baseUrl}uploads/image/${data.Ads[index].images!.first.image.toString()}",
                                             placeholder: (context, url) =>
                                                 const Center(
                                                     child:
@@ -632,7 +633,7 @@ class _KunlikIjaraState extends State<KunlikIjara> {
                                     data.AdsForStudent[index].images!.isNotEmpty
                                         ? CachedNetworkImage(
                                             imageUrl:
-                                                "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.AdsForStudent[index].images!.first.image.toString()}",
+                                                "${Const.baseUrl}uploads/image/${data.AdsForStudent[index].images!.first.image.toString()}",
                                             placeholder: (context, url) =>
                                                 const Center(
                                                     child:

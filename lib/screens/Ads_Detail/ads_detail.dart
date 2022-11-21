@@ -9,6 +9,7 @@ import 'package:hive/hive.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../../chat/chat_page.dart';
+import '../../core/const/consts.dart';
 import '../../services/post_add_chat_permit.dart';
 import '../../services/post_change_favoritr_service.dart';
 import '../Google_map/map_for_ads_detail.dart';
@@ -225,7 +226,7 @@ class _AdsDetailState extends State<AdsDetail> {
                               return widget.Image!.isNotEmpty
                                   ? CachedNetworkImage(
                                       imageUrl:
-                                          "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${widget.Image![index1].image.toString()}",
+                                          "${Const.baseUrl}uploads/image/${widget.Image![index1].image.toString()}",
                                       placeholder: (context, url) =>
                                           const Center(
                                               child:
@@ -448,13 +449,14 @@ class _AdsDetailState extends State<AdsDetail> {
                                 onTap: () {
                                   print('${Hive.box('id').get('id')}');
                                   print(widget.userId);
+                                  // widget.userId!)
                                   if (widget.chatApproved.toString() == '1') {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) => ChatPage(
                                                 widget.userFullName!,
-                                                widget.userId!)));
+                                                widget.userId! )));
                                   } else {
                                     showAlertDialog(context, widget.userId!);
                                   }

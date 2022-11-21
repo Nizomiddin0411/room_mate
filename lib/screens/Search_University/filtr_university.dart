@@ -1,4 +1,5 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
@@ -75,7 +76,7 @@ class _UniverFiltrPageState extends State<UniverFiltrPage> {
                         ),
                         isExpanded: true,
                         hint: Text(
-                          'Qaysi viloyatliksiz',
+                          'Viloyatni tanlang',
                           style: TextStyle(fontSize: 14.sp),
                         ),
                         icon: const Icon(
@@ -120,7 +121,7 @@ class _UniverFiltrPageState extends State<UniverFiltrPage> {
                     children: [
                       Row(
                         children: const [
-                          Text(" Qaysi tumanidansiz"),
+                          Text("Tuman",style: TextStyle(fontWeight: FontWeight.w500),),
                         ],
                       ),
                       SizedBox(
@@ -141,7 +142,7 @@ class _UniverFiltrPageState extends State<UniverFiltrPage> {
                                   ),
                                   isExpanded: true,
                                   hint: Text(
-                                    ' Qaysi tumanidansiz',
+                                    'Tumanni tanlang',
                                     style: TextStyle(fontSize: 14.sp),
                                   ),
                                   icon: const Icon(
@@ -197,7 +198,7 @@ class _UniverFiltrPageState extends State<UniverFiltrPage> {
                                   isExpanded: true,
                                   isDense: true,
                                   hint: Text(
-                                    'Tumaningiz',
+                                    'Tuman',
                                     style: TextStyle(fontSize: 14.sp),
                                   ),
                                   icon: const Icon(
@@ -238,7 +239,10 @@ class _UniverFiltrPageState extends State<UniverFiltrPage> {
                             onPressed: () {
                               provider.getSearchUniver(
                                   '0', '0', '0');
-                              Navigator.pop(context);
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (BuildContext context) => super.widget));
                             },
                             child: Text(
                               "Tozalash",
@@ -252,7 +256,7 @@ class _UniverFiltrPageState extends State<UniverFiltrPage> {
                         SizedBox(
                           height: 20.h,
                         ),
-                        Container(
+                        SizedBox(
                           width: 220.w,
                           child: ElevatedButton(
                             style: ElevatedButton.styleFrom(

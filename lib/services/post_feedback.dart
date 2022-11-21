@@ -5,6 +5,8 @@ import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 import 'package:talaba_uy/services/post_create_ads_student.dart';
 
+import '../core/const/consts.dart';
+
 class FeedbackPost {
   Future postFeedback({
     required String rate,
@@ -14,7 +16,7 @@ class FeedbackPost {
     var request = http.MultipartRequest(
       'post',
       Uri.parse(
-        'http://164.68.114.231:8081/roommate/backend/web/api/user/feedback',
+        '${Const.baseUrl}api/user/feedback',
       ),
     );
 

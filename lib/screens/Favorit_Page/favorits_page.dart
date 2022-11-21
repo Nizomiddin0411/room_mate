@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
+import '../../core/const/consts.dart';
 import '../../provider/favorite_provider.dart';
 import '../../services/post_change_favoritr_service.dart';
 import '../Ads_Detail/ads_detail.dart';
@@ -53,8 +54,8 @@ class _FavoritPageState extends State<FavoritPage> {
                 child: CircularProgressIndicator());
           }
           if (data.Like.isEmpty) {
-            return Center(
-              child: const Text("Ma'lumot yo'q"),
+            return const Center(
+              child: Text("Ma'lumot yo'q"),
             );
           }
           return SingleChildScrollView(
@@ -196,7 +197,7 @@ class _FavoritPageState extends State<FavoritPage> {
                                         data.Like[index].images!.isNotEmpty
                                             ? CachedNetworkImage(
                                                 imageUrl:
-                                                    "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.Like[index].images!.first.image.toString()}",
+                                                    "h${Const.baseUrl}uploads/image/${data.Like[index].images!.first.image.toString()}",
                                                 placeholder: (context, url) =>
                                                     const Center(
                                                         child:

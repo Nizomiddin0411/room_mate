@@ -4,8 +4,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:talaba_uy/provider/favorite_provider.dart';
 import 'package:talaba_uy/screens/Favorit_Ads_Page/StudentEdit_post_last%20_page.dart';
-import 'package:talaba_uy/screens/Google_map/map_screen.dart';
-
 import '../../core/const/app_colors.dart';
 import '../../provider/region_provider.dart';
 import '../Google_map/map_for_edit.dart';
@@ -40,77 +38,61 @@ class StudensEdits2 extends StatefulWidget {
   List<dynamic>? images;
   String updateidi;
   String? locations;
-  StudensEdits2({
-    Key? key,
-    required this.updateidi,
-    required this.images,
-    required this.comfort,
-    required this.utility_bills,
-    required this.cost_period,
-    required this.live_with_owner,
-    required this.costtype,
-    required this.rent_type,
-    required this.cost,
-    required this.etaj,
-    required this.honasoni,
-    required this.qavatlar,
-    required this.univervalue,
-    required this.housetype,
-    required this.Subway,
-    required this.adress,
-    required this.tuman,
-    required this.viloyatname,
-    required this.numbervalue,
-    required this.house,
-    required this.titlecontroller1,
-    required this.viloyatidisi,
-    required this.addinformation,
-    required this.phoneController,
-    required this.titlecount,
-    required this.titleGendor,
-    required this.universiteteid,
-    required this.viloyatvalue,
-    required this.locations
-  }) : super(key: key);
+  String? districtId;
+  String? roomCount;
+  StudensEdits2(
+      {Key? key,
+      required this.roomCount,
+      required this.districtId,
+      required this.updateidi,
+      required this.images,
+      required this.comfort,
+      required this.utility_bills,
+      required this.cost_period,
+      required this.live_with_owner,
+      required this.costtype,
+      required this.rent_type,
+      required this.cost,
+      required this.etaj,
+      required this.honasoni,
+      required this.qavatlar,
+      required this.univervalue,
+      required this.housetype,
+      required this.Subway,
+      required this.adress,
+      required this.tuman,
+      required this.viloyatname,
+      required this.numbervalue,
+      required this.house,
+      required this.titlecontroller1,
+      required this.viloyatidisi,
+      required this.addinformation,
+      required this.phoneController,
+      required this.titlecount,
+      required this.titleGendor,
+      required this.universiteteid,
+      required this.viloyatvalue,
+      required this.locations})
+      : super(key: key);
 
   @override
   State<StudensEdits2> createState() => _StudensEdits2State();
 }
 
 class _StudensEdits2State extends State<StudensEdits2> {
-  TextEditingController? titlecontroller;
   TextEditingController? addressController;
-  TextEditingController? othercontroller;
-  TextEditingController? narxcontroller;
+
   TextEditingController? costcontroller;
   String dropDown = "";
-  String dropDown2 = "";
-  String DistrictId = '';
-  String UniverId = '';
-  String Course = '';
-  String FakultetId = '';
-  String RoomOwner = '';
-  String TypeHouse = '';
-  String TypeOfRent = '';
-  String typeOfPayment = '';
-  String subwayof = '';
-  String gender = '';
-  String CourseCount = '';
-  String roomCount = '';
+
   String price = '';
   String pricerent_type = '';
-  String priceturi = '';
+  String price1 = '';
   String housetype = '';
   String? _dropownUsd;
   Color _colorRegion = Colors.grey;
-  bool _RegionOnClick = false;
   Color _colorDistric = Colors.grey;
   Color _colorGender = Colors.grey;
-  bool _GenderOnClick = false;
-  Color _colorCountPupil = Colors.grey;
-  bool _CountPupilOnClick = false;
-  Color _colorForm = Colors.grey;
-  bool _FormOnClick = false;
   bool value1 = false;
   bool value2 = false;
   bool value3 = false;
@@ -123,18 +105,9 @@ class _StudensEdits2State extends State<StudensEdits2> {
   var costcommunal = "0";
 
   var pricetype = ["Kuniga", "Oyiga", "Kishi boshiga"];
-  String? cost_type;
-  final TextEditingController _textEditingController = TextEditingController();
-  var kurs = [
-    '1-kurs',
-    '2-kurs',
-    '3-kurs',
-    '4-kurs',
-    '5-kurs',
-    '6-kurs',
-  ];
+
   var housecost = ["Oylik", "Kunlik", "Uzoq muddatga"];
-  final List<String> genderItems = ["O'g'il bola ", "Qiz bola"];
+
   var kvartira = [
     'Kvartira',
     'Xovli',
@@ -164,24 +137,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
     "10",
     "11",
   ];
-  var kindOfMoment = [
-    'Kunlik',
-    'Oylik',
-  ];
-  var rooms = [
-    '1',
-    '2',
-    '3',
-    '4',
-    '5-6',
-  ];
-  var ijarachi = [
-    '1',
-    '2',
-    '3',
-    '4',
-    '5-6',
-  ];
+
   var countroums = [
     "1 ",
     "2",
@@ -190,51 +146,80 @@ class _StudensEdits2State extends State<StudensEdits2> {
     "5 ",
   ];
   Color _costTypeColor = Colors.grey;
-  final _formKey = GlobalKey<FormState>();
   String? housecount;
   String? howcountroom;
   String? housefloorcount;
-  String? narxnituri;
+
   String? rent_type;
-  String? cost_period;
+
   String? uyturi;
   String? narxturi;
   String? cost_period1;
-  int _correntPage = 0;
 
   @override
   void initState() {
+    super.initState();
     late List<String> haveComfort = widget.comfort.split(',');
     String comfortList = widget.comfort;
-
-    titlecontroller = TextEditingController();
-    othercontroller = TextEditingController();
+    housetype = widget.housetype == '1' ? 'Kvartira' : 'Xovli';
+    housecount = widget.roomCount;
     addressController = TextEditingController(text: widget.adress);
     costcontroller = TextEditingController(text: widget.cost);
-
+    housefloorcount = widget.qavatlar.toString();
+    howcountroom = widget.etaj;
+    if (widget.rent_type == '1') {
+      price = '1';
+    } else if (widget.rent_type == '2') {
+      price = '2';
+    } else {
+      price = '3';
+    }
+    if (widget.cost_period == '1') {
+      price1 = '1';
+    } else if (widget.cost_period == '2') {
+      price1 = '2';
+    } else {
+      price1 = '3';
+    }
     for (String i in haveComfort) {
       print(i);
       if (i == '1') {
         value1 = true;
+        comfort.add('1');
       }
-      if (i == '2') value2 = true;
-      if (i == '3') value3 = true;
-      if (i == '4') value4 = true;
-      if (i == '5') value5 = true;
-      if (i == '6') value6 = true;
+      if (i == '2') {
+        value2 = true;
+        comfort.add('2');
+      }
+      if (i == '3') {
+        value3 = true;
+        comfort.add('3');
+      }
+      if (i == '4') {
+        value4 = true;
+        comfort.add('4');
+      }
+      if (i == '5') {
+        value5 = true;
+        comfort.add('5');
+      }
+      if (i == '6') {
+        value6 = true;
+        comfort.add('6');
+      }
     }
 
-    if (widget.Subway == '0') {
+    if (widget.Subway.toString() == '0') {
       metro = '1';
     } else {
       metro = '2';
     }
-    if (widget.utility_bills == '0') {
+    if (widget.utility_bills == '1') {
       costcommunal = '1';
     } else {
       costcommunal = '2';
     }
-    if (widget.live_with_owner == '0') {
+    if (widget.live_with_owner == '1') {
       ownerlive = '1';
     } else {
       ownerlive = '2';
@@ -259,8 +244,6 @@ class _StudensEdits2State extends State<StudensEdits2> {
         : widget.housetype == ''
             ? 'kunlik '
             : "kishi boshiga";
-
-    super.initState();
   }
 
   @override
@@ -288,6 +271,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
           padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 12.h),
           child: Consumer<RegionProvider>(
             builder: (_, data, __) {
+              data.districtId = widget.districtId.toString();
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -304,15 +288,17 @@ class _StudensEdits2State extends State<StudensEdits2> {
                     width: 324.w,
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.r),
-                        border: Border.all(color: _colorRegion)),
+                        border: Border.all(color: AppColors.textColor)),
                     child: DropdownButtonFormField(
+                      menuMaxHeight: 100.h,
+                      isExpanded: true,
                       hint: Padding(
                         padding: EdgeInsets.only(left: 8.w),
                         child: Text(widget.viloyatname.tr()),
                       ),
-                      decoration: InputDecoration(border: InputBorder.none),
-                      // value: ,
-                      icon: Icon(Icons.arrow_drop_down_outlined),
+                      decoration:
+                          const InputDecoration(border: InputBorder.none),
+                      icon: const Icon(Icons.arrow_drop_down_outlined),
                       items: data.regions.map((e) {
                         return DropdownMenuItem<String>(
                           value: e.name ?? "",
@@ -324,7 +310,6 @@ class _StudensEdits2State extends State<StudensEdits2> {
                       }).toList(),
                       onChanged: (newValue) async {
                         setState(() {
-                          _RegionOnClick = true;
                           _colorRegion = Colors.grey;
                         });
 
@@ -343,11 +328,16 @@ class _StudensEdits2State extends State<StudensEdits2> {
                   Column(
                     children: [
                       Row(
-                        children: [Text("Tuman",   style: TextStyle(
-                      color: AppColors.textColor,
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w500,
-                    ),)],
+                        children: [
+                          Text(
+                            "Tuman",
+                            style: TextStyle(
+                              color: AppColors.textColor,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          )
+                        ],
                       )
                     ],
                   ),
@@ -363,14 +353,14 @@ class _StudensEdits2State extends State<StudensEdits2> {
                               ),
                               borderRadius: BorderRadius.circular(10.r)),
                           child: DropdownButtonFormField(
+                            isExpanded: true,
                             hint: Padding(
                               padding: EdgeInsets.only(left: 8.w),
                               child: Text(widget.tuman.tr()),
                             ),
-                            decoration: const InputDecoration(
-                              border: InputBorder.none,
-                            ),
-                            icon: Icon(Icons.arrow_drop_down_outlined),
+                            decoration:
+                                const InputDecoration(border: InputBorder.none),
+                            icon: const Icon(Icons.arrow_drop_down_outlined),
                             items: data.districts.map((e) {
                               return DropdownMenuItem<String>(
                                 onTap: () {
@@ -416,11 +406,14 @@ class _StudensEdits2State extends State<StudensEdits2> {
                     children: [
                       Row(
                         children: [
-                          Text("Manzil",   style: TextStyle(
-                      color: AppColors.textColor,
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w500,
-                    ),).tr(),
+                          Text(
+                            "Manzil",
+                            style: TextStyle(
+                              color: AppColors.textColor,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ).tr(),
                         ],
                       ),
                       SizedBox(
@@ -428,14 +421,14 @@ class _StudensEdits2State extends State<StudensEdits2> {
                       ),
                       Row(
                         children: [
-                          Container(
+                          SizedBox(
                             height: 55.h,
                             width: 324.w,
                             child: TextFormField(
                               keyboardType: TextInputType.text,
                               controller: addressController,
                               decoration: InputDecoration(
-                                border: OutlineInputBorder(),
+                                border: const OutlineInputBorder(),
                                 labelText: "Kvartal , Uy , Xonadon ".tr(),
                               ),
                             ),
@@ -452,9 +445,9 @@ class _StudensEdits2State extends State<StudensEdits2> {
                         final mapLatitude = context.read<FavoriteProvider>();
                         mapLatitude.locationFor = true;
                         String lat =
-                        widget.locations!.split(',').first.toString();
+                            widget.locations!.split(',').first.toString();
                         String long =
-                        widget.locations!.split(',').last.toString();
+                            widget.locations!.split(',').last.toString();
                         lat = lat.split('(').last.toString();
                         long = long.split(')').first.toString();
                         print(widget.locations);
@@ -466,10 +459,10 @@ class _StudensEdits2State extends State<StudensEdits2> {
                             context,
                             MaterialPageRoute(
                                 builder: (context) => MapEdit(
-                                  location: widget.locations,
-                                  long: Long,
-                                  lat: Lat,
-                                )));
+                                      location: widget.locations,
+                                      long: Long,
+                                      lat: Lat,
+                                    )));
                       },
                       child: Container(
                         width: 324.w,
@@ -477,7 +470,10 @@ class _StudensEdits2State extends State<StudensEdits2> {
                         child: Card(
                           shadowColor: AppColors.buttonLinear,
                           child: ListTile(
-                            title:  Text("Geojoylashishni kiriting",style: TextStyle(fontSize: 14.sp),).tr(),
+                            title: Text(
+                              "Geojoylashishni kiriting",
+                              style: TextStyle(fontSize: 14.sp),
+                            ).tr(),
                             leading: const Icon(
                               Icons.location_on,
                               color: AppColors.mainColor,
@@ -494,11 +490,11 @@ class _StudensEdits2State extends State<StudensEdits2> {
                         children: [
                           Text(
                             "Metroga yaqinmi ?",
-                             style: TextStyle(
-                      color: AppColors.textColor,
-                      fontSize: 14.sp,
-                      fontWeight: FontWeight.w500,
-                    ),
+                            style: TextStyle(
+                              color: AppColors.textColor,
+                              fontSize: 14.sp,
+                              fontWeight: FontWeight.w500,
+                            ),
                           ),
                         ],
                       ),
@@ -579,7 +575,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
                               ),
                               decoration: const InputDecoration(
                                   border: InputBorder.none),
-                              icon: Icon(Icons.arrow_drop_down_outlined),
+                              icon: const Icon(Icons.arrow_drop_down_outlined),
                               items: kvartira.map((e) {
                                 return DropdownMenuItem<String>(
                                   onTap: () {},
@@ -595,7 +591,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
                                   housetype = newValue.toString();
                                   _colorGender = Colors.grey;
                                 });
-                                print(housetype + "1 kunlik 2 kvartira");
+                                print(housetype + "house type");
                               },
                             ),
                           ),
@@ -622,7 +618,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
                                 borderRadius: BorderRadius.circular(10.r),
                                 border: Border.all(color: _colorGender)),
                             child: DropdownButtonFormField(
-                               menuMaxHeight:150,
+                              menuMaxHeight: 150,
                               hint: Padding(
                                 padding: EdgeInsets.only(left: 8.w),
                                 child: Text(
@@ -678,7 +674,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
                                 borderRadius: BorderRadius.circular(10.r),
                                 border: Border.all(color: _colorGender)),
                             child: DropdownButtonFormField(
-                               menuMaxHeight:150,
+                              menuMaxHeight: 150,
                               hint: Padding(
                                 padding: EdgeInsets.only(left: 8.w),
                                 child: Text(
@@ -730,7 +726,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
                                 borderRadius: BorderRadius.circular(10.r),
                                 border: Border.all(color: _colorGender)),
                             child: DropdownButtonFormField(
-                               menuMaxHeight:150,
+                              menuMaxHeight: 150,
                               hint: Padding(
                                 padding: EdgeInsets.only(left: 8.w),
                                 child: Text(
@@ -740,7 +736,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
                               ),
                               decoration: const InputDecoration(
                                   border: InputBorder.none),
-                              icon: Icon(Icons.arrow_drop_down_outlined),
+                              icon: const Icon(Icons.arrow_drop_down_outlined),
                               items: in_floor.map((e) {
                                 return DropdownMenuItem<String>(
                                   onTap: () {},
@@ -789,7 +785,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
                       child: TextFormField(
                         onChanged: (e) {
                           setState(() {
-                            if (e.length > 0) {
+                            if (e.isNotEmpty) {
                               _costTypeColor = Colors.grey;
                             } else {
                               _costTypeColor = Colors.red;
@@ -817,6 +813,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
                                 setState(() {
                                   _dropownUsd = e;
                                   pricerent_type = e == 'sum' ? '1' : '2';
+                                  print(pricerent_type);
                                 });
                               },
                               hint: Text(
@@ -880,9 +877,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
                               hint: Padding(
                                 padding: EdgeInsets.only(left: 8.w),
                                 child: Text(
-                                  widget.cost_period == ''
-                                      ? "kunlik  / oylik".tr()
-                                      : cost_period1.toString(),
+                                  '${widget.cost_period}',
                                   style: TextStyle(fontSize: 14.sp),
                                 ),
                               ),
@@ -902,11 +897,11 @@ class _StudensEdits2State extends State<StudensEdits2> {
                               onChanged: (newValue) {
                                 setState(() {
                                   if (newValue == 'Kuniga') {
-                                    price = '1';
+                                    price1 = '1';
                                   } else if (newValue == 'Oyiga') {
-                                    price = '2';
-                                  }else{
-                                    price = '3';
+                                    price1 = '2';
+                                  } else {
+                                    price1 = '3';
                                   }
                                   print(pricerent_type);
                                 });
@@ -970,7 +965,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
                                     price = '1';
                                   } else if (newValue == 'Oylik') {
                                     price = '2';
-                                  }else{
+                                  } else {
                                     price = '3';
                                   }
                                 });
@@ -990,7 +985,8 @@ class _StudensEdits2State extends State<StudensEdits2> {
                         children: [
                           Text(
                             "Uy egasi ham yashaydimi ?",
-                            style: TextStyle(fontSize: 14.sp,fontWeight: FontWeight.w500),
+                            style: TextStyle(
+                                fontSize: 14.sp, fontWeight: FontWeight.w500),
                           ),
                         ],
                       ),
@@ -1026,7 +1022,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
                               ),
                               Text(
                                 "Yo'q",
-                                style:  TextStyle(
+                                style: TextStyle(
                                   fontSize: 17.0.sp,
                                 ),
                               ),
@@ -1045,7 +1041,8 @@ class _StudensEdits2State extends State<StudensEdits2> {
                         children: [
                           Text(
                             "Kommunal to’lovlarini kim to’laydi ?",
-                            style: TextStyle(fontSize: 14.sp,fontWeight: FontWeight.w500),
+                            style: TextStyle(
+                                fontSize: 14.sp, fontWeight: FontWeight.w500),
                           ),
                         ],
                       ),
@@ -1060,8 +1057,8 @@ class _StudensEdits2State extends State<StudensEdits2> {
                                 onChanged: (String? val) {
                                   setState(() {
                                     costcommunal = val!;
-                                    print(metro);
                                   });
+                                  print(costcommunal);
                                 },
                               ),
                               Text(
@@ -1099,21 +1096,24 @@ class _StudensEdits2State extends State<StudensEdits2> {
                     children: [
                       Text(
                         "Quyidagi qulayliklarga ega.",
-                        style: TextStyle(color: AppColors.textColor, fontSize: 14.sp,fontWeight: FontWeight.w500),
+                        style: TextStyle(
+                            color: AppColors.textColor,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w500),
                       ),
                     ],
                   ),
                   SizedBox(
                     height: 10.h,
                   ),
-                  Container(
+                  SizedBox(
                     width: 170.w,
                     child: Column(
                       children: [
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                             Text("Wi - fi "),
+                            const Text("Wi - fi "),
                             Checkbox(
                               value: value1,
                               onChanged: (bool? value) {
@@ -1132,7 +1132,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text("TV"),
+                            const Text("TV"),
                             Checkbox(
                               value: value2,
                               onChanged: (bool? value) {
@@ -1151,7 +1151,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text("Muzlatgich"),
+                            const Text("Muzlatgich"),
                             Checkbox(
                               value: value3,
                               onChanged: (bool? value) {
@@ -1170,7 +1170,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text("Kir yuvish mashinasi"),
+                            const Text("Kir yuvish mashinasi"),
                             Checkbox(
                               value: value4,
                               onChanged: (bool? value) {
@@ -1189,7 +1189,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text("Konditsioner"),
+                            const Text("Konditsioner"),
                             Checkbox(
                               value: value5,
                               onChanged: (bool? value) {
@@ -1244,38 +1244,64 @@ class _StudensEdits2State extends State<StudensEdits2> {
                         onPressed: () {
                           final map = context.read<FavoriteProvider>();
                           String comfortItems = comfort.join(',');
+                          print('+++++++++++++++++++++');
+                          print(data.districtId + 'district id');
+                          print(addressController!.text + 'address');
+                          print(map.isTapMap == false
+                              ? '${widget.locations}'
+                              : map.forMap.toString() + 'location');
+                          print(
+                              metro.toString() == 'ha' ? '1' : '2' + 'subway');
+                          print(housetype == 'Kvartira'
+                              ? '1'
+                              : '2' + 'type of house');
+                          print(housecount.toString() + 'count of rooms');
+                          print(housefloorcount.toString() + 'count of floors');
+                          print(howcountroom.toString() + 'in floor');
+                          print(costcontroller!.text + 'cost');
+                          print(pricerent_type + 'cost type');
+                          print(price + 'rent type');
+                          print(price1 + 'cost_period');
+                          print(ownerlive + 'owner is with live');
+                          print(costcommunal + 'utilite bils who pay');
+                          print(comfortItems.toString() + 'comford');
+
                           Navigator.push(
                             context,
                             MaterialPageRoute(
                               builder: (context) => PostEditStudent(
                                 updateid: widget.updateidi,
-
-                                  universiteteid: widget.universiteteid,
-                                  house: widget.house,
-                                  titleGendor: widget.titleGendor,
-                                  numbervalue: widget.numbervalue,
-                                  viloyatvalue: widget.viloyatvalue,
-                                  phoneController: widget.phoneController,
-                                  titlecontroller1: widget.titlecontroller1,
-                                  addinformation: widget.addinformation,
-                                  univervalue: widget.univervalue,
-                                  titlecount: widget.titlecount,
-                                  viloyatidisi: widget.viloyatidisi,
-                                  comfort: comfortItems,
-                                  costlivekomunal: costcommunal.toString() == 'ha' ? '1' : '2',
-                                  metro: metro.toString() == 'ha' ? '1' : '2',
-                                  countroom: housefloorcount.toString(),
-                                  housetype: housetype== 'kv' ? '1' : '2',
-                                  howcountroom: howcountroom.toString(),
-                                  narxnituri: pricerent_type,
-                                  addressController: addressController!.text,
-                                  housecount: housecount.toString(),
-                                  ownerlive: ownerlive.toString(),
-                                  costController:costcontroller!.text,
-                                  rent_type: price,
-                                  cost_period: price,
-                                  location:map.isTapMap == false ?'${widget.locations}':map.forMap, rasm: widget.images,
-                                  ),
+                                viloyatidisi: widget.viloyatidisi,
+                                viloyatvalue: widget.viloyatvalue,
+                                universiteteid: widget.universiteteid,
+                                univervalue: widget.univervalue,
+                                phoneController: widget.phoneController,
+                                numbervalue: widget.numbervalue,
+                                titlecontroller1: widget.titlecontroller1,
+                                house: widget.house,
+                                titleGendor: widget.titleGendor,
+                                titlecount: widget.titlecount,
+                                addinformation: widget.addinformation,
+                                districtId: data.districtId,
+                                comfort: comfortItems,
+                                costlivekomunal:
+                                    costcommunal.toString() ,
+                                metro:  metro.toString() == 'ha' ? '1' : '2',
+                                countroom: housefloorcount.toString(),
+                                housetype: housetype == 'Kvartira'? '1':'2',
+                                howcountroom: howcountroom.toString(),
+                                narxnituri: pricerent_type,
+                                addressController: addressController!.text,
+                                housecount: housecount.toString(),
+                                ownerlive: ownerlive.toString(),
+                                costController: costcontroller!.text,
+                                rent_type: price,
+                                cost_period: price1,
+                                location: map.isTapMap == false
+                                    ? '${widget.locations}'
+                                    : map.forMap,
+                                rasm: widget.images,
+                              ),
                             ),
                           );
                         },

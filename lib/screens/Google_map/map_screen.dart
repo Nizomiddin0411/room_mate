@@ -123,7 +123,7 @@ class _MapScreenState extends State<MapScreen> {
               // icon: const Icon(Icons.location_history),
               // child: Icon(Icons.local_activity),
             ),
-          ):SizedBox(),
+          ):const SizedBox(),
           Padding(
             padding: EdgeInsets.fromLTRB(25.w,5.h,10.w,10.h),
             child: FloatingActionButton.extended(

@@ -4,7 +4,7 @@ import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-
+import 'package:talaba_uy/screens/Favorit_Ads_Page/update_students2.dart';
 import '../../core/const/app_colors.dart';
 import '../../cubit/aut_cubit.dart';
 import '../../provider/region_provider.dart';
@@ -38,12 +38,16 @@ class StudentsEdist extends StatefulWidget {
   String? renttype;
   String? cost_period;
   String? universtatenewname;
+  String? districtId;
+  String? inFloor;
   List<dynamic>? images;
   String? updateid;
   String? stay_univer_id;
 
   StudentsEdist(
       {Key? key,
+        required this.inFloor,
+        required this.districtId,
       required this.stay_univer_id,
       required this.updateid,
       required this.stay_universityname,
@@ -132,7 +136,9 @@ class _StudentsEdistState extends State<StudentsEdist> {
     titlecontroller1 = TextEditingController(text: widget.title);
     phoneController = TextEditingController(text: widget.phone_number);
     addinformation = TextEditingController(text: widget.description);
-    // dropDown = widget.stay_region.toString();
+    dropDown = widget.stay_region.toString();
+
+    Regionidisi = widget.stay_region_id.toString();
     if (widget.roommate_gender.toString() == '2') {
       _titleGendor = "2";
     } else {
@@ -161,7 +167,7 @@ class _StudentsEdistState extends State<StudentsEdist> {
     } else {
       numbervalue = false;
     }
-    if (widget.utility_bills == '1') {
+    if (widget.have_living_home == '1') {
       house = '1';
     } else {
       house = '2';
@@ -170,12 +176,13 @@ class _StudentsEdistState extends State<StudentsEdist> {
 
   @override
   Widget build(BuildContext context) {
-    Regionidisi = widget.stay_region_id.toString();
+
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 12.h),
         child: Consumer<RegionProvider>(
           builder: (_, data, __) {
+            data.UniverId = widget.stay_univer_id.toString();
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -252,42 +259,40 @@ class _StudentsEdistState extends State<StudentsEdist> {
                       width: 240.w,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10.r),
-                          border: Border.all(color: titlecolor)),
-                      child: DropdownButtonFormField(
-                        menuMaxHeight: 100.h,
-                        hint: Padding(
-                          padding: EdgeInsets.symmetric(horizontal: 8.w),
-                          child: Text(
-                            "${widget.stay_region}",
-                            style:
-                                TextStyle(fontSize: 12.sp, color: Colors.black),
+                          border: Border.all(color: AppColors.textColor)),
+                      child: IgnorePointer(
+                        ignoring: regionsvalue,
+                        child: DropdownButtonFormField(
+                          isExpanded: true,
+                          menuMaxHeight: 100.h,
+                          hint: Padding(
+                            padding: EdgeInsets.only(left: 8.w),
+                            child:  Text(widget.stay_region.toString()).tr(),
                           ),
+                          decoration: const InputDecoration(
+                            border: InputBorder.none,
+                          ),
+                          // value: ,
+                          icon: const Icon(Icons.arrow_drop_down_outlined),
+                          items: data.regions.map((e) {
+                            return DropdownMenuItem<String>(
+                              onTap: () {
+                                data.RegionId = e.id.toString();
+                              },
+                              value: e.name ?? "",
+                              child: Padding(
+                                padding:  EdgeInsets.only(left: 8.w),
+                                child: Text(e.name.toString()),
+                              ),
+                            );
+                          }).toList(),
+                          onChanged: (newValue) async {
+                            setState(() {
+                              dropDown = newValue.toString();
+                              print( data.RegionId + 'dsdsdsdsdsd');
+                            });
+                          },
                         ),
-                        decoration:
-                            const InputDecoration(border: InputBorder.none),
-
-                        icon: const Icon(Icons.arrow_drop_down_outlined),
-                        items: data.regions.map((e) {
-                          return DropdownMenuItem<String>(
-                            onTap: () {
-                              // data.RegionId = e.id.toString();
-                              dropDown = e.id.toString();
-                            },
-                            value: e.name ?? "",
-                            child: Text(e.name.toString()),
-                          );
-                        }).toList(),
-                        onChanged: (newValue) async {
-                          // print("Selected ----------- $newValue");
-                          // data.isRegion = true;
-                          // print(data.isRegion);
-                          // final selected = data.regions
-                          //     .where((element) => element.name == newValue);
-                          // data.getDistrict(selected.last.id!);
-                          setState(() {
-                            dropDown = newValue.toString();
-                          });
-                        },
                       ),
                     ),
                     SizedBox(
@@ -345,13 +350,10 @@ class _StudentsEdistState extends State<StudentsEdist> {
                         mode: Mode.BOTTOM_SHEET,
                         items: data.univer.map((e) {
                           if (dropDown2 == e.name) {
-                            data.UniversiterId = e.id.toString();
+                            // data.UniversiterId = e.id.toString();
                             data.isId = e.id;
                             UniverId = e.id.toString();
                           }
-
-                          // final selected = data.univer.where((element) => element.name == e.name);
-                          // data.getFaculty(selected.last.id!);
                           return context.read<AutCubit>().selectedLang.index ==
                                   1
                               ? e.name.toString()
@@ -372,7 +374,6 @@ class _StudentsEdistState extends State<StudentsEdist> {
                             dropDown2 = value.toString();
                             _colorUniver = Colors.grey;
                           });
-                          print(dropDown2);
                         },
                         selectedItem: tr(value6 == false ?  widget.universtatenewname.toString():''),
                       ),
@@ -649,6 +650,7 @@ class _StudentsEdistState extends State<StudentsEdist> {
                               onChanged: (String? val) {
                                 setState(() {
                                   house = val!;
+                                  print(house);
                                 });
                               },
                             ),
@@ -684,7 +686,7 @@ class _StudentsEdistState extends State<StudentsEdist> {
                     child: TextField(
                       onChanged: (e) {
                         setState(() {
-                          if (e.length > 0) {
+                          if (e.isNotEmpty) {
                             _colorForm = Colors.grey;
                           } else {
                             _colorForm = Colors.red;
@@ -718,14 +720,14 @@ class _StudentsEdistState extends State<StudentsEdist> {
                           primary: AppColors.buttonLinear),
                       onPressed: () {
                         print(titlecontroller1!.text + 'title');
-                        print(dropDown.toString() + 'region');
+                        print(data.RegionId.toString() + 'region');
                         print(regionsvalue == true ? '1':'2' +' region matter');
-                        print(data.UniversiterId + 'univer id');
+                        print(data.UniverId + 'univer id');
                         print(univervalue.toString() + 'uniever matter');
                         print(_titleGendor.toString() + 'gender');
                         print(partner.toString() + 'count of roomates');
                         print(phoneController!.text + 'phone number');
-                        print(numbervalue == true ? '1':'2' +' hint phone');
+                        print(numbervalue == true ? '1':'2' +' hide phone');
                         print(house + 'have live');
                         print(addinformation!.text + 'description');
 
@@ -765,43 +767,44 @@ class _StudentsEdistState extends State<StudentsEdist> {
                         //     _FormOnClick &&
                         //     _UniverOnClick) {
                         //=====
-                        // Navigator.push(
-                        //   context,
-                        //   MaterialPageRoute(
-                        //     builder: (context) => StudensEdits2(
-                        //       updateidi: '${widget.updateid}',
-                        //       images: widget.images,
-                        //       comfort: '${widget.comfort}',
-                        //       utility_bills: "${widget.utility_bills}",
-                        //       live_with_owner: "${widget.live_with_owner}",
-                        //       cost_period: "${widget.cost_period}",
-                        //       rent_type: '${widget.renttype}',
-                        //       costtype: '${widget.cost_type}',
-                        //       cost: '${widget.cost}',
-                        //       etaj: '${widget.floors_count}',
-                        //       qavatlar: '${widget.room_count}',
-                        //       honasoni: "${widget.roommate_count}",
-                        //       housetype: '${widget.house_type}',
-                        //       Subway: '${widget.subway}',
-                        //       adress: '${widget.address}',
-                        //       viloyatname: widget.stay_region.toString(),
-                        //       titlecontroller1: titlecontroller1!.text,
-                        //       univervalue: '${value6 ? 1 : 2}',
-                        //       viloyatidisi: data.viloyatid.toString(),
-                        //       viloyatvalue: '${regionsvalue ? 1 : 2}',
-                        //       universiteteid: data.UniverId,
-                        //       titleGendor: '${gender1 ? 0 : _titleGendor}',
-                        //       titlecount: '${gender1 ? 0 : _titleCount}',
-                        //       phoneController:
-                        //           phoneController!.text.split(' ').join(''),
-                        //       house: house,
-                        //       addinformation: addinformation!.text,
-                        //       numbervalue: '${numbervalue ? 1 : 2}',
-                        //       tuman: '${widget.district}',
-                        //       locations: '${widget.location}',
-                        //     ),
-                        //   ),
-                        // );
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => StudensEdits2(
+                              titlecontroller1: titlecontroller1!.text,
+                              viloyatidisi:  data.RegionId.toString(),
+                              viloyatvalue: regionsvalue ? '1' : '2',
+                              universiteteid: data.UniverId,
+                              univervalue: '${value6 ? 1 : 2}',
+                              titleGendor: '${_titleGendor}',
+                              titlecount: '${partner}',
+                              phoneController:
+                              phoneController!.text.split(' ').join(''),
+                              numbervalue: '${numbervalue ? 1 : 2}',
+                              house: house,
+                              addinformation: addinformation!.text,
+
+                              updateidi: '${widget.updateid}',
+                              images: widget.images,
+                              comfort: '${widget.comfort}',
+                              utility_bills: "${widget.utility_bills}",
+                              live_with_owner: "${widget.live_with_owner}",
+                              cost_period: "${widget.cost_period}",
+                              rent_type: '${widget.renttype}',
+                              costtype: '${widget.cost_type}',
+                              cost: '${widget.cost}',
+                              etaj: '${widget.inFloor}',
+                              qavatlar: '${widget.floors_count}',
+                              honasoni: "${widget.roommate_count}",
+                              housetype: '${widget.house_type}',
+                              Subway: '${widget.subway}',
+                              adress: '${widget.address}',
+                              viloyatname: widget.stay_region.toString(),
+                              tuman: '${widget.district}',
+                              locations: '${widget.location}', districtId: widget.districtId, roomCount: widget.room_count,
+                            ),
+                          ),
+                        );
 
                         //===
                         // } else {

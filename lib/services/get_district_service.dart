@@ -5,6 +5,7 @@ import 'package:talaba_uy/core/data/mockdata.dart';
 
 
 
+import '../core/const/consts.dart';
 import '../models/get_district_model.dart';
 
 
@@ -12,7 +13,7 @@ class GetDistrictService {
   Future<List<GetDistrictModel>> fetchDistrict( int id) async {
     try {
       var response = await http.get(Uri.parse(
-        'http://164.68.114.231:8081/roommate/backend/web/api/region/get-district?region_id=$id',
+        '${Const.baseUrl}api/region/get-district?region_id=$id',
       ),
 
       );

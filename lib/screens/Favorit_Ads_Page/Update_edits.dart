@@ -43,10 +43,13 @@ class UpdateStudents extends StatefulWidget {
   String? cost_period;
   String? id;
   String? univername;
+  String? districtId;
+  String? inFloor;
   List<dynamic>? images;
 
   UpdateStudents({
     Key? key,
+    required this.inFloor,
     required this.id,
     required this.stay_region_id,
     required this.images,
@@ -77,6 +80,7 @@ class UpdateStudents extends StatefulWidget {
     required this.stay_university_id,
     required this.stay_university_matter,
     required this.utility_bills,
+    required this.districtId
   }) : super(key: key);
 
   @override
@@ -136,7 +140,7 @@ class _UpdateStudentsState extends State<UpdateStudents> {
         howcountroom: '${widget.howcountroom}',
         universtatenewname: '${widget.univername}',
         images: widget.images,
-        stay_region_id: '${widget.stay_region_id}',
+        stay_region_id: '${widget.stay_region_id}', districtId: widget.districtId, inFloor: widget.inFloor,
       ),
     );
   }

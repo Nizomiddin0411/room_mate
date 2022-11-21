@@ -9,12 +9,14 @@ import 'dart:convert';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 
+import '../core/const/consts.dart';
+
 class FavoriteChange {
   Future Favoritefetch({required String id,}) async {
     var request = http.MultipartRequest(
       'post',
       Uri.parse(
-        'http://164.68.114.231:8081/roommate/backend/web/api/favorite/change-favorite',
+        '${Const.baseUrl}api/favorite/change-favorite',
       ),
       // headers: {
       //   HttpHeaders.authorizationHeader: 'Bearer ${Hive.box('token').get('token')}'

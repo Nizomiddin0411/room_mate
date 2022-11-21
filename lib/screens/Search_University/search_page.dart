@@ -65,7 +65,7 @@ class _SearchPageState extends State<SearchPage> {
               children: [
                 Center(
                   child: Padding(
-                    padding: EdgeInsets.all(15.0),
+                    padding: const EdgeInsets.all(15.0),
                     child: TextField(
                       controller: _controller,
                       decoration: InputDecoration(
@@ -73,7 +73,11 @@ class _SearchPageState extends State<SearchPage> {
                         label: const Text("Qidirish "),
                         suffixIcon: IconButton(
                           onPressed: () {
-                            _controller.clear();
+                            // _controller.clear();
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (BuildContext context) => super.widget));
                           },
                           icon: const Icon(
                             Icons.cancel_outlined,

@@ -22,14 +22,12 @@ class _FeedbackPageState extends State<FeedbackPage> {
     final provider = context.read<FeedbackProvider>();
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: AppColors.backgroundWhite,
-        title: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 68.w),
-          child: const Text(
-            "Feedback",
-            style: TextStyle(color: AppColors.mainColor),
-          ).tr(),
-        ),
+        title: const Text(
+          "Talab va takliflar",
+          style: TextStyle(color: AppColors.mainColor),
+        ).tr(),
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);
@@ -84,7 +82,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
               SizedBox(
                 height: 54.h,
               ),
-              Text("Talab takliflar bo’lsa yozing"),
+              const Text("Talab takliflar bo’lsa yozing"),
               Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
@@ -122,20 +120,23 @@ class _FeedbackPageState extends State<FeedbackPage> {
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Text(
-                  "Yutuqli sovrinda qatnashing !",
-                  style: TextStyle(fontSize: 18.sp),
+                  "Eng yaxshi taklif uchun tanlov !",
+                  style: TextStyle(fontSize: 18.sp,fontWeight: FontWeight.w500),
                 ).tr(),
               ),
               SizedBox(
                 height: 10.h,
               ),
               Text(
-                "Ushbu  yutuqli o’yin haqida batafsil ma’lumot olish shartlari ",
+                "Mazkur rivojlantirish bo'yicha eng yaxshi takliflarni saralash maqsadida har yili tanlov o'tkaziladi.",
                 style: TextStyle(fontSize: 16.sp),
               ),
-              Text(
-                  '1.Dasturdagi xatolar haqida feedback qoldiring sizning fikringiz biz uchun qiziq .'),
-              Text('2.Har oyning qaysidir sanasida 1 kishi tanlab olinadi .'),
+              SizedBox(
+                height: 8.h,
+              ),
+              const Text(
+                  "Eng yaxshi deb topilgan 3 ta taklif egalari har yili avgust oyida qimmatbaho sovg'alar (iPhone 14 telefoni,noutbuq va planshet) bilan taqdirlanadi ."),
+              // const Text('2.Har oyning qaysidir sanasida 1 kishi tanlab olinadi .'),
               InkWell(
                 onTap: () async {
                   print(provider.rentof);
@@ -144,7 +145,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
                           ? '0'
                           : provider.rentof == '1'
                               ? '1'
-                              : '2',
+                              : '2' ,
                       descriptionController.text);
                   Navigator.push(context, MaterialPageRoute(builder: (context) => SuccedPage()));
                 },

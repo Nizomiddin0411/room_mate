@@ -9,7 +9,6 @@ import 'package:talaba_uy/services/get_faculty_service.dart';
 import '../../provider/search_universitet_provider.dart';
 import '../../provider/universitet_provider.dart';
 
-
 class ResultFiltrPage extends StatefulWidget {
   final String id;
 
@@ -69,7 +68,6 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-               
                 SizedBox(height: 12.h),
                 Text(
                   "Viloyat",
@@ -79,13 +77,16 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                     fontWeight: FontWeight.w500,
                   ),
                 ),
-                SizedBox(height: 4.h,),
+                SizedBox(
+                  height: 4.h,
+                ),
                 Column(
                   children: [
                     DropdownButtonFormField2<String>(
+                      dropdownMaxHeight: 100.h,
                       decoration: InputDecoration(
                         enabledBorder:
-                            OutlineInputBorder(borderSide: BorderSide()),
+                            const OutlineInputBorder(borderSide: BorderSide()),
                         isDense: true,
                         contentPadding: EdgeInsets.zero,
                         border: OutlineInputBorder(
@@ -110,9 +111,12 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                       items: provider.Viloyat.map(
                         (e) => DropdownMenuItem<String>(
                           onTap: () {
-                            setState(() {
-                              Region = e.id.toString();
-                            });
+                            provider.isRegion = true;
+                            // setState(() {
+                              // if(provider.RegionId == e.name){
+                                provider.RegionOf = e.id.toString();
+                              // }
+                            // });
                           },
                           value: e.name ?? "",
                           child: Text(
@@ -143,11 +147,14 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                   children: [
                     Row(
                       children: [
-                        Text("Tuman",   style: TextStyle(
-                    color: AppColors.textColor,
-                    fontSize: 14.sp,
-                    fontWeight: FontWeight.w500,
-                  ),),
+                        Text(
+                          "Tuman",
+                          style: TextStyle(
+                            color: AppColors.textColor,
+                            fontSize: 14.sp,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
                       ],
                     ),
                     SizedBox(
@@ -157,6 +164,7 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                         ? Column(
                             children: [
                               DropdownButtonFormField2<String>(
+                                dropdownMaxHeight: 100.h,
                                 decoration: InputDecoration(
                                   enabledBorder: const OutlineInputBorder(
                                       borderSide: BorderSide()),
@@ -186,9 +194,13 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                                     .map(
                                       (e) => DropdownMenuItem<String>(
                                         onTap: () {
-                                          setState(() {
-                                            District = e.id.toString();
-                                          });
+                                          // setState(() {
+                                            // if(provider.DistrickId == e.name){
+                                              provider.DistrictOf = e.id.toString();
+                                            // }
+
+                                            provider.isDistrict = true;
+                                          // });
                                         },
                                         value: provider.istuman
                                             ? e.name.toString()
@@ -239,12 +251,15 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                                 dropdownDecoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(15.r),
                                 ),
-                                items: [],
+                                items: const [],
                                 onChanged: null,
                               ),
                             ],
                           ),
                   ],
+                ),
+                SizedBox(
+                  height: 10.h,
                 ),
                 Text(
                   "Talaba",
@@ -255,7 +270,7 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                   ),
                 ),
                 SizedBox(
-                  height: 10.r,
+                  height: 10.h,
                 ),
                 Text(
                   "Yo’nalish",
@@ -274,15 +289,17 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                       return Column(
                         children: [
                           DropdownButtonFormField2<String?>(
+                            dropdownMaxHeight: 100.h,
                             decoration: InputDecoration(
-                              enabledBorder:
-                                  const OutlineInputBorder(borderSide: BorderSide()),
+                              enabledBorder: const OutlineInputBorder(
+                                  borderSide: BorderSide()),
                               isDense: true,
                               contentPadding: EdgeInsets.zero,
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(10.r),
                               ),
                             ),
+
                             isExpanded: true,
                             isDense: true,
                             hint: Text(
@@ -294,6 +311,7 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                               color: Colors.black45,
                             ),
                             iconSize: 30,
+
                             buttonHeight: 60.h,
                             buttonPadding:
                                 EdgeInsets.only(left: 20.w, right: 10.w),
@@ -303,6 +321,10 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                             items: snapshot.data!
                                 .map(
                                   (value) => DropdownMenuItem<String?>(
+                                    onTap: () {
+                                      provider.isFacultet = true;
+                                      provider.FakultetId = value.id.toString();
+                                    },
                                     value: value.name,
                                     child: Text(
                                       value.name!,
@@ -328,16 +350,21 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                     );
                   },
                 ),
-                SizedBox(height: 4.h,),
+                SizedBox(
+                  height: 4.h,
+                ),
                 Column(
                   children: [
                     Row(
                       children: [
-                        const Text("Kurs ",   style: TextStyle(
-                    color: AppColors.textColor,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w500,
-                  ),).tr(),
+                        const Text(
+                          "Kurs ",
+                          style: TextStyle(
+                            color: AppColors.textColor,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ).tr(),
                       ],
                     ),
                     SizedBox(
@@ -374,6 +401,9 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                           ),
                           items: kursingizItems
                               .map((item) => DropdownMenuItem<String>(
+                                    onTap: () {
+                                      provider.isCourse = true;
+                                    },
                                     value: item,
                                     child: Text(
                                       item,
@@ -383,11 +413,11 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                                     ),
                                   ))
                               .toList(),
-                          validator: (value) =>
-                              value == value ? 'Kursni tanlang' : null,
+                          // validator: (value) =>
+                          //     value == value ? 'Kursni tanlang' : null,
                           onChanged: (String? value) {
-                            Course = value.toString();
-                            setState(() {});
+                            provider.CourseOf = value.toString();
+
                           },
                         ),
                       ],
@@ -409,8 +439,17 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                                   side: const BorderSide(color: Colors.red)),
                               primary: Colors.white),
                           onPressed: () {
-                            provider.getAds('1', '1','1','1', UniverId: widget.id);
-                            Navigator.pop(context);
+                            provider.getAds(
+                                UniverId: widget.id,
+                                course: '0',
+                                Fakultetid: '0',
+                                Regionid: '0',
+                                Districtid: '0');
+                            Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (BuildContext context) =>
+                                        super.widget));
                           },
                           child: Text(
                             "Tozalash",
@@ -433,7 +472,24 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                                   borderRadius: BorderRadius.circular(10.r)),
                               primary: AppColors.buttonLinear),
                           onPressed: () {
-                            provider.getAds(Course, widget.id, provider.RegionId, provider.DistrickId, UniverId: widget.id);
+                            print(widget.id.toString() + 'univer');
+                            print(provider.FakultetId.toString() + 'faqultet');
+                            print(provider.CourseOf.toString() + 'course');
+                            print(provider.DistrictOf.toString() + 'tuman');
+                            print(provider.RegionOf.toString() + 'viloyat');
+                            provider.getAds(
+                                UniverId: widget.id,
+                                Fakultetid: provider.isFacultet == true
+                                    ? provider.FakultetId.toString()
+                                    : '0',
+                                course:
+                                    provider.isCourse == true ? provider.CourseOf.toString() : '0',
+                                Districtid: provider.isDistrict == true
+                                    ? provider.DistrictOf.toString()
+                                    : '0',
+                                Regionid: provider.isRegion == true
+                                    ? provider.RegionOf.toString()
+                                    : '0');
                             Navigator.pop(context);
                           },
                           child: Text(

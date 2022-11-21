@@ -6,6 +6,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
 import 'package:talaba_uy/screens/Ijarachipage/filtr.dart';
+import '../../core/const/consts.dart';
 import '../../provider/region_provider.dart';
 import '../../services/post_change_favoritr_service.dart';
 import '../Ads_Detail/ads_detail.dart';
@@ -254,7 +255,7 @@ class _ElonlarState extends State<Elonlar> {
                                     data.Ads[index].images!.isNotEmpty
                                         ? CachedNetworkImage(
                                             imageUrl:
-                                                "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.Ads[index].images!.first.image.toString()}",
+                                                "${Const.baseUrl}uploads/image/${data.Ads[index].images!.first.image.toString()}",
                                             placeholder: (context, url) =>
                                                 const Center(
                                                     child:
@@ -617,7 +618,7 @@ class _ElonlarState extends State<Elonlar> {
                                     data.AdsForStudent[index].images!.isNotEmpty
                                         ? CachedNetworkImage(
                                             imageUrl:
-                                                "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.AdsForStudent[index].images!.first.image.toString()}",
+                                                "${Const.baseUrl}uploads/image/${data.AdsForStudent[index].images!.first.image.toString()}",
                                             placeholder: (context, url) =>
                                                 const Center(
                                                     child:

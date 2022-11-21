@@ -4,6 +4,8 @@ import 'dart:io';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 
+import '../core/const/consts.dart';
+
 class CreateAdsUserServeice {
   Future CreateAds({
     required String? address,
@@ -23,7 +25,7 @@ class CreateAdsUserServeice {
     var request = http.MultipartRequest(
       'post',
       Uri.parse(
-        'http://164.68.114.231:8081/roommate/backend/web/api/advertising/user-add-advertising',
+        '${Const.baseUrl}api/advertising/user-add-advertising',
       ),
     );
 

@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:talaba_uy/chat/chat_page.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:talaba_uy/screens/drawer/drawer.dart';
+
 
 class AllChats extends StatefulWidget {
   const AllChats({Key? key}) : super(key: key);
@@ -13,7 +13,6 @@ class AllChats extends StatefulWidget {
 }
 
 class _AllChatsState extends State<AllChats> {
-  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
   int myId = Hive.box('id').get('id');
   int leng = 0;
   List _iList = [];
@@ -23,13 +22,13 @@ class _AllChatsState extends State<AllChats> {
       // key: _scaffoldKey,
       // drawer: DrawerPage(),
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(60, 104, 255, 1),
+        backgroundColor: const Color.fromRGBO(60, 104, 255, 1),
         leading: InkWell(
           // onTap: () => _scaffoldKey.currentState!.openDrawer(),
           onTap: ()=>Navigator.pop(context),
-          child: Icon(Icons.arrow_back),
+          child: const Icon(Icons.arrow_back),
         ),
-        title: Text(
+        title: const Text(
           "Messages",
           style: TextStyle(color: Colors.white),
         ),
@@ -43,10 +42,10 @@ class _AllChatsState extends State<AllChats> {
           builder:
               (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             if (snapshot.hasError) {
-              return Text("something is wrong");
+              return const Text("something is wrong");
             }
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             }
@@ -63,7 +62,7 @@ class _AllChatsState extends State<AllChats> {
 
             return ListView.builder(
               itemCount: lengFunc(leng),
-              physics: ScrollPhysics(),
+              physics: const ScrollPhysics(),
               shrinkWrap: true,
               primary: true,
               itemBuilder: ((context, index) {
@@ -72,6 +71,7 @@ class _AllChatsState extends State<AllChats> {
                   onTap: () {
                     
                     print(qs['id']);
+                    print(qs['name']);
                     Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -82,7 +82,7 @@ class _AllChatsState extends State<AllChats> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(30.r)),
                     child: ListTile(
-                      leading: CircleAvatar(
+                      leading: const CircleAvatar(
                         backgroundImage: NetworkImage(
                             "https://upload.wikimedia.org/wikipedia/tr/thumb/e/ea/PolatAlemdar.jpg/800px-PolatAlemdar.jpg"),
                       ),

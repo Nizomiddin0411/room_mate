@@ -578,7 +578,7 @@ class _FiltrPageState extends State<FiltrPage> {
                   Padding(
                     padding:
                         EdgeInsets.symmetric(vertical: 8.h, horizontal: 31.w),
-                    child: Container(
+                    child: SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(

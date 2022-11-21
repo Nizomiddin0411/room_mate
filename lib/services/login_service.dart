@@ -2,13 +2,15 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:hive/hive.dart';
 
+import '../core/const/consts.dart';
+
 class LoginService {
   Future loginService({
     required String phone,
   }) async {
     var request = http.MultipartRequest(
       'post',
-      Uri.parse('http://164.68.114.231:8081/roommate/backend/web/api/user/send-sms'),
+      Uri.parse('${Const.baseUrl}api/user/send-sms'),
     );
     request.fields.addAll({
       'phone': phone, 

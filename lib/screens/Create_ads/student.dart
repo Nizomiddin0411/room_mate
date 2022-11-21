@@ -273,7 +273,7 @@ class _StudentState extends State<Student> {
                               otmEnable1 = value!;
                               regionsvalue = value;
                             });
-                            print(otmEnable1);
+                            print(regionsvalue);
                           },
                         ),
                       ],
@@ -643,7 +643,7 @@ class _StudentState extends State<Student> {
                             ),
                             Text(
                               'Ha',
-                              style: new TextStyle(fontSize: 17.0.sp),
+                              style: TextStyle(fontSize: 17.0.sp),
                             ),
                             SizedBox(
                               width: 55.w,
@@ -732,7 +732,7 @@ class _StudentState extends State<Student> {
                                 .toString() +
                             'telefon');
                         print(house.toString() + 'have living home');
-                        print('${addinformation.text}' + 'discription');
+                        print(addinformation.text + 'discription');
                         print('${numbervalue ? 1 : 2}========== phone matter');
                         if (titlecolor2 && _phoneOnClick) {
                           if (house == '1') {
@@ -741,36 +741,36 @@ class _StudentState extends State<Student> {
                               MaterialPageRoute(
                                 builder: (context) => Student2(
                                     titlecontroller1: titlecontroller1.text,
-                                    univervalue: '${value6 ? 1 : 2}',
-                                    viloyatidisi: data.viloyatid.toString(),
-                                    viloyatvalue: '${regionsvalue ? 1 : 2}',
-                                    universiteteid: data.UniverId,
+                                    univervalue: value6 == true ? '1' : '2',
+                                    viloyatidisi: regionsvalue == false ? data.viloyatid.toString():'',
+                                    viloyatvalue: regionsvalue == true ? '1' : '2',
+                                    universiteteid: value6 == false ? data.UniverId:'',
                                     titleGendor:
-                                        '${gender1 ? 0 : _titleGendor}',
-                                    titlecount: '${_titleCount}',
+                                        gender1 == true ? '0' : _titleGendor.toString(),
+                                    titlecount: '$_titleCount',
                                     phoneController: phoneController.text
                                         .split(' ')
                                         .join(''),
                                     house: house,
                                     addinformation: addinformation.text,
-                                    numbervalue: '${numbervalue ? 1 : 2}'),
+                                    numbervalue: numbervalue==true ? '1' : '2'),
                               ),
                             );
                           } else {
                             await CreateStudentHouse().StudentsCreateAds(
                               title: titlecontroller1.text,
-                              stay_region_id: data.viloyatid.toString(),
-                              stay_region_matter: '${regionsvalue ? 1 : 2}',
-                              stay_university_id: data.UniverId,
-                              stay_university_matter: '${value6 ? 1 : 2}',
-                              roommate_gender: '${gender1 ? 0 : _titleGendor}',
+                              stay_region_id:regionsvalue == false? data.viloyatid.toString():'',
+                              stay_region_matter: regionsvalue == true ? '1' : '2',
+                              stay_university_id:  value6 == false ? data.UniverId :'',
+                              stay_university_matter: value6 == true ? '1' : '2',
+                              roommate_gender: gender1 == true ? '0' : _titleGendor.toString(),
                               roommate_count: _titleCount.toString(),
                               phone_number:
                                   phoneController.text.split(' ').join(''),
-                              phone_number_show: '${numbervalue ? 1 : 2}',
+                              phone_number_show: numbervalue == true ? '1' : '2',
                               have_living_home: house,
-                              description: '${addinformation.text}',
-                              district_id: '19',
+                              description: addinformation.text,
+                              district_id: '',
                               address: '',
                               location: '',
                               subway: '',

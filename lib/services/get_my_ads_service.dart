@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 
 
 
+import '../core/const/consts.dart';
 import '../models/get_district_model.dart';
 import '../models/get_my_ads_model.dart';
 
@@ -13,7 +14,7 @@ class GetMyAdsService {
   Future<List<GetMyAdsModel>> fetchADS() async {
     try {
       var response = await http.get(Uri.parse(
-        'http://164.68.114.231:8081/roommate/backend/web/api/advertising/get-my-advertising',
+        '${Const.baseUrl}api/advertising/get-my-advertising',
 
       ),
           headers: {

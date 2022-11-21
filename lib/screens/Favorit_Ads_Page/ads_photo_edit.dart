@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 import 'package:talaba_uy/provider/favorite_provider.dart';
 import 'package:talaba_uy/screens/Create_ads/create_succed_dart.dart';
 import '../../core/const/app_colors.dart';
+import '../../core/const/consts.dart';
 
 class AdsPhotoEdit extends StatefulWidget {
   String? titleController;
@@ -215,7 +216,7 @@ class _AdsPhotoEditState extends State<AdsPhotoEdit> {
                                   height: 50.h,
                                   child: CachedNetworkImage(
                                     imageUrl:
-                                        'http://164.68.114.231:8081/roommate/backend/web/uploads/image/${widget.Image![index].image.toString()}',
+                                        '${Const.baseUrl}uploads/image/${widget.Image![index].image.toString()}',
 
                                     placeholder: (context, url) =>
                                     const Center(

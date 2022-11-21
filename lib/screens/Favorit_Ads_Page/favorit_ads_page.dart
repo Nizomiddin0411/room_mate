@@ -4,9 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:talaba_uy/screens/Favorit_Ads_Page/Update_edits.dart';
-import 'package:talaba_uy/screens/Favorit_Ads_Page/ads_edit.dart';
+
 import 'package:talaba_uy/screens/Favorit_Ads_Page/ads_page_edit.dart';
 import '../../core/const/app_colors.dart';
+import '../../core/const/consts.dart';
 import '../../provider/favorite_provider.dart';
 import '../../services/post_my_ads_delete_Service.dart';
 import '../Ads_Detail/ads_detail.dart';
@@ -56,7 +57,7 @@ class _FavoritAdsState extends State<FavoritAds> {
                 child: CircularProgressIndicator());
           }
           if (data.MyAds.isEmpty) {
-            return Center(
+            return const Center(
               child: Text("Ma'lumot yo'q"),
             );
           }
@@ -64,7 +65,7 @@ class _FavoritAdsState extends State<FavoritAds> {
             child: Column(
               children: [
                 ListView.builder(
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     shrinkWrap: true,
                     itemCount: data.MyAds.length,
                     itemBuilder: (context, index) {
@@ -166,7 +167,8 @@ class _FavoritAdsState extends State<FavoritAds> {
                                                 createData: data
                                                     .MyAds[index].createdAt
                                                     .toString(),
-                                                comfort: data.MyAds[index].comfort,
+                                                comfort:
+                                                    data.MyAds[index].comfort,
                                                 // data.MyAds[index].comfort,
                                                 inFloor: data
                                                     .MyAds[index].inFloor
@@ -223,7 +225,7 @@ class _FavoritAdsState extends State<FavoritAds> {
                                           data.MyAds[index].images!.isNotEmpty
                                               ? CachedNetworkImage(
                                                   imageUrl:
-                                                      "http://164.68.114.231:8081/roommate/backend/web/uploads/image/${data.MyAds[index].images!.first.image.toString()}",
+                                                      "${Const.baseUrl}uploads/image/${data.MyAds[index].images!.first.image.toString()}",
                                                   placeholder: (context, url) =>
                                                       const Center(
                                                           child:
@@ -406,7 +408,6 @@ class _FavoritAdsState extends State<FavoritAds> {
                                                                           .MyAds[
                                                                               index]
                                                                           .location,
-
                                                                       data
                                                                           .MyAds[
                                                                               index]
@@ -489,10 +490,10 @@ class _FavoritAdsState extends State<FavoritAds> {
                                                                               index]
                                                                           .districtId
                                                                           .toString(),
-                                                                  Image:   data
-                                                                  .MyAds[
-                                                              index]
-                                                                  .images,
+                                                                      Image: data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .images,
                                                                     )
                                                                   : UpdateStudents(
                                                                       univername:
@@ -550,10 +551,19 @@ class _FavoritAdsState extends State<FavoritAds> {
                                                                       renttype:
                                                                           '${data.MyAds[index].rentType}',
                                                                       id: '${data.MyAds[index].id}',
-                                                                      images:
-                                                                          data.MyAds[index].images,
+                                                                      images: data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .images,
                                                                       stay_region_id:
                                                                           '${data.MyAds[index].stayRegionId}',
+                                                                      districtId: data
+                                                                          .MyAds[
+                                                                              index]
+                                                                          .districtId
+                                                                          .toString(),
+                                                                      inFloor:
+                                                                          data.MyAds[index].inFloor.toString(),
                                                                     ),
                                                             ),
                                                           ),
@@ -638,8 +648,16 @@ class _FavoritAdsState extends State<FavoritAds> {
                                                   fontSize: 24.sp),
                                             ),
                                             Text(
-                                              '${data.MyAds[index].costPeriod.toString() == '1' ? 'Kuniga' : data.MyAds[index].costPeriod.toString() == '2' ? 'Oyiga' : 'Uzoq muddatga'}',
-                                              style: TextStyle(
+                                              data.MyAds[index].costPeriod
+                                                          .toString() ==
+                                                      '1'
+                                                  ? 'Kuniga'
+                                                  : data.MyAds[index].costPeriod
+                                                              .toString() ==
+                                                          '2'
+                                                      ? 'Oyiga'
+                                                      : 'Uzoq muddatga',
+                                              style: const TextStyle(
                                                   color: AppColors.mainColor),
                                             ),
                                           ],
@@ -649,7 +667,7 @@ class _FavoritAdsState extends State<FavoritAds> {
                                         // mainAxisAlignment:
                                         //     MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Icon(
+                                          const Icon(
                                             Icons.location_on,
                                             color: AppColors.mainColor,
                                           ),
@@ -692,14 +710,14 @@ class _FavoritAdsState extends State<FavoritAds> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text("E’lonni o’chirish "),
+            title: const Text("E’lonni o’chirish "),
             actions: [
               Column(
                 children: [
                   Padding(
                     padding:
                         EdgeInsets.symmetric(horizontal: 10.h, vertical: 15.w),
-                    child: Text(
+                    child: const Text(
                         "Ushbu e’lonni o’chirishga ishonchingiz komilmi ? "),
                   ),
                   Row(
@@ -716,7 +734,7 @@ class _FavoritAdsState extends State<FavoritAds> {
                             primary: Colors.blue,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.r),
-                                side: BorderSide(color: Colors.blue)),
+                                side: const BorderSide(color: Colors.blue)),
                           ),
                           child: Text(
                             "Bekor qilish",
@@ -729,7 +747,7 @@ class _FavoritAdsState extends State<FavoritAds> {
                       SizedBox(
                         width: 10.w,
                       ),
-                      Container(
+                      SizedBox(
                         width: 130.w,
                         height: 48.h,
                         child: ElevatedButton(
@@ -742,7 +760,7 @@ class _FavoritAdsState extends State<FavoritAds> {
                             primary: Colors.red,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.r),
-                                side: BorderSide(color: Colors.red)),
+                                side: const BorderSide(color: Colors.red)),
                           ),
                           child: Text(
                             "O’chirish",

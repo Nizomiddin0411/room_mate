@@ -4,6 +4,8 @@ import 'dart:io';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 
+import '../core/const/consts.dart';
+
 class UpdateStudentHome {
   Future StudentsUpdate({
     required String idedit,
@@ -37,7 +39,7 @@ class UpdateStudentHome {
     var request = http.MultipartRequest(
       'post',
       Uri.parse(
-        'http://164.68.114.231:8081/roommate/backend/web/api/advertising/student-update-advertising',
+        '${Const.baseUrl}api/advertising/student-update-advertising',
       ),
     );
 

@@ -4,6 +4,8 @@ import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:talaba_uy/services/post_create_ads_student.dart';
 
+import '../core/const/consts.dart';
+
 class RegistratsiyaUser {
   Future CreateAdsUser({
     required String Phonenumber,
@@ -13,7 +15,7 @@ class RegistratsiyaUser {
     var request = http.MultipartRequest(
       'post',
       Uri.parse(
-        'http://164.68.114.231:8081/roommate/backend/web/api/user/user-registration',
+        '${Const.baseUrl}api/user/user-registration',
       ),
     );
 

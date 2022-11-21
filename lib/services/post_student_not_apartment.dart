@@ -4,6 +4,8 @@ import 'dart:io';
 import 'package:hive/hive.dart';
 import 'package:http/http.dart' as http;
 
+import '../core/const/consts.dart';
+
 class CreateStudentHouse {
   Future StudentsCreateAds(
       {
@@ -38,7 +40,7 @@ class CreateStudentHouse {
     var request = http.MultipartRequest(
       'post',
       Uri.parse(
-        'http://164.68.114.231:8081/roommate/backend/web/api/advertising/student-add-advertising',
+        '${Const.baseUrl}api/advertising/student-add-advertising',
       ),
     );
       request.fields.addAll({
