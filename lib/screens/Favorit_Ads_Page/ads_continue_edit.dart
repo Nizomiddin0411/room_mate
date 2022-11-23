@@ -33,11 +33,13 @@ class AdsContinueEdit extends StatefulWidget {
   String? utility_hot_water;
   String? utility_cold_water;
   String? utility_trash;
+  String? costType;
   String subway;
   List<dynamic>? Image;
 
   AdsContinueEdit({
     required this.id,
+    required this.costType,
     required this.addressController,
     required this.university_id,
     required this.roommate_gender,
@@ -86,20 +88,19 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
   String? utility_cold_water;
   String? utility_trash;
   List comfort = [];
-  String? description;
 
-  bool _checkHome = false;
-  bool _checkMetro = false;
-  String RoomOwner = '';
-  String RentOf = '';
-  String Subway = '';
+
+
+
+
+
   String? _dropownUsd;
-  String dropDown = "";
-  String TypeHouse = '';
-  String CountRoom = '';
-  String genderString = '';
-  String dropDown2 = "";
-  String countRoom = '';
+
+
+
+
+
+
   String price = '';
   TextEditingController? addressController;
   TextEditingController? costController;
@@ -119,11 +120,10 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
   bool _inFloorOnClick = true;
   Color _costTypeColor = Colors.grey;
   bool _costTypeOnClick = true;
-  Color _descriptionColor = Colors.grey;
-  bool _descriptionOnClick = true;
+
+
   Color _priceColor = Colors.grey;
   bool _priceOnClick = true;
-  Color _colorForm = Colors.grey;
   Color costColor = Colors.black54;
   Color phoneColor = Colors.black54;
   String? id;
@@ -188,7 +188,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
     '2',
     '3',
     '4',
-    '5-6',
+    '5',
   ];
 
   @override
@@ -199,7 +199,9 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
     inputcontroller = TextEditingController();
     phoneController = TextEditingController(text: widget.phoneNumber);
     descriptionController = TextEditingController(text: widget.description);
-
+    in_floor = widget.in_floor;
+    room_count = widget.room_count;
+    _dropownUsd = widget.costType=='1'?'sum':'usd';
     late List<String> haveComfort = widget.comfort!.split(',');
     for (String i in haveComfort) {
       if (i == '1') {
@@ -420,7 +422,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                             ),
                             decoration:
                                 const InputDecoration(border: InputBorder.none),
-                            icon: Icon(Icons.arrow_drop_down_outlined),
+                            icon: const Icon(Icons.arrow_drop_down_outlined),
                             items: ijaramuddat.map((e) {
                               rent_type = widget.rent_type;
                               return DropdownMenuItem<String>(
@@ -473,6 +475,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                               borderRadius: BorderRadius.circular(10.r),
                               border: Border.all(color: _roomCountColor)),
                           child: DropdownButtonFormField(
+                            menuMaxHeight: 100.h,
                             hint: Padding(
                               padding: EdgeInsets.only(left: 8.w),
                               child: Text(
@@ -484,7 +487,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                                 const InputDecoration(border: InputBorder.none),
                             icon: const Icon(Icons.arrow_drop_down_outlined),
                             items: ijarachi.map((e) {
-                              room_count = widget.room_count;
+
                               return DropdownMenuItem<String>(
                                 onTap: () {},
                                 value: e,
@@ -531,6 +534,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                               borderRadius: BorderRadius.circular(10.r),
                               border: Border.all(color: _floorsCountColor)),
                           child: DropdownButtonFormField(
+                            menuMaxHeight: 100.h,
                             hint: Padding(
                               padding: EdgeInsets.only(left: 8.w),
                               child: Text(
@@ -585,6 +589,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                               borderRadius: BorderRadius.circular(10.r),
                               border: Border.all(color: _inFloorColor)),
                           child: DropdownButtonFormField(
+                            menuMaxHeight: 100.h,
                             hint: Padding(
                               padding: EdgeInsets.only(left: 8.w),
                               child: Text(
@@ -596,7 +601,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                                 const InputDecoration(border: InputBorder.none),
                             icon: const Icon(Icons.arrow_drop_down_outlined),
                             items: rooms.map((e) {
-                              in_floor = widget.in_floor;
+
                               return DropdownMenuItem<String>(
                                 onTap: () {},
                                 value: e,
@@ -641,7 +646,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                       border: Border.all(color: _costTypeColor),
                       borderRadius: BorderRadius.circular(8.r)),
                   child: Container(
-                    padding: EdgeInsets.only(left: 16.w),
+                    padding: EdgeInsets.only(left: 7.w),
                     child: TextFormField(
                       keyboardType: TextInputType.phone,
                       onChanged: (e) {
@@ -863,11 +868,11 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                     Container(
                       width: 172.w,
                     ),
-                    Text("Uy egasi"),
+                    const Text("Uy egasi"),
                     SizedBox(
                       width: 50.w,
                     ),
-                    Text("Ijarachi")
+                    const Text("Ijarachi")
                   ],
                 ),
                 Row(
@@ -877,9 +882,9 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                         SizedBox(
                           height: 1.h,
                         ),
-                        Container(
+                        SizedBox(
                           width: 180.w,
-                          child:  Text("Elektr energiya"),
+                          child:  const Text("Elektr energiya"),
                         ),
                         Radio(
                           value: '1',
@@ -1199,7 +1204,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                       border: Border.all(color: Colors.grey),
                       borderRadius: BorderRadius.circular(4.r)),
                   child: Container(
-                    padding: EdgeInsets.only(left: 16.w),
+                    padding: EdgeInsets.only(left: 8.w),
                     child: TextFormField(
                       controller: descriptionController,
                       maxLines: 6,
@@ -1282,9 +1287,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                             '${comfortItems}  texnikalar',
                           );
                           print('${widget.subway} malumot subway');
-                          if (cost_type == null) {
-                            cost_type = '1';
-                          }
+                          cost_type ??= '1';
 
                           if (_phoneNumberOnClick &&
                               _houseTypeOnClick &&

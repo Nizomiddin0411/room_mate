@@ -101,7 +101,7 @@ class AdsEdit extends StatefulWidget {
 class _AdsEditState extends State<AdsEdit> {
   Completer<GoogleMapController> _controller = Completer();
   // on below line we have specified camera position
-  static final CameraPosition _kGoogle = const CameraPosition(
+  static const CameraPosition _kGoogle = const CameraPosition(
     target: LatLng(41.311081, 69.240562),
     zoom: 14.4746,
   );
@@ -180,14 +180,14 @@ class _AdsEditState extends State<AdsEdit> {
     '2',
     '3',
     '4',
-    '5-6',
+    '5',
   ];
   var ijarachi = [
     '1',
     '2',
     '3',
     '4',
-    '5-6',
+    '5',
   ];
 
   @override
@@ -264,9 +264,9 @@ class _AdsEditState extends State<AdsEdit> {
                   width: double.infinity,
                   decoration: BoxDecoration(
                       border: Border.all(color: _colorUniver),
-                      borderRadius: BorderRadius.circular(8.r)),
+                      borderRadius: BorderRadius.circular(10.r)),
                   child: Container(
-                    padding: EdgeInsets.only(left: 16.w),
+                    padding: EdgeInsets.only(left: 8.w),
                     child: TextFormField(
                       onChanged: (e) {
                         setState(() {
@@ -412,6 +412,7 @@ class _AdsEditState extends State<AdsEdit> {
                     border: Border.all(color: _colorRegion),
                   ),
                   child: DropdownButtonFormField(
+                    menuMaxHeight: 100.h,
                     hint: Padding(
                       padding: EdgeInsets.only(left: 8.w),
                       child: Text(
@@ -471,6 +472,7 @@ class _AdsEditState extends State<AdsEdit> {
                             border: Border.all(color: _colorDistric),
                             borderRadius: BorderRadius.circular(8.r)),
                         child: DropdownButtonFormField(
+                          menuMaxHeight: 100.h,
                           isExpanded: true,
                           hint: Padding(
                             padding: EdgeInsets.only(left: 8.w),
@@ -554,7 +556,7 @@ class _AdsEditState extends State<AdsEdit> {
                       border: Border.all(color: _addressColor),
                       borderRadius: BorderRadius.circular(8.r)),
                   child: Container(
-                    padding: EdgeInsets.only(left: 16.w),
+                    padding: EdgeInsets.only(left: 8.w),
                     child: TextFormField(
                       onChanged: (e) {
                         setState(() {
@@ -611,7 +613,7 @@ class _AdsEditState extends State<AdsEdit> {
                                     lat: Lat,
                                   )));
                     },
-                    child: Container(
+                    child: SizedBox(
                       width: 324.w,
                       height: 60.h,
                       child: Card(
@@ -936,7 +938,7 @@ class _AdsEditState extends State<AdsEdit> {
                                           utility_cold_water:
                                               widget.utility_cold_water,
                                           utility_trash: widget.utility_trash,
-                                          subway: id.toString(), Image: widget.Image,
+                                          subway: id.toString(), Image: widget.Image, costType: widget.costType,
                                         )));
                           } else {
                             setState(() {
