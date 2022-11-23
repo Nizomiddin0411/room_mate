@@ -239,13 +239,7 @@ class _AdsDetailState extends State<AdsDetail> {
                                       height: 219.h,
                                       fit: BoxFit.cover,
                                     )
-                                  // : widget.Image![index1].isEmpty
-                                  //     ? Image.asset(
-                                  //         'assets/images/notImage.png',
-                                  //         width: 324.w,
-                                  //         height: 219.h,
-                                  //         fit: BoxFit.cover,
-                                  //       )
+
                                   : Image.asset(
                                       'assets/images/notImage.png',
                                       width: 324.w,
@@ -257,26 +251,6 @@ class _AdsDetailState extends State<AdsDetail> {
                         );
                       }),
                 ),
-                // Positioned(
-                //   bottom: 20.h,
-                //   left: 0,
-                //   right: 0,
-                //   child: Row(
-                //     mainAxisAlignment: MainAxisAlignment.center,
-                //     children: List.generate(images.length, (i) {
-                //       return Container(
-                //         margin: const EdgeInsets.symmetric(horizontal: 5),
-                //         width: 10.w,
-                //         height: 10.h,
-                //         decoration: BoxDecoration(
-                //             shape: BoxShape.circle,
-                //             color: _correntPage == i
-                //                 ? AppColors.mainColor
-                //                 : Colors.grey),
-                //       );
-                //     }).toList(),
-                //   ),
-                // ),
                 Positioned(
                     top: 16.h,
                     left: 18.w,
@@ -671,7 +645,7 @@ class _AdsDetailState extends State<AdsDetail> {
                           )
                         : Container(),
                     widget.type == '1'
-                        ? Row(
+                        ? widget.stay_region != 'null' ? Row(
                             children: [
                               Container(
                                 width: 40.w,
@@ -695,14 +669,14 @@ class _AdsDetailState extends State<AdsDetail> {
                               )
                             ],
                           )
-                        : Container(),
+                        : Container():Container(),
                     widget.type == '1'
-                        ? SizedBox(
+                        ? widget.stay_region !='null' ?  SizedBox(
                             height: 6.h,
                           )
-                        : Container(),
+                        : Container():Container(),
                     widget.type == '1'
-                        ? Row(
+                        ? widget.stay_university != 'null' ? Row(
                             children: [
                               Container(
                                 width: 40.w,
@@ -730,129 +704,15 @@ class _AdsDetailState extends State<AdsDetail> {
                               )
                             ],
                           )
-                        : Container(),
-                    // Text(
-                    //   'Joylashuv',
-                    //   style: TextStyle(
-                    //       fontSize: 18.sp, fontWeight: FontWeight.bold,color: AppColors.mainColor),
-                    // ).tr(),
-                    // Row(
-                    //   children: [
-                    //     Container(
-                    //       width: 40.w,
-                    //       height: 40.h,
-                    //       decoration: BoxDecoration(
-                    //         color: AppColors.colorBack3,
-                    //         borderRadius: BorderRadius.circular(8.r),
-                    //       ),
-                    //       child: const Center(
-                    //           child: Icon(
-                    //             Icons.location_on,
-                    //             color: AppColors.succesColor,
-                    //           )),
-                    //     ),
-                    //     Padding(
-                    //       padding: const EdgeInsets.all(8.0),
-                    //       child: Text(
-                    //         "${widget.region}",
-                    //         style: TextStyle(fontSize: 14.sp),
-                    //       ),
-                    //     )
-                    //   ],
-                    // ),
-                    // SizedBox(
-                    //   height: 6.h,
-                    // ),
-                    // Row(
-                    //   children: [
-                    //     Container(
-                    //       width: 40.w,
-                    //       height: 40.h,
-                    //       decoration: BoxDecoration(
-                    //         color: AppColors.colorBack3,
-                    //         borderRadius: BorderRadius.circular(8.r),
-                    //       ),
-                    //       child: const Center(
-                    //           child: Icon(
-                    //         Icons.location_on,
-                    //         color: AppColors.succesColor,
-                    //       )),
-                    //     ),
-                    //     Padding(
-                    //       padding: const EdgeInsets.all(8.0),
-                    //       child: Text(
-                    //         "${widget.district}",
-                    //         style: TextStyle(fontSize: 14.sp),
-                    //       ),
-                    //     )
-                    //   ],
-                    // ),
-                    widget == '1'
+                        : Container():Container(),
+                    widget.type == '1'
                         ? SizedBox(
                             height: 6.h,
                           )
                         : Container(),
-                    // widget.type == '1' ?
-                    // widget.type == '1'
-                    //     ? Row(
-                    //         children: [
-                    //           Container(
-                    //             width: 40.w,
-                    //             height: 40.h,
-                    //             decoration: BoxDecoration(
-                    //               color: AppColors.iconBack,
-                    //               borderRadius: BorderRadius.circular(8.r),
-                    //             ),
-                    //             child: const Center(
-                    //                 child: Icon(
-                    //               Icons.corporate_fare,
-                    //               color: AppColors.mainColor,
-                    //             )),
-                    //           ),
-                    //           Padding(
-                    //             padding: const EdgeInsets.all(8.0),
-                    //             child: Container(
-                    //                 width: MediaQuery.of(context).size.width -
-                    //                     150.w,
-                    //                 child: Text(
-                    //                   "${widget.stay_university}",
-                    //                   style: TextStyle(fontSize: 14.sp),
-                    //                 )),
-                    //           )
-                    //         ],
-                    //       )
-                    //     : Container(),
-                    // : const SizedBox(),
                     SizedBox(
                       height: 6.h,
                     ),
-                    // widget.type == '1' ? Row(
-                    //   children: [
-                    //     Container(
-                    //       width: 40.w,
-                    //       height: 40.h,
-                    //       decoration: BoxDecoration(
-                    //         color: AppColors.iconBack,
-                    //         borderRadius: BorderRadius.circular(8.r),
-                    //       ),
-                    //       child: const Center(
-                    //           child: Icon(
-                    //         Icons.school,
-                    //         color: AppColors.mainColor,
-                    //       )),
-                    //     ),
-                    //     Padding(
-                    //       padding: const EdgeInsets.all(8.0),
-                    //       child: SizedBox(
-                    //         width: MediaQuery.of(context).size.width - 150.w,
-                    //         child: Text(
-                    //           "${widget.facultet}",
-                    //           style: TextStyle(fontSize: 14.sp),
-                    //         ),
-                    //       ),
-                    //     )
-                    //   ],
-                    // ) : const SizedBox(),
                     widget.haveHome != '2' ? Column(
                       children: [
                         Text(
@@ -1250,8 +1110,14 @@ showAlertDialog(BuildContext context, int askedid) {
     // title: Text("Akkauntdan chiqish ").tr(),
     content: const Text("Sms yozish uchun ruhsat so'rash ").tr(),
     actions: [
-      notButton,
-      okButton,
+      Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: notButton,
+      ),
+      Padding(
+        padding:  EdgeInsets.fromLTRB(8.w,0,8.w,0),
+        child: okButton,
+      ),
     ],
   );
 

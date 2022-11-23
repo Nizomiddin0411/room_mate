@@ -25,7 +25,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
         centerTitle: true,
         backgroundColor: AppColors.backgroundWhite,
         title: const Text(
-          "Talab va takliflar",
+          "O'z taklifingizni qoldiring",
           style: TextStyle(color: AppColors.mainColor),
         ).tr(),
         leading: IconButton(

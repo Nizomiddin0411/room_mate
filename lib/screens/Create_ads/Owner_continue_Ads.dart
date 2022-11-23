@@ -34,7 +34,7 @@ class OwnerHouseInfo extends StatefulWidget {
 }
 
 class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
-  TextEditingController? phoneController = TextEditingController();
+  TextEditingController? phoneController = TextEditingController(text: "+998");
   String? house_type;
   String? rent_type;
   String? room_count;
@@ -387,7 +387,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                             hint: Padding(
                               padding: EdgeInsets.only(left: 8.w),
                               child: Text(
-                                "1-6",
+                                "1 - 6",
                                 style: TextStyle(fontSize: 14.sp),
                               ),
                             ),
@@ -551,7 +551,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                       border: Border.all(color: _costTypeColor),
                       borderRadius: BorderRadius.circular(8.r)),
                   child: Container(
-                    padding: EdgeInsets.only(left: 16.w),
+                    padding: EdgeInsets.only(left: 10.w),
                     child: TextFormField(
                       keyboardType: TextInputType.phone,
                       onChanged: (e) {
@@ -654,7 +654,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                             ),
                             decoration:
                                 const InputDecoration(border: InputBorder.none),
-                            icon: Icon(Icons.arrow_drop_down_outlined),
+                            icon: const Icon(Icons.arrow_drop_down_outlined),
                             items: pricetype.map((e) {
                               return DropdownMenuItem<String>(
                                 onTap: () {},
@@ -714,7 +714,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                         ),
                         Text(
                           'Ha'.tr(),
-                          style: new TextStyle(fontSize: 14.0.sp),
+                          style: TextStyle(fontSize: 14.0.sp),
                         ),
                         SizedBox(
                           width: 35.w,
@@ -730,7 +730,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                         ),
                         Text(
                           "Yo'q".tr(),
-                          style: new TextStyle(
+                          style: TextStyle(
                             fontSize: 14.0.sp,
                           ),
                         ),
@@ -1102,7 +1102,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                       border: Border.all(color: _descriptionColor),
                       borderRadius: BorderRadius.circular(4.r)),
                   child: Container(
-                    padding: EdgeInsets.only(left: 16.w),
+                    padding: EdgeInsets.only(left: 10.w),
                     child: TextFormField(
                       controller: descriptionController,
                       maxLines: 6,
@@ -1120,7 +1120,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                 Padding(
                   padding:
                       EdgeInsets.symmetric(vertical: 18.h, horizontal: 31.w),
-                  child: Container(
+                  child: SizedBox(
                       width: double.infinity,
                       child: ElevatedButton(
                         style: ElevatedButton.styleFrom(
@@ -1156,7 +1156,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                           // print(adsTitleController?.text);//
                           // print(inputcontroller?.text);//
                           // print(addressController?.text);//
-                          print('${phoneController!.text.split(' ').join('')}' +
+                          print(phoneController!.text.split(' ').join('') +
                               ' telefon');
                           print('${house_type}  uy turi');
                           print('${rent_type} rent type');
@@ -1185,9 +1185,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                             '${comfortItems}  texnikalar',
                           );
                           print('${widget.university_id} malumot');
-                          if (cost_type == null) {
-                            cost_type = '1';
-                          }
+                          cost_type ??= '1';
 
                           if (_phoneNumberOnClick &&
                               _houseTypeOnClick &&

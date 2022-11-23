@@ -22,6 +22,7 @@ import '../../core/const/consts.dart';
 
 class PostEditStudent extends StatefulWidget {
   String metro;
+  String? floorscount;
   String viloyatvalue;
   String universiteteid;
   String univervalue;
@@ -53,6 +54,7 @@ class PostEditStudent extends StatefulWidget {
   PostEditStudent({
     Key? key,
     required this.districtId,
+    required this.floorscount,
     required this.updateid,
     required this.rasm,
     required this.howcountroom,
@@ -392,7 +394,7 @@ class _PostEditStudentState extends State<PostEditStudent> {
                         subway: widget.metro,
                         house_type: widget.housetype,
                         room_count: widget.housecount,
-                        floors_count: widget.howcountroom,
+                        floors_count: widget.floorscount.toString(),
                         howcountroom: widget.howcountroom,
                         cost: widget.costController,
                         cost_type: widget.narxnituri,

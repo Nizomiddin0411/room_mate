@@ -126,7 +126,7 @@ class _MenuForState extends State<MenuFor> {
                   ),
                   child: const Center(
                       child: Text(
-                        "Talab va Takliflar bildirish",
+                        "O'z taklifingizni qoldiring",
                         style: TextStyle(
                           color: AppColors.textColor,
                         ),

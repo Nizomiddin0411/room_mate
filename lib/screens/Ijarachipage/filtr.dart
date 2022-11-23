@@ -122,7 +122,7 @@ class _FiltrPageState extends State<FiltrPage> {
                         borderRadius: BorderRadius.circular(10.r)),
                     child: DropdownButtonFormField(
                       menuMaxHeight: 100.h,
-                      hint: const Text("Viloyatni tanlang").tr(),
+                      hint:  Text("Viloyatni tanlang",style: TextStyle(fontSize: 14.sp),).tr(),
                       decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           focusColor: Colors.grey),
@@ -168,7 +168,7 @@ class _FiltrPageState extends State<FiltrPage> {
                           child: DropdownButtonFormField(
                             menuMaxHeight: 100.h,
                             isExpanded: true,
-                            hint: const Text("Tumanni tanlang").tr(),
+                            hint:  Text("Tumanni tanlang",style: TextStyle(fontSize: 14.sp)).tr(),
                             decoration: const InputDecoration(
                                 isDense: true,
                                 border: OutlineInputBorder(),
@@ -204,7 +204,7 @@ class _FiltrPageState extends State<FiltrPage> {
                               borderRadius: BorderRadius.circular(10.r)),
                           child: DropdownButtonFormField(
                               isExpanded: true,
-                              hint: const Text("Tumanni tanlang").tr(),
+                              hint:  Text("Tumanni tanlang",style: TextStyle(fontSize: 14.sp)).tr(),
                               decoration: const InputDecoration(
                                   isDense: true,
                                   border: OutlineInputBorder(),
@@ -337,7 +337,7 @@ class _FiltrPageState extends State<FiltrPage> {
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10.r)),
                             child: DropdownButtonFormField(
-                              hint: const Text("Kv yoki xovli").tr(),
+                              hint:  Text("Kv yoki xovli",style: TextStyle(fontSize: 14.sp)).tr(),
                               decoration: const InputDecoration(
                                   border: OutlineInputBorder(),
                                   focusColor: Colors.grey),
@@ -376,7 +376,8 @@ class _FiltrPageState extends State<FiltrPage> {
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10.r)),
                             child: DropdownButtonFormField(
-                              hint: const Text("Soni").tr(),
+                              menuMaxHeight: 100.h,
+                              hint:  Text("Soni",style: TextStyle(fontSize: 14.sp)).tr(),
                               decoration: const InputDecoration(
                                   border: OutlineInputBorder(),
                                   focusColor: Colors.grey),
@@ -419,7 +420,7 @@ class _FiltrPageState extends State<FiltrPage> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10.r)),
                       child: DropdownButtonFormField(
-                        hint: const Text("Ijara muddati").tr(),
+                        hint:  Text("Ijara muddati",style: TextStyle(fontSize: 14.sp)).tr(),
                         decoration: const InputDecoration(
                             border: OutlineInputBorder(),
                             focusColor: Colors.grey),
@@ -462,7 +463,7 @@ class _FiltrPageState extends State<FiltrPage> {
                       SizedBox(
                         width: 12.w,
                       ),
-                      const Text("Metroga yaqin").tr()
+                       Text("Metroga yaqin",style: TextStyle(fontSize: 14.sp,fontWeight: FontWeight.w500),).tr()
                     ],
                   ),
                   SizedBox(height: 22.h),
@@ -474,7 +475,7 @@ class _FiltrPageState extends State<FiltrPage> {
                         fontWeight: FontWeight.w500),
                   ).tr(),
                   SizedBox(height: 12.h),
-                  const Text("Dan").tr(),
+                   Text("Dan",style: TextStyle(fontSize: 14.sp,fontWeight: FontWeight.w500),).tr(),
                   SizedBox(height: 6.h),
                   Row(
                     children: [
@@ -494,7 +495,7 @@ class _FiltrPageState extends State<FiltrPage> {
                               controller: fromCost,
                               decoration: InputDecoration(
                                 border: InputBorder.none,
-                                hintText: tr("dan"),
+                                hintText: tr("dan",),
                                 hintStyle: TextStyle(
                                     fontSize: 14.sp, color: Colors.grey),
                               ),

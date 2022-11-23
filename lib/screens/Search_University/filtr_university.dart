@@ -65,6 +65,7 @@ class _UniverFiltrPageState extends State<UniverFiltrPage> {
                   Column(
                     children: [
                       DropdownButtonFormField2<String>(
+                        dropdownMaxHeight: 100.h,
                         decoration: InputDecoration(
                           enabledBorder:
                               const OutlineInputBorder(borderSide: BorderSide()),
@@ -131,6 +132,7 @@ class _UniverFiltrPageState extends State<UniverFiltrPage> {
                           ? Column(
                               children: [
                                 DropdownButtonFormField2<String>(
+                                  dropdownMaxHeight: 100.h,
                                   decoration: InputDecoration(
                                     enabledBorder: const OutlineInputBorder(
                                         borderSide: BorderSide()),

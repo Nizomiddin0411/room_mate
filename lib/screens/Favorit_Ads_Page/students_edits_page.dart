@@ -137,7 +137,7 @@ class _StudentsEdistState extends State<StudentsEdist> {
     phoneController = TextEditingController(text: widget.phone_number);
     addinformation = TextEditingController(text: widget.description);
     dropDown = widget.stay_region.toString();
-
+    // RegionId
     Regionidisi = widget.stay_region_id.toString();
     if (widget.roommate_gender.toString() == '2') {
       _titleGendor = "2";
@@ -183,6 +183,7 @@ class _StudentsEdistState extends State<StudentsEdist> {
         child: Consumer<RegionProvider>(
           builder: (_, data, __) {
             data.UniverId = widget.stay_univer_id.toString();
+            data.RegionId  = widget.stay_region.toString();
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -190,7 +191,7 @@ class _StudentsEdistState extends State<StudentsEdist> {
                   "E’lonni nomlash".tr(),
                   style: TextStyle(
                     color: AppColors.textColor,
-                    fontSize: 14.sp,
+                    fontSize: 12.sp,
                     fontWeight: FontWeight.w500,
                   ),
                 ),
@@ -415,7 +416,7 @@ class _StudentsEdistState extends State<StudentsEdist> {
                           "Sherik izlayabmiz".tr(),
                           style: TextStyle(
                             color: AppColors.textColor,
-                            fontSize: 14.sp,
+                            fontSize: 12.sp,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -473,7 +474,7 @@ class _StudentsEdistState extends State<StudentsEdist> {
                             fontWeight: FontWeight.w500,
                           ),
                         ),
-                        SizedBox(height: 2.h),
+                        SizedBox(height: 7.h),
                         Container(
                           width: 152.w,
                           decoration: BoxDecoration(
@@ -682,7 +683,7 @@ class _StudentsEdistState extends State<StudentsEdist> {
                       border: Border.all(color: _colorForm),
                       borderRadius: BorderRadius.circular(4.r)),
                   child: Container(
-                    padding: EdgeInsets.only(left: 16.w),
+                    padding: EdgeInsets.only(left: 9.w),
                     child: TextField(
                       onChanged: (e) {
                         setState(() {
@@ -730,7 +731,7 @@ class _StudentsEdistState extends State<StudentsEdist> {
                         print(numbervalue == true ? '1':'2' +' hide phone');
                         print(house + 'have live');
                         print(addinformation!.text + 'description');
-
+                        print('---------'+'${regionsvalue}');
                         // print('${widget.updateid} id =====');
                         // print('${widget.comfort} comford');
                         // print("${widget.utility_bills}  utility bills");

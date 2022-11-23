@@ -177,7 +177,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                 borderRadius: BorderRadius.circular(6.r),
                                 color: AppColors.secondBackgroud),
                             child: Padding(
-                              padding: const EdgeInsets.all(5.0),
+                              padding: const EdgeInsets.all(10.0),
                               child: SingleChildScrollView(
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -188,7 +188,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                       height: 10.h,
                                     ),
                                     Text(
-                                        "${provider.ads[index].faculty?.name.toString()}"),
+                                        "${provider.ads[index].faculty?.name.toString()}", style: TextStyle(fontSize: 14.sp)),
                                     SizedBox(
                                       height: 10.h,
                                     ),
@@ -196,13 +196,13 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                       children: [
                                         Text(
                                           provider.ads[index].gender.toString() == '1' ? tr("jinsi") + ":" + tr("Erkak") : tr("jinsi") + ":" + tr("Ayol"),
-                                          style: TextStyle(fontSize: 15.sp),
+                                          style: TextStyle(fontSize: 14.sp),
                                         ),
                                         SizedBox(
                                           width: 45.w,
                                         ),
                                         Text(
-                                            "Kursi : ${provider.ads[index].course.toString()}"),
+                                            "Kursi : ${provider.ads[index].course.toString()}", style: TextStyle(fontSize: 14.sp)),
                                       ],
                                     ),
                                     SizedBox(
@@ -212,7 +212,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                       children: [
                                         Text(
                                           "Viloyat:${provider.ads[index].birthRegion?.name.toString()} ",
-                                          style: TextStyle(fontSize: 15.sp),
+                                          style: TextStyle(fontSize: 14.sp),
                                         ),
                                       ],
                                     ),
@@ -222,7 +222,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                     Column(
                                       children: [
                                         Text(
-                                            "Tuman :${provider.ads[index].birthDistrict?.name.toString()}"),
+                                            "Tuman :${provider.ads[index].birthDistrict?.name.toString()}", style: TextStyle(fontSize: 14.sp)),
                                       ],
                                     ),
                                     SizedBox(
@@ -387,8 +387,14 @@ showAlertDialog(BuildContext context, int askedid) {
     // title: Text("Akkauntdan chiqish ").tr(),
     content: const Text("Sms yozish uchun ruhsat so'rash ").tr(),
     actions: [
-      notButton,
-      okButton,
+      Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: notButton,
+      ),
+      Padding(
+        padding:  EdgeInsets.fromLTRB(8.w,0,8.w,0),
+        child: okButton,
+      ),
     ],
   );
 

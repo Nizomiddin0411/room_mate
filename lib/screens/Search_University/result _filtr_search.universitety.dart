@@ -373,6 +373,7 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                     Column(
                       children: [
                         DropdownButtonFormField2(
+                          dropdownMaxHeight: 100.h,
                           decoration: InputDecoration(
                             enabledBorder: const OutlineInputBorder(
                                 borderSide: BorderSide()),

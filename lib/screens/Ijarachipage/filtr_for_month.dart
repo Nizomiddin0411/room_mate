@@ -50,7 +50,7 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
     '2',
     '3',
     '4',
-    '5-6',
+    '5',
   ];
 
   late TextEditingController fromCost;
@@ -121,12 +121,12 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.r)),
                     child: DropdownButtonFormField(
-                      hint: Text("Viloyatni tanlang").tr(),
+                      hint: const Text("Viloyatni tanlang").tr(),
                       decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           focusColor: Colors.grey),
                       // value: ,
-                      icon: Icon(Icons.arrow_drop_down_outlined),
+                      icon: const Icon(Icons.arrow_drop_down_outlined),
                       items: data.regions.map((e) {
                         return DropdownMenuItem<String>(
                           onTap: () {
@@ -166,12 +166,12 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                               borderRadius: BorderRadius.circular(10.r)),
                           child: DropdownButtonFormField(
                             isExpanded: true,
-                            hint: Text("Tumanni tanlang").tr(),
+                            hint: const Text("Tumanni tanlang").tr(),
                             decoration: const InputDecoration(
                                 isDense: true,
                                 border: OutlineInputBorder(),
                                 focusColor: Colors.grey),
-                            icon: Icon(Icons.arrow_drop_down_outlined),
+                            icon: const Icon(Icons.arrow_drop_down_outlined),
                             items: data.districts.map((e) {
                               return DropdownMenuItem<String>(
                                 onTap: () {
@@ -202,13 +202,13 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                               borderRadius: BorderRadius.circular(10.r)),
                           child: DropdownButtonFormField(
                               isExpanded: true,
-                              hint: Text("Tumanni tanlang").tr(),
+                              hint: const Text("Tumanni tanlang").tr(),
                               decoration: const InputDecoration(
                                   isDense: true,
                                   border: OutlineInputBorder(),
                                   focusColor: Colors.grey),
-                              icon: Icon(Icons.arrow_drop_down_outlined),
-                              items: [],
+                              icon: const Icon(Icons.arrow_drop_down_outlined),
+                              items: const [],
                               onChanged: null),
                         ),
                   SizedBox(height: 12.h),
@@ -406,7 +406,8 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10.r)),
                             child: DropdownButtonFormField(
-                              hint: Text("Xonalar soni",
+                              menuMaxHeight: 100.h,
+                              hint: Text("Soni",
                                       style: TextStyle(fontSize: 11.sp))
                                   .tr(),
                               decoration: const InputDecoration(
@@ -494,7 +495,7 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                       SizedBox(
                         width: 12.w,
                       ),
-                      Text("Metroga yaqin").tr()
+                      Text("Metroga yaqin",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 14.sp),).tr()
                     ],
                   ),
                   SizedBox(height: 22.h),
@@ -506,7 +507,7 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                         fontWeight: FontWeight.w500),
                   ).tr(),
                   SizedBox(height: 12.h),
-                  Text("Dan").tr(),
+                  Text("Dan",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 14.sp)).tr(),
                   SizedBox(height: 6.h),
                   Row(
                     children: [

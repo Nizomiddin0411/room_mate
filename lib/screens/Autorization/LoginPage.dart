@@ -100,7 +100,7 @@ class _LoginPageState extends State<LoginPage> {
                     print(_phoneController.text);
                   },
                   keyboardType: TextInputType.number,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: '998  _ _  _ _ _  _ _  _ _ ',
                     border: OutlineInputBorder(
                         borderSide: BorderSide(color: AppColors.iconColor)),

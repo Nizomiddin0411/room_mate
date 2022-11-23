@@ -348,29 +348,34 @@ class _StudentState extends State<Student> {
                             ),
                           )
                         : Container(
-                            width: 240.w,
-                            decoration: BoxDecoration(
-                                border: Border.all(color: Colors.grey),
-                                borderRadius: BorderRadius.circular(10.r)),
-                            child: DropdownButtonFormField(
-                                isExpanded: true,
-                                hint: Padding(
-                                  padding: EdgeInsets.fromLTRB(6.w, 2.h, 0, 0),
-                                  child: Text(
-                                    "OTM ni tanlang".tr(),
-                                    style: TextStyle(
-                                      color: Colors.grey,
-                                      fontSize: 12.sp,
-                                    ),
-                                  ),
-                                ),
-                                decoration: const InputDecoration(
-                                  border: InputBorder.none,
-                                ),
-                                icon: const Icon(Icons.arrow_drop_down_outlined),
-                                items: const [],
-                                onChanged: null),
+                      width: 240.w,
+                      decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey),
+                          borderRadius: BorderRadius.circular(10.r)),
+                      child: DropdownButtonFormField(
+                          isExpanded: true,
+                          hint: Padding(
+                            padding:
+                            EdgeInsets.fromLTRB(6.w, 4.h, 0, 5.w),
+                            child: Text(
+                              "OTM ni tanlang".tr(),
+                              style: TextStyle(
+                                color: Colors.grey,
+                                fontSize: 12.sp,
+                              ),
+                            ),
                           ),
+                          decoration: const InputDecoration(
+                            border: InputBorder.none,
+                          ),
+                          icon: Padding(
+                            padding: EdgeInsets.fromLTRB(0, 0, 11.w, 9.w),
+                            child: const Icon(
+                                Icons.arrow_drop_down_outlined),
+                          ),
+                          items: const [],
+                          onChanged: null),
+                    ),
                     SizedBox(
                       width: 9.w,
                     ),
@@ -444,7 +449,7 @@ class _StudentState extends State<Student> {
                             ),
                             decoration:
                                 const InputDecoration(border: InputBorder.none),
-                            icon: Icon(Icons.arrow_drop_down_outlined),
+                            icon: const Icon(Icons.arrow_drop_down_outlined),
                             items: genderone.map((e) {
                               return DropdownMenuItem<String>(
                                 onTap: () {},
@@ -846,7 +851,7 @@ class _StudentState extends State<Student> {
 
   Widget _style(BuildContext context, String? selectedItem) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(6.w, 2.h, 0, 0),
+      padding:  EdgeInsets.fromLTRB(6.w,4.h,4.w,0),
       child: Text(
         selectedItem!,
         style: TextStyle(fontSize: 12.sp, color: Colors.black),

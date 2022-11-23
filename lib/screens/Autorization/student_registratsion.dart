@@ -103,7 +103,7 @@ class _StudentUserState extends State<StudentUser> {
                     controller: myController,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(8),
+                          borderRadius: BorderRadius.circular(5.r),
                           borderSide: BorderSide(
                               color: myController.text == ''
                                   ? Colors.red
@@ -120,7 +120,7 @@ class _StudentUserState extends State<StudentUser> {
                 children: [
                   Row(
                     children: [
-                      const Text("Telefon raqami").tr(),
+                      Text("Telefon raqami",style: TextStyle(fontSize: 14.sp),).tr(),
                       SizedBox(width: 165.w,),
                            Text(
                             "Ko’rinmasin",
@@ -133,7 +133,7 @@ class _StudentUserState extends State<StudentUser> {
                   ),
                   Row(
                     children: [
-                      Container(
+                      SizedBox(
                         height: 80.h,
                         width: 240.w,
                         child: TextFormField(
@@ -156,7 +156,7 @@ class _StudentUserState extends State<StudentUser> {
                           controller: nameController,
                           decoration: InputDecoration(
                             border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(8)),
+                                borderRadius: BorderRadius.circular(5.r)),
                           ),
                         ),
                       ),
@@ -170,13 +170,13 @@ class _StudentUserState extends State<StudentUser> {
                           //   height: 10.h,
                           // ),
                           Padding(
-                            padding: EdgeInsets.fromLTRB(10.w,10.h,5.w,25.h),
+                            padding: EdgeInsets.fromLTRB(14.w,10.h,5.w,29.h),
                             child: Checkbox(
                               value: hidenumber,
                               onChanged: (bool? value) {
                                 setState(() {
                                   hidenumber = value!;
-                                  print(hidenumber);
+                                  // print(hidenumber);
                                 });
                               },
                             ),
@@ -208,7 +208,7 @@ class _StudentUserState extends State<StudentUser> {
                           contentPadding: EdgeInsets.zero,
                           enabledBorder: OutlineInputBorder(
                             borderSide: BorderSide(color: jinsiColor),
-                            borderRadius: BorderRadius.circular(10.r),
+                            borderRadius: BorderRadius.circular(5.r),
                           ),
                         ),
                         isExpanded: true,
@@ -224,7 +224,7 @@ class _StudentUserState extends State<StudentUser> {
                         itemHeight: 30.h,
                         iconSize: 30.sp,
                         buttonHeight: 60.h,
-                        buttonPadding: EdgeInsets.only(left: 20.w, right: 10.w),
+                        buttonPadding: EdgeInsets.only(left: 11.w, right: 10.w),
                         dropdownDecoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15.r),
                         ),
@@ -331,6 +331,7 @@ class _StudentUserState extends State<StudentUser> {
                       // ),
                       DropdownSearch<String>(
                         mode: Mode.BOTTOM_SHEET,
+                        dropdownBuilder: _style,
                         items: data.universitet.map((e) {
                           if (drowdown2 == e.name) {
                             data.UniversiterId = e.id.toString();
@@ -369,7 +370,7 @@ class _StudentUserState extends State<StudentUser> {
                 children: [
                   Row(
                     children: [
-                      Text("Ta'lim yo'nalishini tanglang ").tr(),
+                      const Text("Ta'lim yo'nalishini tanglang ").tr(),
                     ],
                   ),
                   SizedBox(
@@ -379,6 +380,7 @@ class _StudentUserState extends State<StudentUser> {
                       ? Column(
                           children: [
                             DropdownButtonFormField2(
+                              dropdownMaxHeight: 100.h,
                               decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(color: fakultColor)),
@@ -401,7 +403,7 @@ class _StudentUserState extends State<StudentUser> {
                               iconSize: 30.sp,
                               buttonHeight: 60.h,
                               buttonPadding:
-                                  EdgeInsets.only(left: 20.w, right: 10.w),
+                                  EdgeInsets.only(left: 11.w, right: 10.w),
                               dropdownDecoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(15.r),
                               ),
@@ -460,7 +462,7 @@ class _StudentUserState extends State<StudentUser> {
                               dropdownDecoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(15),
                               ),
-                              items: [],
+                              items: const [],
                               onChanged: null,
                             ),
                           ],
@@ -478,11 +480,12 @@ class _StudentUserState extends State<StudentUser> {
                     ],
                   ),
                   SizedBox(
-                    height: 5.r,
+                    height: 5.h,
                   ),
                   Column(
                     children: [
                       DropdownButtonFormField2(
+                        dropdownMaxHeight: 100.h,
                         decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(color: kursColor)),
@@ -504,7 +507,7 @@ class _StudentUserState extends State<StudentUser> {
                         ),
                         iconSize: 30.sp,
                         buttonHeight: 60.h,
-                        buttonPadding: EdgeInsets.only(left: 20.w, right: 10.w),
+                        buttonPadding: EdgeInsets.only(left: 11.w, right: 10.w),
                         dropdownDecoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15.r),
                         ),
@@ -546,6 +549,7 @@ class _StudentUserState extends State<StudentUser> {
                   Column(
                     children: [
                       DropdownButtonFormField2<String>(
+                        dropdownMaxHeight: 100.h,
                         decoration: InputDecoration(
                           enabledBorder: OutlineInputBorder(
                               borderSide: BorderSide(color: viloyatColor)),
@@ -566,7 +570,7 @@ class _StudentUserState extends State<StudentUser> {
                         ),
                         iconSize: 30.sp,
                         buttonHeight: 60.h,
-                        buttonPadding: EdgeInsets.only(left: 20.w, right: 10.w),
+                        buttonPadding: EdgeInsets.only(left: 11.w, right: 10.w),
                         dropdownDecoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(15),
                         ),
@@ -623,6 +627,7 @@ class _StudentUserState extends State<StudentUser> {
                       ? Column(
                           children: [
                             DropdownButtonFormField2<String>(
+                              dropdownMaxHeight: 100.h,
                               decoration: InputDecoration(
                                 enabledBorder: OutlineInputBorder(
                                     borderSide: BorderSide(color: tumanColor)),
@@ -644,7 +649,7 @@ class _StudentUserState extends State<StudentUser> {
                               iconSize: 30.sp,
                               buttonHeight: 60.h,
                               buttonPadding:
-                                  EdgeInsets.only(left: 20.w, right: 10.w),
+                                  EdgeInsets.only(left: 11.w, right: 10.w),
                               dropdownDecoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(15),
                               ),
@@ -881,6 +886,16 @@ class _StudentUserState extends State<StudentUser> {
             ],
           );
         }),
+      ),
+    );
+
+  }
+  Widget _style(BuildContext context, String? selectedItem) {
+    return Padding(
+      padding:  EdgeInsets.fromLTRB(0,4.h,4.w,0),
+      child: Text(
+        selectedItem!,
+        style: TextStyle(fontSize: 14.sp),
       ),
     );
   }

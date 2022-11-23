@@ -32,7 +32,6 @@ class Registratsiya extends StatefulWidget {
 
 class _RegistratsiyaState extends State<Registratsiya> {
 
-  final _formKey = GlobalKey<FormState>();
   TabController? _tabController;
   @override
   void initState() {
@@ -66,7 +65,7 @@ class _RegistratsiyaState extends State<Registratsiya> {
             elevation: 0,
             title: Center(
               child: Column(
-                children: [],
+                children: const [],
               ),
             ),
             flexibleSpace: Padding(

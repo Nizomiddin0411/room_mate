@@ -287,7 +287,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
                   Container(
                     width: 324.w,
                     decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10.r),
+                        borderRadius: BorderRadius.circular(5.r),
                         border: Border.all(color: AppColors.textColor)),
                     child: DropdownButtonFormField(
                       menuMaxHeight: 100.h,
@@ -464,8 +464,8 @@ class _StudensEdits2State extends State<StudensEdits2> {
                                       lat: Lat,
                                     )));
                       },
-                      child: Container(
-                        width: 324.w,
+                      child: SizedBox(
+                        width: 330.w,
                         height: 60.h,
                         child: Card(
                           shadowColor: AppColors.buttonLinear,
@@ -781,7 +781,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
                         border: Border.all(color: _costTypeColor),
                         borderRadius: BorderRadius.circular(8.r)),
                     child: Container(
-                      padding: EdgeInsets.only(left: 16.w),
+                      padding: EdgeInsets.only(left: 7.w),
                       child: TextFormField(
                         onChanged: (e) {
                           setState(() {
@@ -869,7 +869,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
                           SizedBox(height: 4.h),
                           Container(
                             height: 50.h,
-                            width: 160.w,
+                            width: 152.w,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10.r),
                                 border: Border.all(color: Colors.grey)),
@@ -1265,7 +1265,6 @@ class _StudensEdits2State extends State<StudensEdits2> {
                           print(ownerlive + 'owner is with live');
                           print(costcommunal + 'utilite bils who pay');
                           print(comfortItems.toString() + 'comford');
-
                           Navigator.push(
                             context,
                             MaterialPageRoute(
@@ -1285,7 +1284,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
                                 districtId: data.districtId,
                                 comfort: comfortItems,
                                 costlivekomunal:
-                                    costcommunal.toString() ,
+                                    costcommunal.toString(),
                                 metro:  metro.toString() == 'ha' ? '1' : '2',
                                 countroom: housefloorcount.toString(),
                                 housetype: housetype == 'Kvartira'? '1':'2',
@@ -1300,7 +1299,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
                                 location: map.isTapMap == false
                                     ? '${widget.locations}'
                                     : map.forMap,
-                                rasm: widget.images,
+                                rasm: widget.images, floorscount: housefloorcount,
                               ),
                             ),
                           );

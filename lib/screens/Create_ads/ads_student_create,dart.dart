@@ -740,7 +740,7 @@ class _Student2State extends State<Student2> {
                         border: Border.all(color: _costTypeColor),
                         borderRadius: BorderRadius.circular(8.r)),
                     child: Container(
-                      padding: EdgeInsets.only(left: 16.w),
+                      padding: EdgeInsets.only(left: 10.w),
                       child: TextFormField(
                         onChanged: (e) {
                           setState(() {

@@ -102,7 +102,7 @@ class _OwnerState extends State<Owner> {
                       border: Border.all(color: _colorUniver),
                       borderRadius: BorderRadius.circular(8.r)),
                   child: Container(
-                    padding: EdgeInsets.only(left: 16.w),
+                    padding: EdgeInsets.only(left: 9.w),
                     child: TextFormField(
                       onChanged: (e) {
                         setState(() {
@@ -307,6 +307,7 @@ class _OwnerState extends State<Owner> {
                             border: Border.all(color: _colorDistric),
                             borderRadius: BorderRadius.circular(8.r)),
                         child: DropdownButtonFormField(
+                          menuMaxHeight: 100.h,
                           isExpanded: true,
                           hint: Padding(
                             padding: EdgeInsets.only(left: 8.w),
@@ -372,8 +373,8 @@ class _OwnerState extends State<Owner> {
                             decoration: const InputDecoration(
                               border: InputBorder.none,
                             ),
-                            icon: Icon(Icons.arrow_drop_down_outlined),
-                            items: [],
+                            icon: const Icon(Icons.arrow_drop_down_outlined),
+                            items: const [],
                             onChanged: null),
                       ),
                 SizedBox(height: 12.h),
@@ -392,7 +393,7 @@ class _OwnerState extends State<Owner> {
                       border: Border.all(color: _addressColor),
                       borderRadius: BorderRadius.circular(8.r)),
                   child: Container(
-                    padding: EdgeInsets.only(left: 16.w),
+                    padding: EdgeInsets.only(left: 10.w),
                     child: TextFormField(
                       onChanged: (e) {
                         setState(() {
@@ -669,7 +670,8 @@ class _OwnerState extends State<Owner> {
                             child: DropdownButtonFormField(
                                 isExpanded: true,
                                 hint: Padding(
-                                  padding: EdgeInsets.fromLTRB(6.w, 2.h, 0, 0),
+                                  padding:
+                                      EdgeInsets.fromLTRB(12.w, 4.h, 0, 5.w),
                                   child: Text(
                                     "OTM ni tanlang".tr(),
                                     style: TextStyle(
@@ -681,8 +683,11 @@ class _OwnerState extends State<Owner> {
                                 decoration: const InputDecoration(
                                   border: InputBorder.none,
                                 ),
-                                icon:
-                                    const Icon(Icons.arrow_drop_down_outlined),
+                                icon: Padding(
+                                  padding: EdgeInsets.fromLTRB(0, 0, 11.w, 9.w),
+                                  child: const Icon(
+                                      Icons.arrow_drop_down_outlined),
+                                ),
                                 items: const [],
                                 onChanged: null),
                           ),
@@ -810,7 +815,7 @@ class _OwnerState extends State<Owner> {
 
   Widget _style(BuildContext context, String? selectedItem) {
     return Padding(
-      padding: const EdgeInsets.all(4.0),
+      padding:  EdgeInsets.fromLTRB(0,4.w,4.w,0),
       child: Text(
         selectedItem!,
         style: TextStyle(fontSize: 12.sp),

@@ -125,7 +125,7 @@ class _FiltrForDayState extends State<FiltrForDay> {
                           border: OutlineInputBorder(),
                           focusColor: Colors.grey),
                       // value: ,
-                      icon: Icon(Icons.arrow_drop_down_outlined),
+                      icon: const Icon(Icons.arrow_drop_down_outlined),
                       items: data.regions.map((e) {
                         return DropdownMenuItem<String>(
                           onTap: () {
@@ -165,7 +165,7 @@ class _FiltrForDayState extends State<FiltrForDay> {
                               borderRadius: BorderRadius.circular(10.r)),
                           child: DropdownButtonFormField(
                             isExpanded: true,
-                            hint: Text("Tumanni tanlang").tr(),
+                            hint: const Text("Tumanni tanlang").tr(),
                             decoration: const InputDecoration(
                                 isDense: true,
                                 border: OutlineInputBorder(),
@@ -201,12 +201,12 @@ class _FiltrForDayState extends State<FiltrForDay> {
                               borderRadius: BorderRadius.circular(10.r)),
                           child: DropdownButtonFormField(
                               isExpanded: true,
-                              hint: Text("Tumanni tanlang").tr(),
+                              hint: const Text("Tumanni tanlang").tr(),
                               decoration: const InputDecoration(
                                   isDense: true,
                                   border: OutlineInputBorder(),
                                   focusColor: Colors.grey),
-                              icon: Icon(Icons.arrow_drop_down_outlined),
+                              icon: const Icon(Icons.arrow_drop_down_outlined),
                               items: [],
                               onChanged: null),
                         ),
@@ -421,11 +421,12 @@ class _FiltrForDayState extends State<FiltrForDay> {
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10.r)),
                             child: DropdownButtonFormField(
+                              menuMaxHeight: 100.h,
                               hint: Text("Soni").tr(),
                               decoration: const InputDecoration(
                                   border: OutlineInputBorder(),
                                   focusColor: Colors.grey),
-                              icon: Icon(Icons.arrow_drop_down_outlined),
+                              icon: const Icon(Icons.arrow_drop_down_outlined),
                               items: rooms.map((e) {
                                 return DropdownMenuItem<String>(
                                   onTap: () {},
@@ -464,7 +465,7 @@ class _FiltrForDayState extends State<FiltrForDay> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10.r)),
                       child: DropdownButtonFormField(
-                        hint: Text("Ijara muddati").tr(),
+                        hint: const Text("Ijara muddati").tr(),
                         decoration: const InputDecoration(
                             border: OutlineInputBorder(),
                             focusColor: Colors.grey),
@@ -491,7 +492,7 @@ class _FiltrForDayState extends State<FiltrForDay> {
                   ),
                   Row(
                     children: [
-                      Container(
+                      SizedBox(
                         width: 20.w,
                         height: 20.h,
                         child: Checkbox(
@@ -507,7 +508,7 @@ class _FiltrForDayState extends State<FiltrForDay> {
                       SizedBox(
                         width: 12.w,
                       ),
-                      Text("Metroga yaqin").tr()
+                      Text("Metroga yaqin",style: TextStyle(fontSize: 14.sp,fontWeight: FontWeight.w500),).tr()
                     ],
                   ),
                   SizedBox(height: 22.h),
@@ -519,7 +520,7 @@ class _FiltrForDayState extends State<FiltrForDay> {
                         fontWeight: FontWeight.w500),
                   ).tr(),
                   SizedBox(height: 12.h),
-                  Text("Dan").tr(),
+                  Text("Dan",style: TextStyle(fontSize: 14.sp,fontWeight: FontWeight.w500),).tr(),
                   SizedBox(height: 6.h),
                   Row(
                     children: [
