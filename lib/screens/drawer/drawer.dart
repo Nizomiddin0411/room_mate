@@ -63,13 +63,13 @@ class _DrawerPageState extends State<DrawerPage> {
                       },
                       // expandedCrossAxisAlignment: CrossAxisAlignment.start,
                     ),
-                    ListTile(
-                        title:  Text("Bildirishnomalar").tr(),
-                        onTap: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => const NotificationPage()));
-                        },
-                        leading: const Icon(Icons.notifications_none)),
+                    // ListTile(
+                    //     title:  Text("Bildirishnomalar").tr(),
+                    //     onTap: () {
+                    //       Navigator.push(context,
+                    //           MaterialPageRoute(builder: (context) => const NotificationPage()));
+                    //     },
+                    //     leading: const Icon(Icons.notifications_none)),
                     ListTile(
                       title:  Text("Chat").tr(),
                       onTap: () {

@@ -1,3 +1,4 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -89,10 +90,14 @@ class _StudensEdits2State extends State<StudensEdits2> {
   String pricerent_type = '';
   String price1 = '';
   String housetype = '';
+  List<String> selectedItems = [];
   String? _dropownUsd;
   Color _colorRegion = Colors.grey;
   Color _colorDistric = Colors.grey;
   Color _colorGender = Colors.grey;
+  bool rentValue1 = false;
+  bool rentValue2 = false;
+
   bool value1 = false;
   bool value2 = false;
   bool value3 = false;
@@ -106,7 +111,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
 
   var pricetype = ["Kuniga", "Oyiga", "Kishi boshiga"];
 
-  var housecost = ["Oylik", "Kunlik", "Uzoq muddatga"];
+  var housecost = ["Oylik", "Kunlik"];
 
   var kvartira = [
     'Kvartira',
@@ -123,6 +128,16 @@ class _StudensEdits2State extends State<StudensEdits2> {
     '8',
     '9',
     '10',
+    '11',
+    '12',
+    '13',
+    '14',
+    '15',
+    '16',
+    '17',
+    '18',
+    '19',
+    '20',
   ];
   var in_floor = [
     '1 ',
@@ -135,7 +150,16 @@ class _StudensEdits2State extends State<StudensEdits2> {
     "8",
     "9",
     "10",
-    "11",
+    '11',
+    '12',
+    '13',
+    '14',
+    '15',
+    '16',
+    '17',
+    '18',
+    '19',
+    '20',
   ];
 
   var countroums = [
@@ -235,7 +259,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
             ? 'Kv '
             : "Hovli";
     narxturi = widget.rent_type == ''
-        ? "kunlik / oylik"
+        ? "Kunlik / Oylik"
         : widget.housetype == '1'
             ? 'kunlik '
             : "oylik";
@@ -351,8 +375,9 @@ class _StudensEdits2State extends State<StudensEdits2> {
                               border: Border.all(
                                 color: _colorDistric,
                               ),
-                              borderRadius: BorderRadius.circular(10.r)),
+                              borderRadius: BorderRadius.circular(5.r)),
                           child: DropdownButtonFormField(
+                            menuMaxHeight: 100.h,
                             isExpanded: true,
                             hint: Padding(
                               padding: EdgeInsets.only(left: 8.w),
@@ -389,7 +414,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
                       : Container(
                           width: 324.w,
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10.r)),
+                              borderRadius: BorderRadius.circular(5.r)),
                           child: DropdownButtonFormField(
                               isExpanded: true,
                               hint: Text(widget.tuman.tr()),
@@ -611,7 +636,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
                               fontWeight: FontWeight.w500,
                             ),
                           ),
-                          SizedBox(height: 4.h),
+                          SizedBox(height: 8.h),
                           Container(
                             width: 152.w,
                             decoration: BoxDecoration(
@@ -719,7 +744,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
                               fontWeight: FontWeight.w500,
                             ),
                           ),
-                          SizedBox(height: 4.h),
+                          SizedBox(height: 8.h),
                           Container(
                             width: 152.w,
                             decoration: BoxDecoration(
@@ -877,7 +902,11 @@ class _StudensEdits2State extends State<StudensEdits2> {
                               hint: Padding(
                                 padding: EdgeInsets.only(left: 8.w),
                                 child: Text(
-                                  '${widget.cost_period}',
+                                  widget.cost_period == '1'
+                                      ? 'Kuniga'
+                                      : widget.cost_period == '2'
+                                          ? 'Oyiga'
+                                          : 'Kishi boshiga',
                                   style: TextStyle(fontSize: 14.sp),
                                 ),
                               ),
@@ -929,47 +958,171 @@ class _StudensEdits2State extends State<StudensEdits2> {
                             ),
                           ),
                           SizedBox(height: 8.h),
+                          // Container(
+                          //   width: 152.w,
+                          //   height: 50.h,
+                          //   decoration: BoxDecoration(
+                          //       borderRadius: BorderRadius.circular(10.r),
+                          //       border: Border.all(color: _colorGender)),
+                          //   child: DropdownButtonFormField<dynamic>(
+                          //     hint: Padding(
+                          //       padding: EdgeInsets.only(left: 8.w),
+                          //       child: Text(
+                          //         widget.rent_type == ''
+                          //             ? "kunlik  / oylik".tr()
+                          //             : narxturi.toString(),
+                          //         style: TextStyle(fontSize: 14.sp),
+                          //       ),
+                          //     ),
+                          //     decoration: const InputDecoration(
+                          //         border: InputBorder.none),
+                          //     icon: const Icon(Icons.arrow_drop_down_outlined),
+                          //     items: [
+                          //       DropdownMenuItem(
+                          //           value: '',
+                          //           child: Row(
+                          //             children: [
+                          //               Checkbox(
+                          //                 value: rentValue1,
+                          //                 onChanged: (bool? value) {
+                          //                   // return rentValue1 = value!;
+                          //                   setState(() {
+                          //                     rentValue1 = value!;
+                          //                   });
+                          //                 },
+                          //               ),
+                          //               Text('Kunlik'),
+                          //             ],
+                          //           )),
+                          //       DropdownMenuItem(
+                          //         value: '',
+                          //           child: Row(
+                          //         children: [
+                          //           Checkbox(
+                          //             value: rentValue2,
+                          //             onChanged: (bool? value) {
+                          //               // return rentValue1 = value!;
+                          //               setState(() {
+                          //                 rentValue2 = value!;
+                          //               });
+                          //             },
+                          //           ),
+                          //           Text('Kunlik'),
+                          //         ],
+                          //       )),
+                          //     ],
+                          //
+                          //     // housecost.map((e) {
+                          //     //   return DropdownMenuItem<String>(
+                          //     //     onTap: () {},
+                          //     //     value: e,
+                          //     //     child: Padding(
+                          //     //       padding: EdgeInsets.only(left: 8.w),
+                          //     //       child: Text(e.tr()),
+                          //     //     ),
+                          //     //   );
+                          //     // }).toList(),
+                          //     onChanged: (newValue) {
+                          //       setState(() {
+                          //         rent_type = newValue.toString();
+                          //         _colorGender = Colors.grey;
+                          //         if (newValue == 'Kunlik') {
+                          //           price = '1';
+                          //         } else if (newValue == 'Oylik') {
+                          //           price = '2';
+                          //         } else {
+                          //           price = '3';
+                          //         }
+                          //       });
+                          //     },
+                          //   ),
+                          // ),
                           Container(
                             width: 152.w,
+                            height: 50.h,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10.r),
-                                border: Border.all(color: _colorGender)),
-                            child: DropdownButtonFormField(
-                              hint: Padding(
-                                padding: EdgeInsets.only(left: 8.w),
-                                child: Text(
-                                  widget.rent_type == ''
-                                      ? "kunlik  / oylik".tr()
-                                      : narxturi.toString(),
-                                  style: TextStyle(fontSize: 14.sp),
-                                ),
+                                border: Border.all(color: Colors.grey)
+                            ),
+                            child: DropdownButtonHideUnderline(
+                              child: DropdownButton2(
+                                isExpanded: true,
+                                hint: Padding(
+                                      padding: EdgeInsets.only(left: 8.w,top: 10.h),
+                                      child: Text(
+                                        widget.rent_type == ''
+                                            ? "Kunlik  / Oylik".tr()
+                                            : narxturi.toString(),
+                                        style: TextStyle(fontSize: 14.sp),
+                                      ),
+                                    ),
+                                items: housecost.map((item) {
+                                  return DropdownMenuItem<String>(
+                                    value: item,
+                                    //disable default onTap to avoid closing menu when selecting an item
+                                    enabled: false,
+                                    child: StatefulBuilder(
+                                      builder: (context, menuSetState) {
+                                        final _isSelected = selectedItems.contains(item);
+                                        return InkWell(
+                                          onTap: () {
+                                            _isSelected
+                                                ? selectedItems.remove(item)
+                                                : selectedItems.add(item);
+                                            //This rebuilds the StatefulWidget to update the button's text
+                                            setState(() {});
+                                            //This rebuilds the dropdownMenu Widget to update the check mark
+                                            menuSetState(() {});
+                                          },
+                                          child: Container(
+                                            height: double.infinity,
+                                            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                                            child: Row(
+                                              children: [
+                                                _isSelected
+                                                    ? const Icon(Icons.check_box_outlined)
+                                                    : const Icon(Icons.check_box_outline_blank),
+                                                const SizedBox(width: 16),
+                                                Text(
+                                                  item,
+                                                  style: const TextStyle(
+                                                    fontSize: 14,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  );
+                                }).toList(),
+                                //Use last selected item as the current value so if we've limited menu height, it scroll to last item.
+                                value: selectedItems.isEmpty ? null : selectedItems.last,
+                                onChanged: (value) {},
+                                buttonHeight: 40,
+                                buttonWidth: 140,
+                                itemHeight: 40,
+                                itemPadding: EdgeInsets.zero,
+                                selectedItemBuilder: (context) {
+                                  return housecost.map(
+                                        (item) {
+                                      return Container(
+                                        alignment: AlignmentDirectional.center,
+                                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                                        child: Text(
+                                          selectedItems.join(', '),
+                                          style: const TextStyle(
+                                            fontSize: 14,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                          maxLines: 1,
+                                        ),
+                                      );
+                                    },
+                                  ).toList();
+                                },
                               ),
-                              decoration: const InputDecoration(
-                                  border: InputBorder.none),
-                              icon: const Icon(Icons.arrow_drop_down_outlined),
-                              items: housecost.map((e) {
-                                return DropdownMenuItem<String>(
-                                  onTap: () {},
-                                  value: e,
-                                  child: Padding(
-                                    padding: EdgeInsets.only(left: 8.w),
-                                    child: Text(e.tr()),
-                                  ),
-                                );
-                              }).toList(),
-                              onChanged: (newValue) {
-                                setState(() {
-                                  rent_type = newValue.toString();
-                                  _colorGender = Colors.grey;
-                                  if (newValue == 'Kunlik') {
-                                    price = '1';
-                                  } else if (newValue == 'Oylik') {
-                                    price = '2';
-                                  } else {
-                                    price = '3';
-                                  }
-                                });
-                              },
                             ),
                           ),
                         ],
@@ -1283,11 +1436,10 @@ class _StudensEdits2State extends State<StudensEdits2> {
                                 addinformation: widget.addinformation,
                                 districtId: data.districtId,
                                 comfort: comfortItems,
-                                costlivekomunal:
-                                    costcommunal.toString(),
-                                metro:  metro.toString() == 'ha' ? '1' : '2',
+                                costlivekomunal: costcommunal.toString(),
+                                metro: metro.toString() == 'ha' ? '1' : '2',
                                 countroom: housefloorcount.toString(),
-                                housetype: housetype == 'Kvartira'? '1':'2',
+                                housetype: housetype == 'Kvartira' ? '1' : '2',
                                 howcountroom: howcountroom.toString(),
                                 narxnituri: pricerent_type,
                                 addressController: addressController!.text,
@@ -1299,7 +1451,8 @@ class _StudensEdits2State extends State<StudensEdits2> {
                                 location: map.isTapMap == false
                                     ? '${widget.locations}'
                                     : map.forMap,
-                                rasm: widget.images, floorscount: housefloorcount,
+                                rasm: widget.images,
+                                floorscount: housefloorcount,
                               ),
                             ),
                           );

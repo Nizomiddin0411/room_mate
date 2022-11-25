@@ -76,38 +76,38 @@ class _SettingState extends State<Setting> {
                 ),
               ),
             ),
-            SizedBox(
-              height: 12.h,
-            ),
-            SizedBox(
-              height: 56.h,
-              child: ListTile(
-                contentPadding: const EdgeInsets.all(0),
-                leading: Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(8.r),
-                      color: AppColors.iconBack),
-                  child: Padding(
-                    padding: EdgeInsets.all(10.0.w),
-                    child: const Icon(Icons.notification_important_outlined,
-                        color: AppColors.mainColor),
-                  ),
-                ),
-                title: Text(
-                  "Bildirishnomani sozlash".tr(),
-                  style:
-                      TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w500),
-                ),
-                trailing: Switch(
-                  onChanged: (e) {
-                    setState(() {
-                      _switchValue = e;
-                    });
-                  },
-                  value: _switchValue,
-                ),
-              ),
-            ),
+            // SizedBox(
+            //   height: 12.h,
+            // ),
+            // SizedBox(
+            //   height: 56.h,
+            //   child: ListTile(
+            //     contentPadding: const EdgeInsets.all(0),
+            //     leading: Container(
+            //       decoration: BoxDecoration(
+            //           borderRadius: BorderRadius.circular(8.r),
+            //           color: AppColors.iconBack),
+            //       child: Padding(
+            //         padding: EdgeInsets.all(10.0.w),
+            //         child: const Icon(Icons.notification_important_outlined,
+            //             color: AppColors.mainColor),
+            //       ),
+            //     ),
+            //     title: Text(
+            //       "Bildirishnomani sozlash".tr(),
+            //       style:
+            //           TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w500),
+            //     ),
+            //     trailing: Switch(
+            //       onChanged: (e) {
+            //         setState(() {
+            //           _switchValue = e;
+            //         });
+            //       },
+            //       value: _switchValue,
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),

@@ -424,7 +424,7 @@ class _AdsDetailState extends State<AdsDetail> {
                                   print('${Hive.box('id').get('id')}');
                                   print(widget.userId);
                                   // widget.userId!)
-                                  if (widget.chatApproved.toString() == '1') {
+                                  if (widget.chatApproved == 1) {
                                     Navigator.push(
                                         context,
                                         MaterialPageRoute(

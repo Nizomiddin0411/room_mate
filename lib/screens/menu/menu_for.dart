@@ -1,4 +1,5 @@
 
+import 'package:badges/badges.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -15,6 +16,7 @@ import 'package:talaba_uy/screens/drawer/drawer.dart';
 import '../Feedback_Page/feedback_page.dart';
 import '../Ijarachipage/ads_for_users.dart';
 import '../Ijarachipage/oylik_ijara.dart';
+import '../Notification_Page/notification_page.dart';
 
 class MenuFor extends StatefulWidget {
   const MenuFor({Key? key}) : super(key: key);
@@ -37,7 +39,7 @@ class _MenuForState extends State<MenuFor> {
 
     return Scaffold(
       key: _scaffoldKey,
-      drawer:  DrawerPage(),
+      drawer:  const DrawerPage(),
       appBar: AppBar(
         backgroundColor: AppColors.backgroundWhite,
         leading: InkWell(
@@ -48,6 +50,22 @@ class _MenuForState extends State<MenuFor> {
           ),
         ),
         actions: [
+          GestureDetector(
+
+            onTap: (){
+              Navigator.push(context, MaterialPageRoute(builder: (context) => const NotificationPage()));
+            },
+            child: Badge(
+              position: BadgePosition.bottomStart(bottom: 0, start: 30),
+              child:  CircleAvatar(
+                backgroundColor: Colors.blue[100],
+                radius: 19.r,
+                child: const Icon(Icons.notifications,color: Colors.grey,),
+
+              ),
+              badgeContent: Text("0",style: TextStyle(color: Colors.white),),
+            ),
+          ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: InkWell(

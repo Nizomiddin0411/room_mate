@@ -1,3 +1,4 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -68,13 +69,10 @@ class _Student2State extends State<Student2> {
   String? _dropownUsd;
   Color _colorRegion = Colors.grey;
   bool _RegionOnClick = false;
+  List<String> selectedItems = [];
   Color _colorDistric = Colors.grey;
   Color _colorGender = Colors.grey;
-  bool _GenderOnClick = false;
-  Color _colorCountPupil = Colors.grey;
-  bool _CountPupilOnClick = false;
-  Color _colorForm = Colors.grey;
-  bool _FormOnClick = false;
+
   bool value1 = false;
   bool value2 = false;
   bool value3 = false;
@@ -96,7 +94,7 @@ class _Student2State extends State<Student2> {
     '5-kurs',
     '6-kurs',
   ];
-  var housecost = ["Oylik", "Kunlik", "Uzoq muddatga"];
+  var housecost = ["Oylik", "Kunlik"];
   final List<String> genderItems = ["O'g'il bola ", "Qiz bola"];
   var kvartira = [
     'Kvartira',
@@ -113,6 +111,17 @@ class _Student2State extends State<Student2> {
     '8',
     '9',
     '10',
+    '11',
+    '12',
+    '13',
+    '14',
+    '15',
+    '16',
+    '17',
+    '18',
+    '19',
+    '20',
+
   ];
   var in_floor = [
     '1 ',
@@ -126,6 +135,15 @@ class _Student2State extends State<Student2> {
     "9",
     "10",
     "11",
+    '12',
+    '13',
+    '14',
+    '15',
+    '16',
+    '17',
+    '18',
+    '19',
+    '20',
   ];
 
   var countroums = [
@@ -138,7 +156,7 @@ class _Student2State extends State<Student2> {
   Color _costTypeColor = Colors.grey;
   final addressController = TextEditingController();
   final costcontroller = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
+  List<String> RentType = [];
   String? housecount;
   String? howcountroom;
   String? housefloorcount;
@@ -386,39 +404,6 @@ class _Student2State extends State<Student2> {
                           ),
                         ),
                       )
-                      // Container(
-                      //   width: 324.w,
-                      //   height: 210.h,
-                      //   child: SafeArea(
-                      //     // on below line creating google maps
-                      //     child: GoogleMap(
-                      //       onTap: _handlerTap,
-                      //       zoomControlsEnabled: false,
-                      //
-                      //       myLocationButtonEnabled: false,
-                      //       // on below line setting camera position
-                      //       // initialCameraPosition: _kGoogle,
-                      //       initialCameraPosition: const CameraPosition(
-                      //         target: LatLng(41.311081,69.240562),
-                      //         zoom: 14,
-                      //
-                      //       ),
-                      //       markers: Set.from(mymarker),
-                      //       // on below line we are setting markers on the map
-                      //       // markers: Set<Marker>.of(_markers),
-                      //       // on below line specifying map type.
-                      //       mapType: MapType.normal,
-                      //       // on below line setting user location enabled.
-                      //       myLocationEnabled: true,
-                      //       // on below line setting compass enabled.
-                      //       compassEnabled: true,
-                      //       // on below line specifying controller on map complete.
-                      //       onMapCreated: (GoogleMapController controller){
-                      //         _controller.complete(controller);
-                      //       },
-                      //     ),
-                      //   ),
-                      // ),
                       ),
                   SizedBox(
                     height: 10.h,
@@ -554,7 +539,7 @@ class _Student2State extends State<Student2> {
                               fontWeight: FontWeight.w500,
                             ),
                           ),
-                          SizedBox(height: 4.h),
+                          SizedBox(height: 8.h),
                           Container(
                             width: 152.w,
                             decoration: BoxDecoration(
@@ -670,7 +655,7 @@ class _Student2State extends State<Student2> {
                               fontWeight: FontWeight.w500,
                             ),
                           ),
-                          SizedBox(height: 4.h),
+                          SizedBox(height: 8.h),
                           Container(
                             width: 152.w,
                             decoration: BoxDecoration(
@@ -895,57 +880,146 @@ class _Student2State extends State<Student2> {
                             ),
                           ),
                           SizedBox(height: 8.h),
+                          // Container(
+                          //   width: 152.w,
+                          //   decoration: BoxDecoration(
+                          //       borderRadius: BorderRadius.circular(10.r),
+                          //       border: Border.all(color: _colorGender)
+                          //   ),
+                          //   child: DropdownButtonFormField(
+                          //
+                          //     hint: Padding(
+                          //       padding: EdgeInsets.only(left: 8.w),
+                          //       child: Text("Kunlik / Oylik ".tr(),
+                          //           style: TextStyle(
+                          //             color: AppColors.iconColor,
+                          //             fontSize: 14.sp,
+                          //             fontWeight: FontWeight.w500,
+                          //           )),
+                          //     ),
+                          //     decoration: const InputDecoration(
+                          //         border: InputBorder.none),
+                          //     icon: const Icon(Icons.arrow_drop_down_outlined),
+                          //     items: housecost.map((e) {
+                          //       return DropdownMenuItem<String>(
+                          //
+                          //         onTap: () {},
+                          //         value: e,
+                          //         child: Padding(
+                          //           padding: EdgeInsets.only(left: 8.w),
+                          //           child: Text(e.tr()),
+                          //         ),
+                          //       );
+                          //     }).toList(),
+                          //     onChanged: (newValue) {
+                          //       setState(() {
+                          //         rent_type = newValue.toString();
+                          //         _colorGender = Colors.grey;
+                          //         if (newValue == 'Kunlik') {
+                          //           price = '1';
+                          //           print(price +'rent type');
+                          //         } else if (newValue == 'Oylik') {
+                          //           price = '2';
+                          //           print(price +'rent type');
+                          //         }else{
+                          //           price = '3';
+                          //           print(price +'rent type');
+                          //         }
+                          //
+                          //       });
+                          //     },
+                          //   ),
+                          // ),
                           Container(
                             width: 152.w,
+                            height: 50.h,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10.r),
-                                border: Border.all(color: _colorGender)),
-                            child: DropdownButtonFormField(
-                              hint: Padding(
-                                padding: EdgeInsets.only(left: 8.w),
-                                child: Text("Kunlik / Oylik ".tr(),
-                                    style: TextStyle(
-                                      color: AppColors.iconColor,
-                                      fontSize: 14.sp,
-                                      fontWeight: FontWeight.w500,
-                                    )),
-                              ),
-                              decoration: const InputDecoration(
-                                  border: InputBorder.none),
-                              icon: const Icon(Icons.arrow_drop_down_outlined),
-                              items: housecost.map((e) {
-                                return DropdownMenuItem<String>(
-                                  onTap: () {},
-                                  value: e,
-                                  child: Padding(
-                                    padding: EdgeInsets.only(left: 8.w),
-                                    child: Text(e.tr()),
+                                border: Border.all(color: Colors.grey)
+                            ),
+                            child: DropdownButtonHideUnderline(
+                              child: DropdownButton2(
+                                isExpanded: true,
+                                hint: Padding(
+                                  padding: EdgeInsets.only(left: 8.w,top: 10.h),
+                                  child: Text("Kunlik  / Oylik".tr(),
+                                    style: TextStyle(fontSize: 14.sp),
                                   ),
-                                );
-                              }).toList(),
-                              onChanged: (newValue) {
-                                setState(() {
-                                  rent_type = newValue.toString();
-                                  _colorGender = Colors.grey;
-                                  if (newValue == 'Kunlik') {
-                                    price = '1';
-                                    print(price +'rent type');
-                                  } else if (newValue == 'Oylik') {
-                                    price = '2';
-                                    print(price +'rent type');
-                                  }else{
-                                    price = '3';
-                                    print(price +'rent type');
-                                  }
-
-                                });
-                              },
+                                ),
+                                items: housecost.map((item) {
+                                  return DropdownMenuItem<String>(
+                                    value: item,
+                                    //disable default onTap to avoid closing menu when selecting an item
+                                    enabled: false,
+                                    child: StatefulBuilder(
+                                      builder: (context, menuSetState) {
+                                        final _isSelected = selectedItems.contains(item);
+                                        return InkWell(
+                                          onTap: () {
+                                            _isSelected
+                                                ? selectedItems.remove(item)
+                                                : selectedItems.add(item);
+                                            //This rebuilds the StatefulWidget to update the button's text
+                                            setState(() {});
+                                            //This rebuilds the dropdownMenu Widget to update the check mark
+                                            menuSetState(() {});
+                                          },
+                                          child: Container(
+                                            height: double.infinity,
+                                            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                                            child: Row(
+                                              children: [
+                                                _isSelected
+                                                    ? const Icon(Icons.check_box_outlined)
+                                                    : const Icon(Icons.check_box_outline_blank),
+                                                SizedBox(width: 16.w),
+                                                Text(
+                                                  item,
+                                                  style: const TextStyle(
+                                                    fontSize: 14,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  );
+                                }).toList(),
+                                //Use last selected item as the current value so if we've limited menu height, it scroll to last item.
+                                value: selectedItems.isEmpty ? null : selectedItems.last,
+                                onChanged: (value) {},
+                                buttonHeight: 40,
+                                buttonWidth: 140,
+                                itemHeight: 40,
+                                itemPadding: EdgeInsets.zero,
+                                selectedItemBuilder: (context) {
+                                  return housecost.map(
+                                        (item) {
+                                      return Container(
+                                        alignment: AlignmentDirectional.center,
+                                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                                        child: Text(
+                                          selectedItems.join(', '),
+                                          style: const TextStyle(
+                                            fontSize: 14,
+                                            overflow: TextOverflow.ellipsis,
+                                          ),
+                                          maxLines: 1,
+                                        ),
+                                      );
+                                    },
+                                  ).toList();
+                                },
+                              ),
                             ),
                           ),
                         ],
                       ),
                     ],
                   ),
+
                   SizedBox(
                     height: 15.h,
                   ),
@@ -1090,10 +1164,10 @@ class _Student2State extends State<Student2> {
                                   fontWeight: FontWeight.w500,
                                 )),
                             Checkbox(
-                              value: this.value1,
+                              value: value1,
                               onChanged: (bool? value) {
                                 setState(() {
-                                  this.value1 = value!;
+                                  value1 = value!;
                                   if (value) {
                                     comfort.add('1');
                                   } else {
@@ -1273,7 +1347,7 @@ class _Student2State extends State<Student2> {
                                 housecount: housecount.toString(),
                                 ownerlive: ownerlive.toString(),
                                 costController: costcontroller.text,
-                                rent_type: price,
+                                rent_type: selectedItems.join(', '),
                                 cost_period: pricerent_type,
                                 location: '${map.forMap}', districId: data.districtId,
                               ),
