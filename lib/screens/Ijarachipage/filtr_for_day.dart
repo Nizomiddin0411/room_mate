@@ -469,7 +469,7 @@ class _FiltrForDayState extends State<FiltrForDay> {
                         decoration: const InputDecoration(
                             border: OutlineInputBorder(),
                             focusColor: Colors.grey),
-                        icon: Icon(Icons.arrow_drop_down_outlined),
+                        icon: const Icon(Icons.arrow_drop_down_outlined),
                         items: kindOfMoment.map((e) {
                           return DropdownMenuItem<String>(
                             onTap: () {},
@@ -615,14 +615,14 @@ class _FiltrForDayState extends State<FiltrForDay> {
                                   color: AppColors.error,
                                   fontSize: 20.sp,
                                   fontWeight: FontWeight.w500),
-                            )),
+                            ).tr()),
                       ),
                     ),
                   ),
                   Padding(
                     padding:
                         EdgeInsets.symmetric(vertical: 8.h, horizontal: 31.w),
-                    child: Container(
+                    child: SizedBox(
                         width: double.infinity,
                         child: ElevatedButton(
                           style: ElevatedButton.styleFrom(

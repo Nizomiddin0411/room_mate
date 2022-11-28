@@ -35,10 +35,10 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
       '3 ',
       '4 ',
     ];
-    String? Region;
-    String? District;
-    String? Fakultet;
-    String Course = '';
+
+
+
+
     return Scaffold(
       backgroundColor: AppColors.backgroundWhite,
       appBar: AppBar(
@@ -49,7 +49,7 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
               color: AppColors.mainColor,
               fontSize: 18.sp,
               fontWeight: FontWeight.w500),
-        ),
+        ).tr(),
         centerTitle: true,
         leading: InkWell(
           child: const Icon(
@@ -76,7 +76,7 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w500,
                   ),
-                ),
+                ).tr(),
                 SizedBox(
                   height: 4.h,
                 ),
@@ -97,7 +97,7 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                       hint: Text(
                         'Qaysi viloyatliksiz',
                         style: TextStyle(fontSize: 14.sp),
-                      ),
+                      ).tr(),
                       icon: const Icon(
                         Icons.arrow_drop_down,
                         color: Colors.black45,
@@ -154,7 +154,7 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                             fontSize: 14.sp,
                             fontWeight: FontWeight.w500,
                           ),
-                        ),
+                        ).tr(),
                       ],
                     ),
                     SizedBox(
@@ -176,9 +176,9 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                                 ),
                                 isExpanded: true,
                                 hint: Text(
-                                  ' Qaysi tumanidansiz',
+                                  'Qaysi tumanidansiz',
                                   style: TextStyle(fontSize: 14.sp),
-                                ),
+                                ).tr(),
                                 icon: const Icon(
                                   Icons.arrow_drop_down,
                                   color: Colors.black45,
@@ -237,9 +237,9 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                                 isExpanded: true,
                                 isDense: true,
                                 hint: Text(
-                                  'Tumaningiz',
+                                  'Qaysi tumanidansiz',
                                   style: TextStyle(fontSize: 14.sp),
-                                ),
+                                ).tr(),
                                 icon: const Icon(
                                   Icons.arrow_drop_down,
                                   color: Colors.black45,
@@ -268,7 +268,7 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                     fontSize: 20.sp,
                     fontWeight: FontWeight.w500,
                   ),
-                ),
+                ).tr(),
                 SizedBox(
                   height: 10.h,
                 ),
@@ -279,7 +279,7 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                     fontSize: 14.sp,
                     fontWeight: FontWeight.w500,
                   ),
-                ),
+                ).tr(),
                 SizedBox(height: 4.h),
                 FutureBuilder<List<GetFacultyModel>?>(
                   future:
@@ -305,7 +305,7 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                             hint: Text(
                               "Yo'nalishingiz",
                               style: TextStyle(fontSize: 14.sp),
-                            ),
+                            ).tr(),
                             icon: const Icon(
                               Icons.arrow_drop_down,
                               color: Colors.black45,
@@ -337,7 +337,7 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                                 .toList(),
                             onChanged: (value) {
                               setState(() {
-                                Fakultet = value.toString();
+
                               });
                             },
                             // onSaved: (value) {},
@@ -358,7 +358,7 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                     Row(
                       children: [
                         const Text(
-                          "Kurs ",
+                          "Kurs",
                           style: TextStyle(
                             color: AppColors.textColor,
                             fontSize: 14,
@@ -458,7 +458,7 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                                 color: Colors.red,
                                 fontSize: 20.sp,
                                 fontWeight: FontWeight.w500),
-                          ),
+                          ).tr(),
                         ),
                       ),
                       SizedBox(
@@ -497,7 +497,7 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                             "Saqlash",
                             style: TextStyle(
                                 fontSize: 20.sp, fontWeight: FontWeight.w500),
-                          ),
+                          ).tr(),
                         ),
                       ),
                     ],

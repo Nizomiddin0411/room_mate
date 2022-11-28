@@ -315,12 +315,12 @@ class _FavoritPageState extends State<FavoritPage> {
                                             data.Like[index].costPeriod
                                                         .toString() ==
                                                     '1'
-                                                ? 'Kuniga'
+                                                ? tr('Kuniga')
                                                 : data.Like[index].costPeriod
                                                             .toString() ==
                                                         '2'
-                                                    ? 'Oyiga'
-                                                    : 'Uzoq muddatga',
+                                                    ? tr('Oyiga')
+                                                    : tr('Kishi boshiga'),
                                             style: const TextStyle(
                                                 color: AppColors.mainColor),
                                           ),

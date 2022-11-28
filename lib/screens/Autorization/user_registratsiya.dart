@@ -1,4 +1,4 @@
-import 'package:dropdown_button2/dropdown_button2.dart';
+
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -17,33 +17,20 @@ class UserRegistratsion extends StatefulWidget {
 }
 
 class _UserRegistratsionState extends State<UserRegistratsion> {
-  String Phonenumber = '';
-  String FullName = '';
-  String UniderId = '';
-  String fakultetId = '';
-  String Course = '1';
-  String Roommate = '';
-  String District = '';
-  String? gender;
+
+
+
   Color jinsiColor = Colors.black12;
   bool jinsi = false;
   bool checkBox = false;
 
-  final List<String> genderItems = [
-    "Ayol".tr(),
-    "Erkak".tr(),
-  ];
-  final List<String> kursingizItems = [
-    '1 ',
-    '2',
-    '3 ',
-    '4 ',
-  ];
+
+
 
   final myController = TextEditingController();
   final nameController = TextEditingController(text: "+998 ");
-  String? selectedValue;
-  String? dropdownvalue;
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +43,7 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
               children: [
                 Row(
                   children: [
-                    Text("Ism va familiya ").tr(),
+                    const Text("Ism va familiya").tr(),
                   ],
                 ),
                 SizedBox(
@@ -91,7 +78,7 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
               children: [
                 Row(
                   children: [
-                    Text("Telefon raqami").tr(),
+                    const Text("Telefon raqami").tr(),
                   ],
                 ),
                 SizedBox(
@@ -115,7 +102,7 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
                           if (e!.length > 12) {
                             return null;
                           } else {
-                            return '9 ta raqam kiriting';
+                            return tr('9 ta raqam kiriting');
                           }
                         },
                         keyboardType: TextInputType.phone,
@@ -133,88 +120,11 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
             SizedBox(
               height: 10.h,
             ),
-            // Column(
-            //   children: [
-            //     Row(
-            //       children: [
-            //         Text("Jins").tr(),
-            //       ],
-            //     ),
-            //     SizedBox(
-            //       height: 5,
-            //     ),
-            //     // Column(
-            //     //   children: [
-            //     //     DropdownButtonFormField2(
-            //     //       decoration: InputDecoration(
-            //     //         isDense: true,
-            //     //         contentPadding: EdgeInsets.zero,
-            //     //         enabledBorder: OutlineInputBorder(
-            //     //           borderSide: BorderSide(color: jinsiColor),
-            //     //           borderRadius: BorderRadius.circular(10),
-            //     //         ),
-            //     //       ),
-            //     //       isExpanded: true,
-            //     //       hint: const Text(
-            //     //         "Jinsni tanlang",
-            //     //         style: TextStyle(fontSize: 14),
-            //     //       ).tr(),
-            //     //       icon: const Icon(
-            //     //         Icons.arrow_drop_down,
-            //     //         color: Colors.black45,
-            //     //       ),
-            //     //       itemPadding: EdgeInsets.only(left: 10, right: 15),
-            //     //       itemHeight: 30,
-            //     //       iconSize: 30,
-            //     //       buttonHeight: 60,
-            //     //       buttonPadding:
-            //     //       const EdgeInsets.only(left: 20, right: 10),
-            //     //       dropdownDecoration: BoxDecoration(
-            //     //         borderRadius: BorderRadius.circular(15),
-            //     //       ),
-            //     //       items: genderItems
-            //     //           .map((item) => DropdownMenuItem<String>(
-            //     //         value: item,
-            //     //         child: Text(
-            //     //           item,
-            //     //           style: const TextStyle(
-            //     //             fontSize: 14,
-            //     //           ),
-            //     //         ),
-            //     //       ))
-            //     //           .toList(),
-            //     //       validator: (value) {
-            //     //         if (value == null) {
-            //     //           return "Jinsni tanlang";
-            //     //         }
-            //     //       },
-            //     //       onChanged: (String? value) {
-            //     //         setState(() {
-            //     //           dropdownvalue = value;
-            //     //           jinsi=true;
-            //     //           jinsiColor = Colors.black12;
-            //     //           print(dropdownvalue);
-            //     //         });
-            //     //       },
-            //     //       onSaved: (value) {
-            //     //         dropdownvalue = value.toString();
-            //     //         setState(() {
-            //     //
-            //     //         });
-            //     //       },
-            //     //     ),
-            //     //   ],
-            //     // ),
-            //   ],
-            // ),
-            SizedBox(
-              height: 10.w,
-            ),
             Column(
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [],
+                  children: const [],
                 ),
               ],
             ),
@@ -288,10 +198,10 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
                 ),
                 child: Center(
                   child: Text(
-                    "Ro’yhatdan o’tish",
+                    "Ro’yhatdan o’tish".tr(),
                     style: TextStyle(
                         color: AppColors.backgroundWhite, fontSize: 20.sp),
-                  ).tr(),
+                  ),
                 ),
               ),
             ),
@@ -306,9 +216,9 @@ void _showToast(BuildContext context, bool isCheck) {
   final scaffold = ScaffoldMessenger.of(context);
   scaffold.showSnackBar(
     SnackBar(
-      content: const Text(
-        'Foydalanish shartini bajarmadingiz !!!',
-        style: TextStyle(
+      content:  Text(
+        tr("Foydalanish shartini bajarmadingiz")+ '!!!',
+        style: const TextStyle(
             color: Colors.red, fontWeight: FontWeight.bold, fontSize: 15),
       ),
       action: SnackBarAction(

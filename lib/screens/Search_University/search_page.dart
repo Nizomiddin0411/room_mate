@@ -70,7 +70,7 @@ class _SearchPageState extends State<SearchPage> {
                       controller: _controller,
                       decoration: InputDecoration(
                         border: const OutlineInputBorder(),
-                        label: const Text("Qidirish "),
+                        label: const Text("Qidirish").tr(),
                         suffixIcon: IconButton(
                           onPressed: () {
                             // _controller.clear();

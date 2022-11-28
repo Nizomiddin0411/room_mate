@@ -47,8 +47,8 @@ class _FeedbackPageState extends State<FeedbackPage> {
               SizedBox(
                 height: 18.h,
               ),
-              const Center(
-                child: Text("Dasturga baxo bering"),
+              Center(
+                child: const Text("Dasturga baxo bering").tr(),
               ),
               SizedBox(
                 height: 20.h,
@@ -82,7 +82,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
               SizedBox(
                 height: 54.h,
               ),
-              const Text("Talab takliflar bo’lsa yozing"),
+              const Text("Talab takliflar bo’lsa yozing").tr(),
               Container(
                 width: double.infinity,
                 decoration: BoxDecoration(
@@ -120,9 +120,10 @@ class _FeedbackPageState extends State<FeedbackPage> {
               Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Text(
-                  "Eng yaxshi taklif uchun tanlov !",
-                  style: TextStyle(fontSize: 18.sp,fontWeight: FontWeight.w500),
-                ).tr(),
+                  tr("Eng yaxshi taklif uchun tanlov") + "!",
+                  style:
+                      TextStyle(fontSize: 18.sp, fontWeight: FontWeight.w500),
+                ),
               ),
               SizedBox(
                 height: 10.h,
@@ -130,12 +131,12 @@ class _FeedbackPageState extends State<FeedbackPage> {
               Text(
                 "Mazkur rivojlantirish bo'yicha eng yaxshi takliflarni saralash maqsadida har yili tanlov o'tkaziladi.",
                 style: TextStyle(fontSize: 16.sp),
-              ),
+              ).tr(),
               SizedBox(
                 height: 8.h,
               ),
               const Text(
-                  "Eng yaxshi deb topilgan 3 ta taklif egalari har yili avgust oyida qimmatbaho sovg'alar (iPhone 14 telefoni,noutbuq va planshet) bilan taqdirlanadi ."),
+                  "Eng yaxshi deb topilgan 3 ta taklif egalari har yili avgust oyida qimmatbaho sovg'alar (iPhone 14 telefoni,noutbuq va planshet) bilan taqdirlanadi .").tr(),
               // const Text('2.Har oyning qaysidir sanasida 1 kishi tanlab olinadi .'),
               InkWell(
                 onTap: () async {
@@ -145,9 +146,12 @@ class _FeedbackPageState extends State<FeedbackPage> {
                           ? '0'
                           : provider.rentof == '1'
                               ? '1'
-                              : '2' ,
+                              : '2',
                       descriptionController.text);
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => SuccedPage()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const SuccedPage()));
                 },
                 child: Padding(
                   padding: EdgeInsets.fromLTRB(23.w, 45.h, 23.w, 10.h),
@@ -162,7 +166,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
                       "Jo’natish",
                       style: TextStyle(
                           fontSize: 20.sp, color: AppColors.backgroundWhite),
-                    )),
+                    ).tr()),
                   ),
                 ),
               )

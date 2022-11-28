@@ -1,4 +1,5 @@
 import 'package:dropdown_button2/dropdown_button2.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -26,7 +27,7 @@ class _UniverFiltrPageState extends State<UniverFiltrPage> {
               color: AppColors.mainColor,
               fontSize: 18.sp,
               fontWeight: FontWeight.w500),
-        ),
+        ).tr(),
         centerTitle: true,
         leading: InkWell(
           child: const Icon(
@@ -52,7 +53,7 @@ class _UniverFiltrPageState extends State<UniverFiltrPage> {
                         color: AppColors.mainColor,
                         fontSize: 20.sp,
                         fontWeight: FontWeight.w500),
-                  ),
+                  ).tr(),
                   SizedBox(height: 12.h),
                   Text(
                     "Viloyat",
@@ -61,7 +62,7 @@ class _UniverFiltrPageState extends State<UniverFiltrPage> {
                       fontSize: 14.sp,
                       fontWeight: FontWeight.w500,
                     ),
-                  ),
+                  ).tr(),
                   Column(
                     children: [
                       DropdownButtonFormField2<String>(
@@ -79,7 +80,7 @@ class _UniverFiltrPageState extends State<UniverFiltrPage> {
                         hint: Text(
                           'Viloyatni tanlang',
                           style: TextStyle(fontSize: 14.sp),
-                        ),
+                        ).tr(),
                         icon: const Icon(
                           Icons.arrow_drop_down,
                           color: Colors.black45,
@@ -121,8 +122,8 @@ class _UniverFiltrPageState extends State<UniverFiltrPage> {
                   Column(
                     children: [
                       Row(
-                        children: const [
-                          Text("Tuman",style: TextStyle(fontWeight: FontWeight.w500),),
+                        children:  [
+                          const Text("Tuman",style: TextStyle(fontWeight: FontWeight.w500),).tr(),
                         ],
                       ),
                       SizedBox(
@@ -146,7 +147,7 @@ class _UniverFiltrPageState extends State<UniverFiltrPage> {
                                   hint: Text(
                                     'Tumanni tanlang',
                                     style: TextStyle(fontSize: 14.sp),
-                                  ),
+                                  ).tr(),
                                   icon: const Icon(
                                     Icons.arrow_drop_down,
                                     color: Colors.black45,
@@ -164,8 +165,8 @@ class _UniverFiltrPageState extends State<UniverFiltrPage> {
                                           onTap: () {
                                             provider.DistrickId =
                                                 e.id.toString();
-                                            print(provider.DistrickId +
-                                                "mmmmmmmmmfmgkfngfngjf");
+                                            // print(provider.DistrickId +
+                                            //     "mmmmmmmmmfmgkfngfngjf");
                                           },
                                           value: provider.istuman
                                               ? e.name.toString()
@@ -202,7 +203,7 @@ class _UniverFiltrPageState extends State<UniverFiltrPage> {
                                   hint: Text(
                                     'Tuman',
                                     style: TextStyle(fontSize: 14.sp),
-                                  ),
+                                  ).tr(),
                                   icon: const Icon(
                                     Icons.arrow_drop_down,
                                     color: Colors.black45,
@@ -214,7 +215,7 @@ class _UniverFiltrPageState extends State<UniverFiltrPage> {
                                   dropdownDecoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(15),
                                   ),
-                                  items: [],
+                                  items: const [],
                                   onChanged: null,
                                 ),
                               ],
@@ -252,7 +253,7 @@ class _UniverFiltrPageState extends State<UniverFiltrPage> {
                                   color: Colors.red,
                                   fontSize: 20.sp,
                                   fontWeight: FontWeight.w500),
-                            ),
+                            ).tr(),
                           ),
                         ),
                         SizedBox(
@@ -276,7 +277,7 @@ class _UniverFiltrPageState extends State<UniverFiltrPage> {
                               "Saqlash",
                               style: TextStyle(
                                   fontSize: 20.sp, fontWeight: FontWeight.w500),
-                            ),
+                            ).tr(),
                           ),
                         ),
                       ],

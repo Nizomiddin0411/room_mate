@@ -571,7 +571,7 @@ class _FiltrPageState extends State<FiltrPage> {
                               color: AppColors.error,
                               fontSize: 20.sp,
                               fontWeight: FontWeight.w500),
-                        )),
+                        ).tr()),
                       ),
                     ),
                   ),

@@ -45,7 +45,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
         title: const Text(
           "Oliy o’quv yurti",
           style: TextStyle(color: AppColors.mainColor),
-        ),
+        ).tr(),
         leading: IconButton(
           icon: const Icon(
             Icons.arrow_back_outlined,
@@ -126,7 +126,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                 Text(
                                   "Filtr",
                                   style: TextStyle(fontSize: 16.sp),
-                                ),
+                                ).tr(),
                               ]),
                             ),
                             decoration: BoxDecoration(
@@ -148,7 +148,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                               color: Colors.blue,
                               fontSize: 24.sp,
                               fontWeight: FontWeight.bold),
-                        ),
+                        ).tr(),
                       ],
                     ),
                     const Divider(
@@ -211,7 +211,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                     Column(
                                       children: [
                                         Text(
-                                          "Viloyat:${provider.ads[index].birthRegion?.name.toString()} ",
+                                          tr("Viloyat")+": ${provider.ads[index].birthRegion?.name.toString()} ",
                                           style: TextStyle(fontSize: 14.sp),
                                         ),
                                       ],
@@ -222,7 +222,7 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                                     Column(
                                       children: [
                                         Text(
-                                            "Tuman :${provider.ads[index].birthDistrict?.name.toString()}", style: TextStyle(fontSize: 14.sp)),
+                                            tr("Tuman")+": ${provider.ads[index].birthDistrict?.name.toString()}", style: TextStyle(fontSize: 14.sp)),
                                       ],
                                     ),
                                     SizedBox(

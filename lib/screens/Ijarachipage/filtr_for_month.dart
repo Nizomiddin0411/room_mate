@@ -413,7 +413,7 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                               decoration: const InputDecoration(
                                   border: OutlineInputBorder(),
                                   focusColor: Colors.grey),
-                              icon: Icon(Icons.arrow_drop_down_outlined),
+                              icon: const Icon(Icons.arrow_drop_down_outlined),
                               items: rooms.map((e) {
                                 return DropdownMenuItem<String>(
                                   onTap: () {},
@@ -456,7 +456,7 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                         decoration: const InputDecoration(
                             border: OutlineInputBorder(),
                             focusColor: Colors.grey),
-                        icon: Icon(Icons.arrow_drop_down_outlined),
+                        icon: const Icon(Icons.arrow_drop_down_outlined),
                         items: kindOfMoment.map((e) {
                           return DropdownMenuItem<String>(
                             onTap: () {},
@@ -602,7 +602,7 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                                   color: AppColors.error,
                                   fontSize: 20.sp,
                                   fontWeight: FontWeight.w500),
-                            )),
+                            ).tr()),
                       ),
                     ),
                   ),

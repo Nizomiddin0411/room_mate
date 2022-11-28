@@ -140,8 +140,8 @@ class _AccountPageState extends State<AccountPage> {
               title: Text(
                 "Telefon raqamni ko’rinmas qilish",
                 style: TextStyle(fontSize: 18.sp),
-              ),
-              trailing: Container(
+              ).tr(),
+              trailing: SizedBox(
                 height: 60.h,
                 width: 80.w,
                 child: Switch(
@@ -173,8 +173,8 @@ class _AccountPageState extends State<AccountPage> {
               title: Text(
                 "Profilni ro’yxatda ko’rinmas qilish",
                 style: TextStyle(fontSize: 18.sp),
-              ),
-              trailing: Container(
+              ).tr(),
+              trailing: SizedBox(
                 height: 60.h,
                 width: 80.w,
                 child: Switch(

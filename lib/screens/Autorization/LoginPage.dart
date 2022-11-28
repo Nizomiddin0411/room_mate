@@ -1,8 +1,6 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
 import 'package:talaba_uy/screens/Autorization/sms_confirmation.dart';
@@ -19,9 +17,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  TextEditingController _phoneController = TextEditingController(text: '+998');
+  final TextEditingController _phoneController = TextEditingController(text: '+998');
   String _message = '';
-  GlobalKey _key = GlobalKey();
+  final GlobalKey _key = GlobalKey();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,7 +31,7 @@ class _LoginPageState extends State<LoginPage> {
             onTap: () {
               Navigator.pop(context);
             },
-            child: Icon(
+            child: const Icon(
               Icons.arrow_back,
               color: Colors.black,
             )),
@@ -115,6 +113,7 @@ class _LoginPageState extends State<LoginPage> {
                 var dataService = await LoginService()
                     .loginService(phone: _phoneController.text);
                 if (dataService['status']) {
+                  // print(dataService['status']);
                   _message = dataService['content'];
                   Navigator.push(
                       context,

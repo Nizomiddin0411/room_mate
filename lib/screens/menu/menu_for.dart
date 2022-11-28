@@ -8,14 +8,9 @@ import 'package:talaba_uy/core/const/app_colors.dart';
 import 'package:talaba_uy/provider/search_universitet_provider.dart';
 import 'package:talaba_uy/screens/Account_Page/account_page.dart';
 import 'package:talaba_uy/screens/Create_ads/create_ads_page.dart';
-import 'package:talaba_uy/screens/Ijarachipage/elonlar.dart';
-import 'package:talaba_uy/screens/Ijarachipage/kunlik_ijara.dart';
-import 'package:talaba_uy/screens/Search_University/search_page.dart';
 import 'package:talaba_uy/screens/drawer/drawer.dart';
-
 import '../Feedback_Page/feedback_page.dart';
 import '../Ijarachipage/ads_for_users.dart';
-import '../Ijarachipage/oylik_ijara.dart';
 import '../Notification_Page/notification_page.dart';
 
 class MenuFor extends StatefulWidget {
@@ -35,6 +30,7 @@ class _MenuForState extends State<MenuFor> {
     Provider.of<SearchUniversitet>(context, listen: false).getSearchUniver(toStringShort(),'0','0');
   }
 
+  @override
   Widget build(BuildContext context) {
 
     return Scaffold(
@@ -63,7 +59,7 @@ class _MenuForState extends State<MenuFor> {
                 child: const Icon(Icons.notifications,color: Colors.grey,),
 
               ),
-              badgeContent: Text("0",style: TextStyle(color: Colors.white),),
+              badgeContent: const Text("0",style: TextStyle(color: Colors.white),),
             ),
           ),
           Padding(
@@ -73,7 +69,7 @@ class _MenuForState extends State<MenuFor> {
                 Navigator.push(context, MaterialPageRoute(builder: (context)=>const AccountPage()));
               },
               child:  CircleAvatar(
-                backgroundImage: AssetImage('assets/images/accountImage.png'),
+                backgroundImage: const AssetImage('assets/images/accountImage.png'),
                 radius: 25.r,
                 // child:
               ),
@@ -142,13 +138,13 @@ class _MenuForState extends State<MenuFor> {
                     borderRadius: BorderRadius.circular(20.r),
                     color: AppColors.secondBackgroud,
                   ),
-                  child: const Center(
-                      child: Text(
+                  child:  Center(
+                      child: const Text(
                         "O'z taklifingizni qoldiring",
                         style: TextStyle(
                           color: AppColors.textColor,
                         ),
-                      )),
+                      ).tr()),
                 ),
               ),
               SizedBox(

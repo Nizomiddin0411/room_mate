@@ -651,12 +651,12 @@ class _FavoritAdsState extends State<FavoritAds> {
                                               data.MyAds[index].costPeriod
                                                           .toString() ==
                                                       '1'
-                                                  ? 'Kuniga'
+                                                  ? tr('Kuniga')
                                                   : data.MyAds[index].costPeriod
                                                               .toString() ==
                                                           '2'
-                                                      ? 'Oyiga'
-                                                      : 'Uzoq muddatga',
+                                                      ? tr('Oyiga')
+                                                      : tr('Kishi boshiga'),
                                               style: const TextStyle(
                                                   color: AppColors.mainColor),
                                             ),
@@ -710,20 +710,20 @@ class _FavoritAdsState extends State<FavoritAds> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: const Text("E’lonni o’chirish "),
+            title: const Text("E’lonni o’chirish").tr(),
             actions: [
               Column(
                 children: [
                   Padding(
                     padding:
                         EdgeInsets.symmetric(horizontal: 10.h, vertical: 15.w),
-                    child: const Text(
-                        "Ushbu e’lonni o’chirishga ishonchingiz komilmi ? "),
+                    child:  Text(
+                        tr("Ushbu e’lonni o’chirishga ishonchingiz komilmi")+"?"),
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Container(
+                      SizedBox(
                         width: 130.w,
                         height: 48.h,
                         child: ElevatedButton(
@@ -767,7 +767,7 @@ class _FavoritAdsState extends State<FavoritAds> {
                             style: TextStyle(
                                 color: AppColors.backgroundWhite,
                                 fontSize: 18.sp),
-                          ),
+                          ).tr(),
                         ),
                       )
                     ],

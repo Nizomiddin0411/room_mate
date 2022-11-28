@@ -36,6 +36,7 @@ class _MenuPageState extends State<MenuPage> {
     // Provider.of<SearchUniversitet>(context, listen: false).getSearchUniver(toStringShort());
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       key: _scaffoldKey,
@@ -63,7 +64,7 @@ class _MenuPageState extends State<MenuPage> {
                 child: const Icon(Icons.notifications,color: Colors.grey,),
 
               ),
-              badgeContent: Text("0",style: TextStyle(color: Colors.white),),
+              badgeContent: const Text("0",style: TextStyle(color: Colors.white),),
             ),
           ),
           Padding(
@@ -235,13 +236,13 @@ class _MenuPageState extends State<MenuPage> {
                     borderRadius: BorderRadius.circular(20.r),
                     color: AppColors.secondBackgroud,
                   ),
-                  child: const Center(
-                      child: Text(
+                  child:  Center(
+                      child: const Text(
                     "O'z taklifingizni qoldiring",
                     style: TextStyle(
                       color: AppColors.textColor,
                     ),
-                  )),
+                  ).tr()),
                 ),
               ),
               SizedBox(

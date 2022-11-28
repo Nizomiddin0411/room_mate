@@ -55,55 +55,54 @@ class AdsDetail extends StatefulWidget {
   String? hidePhone;
   String? haveHome;
   List<dynamic>? Image;
-  AdsDetail({
-    Key? key,
-    required this.utileElictricity,
-    required this.utileGaz,
-    required this.utileColdWater,
-    required this.utileHotWater,
-    required this.utileTrash,
-    required this.locations,
-    required this.Image,
-    required this.roommate_count,
-    required this.rentType,
-    required this.utility_bills,
-    required this.floorsCount,
-    required this.inFloor,
-    required this.roommate_gender,
-    required this.stay_region,
-    required this.stay_university,
-    required this.phoneNumber,
-    required this.phoneNumberShow,
-    required this.title,
-    required this.description,
-    required this.cost,
-    required this.costTayp,
-    required this.houseType,
-    required this.countRoom,
-    required this.countPeople,
-    required this.region,
-    required this.district,
-    required this.createData,
-    required this.liveWithOwner,
-    required this.subway,
-    required this.id,
-    required this.favorite,
-    required this.type,
-    required this.userId,
-    required this.userFullName,
-    required this.chatApproved,
-    required this.address,
-    required this.comfort,
-    required this.costPeriod,
-    required this.haveHome
-  }) : super(key: key);
+  AdsDetail(
+      {Key? key,
+      required this.utileElictricity,
+      required this.utileGaz,
+      required this.utileColdWater,
+      required this.utileHotWater,
+      required this.utileTrash,
+      required this.locations,
+      required this.Image,
+      required this.roommate_count,
+      required this.rentType,
+      required this.utility_bills,
+      required this.floorsCount,
+      required this.inFloor,
+      required this.roommate_gender,
+      required this.stay_region,
+      required this.stay_university,
+      required this.phoneNumber,
+      required this.phoneNumberShow,
+      required this.title,
+      required this.description,
+      required this.cost,
+      required this.costTayp,
+      required this.houseType,
+      required this.countRoom,
+      required this.countPeople,
+      required this.region,
+      required this.district,
+      required this.createData,
+      required this.liveWithOwner,
+      required this.subway,
+      required this.id,
+      required this.favorite,
+      required this.type,
+      required this.userId,
+      required this.userFullName,
+      required this.chatApproved,
+      required this.address,
+      required this.comfort,
+      required this.costPeriod,
+      required this.haveHome})
+      : super(key: key);
 
   @override
   State<AdsDetail> createState() => _AdsDetailState();
 }
 
 class _AdsDetailState extends State<AdsDetail> {
-
   late List<String> haveComfort = widget.comfort.toString().split(',');
   late List<int> haveInt = haveComfort.map(int.parse).toList();
   late List<String> comfort = [];
@@ -135,7 +134,7 @@ class _AdsDetailState extends State<AdsDetail> {
   void initState() {
     // TODO: implement initState
     super.initState();
-    if(widget.comfort!.isNotEmpty ) {
+    if (widget.comfort!.isNotEmpty) {
       isHaveComfort(haveInt, comfort);
       comfortList = comfort.reduce((value, element) => value + ', ' + element);
     }
@@ -212,8 +211,7 @@ class _AdsDetailState extends State<AdsDetail> {
 
                       // controller: _pageController,
                       onPageChanged: (int index) {
-                        setState(() {
-                        });
+                        setState(() {});
                       },
                       itemBuilder: (context, pagePosition) {
                         return Padding(
@@ -239,7 +237,6 @@ class _AdsDetailState extends State<AdsDetail> {
                                       height: 219.h,
                                       fit: BoxFit.cover,
                                     )
-
                                   : Image.asset(
                                       'assets/images/notImage.png',
                                       width: 324.w,
@@ -300,7 +297,7 @@ class _AdsDetailState extends State<AdsDetail> {
             ),
             Container(
               width: 324.w,
-              height: widget.haveHome != '2' ? 210.h:110.h,
+              height: widget.haveHome != '2' ? 210.h : 110.h,
               decoration: BoxDecoration(
                 color: AppColors.backgroundWhite,
                 borderRadius: BorderRadius.only(
@@ -311,27 +308,38 @@ class _AdsDetailState extends State<AdsDetail> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  widget.haveHome != '2' ? Column(
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.fromLTRB(12.w, 12.h, 12.w, 0),
-                            child: Text(
-                              '${widget.cost} ${widget.costTayp == '1' ? "So'm" : 'USD'}/${widget.costPeriod == '1' ? tr('Kuniga') : widget.costPeriod == '2' ? tr('Oyiga') : tr('Kishi boshiga')}',
-                              style: TextStyle(
-                                  fontSize: 24.sp, color: AppColors.mainColor),
+                  widget.haveHome != '2'
+                      ? Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Padding(
+                                  padding:
+                                      EdgeInsets.fromLTRB(12.w, 12.h, 12.w, 0),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        '${widget.cost} ${widget.costTayp == '1' ? "So'm" : 'USD'}/',
+                                        style: TextStyle(
+                                            fontSize: 24.sp,
+                                            color: AppColors.mainColor),
+                                      ),
+                                      Text(
+                                          '${widget.costPeriod == '1' ? tr('Kuniga') : widget.costPeriod == '2' ? tr('Oyiga') : tr('Kishi boshiga')}', style: TextStyle(
+                                          fontSize: 14.sp, color: AppColors.mainColor),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
                             ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 6.h,
-                      ),
-                    ],
-                  ) : const SizedBox(),
-
+                            SizedBox(
+                              height: 6.h,
+                            ),
+                          ],
+                        )
+                      : const SizedBox(),
                   Padding(
                     padding: const EdgeInsets.all(8.0),
                     child: SizedBox(
@@ -344,79 +352,88 @@ class _AdsDetailState extends State<AdsDetail> {
                   SizedBox(
                     height: 8.h,
                   ),
-                  widget.haveHome != '2' ? Column(
-                    children: [
-                      Row(
-                        children: [
-                          const Icon(
-                            Icons.location_on,
-                            color: AppColors.mainColor,
-                          ),
-                          SizedBox(
-                            width: 10.w,
-                          ),
-                          Text(
-                            "${widget.address}",
-                            style: TextStyle(fontSize: 10.sp),
-                          )
-                        ],
-                      ),
-                      SizedBox(
-                        height: 8.h,
-                      ),
-                    ],
-                  ):SizedBox(),
-
-                  widget.haveHome != '2' ? Column(
-                    children: [
-                      InkWell(
-                        onTap: () {
-                          String lat =
-                              widget.locations!.split(',').first.toString();
-                          String long =
-                              widget.locations!.split(',').last.toString();
-                          lat = lat.split('(').last.toString();
-                          long = long.split(')').first.toString();
-                          // print(widget.locations);
-                          // print(lat);
-                          // print(long);
-                          double Lat = double.parse(lat).toDouble();
-                          double Long = double.parse(long).toDouble();
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => MapDetail(
-                                        location: widget.locations,
-                                        long: Long,
-                                        lat: Lat,
-                                      )));
-                        },
-                        child: Row(
+                  widget.haveHome != '2'
+                      ? Column(
                           children: [
-                            const Icon(
-                              Icons.location_on,
-                              color: AppColors.mainColor,
+                            Row(
+                              children: [
+                                const Icon(
+                                  Icons.location_on,
+                                  color: AppColors.mainColor,
+                                ),
+                                SizedBox(
+                                  width: 10.w,
+                                ),
+                                Text(
+                                  "${widget.address}",
+                                  style: TextStyle(fontSize: 10.sp),
+                                )
+                              ],
                             ),
                             SizedBox(
-                              width: 10.w,
+                              height: 8.h,
                             ),
-                            const Text(
-                              "Joylashuvni ko'rish",
-                              style: TextStyle(color: AppColors.mainColor),
-                            ).tr()
                           ],
-                        ),
-                      ),
-                      SizedBox(
-                        height: 8.h,
-                      ),
-                    ],
-                  ) : SizedBox(),
-
+                        )
+                      : const SizedBox(),
+                  widget.haveHome != '2'
+                      ? Column(
+                          children: [
+                            InkWell(
+                              onTap: () {
+                                String lat = widget.locations!
+                                    .split(',')
+                                    .first
+                                    .toString();
+                                String long = widget.locations!
+                                    .split(',')
+                                    .last
+                                    .toString();
+                                lat = lat.split('(').last.toString();
+                                long = long.split(')').first.toString();
+                                // print(widget.locations);
+                                // print(lat);
+                                // print(long);
+                                double Lat = double.parse(lat).toDouble();
+                                double Long = double.parse(long).toDouble();
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => MapDetail(
+                                              location: widget.locations,
+                                              long: Long,
+                                              lat: Lat,
+                                            )));
+                              },
+                              child: Row(
+                                children: [
+                                  const Icon(
+                                    Icons.location_on,
+                                    color: AppColors.mainColor,
+                                  ),
+                                  SizedBox(
+                                    width: 10.w,
+                                  ),
+                                  const Text(
+                                    "Joylashuvni ko'rish",
+                                    style:
+                                        TextStyle(color: AppColors.mainColor),
+                                  ).tr()
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              height: 8.h,
+                            ),
+                          ],
+                        )
+                      : SizedBox(),
                   Row(
                     children: [
                       // widget.chatApproved == 1 ?
-                      widget.type == '1'
+                      widget.type == '1' &&
+                              Hive.box('id').get('id').toString() !=
+                                  widget.userId.toString()
                           ? Padding(
                               padding: EdgeInsets.fromLTRB(12.w, 0, 12.w, 12.h),
                               child: InkWell(
@@ -430,7 +447,7 @@ class _AdsDetailState extends State<AdsDetail> {
                                         MaterialPageRoute(
                                             builder: (context) => ChatPage(
                                                 widget.userFullName!,
-                                                widget.userId! )));
+                                                widget.userId!)));
                                   } else {
                                     showAlertDialog(context, widget.userId!);
                                   }
@@ -589,7 +606,7 @@ class _AdsDetailState extends State<AdsDetail> {
                                     ),
                                   ),
                                 )
-                              : SizedBox()
+                              : const SizedBox()
                     ],
                   )
                 ],
@@ -632,7 +649,7 @@ class _AdsDetailState extends State<AdsDetail> {
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
                                 child: Text(
-                                  "${widget.roommate_count} kishi ${widget.roommate_gender == '1' ? "O'g'il" : 'Qiz'} bola",
+                                  "${widget.roommate_count} "+tr("kishi")+" ${widget.roommate_gender == '1' ? tr("O'g'il bola") : tr('Qiz bola')} ",
                                   style: TextStyle(fontSize: 14.sp),
                                 ),
                               )
@@ -645,51 +662,456 @@ class _AdsDetailState extends State<AdsDetail> {
                           )
                         : Container(),
                     widget.type == '1'
-                        ? widget.stay_region != 'null' ? Row(
+                        ? widget.stay_region != null
+                            ? Row(
+                                children: [
+                                  Container(
+                                    width: 40.w,
+                                    height: 40.h,
+                                    decoration: BoxDecoration(
+                                      color: AppColors.iconBack,
+                                      borderRadius: BorderRadius.circular(8.r),
+                                    ),
+                                    child: const Center(
+                                        child: Icon(
+                                      Icons.location_on,
+                                      color: AppColors.mainColor,
+                                    )),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      "${widget.stay_region}",
+                                      style: TextStyle(fontSize: 14.sp),
+                                    ),
+                                  )
+                                ],
+                              )
+                            : Container()
+                        : Container(),
+                    widget.type == '1'
+                        ? widget.stay_region != 'null'
+                            ? SizedBox(
+                                height: 6.h,
+                              )
+                            : Container()
+                        : Container(),
+                    widget.type == '1'
+                        ? widget.stay_university != 'null'
+                            ? Row(
+                                children: [
+                                  Container(
+                                    width: 40.w,
+                                    height: 40.h,
+                                    decoration: BoxDecoration(
+                                      color: AppColors.iconBack,
+                                      borderRadius: BorderRadius.circular(8.r),
+                                    ),
+                                    child: const Center(
+                                        child: Icon(
+                                      Icons.corporate_fare,
+                                      color: AppColors.mainColor,
+                                    )),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: SizedBox(
+                                      width: MediaQuery.of(context).size.width -
+                                          150.w,
+                                      child: Text(
+                                        "${widget.stay_university}",
+                                        style: TextStyle(fontSize: 14.sp),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              )
+                            : Container()
+                        : Container(),
+                    widget.type == '1'
+                        ? SizedBox(
+                            height: 6.h,
+                          )
+                        : Container(),
+                    SizedBox(
+                      height: 6.h,
+                    ),
+                    widget.haveHome != '2'
+                        ? Column(
+                            children: [
+                              Text(
+                                tr("Xonadon ma’lumotlari"),
+                                style: TextStyle(
+                                    fontSize: 18.sp,
+                                    fontWeight: FontWeight.bold,
+                                    color: AppColors.mainColor),
+                              ),
+                              Row(
+                                children: [
+                                  Container(
+                                    width: 40.w,
+                                    height: 40.h,
+                                    decoration: BoxDecoration(
+                                      color: AppColors.colorBack3,
+                                      borderRadius: BorderRadius.circular(8.r),
+                                    ),
+                                    child: const Center(
+                                        child: Icon(
+                                      Icons.location_on,
+                                      color: AppColors.succesColor,
+                                    )),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: SizedBox(
+                                      width: MediaQuery.of(context).size.width -
+                                          150.w,
+                                      child: Text(
+                                        "${widget.region} | ${widget.district}",
+                                        style: TextStyle(fontSize: 14.sp),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                              SizedBox(
+                                height: 6.h,
+                              ),
+                              Row(
+                                children: [
+                                  Container(
+                                    width: 40.w,
+                                    height: 40.h,
+                                    decoration: BoxDecoration(
+                                      color: AppColors.colorBack3,
+                                      borderRadius: BorderRadius.circular(8.r),
+                                    ),
+                                    child: const Center(
+                                        child: Icon(
+                                      Icons.location_on,
+                                      color: AppColors.succesColor,
+                                    )),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      "${widget.address}",
+                                      style: TextStyle(fontSize: 14.sp),
+                                    ),
+                                  )
+                                ],
+                              ),
+                              SizedBox(
+                                height: 6.h,
+                              ),
+                              Row(
+                                children: [
+                                  Container(
+                                    width: 40.w,
+                                    height: 40.h,
+                                    decoration: BoxDecoration(
+                                      color: AppColors.colorBack3,
+                                      borderRadius: BorderRadius.circular(8.r),
+                                    ),
+                                    child: const Center(
+                                        child: Icon(
+                                      Icons.directions_subway,
+                                      color: AppColors.succesColor,
+                                    )),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      tr("Metroga yaqinmi") +
+                                          ":  ${widget.subway == '1' ? tr('Ha') : tr("Yo'q")}",
+                                      style: TextStyle(fontSize: 14.sp),
+                                    ),
+                                  )
+                                ],
+                              ),
+                              SizedBox(
+                                height: 6.h,
+                              ),
+                              Row(
+                                children: [
+                                  Container(
+                                    width: 40.w,
+                                    height: 40.h,
+                                    decoration: BoxDecoration(
+                                      color: AppColors.colorBack3,
+                                      borderRadius: BorderRadius.circular(8.r),
+                                    ),
+                                    child: const Center(
+                                        child: Icon(
+                                      Icons.apartment,
+                                      color: AppColors.succesColor,
+                                    )),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      tr(widget.houseType == '1'
+                                              ? 'Kvartira'
+                                              : 'Xonadon') +
+                                          " | ${widget.countRoom} "+tr("xonali") +
+                                          " | ${widget.inFloor}/${widget.floorsCount}" +tr("etajda"),
+                                      style: TextStyle(fontSize: 14.sp),
+                                    ),
+                                  )
+                                ],
+                              ),
+                              SizedBox(
+                                height: 6.h,
+                              ),
+                              Row(
+                                children: [
+                                  Container(
+                                    width: 40.w,
+                                    height: 40.h,
+                                    decoration: BoxDecoration(
+                                      color: AppColors.colorBack3,
+                                      borderRadius: BorderRadius.circular(8.r),
+                                    ),
+                                    child: const Center(
+                                        child: Icon(
+                                      Icons.apartment,
+                                      color: AppColors.succesColor,
+                                    )),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Text(
+                                      tr("Uy egasi ham yashaydimi") +": " +
+                                          (widget.liveWithOwner == '1'
+                                              ? tr('Ha')
+                                              : tr("Yo'q")),
+                                      style: TextStyle(fontSize: 14.sp),
+                                    ),
+                                  )
+                                ],
+                              ),
+                              SizedBox(
+                                height: 6.h,
+                              ),
+                            ],
+                          )
+                        : const SizedBox(),
+                    widget.description.toString() != 'null' &&
+                            widget.description.toString() != ''
+                        ? Row(
                             children: [
                               Container(
                                 width: 40.w,
                                 height: 40.h,
                                 decoration: BoxDecoration(
-                                  color: AppColors.iconBack,
+                                  color: AppColors.colorBack3,
                                   borderRadius: BorderRadius.circular(8.r),
                                 ),
                                 child: const Center(
                                     child: Icon(
-                                  Icons.location_on,
-                                  color: AppColors.mainColor,
+                                  Icons.house,
+                                  color: AppColors.succesColor,
                                 )),
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  "${widget.stay_region}",
-                                  style: TextStyle(fontSize: 14.sp),
-                                ),
+                                child: SizedBox(
+                                    width: MediaQuery.of(context).size.width -
+                                        150.w,
+                                    child: Text(
+                                      "${widget.description}",
+                                      style: TextStyle(fontSize: 14.sp),
+                                    )),
                               )
                             ],
                           )
-                        : Container():Container(),
-                    widget.type == '1'
-                        ? widget.stay_region !='null' ?  SizedBox(
-                            height: 6.h,
+                        : const SizedBox(),
+                    widget.haveHome != '2'
+                        ? Column(
+                            children: [
+                              SizedBox(
+                                height: 6.h,
+                              ),
+                              Text(
+                                tr("To’lovlar"),
+                                style: TextStyle(
+                                    fontSize: 18.sp,
+                                    fontWeight: FontWeight.bold,
+                                    color: AppColors.mainColor),
+                              ),
+                              widget.type == '1'
+                                  ? Row(
+                                      children: [
+                                        Container(
+                                          width: 40.w,
+                                          height: 40.h,
+                                          decoration: BoxDecoration(
+                                            color: AppColors.colorBack2,
+                                            borderRadius:
+                                                BorderRadius.circular(8.r),
+                                          ),
+                                          child: const Center(
+                                              child: Icon(
+                                            Icons.countertops,
+                                            color: AppColors.error,
+                                          )),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: SizedBox(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width -
+                                                  130.w,
+                                              child: Text(
+                                                tr("Kommunal to’lovlarni to’laydi") +
+                                                    " : " +
+                                                    "${widget.utility_bills == '1' ? tr('Uy egasi') : tr('Ijarachi')}",
+                                                style:
+                                                    TextStyle(fontSize: 14.sp),
+                                              )),
+                                        )
+                                      ],
+                                    )
+                                  : const SizedBox(),
+                              SizedBox(
+                                height: 6.h,
+                              ),
+                              user.isNotEmpty
+                                  ? Row(
+                                      children: [
+                                        Container(
+                                          width: 40.w,
+                                          height: 40.h,
+                                          decoration: BoxDecoration(
+                                            color: AppColors.colorBack2,
+                                            borderRadius:
+                                                BorderRadius.circular(8.r),
+                                          ),
+                                          child: const Center(
+                                              child: Icon(
+                                            Icons.countertops,
+                                            color: AppColors.error,
+                                          )),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: SizedBox(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width -
+                                                  130.w,
+                                              child: Text(
+                                                user.isNotEmpty
+                                                    ? tr("Uy egasi to'laydi")+": " +"${forUser}"
+                                                    : '',
+                                                style:
+                                                    TextStyle(fontSize: 14.sp),
+                                              )),
+                                        )
+                                      ],
+                                    )
+                                  : const SizedBox(),
+                              SizedBox(
+                                height: 6.h,
+                              ),
+                              student.isNotEmpty
+                                  ? Row(
+                                      children: [
+                                        Container(
+                                          width: 40.w,
+                                          height: 40.h,
+                                          decoration: BoxDecoration(
+                                            color: AppColors.colorBack2,
+                                            borderRadius:
+                                                BorderRadius.circular(8.r),
+                                          ),
+                                          child: const Center(
+                                              child: Icon(
+                                            Icons.countertops,
+                                            color: AppColors.error,
+                                          )),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: SizedBox(
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width -
+                                                  130.w,
+                                              child: Text(
+                                                student.isNotEmpty
+                                                    ? tr("Ijarachi to'laydi")+":"+" ${forStudent}"
+                                                    : '',
+                                                style:
+                                                    TextStyle(fontSize: 14.sp),
+                                              )),
+                                        )
+                                      ],
+                                    )
+                                  : const SizedBox(),
+                              SizedBox(
+                                height: 6.h,
+                              ),
+                              Row(
+                                children: [
+                                  Container(
+                                    width: 40.w,
+                                    height: 40.h,
+                                    decoration: BoxDecoration(
+                                      color: AppColors.colorBack2,
+                                      borderRadius: BorderRadius.circular(8.r),
+                                    ),
+                                    child: const Center(
+                                        child: Icon(
+                                      Icons.account_balance_wallet,
+                                      color: AppColors.error,
+                                    )),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: SizedBox(
+                                        width:
+                                            MediaQuery.of(context).size.width -
+                                                130.w,
+                                        child: Text(
+                                          "${widget.cost} ${widget.costTayp.toString() == '1' ? "So'm" : "USD"}/${widget.costPeriod == '1' ? tr('Kuniga') : widget.costPeriod == '2' ? tr('Oyiga') : tr('Kishi boshiga')}",
+                                          style: TextStyle(fontSize: 14.sp),
+                                        )),
+                                  )
+                                ],
+                              ),
+                            ],
                           )
-                        : Container():Container(),
-                    widget.type == '1'
-                        ? widget.stay_university != 'null' ? Row(
+                        : SizedBox(),
+                    SizedBox(
+                      height: 6.h,
+                    ),
+                    widget.comfort!.isNotEmpty
+                        ? Text(
+                            tr("Quydagi qo'shimcha qulayliklar"),
+                            style: TextStyle(
+                                fontSize: 18.sp,
+                                fontWeight: FontWeight.bold,
+                                color: AppColors.mainColor),
+                          )
+                        : const SizedBox(),
+                    widget.comfort!.isNotEmpty
+                        ? Row(
                             children: [
                               Container(
                                 width: 40.w,
                                 height: 40.h,
                                 decoration: BoxDecoration(
-                                  color: AppColors.iconBack,
+                                  color: AppColors.colorBack2,
                                   borderRadius: BorderRadius.circular(8.r),
                                 ),
                                 child: const Center(
-                                    child: Icon(
-                                  Icons.corporate_fare,
-                                  color: AppColors.mainColor,
-                                )),
+                                  child: Icon(
+                                    Icons.check_box,
+                                    color: AppColors.error,
+                                  ),
+                                ),
                               ),
                               Padding(
                                 padding: const EdgeInsets.all(8.0),
@@ -697,385 +1119,14 @@ class _AdsDetailState extends State<AdsDetail> {
                                   width:
                                       MediaQuery.of(context).size.width - 150.w,
                                   child: Text(
-                                    "${widget.stay_university}",
+                                    comfortList,
                                     style: TextStyle(fontSize: 14.sp),
                                   ),
                                 ),
-                              )
+                              ),
                             ],
                           )
-                        : Container():Container(),
-                    widget.type == '1'
-                        ? SizedBox(
-                            height: 6.h,
-                          )
-                        : Container(),
-                    SizedBox(
-                      height: 6.h,
-                    ),
-                    widget.haveHome != '2' ? Column(
-                      children: [
-                        Text(
-                          tr("Xonadon ma’lumotlari"),
-                          style: TextStyle(
-                              fontSize: 18.sp,
-                              fontWeight: FontWeight.bold,
-                              color: AppColors.mainColor),
-                        ),
-                        Row(
-                          children: [
-                            Container(
-                              width: 40.w,
-                              height: 40.h,
-                              decoration: BoxDecoration(
-                                color: AppColors.colorBack3,
-                                borderRadius: BorderRadius.circular(8.r),
-                              ),
-                              child: const Center(
-                                  child: Icon(
-                                    Icons.location_on,
-                                    color: AppColors.succesColor,
-                                  )),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: SizedBox(
-                                width: MediaQuery.of(context).size.width - 150.w,
-                                child: Text(
-                                  "${widget.region} | ${widget.district}",
-                                  style: TextStyle(fontSize: 14.sp),
-                                ),
-                              ),
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          height: 6.h,
-                        ),
-                        Row(
-                          children: [
-                            Container(
-                              width: 40.w,
-                              height: 40.h,
-                              decoration: BoxDecoration(
-                                color: AppColors.colorBack3,
-                                borderRadius: BorderRadius.circular(8.r),
-                              ),
-                              child: const Center(
-                                  child: Icon(
-                                    Icons.location_on,
-                                    color: AppColors.succesColor,
-                                  )),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                "${widget.address}",
-                                style: TextStyle(fontSize: 14.sp),
-                              ),
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          height: 6.h,
-                        ),
-                        Row(
-                          children: [
-                            Container(
-                              width: 40.w,
-                              height: 40.h,
-                              decoration: BoxDecoration(
-                                color: AppColors.colorBack3,
-                                borderRadius: BorderRadius.circular(8.r),
-                              ),
-                              child: const Center(
-                                  child: Icon(
-                                    Icons.directions_subway,
-                                    color: AppColors.succesColor,
-                                  )),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                tr("Metroga yaqinmi") +
-                                    ":  ${widget.subway == '1' ? tr('Ha') : tr("Yo'q")}",
-                                style: TextStyle(fontSize: 14.sp),
-                              ),
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          height: 6.h,
-                        ),
-
-                        Row(
-                          children: [
-                            Container(
-                              width: 40.w,
-                              height: 40.h,
-                              decoration: BoxDecoration(
-                                color: AppColors.colorBack3,
-                                borderRadius: BorderRadius.circular(8.r),
-                              ),
-                              child: const Center(
-                                  child: Icon(
-                                    Icons.apartment,
-                                    color: AppColors.succesColor,
-                                  )),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                tr(widget.houseType == '1'
-                                    ? 'Kvartira'
-                                    : 'Xonadon') +
-                                    " | ${widget.countRoom} xonali" +
-                                    " | ${widget.inFloor}/${widget.floorsCount} etajda",
-                                style: TextStyle(fontSize: 14.sp),
-                              ),
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          height: 6.h,
-                        ),
-                        Row(
-                          children: [
-                            Container(
-                              width: 40.w,
-                              height: 40.h,
-                              decoration: BoxDecoration(
-                                color: AppColors.colorBack3,
-                                borderRadius: BorderRadius.circular(8.r),
-                              ),
-                              child: const Center(
-                                  child: Icon(
-                                    Icons.apartment,
-                                    color: AppColors.succesColor,
-                                  )),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                tr("Uy egasi ham yashaydimi: ") +
-                                    (widget.liveWithOwner == '1'
-                                        ? tr('Ha')
-                                        : tr("Yo'q")),
-                                style: TextStyle(fontSize: 14.sp),
-                              ),
-                            )
-                          ],
-                        ),
-                        SizedBox(
-                          height: 6.h,
-                        ),
-                      ],
-                    ) : const SizedBox(),
-                    widget.description.toString() != 'null' && widget.description.toString() != '' ?
-                    Row(
-                      children: [
-                        Container(
-                          width: 40.w,
-                          height: 40.h,
-                          decoration: BoxDecoration(
-                            color: AppColors.colorBack3,
-                            borderRadius: BorderRadius.circular(8.r),
-                          ),
-                          child: const Center(
-                              child: Icon(
-                            Icons.house,
-                            color: AppColors.succesColor,
-                          )),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: SizedBox(
-                              width: MediaQuery.of(context).size.width - 150.w,
-                              child: Text(
-                                "${widget.description}",
-                                style: TextStyle(fontSize: 14.sp),
-                              )),
-                        )
-                      ],
-                    )
-                        : SizedBox(),
-                   widget.haveHome != '2' ? Column(
-                     children: [
-                       SizedBox(
-                         height: 6.h,
-                       ),
-                       Text(
-                         tr("To’lovlar"),
-                         style: TextStyle(
-                             fontSize: 18.sp,
-                             fontWeight: FontWeight.bold,
-                             color: AppColors.mainColor),
-                       ),
-                       widget.type == '1' ? Row(
-                         children: [
-                           Container(
-                             width: 40.w,
-                             height: 40.h,
-                             decoration: BoxDecoration(
-                               color: AppColors.colorBack2,
-                               borderRadius: BorderRadius.circular(8.r),
-                             ),
-                             child: const Center(
-                                 child: Icon(
-                                   Icons.countertops,
-                                   color: AppColors.error,
-                                 )),
-                           ),
-                           Padding(
-                             padding: const EdgeInsets.all(8.0),
-                             child: SizedBox(
-                                 width: MediaQuery.of(context).size.width - 130.w,
-                                 child: Text(
-                                   tr("Kommunal to’lovlarni to’laydi") +
-                                       " : " +
-                                       "${widget.utility_bills == '1' ? tr('Uy egasi') : tr('Ijarachi')}",
-                                   style: TextStyle(fontSize: 14.sp),
-                                 )),
-                           )
-                         ],
-                       ) : const SizedBox(),
-                       SizedBox(
-                         height: 6.h,
-                       ),
-                       user.isNotEmpty
-                           ? Row(
-                         children: [
-                           Container(
-                             width: 40.w,
-                             height: 40.h,
-                             decoration: BoxDecoration(
-                               color: AppColors.colorBack2,
-                               borderRadius: BorderRadius.circular(8.r),
-                             ),
-                             child: const Center(
-                                 child: Icon(
-                                   Icons.countertops,
-                                   color: AppColors.error,
-                                 )),
-                           ),
-                           Padding(
-                             padding: const EdgeInsets.all(8.0),
-                             child: SizedBox(
-                                 width: MediaQuery.of(context).size.width -
-                                     130.w,
-                                 child: Text(
-                                   user.isNotEmpty
-                                       ? "uy egasi to'laydi: ${forUser}"
-                                       : '',
-                                   style: TextStyle(fontSize: 14.sp),
-                                 )),
-                           )
-                         ],
-                       )
-                           : const SizedBox(),
-                       SizedBox(
-                         height: 6.h,
-                       ),
-                       student.isNotEmpty
-                           ? Row(
-                         children: [
-                           Container(
-                             width: 40.w,
-                             height: 40.h,
-                             decoration: BoxDecoration(
-                               color: AppColors.colorBack2,
-                               borderRadius: BorderRadius.circular(8.r),
-                             ),
-                             child: const Center(
-                                 child: Icon(
-                                   Icons.countertops,
-                                   color: AppColors.error,
-                                 )),
-                           ),
-                           Padding(
-                             padding: const EdgeInsets.all(8.0),
-                             child: SizedBox(
-                                 width: MediaQuery.of(context).size.width -
-                                     130.w,
-                                 child: Text(
-                                   student.isNotEmpty
-                                       ? "ijarachi to'laydi: ${forStudent}"
-                                       : '',
-                                   style: TextStyle(fontSize: 14.sp),
-                                 )),
-                           )
-                         ],
-                       )
-                           : const SizedBox(),
-                       SizedBox(
-                         height: 6.h,
-                       ),
-                       Row(
-                         children: [
-                           Container(
-                             width: 40.w,
-                             height: 40.h,
-                             decoration: BoxDecoration(
-                               color: AppColors.colorBack2,
-                               borderRadius: BorderRadius.circular(8.r),
-                             ),
-                             child: const Center(
-                                 child: Icon(
-                                   Icons.account_balance_wallet,
-                                   color: AppColors.error,
-                                 )),
-                           ),
-                           Padding(
-                             padding: const EdgeInsets.all(8.0),
-                             child: SizedBox(
-                                 width: MediaQuery.of(context).size.width - 130.w,
-                                 child: Text(
-                                   "${widget.cost} ${widget.costTayp.toString() == '1' ? "So'm" : "USD"}/${widget.costPeriod == '1' ? tr('Kuniga') :widget.costPeriod == '2'?tr('Oyiga'):tr('Kishi boshiga')}",
-                                   style: TextStyle(fontSize: 14.sp),
-                                 )),
-                           )
-                         ],
-                       ),
-                     ],
-                   ):SizedBox(),
-                    SizedBox(
-                      height: 6.h,
-                    ),
-                    widget.comfort!.isNotEmpty ? Text(
-                      tr("Quydagi qo'shimcha qulayliklar"),
-                      style: TextStyle(
-                          fontSize: 18.sp,
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.mainColor),
-                    ):SizedBox(),
-                    widget.comfort!.isNotEmpty ? Row(
-                      children: [
-                        Container(
-                          width: 40.w,
-                          height: 40.h,
-                          decoration: BoxDecoration(
-                            color: AppColors.colorBack2,
-                            borderRadius: BorderRadius.circular(8.r),
-                          ),
-                          child: const Center(
-                            child: Icon(
-                              Icons.check_box,
-                              color: AppColors.error,
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(8.0),
-                          child: SizedBox(
-                            width: MediaQuery.of(context).size.width - 150.w,
-                            child: Text(
-                              comfortList,
-                              style: TextStyle(fontSize: 14.sp),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ):const SizedBox(),
+                        : const SizedBox(),
                   ],
                 ),
               ),
@@ -1108,14 +1159,14 @@ showAlertDialog(BuildContext context, int askedid) {
   // Create AlertDialog
   AlertDialog alert = AlertDialog(
     // title: Text("Akkauntdan chiqish ").tr(),
-    content: const Text("Sms yozish uchun ruhsat so'rash ").tr(),
+    content: const Text("Sms yozish uchun ruhsat so'rash").tr(),
     actions: [
       Padding(
         padding: const EdgeInsets.all(10.0),
         child: notButton,
       ),
       Padding(
-        padding:  EdgeInsets.fromLTRB(8.w,0,8.w,0),
+        padding: EdgeInsets.fromLTRB(8.w, 0, 8.w, 0),
         child: okButton,
       ),
     ],

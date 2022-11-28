@@ -45,9 +45,9 @@ class _SmsConfirmationPageState extends State<SmsConfirmationPage> {
     type = Hive.box('type').get('type').toString();
     setState(() {});
     _timer = Timer.periodic(
-      Duration(seconds: 1),
+      const Duration(seconds: 1),
       (timer) {
-        this._secoundCount -= 1;
+        _secoundCount -= 1;
         setState(() {});
       },
     );
@@ -112,14 +112,14 @@ class _SmsConfirmationPageState extends State<SmsConfirmationPage> {
             Text(
               "SMS tasdiqlash",
               style: TextStyle(color: AppColors.mainColor, fontSize: 32.sp),
-            ),
+            ).tr(),
             SizedBox(
               height: 8.h,
             ),
             SizedBox(
               width: MediaQuery.of(context).size.width - 150.w,
               child: Text(
-                "Biz *** $_partPhone raqamga SMS xabar jo’natdik, SMS xabardagi kod bilan tasdiqlang!"
+                tr("Biz") + "*** $_partPhone "+tr("raqamga SMS xabar jo’natdik, SMS xabardagi kod bilan tasdiqlang!")
                     .tr(),
                 style: TextStyle(fontSize: 16.sp),
                 textAlign: TextAlign.center,
@@ -129,9 +129,9 @@ class _SmsConfirmationPageState extends State<SmsConfirmationPage> {
               height: 36.h,
             ),
             PinFieldAutoFill(
-              decoration: BoxLooseDecoration(
-                textStyle: TextStyle(fontSize: 20, color: Colors.black),
-                strokeColorBuilder: FixedColorBuilder(AppColors.mainColor),
+              decoration:  BoxLooseDecoration(
+                textStyle: TextStyle(fontSize: 20.sp, color: Colors.black),
+                strokeColorBuilder: const FixedColorBuilder(AppColors.mainColor),
               ),
               currentCode: _code, // prefill with a code
               codeLength: 5, //code length, default 6
@@ -161,7 +161,7 @@ class _SmsConfirmationPageState extends State<SmsConfirmationPage> {
                         ":" +
                         "0" +
                         _secoundCount.toString(),
-                style: TextStyle(color: AppColors.mainColor),
+                style: const TextStyle(color: AppColors.mainColor),
               ),
             ),
             SizedBox(
@@ -175,9 +175,9 @@ class _SmsConfirmationPageState extends State<SmsConfirmationPage> {
                     _minutCount = 2;
                     _secoundCount = 59;
                     _timer = Timer.periodic(
-                      Duration(seconds: 1),
+                      const Duration(seconds: 1),
                       (timer) {
-                        this._secoundCount -= 1;
+                        _secoundCount -= 1;
                         setState(() {});
                       },
                     );
@@ -195,7 +195,8 @@ class _SmsConfirmationPageState extends State<SmsConfirmationPage> {
                   }
                 },
                 child: Text(
-                  "Qayta jo’natish",
+                  // "Qayta jo’natish",
+                  '',
                   style: TextStyle(
                       color: !_timeOf
                           ? Colors.grey.shade400
@@ -216,7 +217,7 @@ class _SmsConfirmationPageState extends State<SmsConfirmationPage> {
                       context,
                       MaterialPageRoute(
                           builder: (context) =>
-                              Hive.box('type').get('type').toString() == '2' ? MenuPage() : Hive.box('type').get('type').toString() == '3' ? MenuFor() : Container()),
+                              Hive.box('type').get('type').toString() == '2' ? const MenuPage() : Hive.box('type').get('type').toString() == '3' ? const MenuFor() : Container()),
                       (route) => false);
                 } else {
                   _message = dataService['content'];

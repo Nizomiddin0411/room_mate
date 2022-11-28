@@ -1,10 +1,8 @@
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
 import 'package:talaba_uy/screens/Autorization/regirtratsiya_dart.dart';
-
 import 'LoginPage.dart';
 
 class StartPage extends StatefulWidget {
@@ -20,7 +18,7 @@ class _StartPageState extends State<StartPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.fromLTRB(25, 115, 25, 120),
+        padding:  EdgeInsets.fromLTRB(25.w, 115.h, 25.w, 120.h),
         child: Column(
           children: [
               Text("Assalomu alaykum , Xush kelibsiz ".tr(),style: TextStyle(fontSize: 18.sp),),
@@ -35,7 +33,7 @@ class _StartPageState extends State<StartPage> {
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>(LoginPage())));
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>(const LoginPage())));
               },
               style: ElevatedButton.styleFrom(
                   primary: Colors.white,

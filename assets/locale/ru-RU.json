@@ -1,5 +1,45 @@
 {
+
+  "Ko’rinmasin": "Невидимый",
+  "Ta'lim yo'nalishini tanglang": "Выберите курс обучения",
+  "Foydalanuvchi shartlariga": "Условия использования",
+  "9 ta raqam kiriting": "Введите 9 цифр",
+  "Foydalanish shartini bajarmadingiz": "Вы не выполнили условие использования",
+
+  "Ro’yxatdan o’tish":"Регистрация",
+  "Biz":"Мы",
+  "raqamga SMS xabar jo’natdik, SMS xabardagi kod bilan tasdiqlang!": "мы отправили SMS-сообщение на номер, подтвердите кодом в SMS-сообщении!",
+
+  "Qidirish": "Поиск",
+  "Tozalash": "Очистка",
+  "Sherik izlayotgan": "Ищу соседа по комнате",
+  "jinsi": "Пол",
+  "Qaysi viloyatliksiz": "Вы из какого региона",
+  "Qaysi tumanidansiz": "Вы из какого района",
+  "Yo'nalishingiz": "Ваше направление",
+  "O'g'il bola": "Мальчик",
   "Keyingi":"Следующий",
+  "Qiz bola": "Девушка",
+  "xonali": "комнатный",
+  "etajda": "этаж",
+  "Uy egasi ham yashaydimi": "Живет ли домовладелец",
+  "Uy egasi to'laydi": "Арендодатель платит",
+  "Ijarachi to'laydi": "Арендатор платит",
+  "Quydagi qo'shimcha qulayliklar": "Дополнительные удобства ниже",
+  "Ruhsat olish": "Получить разрешение",
+  "Sms yozish uchun ruhsat so'rash": "Запросить разрешение на чат",
+  "Telefon raqamni ko’rinmas qilish":"Сделать номер телефона невидимым",
+  "Profilni ro’yxatda ko’rinmas qilish": "Сделать профиль невидимым в списке",
+  "Ushbu e’lonni o’chirishga ishonchingiz komilmi": "Вы уверены, что хотите удалить это объявление",
+  "O'z taklifingizni qoldiring": "Оставить свое предложение",
+  "Talab takliflar bo’lsa yozing": "Напишите, если спрос предложения",
+  "Shu yerga xabaringizni batafsil yozing ...": "Напишите подробное сообщение здесь ...",
+  "Eng yaxshi taklif uchun tanlov": "Конкурс на лучшее предложение",
+  "Mazkur rivojlantirish bo'yicha eng yaxshi takliflarni saralash maqsadida har yili tanlov o'tkaziladi.": "С целью отбора лучших предложений по данному развитию ежегодно проводится конкурс.",
+  "Eng yaxshi deb topilgan 3 ta taklif egalari har yili avgust oyida qimmatbaho sovg'alar (iPhone 14 telefoni,noutbuq va planshet) bilan taqdirlanadi .": "Обладатели 3 лучших предложений ежегодно в августе награждаются ценными подарками (телефон iPhone 14,ноутбук и планшет).",
+  "Jo’natish": "Отправить",
+
+
   "Assalomu alaykum , Xush kelibsiz ": "Привет, добро пожаловать",
   "Ro’yhatdan o’tish": "Зарегистрироваться",
   "Ro’yxatdan o’tish uchun shaxsiy ma’lumotlaringizni  kiriting": "Введите свои личные данные для регистрации",
@@ -58,7 +98,7 @@
   "Batafsil": "Подробнее",
   "E’lonni o’chirish": "Удалить объявление",
   "Ushbu e’lonni o’chirishga ishonchingiz komilmi ?": "Вы уверены, что хотите удалить эту объявление?",
-  "O’chirish": "O’chirish",
+  "O’chirish": "Удалить",
   "E’lon yaratish": "Создать объявление",
   "Uy beruvchiman": "Я домовладелец",
   "Joylashuv": "Местоположение",
@@ -193,5 +233,5 @@
   "Siz muvaffaqiyatli ro’yxatdan o’tdingiz !!!": "Вы успешно зарегистрировались !!!",
   "Asosiyga qaytish": "Вернуться к основному",
   "Bildirishnoma": "Уведомление",
-  "Dasturga baxo bering": ""
+  "Dasturga baxo bering": "Оцените программу"
 }

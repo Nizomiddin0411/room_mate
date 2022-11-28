@@ -52,8 +52,8 @@ class _StudentUserState extends State<StudentUser> {
   String drowdown2 = '';
 
   final List<String> genderItems = [
-    "O'g'il",
-    'Qiz',
+    tr("O'g'il bola"),
+    tr('Qiz bola'),
   ];
   final List<String> kursingizItems = [
     '1 ',
@@ -85,7 +85,7 @@ class _StudentUserState extends State<StudentUser> {
                 children: [
                   Row(
                     children: [
-                      const Text("Ism va familiya ").tr(),
+                      const Text("Ism va familiya").tr(),
                     ],
                   ),
                   SizedBox(
@@ -119,13 +119,17 @@ class _StudentUserState extends State<StudentUser> {
               Column(
                 children: [
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text("Telefon raqami",style: TextStyle(fontSize: 14.sp),).tr(),
-                      SizedBox(width: 165.w,),
-                           Text(
-                            "Ko’rinmasin",
-                            style: TextStyle(fontSize: 14.sp),
-                          ),
+                      // SizedBox(width: 126.w,),
+                           Padding(
+                             padding:  EdgeInsets.only(right: 5.w),
+                             child: Text(
+                              "Ko’rinmasin",
+                              style: TextStyle(fontSize: 14.sp),
+                          ).tr(),
+                           ),
                     ],
                   ),
                   SizedBox(
@@ -149,7 +153,7 @@ class _StudentUserState extends State<StudentUser> {
                             if (e!.length > 12) {
                               return null;
                             } else {
-                              return '9 ta raqam kiriting';
+                              return tr('9 ta raqam kiriting');
                             }
                           },
                           keyboardType: TextInputType.phone,
@@ -165,7 +169,7 @@ class _StudentUserState extends State<StudentUser> {
                       ),
                       Column(
                         children: [
-                     
+
                           // SizedBox(
                           //   height: 10.h,
                           // ),
@@ -333,10 +337,17 @@ class _StudentUserState extends State<StudentUser> {
                         mode: Mode.BOTTOM_SHEET,
                         dropdownBuilder: _style,
                         items: data.universitet.map((e) {
+                          if(context.read<AutCubit>().selectedLang.index == 1) {
                           if (drowdown2 == e.name) {
                             data.UniversiterId = e.id.toString();
                             data.isId = e.id;
                             university_id = e.id.toString();
+                          }}else{
+                            if (drowdown2 == e.nameRu) {
+                              data.UniversiterId = e.id.toString();
+                              data.isId = e.id;
+                              university_id = e.id.toString();
+                            }
                           }
                           return context.read<AutCubit>().selectedLang.index ==
                                   1
@@ -346,10 +357,16 @@ class _StudentUserState extends State<StudentUser> {
                         showSearchBox: true,
                         onChanged: (value) async {
                           data.isUniver = true;
-                          final selected = data.universitet
-                              .where((element) => element.name == value);
-                          data.getFakultet(selected.last.id!);
+                          if(context.read<AutCubit>().selectedLang.index == 1) {
+                            final selected = data.universitet
+                                .where((element) => element.name == value);
+                            data.getFakultet(selected.last.id!);
+                          }else{
+                            final selected = data.universitet
+                                .where((element) => element.nameRu == value);
+                            data.getFakultet(selected.last.id!);
                           print("${selected.last.id}iminjonov");
+                          }
                           setState(() {
                             drowdown2 = value.toString();
                             univer = true;
@@ -370,7 +387,7 @@ class _StudentUserState extends State<StudentUser> {
                 children: [
                   Row(
                     children: [
-                      const Text("Ta'lim yo'nalishini tanglang ").tr(),
+                      const Text("Ta'lim yo'nalishini tanglang").tr(),
                     ],
                   ),
                   SizedBox(
@@ -448,7 +465,7 @@ class _StudentUserState extends State<StudentUser> {
                               isExpanded: true,
                               isDense: true,
                               hint: Text(
-                                "Yo'nalishni tanlang ",
+                                "Yo'nalishni tanlang",
                                 style: TextStyle(fontSize: 14.sp),
                               ).tr(),
                               icon: const Icon(
@@ -458,7 +475,7 @@ class _StudentUserState extends State<StudentUser> {
                               iconSize: 30.sp,
                               buttonHeight: 60.h,
                               buttonPadding:
-                                  EdgeInsets.only(left: 20.w, right: 10.w),
+                                  EdgeInsets.only(left: 12.w, right: 10.w),
                               dropdownDecoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(15),
                               ),
@@ -617,7 +634,7 @@ class _StudentUserState extends State<StudentUser> {
                 children: [
                   Row(
                     children: [
-                      Text("Tuman").tr(),
+                      const Text("Tuman").tr(),
                     ],
                   ),
                   SizedBox(
@@ -707,11 +724,11 @@ class _StudentUserState extends State<StudentUser> {
                               iconSize: 30.sp,
                               buttonHeight: 60.h,
                               buttonPadding:
-                                  EdgeInsets.only(left: 20.w, right: 10.w),
+                                  EdgeInsets.only(left: 12.w, right: 10.w),
                               dropdownDecoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(15.r),
                               ),
-                              items: [],
+                              items: const [],
                               onChanged: null,
                             ),
                           ],
@@ -731,23 +748,19 @@ class _StudentUserState extends State<StudentUser> {
                         style: TextStyle(
                             color: AppColors.textColor,
                             fontWeight: FontWeight.bold,
-                            fontSize: 15.sp),
+                            fontSize: 14.sp),
                       ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(
-                            horizontal: 8.0.w, vertical: 8.0.h),
-                        child: SizedBox(
-                          height: 40.h,
-                          width: 70.w,
-                          child: Switch(
-                            value: isSwitched,
-                            onChanged: (value) {
-                              setState(() {
-                                isSwitched = value;
+                      SizedBox(
+                        height: 40.h,
+                        width: 70.w,
+                        child: Switch(
+                          value: isSwitched,
+                          onChanged: (value) {
+                            setState(() {
+                              isSwitched = value;
 
-                              });
-                            },
-                          ),
+                            });
+                          },
                         ),
                       ),
                     ],
@@ -786,7 +799,7 @@ class _StudentUserState extends State<StudentUser> {
                             "Foydalanuvchi shartlariga",
                             style: TextStyle(
                                 color: AppColors.mainColor, fontSize: 15.sp),
-                          ),
+                          ).tr(),
                           const Divider(
                             color: Colors.red,
                             thickness: 2,
@@ -821,7 +834,7 @@ class _StudentUserState extends State<StudentUser> {
                     // print("${myController.text}" +'full name' );
                     // print("${nameController.text}" + ' telefon');
                     // print("${hidenumber ? '1' : '2'}" + 'hide phone');
-                    // print("${dropdownvalue.toString() == "O'g'il" ? '1' : '2'}" + 'Gendor');
+                    // print("${dropdownvalue.toString() == tr("O'g'il bola") ? '1' : '2'}" + 'Gendor');
                     // print("${university_id.toString()}" + 'universitet id');
                     // print("${data.fakultetid.toString()}" + 'facultet');
                     // print("${Course.toString()}" + 'course');
@@ -837,7 +850,7 @@ class _StudentUserState extends State<StudentUser> {
                       HideProfile: isSwitched ? '1' : '2',
                       District: data.districtId.toString(),
                       Phonenumber: nameController.text,
-                      gender: dropdownvalue.toString() == "O'g'il" ? '1' : '2',
+                      gender: dropdownvalue.toString() == tr("O'g'il bola") ? '1' : '2',
                       UniderId: university_id.toString(),
                       Hidenumber: hidenumber ? '1' : '2',
                     );
@@ -876,7 +889,7 @@ class _StudentUserState extends State<StudentUser> {
                   ),
                   child: Center(
                     child: Text(
-                      "Ro’yxatdan o’tish".tr(),
+                      "Ro’yhatdan o’tish".tr(),
                       style: TextStyle(
                           color: AppColors.backgroundWhite, fontSize: 20.sp),
                     ),
@@ -905,9 +918,9 @@ class _StudentUserState extends State<StudentUser> {
     scaffold.showSnackBar(
       SnackBar(
         backgroundColor: Colors.white,
-        content: const Text(
-          'Foydalanish shartini bajarmadingiz !!!',
-          style: TextStyle(
+        content:  Text(
+          tr("Foydalanish shartini bajarmadingiz")+ '!!!',
+          style: const TextStyle(
               color: Colors.red, fontWeight: FontWeight.bold, fontSize: 15),
         ),
         action: SnackBarAction(
