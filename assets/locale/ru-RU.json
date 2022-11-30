@@ -1,15 +1,25 @@
 {
+  "Qaysi viloyatlik sherik izlayabsiz": "В каком регионе вы ищете партнера",
+  "Viloyat/Shaharni tanlang":  "Выбрать регион/город",
+  "Qaysi OTM da o’qiydigan sherik izlayabsiz": "В каком вузе вы ищете партнера обучающегося",
+  "Nechta sherik izlayabsiz": "Сколько партнеров вы ищете",
+  "Ijaraga turishga joyingiz bormi": "У вас есть место в аренду",
+  "Qo’shimcha xususiyatlarni kiriting": "Введите дополнительные свойства",
+  "Kvartal,Uy,Xonadon": "Квартал,Дом,Квартира",
+  "Kommunal to’lovlarini kim to’laydi": "Кто платит за коммунальные услуги",
+
+  "Saqlandi":"Сохранено",
+  "Joylashuvni aniqlash": "Определение местоположения",
+
 
   "Ko’rinmasin": "Невидимый",
   "Ta'lim yo'nalishini tanglang": "Выберите курс обучения",
   "Foydalanuvchi shartlariga": "Условия использования",
   "9 ta raqam kiriting": "Введите 9 цифр",
   "Foydalanish shartini bajarmadingiz": "Вы не выполнили условие использования",
-
   "Ro’yxatdan o’tish":"Регистрация",
   "Biz":"Мы",
   "raqamga SMS xabar jo’natdik, SMS xabardagi kod bilan tasdiqlang!": "мы отправили SMS-сообщение на номер, подтвердите кодом в SMS-сообщении!",
-
   "Qidirish": "Поиск",
   "Tozalash": "Очистка",
   "Sherik izlayotgan": "Ищу соседа по комнате",
@@ -221,10 +231,10 @@
   "Turlari": "Виды",
   "Narxning turlanishi": "Ценовое разнообразие",
   "Xonadonni narxini kiriting": "Введите стоимость аренды квартиры",
-  "Nechinchi qavatda ?": "На каком этаже ?",
+  "Nechinchi qavatda": "На каком этаже",
   "Qavatlar soni": "Количество этажей",
   "Kvartira , Xovli": "Квартира, Двор",
-  "Ijara muddatini turi": "",
+  "Ijara muddatini turi": "Тип срока аренды",
   "Kuniga": "В день",
   "Oyiga": "В месяц",
   "Kishi boshiga": "по количеству людей",

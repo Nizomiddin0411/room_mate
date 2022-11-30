@@ -47,7 +47,7 @@ class _CreateAdsPageState extends State<CreateAdsPage>
         ),
         elevation: 0,
         title: Text("E’lon yaratish".tr(),
-            style: TextStyle(color: AppColors.mainColor)),
+            style: const TextStyle(color: AppColors.mainColor)),
         centerTitle: true,
       ),
       body:  Hive.box('type').get('type').toString() == '2' ? Student() : Owner(),

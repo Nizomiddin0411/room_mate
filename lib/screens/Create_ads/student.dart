@@ -8,7 +8,6 @@ import 'package:provider/provider.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
 import '../../cubit/aut_cubit.dart';
 import '../../models/lang_model.dart';
-import '../../provider/favorite_provider.dart';
 import '../../provider/region_provider.dart';
 import '../../services/post_student_not_apartment.dart';
 import 'ads_student_create,dart.dart';
@@ -22,7 +21,7 @@ class Student extends StatefulWidget {
 }
 
 class _StudentState extends State<Student> {
-  GlobalKey _keyAddInfo = GlobalKey();
+  final GlobalKey _keyAddInfo = GlobalKey();
   String dropDown = "";
   String dropDown2 = "";
   String? phonenumber;
@@ -47,29 +46,16 @@ class _StudentState extends State<Student> {
   bool titlecolor1 = false;
   bool titlecolor2 = false;
   Color _colorUniver = Colors.grey;
-  bool _UniverOnClick = false;
   Color _colorGender = Colors.grey;
   Color _colorForm = Colors.grey;
   Color titlecolort = Colors.grey;
-  bool _FormOnClick = false;
   bool gender1 = false;
   bool _phoneOnClick = false;
   Color _phoneColor = Colors.grey;
-  var kurs = [
-    '1-kurs',
-    '2-kurs',
-    '3-kurs',
-    '4-kurs',
-    '5-kurs',
-    '6-kurs',
-  ];
-  var kvartira = [
-    'Kvartira',
-    'Xovli',
-  ];
+
   var genderone = [
-    "O'g'il",
-    "Qiz",
+    tr("O'g'il bola"),
+    tr("Qiz bola"),
   ];
   var kvsherik = [
     '1',
@@ -105,7 +91,6 @@ class _StudentState extends State<Student> {
 
   @override
   Widget build(BuildContext context) {
-
     context.read<AutCubit>().selectSettingLan(
         LangData.languageList.singleWhere((e) => e.locale == context.locale),
         context);
@@ -163,7 +148,7 @@ class _StudentState extends State<Student> {
                 Row(
                   children: [
                     Text(
-                      "Qaysi viloyatlik sherik izlayabsiz ?".tr(),
+                      "Qaysi viloyatlik sherik izlayabsiz".tr() + "?",
                       style: TextStyle(
                         color: AppColors.textColor,
                         fontSize: 12.sp,
@@ -172,8 +157,9 @@ class _StudentState extends State<Student> {
                     ),
                   ],
                 ),
-                SizedBox(height: 5.h),
+                SizedBox(height: 4.h),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     otmEnable1 == false
                         ? Container(
@@ -192,7 +178,7 @@ class _StudentState extends State<Student> {
                                     "Viloyat/Shaharni tanlang",
                                     style: TextStyle(
                                         fontSize: 12.sp, color: Colors.grey),
-                                  ),
+                                  ).tr(),
                                 ),
                                 decoration: const InputDecoration(
                                     border: InputBorder.none),
@@ -204,11 +190,23 @@ class _StudentState extends State<Student> {
                                     onTap: () {
                                       data.viloyatid = e.id.toString();
                                     },
-                                    value: e.name ?? "",
+                                    value: context
+                                                .read<AutCubit>()
+                                                .selectedLang
+                                                .index ==
+                                            1
+                                        ? e.name
+                                        : e.nameRu,
                                     child: Padding(
                                       padding:
                                           EdgeInsets.fromLTRB(8.w, 0, 0, 0),
-                                      child: Text(e.name.toString()),
+                                      child: Text(context
+                                                  .read<AutCubit>()
+                                                  .selectedLang
+                                                  .index ==
+                                              1
+                                          ? e.name.toString()
+                                          : e.nameRu.toString()),
                                     ),
                                   );
                                 }).toList(),
@@ -218,13 +216,14 @@ class _StudentState extends State<Student> {
                                     univerColor1 = Colors.grey;
                                   });
 
-                                  final selected = data.regions.where(
-                                      (element) => element.name == newValue);
-                                  data.getDistrict(selected.last.id!);
+                                  // final selected = data.regions.where(
+                                  //     (element) => element.name == newValue);
+                                  // data.getDistrict(selected.last.id!);
                                   setState(() {
                                     dropDown = newValue.toString();
                                   });
-                                  print(dropDown + "viloyat adiii");
+                                  print(data.viloyatid.toString() +
+                                      "viloyat adiii");
                                 },
                               ),
                             ),
@@ -249,13 +248,14 @@ class _StudentState extends State<Student> {
                                 decoration: const InputDecoration(
                                   border: InputBorder.none,
                                 ),
-                                icon: const Icon(Icons.arrow_drop_down_outlined),
+                                icon:
+                                    const Icon(Icons.arrow_drop_down_outlined),
                                 items: const [],
                                 onChanged: null),
                           ),
-                    SizedBox(
-                      width: 9.w,
-                    ),
+                    // SizedBox(
+                    //   width: 9.w,
+                    // ),
                     Column(
                       children: [
                         Text(
@@ -265,7 +265,7 @@ class _StudentState extends State<Student> {
                             fontSize: 12.sp,
                             fontWeight: FontWeight.w500,
                           ),
-                        ),
+                        ).tr(),
                         Checkbox(
                           value: regionsvalue,
                           onChanged: (bool? value) {
@@ -284,20 +284,21 @@ class _StudentState extends State<Student> {
                 Row(
                   children: [
                     Text(
-                      "Qaysi OTM da o’qiydigan sherik izlayabsiz ?".tr(),
+                      "Qaysi OTM da o’qiydigan sherik izlayabsiz".tr() + "?",
                       style: TextStyle(
                         color: AppColors.textColor,
                         fontSize: 12.sp,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    SizedBox(
-                      width: 70.w,
-                    ),
+                    // SizedBox(
+                    //   width: 70.w,
+                    // ),
                   ],
                 ),
                 SizedBox(height: 4.h),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     otmEnable == true
                         ? Container(
@@ -313,7 +314,13 @@ class _StudentState extends State<Student> {
                                   border: InputBorder.none),
 
                               items: data.univer.map((e) {
-                                if (dropDown2 == e.name) {
+                                if (context
+                                        .read<AutCubit>()
+                                        .selectedLang
+                                        .index == 1){ if (dropDown2 == e.name) {
+                                  data.UniverId = e.id.toString();
+                                  data.isId = e.id;
+                                }}else{
                                   data.UniverId = e.id.toString();
                                   data.isId = e.id;
                                 }
@@ -333,14 +340,13 @@ class _StudentState extends State<Student> {
                               // hint: "country in menu mode",
                               onChanged: (value) async {
                                 data.isUniver = true;
-                                final selected = data.univer
-                                    .where((element) => element.name == value);
-                                data.getFaculty(selected.last.id!);
+                                // final selected = data.univer
+                                //     .where((element) => element.name == value);
+                                // data.getFaculty(selected.last.id!);
                                 // data.getFaculty(data.isId!);
-                                print('${selected}=================');
+                                // print('${selected}=================');
                                 setState(() {
                                   dropDown2 = value.toString();
-                                  _UniverOnClick = true;
                                   _colorUniver = Colors.grey;
                                 });
                               },
@@ -348,37 +354,37 @@ class _StudentState extends State<Student> {
                             ),
                           )
                         : Container(
-                      width: 240.w,
-                      decoration: BoxDecoration(
-                          border: Border.all(color: Colors.grey),
-                          borderRadius: BorderRadius.circular(10.r)),
-                      child: DropdownButtonFormField(
-                          isExpanded: true,
-                          hint: Padding(
-                            padding:
-                            EdgeInsets.fromLTRB(6.w, 4.h, 0, 5.w),
-                            child: Text(
-                              "OTM ni tanlang".tr(),
-                              style: TextStyle(
-                                color: Colors.grey,
-                                fontSize: 12.sp,
-                              ),
-                            ),
+                            width: 240.w,
+                            decoration: BoxDecoration(
+                                border: Border.all(color: Colors.grey),
+                                borderRadius: BorderRadius.circular(10.r)),
+                            child: DropdownButtonFormField(
+                                isExpanded: true,
+                                hint: Padding(
+                                  padding:
+                                      EdgeInsets.fromLTRB(6.w, 4.h, 0, 5.w),
+                                  child: Text(
+                                    "OTM ni tanlang".tr(),
+                                    style: TextStyle(
+                                      color: Colors.grey,
+                                      fontSize: 12.sp,
+                                    ),
+                                  ),
+                                ),
+                                decoration: const InputDecoration(
+                                  border: InputBorder.none,
+                                ),
+                                icon: Padding(
+                                  padding: EdgeInsets.fromLTRB(0, 0, 11.w, 9.w),
+                                  child: const Icon(
+                                      Icons.arrow_drop_down_outlined),
+                                ),
+                                items: const [],
+                                onChanged: null),
                           ),
-                          decoration: const InputDecoration(
-                            border: InputBorder.none,
-                          ),
-                          icon: Padding(
-                            padding: EdgeInsets.fromLTRB(0, 0, 11.w, 9.w),
-                            child: const Icon(
-                                Icons.arrow_drop_down_outlined),
-                          ),
-                          items: const [],
-                          onChanged: null),
-                    ),
-                    SizedBox(
-                      width: 9.w,
-                    ),
+                    // SizedBox(
+                    //   width: 9.w,
+                    // ),
                     Column(
                       children: [
                         Text(
@@ -388,7 +394,7 @@ class _StudentState extends State<Student> {
                             fontSize: 12.sp,
                             fontWeight: FontWeight.w500,
                           ),
-                        ),
+                        ).tr(),
                         Checkbox(
                           value: value6,
                           onChanged: (bool? value) {
@@ -435,13 +441,13 @@ class _StudentState extends State<Student> {
                         ),
                         SizedBox(height: 8.h),
                         Container(
-                          width: 110.w,
+                          width: 133.w,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.r),
                               border: Border.all(color: _colorGender)),
                           child: DropdownButtonFormField(
                             hint: Padding(
-                              padding: EdgeInsets.symmetric(horizontal: 8.w),
+                              padding: EdgeInsets.symmetric(horizontal: 6.w),
                               child: Text(
                                 "Qiz,O'g'il".tr(),
                                 style: TextStyle(fontSize: 12.sp),
@@ -463,9 +469,10 @@ class _StudentState extends State<Student> {
                             }).toList(),
                             onChanged: (gender) {
                               setState(() {
-                                if (gender1 == false) {
-                                  _titleGendor = e == "Qiz bolaga" ? '2' : '1';
-                                }
+                                // if (gender1 == false) {
+                                  gender == tr("Qiz bola") ? _titleGendor = '2' : _titleGendor = '1';
+                                  print(_titleGendor.toString()+'dasdasd');
+                                // }
                               });
                             },
                           ),
@@ -479,7 +486,7 @@ class _StudentState extends State<Student> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Nechta sherik izlayabsiz ?".tr(),
+                          "Nechta sherik izlayabsiz".tr() + "?",
                           style: TextStyle(
                             color: AppColors.textColor,
                             fontSize: 12.sp,
@@ -488,7 +495,7 @@ class _StudentState extends State<Student> {
                         ),
                         SizedBox(height: 4.h),
                         Container(
-                          width: 110.w,
+                          width: 130.w,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.r),
                               border: Border.all(color: _colorGender)),
@@ -622,7 +629,7 @@ class _StudentState extends State<Student> {
                     Row(
                       children: [
                         Text(
-                          "Ijaraga turishga joyingiz bormi ?",
+                          "Ijaraga turishga joyingiz bormi".tr() + "?",
                           style: TextStyle(
                             color: AppColors.textColor,
                             fontSize: 12.sp,
@@ -649,7 +656,7 @@ class _StudentState extends State<Student> {
                             Text(
                               'Ha',
                               style: TextStyle(fontSize: 17.0.sp),
-                            ),
+                            ).tr(),
                             SizedBox(
                               width: 55.w,
                             ),
@@ -668,7 +675,7 @@ class _StudentState extends State<Student> {
                               style: TextStyle(
                                 fontSize: 17.0.sp,
                               ),
-                            ),
+                            ).tr(),
                           ],
                         ),
                       ],
@@ -677,7 +684,7 @@ class _StudentState extends State<Student> {
                 ),
                 SizedBox(height: 12.h),
                 Text(
-                  "Qo’shimcha xususiyatlarni kiriting ".tr(),
+                  "Qo’shimcha xususiyatlarni kiriting".tr(),
                   style: TextStyle(
                     color: AppColors.textColor,
                     fontSize: 12.sp,
@@ -713,7 +720,7 @@ class _StudentState extends State<Student> {
                 Padding(
                   padding:
                       EdgeInsets.symmetric(vertical: 18.h, horizontal: 31.w),
-                  child: Container(
+                  child: SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
@@ -747,32 +754,46 @@ class _StudentState extends State<Student> {
                                 builder: (context) => Student2(
                                     titlecontroller1: titlecontroller1.text,
                                     univervalue: value6 == true ? '1' : '2',
-                                    viloyatidisi: regionsvalue == false ? data.viloyatid.toString():'',
-                                    viloyatvalue: regionsvalue == true ? '1' : '2',
-                                    universiteteid: value6 == false ? data.UniverId:'',
-                                    titleGendor:
-                                        gender1 == true ? '0' : _titleGendor.toString(),
+                                    viloyatidisi: regionsvalue == false
+                                        ? data.viloyatid.toString()
+                                        : '',
+                                    viloyatvalue:
+                                        regionsvalue == true ? '1' : '2',
+                                    universiteteid:
+                                        value6 == false ? data.UniverId : '',
+                                    titleGendor: gender1 == true
+                                        ? '0'
+                                        : _titleGendor.toString(),
                                     titlecount: '$_titleCount',
                                     phoneController: phoneController.text
                                         .split(' ')
                                         .join(''),
                                     house: house,
                                     addinformation: addinformation.text,
-                                    numbervalue: numbervalue==true ? '1' : '2'),
+                                    numbervalue:
+                                        numbervalue == true ? '1' : '2'),
                               ),
                             );
                           } else {
                             await CreateStudentHouse().StudentsCreateAds(
                               title: titlecontroller1.text,
-                              stay_region_id:regionsvalue == false? data.viloyatid.toString():'',
-                              stay_region_matter: regionsvalue == true ? '1' : '2',
-                              stay_university_id:  value6 == false ? data.UniverId :'',
-                              stay_university_matter: value6 == true ? '1' : '2',
-                              roommate_gender: gender1 == true ? '0' : _titleGendor.toString(),
+                              stay_region_id: regionsvalue == false
+                                  ? data.viloyatid.toString()
+                                  : '',
+                              stay_region_matter:
+                                  regionsvalue == true ? '1' : '2',
+                              stay_university_id:
+                                  value6 == false ? data.UniverId : '',
+                              stay_university_matter:
+                                  value6 == true ? '1' : '2',
+                              roommate_gender: gender1 == true
+                                  ? '0'
+                                  : _titleGendor.toString(),
                               roommate_count: _titleCount.toString(),
                               phone_number:
                                   phoneController.text.split(' ').join(''),
-                              phone_number_show: numbervalue == true ? '1' : '2',
+                              phone_number_show:
+                                  numbervalue == true ? '1' : '2',
                               have_living_home: house,
                               description: addinformation.text,
                               district_id: '',
@@ -834,7 +855,7 @@ class _StudentState extends State<Student> {
                             '${numbervalue ? '1' : '2'}  telefon raqam korinsin  +++++++++++');
                       },
                       child: Text(
-                        "Keyingi ".tr(),
+                        "Keyingi".tr(),
                         style: TextStyle(
                             fontSize: 20.sp, fontWeight: FontWeight.w500),
                       ),
@@ -851,7 +872,7 @@ class _StudentState extends State<Student> {
 
   Widget _style(BuildContext context, String? selectedItem) {
     return Padding(
-      padding:  EdgeInsets.fromLTRB(6.w,4.h,4.w,0),
+      padding: EdgeInsets.fromLTRB(6.w, 4.h, 4.w, 0),
       child: Text(
         selectedItem!,
         style: TextStyle(fontSize: 12.sp, color: Colors.black),

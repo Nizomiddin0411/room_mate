@@ -57,7 +57,7 @@ class _MapScreenState extends State<MapScreen> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.backgroundWhite,
-        title: const Text("User current location"),
+        title: const Text("Joylashuv",style: TextStyle(color: AppColors.textColor),).tr(),
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
@@ -69,42 +69,41 @@ class _MapScreenState extends State<MapScreen> {
           ),
         ),
       ),
-      body: Container(
-        child: SafeArea(
-          // on below line creating google maps
-          child: GoogleMap(
-            myLocationEnabled: true,
-            myLocationButtonEnabled: false,
-            onTap: _handlerTap,
-            zoomControlsEnabled: false,
+      body: SafeArea(
+        // on below line creating google maps
+        child: GoogleMap(
+          myLocationEnabled: true,
+          myLocationButtonEnabled: false,
+          onTap: _handlerTap,
+          zoomControlsEnabled: false,
 
-            // on below line setting camera position
-            // initialCameraPosition: _kGoogle,
-            initialCameraPosition: const CameraPosition(
-              target: LatLng(41.311081, 69.240562),
-              zoom: 14,
-            ),
-            markers: Set.from(mymarker),
-            // on below line we are setting markers on the map
-            // markers: Set<Marker>.of(_markers),
-            // on below line specifying map type.
-            mapType: MapType.normal,
-            // on below line setting user location enabled.
-
-            // on below line setting compass enabled.
-            compassEnabled: true,
-            // on below line specifying controller on map complete.
-            onMapCreated: (GoogleMapController controller) {
-              _controller.complete(controller);
-            },
+          // on below line setting camera position
+          // initialCameraPosition: _kGoogle,
+          initialCameraPosition: const CameraPosition(
+            target: LatLng(41.311081, 69.240562),
+            zoom: 14,
           ),
+          markers: Set.from(mymarker),
+          // on below line we are setting markers on the map
+          // markers: Set<Marker>.of(_markers),
+          // on below line specifying map type.
+          mapType: MapType.normal,
+          // on below line setting user location enabled.
+
+          // on below line setting compass enabled.
+          compassEnabled: true,
+          // on below line specifying controller on map complete.
+          onMapCreated: (GoogleMapController controller) {
+            _controller.complete(controller);
+          },
         ),
       ),
 
       floatingActionButton: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           isButton == true ? Padding(
-            padding:  EdgeInsets.fromLTRB(25.w,5.h,0.w,10.h),
+            padding:  EdgeInsets.fromLTRB(18.w,5.h,0.w,10.h),
             child: FloatingActionButton.extended(
               onPressed: () async {
                 Fluttertoast.showToast(
@@ -117,15 +116,15 @@ class _MapScreenState extends State<MapScreen> {
                 Navigator.pop(context);
 
               },
-              label: const Text(
-                "Saqlash",style: TextStyle(fontWeight: FontWeight.bold),
-              ),
+              label:  Text(
+                "Saqlash",style: TextStyle(fontSize: 10.sp,fontWeight: FontWeight.bold),
+              ).tr(),
               // icon: const Icon(Icons.location_history),
               // child: Icon(Icons.local_activity),
             ),
           ):const SizedBox(),
           Padding(
-            padding: EdgeInsets.fromLTRB(25.w,5.h,10.w,10.h),
+            padding: EdgeInsets.fromLTRB(5.w,5.h,5.w,10.h),
             child: FloatingActionButton.extended(
               onPressed: () async {
                 final maps = context.read<FavoriteProvider>();
@@ -146,10 +145,11 @@ class _MapScreenState extends State<MapScreen> {
 
                 // Navigator.pop(context);
               },
-              label: const Text(
+              label:  Text(
                 "Joylashuvni aniqlash",
-              ),
-              icon: const Icon(Icons.location_history),
+                style: TextStyle(fontSize: 10.sp,fontWeight: FontWeight.bold),
+              ).tr(),
+              // icon: const Icon(Icons.location_history),
               // child: Icon(Icons.local_activity),
             ),
           ),

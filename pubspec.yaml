@@ -73,6 +73,7 @@ dependencies:
   image_gallery_saver: ^1.7.1
   url_launcher: ^6.1.6
   badges: ^2.0.3
+  cron: ^0.5.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
