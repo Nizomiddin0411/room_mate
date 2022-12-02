@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:geolocator/geolocator.dart';
@@ -19,7 +20,7 @@ class MapDetail extends StatefulWidget {
 //20.42796133580664, 80.885749655962
 class _MapDetailState extends State<MapDetail> {
   // double lat = .first.parse();
-  Completer<GoogleMapController> _controller = Completer();
+  final Completer<GoogleMapController> _controller = Completer();
   // on below line we have specified camera position
   static final CameraPosition _kGoogle =  CameraPosition(
     target: LatLng(41.311081, 69.240562),
@@ -62,7 +63,7 @@ class _MapDetailState extends State<MapDetail> {
 
       appBar:  AppBar(
         backgroundColor: AppColors.backgroundWhite,
-        title: const Text("User current location"),
+        title:  const Text("Joylashuv").tr(),
         centerTitle: true,
         leading: IconButton(
           onPressed: () {

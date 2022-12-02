@@ -98,6 +98,7 @@ class _CreateimageState extends State<Createimage> {
   ImagePicker image = ImagePicker();
   int sum = 0;
 
+  @override
   void initState() {
     // TODO: implement initState
     super.initState();
@@ -196,7 +197,7 @@ class _CreateimageState extends State<Createimage> {
                           children: [
                             SizedBox(
                               child: DottedBorder(
-                                dashPattern: [6, 3],
+                                dashPattern: const [6, 3],
                                 color: Colors.black,
                                 strokeWidth: 0.5.w,
                                 child: InkWell(
@@ -240,7 +241,7 @@ class _CreateimageState extends State<Createimage> {
                     ConstrainedBox(
                       constraints:
                           BoxConstraints(maxHeight: 250.h, maxWidth: 400.w),
-                      child: Container(
+                      child: SizedBox(
                         height: 240.h,
                         child: ListView(
                           children:

@@ -107,7 +107,8 @@ class _ElonlarState extends State<Elonlar> {
                               Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) => const FiltrPage()))
+                                          builder: (context) =>
+                                              const FiltrPage()))
                                   .then((value) => data.isChanded);
                               data.isRegion = false;
                               data.isDistricts = false;
@@ -227,12 +228,22 @@ class _ElonlarState extends State<Elonlar> {
                                   Image: data.Ads[index].images ?? [],
                                   locations:
                                       data.Ads[index].location.toString(),
-                                  utileHotWater: data.Ads[index].utilityHotWater.toString(),
-                                  utileElictricity: data.Ads[index].utilityElectricity.toString(),
-                                  utileGaz: data.Ads[index].unilityGaz.toString(),
-                                  utileTrash: data.Ads[index].utilityTrash.toString(),
-                                  utileColdWater: data.Ads[index].utilityColdWater.toString(),
-                                  costPeriod: data.Ads[index].costPeriod.toString(), haveHome: data.Ads[index].haveLivingHome.toString(),
+                                  utileHotWater: data.Ads[index].utilityHotWater
+                                      .toString(),
+                                  utileElictricity: data
+                                      .Ads[index].utilityElectricity
+                                      .toString(),
+                                  utileGaz:
+                                      data.Ads[index].unilityGaz.toString(),
+                                  utileTrash:
+                                      data.Ads[index].utilityTrash.toString(),
+                                  utileColdWater: data
+                                      .Ads[index].utilityColdWater
+                                      .toString(),
+                                  costPeriod:
+                                      data.Ads[index].costPeriod.toString(),
+                                  haveHome:
+                                      data.Ads[index].haveLivingHome.toString(),
                                 ),
                               ),
                             );
@@ -383,9 +394,12 @@ class _ElonlarState extends State<Elonlar> {
                                                               .toString() ==
                                                           '1'
                                                       ? tr('Kuniga')
-                                                      :data.Ads[index].costPeriod
-                                                      .toString() ==
-                                                      '2' ?tr('Oyiga'):tr('Kishi boshiga'),
+                                                      : data.Ads[index]
+                                                                  .costPeriod
+                                                                  .toString() ==
+                                                              '2'
+                                                          ? tr('Oyiga')
+                                                          : tr('Kishi boshiga'),
                                                   style: const TextStyle(
                                                       color:
                                                           AppColors.mainColor),
@@ -543,13 +557,11 @@ class _ElonlarState extends State<Elonlar> {
                                           district: data.AdsForStudent[index]
                                               .district?.name
                                               .toString(),
-                                          stay_region: data.AdsForStudent[index]
-                                              .stayRegion?.name
+                                          stay_region: data.AdsForStudent[index].stayRegion?.name
                                               .toString(),
                                           stay_university: data
                                               .AdsForStudent[index]
-                                              .stayUniversity
-                                              ?.name
+                                              .stayUniversity?.name
                                               .toString(),
                                           region: data
                                               .AdsForStudent[index].region?.name
@@ -600,8 +612,14 @@ class _ElonlarState extends State<Elonlar> {
                                           utileHotWater: data
                                               .AdsForStudent[index]
                                               .utilityHotWater
-                                              .toString(), costPeriod: data
-                                        .AdsForStudent[index].costPeriod.toString(), haveHome: data.AdsForStudent[index].haveLivingHome.toString(),
+                                              .toString(),
+                                          costPeriod: data
+                                              .AdsForStudent[index].costPeriod
+                                              .toString(),
+                                          haveHome: data.AdsForStudent[index]
+                                              .haveLivingHome
+
+                                              .toString(),
                                         )));
                           },
                           child: Container(
@@ -744,10 +762,12 @@ class _ElonlarState extends State<Elonlar> {
                                                               .toString() ==
                                                           '1'
                                                       ? tr('Kuniga')
-                                                      :data.AdsForStudent[index]
-                                                      .costPeriod
-                                                      .toString() ==
-                                                      '2' ?tr('Oyiga'):tr('Kishi boshiga'),
+                                                      : data.AdsForStudent[index]
+                                                                  .costPeriod
+                                                                  .toString() ==
+                                                              '2'
+                                                          ? tr('Oyiga')
+                                                          : tr('Kishi boshiga'),
                                                   style: const TextStyle(
                                                       color:
                                                           AppColors.mainColor),

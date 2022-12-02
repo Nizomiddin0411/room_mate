@@ -46,22 +46,22 @@ class _MenuForState extends State<MenuFor> {
           ),
         ),
         actions: [
-          GestureDetector(
-
-            onTap: (){
-              Navigator.push(context, MaterialPageRoute(builder: (context) => const NotificationPage()));
-            },
-            child: Badge(
-              position: BadgePosition.bottomStart(bottom: 0, start: 30),
-              child:  CircleAvatar(
-                backgroundColor: Colors.blue[100],
-                radius: 19.r,
-                child: const Icon(Icons.notifications,color: Colors.grey,),
-
-              ),
-              badgeContent: const Text("0",style: TextStyle(color: Colors.white),),
-            ),
-          ),
+          // GestureDetector(
+          //
+          //   onTap: (){
+          //     Navigator.push(context, MaterialPageRoute(builder: (context) => const NotificationPage()));
+          //   },
+          //   child: Badge(
+          //     position: BadgePosition.bottomStart(bottom: 0, start: 30),
+          //     child:  CircleAvatar(
+          //       backgroundColor: Colors.blue[100],
+          //       radius: 19.r,
+          //       child: const Icon(Icons.notifications,color: Colors.grey,),
+          //
+          //     ),
+          //     badgeContent: const Text("0",style: TextStyle(color: Colors.white),),
+          //   ),
+          // ),
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: InkWell(

@@ -146,7 +146,7 @@ class CreateStudent {
       'live_with_owner': live_with_owner,
       'utility_bills': utility_bills,
       'comfort': comfort,
-      'rent_type': renttype,
+      'rent_type': '${renttype}',
       'cost_period': cost_period,
     });
     print('${title} titletitle nomi +++++++++++');

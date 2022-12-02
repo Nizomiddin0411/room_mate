@@ -109,7 +109,7 @@ class _StudentsEdistState extends State<StudentsEdist> {
     '4',
     '5',
   ];
-  final List<String> genderItems = ["O'g'il bola", "Qiz bola"];
+  final List<String> genderItems = [tr("O'g'il bola"), tr("Qiz bola")];
 
   bool regionsvalue = false;
   bool numbervalue = false;
@@ -146,10 +146,10 @@ class _StudentsEdistState extends State<StudentsEdist> {
     }
     partner = widget.roommate_count;
     roommate_gender = widget.roommate_gender == ''
-        ? "O’gil bollarga / Qizlarga"
+        ? tr("O'g'il bola")+"/"+tr("Qiz bola")
         : widget.roommate_gender == '2'
-            ? 'Qiz '
-            : "O'g'il";
+            ? tr('Qiz bola')
+            : tr("O'g'il bola");
     if (widget.stay_university_matter == '2') {
       value6 = true;
       univervalue = '2';
@@ -218,7 +218,7 @@ class _StudentsEdistState extends State<StudentsEdist> {
                       controller: titlecontroller1,
                       decoration: InputDecoration(
                         border: InputBorder.none,
-                        hintText: "E'lonni nomlash",
+                        hintText: "E'lonni nomlash".tr(),
                         hintStyle:
                             TextStyle(fontSize: 12.sp, color: Colors.grey),
                       ),
@@ -231,24 +231,28 @@ class _StudentsEdistState extends State<StudentsEdist> {
                   height: 15.h,
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Qaysi viloyatlik sherik izlayabsiz ?".tr(),
+                      "Qaysi viloyatlik sherik izlayabsiz".tr()+"?",
                       style: TextStyle(
                         color: AppColors.textColor,
                         fontSize: 12.sp,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    SizedBox(
-                      width: 76.w,
-                    ),
-                    Text(
-                      "Ahamiyatsiz",
-                      style: TextStyle(
-                        color: AppColors.textColor,
-                        fontSize: 12.sp,
-                        fontWeight: FontWeight.w500,
+                    // SizedBox(
+                    //   width: 76.w,
+                    // ),
+                    Padding(
+                      padding:  EdgeInsets.only(right: 14.w),
+                      child: Text(
+                        "Ahamiyatsiz".tr(),
+                        style: TextStyle(
+                          color: AppColors.textColor,
+                          fontSize: 12.sp,
+                          fontWeight: FontWeight.w500,
+                        ),
                       ),
                     ),
                   ],
@@ -280,10 +284,12 @@ class _StudentsEdistState extends State<StudentsEdist> {
                               onTap: () {
                                 data.RegionId = e.id.toString();
                               },
-                              value: e.name ?? "",
+                              value: context.read<AutCubit>().selectedLang.index ==
+                                  1 ? e.name : e.nameRu,
                               child: Padding(
                                 padding:  EdgeInsets.only(left: 8.w),
-                                child: Text(e.name.toString()),
+                                child: Text(context.read<AutCubit>().selectedLang.index ==
+                                    1 ? e.name.toString(): e.nameRu.toString()),
                               ),
                             );
                           }).toList(),
@@ -315,26 +321,20 @@ class _StudentsEdistState extends State<StudentsEdist> {
                 ),
                 SizedBox(height: 15.h),
                 Row(
+                  // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "Qaysi OTM da o’qiydigan sherik izlayabsiz ?".tr(),
+                      "Qaysi OTM da o’qiydigan sherik izlayabsiz".tr() +"?",
                       style: TextStyle(
                         color: AppColors.textColor,
                         fontSize: 12.sp,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    SizedBox(
-                      width: 27.w,
-                    ),
-                    Text(
-                      "Ahamiyatsiz",
-                      style: TextStyle(
-                        color: AppColors.textColor,
-                        fontSize: 12.sp,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
+                    // SizedBox(
+                    //   width: 27.w,
+                    // ),
+
                   ],
                 ),
                 SizedBox(height: 4.h),
@@ -350,10 +350,18 @@ class _StudentsEdistState extends State<StudentsEdist> {
                         dropdownBuilder: _style,
                         mode: Mode.BOTTOM_SHEET,
                         items: data.univer.map((e) {
+                          if(context.read<AutCubit>().selectedLang.index ==
+                              1){
                           if (dropDown2 == e.name) {
                             // data.UniversiterId = e.id.toString();
                             data.isId = e.id;
                             UniverId = e.id.toString();
+                          }}else{
+                            if (dropDown2 == e.nameRu) {
+                              // data.UniversiterId = e.id.toString();
+                              data.isId = e.id;
+                              UniverId = e.id.toString();
+                            }
                           }
                           return context.read<AutCubit>().selectedLang.index ==
                                   1
@@ -384,6 +392,17 @@ class _StudentsEdistState extends State<StudentsEdist> {
                     ),
                     Column(
                       children: [
+                        Padding(
+                          padding: EdgeInsets.only(right: 1.w),
+                          child: Text(
+                            "Ahamiyatsiz",
+                            style: TextStyle(
+                              color: AppColors.textColor,
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ).tr(),
+                        ),
                         Checkbox(
                           value: value6,
                           onChanged: (bool? value) {
@@ -431,7 +450,7 @@ class _StudentsEdistState extends State<StudentsEdist> {
                               padding: EdgeInsets.only(left: 8.w),
                               child: Text(
                                 widget.roommate_gender == ''
-                                    ? "O’gil  / Qiz".tr()
+                                    ? "O'g'il bola".tr()+"/"+"Qiz bola".tr()
                                     : roommate_gender.toString(),
                                 style: TextStyle(fontSize: 12.sp),
                               ),
@@ -442,7 +461,7 @@ class _StudentsEdistState extends State<StudentsEdist> {
                             items: genderItems.map((e) {
                               return DropdownMenuItem<String>(
                                 onTap: () {
-                                  e == "Qiz bola" ? _titleGendor = '2' : '1';
+                                  e == tr("Qiz bola") ? _titleGendor = '2' : '1';
                                 },
                                 value: e,
                                 child: Padding(
@@ -452,6 +471,7 @@ class _StudentsEdistState extends State<StudentsEdist> {
                               );
                             }).toList(),
                             onChanged: (gender) {
+                              print(_titleGendor);
                               setState(() {
                                 widget.roommate_gender.toString();
                               });
@@ -461,13 +481,13 @@ class _StudentsEdistState extends State<StudentsEdist> {
                       ],
                     ),
                     SizedBox(
-                      width: 18.w,
+                      width: 7.w,
                     ),
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Nechta sherik izlayabsiz ?".tr(),
+                          "Nechta sherik izlayabsiz".tr() +"?",
                           style: TextStyle(
                             color: AppColors.textColor,
                             fontSize: 12.sp,
@@ -519,6 +539,7 @@ class _StudentsEdistState extends State<StudentsEdist> {
                 Column(
                   children: [
                     Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
                           "Telefon raqami",
@@ -528,21 +549,24 @@ class _StudentsEdistState extends State<StudentsEdist> {
                             fontWeight: FontWeight.w500,
                           ),
                         ).tr(),
-                        SizedBox(
-                          width: 162.w,
-                        ),
-                        Text(
-                          "Ko’rinmasin",
-                          style: TextStyle(
-                            color: AppColors.textColor,
-                            fontSize: 12.sp,
-                            fontWeight: FontWeight.w500,
-                          ),
+                        // SizedBox(
+                        //   width: 162.w,
+                        // ),
+                        Padding(
+                          padding:  EdgeInsets.only(right: 13.w),
+                          child: Text(
+                            "Ko’rinmasin",
+                            style: TextStyle(
+                              color: AppColors.textColor,
+                              fontSize: 12.sp,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ).tr(),
                         ),
                       ],
                     ),
                     SizedBox(
-                      height: 7.h,
+                      height: 6.h,
                     ),
                     Row(
                       children: [
@@ -614,7 +638,7 @@ class _StudentsEdistState extends State<StudentsEdist> {
                     Row(
                       children: [
                         Text(
-                          "Ijaraga turishga joyingiz bormi ?",
+                          "Ijaraga turishga joyingiz bormi".tr()+"?",
                           style: TextStyle(
                             color: AppColors.textColor,
                             fontSize: 14.sp,
@@ -641,7 +665,7 @@ class _StudentsEdistState extends State<StudentsEdist> {
                             Text(
                               'Ha',
                               style: TextStyle(fontSize: 17.sp),
-                            ),
+                            ).tr(),
                             SizedBox(
                               width: 35.w,
                             ),
@@ -660,7 +684,7 @@ class _StudentsEdistState extends State<StudentsEdist> {
                               style: TextStyle(
                                 fontSize: 17.0.sp,
                               ),
-                            ),
+                            ).tr(),
                           ],
                         ),
                       ],
@@ -669,7 +693,7 @@ class _StudentsEdistState extends State<StudentsEdist> {
                 ),
                 SizedBox(height: 12.h),
                 Text(
-                  "Qo’shimcha xususiyatlarni kiriting ".tr(),
+                  "Qo’shimcha xususiyatlarni kiriting".tr(),
                   style: TextStyle(
                     color: AppColors.textColor,
                     fontSize: 12.sp,
@@ -848,7 +872,7 @@ class _StudentsEdistState extends State<StudentsEdist> {
                         //     '${numbervalue ? '1' : '2'}  telefon raqam korinsin  +++++++++++');
                       },
                       child: Text(
-                        "Keyingi ".tr(),
+                        "Keyingi".tr(),
                         style: TextStyle(
                             fontSize: 20.sp, fontWeight: FontWeight.w500),
                       ),

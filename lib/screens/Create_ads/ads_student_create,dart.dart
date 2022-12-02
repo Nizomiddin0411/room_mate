@@ -1365,7 +1365,7 @@ class _Student2State extends State<Student2> {
                                 housecount: housecount.toString(),
                                 ownerlive: ownerlive.toString(),
                                 costController: costcontroller.text,
-                                rent_type: selectedItems.join(', '),
+                                rent_type: '1',
                                 cost_period: pricerent_type,
                                 location: '${map.forMap}', districId: data.districtId,
                               ),

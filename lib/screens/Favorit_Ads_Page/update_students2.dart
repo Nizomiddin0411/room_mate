@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:talaba_uy/provider/favorite_provider.dart';
 import 'package:talaba_uy/screens/Favorit_Ads_Page/StudentEdit_post_last%20_page.dart';
 import '../../core/const/app_colors.dart';
+import '../../cubit/aut_cubit.dart';
 import '../../provider/region_provider.dart';
 import '../Google_map/map_for_edit.dart';
 
@@ -109,13 +110,13 @@ class _StudensEdits2State extends State<StudensEdits2> {
   var ownerlive = "0";
   var costcommunal = "0";
 
-  var pricetype = ["Kuniga", "Oyiga", "Kishi boshiga"];
+  var pricetype = [tr("Kuniga"), tr("Oyiga"), tr("Kishi boshiga")];
 
-  var housecost = ["Oylik", "Kunlik"];
+  var housecost = [tr("Oylik"), tr("Kunlik")];
 
   var kvartira = [
-    'Kvartira',
-    'Xovli',
+    tr('Kvartira'),
+    'Xovli'.tr(),
   ];
   var floors_count = [
     '1',
@@ -185,7 +186,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
     super.initState();
     late List<String> haveComfort = widget.comfort.split(',');
     String comfortList = widget.comfort;
-    housetype = widget.housetype == '1' ? 'Kvartira' : 'Xovli';
+    housetype = widget.housetype == '1' ? tr('Kvartira') : 'Xovli'.tr();
     housecount = widget.roomCount;
     addressController = TextEditingController(text: widget.adress);
     costcontroller = TextEditingController(text: widget.cost);
@@ -256,18 +257,18 @@ class _StudensEdits2State extends State<StudensEdits2> {
     uyturi = widget.housetype == ''
         ? "kv / hovli"
         : widget.housetype == '1'
-            ? 'Kv '
-            : "Hovli";
+            ? 'Kvartira'.tr()
+            : "Xovli".tr();
     narxturi = widget.rent_type == ''
-        ? "Kunlik / Oylik"
+        ? "Kuniga".tr()+"/" +"Oyiga".tr()
         : widget.housetype == '1'
-            ? 'kunlik '
-            : "oylik";
+            ? 'Kuniga'.tr()
+            : "Oyiga".tr();
     cost_period1 = widget.cost_period == ''
-        ? "kunlik / oylik"
+        ? "Kunlik".tr()+"/"+"Oylik".tr()
         : widget.housetype == ''
-            ? 'kunlik '
-            : "kishi boshiga";
+            ? 'Kunlik'.tr()
+            : "Kishi boshiga".tr();
   }
 
   @override
@@ -325,10 +326,12 @@ class _StudensEdits2State extends State<StudensEdits2> {
                       icon: const Icon(Icons.arrow_drop_down_outlined),
                       items: data.regions.map((e) {
                         return DropdownMenuItem<String>(
-                          value: e.name ?? "",
+                          value: context.read<AutCubit>().selectedLang.index ==
+                              1 ? e.name.toString() : e.nameRu.toString(),
                           child: Padding(
                             padding: EdgeInsets.only(left: 8.w),
-                            child: Text(e.name.toString()),
+                            child: Text(context.read<AutCubit>().selectedLang.index ==
+                                1 ? e.name.toString():e.nameRu.toString()),
                           ),
                         );
                       }).toList(),
@@ -336,10 +339,16 @@ class _StudensEdits2State extends State<StudensEdits2> {
                         setState(() {
                           _colorRegion = Colors.grey;
                         });
-
+                        if(context.read<AutCubit>().selectedLang.index ==
+                            1){
                         final selected = data.regions
                             .where((element) => element.name == newValue);
                         data.getDistrict(selected.last.id!);
+                        }else{
+                          final selected = data.regions
+                              .where((element) => element.nameRu == newValue);
+                          data.getDistrict(selected.last.id!);
+                        }
                         setState(() {
                           dropDown = newValue.toString();
                         });
@@ -360,7 +369,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
                               fontSize: 14.sp,
                               fontWeight: FontWeight.w500,
                             ),
-                          )
+                          ).tr()
                         ],
                       )
                     ],
@@ -392,14 +401,16 @@ class _StudensEdits2State extends State<StudensEdits2> {
                                   print("${e.name}${e.id}");
                                   data.districtId = e.id.toString();
                                 },
-                                value: data.isDistrict
+                                value: context.read<AutCubit>().selectedLang.index ==
+                                    1
                                     ? e.name.toString()
-                                    : data.defaultvalue,
+                                    : e.nameRu.toString(),
                                 child: Padding(
                                   padding: EdgeInsets.only(left: 8.w),
-                                  child: Text(data.isDistrict
+                                  child: Text(context.read<AutCubit>().selectedLang.index ==
+                                      1
                                       ? e.name.toString()
-                                      : data.defaultvalue),
+                                      : e.nameRu.toString()),
                                 ),
                               );
                             }).toList(),
@@ -454,7 +465,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
                               controller: addressController,
                               decoration: InputDecoration(
                                 border: const OutlineInputBorder(),
-                                labelText: "Kvartal , Uy , Xonadon ".tr(),
+                                labelText:  "Kvartal,Uy,Xonadon".tr(),
                               ),
                             ),
                           ),
@@ -514,13 +525,13 @@ class _StudensEdits2State extends State<StudensEdits2> {
                       Row(
                         children: [
                           Text(
-                            "Metroga yaqinmi ?",
+                            "Metroga yaqinmi "+"?",
                             style: TextStyle(
                               color: AppColors.textColor,
                               fontSize: 14.sp,
                               fontWeight: FontWeight.w500,
                             ),
-                          ),
+                          ).tr(),
                         ],
                       ),
                       Row(
@@ -541,7 +552,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
                               Text(
                                 'Ha',
                                 style: TextStyle(fontSize: 17.0.sp),
-                              ),
+                              ).tr(),
                               SizedBox(
                                 width: 25.w,
                               ),
@@ -551,6 +562,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
                                 onChanged: (String? val) {
                                   setState(() {
                                     metro = val!;
+                                    print(metro);
                                   });
                                 },
                               ),
@@ -559,7 +571,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
                                 style: TextStyle(
                                   fontSize: 17.0.sp,
                                 ),
-                              ),
+                              ).tr(),
                             ],
                           ),
                         ],
@@ -593,7 +605,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
                                 padding: EdgeInsets.only(left: 8.w),
                                 child: Text(
                                   widget.housetype == ''
-                                      ? "kv  / Hovli".tr()
+                                      ? "Kvartira".tr()+"/"+"Xovli".tr()
                                       : uyturi.toString(),
                                   style: TextStyle(fontSize: 14.sp),
                                 ),
@@ -629,7 +641,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Xonalar soni ?".tr(),
+                            "Xonalar soni".tr() +"?",
                             style: TextStyle(
                               color: AppColors.textColor,
                               fontSize: 14.sp,
@@ -685,7 +697,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Qavatlar soni ".tr(),
+                            "Qavatlar soni".tr(),
                             style: TextStyle(
                               color: AppColors.textColor,
                               fontSize: 14.sp,
@@ -737,7 +749,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "Nechinchi qavatda ?".tr(),
+                            "Nechinchi qavatda".tr()+"?",
                             style: TextStyle(
                               color: AppColors.textColor,
                               fontSize: 14.sp,
@@ -837,7 +849,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
                               onChanged: (String? e) {
                                 setState(() {
                                   _dropownUsd = e;
-                                  pricerent_type = e == 'sum' ? '1' : '2';
+                                  e == 'sum' ? pricerent_type = '1' : '2';
                                   print(pricerent_type);
                                 });
                               },
@@ -894,7 +906,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
                           SizedBox(height: 4.h),
                           Container(
                             height: 50.h,
-                            width: 152.w,
+                            width: 181.w,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10.r),
                                 border: Border.all(color: Colors.grey)),
@@ -903,10 +915,10 @@ class _StudensEdits2State extends State<StudensEdits2> {
                                 padding: EdgeInsets.only(left: 8.w),
                                 child: Text(
                                   widget.cost_period == '1'
-                                      ? 'Kuniga'
+                                      ? tr('Kuniga')
                                       : widget.cost_period == '2'
-                                          ? 'Oyiga'
-                                          : 'Kishi boshiga',
+                                          ? tr('Oyiga')
+                                          : tr('Kishi boshiga'),
                                   style: TextStyle(fontSize: 14.sp),
                                 ),
                               ),
@@ -925,9 +937,9 @@ class _StudensEdits2State extends State<StudensEdits2> {
                               }).toList(),
                               onChanged: (newValue) {
                                 setState(() {
-                                  if (newValue == 'Kuniga') {
+                                  if (newValue == tr('Kuniga')) {
                                     price1 = '1';
-                                  } else if (newValue == 'Oyiga') {
+                                  } else if (newValue == tr('Oyiga')) {
                                     price1 = '2';
                                   } else {
                                     price1 = '3';
@@ -1051,7 +1063,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
                                       padding: EdgeInsets.only(left: 8.w,top: 10.h),
                                       child: Text(
                                         widget.rent_type == ''
-                                            ? "Kunlik  / Oylik".tr()
+                                            ? "Kunlik".tr() +"/" +"Oylik".tr()
                                             : narxturi.toString(),
                                         style: TextStyle(fontSize: 14.sp),
                                       ),
@@ -1137,7 +1149,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
                       Row(
                         children: [
                           Text(
-                            "Uy egasi ham yashaydimi ?",
+                            "Uy egasi ham yashaydimi".tr()+"?",
                             style: TextStyle(
                                 fontSize: 14.sp, fontWeight: FontWeight.w500),
                           ),
@@ -1160,7 +1172,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
                               Text(
                                 'Ha',
                                 style: TextStyle(fontSize: 17.0.sp),
-                              ),
+                              ).tr(),
                               SizedBox(
                                 width: 50.w,
                               ),
@@ -1178,7 +1190,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
                                 style: TextStyle(
                                   fontSize: 17.0.sp,
                                 ),
-                              ),
+                              ).tr(),
                             ],
                           ),
                         ],
@@ -1193,7 +1205,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
                       Row(
                         children: [
                           Text(
-                            "Kommunal to’lovlarini kim to’laydi ?",
+                            "Kommunal to’lovlarini kim to’laydi".tr()+"?",
                             style: TextStyle(
                                 fontSize: 14.sp, fontWeight: FontWeight.w500),
                           ),
@@ -1217,7 +1229,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
                               Text(
                                 'Uy egasi',
                                 style: TextStyle(fontSize: 17.0.sp),
-                              ),
+                              ).tr(),
                               SizedBox(
                                 width: 15.w,
                               ),
@@ -1235,7 +1247,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
                                 style: TextStyle(
                                   fontSize: 17.0.sp,
                                 ),
-                              ),
+                              ).tr(),
                             ],
                           ),
                         ],
@@ -1253,7 +1265,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
                             color: AppColors.textColor,
                             fontSize: 14.sp,
                             fontWeight: FontWeight.w500),
-                      ),
+                      ).tr(),
                     ],
                   ),
                   SizedBox(
@@ -1266,7 +1278,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text("Wi - fi "),
+                            const Text("Wi - fi").tr(),
                             Checkbox(
                               value: value1,
                               onChanged: (bool? value) {
@@ -1285,7 +1297,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text("TV"),
+                            const Text("TV").tr(),
                             Checkbox(
                               value: value2,
                               onChanged: (bool? value) {
@@ -1304,7 +1316,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text("Muzlatgich"),
+                            const Text("Muzlatgich").tr(),
                             Checkbox(
                               value: value3,
                               onChanged: (bool? value) {
@@ -1323,7 +1335,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text("Kir yuvish mashinasi"),
+                            const Text("Kir yuvish mashinasi").tr(),
                             Checkbox(
                               value: value4,
                               onChanged: (bool? value) {
@@ -1342,7 +1354,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text("Konditsioner"),
+                            const Text("Konditsioner").tr(),
                             Checkbox(
                               value: value5,
                               onChanged: (bool? value) {
@@ -1361,7 +1373,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            const Text("Chang yutgich"),
+                            const Text("Chang yutgich").tr(),
                             Checkbox(
                               value: value6,
                               onChanged: (bool? value) {
@@ -1437,9 +1449,10 @@ class _StudensEdits2State extends State<StudensEdits2> {
                                 districtId: data.districtId,
                                 comfort: comfortItems,
                                 costlivekomunal: costcommunal.toString(),
-                                metro: metro.toString() == 'ha' ? '1' : '2',
+                                //== 'ha' ? '1' : '2'
+                                metro: metro.toString() ,
                                 countroom: housefloorcount.toString(),
-                                housetype: housetype == 'Kvartira' ? '1' : '2',
+                                housetype: housetype == tr('Kvartira') ? '1' : '2',
                                 howcountroom: howcountroom.toString(),
                                 narxnituri: pricerent_type,
                                 addressController: addressController!.text,
@@ -1461,7 +1474,7 @@ class _StudensEdits2State extends State<StudensEdits2> {
                           "Keyingi".tr(),
                           style: TextStyle(
                               fontSize: 20.sp, fontWeight: FontWeight.w500),
-                        ),
+                        ).tr(),
                       ),
                     ),
                   ),

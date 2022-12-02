@@ -1,3 +1,4 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/material.dart';
@@ -50,17 +51,9 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
   String? utility_trash;
   List comfort = [];
   String? description;
-  String RoomOwner = '';
-  String RentOf = '';
-  String Subway = '';
   String? _dropownUsd;
-  String dropDown = "";
-  String TypeHouse = '';
-  String CountRoom = '';
-  String genderString = '';
-  String dropDown2 = "";
-  String countRoom = '';
   String price = '';
+  List<String> selectedItems = [];
   TextEditingController? addressController;
   TextEditingController? costController;
   TextEditingController? adsTitleController;
@@ -80,23 +73,20 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
   Color _costTypeColor = Colors.grey;
   bool _costTypeOnClick = false;
   Color _descriptionColor = Colors.grey;
-  bool _descriptionOnClick = false;
+
   Color _priceColor = Colors.grey;
   bool _priceOnClick = false;
-  Color _colorForm = Colors.grey;
+
   bool value5 = false;
   var pricetype = [
-    "Kuniga",
-    "Oyiga",
-    "Kishi boshiga",
+    tr("Kuniga"),
+    tr("Oyiga"),
+    tr("Kishi boshiga"),
   ];
-  var kvartira = [
-    'Kvartira',
-    'Xovli',
-  ];
+
   var housetype = [
-    "Hovli",
-    'Kvartira',
+    tr("Xovli"),
+    tr('Kvartira'),
   ];
   var houseroom = [
     "1",
@@ -110,13 +100,8 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
     "9",
   ];
   var ijaramuddat = [
-    "Kunlik",
-    "Oylik",
-    "Uzoq muddat",
-  ];
-  var kindOfMoment = [
-    'kunlik',
-    'oylik',
+    tr("Kunlik"),
+    tr("Oylik"),
   ];
   var rooms = [
     '1',
@@ -157,19 +142,19 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: Colors.white,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_outlined),
+          icon: const Icon(Icons.arrow_back_outlined),
           onPressed: () {
             Navigator.pop(context);
           },
           color: Colors.black,
         ),
-        title: const Center(
-            child: Text(
+        title: const Text(
           "E’lon yaratish",
           style: TextStyle(color: Colors.blue),
-        )),
+        ).tr(),
       ),
       body: SingleChildScrollView(
           child: Padding(
@@ -278,7 +263,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                             ),
                             decoration:
                                 const InputDecoration(border: InputBorder.none),
-                            icon: Icon(Icons.arrow_drop_down_outlined),
+                            icon: const Icon(Icons.arrow_drop_down_outlined),
                             items: housetype.map((e) {
                               return DropdownMenuItem<String>(
                                 onTap: () {},
@@ -291,7 +276,8 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                             }).toList(),
                             onChanged: (newValue) {
                               setState(() {
-                                house_type = newValue == 'Hovli'.tr() ? '2' : '1';
+                                house_type = newValue == 'Xovli'.tr() ? '2' : '1';
+                                print(house_type);
                                 _houseTypeOnClick = true;
                                 _houseTypeColor = Colors.grey;
                               });
@@ -315,44 +301,136 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                           ),
                         ),
                         SizedBox(height: 4.h),
+                        // Container(
+                        //   height: 50.h,
+                        //   width: 134.w,
+                        //   decoration: BoxDecoration(
+                        //       borderRadius: BorderRadius.circular(10.r),
+                        //       border: Border.all(color: _rentTypeColor)),
+                        //   child: DropdownButtonFormField(
+                        //     hint: Padding(
+                        //       padding: EdgeInsets.only(left: 8.w),
+                        //       child: Text(
+                        //         "Kunlik  / Oylik".tr(),
+                        //         style: TextStyle(fontSize: 14.sp),
+                        //       ),
+                        //     ),
+                        //     decoration:
+                        //         const InputDecoration(border: InputBorder.none),
+                        //     icon: const Icon(Icons.arrow_drop_down_outlined),
+                        //     items: ijaramuddat.map((e) {
+                        //       return DropdownMenuItem<String>(
+                        //         onTap: () {},
+                        //         value: e,
+                        //         child: Padding(
+                        //           padding: EdgeInsets.only(left: 8.w),
+                        //           child: Text(e.tr()),
+                        //         ),
+                        //       );
+                        //     }).toList(),
+                        //     onChanged: (newValue) {
+                        //       setState(() {
+                        //         rent_type = newValue == 'Kunlik'.tr()
+                        //             ? '1'
+                        //             : newValue == 'Oylik'.tr()
+                        //                 ? '2'
+                        //                 : '3';
+                        //         _rentTypeOnClick = true;
+                        //         _rentTypeColor = Colors.grey;
+                        //       });
+                        //     },
+                        //   ),
+                        // ),
                         Container(
+                          width: 137.w,
                           height: 50.h,
-                          width: 134.w,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.r),
-                              border: Border.all(color: _rentTypeColor)),
-                          child: DropdownButtonFormField(
-                            hint: Padding(
-                              padding: EdgeInsets.only(left: 8.w),
-                              child: Text(
-                                "Kunlik  / Oylik".tr(),
-                                style: TextStyle(fontSize: 14.sp),
-                              ),
-                            ),
-                            decoration:
-                                const InputDecoration(border: InputBorder.none),
-                            icon: const Icon(Icons.arrow_drop_down_outlined),
-                            items: ijaramuddat.map((e) {
-                              return DropdownMenuItem<String>(
-                                onTap: () {},
-                                value: e,
-                                child: Padding(
-                                  padding: EdgeInsets.only(left: 8.w),
-                                  child: Text(e.tr()),
+                              border: Border.all(color: _rentTypeColor)
+                          ),
+                          child: DropdownButtonHideUnderline(
+                            child: DropdownButton2(
+                              isExpanded: true,
+                              hint: Padding(
+                                padding: EdgeInsets.only(left: 8.w,top: 5.h),
+                                child: Text(tr("Kunlik")+"/"+tr("Oylik"),
+                                  style: TextStyle(fontSize: 14.sp),
                                 ),
-                              );
-                            }).toList(),
-                            onChanged: (newValue) {
-                              setState(() {
-                                rent_type = newValue == 'Kunlik'.tr()
-                                    ? '1'
-                                    : newValue == 'Oylik'.tr()
-                                        ? '2'
-                                        : '3';
-                                _rentTypeOnClick = true;
-                                _rentTypeColor = Colors.grey;
-                              });
-                            },
+                              ),
+                              items: ijaramuddat.map((item) {
+                                return DropdownMenuItem<String>(
+                                  value: item,
+                                  //disable default onTap to avoid closing menu when selecting an item
+                                  enabled: false,
+                                  child: StatefulBuilder(
+                                    builder: (context, menuSetState) {
+                                      final _isSelected = selectedItems.contains(item);
+                                      return InkWell(
+                                        onTap: () {
+                                          _isSelected
+                                              ? selectedItems.remove(item)
+                                              : selectedItems.add(item);
+                                          //This rebuilds the StatefulWidget to update the button's text
+                                          setState(() {});
+                                          _rentTypeOnClick = true;
+                                          _rentTypeColor = Colors.grey;
+                                          //This rebuilds the dropdownMenu Widget to update the check mark
+                                          menuSetState(() {});
+                                        },
+                                        child: Container(
+                                          height: double.infinity,
+                                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                                          child: Row(
+                                            children: [
+                                              _isSelected
+                                                  ? const Icon(Icons.check_box_outlined)
+                                                  : const Icon(Icons.check_box_outline_blank),
+                                              SizedBox(width: 16.w),
+                                              Text(
+                                                item,
+                                                style:  TextStyle(
+                                                  fontSize: 14.sp,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                );
+                              }).toList(),
+                              //Use last selected item as the current value so if we've limited menu height, it scroll to last item.
+                              value: selectedItems.isEmpty ? null : selectedItems.last,
+                              onChanged: (value) {
+                                setState(() {
+
+                                });
+
+                              },
+                              buttonHeight: 40,
+                              buttonWidth: 140,
+                              itemHeight: 40,
+                              itemPadding: EdgeInsets.zero,
+                              selectedItemBuilder: (context) {
+                                return ijaramuddat.map(
+                                      (item) {
+                                    return Container(
+                                      alignment: AlignmentDirectional.center,
+                                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                                      child: Text(
+                                        selectedItems.join(', '),
+                                        style: const TextStyle(
+                                          fontSize: 14,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                        maxLines: 1,
+                                      ),
+                                    );
+                                  },
+                                ).toList();
+                              },
+                            ),
                           ),
                         ),
                       ],
@@ -640,7 +718,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                         SizedBox(height: 4.h),
                         Container(
                           height: 50.h,
-                          width: 160.w,
+                          width: 182.w,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.r),
                               border: Border.all(color: _priceColor)),
@@ -668,13 +746,14 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                             onChanged: (newValue) {
                               setState(() {
                                 print(newValue);
-                                if (newValue == 'kunlik'.tr()) {
+                                if (newValue == 'Kuniga'.tr()) {
                                   price = '1';
-                                } else if (newValue == 'oylik'.tr()) {
+                                } else if (newValue == 'Oyiga'.tr()) {
                                   price = '2';
                                 } else {
                                   price = '3';
                                 }
+                                print(price);
                                 _priceOnClick = true;
                                 _priceColor = Colors.grey;
                               });
@@ -758,13 +837,15 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                   ],
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Container(width: 172.w,),
-                    Text("Uy egasi".tr()),
-                    SizedBox(
-                      width: 50.w,
-                    ),
-                    Text("Ijarachi".tr())
+                    Container(width: 155.w,),
+                    Container(
+                     alignment: Alignment.center,
+                    width:90.w,
+                        child: Text("Uy egasi".tr())),
+
+                    Container(width: 70.w,child: Text("Ijarachi".tr(),), alignment: Alignment.center,)
                   ],
                 ),
                 Row(
@@ -774,7 +855,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                         SizedBox(
                           height: 1.h,
                         ),
-                        Container(
+                        SizedBox(
                           width: 180.w,
                           child: Text("Elektr energiya".tr()),
                         ),
@@ -807,7 +888,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                   children: [
                     Row(
                       children: [
-                        Container(
+                        SizedBox(
                           width: 180.w,
                           child: Text("Gaz".tr()),
                         ),
@@ -841,7 +922,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                             SizedBox(
                               height: 1.h,
                             ),
-                            Container(width: 180.w, child: Text("Sovuq suv".tr())),
+                            SizedBox(width: 180.w, child: Text("Sovuq suv".tr())),
                             Radio(
                               value: 1,
                               groupValue: id3,
@@ -874,7 +955,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                             SizedBox(
                               height: 1.h,
                             ),
-                            Container(width: 180.w, child: Text("Issiq suv".tr())),
+                            SizedBox(width: 180.w, child: Text("Issiq suv".tr())),
                             Radio(
                               value: 1,
                               groupValue: id4,
@@ -907,7 +988,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                             SizedBox(
                               height: 1.h,
                             ),
-                            Container(
+                            SizedBox(
                               width: 180.w,
                               child: Text("Chiqindi".tr()),
                             ),
@@ -957,7 +1038,7 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                 ),
                 Row(
                   children: [
-                    Container(
+                    SizedBox(
                       width: 228.w,
                       child: Column(
                         children: [
@@ -966,10 +1047,10 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                             children: [
                               Text("Wi - fi".tr()),
                               Checkbox(
-                                value: this.value1,
+                                value: value1,
                                 onChanged: (bool? value) {
                                   setState(() {
-                                    this.value1 = value!;
+                                    value1 = value!;
                                     if (value) {
                                       comfort.add('1');
                                     } else {
@@ -985,10 +1066,10 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                             children: [
                               Text("TV".tr()),
                               Checkbox(
-                                value: this.value2,
+                                value: value2,
                                 onChanged: (bool? value) {
                                   setState(() {
-                                    this.value2 = value!;
+                                    value2 = value!;
                                     if (value) {
                                       comfort.add('2');
                                     } else {
@@ -1004,10 +1085,10 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                             children: [
                               Text("Muzlatgich".tr()),
                               Checkbox(
-                                value: this.value3,
+                                value: value3,
                                 onChanged: (bool? value) {
                                   setState(() {
-                                    this.value3 = value!;
+                                    value3 = value!;
                                     if (value) {
                                       comfort.add('3');
                                     } else {
@@ -1023,10 +1104,10 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                             children: [
                               Text("Kir yuvish mashinasi".tr()),
                               Checkbox(
-                                value: this.value4,
+                                value: value4,
                                 onChanged: (bool? value) {
                                   setState(() {
-                                    this.value4 = value!;
+                                    value4 = value!;
                                     if (value) {
                                       comfort.add('4');
                                     } else {
@@ -1042,10 +1123,10 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                             children: [
                               Text("Konditsioner".tr()),
                               Checkbox(
-                                value: this.value6,
+                                value: value6,
                                 onChanged: (bool? value) {
                                   setState(() {
-                                    this.value6 = value!;
+                                    value6 = value!;
                                     if (value) {
                                       comfort.add('5');
                                     } else {
@@ -1061,10 +1142,10 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                             children: [
                               Text("Chang yutgich".tr()),
                               Checkbox(
-                                value: this.value5,
+                                value: value5,
                                 onChanged: (bool? value) {
                                   setState(() {
-                                    this.value5 = value!;
+                                    value5 = value!;
                                     if (value) {
                                       comfort.add('6');
                                     } else {
@@ -1213,7 +1294,8 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                                             .split(' ')
                                             .join(''),
                                         house_type: house_type,
-                                        rent_type: rent_type,
+                                        // rent_type: rent_type,
+                                        rent_type: selectedItems.join(', '),
                                         room_count: room_count,
                                         floors_count: floors_count,
                                         in_floor: in_floor,
@@ -1232,8 +1314,15 @@ class _OwnerHouseInfoState extends State<OwnerHouseInfo> {
                                         description: descriptionController.text,
                                         cost_period: price,
                                       )),
+
                             );
                           } else {
+                            print(_phoneNumberOnClick.toString() + _houseTypeOnClick.toString()
+                                +_rentTypeOnClick.toString() +
+                                _roomCountOnClick.toString() +
+                                _floorsCountOnClick.toString() +
+                                _inFloorOnClick.toString() +
+                                _costTypeOnClick.toString() + _priceOnClick.toString());
                             setState(() {
                               if (!_phoneNumberOnClick) {
                                 _phoneNumberColor = Colors.red;

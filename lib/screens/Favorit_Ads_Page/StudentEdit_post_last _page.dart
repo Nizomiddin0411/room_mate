@@ -6,17 +6,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
 import 'dart:io';
-
-import 'package:dotted_border/dotted_border.dart';
-import 'package:easy_localization/easy_localization.dart';
 import 'package:file_picker/file_picker.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:talaba_uy/screens/Create_ads/create_succed_dart.dart';
-import 'package:talaba_uy/services/post_student_adds.dart';
 import 'package:talaba_uy/services/update_students%20_Ads.dart';
-
 import '../../core/const/app_colors.dart';
 import '../../core/const/consts.dart';
 
@@ -136,12 +128,12 @@ class _PostEditStudentState extends State<PostEditStudent> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: const Center(child: Text("Rasm yuklash")),
+            title:  Center(child: const Text("Rasm yuklash").tr()),
             content: SingleChildScrollView(
               child: ListBody(
                 children: [
                   GestureDetector(
-                    child: const Text("From Camera"),
+                    child: const Text("Rasimga olish").tr(),
                     onTap: () async {
                       // getcam();
                       if (sum < 3) {
@@ -156,7 +148,7 @@ class _PostEditStudentState extends State<PostEditStudent> {
                   const Padding(padding: EdgeInsets.all(10)),
                   GestureDetector(
                     child: Text(
-                      "From Gallery",
+                      "Galeriyadan yuklash".tr(),
                       style: TextStyle(
                           color: sum < 3 ? Colors.black : Colors.grey.shade300),
                     ),
@@ -194,7 +186,7 @@ class _PostEditStudentState extends State<PostEditStudent> {
               color: AppColors.textColor,
             ),
           ),
-          title: Text("E’lon o'zgartirish".tr(),
+          title: Text("E’lonni o'zgartirish".tr(),
               style: const TextStyle(color: AppColors.mainColor)),
           centerTitle: true,
         ),
@@ -411,7 +403,7 @@ class _PostEditStudentState extends State<PostEditStudent> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => CreateSuccedful(),
+                          builder: (context) => const CreateSuccedful(),
                         ),
                       );
                     },

@@ -8,7 +8,7 @@ class AllAdsModel {
   int? stayUniversityId;
   int? stayUniversityMatter;
   int? roommateGender;
-  int? genderMatter;
+  dynamic genderMatter;
   int? roommateCount;
   String? phoneNumber;
   int? phoneNumberShow;
@@ -26,15 +26,15 @@ class AllAdsModel {
   int? costType;
   int? liveWithOwner;
   int? utilityBills;
-  int? utilityElectricity;
-  int? unilityGaz;
-  int? utilityHotWater;
-  int? utilityColdWater;
-  int? utilityTrash;
+  dynamic utilityElectricity;
+  dynamic unilityGaz;
+  dynamic utilityHotWater;
+  dynamic utilityColdWater;
+  dynamic utilityTrash;
   String? comfort;
-  int? universityId;
-  int? universityIdMatter;
-  int? rentType;
+  dynamic universityId;
+  dynamic universityIdMatter;
+  String? rentType;
   String? createdAt;
   String? updatedAt;
   int? costPeriod;
@@ -45,8 +45,9 @@ class AllAdsModel {
   Region? region;
   Region? stayRegion;
   District? district;
-  University? university;
+  dynamic university;
   StayUniversity? stayUniversity;
+  int? course;
 
   AllAdsModel(
       {this.id,
@@ -96,7 +97,8 @@ class AllAdsModel {
         this.stayRegion,
         this.district,
         this.university,
-        this.stayUniversity});
+        this.stayUniversity,
+        this.course});
 
   AllAdsModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -155,12 +157,11 @@ class AllAdsModel {
     district = json['district'] != null
         ? new District.fromJson(json['district'])
         : null;
-    university = json['university'] != null
-        ? new University.fromJson(json['university'])
-        : null;
+    university = json['university'];
     stayUniversity = json['stay_university'] != null
         ? new StayUniversity.fromJson(json['stay_university'])
         : null;
+    course = json['course'];
   }
 
   Map<String, dynamic> toJson() {
@@ -219,12 +220,11 @@ class AllAdsModel {
     if (this.district != null) {
       data['district'] = this.district!.toJson();
     }
-    if (this.university != null) {
-      data['university'] = this.university!.toJson();
-    }
+    data['university'] = this.university;
     if (this.stayUniversity != null) {
       data['stay_university'] = this.stayUniversity!.toJson();
     }
+    data['course'] = this.course;
     return data;
   }
 }
@@ -298,58 +298,14 @@ class District {
   }
 }
 
-class University {
-  int? id;
-  String? name;
-  String? nameRu;
-  String? short;
-  int? districtId;
-  dynamic address;
-  String? advertising;
-  String? searching;
-
-  University(
-      {this.id,
-        this.name,
-        this.nameRu,
-        this.short,
-        this.districtId,
-        this.address,
-        this.advertising,
-        this.searching});
-
-  University.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    name = json['name'];
-    nameRu = json['name_ru'];
-    short = json['short'];
-    districtId = json['district_id'];
-    address = json['address'];
-    advertising = json['advertising'];
-    searching = json['searching'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['id'] = this.id;
-    data['name'] = this.name;
-    data['name_ru'] = this.nameRu;
-    data['short'] = this.short;
-    data['district_id'] = this.districtId;
-    data['address'] = this.address;
-    data['advertising'] = this.advertising;
-    data['searching'] = this.searching;
-    return data;
-  }
-}
-
 class StayUniversity {
   int? id;
   String? name;
   String? nameRu;
   String? short;
-  dynamic districtId;
-  dynamic address;
+  Null? districtId;
+  Null? regionId;
+  Null? address;
   String? advertising;
   String? searching;
 
@@ -359,6 +315,7 @@ class StayUniversity {
         this.nameRu,
         this.short,
         this.districtId,
+        this.regionId,
         this.address,
         this.advertising,
         this.searching});
@@ -369,6 +326,7 @@ class StayUniversity {
     nameRu = json['name_ru'];
     short = json['short'];
     districtId = json['district_id'];
+    regionId = json['region_id'];
     address = json['address'];
     advertising = json['advertising'];
     searching = json['searching'];
@@ -381,6 +339,7 @@ class StayUniversity {
     data['name_ru'] = this.nameRu;
     data['short'] = this.short;
     data['district_id'] = this.districtId;
+    data['region_id'] = this.regionId;
     data['address'] = this.address;
     data['advertising'] = this.advertising;
     data['searching'] = this.searching;

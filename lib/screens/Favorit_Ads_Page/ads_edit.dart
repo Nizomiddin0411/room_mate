@@ -4,7 +4,6 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:geolocator/geolocator.dart';
-import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
 import 'package:talaba_uy/cubit/aut_cubit.dart';
@@ -54,80 +53,55 @@ class AdsEdit extends StatefulWidget {
   String? district_id;
 
   AdsEdit(
-      this.title,
-      this.description,
-      this.houseType,
-      this.cost,
-      this.costType,
-      this.countRoom,
-      this.countPeople,
-      this.liveWithOwner,
-      this.subway,
-      this.favorite,
-      this.id,
-      this.type,
-      this.userId,
-      this.phoneNumber,
-      this.comfort,
-      this.inFloor,
-      this.roommate_count,
-      this.address,
-      this.roommate_gender,
-      this.locations,
-
-      this.universityId,
-      this.region,
-      this.rentType,
-      this.floors_count,
-      this.cost_period,
-      this.gender_matter,
-      this.university_id_matter,
-      this.regionName,
-      this.tumanName,
-      this.live_with_owner,
-      this.utility_electricity,
-      this.unility_gaz,
-      this.utility_hot_water,
-      this.utility_cold_water,
-      this.utility_trash,
-      this.district_id,
-      {Key? key,required this.Image,})
-      : super(key: key);
+    this.title,
+    this.description,
+    this.houseType,
+    this.cost,
+    this.costType,
+    this.countRoom,
+    this.countPeople,
+    this.liveWithOwner,
+    this.subway,
+    this.favorite,
+    this.id,
+    this.type,
+    this.userId,
+    this.phoneNumber,
+    this.comfort,
+    this.inFloor,
+    this.roommate_count,
+    this.address,
+    this.roommate_gender,
+    this.locations,
+    this.universityId,
+    this.region,
+    this.rentType,
+    this.floors_count,
+    this.cost_period,
+    this.gender_matter,
+    this.university_id_matter,
+    this.regionName,
+    this.tumanName,
+    this.live_with_owner,
+    this.utility_electricity,
+    this.unility_gaz,
+    this.utility_hot_water,
+    this.utility_cold_water,
+    this.utility_trash,
+    this.district_id, {
+    Key? key,
+    required this.Image,
+  }) : super(key: key);
 
   @override
   State<AdsEdit> createState() => _AdsEditState();
 }
 
 class _AdsEditState extends State<AdsEdit> {
-  Completer<GoogleMapController> _controller = Completer();
-  // on below line we have specified camera position
-  static const CameraPosition _kGoogle = const CameraPosition(
-    target: LatLng(41.311081, 69.240562),
-    zoom: 14.4746,
-  );
-
-  // on below line we have created the list of markers
-  final List<Marker> _markers = <Marker>[];
-
-  // created method for getting user current location
-  Future<Position> getUserCurrentLocation() async {
-    await Geolocator.requestPermission()
-        .then((value) {})
-        .onError((error, stackTrace) async {
-      await Geolocator.requestPermission();
-    });
-    return await Geolocator.getCurrentPosition();
-  }
-
-  String RoomOwner = '';
-  String RentOf = '';
-  String Subway = '';
   String dropDown = "";
-  String TypeHouse = '';
-  String CountRoom = '';
-  String genderString = '';
+
   String dropDown2 = "";
-  String countRoom = '';
+
   TextEditingController? titleController;
   TextEditingController? addressController;
   String? roommate_gender;
@@ -159,22 +133,13 @@ class _AdsEditState extends State<AdsEdit> {
   int? index;
   // String region = '';
 
-  var pricetype = [
-    "1 ta odam kerak",
-    "kishi boshiga 500",
-  ];
-  var kvartira = [
-    'Kvartira',
-    'Xovli',
-  ];
+
+
   var gender = [
-    "O'g'il bolaga",
-    'Qiz bolaga',
+    tr("O'g'il bolaga"),
+    tr('Qiz bolaga'),
   ];
-  var kindOfMoment = [
-    'kunlik',
-    'oylik',
-  ];
+
   var rooms = [
     '1',
     '2',
@@ -194,10 +159,8 @@ class _AdsEditState extends State<AdsEdit> {
   void initState() {
     Provider.of<RegionProvider>(context, listen: false).getUnivers();
 
-    addressController = TextEditingController(
-        text: widget.address == null ? '' : widget.address);
-    titleController =
-        TextEditingController(text: widget.title == null ? '' : widget.title);
+    addressController = TextEditingController(text: widget.address ?? '');
+    titleController = TextEditingController(text: widget.title ?? '');
     roommate_gender = widget.roommate_gender == '1'
         ? "O'g'il bolaga"
         : widget.roommate_gender == '2'
@@ -233,21 +196,12 @@ class _AdsEditState extends State<AdsEdit> {
   Widget build(BuildContext context) {
     print(widget.subway.toString() + "bbb");
     final mapLat = context.read<FavoriteProvider>();
-    _markers.add(
-      const Marker(
-          markerId: MarkerId('1'),
-          position: LatLng(41.311081, 69.240562),
-          infoWindow: InfoWindow(
-            title: 'My Position',
-          )),
-    );
 
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 18.w, vertical: 12.h),
         child: Consumer<RegionProvider>(
           builder: (_, data, __) {
-
             return Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
@@ -325,7 +279,9 @@ class _AdsEditState extends State<AdsEdit> {
                               padding: EdgeInsets.only(left: 8.w),
                               child: Text(
                                 widget.roommate_gender == ''
-                                    ? "O’g'il bollarga / Qizlarga".tr()
+                                    ? "O’g'il bolaga".tr() +
+                                        "/" +
+                                        "Qizbolaga".tr()
                                     : roommate_gender.toString().tr(),
                                 style: TextStyle(
                                     fontSize: 14.sp, color: Colors.grey),
@@ -431,11 +387,15 @@ class _AdsEditState extends State<AdsEdit> {
                     ),
                     items: data.regions.map((e) {
                       return DropdownMenuItem<String>(
-                        value: e.name ?? "",
+                        value: context.read<AutCubit>().selectedLang.index == 1
+                            ? e.name.toString()
+                            : e.nameRu.toString(),
                         child: Padding(
                           padding: EdgeInsets.only(left: 8.w),
                           child: Text(
-                            e.name.toString(),
+                            context.read<AutCubit>().selectedLang.index == 1
+                                ? e.name.toString()
+                                : e.nameRu.toString(),
                             style: TextStyle(
                                 fontSize: 16.sp, color: AppColors.textColor),
                           ),
@@ -443,11 +403,17 @@ class _AdsEditState extends State<AdsEdit> {
                       );
                     }).toList(),
                     onChanged: (newValue) async {
-                      final selected = data.regions
-                          .where((element) => element.name == newValue);
-                      data.getDistrict(selected.last.id!);
+                      if (context.read<AutCubit>().selectedLang.index == 1) {
+                        final selected = data.regions
+                            .where((element) => element.name == newValue);
+                        data.getDistrict(selected.last.id!);
+                      } else {
+                        final selected = data.regions
+                            .where((element) => element.nameRu == newValue);
+                        data.getDistrict(selected.last.id!);
+                      }
                       setState(() {
-                        print(selected.last.id!);
+                        // print(selected.last.id!);
                         _RegionOnClick = true;
                         _colorRegion = Colors.grey;
                         dropDown = newValue.toString();
@@ -500,14 +466,20 @@ class _AdsEditState extends State<AdsEdit> {
 
                                 district_id = e.id.toString();
                               },
-                              value: data.isDistrict
-                                  ? e.name.toString()
-                                  : data.defaultvalue,
+                              value:
+                                  context.read<AutCubit>().selectedLang.index ==
+                                          1
+                                      ? e.name.toString()
+                                      : e.nameRu.toString(),
                               child: Padding(
                                 padding: EdgeInsets.only(left: 8.w),
-                                child: Text(data.isDistrict
+                                child: Text(context
+                                            .read<AutCubit>()
+                                            .selectedLang
+                                            .index ==
+                                        1
                                     ? e.name.toString()
-                                    : data.defaultvalue),
+                                    : e.nameRu.toString()),
                               ),
                             );
                           }).toList(),
@@ -518,6 +490,7 @@ class _AdsEditState extends State<AdsEdit> {
                             setState(() {
                               // dropDown1 = newValue as GetDistrictModel?;
                               dropDown = newValue.toString();
+                              print(dropDown + 'sdas');
                             });
                           },
                         ),
@@ -691,7 +664,7 @@ class _AdsEditState extends State<AdsEdit> {
                             ),
                             Text(
                               'Ha'.tr(),
-                              style:  TextStyle(fontSize: 14.0.sp),
+                              style: TextStyle(fontSize: 14.0.sp),
                             ),
                             SizedBox(
                               width: 55.w,
@@ -707,7 +680,7 @@ class _AdsEditState extends State<AdsEdit> {
                             ),
                             Text(
                               "Yo'q".tr(),
-                              style:  TextStyle(
+                              style: TextStyle(
                                 fontSize: 14.0.sp,
                               ),
                             ),
@@ -882,8 +855,9 @@ class _AdsEditState extends State<AdsEdit> {
                             primary: AppColors.buttonLinear),
                         onPressed: () {
                           final map = context.read<FavoriteProvider>();
-                          print(map.isTapMap == false ?'${widget.locations}':map.forMap +
-                              'MAPPPPPPPPPPPPPPPPPPPPPPP');
+                          print(map.isTapMap == false
+                              ? '${widget.locations}'
+                              : map.forMap + 'MAPPPPPPPPPPPPPPPPPPPPPPP');
                           print('map');
                           print('${titleController!.text}  title');
                           print('${value5! ? 0 : roommate_gender}' + 'gender');
@@ -917,7 +891,9 @@ class _AdsEditState extends State<AdsEdit> {
                                           district_id: district_id,
                                           titleController:
                                               titleController!.text,
-                                          location: map.isTapMap == false ?'${widget.locations}':map.forMap,
+                                          location: map.isTapMap == false
+                                              ? '${widget.locations}'
+                                              : map.forMap,
                                           phoneNumber: widget.phoneNumber,
                                           houseType: widget.houseType,
                                           rent_type: widget.rentType,
@@ -938,7 +914,9 @@ class _AdsEditState extends State<AdsEdit> {
                                           utility_cold_water:
                                               widget.utility_cold_water,
                                           utility_trash: widget.utility_trash,
-                                          subway: id.toString(), Image: widget.Image, costType: widget.costType,
+                                          subway: id.toString(),
+                                          Image: widget.Image,
+                                          costType: widget.costType,
                                         )));
                           } else {
                             setState(() {
@@ -977,22 +955,6 @@ class _AdsEditState extends State<AdsEdit> {
         ),
       ),
     );
-  }
-
-  List<Marker> mymarker = [];
-  _handlerTap(LatLng tappadPoint) {
-    final mapLatitude = context.read<FavoriteProvider>();
-    mapLatitude.forMap = (tappadPoint.toString());
-    print(tappadPoint);
-    print(mapLatitude.forMap);
-
-    setState(() {
-      mymarker = [];
-      mymarker.add(Marker(
-        markerId: MarkerId(tappadPoint.toString()),
-        position: tappadPoint,
-      ));
-    });
   }
 
   Widget _style(BuildContext context, String? selectedItem) {

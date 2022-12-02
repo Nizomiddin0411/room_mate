@@ -1,8 +1,8 @@
+import 'package:dropdown_button2/dropdown_button2.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:easy_mask/easy_mask.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:talaba_uy/screens/Create_ads/owner_photo.dart';
 import 'package:talaba_uy/screens/Favorit_Ads_Page/ads_photo_edit.dart';
 
 import '../../core/const/app_colors.dart';
@@ -88,19 +88,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
   String? utility_cold_water;
   String? utility_trash;
   List comfort = [];
-
-
-
-
-
-
   String? _dropownUsd;
-
-
-
-
-
-
   String price = '';
   TextEditingController? addressController;
   TextEditingController? costController;
@@ -140,16 +128,14 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
   bool value5 = false;
   bool value6 = false;
   var pricetype = [
-    "kunlik",
-    "oylik",
-    "kishi boshiga",
+    "Kuniga",
+    "Oyiga",
+    "Kishi boshiga",
   ];
-  var kvartira = [
-    'Kvartira',
-    'Xovli',
-  ];
+
+  List<String> selectedItems = [];
   var housetype = [
-    "Hovli",
+    "Xovli",
     'Kvartira',
   ];
   var houseroom = [
@@ -164,14 +150,10 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
     "9",
   ];
   var ijaramuddat = [
-    "Kunlik",
-    "Oylik",
-    "Uzoq muddat",
+    tr("Kunlik"),
+    tr("Oylik"),
   ];
-  var kindOfMoment = [
-    'kunlik',
-    'oylik',
-  ];
+
   var rooms = [
     '1',
     '2',
@@ -241,19 +223,19 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
     // print('aa');
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: Colors.white,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back_outlined),
+          icon: const Icon(Icons.arrow_back_outlined),
           onPressed: () {
             Navigator.pop(context);
           },
           color: Colors.black,
         ),
-        title: const Center(
-            child: Text(
-          "E’lon yaratish",
+        title: const Text(
+          "E’lonni o'zgartirish",
           style: TextStyle(color: Colors.blue),
-        )),
+        ),
       ),
       body: SingleChildScrollView(
           child: Padding(
@@ -264,7 +246,12 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
               children: [
                 Row(
                   children: [
-                    Text("Telefon raqami").tr(),
+                    Text("Telefon raqami",style: TextStyle(
+                      color: AppColors.textColor,
+                      fontSize: 14.sp,
+                      fontWeight: FontWeight.w500,
+                    ),).tr(),
+
                   ],
                 ),
                 SizedBox(
@@ -352,7 +339,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                               padding: EdgeInsets.only(left: 8.w),
                               child: Text(
                                 widget.houseType == '2'
-                                    ? 'Hovli'.tr()
+                                    ? 'Xovli'.tr()
                                     : widget.houseType == '1'
                                         ? 'Kvartira'.tr()
                                         : "Kvartira , Xovli".tr(),
@@ -361,7 +348,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                             ),
                             decoration:
                                 const InputDecoration(border: InputBorder.none),
-                            icon: Icon(Icons.arrow_drop_down_outlined),
+                            icon: const Icon(Icons.arrow_drop_down_outlined),
                             items: housetype.map((e) {
                               house_type = widget.houseType;
                               print(widget.houseType);
@@ -376,7 +363,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                             }).toList(),
                             onChanged: (newValue) {
                               setState(() {
-                                house_type = newValue == 'Hovli'.tr() ? '2' : '1';
+                                house_type = newValue == 'Xovli'.tr() ? '2' : '1';
                                 _houseTypeOnClick = true;
                                 _houseTypeColor = Colors.grey;
                               });
@@ -400,51 +387,149 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                           ),
                         ),
                         SizedBox(height: 4.h),
+                        // Container(
+                        //   height: 50.h,
+                        //   width: 134.w,
+                        //   decoration: BoxDecoration(
+                        //       borderRadius: BorderRadius.circular(10.r),
+                        //       border: Border.all(color: _rentTypeColor)),
+                        //   child: DropdownButtonFormField(
+                        //     hint: Padding(
+                        //       padding: EdgeInsets.only(left: 8.w),
+                        //       child: Text(
+                        //         widget.rent_type == '1'
+                        //             ? tr('Kunlik')
+                        //             : widget.rent_type == '2'
+                        //                 ? tr("Oylik")
+                        //                 : widget.rent_type == '3'
+                        //                     ? tr("Uzoq muddat")
+                        //                     : "Kunlik  / Oylik".tr(),
+                        //         style: TextStyle(fontSize: 14.sp),
+                        //       ),
+                        //     ),
+                        //     decoration:
+                        //         const InputDecoration(border: InputBorder.none),
+                        //     icon: const Icon(Icons.arrow_drop_down_outlined),
+                        //     items: ijaramuddat.map((e) {
+                        //       rent_type = widget.rent_type;
+                        //       return DropdownMenuItem<String>(
+                        //         onTap: () {},
+                        //         value: e,
+                        //         child: Padding(
+                        //           padding: EdgeInsets.only(left: 8.w),
+                        //           child: Text(e.tr()),
+                        //         ),
+                        //       );
+                        //     }).toList(),
+                        //     onChanged: (newValue) {
+                        //       setState(() {
+                        //         rent_type = newValue == 'Kunlik'.tr()
+                        //             ? '1'
+                        //             : newValue == 'Oylik'.tr()
+                        //                 ? '2'
+                        //                 : '3';
+                        //         _rentTypeOnClick = true;
+                        //         _rentTypeColor = Colors.grey;
+                        //       });
+                        //     },
+                        //   ),
+                        // ),
                         Container(
+                          width: 137.w,
                           height: 50.h,
-                          width: 134.w,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.r),
-                              border: Border.all(color: _rentTypeColor)),
-                          child: DropdownButtonFormField(
-                            hint: Padding(
-                              padding: EdgeInsets.only(left: 8.w),
-                              child: Text(
-                                widget.rent_type == '1'
-                                    ? 'Kunlik'
-                                    : widget.rent_type == '2'
-                                        ? "Oylik"
-                                        : widget.rent_type == '3'
-                                            ? "Uzoq muddat"
-                                            : "Kunlik  / Oylik".tr(),
-                                style: TextStyle(fontSize: 14.sp),
-                              ),
-                            ),
-                            decoration:
-                                const InputDecoration(border: InputBorder.none),
-                            icon: const Icon(Icons.arrow_drop_down_outlined),
-                            items: ijaramuddat.map((e) {
-                              rent_type = widget.rent_type;
-                              return DropdownMenuItem<String>(
-                                onTap: () {},
-                                value: e,
-                                child: Padding(
-                                  padding: EdgeInsets.only(left: 8.w),
-                                  child: Text(e.tr()),
+                              border: Border.all(color: _rentTypeColor)
+                          ),
+                          child: DropdownButtonHideUnderline(
+                            child: DropdownButton2(
+                              isExpanded: true,
+                              hint: Padding(
+                                padding: EdgeInsets.only(left: 8.w,top: 7.h),
+                                child: Text(
+                                  widget.rent_type == '1'
+                                      ? tr('Kunlik')
+                                      : widget.rent_type == '2'
+                                      ? tr("Oylik")
+                                      : "Kunlik  / Oylik".tr(),
+                                  style: TextStyle(fontSize: 16.sp),
                                 ),
-                              );
-                            }).toList(),
-                            onChanged: (newValue) {
-                              setState(() {
-                                rent_type = newValue == 'Kunlik'.tr()
-                                    ? '1'
-                                    : newValue == 'Oylik'.tr()
-                                        ? '2'
-                                        : '3';
-                                _rentTypeOnClick = true;
-                                _rentTypeColor = Colors.grey; 
-                              });
-                            },
+
+                              ),
+                              items: ijaramuddat.map((item) {
+                                return DropdownMenuItem<String>(
+                                  value: item,
+                                  //disable default onTap to avoid closing menu when selecting an item
+                                  enabled: false,
+                                  child: StatefulBuilder(
+                                    builder: (context, menuSetState) {
+                                      final _isSelected = selectedItems.contains(item);
+                                      return InkWell(
+                                        onTap: () {
+                                          _isSelected
+                                              ? selectedItems.remove(item)
+                                              : selectedItems.add(item);
+                                          //This rebuilds the StatefulWidget to update the button's text
+                                          setState(() {});
+                                          _rentTypeOnClick = true;
+                                          _rentTypeColor = Colors.grey;
+                                          //This rebuilds the dropdownMenu Widget to update the check mark
+                                          menuSetState(() {});
+                                        },
+                                        child: Container(
+                                          height: double.infinity,
+                                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                                          child: Row(
+                                            children: [
+                                              _isSelected
+                                                  ? const Icon(Icons.check_box_outlined)
+                                                  : const Icon(Icons.check_box_outline_blank),
+                                              SizedBox(width: 16.w),
+                                              Text(
+                                                item,
+                                                style:  TextStyle(
+                                                  fontSize: 14.sp,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      );
+                                    },
+                                  ),
+                                );
+                              }).toList(),
+                              //Use last selected item as the current value so if we've limited menu height, it scroll to last item.
+                              value: selectedItems.isEmpty ? null : selectedItems.last,
+                              onChanged: (value) {
+                                setState(() {
+
+                                });
+
+                              },
+                              buttonHeight: 40,
+                              buttonWidth: 140,
+                              itemHeight: 40,
+                              itemPadding: EdgeInsets.zero,
+                              selectedItemBuilder: (context) {
+                                return ijaramuddat.map(
+                                      (item) {
+                                    return Container(
+                                      alignment: AlignmentDirectional.center,
+                                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                                      child: Text(
+                                        selectedItems.join(', '),
+                                        style: const TextStyle(
+                                          fontSize: 14,
+                                          overflow: TextOverflow.ellipsis,
+                                        ),
+                                        maxLines: 1,
+                                      ),
+                                    );
+                                  },
+                                ).toList();
+                              },
+                            ),
                           ),
                         ),
                       ],
@@ -519,7 +604,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Qavatlar soni ".tr(),
+                          "Qavatlar soni".tr(),
                           style: TextStyle(
                             color: AppColors.textColor,
                             fontSize: 14.sp,
@@ -574,7 +659,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          "Nechinchi qavatda ?".tr(),
+                          "Nechinchi qavatda".tr()+"?",
                           style: TextStyle(
                             color: AppColors.textColor,
                             fontSize: 14.sp,
@@ -737,7 +822,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                         SizedBox(height: 4.h),
                         Container(
                           height: 50.h,
-                          width: 160.w,
+                          width: 167.w,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.r),
                               border: Border.all(color: _priceColor)),
@@ -746,11 +831,11 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                               padding: EdgeInsets.only(left: 8.w),
                               child: Text(
                                 widget.cost_period == '1'
-                                    ? "kunlik"
+                                    ? tr("Kuniga")
                                     : widget.cost_period == '2'
-                                        ? "oylik"
+                                        ? tr("Oyiga")
                                         : widget.cost_period == '3'
-                                            ? "kishi boshiga"
+                                            ? tr("Kishi boshiga")
                                             : "Turlari".tr(),
                                 style: TextStyle(fontSize: 14.sp),
                               ),
@@ -762,7 +847,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                               price = widget.cost_period.toString();
                               return DropdownMenuItem<String>(
                                 onTap: () {},
-                                value: e,
+                                value: e.tr(),
                                 child: Padding(
                                   padding: EdgeInsets.only(left: 8.w),
                                   child: Text(e.tr()),
@@ -772,9 +857,9 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                             onChanged: (newValue) {
                               setState(() {
                                 print(newValue);
-                                if (newValue == 'kunlik') {
+                                if (newValue == tr('Kuniga')) {
                                   price = '1';
-                                } else if (newValue == 'oylik') {
+                                } else if (newValue == tr('Oyiga')) {
                                   price = '2';
                                 } else {
                                   price = '3';
@@ -802,7 +887,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                               color: AppColors.textColor,
                               fontSize: 16.sp,
                               fontWeight: FontWeight.w500),
-                        ),
+                        ).tr(),
                       ],
                     ),
                     Row(
@@ -819,7 +904,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                         Text(
                           'Ha',
                           style:  TextStyle(fontSize: 14.0.sp),
-                        ),
+                        ).tr(),
                         SizedBox(
                           width: 35.w,
                         ),
@@ -837,7 +922,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                           style:  TextStyle(
                             fontSize: 14.0.sp,
                           ),
-                        ),
+                        ).tr(),
                       ],
                     )
                   ],
@@ -855,7 +940,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                               color: AppColors.textColor,
                               fontSize: 16.sp,
                               fontWeight: FontWeight.w500),
-                        ),
+                        ).tr(),
                         SizedBox(
                           height: 15.h,
                         )
@@ -864,15 +949,15 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                   ],
                 ),
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
+                    Container(width: 155.w,),
                     Container(
-                      width: 172.w,
-                    ),
-                    const Text("Uy egasi"),
-                    SizedBox(
-                      width: 50.w,
-                    ),
-                    const Text("Ijarachi")
+                        alignment: Alignment.center,
+                        width:90.w,
+                        child: Text("Uy egasi".tr())),
+
+                    Container(width: 70.w,child: Text("Ijarachi".tr(),), alignment: Alignment.center,)
                   ],
                 ),
                 Row(
@@ -884,7 +969,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                         ),
                         SizedBox(
                           width: 180.w,
-                          child:  const Text("Elektr energiya"),
+                          child:  const Text("Elektr energiya").tr(),
                         ),
                         Radio(
                           value: '1',
@@ -917,7 +1002,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                       children: [
                         SizedBox(
                           width: 180.w,
-                          child: Text("Gaz"),
+                          child: const Text("Gaz").tr(),
                         ),
                         Radio(
                           value: '1',
@@ -949,7 +1034,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                             SizedBox(
                               height: 1.h,
                             ),
-                            SizedBox(width: 180.w, child: Text("Sovuq suv")),
+                            SizedBox(width: 180.w, child: const Text("Sovuq suv").tr()),
                             Radio(
                               value: '1',
                               groupValue: id3,
@@ -982,7 +1067,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                             SizedBox(
                               height: 1.h,
                             ),
-                            SizedBox(width: 180.w, child: const Text("Issiq suv")),
+                            SizedBox(width: 180.w, child: const Text("Issiq suv").tr()),
                             Radio(
                               value: '1',
                               groupValue: id4,
@@ -1015,7 +1100,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                             SizedBox(
                               height: 1.h,
                             ),
-                            SizedBox(width: 180.w, child: const Text("Chiqindi")),
+                            SizedBox(width: 180.w, child: const Text("Chiqindi").tr()),
                             Radio(
                               value: '1',
                               groupValue: id5,
@@ -1051,7 +1136,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                           color: AppColors.textColor,
                           fontSize: 16.sp,
                           fontWeight: FontWeight.w500),
-                    ),
+                    ).tr(),
                   ],
                 ),
                 SizedBox(
@@ -1066,7 +1151,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text("Wi - fi "),
+                              const Text("Wi - fi").tr(),
                               Checkbox(
                                 value: value1,
                                 onChanged: (bool? value) {
@@ -1085,7 +1170,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text("TV"),
+                              const Text("TV").tr(),
                               Checkbox(
                                 value: value2,
                                 onChanged: (bool? value) {
@@ -1104,7 +1189,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text("Muzlatgich"),
+                              const Text("Muzlatgich").tr(),
                               Checkbox(
                                 value: value3,
                                 onChanged: (bool? value) {
@@ -1123,7 +1208,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text("Kir yuvish mashinasi"),
+                              const Text("Kir yuvish mashinasi").tr(),
                               Checkbox(
                                 value: value4,
                                 onChanged: (bool? value) {
@@ -1142,7 +1227,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text("Konditsioner"),
+                              const Text("Konditsioner").tr(),
                               Checkbox(
                                 value: value5,
                                 onChanged: (bool? value) {
@@ -1161,7 +1246,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
-                              const Text("Chang yutgich"),
+                              const Text("Chang yutgich").tr(),
                               Checkbox(
                                 value: value6,
                                 onChanged: (bool? value) {
@@ -1194,7 +1279,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                         fontSize: 14.sp,
                         fontWeight: FontWeight.w500,
                       ),
-                    ),
+                    ).tr(),
                   ],
                 ),
                 SizedBox(height: 6.h),
@@ -1368,7 +1453,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                           }
                         },
                         child: Text(
-                          "Keyingi ".tr(),
+                          "Keyingi".tr(),
                           style: TextStyle(
                               fontSize: 20.sp, fontWeight: FontWeight.w500),
                         ),

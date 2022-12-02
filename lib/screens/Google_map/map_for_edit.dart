@@ -68,7 +68,7 @@ class _MapEditState extends State<MapEdit> {
 
       appBar:  AppBar(
         backgroundColor: AppColors.backgroundWhite,
-        title: const Text("User current location"),
+        title: const Text("Joylashuv",style: TextStyle(color: AppColors.textColor),).tr(),
         centerTitle: true,
         leading: IconButton(
           onPressed: () {
@@ -80,34 +80,32 @@ class _MapEditState extends State<MapEdit> {
           ),
         ),
       ),
-      body: Container(
-        child: SafeArea(
-          // on below line creating google maps
-          child: GoogleMap(
-            onTap: _handlerTap,
-            zoomControlsEnabled: false,
-            myLocationButtonEnabled: false,
-            // on below line setting camera position
-            // initialCameraPosition: _kGoogle,
-            initialCameraPosition:  CameraPosition(
-              target: LatLng(widget.lat, widget.long),
-              zoom: 14,
+      body: SafeArea(
+        // on below line creating google maps
+        child: GoogleMap(
+          onTap: _handlerTap,
+          zoomControlsEnabled: false,
+          myLocationButtonEnabled: false,
+          // on below line setting camera position
+          // initialCameraPosition: _kGoogle,
+          initialCameraPosition:  CameraPosition(
+            target: LatLng(widget.lat, widget.long),
+            zoom: 14,
 
-            ),
-            // on below line we are setting markers on the map
-            markers: Set<Marker>.of(mymarker),
-
-            // on below line specifying map type.
-            mapType: MapType.normal,
-            // on below line setting user location enabled.
-            myLocationEnabled: true,
-            // on below line setting compass enabled.
-            compassEnabled: true,
-            // on below line specifying controller on map complete.
-            onMapCreated: (GoogleMapController controller){
-              _controller.complete(controller);
-            },
           ),
+          // on below line we are setting markers on the map
+          markers: Set<Marker>.of(mymarker),
+
+          // on below line specifying map type.
+          mapType: MapType.normal,
+          // on below line setting user location enabled.
+          myLocationEnabled: true,
+          // on below line setting compass enabled.
+          compassEnabled: true,
+          // on below line specifying controller on map complete.
+          onMapCreated: (GoogleMapController controller){
+            _controller.complete(controller);
+          },
         ),
       ),
       // on pressing floating action button the camera will take to user current location
