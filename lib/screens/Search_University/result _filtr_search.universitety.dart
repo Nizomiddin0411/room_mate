@@ -6,6 +6,7 @@ import 'package:provider/provider.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
 import 'package:talaba_uy/models/get_faculty_model.dart';
 import 'package:talaba_uy/services/get_faculty_service.dart';
+import '../../cubit/aut_cubit.dart';
 import '../../provider/search_universitet_provider.dart';
 import '../../provider/universitet_provider.dart';
 
@@ -19,6 +20,7 @@ class ResultFiltrPage extends StatefulWidget {
 }
 
 class _ResultFiltrPageState extends State<ResultFiltrPage> {
+  @override
   void initState() {
     super.initState();
     Provider.of<UniversitetProvider>(context, listen: false).getViloyat();
@@ -118,9 +120,9 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                               // }
                             // });
                           },
-                          value: e.name ?? "",
+                          value: context.read<AutCubit>().selectedLang.index == 2 ?e.nameRu : e.name ,
                           child: Text(
-                            e.name.toString(),
+                            context.read<AutCubit>().selectedLang.index == 2 ? e.nameRu.toString() :e.name.toString(),
                             style: TextStyle(
                               fontSize: 14.sp,
                             ),
@@ -129,9 +131,17 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                       ).toList(),
                       onChanged: (newValue) async {
                         print("Selected ----------- $newValue");
-                        final selected = provider.Viloyat.where(
-                            (element) => element.name == newValue);
-                        provider.getTuman(selected.last.id!);
+
+                        if(context.read<AutCubit>().selectedLang.index == 2){
+                          final selected = provider.Viloyat.where(
+                                  (element) => element.nameRu == newValue);
+                          provider.getTuman(selected.last.id!);
+                        }else {
+                          final selected = provider.Viloyat.where(
+                                  (element) => element.name == newValue);
+                          provider.getTuman(selected.last.id!);
+                        }
+
                         provider.RegionId = newValue.toString();
                         print(provider.RegionId);
                         setState(() {});
@@ -202,11 +212,11 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                                             provider.isDistrict = true;
                                           // });
                                         },
-                                        value: provider.istuman
-                                            ? e.name.toString()
-                                            : provider.defaultvalue1,
+                                        value:context.read<AutCubit>().selectedLang.index == 2
+                                            ? e.nameRu.toString() : e.name.toString(),
                                         child: Text(
-                                          e.name.toString(),
+                                          context.read<AutCubit>().selectedLang.index == 2
+                                              ? e.nameRu.toString() : e.name.toString(),
                                           style: TextStyle(
                                             fontSize: 14.sp,
                                           ),
@@ -325,9 +335,11 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                                       provider.isFacultet = true;
                                       provider.FakultetId = value.id.toString();
                                     },
-                                    value: value.name,
+                                    value: context.read<AutCubit>().selectedLang.index == 2
+                                        ? value.nameRu.toString() : value.name.toString(),
                                     child: Text(
-                                      value.name!,
+                                      context.read<AutCubit>().selectedLang.index == 2
+                                          ? value.nameRu.toString() : value.name.toString(),
                                       style: TextStyle(
                                         fontSize: 14.sp,
                                       ),

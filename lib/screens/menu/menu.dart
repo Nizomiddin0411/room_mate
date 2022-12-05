@@ -37,13 +37,13 @@ class _MenuPageState extends State<MenuPage> {
       '0',
     );
     final cron = Cron();
-    // try{
+    try{
       cron.schedule(Schedule.parse('*/6 * * * * *'), () {
         Provider.of<NotificationProvider>(context, listen: false).getCount();
       });
-    // } on ScheduleParseException{
-    //   // await cron.close();
-    // }
+    } on ScheduleParseException{
+       cron.close();
+    }
 
   }
 

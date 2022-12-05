@@ -58,7 +58,8 @@ class _LanguageSetttingState extends State<LanguageSettting> {
                   border: Border.all(color: AppColors.iconBack)),
               child: InkWell(
                 onTap: () {
-                  context.locale = Locale('uz', 'UZ');
+
+                  context.locale = const Locale('uz', 'UZ');
                   setState(() {
                     lang = true;
                     _language = 'uz';
@@ -66,6 +67,9 @@ class _LanguageSetttingState extends State<LanguageSettting> {
                   });
                   context.read<AutCubit>().selectLanguage(LangData.languageList
                       .singleWhere((e) => e.locale == context.locale));
+                  // context.read<AutCubit>().selectSettingLan(
+                  //     LangData.languageList[1], context);
+                  print(context.read<AutCubit>().selectedLang.index.toString() + '+++++++++');
                 },
                 child: ListTile(
                   horizontalTitleGap: 0,
@@ -104,8 +108,9 @@ class _LanguageSetttingState extends State<LanguageSettting> {
                   border: Border.all(color: AppColors.iconBack)),
               child: InkWell(
                 onTap: () {
+
                   context.locale = const Locale('ru', 'RU');
-                  print( context.read<AutCubit>().selectedLang.index.toString() +'-----------------------');
+
 
                   setState(() {
                     lang = true;
@@ -115,6 +120,9 @@ class _LanguageSetttingState extends State<LanguageSettting> {
                   context.read<AutCubit>().selectLanguage(LangData.languageList
                       .singleWhere((e) => e.locale == context.locale));
                  // context.read<AutCubit>().selectSettingLan(selectedLang, context);
+                 //  context.read<AutCubit>().selectSettingLan(
+                 //      LangData.languageList[2], context);
+                  print( context.read<AutCubit>().selectedLang.index.toString() +'-----------------------');
                 },
                 child: ListTile(
                   horizontalTitleGap: 0,

@@ -1,4 +1,4 @@
-import 'package:dropdown_button2/dropdown_button2.dart';
+
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
@@ -36,12 +36,12 @@ class _FiltrForDayState extends State<FiltrForDay> {
   String roomCount = '';
 
   var kvartira = [
-    'Kvartira',
-    'Xovli',
+    tr('Kvartira'),
+    tr('Xovli'),
   ];
   var kindOfMoment = [
-    'kunlik',
-    'oylik',
+    tr('Kunlik'),
+    tr('Oylik'),
   ];
   var rooms = [
     '1',
@@ -120,7 +120,8 @@ class _FiltrForDayState extends State<FiltrForDay> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.r)),
                     child: DropdownButtonFormField(
-                      hint: Text("Viloyatni tanlang").tr(),
+                      menuMaxHeight: 100.h,
+                      hint: const Text("Viloyatni tanlang").tr(),
                       decoration: const InputDecoration(
                           border: OutlineInputBorder(),
                           focusColor: Colors.grey),
@@ -131,17 +132,23 @@ class _FiltrForDayState extends State<FiltrForDay> {
                           onTap: () {
                             data.RegionId = e.id.toString();
                           },
-                          value: e.name ?? "",
-                          child: Text(e.name.toString()),
+                          value: context.read<AutCubit>().selectedLang.index == 1? e.name : e.nameRu,
+                          child: Text(context.read<AutCubit>().selectedLang.index == 1 ? e.name.toString():e.nameRu.toString()),
                         );
                       }).toList(),
                       onChanged: (newValue) async {
                         // print("Selected ----------- $newValue");
                         data.isRegion = true;
                         print(data.isRegion);
+                        if(context.read<AutCubit>().selectedLang.index == 1){
                         final selected = data.regions
                             .where((element) => element.name == newValue);
                         data.getDistrict(selected.last.id!);
+                        }else{
+                          final selected = data.regions
+                              .where((element) => element.nameRu == newValue);
+                          data.getDistrict(selected.last.id!);
+                        }
                         setState(() {
                           dropDown = newValue.toString();
                         });
@@ -160,10 +167,12 @@ class _FiltrForDayState extends State<FiltrForDay> {
                   SizedBox(height: 4.h),
                   data.isDistrict
                       ? Container(
+
                           width: 324.w,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.r)),
                           child: DropdownButtonFormField(
+                              menuMaxHeight: 100.h,
                             isExpanded: true,
                             hint: const Text("Tumanni tanlang").tr(),
                             decoration: const InputDecoration(
@@ -177,12 +186,12 @@ class _FiltrForDayState extends State<FiltrForDay> {
                                   print("${e.name}${e.id}");
                                   data.districtId = e.id.toString();
                                 },
-                                value: data.isDistrict
+                                value: context.read<AutCubit>().selectedLang.index == 1
                                     ? e.name.toString()
-                                    : data.defaultvalue,
-                                child: Text(data.isDistrict
+                                    : e.nameRu.toString(),
+                                child: Text(context.read<AutCubit>().selectedLang.index == 1
                                     ? e.name.toString()
-                                    : data.defaultvalue),
+                                    : e.nameRu.toString()),
                               );
                             }).toList(),
                             onChanged: (newValue) {
@@ -382,16 +391,16 @@ class _FiltrForDayState extends State<FiltrForDay> {
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(10.r)),
                             child: DropdownButtonFormField(
-                              hint: Text("Kv yoki xovli").tr(),
+                              hint: const Text("Kv yoki xovli").tr(),
                               decoration: const InputDecoration(
                                   border: OutlineInputBorder(),
                                   focusColor: Colors.grey),
-                              icon: Icon(Icons.arrow_drop_down_outlined),
+                              icon: const Icon(Icons.arrow_drop_down_outlined),
                               items: kvartira.map((e) {
                                 return DropdownMenuItem<String>(
                                   onTap: () {},
                                   value: e,
-                                  child: Text(e),
+                                  child: Text(e.tr()),
                                 );
                               }).toList(),
                               onChanged: (newValue) {
@@ -422,7 +431,7 @@ class _FiltrForDayState extends State<FiltrForDay> {
                                 borderRadius: BorderRadius.circular(10.r)),
                             child: DropdownButtonFormField(
                               menuMaxHeight: 100.h,
-                              hint: Text("Soni").tr(),
+                              hint: const Text("Soni").tr(),
                               decoration: const InputDecoration(
                                   border: OutlineInputBorder(),
                                   focusColor: Colors.grey),
@@ -474,7 +483,7 @@ class _FiltrForDayState extends State<FiltrForDay> {
                           return DropdownMenuItem<String>(
                             onTap: () {},
                             value: e,
-                            child: Text(e),
+                            child: Text(e.tr()),
                           );
                         }).toList(),
                         onChanged: (newValue) {
@@ -634,14 +643,14 @@ class _FiltrForDayState extends State<FiltrForDay> {
                             // DistrictId
 
                             setState(() {
-                              if (kvartira == 'Xovli') {
+                              if (kvartira == tr('Xovli')) {
                                 TypeHouse = '2';
                               } else {
                                 TypeHouse = '1';
                               }
                             });
                             setState(() {
-                              if (TypeOfRent == 'kunlik') {
+                              if (TypeOfRent == 'Kunlik') {
                                 _titleTime = '1';
                               } else {
                                 _titleTime = '2';

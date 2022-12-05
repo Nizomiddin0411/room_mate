@@ -37,13 +37,13 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
   String roomCount = '';
 
   var kvartira = [
-    'Kvartira',
-    'Xovli',
+    tr('Kvartira'),
+    tr('Xovli'),
   ];
 
   var kindOfMoment = [
-    'kunlik',
-    'oylik',
+    tr('Kunlik'),
+    tr('Oylik'),
   ];
   var rooms = [
     '1',
@@ -132,17 +132,24 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                           onTap: () {
                             data.RegionId = e.id.toString();
                           },
-                          value: e.name ?? "",
-                          child: Text(e.name.toString()),
+                          value: context.read<AutCubit>().selectedLang.index == 1 ? e.name  : e.nameRu,
+                          child: Text(context.read<AutCubit>().selectedLang.index == 1 ? e.name.toString():e.nameRu.toString()),
                         );
                       }).toList(),
                       onChanged: (newValue) async {
                         // print("Selected ----------- $newValue");
                         data.isRegion = true;
                         print(data.isRegion);
+                        if(context.read<AutCubit>().selectedLang.index == 1){
                         final selected = data.regions
                             .where((element) => element.name == newValue);
-                        data.getDistrict(selected.last.id!);
+                        data.getDistrict(selected.last.id!);}
+                        else
+                          {
+                            final selected = data.regions
+                                .where((element) => element.nameRu == newValue);
+                            data.getDistrict(selected.last.id!);
+                          }
                         setState(() {
                           dropDown = newValue.toString();
                         });
@@ -178,12 +185,12 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                                   // print("${e.name}${e.id}");
                                   data.districtId = e.id.toString();
                                 },
-                                value: data.isDistrict
+                                value: context.read<AutCubit>().selectedLang.index == 1
                                     ? e.name.toString()
-                                    : data.defaultvalue,
-                                child: Text(data.isDistrict
+                                    : e.nameRu.toString(),
+                                child: Text(context.read<AutCubit>().selectedLang.index == 1
                                     ? e.name.toString()
-                                    : data.defaultvalue),
+                                    : e.nameRu.toString()),
                               );
                             }).toList(),
                             onChanged: (newValue) {
@@ -620,14 +627,14 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                           onPressed: () async {
 
                             setState(() {
-                              if (kvartira == 'Xovli') {
+                              if (kvartira == tr('Xovli')) {
                                 TypeHouse = '2';
                               } else {
                                 TypeHouse = '1';
                               }
                             });
                             setState(() {
-                              if (TypeOfRent == 'kunlik') {
+                              if (TypeOfRent == tr('Kunlik')) {
                                 _titleTime = '1';
                               } else {
                                 _titleTime = '2';

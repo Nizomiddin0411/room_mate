@@ -36,12 +36,12 @@ class _FiltrPageState extends State<FiltrPage> {
     '6-kurs',
   ];
   var kvartira = [
-    'Kvartira',
-    'Xovli',
+    tr('Kvartira'),
+    tr('Xovli'),
   ];
   var kindOfMoment = [
-    'kunlik',
-    'oylik',
+    tr('Kunlik'),
+    tr('Oylik'),
   ];
   var rooms = [
     '1',
@@ -65,9 +65,9 @@ class _FiltrPageState extends State<FiltrPage> {
 
   @override
   Widget build(BuildContext context) {
-    context.read<AutCubit>().selectSettingLan(
-        LangData.languageList.singleWhere((e) => e.locale == context.locale),
-        context);
+    // context.read<AutCubit>().selectSettingLan(
+    //     LangData.languageList.singleWhere((e) => e.locale == context.locale),
+    //     context);
     return Scaffold(
       backgroundColor: AppColors.backgroundWhite,
       appBar: AppBar(
@@ -133,17 +133,23 @@ class _FiltrPageState extends State<FiltrPage> {
                           onTap: () {
                             data.RegionId = e.id.toString();
                           },
-                          value: e.name ?? "",
-                          child: Text(e.name.toString()),
+                          value: context.read<AutCubit>().selectedLang.index == 2?e.nameRu.toString():e.name.toString(),
+                          child: Text(context.read<AutCubit>().selectedLang.index == 2 ? e.nameRu.toString():e.name.toString()),
                         );
                       }).toList(),
                       onChanged: (newValue) async {
                         // print("Selected ----------- $newValue");
                         data.isRegion = true;
                         print(data.isRegion);
+                        if(context.read<AutCubit>().selectedLang.index == 1){
                         final selected = data.regions
                             .where((element) => element.name == newValue);
                         data.getDistrict(selected.last.id!);
+                        }else{
+                          final selected = data.regions
+                              .where((element) => element.nameRu == newValue);
+                          data.getDistrict(selected.last.id!);
+                        }
                         setState(() {
                           dropDown = newValue.toString();
                         });
@@ -180,12 +186,12 @@ class _FiltrPageState extends State<FiltrPage> {
                                   print("${e.name}${e.id}");
                                   data.districtId = e.id.toString();
                                 },
-                                value: data.isDistrict
+                                value: context.read<AutCubit>().selectedLang.index == 1
                                     ? e.name.toString()
-                                    : data.defaultvalue,
-                                child: Text(data.isDistrict
+                                    : e.nameRu.toString(),
+                                child: Text(context.read<AutCubit>().selectedLang.index == 1
                                     ? e.name.toString()
-                                    : data.defaultvalue),
+                                    : e.nameRu.toString()),
                               );
                             }).toList(),
                             onChanged: (newValue) {
@@ -590,14 +596,14 @@ class _FiltrPageState extends State<FiltrPage> {
                           onPressed: () async {
                             // DistrictId
                             setState(() {
-                              if (kvartira == 'Xovli') {
+                              if (kvartira == tr('Xovli')) {
                                 TypeHouse = '2';
                               } else {
                                 TypeHouse = '1';
                               }
                             });
                             setState(() {
-                              if (TypeOfRent == 'kunlik') {
+                              if (TypeOfRent == tr('Kunlik')) {
                                 _titleTime = '1';
                               } else {
                                 _titleTime = '2';

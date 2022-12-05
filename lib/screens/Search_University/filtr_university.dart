@@ -108,7 +108,7 @@ class _UniverFiltrPageState extends State<UniverFiltrPage> {
                           ),
                         ).toList(),
                         onChanged: (newValue) async {
-                          print("Selected ----------- $newValue");
+                          print("Selected ----------- ${context.read<AutCubit>().selectedLang.index}");
                           if(context.read<AutCubit>().selectedLang.index == 1){
                           final selected = provider.Viloyat.where(
                               (element) => element.name == newValue);
@@ -176,11 +176,10 @@ class _UniverFiltrPageState extends State<UniverFiltrPage> {
                                             // print(provider.DistrickId +
                                             //     "mmmmmmmmmfmgkfngfngjf");
                                           },
-                                          value: provider.istuman
-                                              ? e.name.toString()
-                                              : provider.defaultvalue1,
+                                          value: context.read<AutCubit>().selectedLang.index == 2
+                                              ?e.nameRu.toString() : e.name.toString(),
                                           child: Text(
-                                            e.name.toString(),
+              context.read<AutCubit>().selectedLang.index == 2 ? e.nameRu.toString() : e.name.toString(),
                                             style: TextStyle(
                                               fontSize: 14.sp,
                                             ),
