@@ -1,7 +1,11 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
+
+import '../../cubit/aut_cubit.dart';
+import '../../models/lang_model.dart';
 
 class LanguageSettting extends StatefulWidget {
   const LanguageSettting({Key? key}) : super(key: key);
@@ -11,6 +15,7 @@ class LanguageSettting extends StatefulWidget {
 }
 
 class _LanguageSetttingState extends State<LanguageSettting> {
+
   String? _groupValue;
   String _language = 'uz';
   bool value1 = false;
@@ -19,6 +24,7 @@ class _LanguageSetttingState extends State<LanguageSettting> {
   @override
   Widget build(BuildContext context) {
     setlocale(context.locale);
+    // context.cubit
     return Scaffold(
       backgroundColor: AppColors.backgroundWhite,
       appBar: AppBar(
@@ -27,7 +33,7 @@ class _LanguageSetttingState extends State<LanguageSettting> {
           onPressed: () {
             Navigator.pop(context);
           },
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back,
             color: AppColors.textColor,
           ),
@@ -58,6 +64,8 @@ class _LanguageSetttingState extends State<LanguageSettting> {
                     _language = 'uz';
                     value1 = true;
                   });
+                  context.read<AutCubit>().selectLanguage(LangData.languageList
+                      .singleWhere((e) => e.locale == context.locale));
                 },
                 child: ListTile(
                   horizontalTitleGap: 0,
@@ -78,7 +86,7 @@ class _LanguageSetttingState extends State<LanguageSettting> {
                   )
                       : Container(
                     decoration: BoxDecoration(
-                        color: Color.fromRGBO(149, 149, 149, 1),
+                        color: const Color.fromRGBO(149, 149, 149, 1),
                         shape: BoxShape.circle,
                         border: Border.all(width: 1.w)),
                     child: CircleAvatar(
@@ -96,12 +104,17 @@ class _LanguageSetttingState extends State<LanguageSettting> {
                   border: Border.all(color: AppColors.iconBack)),
               child: InkWell(
                 onTap: () {
-                  context.locale = Locale('ru', 'RU');
+                  context.locale = const Locale('ru', 'RU');
+                  print( context.read<AutCubit>().selectedLang.index.toString() +'-----------------------');
+
                   setState(() {
                     lang = true;
                     _language = 'rus';
                     value1 = true;
                   });
+                  context.read<AutCubit>().selectLanguage(LangData.languageList
+                      .singleWhere((e) => e.locale == context.locale));
+                 // context.read<AutCubit>().selectSettingLan(selectedLang, context);
                 },
                 child: ListTile(
                   horizontalTitleGap: 0,
@@ -122,7 +135,7 @@ class _LanguageSetttingState extends State<LanguageSettting> {
                   )
                       : Container(
                     decoration: BoxDecoration(
-                        color: Color.fromRGBO(149, 149, 149, 1),
+                        color: const Color.fromRGBO(149, 149, 149, 1),
                         shape: BoxShape.circle,
                         border: Border.all(width: 1.w)),
                     child: CircleAvatar(

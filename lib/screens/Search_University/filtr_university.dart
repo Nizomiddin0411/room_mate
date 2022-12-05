@@ -7,6 +7,8 @@ import 'package:provider/provider.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
 import 'package:talaba_uy/provider/search_universitet_provider.dart';
 
+import '../../cubit/aut_cubit.dart';
+
 class UniverFiltrPage extends StatefulWidget {
   const UniverFiltrPage({Key? key}) : super(key: key);
 
@@ -96,9 +98,9 @@ class _UniverFiltrPageState extends State<UniverFiltrPage> {
                             onTap: () {
                               provider.RegionId = e.id.toString();
                             },
-                            value: e.name ?? "",
+                            value: context.read<AutCubit>().selectedLang.index == 2 ? e.nameRu.toString() : e.name.toString(),
                             child: Text(
-                              e.name.toString(),
+                              context.read<AutCubit>().selectedLang.index == 2 ? e.nameRu.toString():e.name.toString(),
                               style: TextStyle(
                                 fontSize: 14.sp,
                               ),
@@ -107,9 +109,15 @@ class _UniverFiltrPageState extends State<UniverFiltrPage> {
                         ).toList(),
                         onChanged: (newValue) async {
                           print("Selected ----------- $newValue");
+                          if(context.read<AutCubit>().selectedLang.index == 1){
                           final selected = provider.Viloyat.where(
                               (element) => element.name == newValue);
                           provider.getTuman(selected.last.id!);
+                          }else{
+                            final selected = provider.Viloyat.where(
+                                    (element) => element.nameRu == newValue);
+                            provider.getTuman(selected.last.id!);
+                          }
                           setState(() {});
                         },
                         onSaved: (value) {},

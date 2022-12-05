@@ -1,3 +1,4 @@
+import 'package:cron/cron.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -11,6 +12,8 @@ import 'package:talaba_uy/provider/day_provider.dart';
 import 'package:talaba_uy/provider/favorite_provider.dart';
 import 'package:talaba_uy/provider/feedback_provider.dart';
 import 'package:talaba_uy/provider/month_provider.dart';
+import 'package:talaba_uy/provider/notification_provider.dart';
+import 'package:talaba_uy/provider/profile_provider.dart';
 import 'package:talaba_uy/provider/region_provider.dart';
 import 'package:talaba_uy/provider/search_universitet_provider.dart';
 import 'package:talaba_uy/provider/universitet_provider.dart';
@@ -44,7 +47,10 @@ void main() async {
   await Hive.openBox('scrollController');
   await Hive.openBox('hide_profile');
   await Hive.openBox('hide_phone');
-
+  // final cron = Cron();
+  // cron.schedule(Schedule.parse('*/6 * * * * *'), () async {
+  //   // print('every three minutes');
+  // });
   runApp(EasyLocalization(
     path: 'assets/locale',
     supportedLocales: const [
@@ -79,7 +85,9 @@ class MyApp extends StatelessWidget {
               ChangeNotifierProvider(create: (context) => FavoriteProvider()),
               ChangeNotifierProvider(create: (context) => SearchUniversitet()),
               ChangeNotifierProvider(create: (context) => ChatPermit()),
-              ChangeNotifierProvider(create: (context) => FeedbackProvider())
+              ChangeNotifierProvider(create: (context) => FeedbackProvider()),
+              ChangeNotifierProvider(create: (context) => ProfieleProvider()),
+              ChangeNotifierProvider(create: (context) => NotificationProvider()),
             ],
             child: BlocProvider(
               create: (context) => AutCubit(),

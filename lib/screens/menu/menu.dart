@@ -1,4 +1,5 @@
 import 'package:badges/badges.dart';
+import 'package:cron/cron.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -12,6 +13,8 @@ import 'package:talaba_uy/screens/Ijarachipage/kunlik_ijara.dart';
 import 'package:talaba_uy/screens/Search_University/search_page.dart';
 import 'package:talaba_uy/screens/drawer/drawer.dart';
 
+import '../../provider/notification_provider.dart';
+import '../../services/get_count_notification.dart';
 import '../Feedback_Page/feedback_page.dart';
 import '../Ijarachipage/oylik_ijara.dart';
 import '../Notification_Page/notification_page.dart';
@@ -33,7 +36,15 @@ class _MenuPageState extends State<MenuPage> {
       '0',
       '0',
     );
-    // Provider.of<SearchUniversitet>(context, listen: false).getSearchUniver(toStringShort());
+    final cron = Cron();
+    // try{
+      cron.schedule(Schedule.parse('*/6 * * * * *'), () {
+        Provider.of<NotificationProvider>(context, listen: false).getCount();
+      });
+    // } on ScheduleParseException{
+    //   // await cron.close();
+    // }
+
   }
 
   @override
@@ -51,21 +62,32 @@ class _MenuPageState extends State<MenuPage> {
           ),
         ),
         actions: [
-          GestureDetector(
-
-            onTap: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => const NotificationPage()));
+          Consumer<NotificationProvider>(
+            builder: (_, data,__) {
+              return GestureDetector(
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const NotificationPage()));
+                },
+                child: Badge(
+                  position: BadgePosition.bottomStart(bottom: 0, start: 30),
+                  child: CircleAvatar(
+                    backgroundColor: Colors.blue[100],
+                    radius: 19.r,
+                    child: const Icon(
+                      Icons.notifications,
+                      color: Colors.grey,
+                    ),
+                  ),
+                   badgeContent:   Text(
+                    "${data.count.message ?? '0'}",
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                ),
+              );
             },
-            child: Badge(
-              position: BadgePosition.bottomStart(bottom: 0, start: 30),
-              child:  CircleAvatar(
-                backgroundColor: Colors.blue[100],
-                radius: 19.r,
-                child: const Icon(Icons.notifications,color: Colors.grey,),
-
-              ),
-              badgeContent: const Text("0",style: TextStyle(color: Colors.white),),
-            ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
@@ -77,7 +99,8 @@ class _MenuPageState extends State<MenuPage> {
                         builder: (context) => const AccountPage()));
               },
               child: CircleAvatar(
-                backgroundImage: const AssetImage('assets/images/accountImage.png'),
+                backgroundImage:
+                    const AssetImage('assets/images/accountImage.png'),
                 radius: 25.r,
                 // child:
               ),
@@ -226,8 +249,11 @@ class _MenuPageState extends State<MenuPage> {
                 height: 30.h,
               ),
               InkWell(
-                onTap: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => const FeedbackPage()));
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const FeedbackPage()));
                 },
                 child: Container(
                   height: 80.h,
@@ -236,7 +262,7 @@ class _MenuPageState extends State<MenuPage> {
                     borderRadius: BorderRadius.circular(20.r),
                     color: AppColors.secondBackgroud,
                   ),
-                  child:  Center(
+                  child: Center(
                       child: const Text(
                     "O'z taklifingizni qoldiring",
                     style: TextStyle(

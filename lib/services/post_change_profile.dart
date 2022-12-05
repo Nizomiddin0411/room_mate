@@ -6,8 +6,9 @@ import 'package:http/http.dart' as http;
 import '../core/const/consts.dart';
 class ChangeProfile {
   Future ChangeProf({
-    required String hideProfile,
-    required String hidePhone,
+    required String hide,
+    // required String hidePhone,
+    required String isHide,
   }) async {
     // print(Hive.box('token').get('token'));
     // ignore: unused_local_variable
@@ -18,15 +19,19 @@ class ChangeProfile {
       ),
 
       );
-    request.fields.addAll({'hide_profile': hideProfile,});
-    request.fields.addAll({'hide_phone': hidePhone,});
+    if(isHide == '2'){
+    request.fields.addAll({'hide_profile': hide,});
+    }
+    if(isHide == '1'){
+    request.fields.addAll({'hide_phone': hide,});
+    }
     request.headers.addAll({HttpHeaders.authorizationHeader: 'Bearer ${Hive.box('token').get('token')}'});
     http.StreamedResponse response = await request.send();
     if (response.statusCode >= 200 && response.statusCode <= 300) {
       var data = await response.stream.bytesToString();
       // await Hive.box('token').put('token', jsonDecode(data)["access_token"]);
-      print("$hideProfile   prifilee idisi  ");
-      print("$hidePhone   prifilee idisi  ");
+      print("$hide   prifilee and phone");
+      print("$isHide   for check  ");
 
       return jsonDecode(data);
     }

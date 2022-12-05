@@ -3,9 +3,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive/hive.dart';
+import 'package:provider/provider.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
 import 'package:talaba_uy/screens/Autorization/language_dart.dart';
 
+import '../../provider/profile_provider.dart';
 import '../../services/post_change_profile.dart';
 
 class AccountPage extends StatefulWidget {
@@ -16,27 +18,40 @@ class AccountPage extends StatefulWidget {
 }
 
 class _AccountPageState extends State<AccountPage> {
-  final bool _switchValue = false;
-  bool? isSwitched;
-  bool? isSwitchedSecond;
+
+
   String name = Hive.box('fullname').get('fullname').toString();
   String number = Hive.box('phone').get('phone');
-
+  bool isSwitched = false;
+  bool isSwitchedSecond = false;
   @override
   void initState() {
-    // TODO: implement initState
-    isSwitched = Hive.box('hide_phone').get('hide_phone') == null || Hive.box('hide_phone').get('hide_phone').toString() == '2'
-      ?   false
-      :  true;
-    isSwitchedSecond = Hive.box('hide_profile').get('hide_profile') == null || Hive.box('hide_profile').get('hide_profile').toString() == '2'
-      ? false
-      : true;
     super.initState();
+    Provider.of<ProfieleProvider>(context, listen: false).getProfile().asStream();
+    // isSwitched = Hive.box('hide_phone').get('hide_phone') == null || Hive.box('hide_phone').get('hide_phone').toString() == '2'
+    //   ?   false
+    //   :  true;
+    // isSwitchedSecond = Hive.box('hide_profile').get('hide_profile') == null || Hive.box('hide_profile').get('hide_profile').toString() == '2'
+    //   ? false
+    //   : true;
+    if(Provider.of<ProfieleProvider>(context, listen: false).profile.hidePhone == 1){
+      isSwitched = true;
+    }else{
+      isSwitched = false;
+    }
+
+    if(Provider.of<ProfieleProvider>(context, listen: false).profile.hideProfile == 1){
+      isSwitchedSecond = true;
+    }else{
+      isSwitchedSecond = false;
+    }
+
   }
 
   @override
   Widget build(BuildContext context) {
     print(Hive.box('hide_profile').get('hide_profile').toString() + "aa");
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: AppColors.backgroundWhite,
@@ -57,7 +72,12 @@ class _AccountPageState extends State<AccountPage> {
           },
         ),
       ),
-      body: SingleChildScrollView(
+      body: Consumer<ProfieleProvider>(
+
+     builder: (_, data, __) {
+
+
+    return SingleChildScrollView(
         child: Column(
           children: [
             Padding(
@@ -78,7 +98,8 @@ class _AccountPageState extends State<AccountPage> {
               height: 20.h,
             ),
             Text(
-              Hive.box('fullname').isEmpty ? 'name' : name,
+              // Hive.box('fullname').isEmpty ? 'name' : name,
+              data.profile.fullName.toString(),
               style: TextStyle(fontSize: 18.sp, fontWeight: FontWeight.bold),
             ),
             Text(Hive.box('fullname').isEmpty ? 'phone' : number),
@@ -125,7 +146,7 @@ class _AccountPageState extends State<AccountPage> {
             //         ),
             //       ),
             // ),
-            Hive.box('type').get('type') == 2 ? ListTile(
+            data.profile.roleId.toString() == 2.toString() ? ListTile(
               leading: Container(
                   width: 40.w,
                   height: 40.h,
@@ -145,20 +166,23 @@ class _AccountPageState extends State<AccountPage> {
                 height: 60.h,
                 width: 80.w,
                 child: Switch(
-                  value: isSwitched!,
-                  onChanged: (value) {
-                    ChangeProfile().ChangeProf(
-                        hideProfile: isSwitched! ? '1' : '2', hidePhone: isSwitchedSecond! ? '1' : '2'
-                    );
+                  value: isSwitched,
+                  onChanged: (value) async{
+                    print(isSwitched);
                     setState(() {
                       isSwitched = value;
-                      Hive.box('hide_phone').put('hide_phone',value ? '1':'2');
                     });
+                    ChangeProfile().ChangeProf(
+                      hide: isSwitched ? '1' : '2', isHide: '1',
+                    );
+                    print(isSwitched);
+
+                    await data.getProfile();
                   },
                 ),
               ),
             ):Container(),
-            Hive.box('type').get('type').toString() == '2' ? ListTile(
+            data.profile.roleId == 2 ? ListTile(
               leading: Container(
                   width: 40.w,
                   height: 40.h,
@@ -178,19 +202,22 @@ class _AccountPageState extends State<AccountPage> {
                 height: 60.h,
                 width: 80.w,
                 child: Switch(
-                  value: isSwitchedSecond!,
+                  value: isSwitchedSecond,
                   onChanged: (value) {
-                    ChangeProfile().ChangeProf(
-                        hideProfile: isSwitched! ? '1' : '2', hidePhone: isSwitchedSecond! ? '1' : '2');
+
+
                     setState(() {
                       isSwitchedSecond = value;
-                      Hive.box('hide_profile').put('hide_profile',value ? '1' : '2');
                     });
+                    ChangeProfile().ChangeProf(
+                      hide: isSwitchedSecond ? '1' : '2',
+                      isHide: '2',
+                    );
                   },
                 ),
               ),
             ) : Container(),
-            Hive.box('type').get('type') != 2 ? InkWell(
+             InkWell(
               onTap: () {
                 showAlertDialog(context);
               },
@@ -211,29 +238,6 @@ class _AccountPageState extends State<AccountPage> {
                   style: TextStyle(fontSize: 18.sp, color: AppColors.error),
                 ).tr(),
               ),
-            ):Center(
-              child: InkWell(
-                onTap: () {
-                  showAlertDialog(context);
-                },
-                child: ListTile(
-                  leading: Container(
-                      width: 40.w,
-                      height: 40.h,
-                      decoration: BoxDecoration(
-                        color: AppColors.colorBack2,
-                        borderRadius: BorderRadius.circular(8.r),
-                      ),
-                      child: const Icon(
-                        Icons.exit_to_app,
-                        color: AppColors.error,
-                      )),
-                  title: Text(
-                    "Akkauntdan chiqish ",
-                    style: TextStyle(fontSize: 18.sp, color: AppColors.error),
-                  ).tr(),
-                ),
-              ),
             ),
             SizedBox(
               height: 230.h,
@@ -243,7 +247,9 @@ class _AccountPageState extends State<AccountPage> {
             )
           ],
         ),
-      ),
+      );
+  },
+),
     );
   }
 }

@@ -12,7 +12,6 @@ class Setting extends StatefulWidget {
 }
 
 class _SettingState extends State<Setting> {
-  bool _switchValue = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(

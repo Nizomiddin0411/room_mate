@@ -102,6 +102,8 @@ class _LanguagePageState extends State<LanguagePage> {
                   child: InkWell(
                     onTap: () {
                       context.locale = const Locale('ru', 'RU');
+                      // context.read<AutCubit>().selectLanguage(LangData.languageList
+                      //     .singleWhere((e) => e.locale == context.locale));
                       setState(() {
                         lang = true;
                         _language = 'rus';

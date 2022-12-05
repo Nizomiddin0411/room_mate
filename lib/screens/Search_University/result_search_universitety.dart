@@ -1,15 +1,11 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 import 'package:talaba_uy/chat/chat_page.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
-import 'package:talaba_uy/provider/search_universitet_provider.dart';
 import 'package:url_launcher/url_launcher.dart';
-
-import '../../provider/chat_permit_provider.dart';
 import '../../provider/universitet_provider.dart';
 import '../../services/post_add_chat_permit.dart';
 import 'result _filtr_search.universitety.dart';
@@ -172,183 +168,181 @@ class _ResultUniversitetPageState extends State<ResultUniversitetPage> {
                          provider.ads[index].hideProfile == 2 ?
                           Container(
                             width: 324.w,
-                            height: 210.h,
+                            height: 220.h,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(6.r),
                                 color: AppColors.secondBackgroud),
                             child: Padding(
                               padding: const EdgeInsets.all(10.0),
-                              child: SingleChildScrollView(
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(provider.ads[index].fullName
-                                        .toString()),
-                                    SizedBox(
-                                      height: 10.h,
-                                    ),
-                                    Text(
-                                        "${provider.ads[index].faculty?.name.toString()}", style: TextStyle(fontSize: 14.sp)),
-                                    SizedBox(
-                                      height: 10.h,
-                                    ),
-                                    Row(
-                                      children: [
-                                        Text(
-                                          provider.ads[index].gender.toString() == '1' ? tr("jinsi") + ":" + tr("Erkak") : tr("jinsi") + ":" + tr("Ayol"),
-                                          style: TextStyle(fontSize: 14.sp),
-                                        ),
-                                        SizedBox(
-                                          width: 45.w,
-                                        ),
-                                        Text(
-                                            "Kursi : ${provider.ads[index].course.toString()}", style: TextStyle(fontSize: 14.sp)),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 10.h,
-                                    ),
-                                    Column(
-                                      children: [
-                                        Text(
-                                          tr("Viloyat")+": ${provider.ads[index].birthRegion?.name.toString()} ",
-                                          style: TextStyle(fontSize: 14.sp),
-                                        ),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 10.h,
-                                    ),
-                                    Column(
-                                      children: [
-                                        Text(
-                                            tr("Tuman")+": ${provider.ads[index].birthDistrict?.name.toString()}", style: TextStyle(fontSize: 14.sp)),
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 12.h,
-                                    ),
-                                    Row(
-                                      children: [
-                                        InkWell(
-                                          onTap: () {
-                                            if (provider.ads[index].chatApproved.toString() == '1') {
-                                              Navigator.push(
-                                                  context,
-                                                  MaterialPageRoute(
-                                                      builder: (context) => ChatPage(
-                                                          provider.ads[index].fullName.toString(),
-                                                          provider.ads[index].id!)));
-                                            } else {
-                                              showAlertDialog(context, provider.ads[index].id!);
-                                            }
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(provider.ads[index].fullName
+                                      .toString()),
+                                  SizedBox(
+                                    height: 10.h,
+                                  ),
+                                  Text(
+                                      "${provider.ads[index].faculty?.name.toString()}", style: TextStyle(fontSize: 14.sp)),
+                                  SizedBox(
+                                    height: 10.h,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Text(
+                                        provider.ads[index].gender.toString() == '1' ? tr("jinsi") + ": " + tr("Erkak") : tr("jinsi") + ":" + tr("Ayol"),
+                                        style: TextStyle(fontSize: 14.sp),
+                                      ),
+                                      SizedBox(
+                                        width: 45.w,
+                                      ),
+                                      Text(
+                                          "Kursi : ${provider.ads[index].course.toString()}", style: TextStyle(fontSize: 14.sp)),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 10.h,
+                                  ),
+                                  Column(
+                                    children: [
+                                      Text(
+                                        tr("Viloyat")+": ${provider.ads[index].birthRegion?.name.toString()} ",
+                                        style: TextStyle(fontSize: 14.sp),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 10.h,
+                                  ),
+                                  Column(
+                                    children: [
+                                      Text(
+                                          tr("Tuman")+": ${provider.ads[index].birthDistrict?.name.toString()}", style: TextStyle(fontSize: 14.sp)),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 12.h,
+                                  ),
+                                  Row(
+                                    children: [
+                                      InkWell(
+                                        onTap: () {
+                                          if (provider.ads[index].chatApproved.toString() == '1') {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) => ChatPage(
+                                                        provider.ads[index].fullName.toString(),
+                                                        provider.ads[index].id!)));
+                                          } else {
+                                            showAlertDialog(context, provider.ads[index].id!);
+                                          }
 
-                                          },
+                                        },
+                                        child: Padding(
+                                          padding: EdgeInsets.fromLTRB(
+                                              0, 0, 7.w, 0),
+                                          child: Container(
+                                            height: 42.h,
+                                            width: 90.w,
+                                            child: Padding(
+                                              padding: EdgeInsets.fromLTRB(
+                                                  5.w, 0, 5.w, 0),
+                                              child: Row(
+                                                children: [
+                                                  const Icon(
+                                                    Icons.email_outlined,
+                                                    color: Colors.blue,
+                                                  ),
+                                                  SizedBox(
+                                                    width: 7.w,
+                                                  ),
+                                                  Text(
+                                                    tr("Aloqa"),
+                                                    style: const TextStyle(
+                                                        color: Colors.black),
+                                                  )
+                                                ],
+                                              ),
+                                            ),
+                                            decoration: BoxDecoration(
+                                                color:
+                                                    AppColors.backgroundWhite,
+                                                border: Border.all(
+                                                    color: Colors.blue),
+                                                borderRadius:
+                                                    BorderRadius.circular(
+                                                        10.r)),
+                                          ),
+                                        ),
+                                      ),
+                                      SizedBox(
+                                        width: 35.w,
+                                      ),
+                                      InkWell(
+                                          onTap: () {},
                                           child: Padding(
                                             padding: EdgeInsets.fromLTRB(
                                                 0, 0, 7.w, 0),
                                             child: Container(
                                               height: 42.h,
-                                              width: 90.w,
+                                              width: 150.w,
                                               child: Padding(
                                                 padding: EdgeInsets.fromLTRB(
                                                     5.w, 0, 5.w, 0),
                                                 child: Row(
                                                   children: [
                                                     const Icon(
-                                                      Icons.email_outlined,
+                                                      Icons.phone,
                                                       color: Colors.blue,
                                                     ),
                                                     SizedBox(
-                                                      width: 7.w,
+                                                      width: 10.w,
                                                     ),
-                                                    Text(
-                                                      tr("Aloqa"),
-                                                      style: const TextStyle(
-                                                          color: Colors.black),
+                                                    InkWell(
+                                                      onTap: checkhidenumber == '2' ?() async {
+                                                        final Uri launchUri =
+                                                            Uri(
+                                                          scheme: 'tel',
+                                                          path: checknumber ==
+                                                                  '1'
+                                                              ? null
+                                                              : provider
+                                                                  .ads[index]
+                                                                  .phone
+                                                                  .toString(),
+                                                        );
+
+                                                             await launchUrl(
+                                                                launchUri);
+                                                      }:(){},
+                                                      child: Text(
+                                                        checkhidenumber == '2'
+                                                            ? checknumber
+                                                                .toString()
+                                                            : '*************',
+                                                        style:
+                                                            const TextStyle(
+                                                                color: Colors
+                                                                    .black),
+                                                      ),
                                                     )
                                                   ],
                                                 ),
                                               ),
                                               decoration: BoxDecoration(
-                                                  color:
-                                                      AppColors.backgroundWhite,
+                                                  color: AppColors
+                                                      .backgroundWhite,
                                                   border: Border.all(
                                                       color: Colors.blue),
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           10.r)),
                                             ),
-                                          ),
-                                        ),
-                                        SizedBox(
-                                          width: 35.w,
-                                        ),
-                                        InkWell(
-                                            onTap: () {},
-                                            child: Padding(
-                                              padding: EdgeInsets.fromLTRB(
-                                                  0, 0, 7.w, 0),
-                                              child: Container(
-                                                height: 42.h,
-                                                width: 150.w,
-                                                child: Padding(
-                                                  padding: EdgeInsets.fromLTRB(
-                                                      5.w, 0, 5.w, 0),
-                                                  child: Row(
-                                                    children: [
-                                                      const Icon(
-                                                        Icons.phone,
-                                                        color: Colors.blue,
-                                                      ),
-                                                      SizedBox(
-                                                        width: 10.w,
-                                                      ),
-                                                      InkWell(
-                                                        onTap: checkhidenumber == '2' ?() async {
-                                                          final Uri launchUri =
-                                                              Uri(
-                                                            scheme: 'tel',
-                                                            path: checknumber ==
-                                                                    '1'
-                                                                ? null
-                                                                : provider
-                                                                    .ads[index]
-                                                                    .phone
-                                                                    .toString(),
-                                                          );
-
-                                                               await launchUrl(
-                                                                  launchUri);
-                                                        }:(){},
-                                                        child: Text(
-                                                          checkhidenumber == '2'
-                                                              ? checknumber
-                                                                  .toString()
-                                                              : '*************',
-                                                          style:
-                                                              const TextStyle(
-                                                                  color: Colors
-                                                                      .black),
-                                                        ),
-                                                      )
-                                                    ],
-                                                  ),
-                                                ),
-                                                decoration: BoxDecoration(
-                                                    color: AppColors
-                                                        .backgroundWhite,
-                                                    border: Border.all(
-                                                        color: Colors.blue),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10.r)),
-                                              ),
-                                            )),
-                                      ],
-                                    )
-                                  ],
-                                ),
+                                          )),
+                                    ],
+                                  )
+                                ],
                               ),
                             ),
                           ):const SizedBox(),
@@ -368,16 +362,16 @@ showAlertDialog(BuildContext context, int askedid) {
   // Create button
   Widget okButton = ElevatedButton(
     style: ElevatedButton.styleFrom(primary: AppColors.mainColor),
-    child: const Text("Ruhsat olish").tr(),
+    child:  Text("Ruhsat olish",style: TextStyle(fontSize: 10.sp)).tr(),
     onPressed: () async {
-      print(askedid);
+      // print(askedid);
       await PostChatPermit().fetchApprov(Askid: askedid.toString());
       Navigator.of(context).pop();
     },
   );
   Widget notButton = ElevatedButton(
     style: ElevatedButton.styleFrom(primary: AppColors.error),
-    child: const Text("Bekor qilish").tr(),
+    child:  Text("Bekor qilish",style: TextStyle(fontSize: 10.sp),).tr(),
     onPressed: () {
       Navigator.of(context).pop();
     },
@@ -385,7 +379,7 @@ showAlertDialog(BuildContext context, int askedid) {
   // Create AlertDialog
   AlertDialog alert = AlertDialog(
     // title: Text("Akkauntdan chiqish ").tr(),
-    content: const Text("Sms yozish uchun ruhsat so'rash ").tr(),
+    content: const Text("Sms yozish uchun ruhsat so'rash").tr(),
     actions: [
       Padding(
         padding: const EdgeInsets.all(10.0),

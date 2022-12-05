@@ -25,6 +25,6 @@ class AutCubit extends Cubit<AutState> {
     }else {
       await context.setLocale(const Locale('ru', 'RU'));
     }
-
+    emit(AutInitial());
   }
 }

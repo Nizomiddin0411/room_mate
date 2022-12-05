@@ -3,6 +3,7 @@ import 'package:easy_localization/easy_localization.dart';
 import 'package:favorite_button/favorite_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:hive/hive.dart';
 import 'package:provider/provider.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
 import 'package:talaba_uy/screens/Ijarachipage/filtr.dart';
@@ -341,7 +342,7 @@ class _ElonlarState extends State<Elonlar> {
                                                 ),
                                               ),
                                             ),
-                                            Padding(
+                                            Hive.box('id').get('id').toString() != data.Ads[index].userId.toString() ?Padding(
                                               padding: EdgeInsets.fromLTRB(
                                                   1.w, 0, 8.w, 0),
                                               child: FavoriteButton(
@@ -363,7 +364,7 @@ class _ElonlarState extends State<Elonlar> {
                                                   });
                                                 },
                                               ),
-                                            ),
+                                            ):Container(),
                                           ],
                                         ),
                                       ),
@@ -709,7 +710,7 @@ class _ElonlarState extends State<Elonlar> {
                                                       .backgroundWhite),
                                             )),
                                           ),
-                                          Padding(
+                                          Hive.box('id').get('id').toString() != data.AdsForStudent[index].userId.toString() ? Padding(
                                               padding: EdgeInsets.fromLTRB(
                                                   1.w, 0, 8.w, 0),
                                               child: FavoriteButton(
@@ -732,7 +733,7 @@ class _ElonlarState extends State<Elonlar> {
                                                                 .toString());
                                                   });
                                                 },
-                                              ))
+                                              )):Container()
                                         ],
                                       ),
                                     ))

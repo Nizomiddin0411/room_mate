@@ -326,7 +326,7 @@ class _AdsDetailState extends State<AdsDetail> {
                                             color: AppColors.mainColor),
                                       ),
                                       Text(
-                                          '${widget.costPeriod == '1' ? tr('Kuniga') : widget.costPeriod == '2' ? tr('Oyiga') : tr('Kishi boshiga')}', style: TextStyle(
+                                          widget.costPeriod == '1' ? tr('Kuniga') : widget.costPeriod == '2' ? tr('Oyiga') : tr('Kishi boshiga'), style: TextStyle(
                                           fontSize: 14.sp, color: AppColors.mainColor),
                                       ),
                                     ],
@@ -697,7 +697,7 @@ class _AdsDetailState extends State<AdsDetail> {
                             : Container()
                         : Container(),
                     widget.type == '1'
-                        ? widget.stay_university != 'null'
+                        ? widget.stay_university != null
                             ? Row(
                                 children: [
                                   Container(
@@ -1142,7 +1142,7 @@ showAlertDialog(BuildContext context, int askedid) {
   // Create button
   Widget okButton = ElevatedButton(
     style: ElevatedButton.styleFrom(primary: AppColors.mainColor),
-    child: const Text("Ruhsat olish").tr(),
+    child:  Text("Ruhsat olish",style: TextStyle(fontSize: 10.sp),).tr(),
     onPressed: () async {
       print(askedid);
       await PostChatPermit().fetchApprov(Askid: askedid.toString());
@@ -1151,7 +1151,7 @@ showAlertDialog(BuildContext context, int askedid) {
   );
   Widget notButton = ElevatedButton(
     style: ElevatedButton.styleFrom(primary: AppColors.error),
-    child: const Text("Bekor qilish").tr(),
+    child:  Text("Bekor qilish",style: TextStyle(fontSize: 10.sp),).tr(),
     onPressed: () {
       Navigator.of(context).pop();
     },
@@ -1159,7 +1159,7 @@ showAlertDialog(BuildContext context, int askedid) {
   // Create AlertDialog
   AlertDialog alert = AlertDialog(
     // title: Text("Akkauntdan chiqish ").tr(),
-    content: const Text("Sms yozish uchun ruhsat so'rash").tr(),
+    content:  Text("Sms yozish uchun ruhsat so'rash",style: TextStyle(fontSize: 14.sp,fontWeight: FontWeight.bold)).tr(),
     actions: [
       Padding(
         padding: const EdgeInsets.all(10.0),
