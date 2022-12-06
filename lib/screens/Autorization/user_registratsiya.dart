@@ -86,7 +86,7 @@ class _UserRegistratsionState extends State<UserRegistratsion> {
                 ),
                 Row(
                   children: [
-                    Container(
+                    SizedBox(
                       height: 95.h,
                       width: 345.w,
                       child: TextFormField(

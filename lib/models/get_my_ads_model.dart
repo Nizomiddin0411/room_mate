@@ -305,9 +305,9 @@
   String? name;
   String? nameRu;
   String? short;
-  Null? districtId;
-  Null? regionId;
-  Null? address;
+  dynamic districtId;
+  dynamic regionId;
+  dynamic address;
   String? advertising;
   String? searching;
 

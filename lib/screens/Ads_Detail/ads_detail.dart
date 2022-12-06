@@ -274,7 +274,7 @@ class _AdsDetailState extends State<AdsDetail> {
                                   color: AppColors.backgroundWhite),
                             )),
                           ),
-                          Padding(
+                          Hive.box('id').get('id').toString() != widget.userId.toString() ? Padding(
                             padding: EdgeInsets.fromLTRB(1.w, 0, 8.w, 0),
                             child: FavoriteButton(
                               isFavorite: widget.favorite.toString() == '0'
@@ -289,7 +289,7 @@ class _AdsDetailState extends State<AdsDetail> {
                                 });
                               },
                             ),
-                          )
+                          ):Container(),
                         ],
                       ),
                     ))

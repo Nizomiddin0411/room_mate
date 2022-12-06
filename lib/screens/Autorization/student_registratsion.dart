@@ -121,15 +121,18 @@ class _StudentUserState extends State<StudentUser> {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text("Telefon raqami",style: TextStyle(fontSize: 14.sp),).tr(),
+                      Text(
+                        "Telefon raqami",
+                        style: TextStyle(fontSize: 14.sp),
+                      ).tr(),
                       // SizedBox(width: 126.w,),
-                           Padding(
-                             padding:  EdgeInsets.only(right: 5.w),
-                             child: Text(
-                              "Ko’rinmasin",
-                              style: TextStyle(fontSize: 14.sp),
-                          ).tr(),
-                           ),
+                      Padding(
+                        padding: EdgeInsets.only(right: 5.w),
+                        child: Text(
+                          "Ko’rinmasin",
+                          style: TextStyle(fontSize: 14.sp),
+                        ).tr(),
+                      ),
                     ],
                   ),
                   SizedBox(
@@ -169,12 +172,11 @@ class _StudentUserState extends State<StudentUser> {
                       ),
                       Column(
                         children: [
-
                           // SizedBox(
                           //   height: 10.h,
                           // ),
                           Padding(
-                            padding: EdgeInsets.fromLTRB(14.w,10.h,5.w,29.h),
+                            padding: EdgeInsets.fromLTRB(14.w, 10.h, 5.w, 29.h),
                             child: Checkbox(
                               value: hidenumber,
                               onChanged: (bool? value) {
@@ -337,12 +339,14 @@ class _StudentUserState extends State<StudentUser> {
                         mode: Mode.BOTTOM_SHEET,
                         dropdownBuilder: _style,
                         items: data.universitet.map((e) {
-                          if(context.read<AutCubit>().selectedLang.index == 1) {
-                          if (drowdown2 == e.name) {
-                            data.UniversiterId = e.id.toString();
-                            data.isId = e.id;
-                            university_id = e.id.toString();
-                          }}else{
+                          if (context.read<AutCubit>().selectedLang.index ==
+                              1) {
+                            if (drowdown2 == e.name) {
+                              data.UniversiterId = e.id.toString();
+                              data.isId = e.id;
+                              university_id = e.id.toString();
+                            }
+                          } else {
                             if (drowdown2 == e.nameRu) {
                               data.UniversiterId = e.id.toString();
                               data.isId = e.id;
@@ -357,15 +361,16 @@ class _StudentUserState extends State<StudentUser> {
                         showSearchBox: true,
                         onChanged: (value) async {
                           data.isUniver = true;
-                          if(context.read<AutCubit>().selectedLang.index == 1) {
+                          if (context.read<AutCubit>().selectedLang.index ==
+                              1) {
                             final selected = data.universitet
                                 .where((element) => element.name == value);
                             data.getFakultet(selected.last.id!);
-                          }else{
+                          } else {
                             final selected = data.universitet
                                 .where((element) => element.nameRu == value);
                             data.getFakultet(selected.last.id!);
-                          print("${selected.last.id}iminjonov");
+                            print("${selected.last.id}iminjonov");
                           }
                           setState(() {
                             drowdown2 = value.toString();
@@ -597,9 +602,14 @@ class _StudentUserState extends State<StudentUser> {
                               data.districtid = e.id.toString();
                               print('${data.districtid}hhcshcbscuvsycvtuc');
                             },
-                            value: e.name ?? "",
+                            value:
+                                context.read<AutCubit>().selectedLang.index == 1
+                                    ? e.name
+                                    : e.nameRu,
                             child: Text(
-                              e.name.toString(),
+                              context.read<AutCubit>().selectedLang.index == 1
+                                  ? e.name.toString()
+                                  : e.nameRu.toString(),
                               style: TextStyle(
                                 fontSize: 14.sp,
                               ),
@@ -608,9 +618,16 @@ class _StudentUserState extends State<StudentUser> {
                         ).toList(),
                         onChanged: (newValue) async {
                           print("Selected ----------- $newValue");
-                          final selected = data.Viloyat.where(
-                              (element) => element.name == newValue);
-                          data.getTuman(selected.last.id!);
+                          if (context.read<AutCubit>().selectedLang.index ==
+                              1) {
+                            final selected = data.Viloyat.where(
+                                (element) => element.name == newValue);
+                            data.getTuman(selected.last.id!);
+                          } else {
+                            final selected = data.Viloyat.where(
+                                (element) => element.nameRu == newValue);
+                            data.getTuman(selected.last.id!);
+                          }
                           setState(() {
                             viloyat = true;
                             viloyatColor = Colors.black12;
@@ -677,11 +694,21 @@ class _StudentUserState extends State<StudentUser> {
                                         print("${e.name}${e.id}");
                                         data.districtId = e.id.toString();
                                       },
-                                      value: data.istuman
+                                      value: context
+                                                  .read<AutCubit>()
+                                                  .selectedLang
+                                                  .index ==
+                                              1
                                           ? e.name.toString()
-                                          : data.defaultvalue1,
+                                          : e.nameRu.toString(),
                                       child: Text(
-                                        e.name.toString(),
+                                        context
+                                                    .read<AutCubit>()
+                                                    .selectedLang
+                                                    .index ==
+                                                1
+                                            ? e.name.toString()
+                                            : e.nameRu.toString(),
                                         style: TextStyle(
                                           fontSize: 14.sp,
                                         ),
@@ -691,7 +718,7 @@ class _StudentUserState extends State<StudentUser> {
                                   .toList(),
                               onChanged: (value) {
                                 setState(() {
-                                  Tuman = (value as String?)!;
+                                  Tuman = (value)!;
                                   ktuman = true;
                                   tumanColor = Colors.black12;
                                 });
@@ -758,7 +785,6 @@ class _StudentUserState extends State<StudentUser> {
                           onChanged: (value) {
                             setState(() {
                               isSwitched = value;
-
                             });
                           },
                         ),
@@ -841,8 +867,6 @@ class _StudentUserState extends State<StudentUser> {
                     // print("${isSwitched.toString() == 'Ha' ? '1' : '2'}" + 'hide profile');
                     // print("${data.districtId.toString()}" + 'tuman');
 
-
-
                     await RegistratsiyaStudent().CreateAdsStudent(
                       FullName: myController.text,
                       fakultetId: data.fakultetid.toString(),
@@ -850,7 +874,9 @@ class _StudentUserState extends State<StudentUser> {
                       HideProfile: isSwitched ? '1' : '2',
                       District: data.districtId.toString(),
                       Phonenumber: nameController.text,
-                      gender: dropdownvalue.toString() == tr("O'g'il bola") ? '1' : '2',
+                      gender: dropdownvalue.toString() == tr("O'g'il bola")
+                          ? '1'
+                          : '2',
                       UniderId: university_id.toString(),
                       Hidenumber: hidenumber ? '1' : '2',
                     );
@@ -901,11 +927,11 @@ class _StudentUserState extends State<StudentUser> {
         }),
       ),
     );
-
   }
+
   Widget _style(BuildContext context, String? selectedItem) {
     return Padding(
-      padding:  EdgeInsets.fromLTRB(0,4.h,4.w,0),
+      padding: EdgeInsets.fromLTRB(0, 4.h, 4.w, 0),
       child: Text(
         selectedItem!,
         style: TextStyle(fontSize: 14.sp),
@@ -918,8 +944,8 @@ class _StudentUserState extends State<StudentUser> {
     scaffold.showSnackBar(
       SnackBar(
         backgroundColor: Colors.white,
-        content:  Text(
-          tr("Foydalanish shartini bajarmadingiz")+ '!!!',
+        content: Text(
+          tr("Foydalanish shartini bajarmadingiz") + '!!!',
           style: const TextStyle(
               color: Colors.red, fontWeight: FontWeight.bold, fontSize: 15),
         ),

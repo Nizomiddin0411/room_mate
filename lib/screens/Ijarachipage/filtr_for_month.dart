@@ -121,6 +121,7 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                     decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10.r)),
                     child: DropdownButtonFormField(
+                      menuMaxHeight: 100.h,
                       hint: const Text("Viloyatni tanlang").tr(),
                       decoration: const InputDecoration(
                           border: OutlineInputBorder(),
@@ -172,6 +173,7 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.r)),
                           child: DropdownButtonFormField(
+                            menuMaxHeight: 100.h,
                             isExpanded: true,
                             hint: const Text("Tumanni tanlang").tr(),
                             decoration: const InputDecoration(
@@ -415,7 +417,7 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                             child: DropdownButtonFormField(
                               menuMaxHeight: 100.h,
                               hint: Text("Soni",
-                                      style: TextStyle(fontSize: 11.sp))
+                                      style: TextStyle(fontSize: 14.sp))
                                   .tr(),
                               decoration: const InputDecoration(
                                   border: OutlineInputBorder(),

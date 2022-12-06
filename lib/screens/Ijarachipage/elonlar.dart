@@ -8,6 +8,7 @@ import 'package:provider/provider.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
 import 'package:talaba_uy/screens/Ijarachipage/filtr.dart';
 import '../../core/const/consts.dart';
+import '../../cubit/aut_cubit.dart';
 import '../../provider/region_provider.dart';
 import '../../services/post_change_favoritr_service.dart';
 import '../Ads_Detail/ads_detail.dart';
@@ -189,9 +190,9 @@ class _ElonlarState extends State<Elonlar> {
                                   countPeople:
                                       data.Ads[index].roommateCount.toString(),
                                   region:
-                                      data.Ads[index].region?.name.toString(),
+                                  context.read<AutCubit>().selectedLang.index == 1 ? data.Ads[index].region?.name.toString():data.Ads[index].region?.nameRu.toString(),
                                   district:
-                                      data.Ads[index].district?.name.toString(),
+                                  context.read<AutCubit>().selectedLang.index == 1 ? data.Ads[index].district?.name.toString():data.Ads[index].district?.nameRu.toString(),
                                   liveWithOwner:
                                       data.Ads[index].liveWithOwner.toString(),
                                   subway: data.Ads[index].subway.toString(),
