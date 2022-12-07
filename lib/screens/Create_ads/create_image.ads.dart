@@ -126,10 +126,10 @@ class _CreateimageState extends State<Createimage> {
                 children: [
                   GestureDetector(
                     child: Text(
-                      "From Camera",
+                      "Rasimga olish",
                       style: TextStyle(
                           color: sum < 4 ? Colors.black : Colors.grey.shade300),
-                    ),
+                    ).tr(),
                     onTap: () async {
                       // getcam();
                       if (sum < 4) {
@@ -144,7 +144,7 @@ class _CreateimageState extends State<Createimage> {
                   const Padding(padding: EdgeInsets.all(10)),
                   GestureDetector(
                     child: Text(
-                      "From Gallery",
+                      "Galeriyadan yuklash".tr(),
                       style: TextStyle(
                           color: sum < 4 ? Colors.black : Colors.grey.shade300),
                     ),

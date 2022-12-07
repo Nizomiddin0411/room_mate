@@ -407,13 +407,13 @@ class _AdsUsersState extends State<AdsUsers> {
                                                     data.Ads[index].costPeriod
                                                                 .toString() ==
                                                             '1'
-                                                        ? 'Kuniga'
+                                                        ? tr('Kuniga')
                                                         : data.Ads[index]
                                                                     .costPeriod
                                                                     .toString() ==
                                                                 '2'
-                                                            ? 'Oyiga'
-                                                            : 'Uzoq muddatga',
+                                                            ? tr('Oyiga')
+                                                            : tr("Kishi boshiga"),
                                                     style: const TextStyle(
                                                         color: AppColors
                                                             .mainColor),

@@ -128,12 +128,12 @@ class _AdsPhotoEditState extends State<AdsPhotoEdit> {
         context: context,
         builder: (BuildContext context) {
           return AlertDialog(
-            title: const Center(child: Text("Rasm yuklash")),
+            title:  Center(child: const Text("Rasm yuklash").tr()),
             content: SingleChildScrollView(
               child: ListBody(
                 children: [
                   GestureDetector(
-                    child: const Text("From Camera"),
+                    child:  const Text("Rasimga olish").tr(),
                     onTap: () async {
                       // getcam();
                       if (sum < 4) {
@@ -148,11 +148,11 @@ class _AdsPhotoEditState extends State<AdsPhotoEdit> {
                   Padding(padding: EdgeInsets.all(10.r)),
                   GestureDetector(
                     child: Text(
-                      "From Gallery",
+                      "Galeriyadan yuklash",
                       style: TextStyle(
                         color: sum < 4 ? Colors.black : Colors.grey.shade300,
                       ),
-                    ),
+                    ).tr(),
                     onTap: () async {
                       if (sum < 4) {
                         sum += 1;
@@ -187,9 +187,9 @@ class _AdsPhotoEditState extends State<AdsPhotoEdit> {
             },
             color: Colors.black,
           ),
-          title: const Text(
-            "E’lon o'zgartirish",
-            style: TextStyle(color: Colors.blue),
+          title:  Text(
+            "E’lonni o'zgartirish".tr(),
+            style: const TextStyle(color: Colors.blue),
           ),
         ),
         body: Padding(
@@ -232,7 +232,7 @@ class _AdsPhotoEditState extends State<AdsPhotoEdit> {
                           ),
                           SizedBox(
                             child: DottedBorder(
-                              dashPattern: [3, 1],
+                              dashPattern: const [3, 1],
                               color: Colors.black,
                               strokeWidth: 0.5.w,
                               child: InkWell(

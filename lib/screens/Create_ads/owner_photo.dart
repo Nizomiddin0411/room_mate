@@ -130,7 +130,7 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
                 children: [
                   GestureDetector(
                     child: Text(
-                      "From Camera".tr(),
+                      "Rasimga olish".tr(),
                       style: TextStyle(
                           color: sum < 4 ? Colors.black : Colors.grey.shade300),
                     ),
@@ -148,7 +148,7 @@ class _OwnerCreateImageState extends State<OwnerCreateImage> {
                   Padding(padding: EdgeInsets.all(10.w)),
                   GestureDetector(
                     child: Text(
-                      "From Gallery".tr(),
+                      "Galeriyadan yuklash".tr(),
                       style: TextStyle(
                           color: sum < 4 ? Colors.black : Colors.grey.shade300),
                     ),

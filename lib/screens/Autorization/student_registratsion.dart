@@ -435,12 +435,14 @@ class _StudentUserState extends State<StudentUser> {
                                       onTap: () {
                                         data.fakultetid = e.id.toString();
                                       },
-                                      value: data.isFakultet
+                                      value: context.read<AutCubit>().selectedLang.index ==
+                                          1
                                           ? e.name.toString()
-                                          : data.defaultvalue,
-                                      child: Text(data.isFakultet
+                                          : e.nameRu.toString(),
+                                      child: Text(context.read<AutCubit>().selectedLang.index ==
+                                          1
                                           ? e.name.toString()
-                                          : data.defaultvalue),
+                                          : e.nameRu.toString()),
                                     ),
                                   )
                                   .toList(),

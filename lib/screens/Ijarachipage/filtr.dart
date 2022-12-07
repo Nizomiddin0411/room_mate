@@ -19,10 +19,12 @@ class _FiltrPageState extends State<FiltrPage> {
   bool _checkMetro = false;
 
   String dropDown = "";
+  String districtFor = '';
+  String TypeHouse = '1';
   String dropDown2 = "";
   String _titleTime = "Ijara muddati";
 
-  String TypeHouse = '';
+
   String TypeOfRent = '';
   String subwayof = '';
 
@@ -199,7 +201,7 @@ class _FiltrPageState extends State<FiltrPage> {
                               data.isDistrict = true;
                               setState(() {
                                 // dropDown1 = newValue as GetDistrictModel?;
-                                dropDown = newValue.toString();
+                                districtFor = newValue.toString();
                               });
                             },
                           ),
@@ -358,7 +360,7 @@ class _FiltrPageState extends State<FiltrPage> {
                               onChanged: (newValue) {
                                 data.isTypeHouse = true;
                                 setState(() {
-                                  dropDown = newValue.toString();
+                                  TypeHouse = newValue.toString();
                                 });
                               },
                             ),
@@ -596,7 +598,7 @@ class _FiltrPageState extends State<FiltrPage> {
                           onPressed: () async {
                             // DistrictId
                             setState(() {
-                              if (kvartira == tr('Xovli')) {
+                              if (TypeHouse == tr('Xovli')) {
                                 TypeHouse = '2';
                               } else {
                                 TypeHouse = '1';

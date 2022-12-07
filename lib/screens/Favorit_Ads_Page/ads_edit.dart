@@ -1,9 +1,9 @@
-import 'dart:async';
+
 import 'package:dropdown_search/dropdown_search.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:geolocator/geolocator.dart';
+
 import 'package:provider/provider.dart';
 import 'package:talaba_uy/core/const/app_colors.dart';
 import 'package:talaba_uy/cubit/aut_cubit.dart';

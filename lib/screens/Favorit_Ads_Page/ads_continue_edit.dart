@@ -128,15 +128,15 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
   bool value5 = false;
   bool value6 = false;
   var pricetype = [
-    "Kuniga",
-    "Oyiga",
-    "Kishi boshiga",
+    tr("Kuniga"),
+    tr("Oyiga"),
+    tr("Kishi boshiga"),
   ];
 
   List<String> selectedItems = [];
   var housetype = [
-    "Xovli",
-    'Kvartira',
+    tr("Xovli"),
+    tr('Kvartira'),
   ];
   var houseroom = [
     "1",
@@ -235,7 +235,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
         title: const Text(
           "E’lonni o'zgartirish",
           style: TextStyle(color: Colors.blue),
-        ),
+        ).tr(),
       ),
       body: SingleChildScrollView(
           child: Padding(
@@ -822,7 +822,7 @@ class _AdsContinueEditState extends State<AdsContinueEdit> {
                         SizedBox(height: 4.h),
                         Container(
                           height: 50.h,
-                          width: 167.w,
+                          width: 181.w,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10.r),
                               border: Border.all(color: _priceColor)),

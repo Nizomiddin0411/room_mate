@@ -271,17 +271,26 @@ class _OwnerState extends State<Owner> {
                     ),
                     items: data.regions.map((e) {
                       return DropdownMenuItem<String>(
-                        value: e.name ?? "",
+                        value: context.read<AutCubit>().selectedLang.index ==
+                            1 ? e.name.toString() :e.nameRu.toString(),
                         child: Padding(
                           padding: EdgeInsets.only(left: 8.w),
-                          child: Text(e.name.toString()),
+                          child: Text(context.read<AutCubit>().selectedLang.index ==
+                              1 ? e.name.toString():e.nameRu.toString()),
                         ),
                       );
                     }).toList(),
                     onChanged: (newValue) async {
-                      final selected = data.regions
-                          .where((element) => element.name == newValue);
-                      data.getDistrict(selected.last.id!);
+                      if(context.read<AutCubit>().selectedLang.index ==
+                          1) {
+                        final selected = data.regions
+                            .where((element) => element.name == newValue);
+                        data.getDistrict(selected.last.id!);
+                      }else{
+                        final selected = data.regions
+                            .where((element) => element.nameRu == newValue);
+                        data.getDistrict(selected.last.id!);
+                      }
                       setState(() {
                         _RegionOnClick = true;
                         _colorRegion = Colors.grey;
@@ -331,14 +340,16 @@ class _OwnerState extends State<Owner> {
                                 district_id = e.id.toString();
                                 setState(() {});
                               },
-                              value: data.isDistrict
+                              value:context.read<AutCubit>().selectedLang.index ==
+                                  1
                                   ? e.name.toString()
-                                  : data.defaultvalue,
+                                  : e.nameRu.toString(),
                               child: Padding(
                                 padding: EdgeInsets.only(left: 8.w),
-                                child: Text(data.isDistrict
+                                child: Text(context.read<AutCubit>().selectedLang.index ==
+                                    1
                                     ? e.name.toString()
-                                    : data.defaultvalue),
+                                    : e.nameRu.toString()),
                               ),
                             );
                           }).toList(),
@@ -429,9 +440,9 @@ class _OwnerState extends State<Owner> {
                 InkWell(
                     onTap: () {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => MapScreen()));
+                          MaterialPageRoute(builder: (context) => const MapScreen()));
                     },
-                    child: Container(
+                    child: SizedBox(
                       width: 324.w,
                       height: 60.h,
                       child: Card(

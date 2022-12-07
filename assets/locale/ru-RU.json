@@ -7,8 +7,9 @@
   "Qo’shimcha xususiyatlarni kiriting": "Введите дополнительные свойства",
   "Kvartal,Uy,Xonadon": "Квартал,Дом,Квартира",
   "Kommunal to’lovlarini kim to’laydi": "Кто платит за коммунальные услуги",
-
+  "Talaba": "Студент",
   "Saqlandi":"Сохранено",
+
   "Joylashuvni aniqlash": "Определение местоположения",
   "E’lonni o'zgartirish": "Изменить объявление",
 
@@ -149,6 +150,7 @@
   "Jinsi:": "Пол:",
   "Kursi:": "Курс:",
   "Kursi": "Курс",
+
   "Aloqa": "Связь",
   "Oliy o’quv yurti": "Высшее учебное заведение",
   "Erkak": "Мужчина",

@@ -391,7 +391,7 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                               onChanged: (newValue) {
                                 data.isTypeHouse = true;
                                 setState(() {
-                                  dropDown = newValue.toString();
+                                  TypeHouse = newValue.toString();
                                 });
                               },
                             ),
@@ -461,7 +461,7 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10.r)),
                       child: DropdownButtonFormField(
-                        hint: Text("Ijara muddati").tr(),
+                        hint: const Text("Ijara muddati").tr(),
                         decoration: const InputDecoration(
                             border: OutlineInputBorder(),
                             focusColor: Colors.grey),
@@ -488,7 +488,7 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                   ),
                   Row(
                     children: [
-                      Container(
+                      SizedBox(
                         width: 20.w,
                         height: 20.h,
                         child: Checkbox(
@@ -629,7 +629,7 @@ class _FiltrForMonthState extends State<FiltrForMonth> {
                           onPressed: () async {
 
                             setState(() {
-                              if (kvartira == tr('Xovli')) {
+                              if (TypeHouse == tr('Xovli')) {
                                 TypeHouse = '2';
                               } else {
                                 TypeHouse = '1';

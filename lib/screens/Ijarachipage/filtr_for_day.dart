@@ -406,7 +406,7 @@ class _FiltrForDayState extends State<FiltrForDay> {
                               onChanged: (newValue) {
                                 data.isTypeHouse = true;
                                 setState(() {
-                                  dropDown = newValue.toString();
+                                  TypeHouse = newValue.toString();
                                 });
                               },
                             ),
@@ -643,7 +643,7 @@ class _FiltrForDayState extends State<FiltrForDay> {
                             // DistrictId
 
                             setState(() {
-                              if (kvartira == tr('Xovli')) {
+                              if (TypeHouse == tr('Xovli')) {
                                 TypeHouse = '2';
                               } else {
                                 TypeHouse = '1';
