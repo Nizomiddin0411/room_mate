@@ -121,11 +121,28 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Hive
-          .box('token')
-          .isEmpty ? const LanguagePage() : Hive.box('type').get('type').toString() == '2' ? const MenuPage() :const MenuFor() ,
-      // This trailing comma makes auto-formatting nicer for build methods.
+    DateTime _lastExitTime = DateTime.now();
+    return WillPopScope(
+      onWillPop: () async {
+        if (DateTime.now().difference(_lastExitTime) >= Duration(seconds: 2)) {
+          //showing message to user
+          final snack =   SnackBar(
+            content:  Text("Chiqish uchun yana bosing"),
+            duration: Duration(seconds: 2),
+          );
+          ScaffoldMessenger.of(context).showSnackBar(snack);
+          _lastExitTime = DateTime.now();
+          return false; // disable back press
+        } else {
+          return true; //  exit the app
+        }
+      },
+      child: Scaffold(
+        body: Hive
+            .box('token')
+            .isEmpty ? const LanguagePage() : Hive.box('type').get('type').toString() == '2' ? const MenuPage() :const MenuFor() ,
+        // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
 
   }
