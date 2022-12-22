@@ -53,7 +53,7 @@ class _StartPageState extends State<StartPage> {
               ),
               child: Center(
                 child: Text(
-                  "Login".tr(
+                  "Kirish".tr(
                   ),
                   style: TextStyle(color: Colors.blue,fontSize: 20.sp),
                 ),

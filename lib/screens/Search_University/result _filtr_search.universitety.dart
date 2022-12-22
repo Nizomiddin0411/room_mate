@@ -97,7 +97,7 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                       ),
                       isExpanded: true,
                       hint: Text(
-                        'Qaysi viloyatliksiz',
+                        'Viloyatni tanlang',
                         style: TextStyle(fontSize: 14.sp),
                       ).tr(),
                       icon: const Icon(
@@ -186,7 +186,7 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                                 ),
                                 isExpanded: true,
                                 hint: Text(
-                                  'Qaysi tumanidansiz',
+                                  'Tumanni tanlang',
                                   style: TextStyle(fontSize: 14.sp),
                                 ).tr(),
                                 icon: const Icon(
@@ -247,7 +247,7 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                                 isExpanded: true,
                                 isDense: true,
                                 hint: Text(
-                                  'Qaysi tumanidansiz',
+                                  'Tumanni tanlang',
                                   style: TextStyle(fontSize: 14.sp),
                                 ).tr(),
                                 icon: const Icon(
@@ -313,7 +313,7 @@ class _ResultFiltrPageState extends State<ResultFiltrPage> {
                             isExpanded: true,
                             isDense: true,
                             hint: Text(
-                              "Yo'nalishingiz",
+                              "Yo'nalishni tanlang",
                               style: TextStyle(fontSize: 14.sp),
                             ).tr(),
                             icon: const Icon(

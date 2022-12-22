@@ -124,11 +124,11 @@ class _MyHomePageState extends State<MyHomePage> {
     DateTime _lastExitTime = DateTime.now();
     return WillPopScope(
       onWillPop: () async {
-        if (DateTime.now().difference(_lastExitTime) >= Duration(seconds: 2)) {
+        if (DateTime.now().difference(_lastExitTime) >= const Duration(seconds: 2)) {
           //showing message to user
           final snack =   SnackBar(
-            content:  Text("Chiqish uchun yana bosing"),
-            duration: Duration(seconds: 2),
+            content:  Text("Chiqish uchun yana bosing").tr(),
+            duration: const Duration(seconds: 2),
           );
           ScaffoldMessenger.of(context).showSnackBar(snack);
           _lastExitTime = DateTime.now();

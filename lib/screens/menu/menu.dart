@@ -14,7 +14,7 @@ import 'package:talaba_uy/screens/Search_University/search_page.dart';
 import 'package:talaba_uy/screens/drawer/drawer.dart';
 
 import '../../provider/notification_provider.dart';
-import '../../services/get_count_notification.dart';
+
 import '../Feedback_Page/feedback_page.dart';
 import '../Ijarachipage/oylik_ijara.dart';
 import '../Notification_Page/notification_page.dart';
@@ -82,7 +82,7 @@ class _MenuPageState extends State<MenuPage> {
                     ),
                   ),
                    badgeContent:   Text(
-                    "${data.count.message ?? '0'}",
+                    data.count.message ?? '0',
                     style: const TextStyle(color: Colors.white),
                   ),
                 ),

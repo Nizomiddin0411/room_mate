@@ -136,7 +136,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
                 height: 8.h,
               ),
               const Text(
-                  "Eng yaxshi deb topilgan 3 ta taklif egalari har yili avgust oyida qimmatbaho sovg'alar (iPhone 14 telefoni,noutbuq va planshet) bilan taqdirlanadi .").tr(),
+                  "Eng yaxshi deb topilgan 3 ta taklif egalari har yili avgust oyida qimmatbaho sovg'alar (iPhone 14 telefoni, noutbuk va planshet) bilan taqdirlanadi .").tr(),
               // const Text('2.Har oyning qaysidir sanasida 1 kishi tanlab olinadi .'),
               InkWell(
                 onTap: () async {

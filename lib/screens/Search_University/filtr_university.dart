@@ -208,7 +208,7 @@ class _UniverFiltrPageState extends State<UniverFiltrPage> {
                                   isExpanded: true,
                                   isDense: true,
                                   hint: Text(
-                                    'Tuman',
+                                    'Tumanni tanlang',
                                     style: TextStyle(fontSize: 14.sp),
                                   ).tr(),
                                   icon: const Icon(
