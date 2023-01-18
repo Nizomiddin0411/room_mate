@@ -248,7 +248,7 @@ class _UniverFiltrPageState extends State<UniverFiltrPage> {
                                 primary: Colors.white),
                             onPressed: () {
                               provider.getSearchUniver(
-                                  '0', '0', '0');
+                                  '1', '1', '1');
                               Navigator.pushReplacement(
                                   context,
                                   MaterialPageRoute(

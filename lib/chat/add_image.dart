@@ -25,17 +25,17 @@ class _AddImageState extends State<AddImage> {
         appBar: AppBar(
           title: Text('Add Image'),
           actions: [
-            FlatButton(
-                onPressed: () {
-                  setState(() {
-                    uploading = true;
-                  });
-                  uploadFile().whenComplete(() => Navigator.of(context).pop());
-                },
-                child: Text(
-                  'upload',
-                  style: TextStyle(color: Colors.white),
-                ))
+            // FlatButton(
+            //     onPressed: () {
+            //       setState(() {
+            //         uploading = true;
+            //       });
+            //       uploadFile().whenComplete(() => Navigator.of(context).pop());
+            //     },
+            //     child: Text(
+            //       'upload',
+            //       style: TextStyle(color: Colors.white),
+            //     ))
           ],
         ),
         body: Stack(

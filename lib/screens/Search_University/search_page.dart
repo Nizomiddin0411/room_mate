@@ -26,6 +26,7 @@ class _SearchPageState extends State<SearchPage> {
     WidgetsBinding.instance!.addPostFrameCallback((_) {
       context.read<SearchUniversitet>().getSearchUniver("0", '0', '0');
       Provider.of<UniversitetProvider>(context, listen: false).getViloyat();
+      // Provider.of<SearchUniversitet>(context, listen: false).getAds();
     });
     super.initState();
   }
